@@ -31,12 +31,13 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         return [
+            'recaptcha_site_key' => config('services.google_recaptcha.site_key'),
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
             ],
             'ziggy' => fn () => [
-                ...(new Ziggy)->toArray(),
+                ...(new Ziggy())->toArray(),
                 'location' => $request->url(),
             ],
         ];
