@@ -19,6 +19,8 @@ export default {
         },
         extend: {
             fontFamily: {
+                roboto: ["Roboto", "sans-serif"],
+                merriewather: ["Merriweather", "serif"],
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
             minHeight: {
