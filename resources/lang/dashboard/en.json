@@ -33,6 +33,26 @@
     ":label Records Selected": ":label records selected",
     "Delete Selected": "Delete Selected",
     "Delete All": "Delete All",
+    ":label has been successfully created.": ":label has been successfully created.",
+    ":label has been successfully updated.": ":label has been successfully updated.",
+    ":label has been successfully deleted.": ":label has been successfully deleted.",
+    "Selected :label have been successfully deleted.": "Selected :label have been successfully deleted.",
+    "All :label have been successfully deleted.": "All :label have been successfully deleted.",
+    ":label has been successfully restored.": ":label has been successfully restored.",
+    "Selected :label have been successfully restored.": "Selected :label have been successfully restored.",
+    "All :label have been successfully restored.": "All :label have been successfully restored.",
+    "The :label has been permanently deleted.": "The :label has been permanently deleted.",
+    "Selected :label have been permanently deleted.": "Selected :label have been permanently deleted.",
+    "All :label have been permanently deleted.": "All :label have been permanently deleted.",
+    "Confirm": "Confirm",
+    "Cancel": "Cancel",
     "Categories": "Categories",
-    "Category": "Category"
+    "Category": "Category",
+    "categories": "categories",
+    "category": "category",
+    "Category Name": "Category Name",
+    "Parent Category": "Parent Category",
+    "Status": "Status",
+    "Category Image": "Category Image"
+
 }

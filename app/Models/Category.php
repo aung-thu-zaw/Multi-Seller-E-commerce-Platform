@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Laravel\Scout\Searchable;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -41,6 +43,16 @@ class Category extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<Category, never>
+     */
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => $value ? asset("storage/categories/$value") : null,
+        );
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Category,Category>
      */
     public function parent(): BelongsTo
@@ -54,5 +66,25 @@ class Category extends Model
     public function children(): HasMany
     {
         return $this->hasMany(Category::class, 'parent_id')->with('children');
+    }
+
+    /**
+     * @param string|null  $search
+     * @param  Builder<Category>  $query
+     */
+    public function scopeSearch(Builder $query, ?string $search): void
+    {
+        $query->when($search ?? null, function ($query, $keyword) {
+            $query->where(function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', '%' . $keyword . '%');
+            });
+        });
+    }
+
+    public static function deleteImage(?string $categoryImage): void
+    {
+        if (!empty($categoryImage) && file_exists(storage_path('app/public/categories/'.pathinfo($categoryImage, PATHINFO_BASENAME)))) {
+            unlink(storage_path('app/public/categories/'.pathinfo($categoryImage, PATHINFO_BASENAME)));
+        }
     }
 }

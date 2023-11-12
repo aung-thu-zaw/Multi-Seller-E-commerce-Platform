@@ -25,10 +25,10 @@ export function useResourceActions(formFields = {}) {
     const { executeRecaptcha, recaptchaLoaded } = useReCaptcha();
 
     // Create Action
-    const createAction = async (model, createRouteName) => {
+    const createAction = async (entityType, createRouteName) => {
         await recaptchaLoaded();
         form.captcha_token = await executeRecaptcha(
-            `create_${formatToSnakeCase(model)}`
+            `create_${formatToSnakeCase(entityType)}`
         );
         processing.value = true;
 
@@ -45,11 +45,13 @@ export function useResourceActions(formFields = {}) {
                 preserveState: true,
                 preserveScroll: true,
                 onSuccess: () => {
-                    const successMessage = usePage().props.flash.successMessage;
+                    const successMessage = usePage().props.flash.success;
                     if (successMessage) {
                         swal({
                             icon: "success",
-                            title: __(successMessage, { label: __(model) }),
+                            title: __(successMessage, {
+                                label: __(entityType),
+                            }),
                         });
                     }
                 },
@@ -63,20 +65,20 @@ export function useResourceActions(formFields = {}) {
 
     // Edit Action
     const editAction = async (
-        model,
+        entityType,
         editRouteName,
         targetIdentifier,
         method = "patch"
     ) => {
         await recaptchaLoaded();
         form.captcha_token = await executeRecaptcha(
-            `edit_${formatToSnakeCase(model)}`
+            `edit_${formatToSnakeCase(entityType)}`
         );
         processing.value = true;
 
         router.post(
             route(editRouteName, {
-                [formatToSnakeCase(model)]: targetIdentifier,
+                [formatToSnakeCase(entityType)]: targetIdentifier,
             }),
             {
                 _method:
@@ -88,11 +90,13 @@ export function useResourceActions(formFields = {}) {
                 preserveState: true,
                 preserveScroll: true,
                 onSuccess: () => {
-                    const successMessage = usePage().props.flash.successMessage;
+                    const successMessage = usePage().props.flash.success;
                     if (successMessage) {
                         swal({
                             icon: "success",
-                            title: __(successMessage, { label: __(model) }),
+                            title: __(successMessage, {
+                                label: __(entityType),
+                            }),
                         });
                     }
                 },
@@ -106,13 +110,15 @@ export function useResourceActions(formFields = {}) {
 
     // Soft Delete Action
     const softDeleteAction = async (
-        model,
+        entityType,
         deleteRouteName,
         targetIdentifier
     ) => {
         const result = await swal({
             icon: "question",
-            title: __("Delete :label", { label: __(formatToTitleCase(model)) }),
+            title: __("Delete :label", {
+                label: __(formatToTitleCase(entityType)),
+            }),
             text:
                 __("Are you sure you would like to do this?") +
                 __("It can be restored within 60 days."),
@@ -129,18 +135,20 @@ export function useResourceActions(formFields = {}) {
         if (result.isConfirmed) {
             router.delete(
                 route(deleteRouteName, {
-                    [formatToSnakeCase(model)]: targetIdentifier,
+                    [formatToSnakeCase(entityType)]: targetIdentifier,
                     ...queryStringParams.value,
                 }),
                 {
                     preserveScroll: true,
                     onSuccess: () => {
                         const successMessage =
-                            usePage().props.flash.successMessage;
+                            usePage().props.flash.success;
                         if (successMessage) {
                             swal({
                                 icon: "success",
-                                title: __(successMessage, { label: __(model) }),
+                                title: __(successMessage, {
+                                    label: __(entityType),
+                                }),
                             });
                         }
                     },
@@ -151,14 +159,14 @@ export function useResourceActions(formFields = {}) {
 
     // Selected Soft Delete Action
     const selectedSoftDeleteAction = async (
-        model,
+        entityTypes,
         deleteRouteName,
         selectedItems
     ) => {
         const result = await swal({
             icon: "question",
             title: __("Delete Selected :label", {
-                label: __(formatToTitleCase(model)),
+                label: __(formatToTitleCase(entityTypes)),
             }),
             text:
                 __("Are you sure you would like to do this?") +
@@ -187,11 +195,13 @@ export function useResourceActions(formFields = {}) {
                     },
                     onSuccess: () => {
                         const successMessage =
-                            usePage().props.flash.successMessage;
+                            usePage().props.flash.success;
                         if (successMessage) {
                             swal({
                                 icon: "success",
-                                title: __(successMessage, { label: __(model) }),
+                                title: __(successMessage, {
+                                    label: __(entityTypes),
+                                }),
                             });
                         }
                     },
@@ -201,11 +211,15 @@ export function useResourceActions(formFields = {}) {
     };
 
     // Restore Action
-    const restoreAction = async (model, restoreRouteName, targetIdentifier) => {
+    const restoreAction = async (
+        entityType,
+        restoreRouteName,
+        targetIdentifier
+    ) => {
         const result = await swal({
             icon: "question",
             title: __("Restore :label", {
-                label: __(formatToTitleCase(model)),
+                label: __(formatToTitleCase(entityType)),
             }),
             text: __("Are you sure you would like to restore this?"),
             showCancelButton: true,
@@ -230,12 +244,14 @@ export function useResourceActions(formFields = {}) {
                     preserveScroll: true,
                     onSuccess: () => {
                         const successMessage =
-                            usePage().props.flash.successMessage;
+                            usePage().props.flash.success;
 
                         if (successMessage) {
                             swal({
                                 icon: "success",
-                                title: __(successMessage, { label: __(model) }),
+                                title: __(successMessage, {
+                                    label: __(entityType),
+                                }),
                             });
                         }
                     },
@@ -246,14 +262,14 @@ export function useResourceActions(formFields = {}) {
 
     // Selected Restore Action
     const restoreSelectedAction = async (
-        model,
+        entityTypes,
         restoreRouteName,
         selectedItems
     ) => {
         const result = await swal({
             icon: "question",
             title: __("Restore Selected :label", {
-                label: formatToTitleCase(__(model)),
+                label: formatToTitleCase(__(entityTypes)),
             }),
             text: __("Are you sure you would like to restore these?"),
             showCancelButton: true,
@@ -281,12 +297,14 @@ export function useResourceActions(formFields = {}) {
                     },
                     onSuccess: () => {
                         const successMessage =
-                            usePage().props.flash.successMessage;
+                            usePage().props.flash.success;
 
                         if (successMessage) {
                             swal({
                                 icon: "success",
-                                title: __(successMessage, { label: __(model) }),
+                                title: __(successMessage, {
+                                    label: __(entityTypes),
+                                }),
                             });
                         }
                     },
@@ -297,14 +315,14 @@ export function useResourceActions(formFields = {}) {
 
     // Permanent Delete Action
     const permanentDeleteAction = async (
-        model,
+        entityType,
         deleteRouteName,
         targetIdentifier
     ) => {
         const result = await swal({
             icon: "question",
             title: __("Permanently Delete :label", {
-                label: formatToTitleCase(__(model)),
+                label: formatToTitleCase(__(entityType)),
             }),
             text: __(
                 "This action cannot be undone. Are you sure you want to permanently delete this?"
@@ -329,11 +347,13 @@ export function useResourceActions(formFields = {}) {
                     preserveScroll: true,
                     onSuccess: () => {
                         const successMessage =
-                            usePage().props.flash.successMessage;
+                            usePage().props.flash.success;
                         if (successMessage) {
                             swal({
                                 icon: "success",
-                                title: __(successMessage, { label: __(model) }),
+                                title: __(successMessage, {
+                                    label: __(entityType),
+                                }),
                             });
                         }
                     },
@@ -344,18 +364,18 @@ export function useResourceActions(formFields = {}) {
 
     // Selected Permanent Delete Action
     const permanentDeleteSelectedAction = async (
-        model,
+        entityTypes,
         deleteRouteName,
         selectedItems
     ) => {
         const result = await swal({
             icon: "question",
             title: __("Permanently Delete Selected :label", {
-                label: formatToTitleCase(__(model)),
+                label: formatToTitleCase(__(entityTypes)),
             }),
             text: __(
                 "This action cannot be undone. Are you sure you want to permanently delete the selected :label in the trash?",
-                { label: __(model.toLowerCase()) }
+                { label: __(entityTypes.toLowerCase()) }
             ),
             showCancelButton: true,
             confirmButtonText: __("Confirm"),
@@ -380,11 +400,13 @@ export function useResourceActions(formFields = {}) {
                     },
                     onSuccess: () => {
                         const successMessage =
-                            usePage().props.flash.successMessage;
+                            usePage().props.flash.success;
                         if (successMessage) {
                             swal({
                                 icon: "success",
-                                title: __(successMessage, { label: __(model) }),
+                                title: __(successMessage, {
+                                    label: __(entityTypes),
+                                }),
                             });
                         }
                     },
@@ -394,15 +416,15 @@ export function useResourceActions(formFields = {}) {
     };
 
     // Permanent Delete All Action
-    const permanentDeleteAllAction = async (model, deleteRouteName) => {
+    const permanentDeleteAllAction = async (entityTypes, deleteRouteName) => {
         const result = await swal({
             icon: "question",
             title: __("Permanently Delete All :label", {
-                label: __(formatToTitleCase(model)),
+                label: __(formatToTitleCase(entityTypes)),
             }),
             text: __(
                 "This action cannot be undone. Are you sure you want to permanently delete all :label in the trash?",
-                { label: __(formatToTitleCase(model)) }
+                { label: __(formatToTitleCase(entityTypes)) }
             ),
             showCancelButton: true,
             confirmButtonText: __("Confirm"),
@@ -423,11 +445,13 @@ export function useResourceActions(formFields = {}) {
                     preserveScroll: true,
                     onSuccess: () => {
                         const successMessage =
-                            usePage().props.flash.successMessage;
+                            usePage().props.flash.success;
                         if (successMessage) {
                             swal({
                                 icon: "success",
-                                title: __(successMessage, { label: __(model) }),
+                                title: __(successMessage, {
+                                    label: __(entityTypes),
+                                }),
                             });
                         }
                     },
