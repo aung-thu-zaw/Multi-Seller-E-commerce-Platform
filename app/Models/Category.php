@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
+use Laravel\Scout\Searchable;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,6 +16,7 @@ class Category extends Model
     use HasFactory;
     use SoftDeletes;
     use HasSlug;
+    use Searchable;
 
     public function getSlugOptions(): SlugOptions
     {
@@ -27,6 +28,16 @@ class Category extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    /**
+     *     @return array<string>
+     */
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name,
+        ];
     }
 
     /**
@@ -43,18 +54,5 @@ class Category extends Model
     public function children(): HasMany
     {
         return $this->hasMany(Category::class, 'parent_id')->with('children');
-    }
-
-    /**
-     * @param string|null  $search
-     * @param  Builder<Category>  $query
-     */
-    public function scopeSearch(Builder $query, ?string $search): void
-    {
-        $query->when($search ?? null, function ($query, $keyword) {
-            $query->where(function ($query) use ($keyword) {
-                $query->where('blogTitle', 'LIKE', '%' . $keyword . '%')->orWhere('blogIntro', 'LIKE', '%' . $keyword . '%');
-            });
-        });
     }
 }

@@ -5,7 +5,7 @@ import vue from "@vitejs/plugin-vue";
 export default defineConfig({
     resolve: {
         alias: {
-            "@assets": "/resources/js/assets",
+            // "@assets": "/resources/js/assets",
         },
     },
     plugins: [
