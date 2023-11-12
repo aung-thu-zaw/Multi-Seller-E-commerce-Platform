@@ -10,7 +10,10 @@ import AdminDashboardSidebar from "@/Components/Sidebars/AdminDashboardSidebar.v
       <AdminDashboardNavbar />
       <slot name="header"></slot>
 
-      <div class="px-4 md:px-10 mx-auto w-full -m-24">
+      <div
+        class="px-4 md:px-10 mx-auto w-full"
+        :class="{ '-m-24': $page.url === '/admin/dashboard' }"
+      >
         <slot />
       </div>
     </div>

@@ -115,10 +115,10 @@ const toggleCollapseShow = (classes) => {
             </Link>
           </li>
 
-          <!-- Brands -->
-          <li class="items-center">
+          <!-- Categories -->
+          <li v-show="can('categories.view')" class="items-center">
             <Link
-              href="#"
+              :href="route('admin.categories.index')"
               :data="{
                 page: 1,
                 per_page: 5,
@@ -128,13 +128,13 @@ const toggleCollapseShow = (classes) => {
               class="text-xs py-3 font-bold block"
               :class="{
                 'text-blue-600 hover:text-blue-500':
-                  $page.url.startsWith('/admin/brands'),
+                  $page.url.startsWith('/admin/categories'),
                 'text-slate-600 hover:text-slate-500':
-                  !$page.url.startsWith('/admin/brands'),
+                  !$page.url.startsWith('/admin/categories'),
               }"
             >
-              <i class="fa-solid fa-award mr-2 text-sm"></i>
-              {{ __("Brands") }}
+              <i class="fa-solid fa-list mr-2 text-sm"></i>
+              {{ __("Categories") }}
             </Link>
           </li>
         </ul>

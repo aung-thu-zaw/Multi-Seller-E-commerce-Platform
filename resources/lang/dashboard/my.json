@@ -1,4 +1,16 @@
 {
+    "List": "စာရင်း",
+    "Trashed": "ဖျက်ထားသော စာရင်း",
+    "Create": "ဖန်တီးပါ",
+    "Create :label": ":label ဖန်တီးပါ",
+    "Edit :label": ":label ကိုတည်းဖြတ်ပါ",
+    "Deleted :label": "ဖျက်ထားသော :label",
+    "Create A New :label": ":label အသစ်တစ်ခုဖန်တီးပါ",
+    "Search by :label": ":label ဖြင့်ရှာဖွေပါ။",
+    "Edit": "တည်းဖြတ်ပါ",
+    "Delete": "ဖျက်ပါ",
+    "Go Back": "ပြန်သွားပါ",
+    "Trash": "အမှိုက်ပုံး",
     "Admin": "အက်မင်",
     "Seller": "ရောင်းသူ",
     "User": "အသုံးပြုသူ",
@@ -13,5 +25,14 @@
     "Processing": "လုပ်ဆောင်နေသည်",
     "E-commerce Administration": "E-commerce စီမံခန့်ခွဲမှု",
     "Dashboard": "ဒက်ရှ်ဘုတ်",
-    "Save Changes": "အပြောင်းအလဲများကို သိမ်းဆည်းပါ"
+    "Save Changes": "အပြောင်းအလဲများကို သိမ်းဆည်းပါ",
+    "There is no data in this table.": "ဤဇယားတွင် ဒေတာမရှိပါ။",
+    "Per Page": "တစ်မျက်နှာ",
+    "Select All": "အားလုံးကို ရွေးပါ",
+    "Deselect All": "ရွေးချယ်မှုအားလုံးကိုဖြုတ်ပါ",
+    ":label Records Selected": "မှတ်တမ်း :label ခုကို ရွေးချယ်ထားသည်။",
+    "Delete Selected": "ရွေးချယ်ထားမှူများကို ဖျက်ပါ",
+    "Delete All": "အားလုံးကို ဖျက်ပါ",
+    "Categories": "အမျိုးအစားများ",
+    "Category": "အမျိုးအစား"
 }

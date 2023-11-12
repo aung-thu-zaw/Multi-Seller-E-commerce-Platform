@@ -1,4 +1,16 @@
 {
+    "List": "List",
+    "Trashed": "Deleted List",
+    "Create": "Create",
+    "Create :label": "Create :label",
+    "Edit :label": "Edit :label",
+    "Deleted :label": "Deleted :label",
+    "Create A New :label": "Create A New :label",
+    "Search by :label": "Search by :label",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "Go Back": "Go Back",
+    "Trash": "Trash",
     "Admin": "Admin",
     "Seller": "Seller",
     "User": "User",
@@ -13,5 +25,14 @@
     "Processing": "Processing",
     "E-commerce Administration": "E-commerce Administration",
     "Dashboard": "Dashboard",
-    "Save Changes": "Save Changes"
+    "Save Changes": "Save Changes",
+    "There is no data in this table.": "There is no data in this table.",
+    "Per Page": "Per Page",
+    "Select All": "Select All",
+    "Deselect All": "Deselect All",
+    ":label Records Selected": ":label records selected",
+    "Delete Selected": "Delete Selected",
+    "Delete All": "Delete All",
+    "Categories": "Categories",
+    "Category": "Category"
 }
