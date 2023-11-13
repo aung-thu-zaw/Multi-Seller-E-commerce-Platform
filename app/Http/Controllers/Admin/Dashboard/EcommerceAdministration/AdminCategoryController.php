@@ -22,6 +22,11 @@ class AdminCategoryController extends Controller
     {
         $this->middleware('permission:categories.view', ['only' => ['index']]);
         $this->middleware('permission:categories.create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:categories.edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:categories.delete', ['only' => ['destroy', 'destroySelected']]);
+        $this->middleware('permission:categories.view.trash', ['only' => ['trashed']]);
+        $this->middleware('permission:categories.restore', ['only' => ['restore', 'restoreSelected']]);
+        $this->middleware('permission:categories.force.delete', ['only' => ['forceDelete', 'forceDeleteSelected', 'forceDeleteAll']]);
     }
 
     public function index(): Response|ResponseFactory
