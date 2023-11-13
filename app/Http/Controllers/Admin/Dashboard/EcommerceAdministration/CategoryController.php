@@ -125,4 +125,13 @@ class CategoryController extends Controller
 
         return to_route('admin.categories.trashed', $this->getQueryStringParams($request))->with('success', 'The :label has been permanently deleted.');
     }
+
+    public function forceDeleteSelected(Request $request, string $selectedItems): RedirectResponse
+    {
+        $selectedItems = explode(',', $selectedItems);
+
+        Category::onlyTrashed()->whereIn('id', $selectedItems)->forceDelete();
+
+        return to_route('admin.categories.trashed', $this->getQueryStringParams($request))->with('success', 'Selected :label have been permanently deleted.');
+    }
 }

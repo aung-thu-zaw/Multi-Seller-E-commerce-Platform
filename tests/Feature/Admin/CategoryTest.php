@@ -30,13 +30,13 @@ it('allows admin to access the category list page and verifies correct props', f
     get(route('admin.categories.index'))
         ->assertOk()
         ->assertInertia(
-            fn (Assert $page) => $page
+            fn(Assert $page) => $page
                 ->component('Admin/Categories/Index')
                 ->has('categories')
                 ->has('categories.data', 5)
                 ->has(
                     'categories.data.0',
-                    fn (Assert $page) => $page
+                    fn(Assert $page) => $page
                         ->where('id', 10)
                         ->has('children', 0)
                         ->etc(),
@@ -61,12 +61,12 @@ it('allows admin to access the category create page and verifies correct props',
     get(route('admin.categories.create'))
         ->assertOk()
         ->assertInertia(
-            fn (Assert $page) => $page
+            fn(Assert $page) => $page
                 ->component('Admin/Categories/Create')
                 ->has('categories', 10)
                 ->has(
                     'categories.0',
-                    fn (Assert $page) => $page
+                    fn(Assert $page) => $page
                         ->has('id')
                         ->has('parent_id')
                         ->has('name'),
@@ -132,11 +132,11 @@ it('allows admin to access the category edit page and verifies correct props', f
     get(route('admin.categories.edit', $category))
         ->assertOk()
         ->assertInertia(
-            fn (Assert $page) => $page
+            fn(Assert $page) => $page
                 ->component('Admin/Categories/Edit')
                 ->has(
                     'category',
-                    fn (Assert $page) => $page
+                    fn(Assert $page) => $page
                         ->where('id', $category->id)
                         ->where('name', $category->name)
                         ->etc(),
@@ -144,7 +144,7 @@ it('allows admin to access the category edit page and verifies correct props', f
                 ->has('categories', 11)
                 ->has(
                     'categories.0',
-                    fn (Assert $page) => $page
+                    fn(Assert $page) => $page
                         ->has('id')
                         ->has('parent_id')
                         ->has('name'),
@@ -247,16 +247,11 @@ it('allows admin to access the category trashed list page and verifies correct p
     get(route('admin.categories.trashed'))
         ->assertOk()
         ->assertInertia(
-            fn (Assert $page) => $page
+            fn(Assert $page) => $page
                 ->component('Admin/Categories/Trash')
                 ->has('trashedCategories')
                 ->has('trashedCategories.data', 5)
-                ->has(
-                    'trashedCategories.data.0',
-                    fn (Assert $page) => $page
-                        ->where('id', 8)
-                        ->etc(),
-                ),
+                ->has('trashedCategories.data.0', fn(Assert $page) => $page->where('id', 8)->etc()),
         );
 });
 
@@ -272,7 +267,7 @@ it('successfully restores a category as an admin', function () {
         ->assertStatus(302)
         ->assertRedirect(route('admin.categories.trashed', queryStringParams()));
 
-    assertDatabaseHas("categories", ["id" => $category->id,"deleted_at" => null]);
+    assertDatabaseHas('categories', ['id' => $category->id, 'deleted_at' => null]);
 });
 
 it('successfully restore selected trashed category as an admin', function () {
@@ -285,7 +280,6 @@ it('successfully restore selected trashed category as an admin', function () {
 
     $selectedItems = $categories->pluck('id')->implode(',');
 
-
     // Act & Assert
     actingAsSuperAdmin();
 
@@ -294,7 +288,7 @@ it('successfully restore selected trashed category as an admin', function () {
         ->assertRedirect(route('admin.categories.trashed', queryStringParams()));
 
     foreach ($categories as $category) {
-        assertDatabaseHas("categories", ["id" => $category->id,"deleted_at" => null]);
+        assertDatabaseHas('categories', ['id' => $category->id, 'deleted_at' => null]);
     }
 });
 
@@ -312,4 +306,27 @@ it('successfully force deletes a trashed category as an admin', function () {
 
     assertDatabaseMissing('categories', ['id' => $category->id]);
     assertDatabaseCount('categories', 0);
+});
+
+it('successfully force delete selected trashed category as an admin', function () {
+    // Arrange
+    $categories = Category::factory(3)->create();
+
+    $categories->each(function ($category) {
+        $category->delete();
+    });
+
+    $selectedItems = $categories->pluck('id')->implode(',');
+
+    // Act & Assert
+    actingAsSuperAdmin();
+
+    delete(route('admin.categories.force-delete.selected', $selectedItems))
+        ->assertStatus(302)
+        ->assertRedirect(route('admin.categories.trashed', queryStringParams()));
+
+    foreach ($categories as $category) {
+        assertDatabaseMissing('categories', ['id' => $category->id]);
+        assertDatabaseCount('categories', 0);
+    }
 });
