@@ -61,6 +61,12 @@
     "Restore All :label": "Restore All :label",
     "Are you sure you would like to restore these?": "Are you sure you would like to restore these?",
     "Delete Whatever": "Delete Whatever",
+    "Restore All": "Restore All",
+    "Restore Selected": "Restore Selected",
+    ":label in the trash will be automatically deleted after 60 days": ":label in the trash will be automatically deleted after 60 days",
+    "Empty The Trash Now": "Empty The Trash Now",
+    "Restore": "Restore",
+    "Delete Forever": "Delete Forever",
     "Confirm": "Confirm",
     "Cancel": "Cancel",
     "Categories": "Categories",
@@ -71,5 +77,4 @@
     "Parent Category": "Parent Category",
     "Status": "Status",
     "Category Image": "Category Image"
-
 }

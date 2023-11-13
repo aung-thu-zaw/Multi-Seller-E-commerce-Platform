@@ -223,3 +223,37 @@ it('successfully soft delete selected category as an admin', function () {
         assertSoftDeleted('categories', ['id' => $category->id]);
     }
 });
+
+it('prevents non-admin from accessing the category trashed list page', function () {
+    // Act & Assert
+    actingAsAuthenticatedUser(role: 'user');
+
+    get(route('admin.categories.trashed'))->assertForbidden();
+});
+
+it('allows admin to access the category trashed list page and verifies correct props', function () {
+    // Arrange
+    $categories = Category::factory(8)->create();
+
+    $categories->each(function ($category) {
+        $category->delete();
+    });
+
+    // Act & Assert
+    actingAsSuperAdmin();
+
+    get(route('admin.categories.trashed'))
+        ->assertOk()
+        ->assertInertia(
+            fn (Assert $page) => $page
+                ->component('Admin/Categories/Trash')
+                ->has('trashedCategories')
+                ->has('trashedCategories.data', 5)
+                ->has(
+                    'trashedCategories.data.0',
+                    fn (Assert $page) => $page
+                        ->where('id', 8)
+                        ->etc(),
+                ),
+        );
+});

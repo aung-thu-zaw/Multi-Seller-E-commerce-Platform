@@ -32,12 +32,12 @@ class CategoryController extends Controller
     public function index(): Response|ResponseFactory
     {
         $categories = Category::search(request('search'))
-            ->query(function (Builder $builder) {
-                $builder->with('children');
-            })
-            ->orderBy(request('sort', 'id'), request('direction', 'desc'))
-            ->paginate(request('per_page', 5))
-            ->appends(request()->all());
+                              ->query(function (Builder $builder) {
+                                  $builder->with('children');
+                              })
+                              ->orderBy(request('sort', 'id'), request('direction', 'desc'))
+                              ->paginate(request('per_page', 5))
+                              ->appends(request()->all());
 
         return inertia('Admin/Categories/Index', compact('categories'));
     }
@@ -84,5 +84,16 @@ class CategoryController extends Controller
         Category::whereIn('id', $selectedItems)->delete();
 
         return to_route('admin.categories.index', $this->getQueryStringParams($request))->with('success', 'Selected :label have been successfully deleted.');
+    }
+
+    public function trashed(): Response|ResponseFactory
+    {
+        $trashedCategories = Category::search(request('search'))
+                                     ->onlyTrashed()
+                                     ->orderBy(request('sort', 'id'), request('direction', 'desc'))
+                                     ->paginate(request('per_page', 5))
+                                     ->appends(request()->all());
+
+        return inertia('Admin/Categories/Trash', compact('trashedCategories'));
     }
 }
