@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\Auth\AdminLoginController;
-use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
-use App\Http\Controllers\Admin\Dashboard\EcommerceAdministration\AdminCategoryController;
+use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Dashboard\DashboardController;
+use App\Http\Controllers\Admin\Dashboard\EcommerceAdministration\CategoryController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/admin/login', AdminLoginController::class)->middleware('guest')->name('admin.login');
+Route::get('/admin/login', LoginController::class)->middleware('guest')->name('admin.login');
 
 Route::middleware(['auth', 'verified', 'user.role:admin'])
     ->prefix('admin')
@@ -13,11 +13,11 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
     ->group(function () {
 
         // Dashboard
-        Route::get('/dashboard', AdminDashboardController::class)->name('dashboard');
+        Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
         // Category Operations
-        Route::resource('categories', AdminCategoryController::class)->except(['show']);
-        Route::controller(AdminCategoryController::class)
+        Route::resource('categories', CategoryController::class)->except(['show']);
+        Route::controller(CategoryController::class)
             ->prefix('/categories/trash')
             ->name('categories.')
             ->group(function () {

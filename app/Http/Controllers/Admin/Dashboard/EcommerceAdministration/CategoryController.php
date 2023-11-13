@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
-class AdminCategoryController extends Controller
+class CategoryController extends Controller
 {
     use HandlesQueryStringParameters;
 

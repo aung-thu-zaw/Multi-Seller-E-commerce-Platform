@@ -1,11 +1,9 @@
 <?php
 
 use App\Models\Category;
-use Illuminate\Testing\Constraints\SoftDeletedInDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
 
 use function Pest\Laravel\assertDatabaseHas;
-use function Pest\Laravel\assertNotSoftDeleted;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\delete;
 use function Pest\Laravel\get;

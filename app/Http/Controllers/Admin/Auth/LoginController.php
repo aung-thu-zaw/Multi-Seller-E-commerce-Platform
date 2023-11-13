@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
-class AdminLoginController extends Controller
+class LoginController extends Controller
 {
     public function __invoke(): Response|ResponseFactory
     {
