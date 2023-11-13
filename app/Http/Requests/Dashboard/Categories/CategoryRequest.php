@@ -27,7 +27,7 @@ class CategoryRequest extends FormRequest
             "parent_id" => ["nullable","numeric",Rule::exists("categories", "id")],
             "name" => ["required","string","max:255",Rule::unique("categories", "name")],
             "status" => ["required","boolean"],
-            'captcha_token' => ['required', new RecaptchaRule()],
+            'captcha_token' => [new RecaptchaRule()],
         ];
 
         if ($this->hasFile('image')) {

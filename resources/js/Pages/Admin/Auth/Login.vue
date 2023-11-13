@@ -4,6 +4,7 @@ import FormButton from "@/Components/Buttons/FormButton.vue";
 import Checkbox from "@/Components/Forms/Fields/Checkbox.vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import AuthFormContainer from "@/Components/Forms/AuthFormContainer.vue";
+import InputLabel from "@/Components/Forms/Fields/InputLabel.vue";
 import InputError from "@/Components/Forms/Fields/InputError.vue";
 import InputField from "@/Components/Forms/Fields/InputField.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";

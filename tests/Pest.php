@@ -1,7 +1,13 @@
 <?php
 
+use App\Models\User;
+use Database\Seeders\PermissionSeeder;
+use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
+
+use function Pest\Laravel\actingAs;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +20,7 @@ use Tests\TestCase;
 |
 */
 
-uses(TestCase::class, RefreshDatabase::class)->in('Feature');
+uses(TestCase::class, RefreshDatabase::class)->beforeEach(fn () => $this->seed([PermissionSeeder::class, RoleSeeder::class]))->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +48,36 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function actingAsAuthenticatedUser(string $role = 'user'): User
 {
-    // ..
+    $user = User::factory()->create(["role" => $role]);
+
+    actingAs($user);
+
+    return $user;
+}
+
+function actingAsSuperAdmin(): User
+{
+    $superAdmin = User::factory()->create(['role' => 'admin']);
+
+    $superAdmin->assignRole("Super Admin");
+
+    $role = Role::with('permissions')->where('name', 'Super Admin')->first();
+
+    $superAdmin->syncPermissions($role->permissions);
+
+    actingAs($superAdmin);
+
+    return $superAdmin;
+}
+
+function queryStringParams(): array
+{
+    return [
+        'page' => '1',
+        'per_page' => '5',
+        'sort' => 'id',
+        'direction' => 'desc',
+    ];
 }

@@ -29,17 +29,17 @@ class AdminCategoryController extends Controller
                                   $builder->with('children');
                               })
                               ->orderBy(request('sort', 'id'), request('direction', 'desc'))
-                              ->paginate(request('per_page', 10))
+                              ->paginate(request('per_page', 5))
                               ->appends(request()->all());
 
-        return inertia('Admin/EcommerceAdministration/Categories/Index', compact('categories'));
+        return inertia('Admin/Categories/Index', compact('categories'));
     }
 
     public function create(): Response|ResponseFactory
     {
         $categories = Category::select('id', 'parent_id', 'name')->get();
 
-        return inertia('Admin/EcommerceAdministration/Categories/Create', compact('categories'));
+        return inertia('Admin/Categories/Create', compact('categories'));
     }
 
     public function store(CategoryRequest $request): RedirectResponse
