@@ -12,7 +12,7 @@ class CategoryImageUploadServiceTest extends TestCase
     public function test_that_the_create_image_method_successfully_creates_a_new_category_image(): void
     {
         // Arrange
-        Storage::fake("public");
+        Storage::fake('public');
         $image = UploadedFile::fake()->image('fake-category-image.jpg');
         $service = new CategoryImageUploadService();
 
@@ -26,7 +26,7 @@ class CategoryImageUploadServiceTest extends TestCase
     public function test_that_the_update_image_method_successfully_updates_a_new_category_image_and_delete_existing_old_category_image(): void
     {
         // Arrange
-        Storage::fake("public");
+        Storage::fake('public');
         $image = UploadedFile::fake()->image('new-fake-category-image.jpg');
         $existingImage = 'existing-fake-category-image.jpg';
         $service = new CategoryImageUploadService();

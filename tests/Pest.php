@@ -50,7 +50,7 @@ expect()->extend('toBeOne', function () {
 
 function actingAsAuthenticatedUser(string $role = 'user'): User
 {
-    $user = User::factory()->create(["role" => $role]);
+    $user = User::factory()->create(['role' => $role]);
 
     actingAs($user);
 
@@ -61,7 +61,7 @@ function actingAsSuperAdmin(): User
 {
     $superAdmin = User::factory()->create(['role' => 'admin']);
 
-    $superAdmin->assignRole("Super Admin");
+    $superAdmin->assignRole('Super Admin');
 
     $role = Role::with('permissions')->where('name', 'Super Admin')->first();
 

@@ -1,12 +1,9 @@
 <?php
 
 use App\Models\Category;
-use App\Models\Product;
 use Inertia\Testing\AssertableInertia as Assert;
 
-use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
-use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
@@ -31,13 +28,13 @@ it('allows admin to access the category list page and verifies correct props', f
     get(route('admin.categories.index'))
         ->assertOk()
         ->assertInertia(
-            fn(Assert $page) => $page
+            fn (Assert $page) => $page
                 ->component('Admin/Categories/Index')
                 ->has('categories')
                 ->has('categories.data', 5)
                 ->has(
                     'categories.data.0',
-                    fn(Assert $page) => $page
+                    fn (Assert $page) => $page
                         ->where('id', 10)
                         ->has('children', 0)
                         ->etc(),
@@ -62,12 +59,12 @@ it('allows admin to access the category create page and verifies correct props',
     get(route('admin.categories.create'))
         ->assertOk()
         ->assertInertia(
-            fn(Assert $page) => $page
+            fn (Assert $page) => $page
                 ->component('Admin/Categories/Create')
                 ->has('categories', 10)
                 ->has(
                     'categories.0',
-                    fn(Assert $page) => $page
+                    fn (Assert $page) => $page
                         ->has('id')
                         ->has('parent_id')
                         ->has('name'),
@@ -133,11 +130,11 @@ it('allows admin to access the category edit page and verifies correct props', f
     get(route('admin.categories.edit', $category))
         ->assertOk()
         ->assertInertia(
-            fn(Assert $page) => $page
+            fn (Assert $page) => $page
                 ->component('Admin/Categories/Edit')
                 ->has(
                     'category',
-                    fn(Assert $page) => $page
+                    fn (Assert $page) => $page
                         ->where('id', $category->id)
                         ->where('name', $category->name)
                         ->etc(),
@@ -145,7 +142,7 @@ it('allows admin to access the category edit page and verifies correct props', f
                 ->has('categories', 11)
                 ->has(
                     'categories.0',
-                    fn(Assert $page) => $page
+                    fn (Assert $page) => $page
                         ->has('id')
                         ->has('parent_id')
                         ->has('name'),

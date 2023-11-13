@@ -4,21 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Laravel\Scout\Searchable;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Category extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     use HasSlug;
     use Searchable;
+    use SoftDeletes;
 
     public function getSlugOptions(): SlugOptions
     {
@@ -69,14 +69,13 @@ class Category extends Model
     }
 
     /**
-     * @param string|null  $search
      * @param  Builder<Category>  $query
      */
     public function scopeSearch(Builder $query, ?string $search): void
     {
         $query->when($search ?? null, function ($query, $keyword) {
             $query->where(function ($query) use ($keyword) {
-                $query->where('name', 'LIKE', '%' . $keyword . '%');
+                $query->where('name', 'LIKE', '%'.$keyword.'%');
             });
         });
     }

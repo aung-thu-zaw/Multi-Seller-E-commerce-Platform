@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
+use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Admin\Dashboard\EcommerceAdministration\AdminCategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/login', AdminLoginController::class)->middleware('guest')->name('admin.login');
 
-Route::middleware(['auth','verified', 'user.role:admin'])
+Route::middleware(['auth', 'verified', 'user.role:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {

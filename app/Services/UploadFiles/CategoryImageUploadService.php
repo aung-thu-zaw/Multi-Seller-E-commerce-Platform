@@ -18,7 +18,7 @@ class CategoryImageUploadService
         return $fileName;
     }
 
-    public function updateImage(UploadedFile $image, string|null $categoryImage): string
+    public function updateImage(UploadedFile $image, ?string $categoryImage): string
     {
         if (is_string($categoryImage)) {
 

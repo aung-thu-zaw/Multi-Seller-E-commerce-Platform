@@ -17,5 +17,5 @@ it('allows admin to access the dashboard page and verifies correct props', funct
 
     get(route('admin.dashboard'))
         ->assertOk()
-        ->assertInertia(fn(Assert $page) => $page->component('Admin/Dashboard'));
+        ->assertInertia(fn (Assert $page) => $page->component('Admin/Dashboard'));
 });

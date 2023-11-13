@@ -16,7 +16,7 @@ class CreateCategoryActionTest extends TestCase
     public function test_that_the_create_product_action_class_successfully_creates_a_new_product(): void
     {
         // Arrange
-        Storage::fake("public");
+        Storage::fake('public');
         $data = [
             'parent_id' => null,
             'name' => 'Test Category',

@@ -6,9 +6,9 @@ use App\Actions\Admin\Categories\CreateCategoryAction;
 use App\Actions\Admin\Categories\UpdateCategoryAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Categories\CategoryRequest;
-use Illuminate\Database\Eloquent\Builder;
 use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -32,12 +32,12 @@ class AdminCategoryController extends Controller
     public function index(): Response|ResponseFactory
     {
         $categories = Category::search(request('search'))
-                              ->query(function (Builder $builder) {
-                                  $builder->with('children');
-                              })
-                              ->orderBy(request('sort', 'id'), request('direction', 'desc'))
-                              ->paginate(request('per_page', 5))
-                              ->appends(request()->all());
+            ->query(function (Builder $builder) {
+                $builder->with('children');
+            })
+            ->orderBy(request('sort', 'id'), request('direction', 'desc'))
+            ->paginate(request('per_page', 5))
+            ->appends(request()->all());
 
         return inertia('Admin/Categories/Index', compact('categories'));
     }
@@ -76,5 +76,4 @@ class AdminCategoryController extends Controller
 
         return to_route('admin.categories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully deleted.');
     }
-
 }
