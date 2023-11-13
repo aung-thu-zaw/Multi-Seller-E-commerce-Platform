@@ -3,7 +3,9 @@
 use App\Models\Category;
 use Inertia\Testing\AssertableInertia as Assert;
 
+use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
+use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
@@ -271,4 +273,20 @@ it('successfully restores a category as an admin', function () {
         ->assertRedirect(route('admin.categories.trashed', queryStringParams()));
 
     assertDatabaseHas("categories", ["id" => $category->id,"deleted_at" => null]);
+});
+
+it('successfully force deletes a trashed category as an admin', function () {
+    // Arrange
+    $category = Category::factory()->create();
+    $category->delete();
+
+    // Act & Assert
+    actingAsSuperAdmin();
+
+    delete(route('admin.categories.force-delete', $category->id))
+        ->assertStatus(302)
+        ->assertRedirect(route('admin.categories.trashed', queryStringParams()));
+
+    assertDatabaseMissing('categories', ['id' => $category->id]);
+    assertDatabaseCount('categories', 0);
 });

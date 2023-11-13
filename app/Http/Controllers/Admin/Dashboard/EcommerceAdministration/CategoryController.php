@@ -105,4 +105,15 @@ class CategoryController extends Controller
 
         return to_route('admin.categories.trashed', $this->getQueryStringParams($request))->with('success', ':label has been successfully restored.');
     }
+
+    public function forceDelete(Request $request, int $trashedCategoryId): RedirectResponse
+    {
+        $trashedCategory = Category::onlyTrashed()->findOrFail($trashedCategoryId);
+
+        Category::deleteImage($trashedCategory->image);
+
+        $trashedCategory->forceDelete();
+
+        return to_route('admin.categories.trashed', $this->getQueryStringParams($request))->with('success', 'The :label has been permanently deleted.');
+    }
 }
