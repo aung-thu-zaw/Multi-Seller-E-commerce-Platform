@@ -16,6 +16,7 @@ import NoTableData from "@/Components/Tables/NoTableData.vue";
 import BulkActionButton from "@/Components/Buttons/BulkActionButton.vue";
 import InertiaLinkButton from "@/Components/Buttons/InertiaLinkButton.vue";
 import NormalButton from "@/Components/Buttons/NormalButton.vue";
+import EmptyTrashButton from "@/Components/Buttons/EmptyTrashButton.vue";
 import Pagination from "@/Components/Paginations/DashboardPagination.vue";
 import { Head } from "@inertiajs/vue3";
 import { __ } from "@/Services/translations-inside-setup.js";
@@ -104,8 +105,6 @@ const {
 
           <div class="flex items-center justify-end w-full md:space-x-5">
             <DashboardTableDataPerPageSelectBox :to="trashedCategoryList" />
-
-            <DashboardTableFilterByDate :to="trashedCategoryList" />
           </div>
         </div>
 

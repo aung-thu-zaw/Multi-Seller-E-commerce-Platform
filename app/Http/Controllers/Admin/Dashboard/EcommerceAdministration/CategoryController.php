@@ -106,6 +106,15 @@ class CategoryController extends Controller
         return to_route('admin.categories.trashed', $this->getQueryStringParams($request))->with('success', ':label has been successfully restored.');
     }
 
+    public function restoreSelected(Request $request, string $selectedItems): RedirectResponse
+    {
+        $selectedItems = explode(',', $selectedItems);
+
+        Category::onlyTrashed()->whereIn('id', $selectedItems)->restore();
+
+        return to_route('admin.categories.trashed', $this->getQueryStringParams($request))->with('success', 'Selected :label have been successfully restored.');
+    }
+
     public function forceDelete(Request $request, int $trashedCategoryId): RedirectResponse
     {
         $trashedCategory = Category::onlyTrashed()->findOrFail($trashedCategoryId);

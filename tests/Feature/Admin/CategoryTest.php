@@ -275,6 +275,29 @@ it('successfully restores a category as an admin', function () {
     assertDatabaseHas("categories", ["id" => $category->id,"deleted_at" => null]);
 });
 
+it('successfully restore selected trashed category as an admin', function () {
+    // Arrange
+    $categories = Category::factory(3)->create();
+
+    $categories->each(function ($category) {
+        $category->delete();
+    });
+
+    $selectedItems = $categories->pluck('id')->implode(',');
+
+
+    // Act & Assert
+    actingAsSuperAdmin();
+
+    post(route('admin.categories.restore.selected', $selectedItems))
+        ->assertStatus(302)
+        ->assertRedirect(route('admin.categories.trashed', queryStringParams()));
+
+    foreach ($categories as $category) {
+        assertDatabaseHas("categories", ["id" => $category->id,"deleted_at" => null]);
+    }
+});
+
 it('successfully force deletes a trashed category as an admin', function () {
     // Arrange
     $category = Category::factory()->create();
