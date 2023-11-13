@@ -96,4 +96,13 @@ class CategoryController extends Controller
 
         return inertia('Admin/Categories/Trash', compact('trashedCategories'));
     }
+
+    public function restore(Request $request, int $trashedCategoryId): RedirectResponse
+    {
+        $trashedCategory = Category::onlyTrashed()->findOrFail($trashedCategoryId);
+
+        $trashedCategory->restore();
+
+        return to_route('admin.categories.trashed', $this->getQueryStringParams($request))->with('success', ':label has been successfully restored.');
+    }
 }

@@ -257,3 +257,18 @@ it('allows admin to access the category trashed list page and verifies correct p
                 ),
         );
 });
+
+it('successfully restores a category as an admin', function () {
+    // Arrange
+    $category = Category::factory()->create();
+    $category->delete();
+
+    // Act & Assert
+    actingAsSuperAdmin();
+
+    post(route('admin.categories.restore', $category->id))
+        ->assertStatus(302)
+        ->assertRedirect(route('admin.categories.trashed', queryStringParams()));
+
+    assertDatabaseHas("categories", ["id" => $category->id,"deleted_at" => null]);
+});
