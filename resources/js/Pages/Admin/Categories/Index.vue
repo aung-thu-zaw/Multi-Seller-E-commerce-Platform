@@ -29,7 +29,7 @@ const categoryList = "admin.categories.index";
 
 const { queryStringParams } = useQueryStringParams();
 
-const { softDeleteAction, selectedSoftDeleteAction } = useResourceActions();
+const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
 </script>
 
 <template>
@@ -95,6 +95,13 @@ const { softDeleteAction, selectedSoftDeleteAction } = useResourceActions();
             <template #bulk-actions="{ selectedItems }">
               <BulkActionButton
                 v-show="can('categories.delete')"
+                @click="
+                  softDeleteSelectedAction(
+                    'Categories',
+                    'admin.categories.destroy.selected',
+                    selectedItems
+                  )
+                "
                 class="text-red-600"
               >
                 <i class="fa-solid fa-trash-can"></i>

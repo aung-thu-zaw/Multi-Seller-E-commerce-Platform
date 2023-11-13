@@ -76,4 +76,13 @@ class AdminCategoryController extends Controller
 
         return to_route('admin.categories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully deleted.');
     }
+
+    public function destroySelected(Request $request, string $selectedItems): RedirectResponse
+    {
+        $selectedItems = explode(',', $selectedItems);
+
+        Category::whereIn('id', $selectedItems)->delete();
+
+        return to_route('admin.categories.index', $this->getQueryStringParams($request))->with('success', 'Selected :label have been successfully deleted.');
+    }
 }

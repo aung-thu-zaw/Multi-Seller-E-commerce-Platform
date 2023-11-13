@@ -1,9 +1,11 @@
 <?php
 
 use App\Models\Category;
+use Illuminate\Testing\Constraints\SoftDeletedInDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
 
 use function Pest\Laravel\assertDatabaseHas;
+use function Pest\Laravel\assertNotSoftDeleted;
 use function Pest\Laravel\assertSoftDeleted;
 use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
@@ -195,6 +197,7 @@ it('successfully updates a category as an admin', function () {
 it('successfully soft deletes a category as an admin', function () {
     // Arrange
     $category = Category::factory()->create();
+    $array = $category->toArray();
 
     // Act & Assert
     actingAsSuperAdmin();
@@ -203,11 +206,22 @@ it('successfully soft deletes a category as an admin', function () {
         ->assertStatus(302)
         ->assertRedirect(route('admin.categories.index', queryStringParams()));
 
-    assertSoftDeleted('categories', [
-        'id' => $category->id,
-        'parent_id' => $category->parent_id,
-        'name' => $category->name,
-        'status' => $category->status,
-        'image' => $category->image,
-    ]);
+    assertSoftDeleted('categories', ['id' => $category->id]);
+});
+
+it('successfully soft delete selected category as an admin', function () {
+    // Arrange
+    $categories = Category::factory(3)->create();
+    $selectedItems = $categories->pluck('id')->implode(',');
+
+    // Act & Assert
+    actingAsSuperAdmin();
+
+    delete(route('admin.categories.destroy.selected', $selectedItems))
+        ->assertStatus(302)
+        ->assertRedirect(route('admin.categories.index', queryStringParams()));
+
+    foreach ($categories as $category) {
+        assertSoftDeleted('categories', ['id' => $category->id]);
+    }
 });

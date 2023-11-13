@@ -141,8 +141,7 @@ export function useResourceActions(formFields = {}) {
                 {
                     preserveScroll: true,
                     onSuccess: () => {
-                        const successMessage =
-                            usePage().props.flash.success;
+                        const successMessage = usePage().props.flash.success;
                         if (successMessage) {
                             swal({
                                 icon: "success",
@@ -157,8 +156,8 @@ export function useResourceActions(formFields = {}) {
         }
     };
 
-    // Selected Soft Delete Action
-    const selectedSoftDeleteAction = async (
+    // Soft Delete Selected Action
+    const softDeleteSelectedAction = async (
         entityTypes,
         deleteRouteName,
         selectedItems
@@ -185,7 +184,7 @@ export function useResourceActions(formFields = {}) {
         if (result.isConfirmed) {
             router.delete(
                 route(deleteRouteName, {
-                    selectedItems,
+                    selected_items: selectedItems,
                     ...queryStringParams.value,
                 }),
                 {
@@ -194,8 +193,7 @@ export function useResourceActions(formFields = {}) {
                         store.dispatch("setSelectedItems", []);
                     },
                     onSuccess: () => {
-                        const successMessage =
-                            usePage().props.flash.success;
+                        const successMessage = usePage().props.flash.success;
                         if (successMessage) {
                             swal({
                                 icon: "success",
@@ -243,8 +241,7 @@ export function useResourceActions(formFields = {}) {
                 {
                     preserveScroll: true,
                     onSuccess: () => {
-                        const successMessage =
-                            usePage().props.flash.success;
+                        const successMessage = usePage().props.flash.success;
 
                         if (successMessage) {
                             swal({
@@ -285,7 +282,7 @@ export function useResourceActions(formFields = {}) {
         if (result.isConfirmed) {
             router.post(
                 route(restoreRouteName, {
-                    selectedItems,
+                    selected_items: selectedItems,
                 }),
                 {
                     ...queryStringParams.value,
@@ -296,8 +293,7 @@ export function useResourceActions(formFields = {}) {
                         store.dispatch("setSelectedItems", []);
                     },
                     onSuccess: () => {
-                        const successMessage =
-                            usePage().props.flash.success;
+                        const successMessage = usePage().props.flash.success;
 
                         if (successMessage) {
                             swal({
@@ -346,8 +342,7 @@ export function useResourceActions(formFields = {}) {
                 {
                     preserveScroll: true,
                     onSuccess: () => {
-                        const successMessage =
-                            usePage().props.flash.success;
+                        const successMessage = usePage().props.flash.success;
                         if (successMessage) {
                             swal({
                                 icon: "success",
@@ -390,7 +385,7 @@ export function useResourceActions(formFields = {}) {
         if (result.isConfirmed) {
             router.delete(
                 route(deleteRouteName, {
-                    selectedItems,
+                    selected_items: selectedItems,
                     ...queryStringParams.value,
                 }),
                 {
@@ -399,8 +394,7 @@ export function useResourceActions(formFields = {}) {
                         store.dispatch("setSelectedItems", []);
                     },
                     onSuccess: () => {
-                        const successMessage =
-                            usePage().props.flash.success;
+                        const successMessage = usePage().props.flash.success;
                         if (successMessage) {
                             swal({
                                 icon: "success",
@@ -444,8 +438,7 @@ export function useResourceActions(formFields = {}) {
                 {
                     preserveScroll: true,
                     onSuccess: () => {
-                        const successMessage =
-                            usePage().props.flash.success;
+                        const successMessage = usePage().props.flash.success;
                         if (successMessage) {
                             swal({
                                 icon: "success",
@@ -466,7 +459,7 @@ export function useResourceActions(formFields = {}) {
         createAction,
         editAction,
         softDeleteAction,
-        selectedSoftDeleteAction,
+        softDeleteSelectedAction,
         restoreAction,
         restoreSelectedAction,
         permanentDeleteAction,
