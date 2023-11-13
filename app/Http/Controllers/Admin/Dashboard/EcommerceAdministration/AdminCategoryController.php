@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
@@ -62,6 +63,13 @@ class AdminCategoryController extends Controller
         (new UpdateCategoryAction())->handle($request->validated(), $category);
 
         return to_route('admin.categories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
+    }
+
+    public function destroy(Request $request, Category $category): RedirectResponse
+    {
+        $category->delete();
+
+        return to_route('admin.categories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully deleted.');
     }
 
 }

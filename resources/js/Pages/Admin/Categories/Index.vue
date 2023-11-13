@@ -21,12 +21,15 @@ import Pagination from "@/Components/Paginations/DashboardPagination.vue";
 import { Head } from "@inertiajs/vue3";
 import { __ } from "@/Services/translations-inside-setup.js";
 import { useQueryStringParams } from "@/Composables/useQueryStringParams";
+import { useResourceActions } from "@/Composables/useResourceActions";
 
 defineProps({ categories: Object });
 
 const categoryList = "admin.categories.index";
 
 const { queryStringParams } = useQueryStringParams();
+
+const { softDeleteAction, selectedSoftDeleteAction } = useResourceActions();
 </script>
 
 <template>
@@ -155,6 +158,13 @@ const { queryStringParams } = useQueryStringParams();
 
                 <NormalButton
                   v-show="can('categories.delete')"
+                  @click="
+                    softDeleteAction(
+                      'Category',
+                      'admin.categories.destroy',
+                      item
+                    )
+                  "
                   class="bg-red-600 text-white ring-2 ring-red-300"
                 >
                   <i class="fa-solid fa-trash-can"></i>
