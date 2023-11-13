@@ -330,3 +330,24 @@ it('successfully force delete selected trashed category as an admin', function (
         assertDatabaseCount('categories', 0);
     }
 });
+
+it('successfully force delete all trashed category as an admin', function () {
+    // Arrange
+    $categories = Category::factory(5)->create();
+
+    $categories->each(function ($category) {
+        $category->delete();
+    });
+
+    // Act & Assert
+    actingAsSuperAdmin();
+
+    delete(route('admin.categories.force-delete.all'))
+        ->assertStatus(302)
+        ->assertRedirect(route('admin.categories.trashed', queryStringParams()));
+
+    foreach ($categories as $category) {
+        assertDatabaseMissing('categories', ['id' => $category->id]);
+        assertDatabaseCount('categories', 0);
+    }
+});

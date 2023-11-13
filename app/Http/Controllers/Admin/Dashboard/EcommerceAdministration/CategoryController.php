@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Dashboard\EcommerceAdministration;
 
 use App\Actions\Admin\Categories\CreateCategoryAction;
+use App\Actions\Admin\Categories\PermanentlyDeleteTrashedCategoriesAction;
 use App\Actions\Admin\Categories\UpdateCategoryAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Categories\CategoryRequest;
@@ -130,8 +131,19 @@ class CategoryController extends Controller
     {
         $selectedItems = explode(',', $selectedItems);
 
-        Category::onlyTrashed()->whereIn('id', $selectedItems)->forceDelete();
+        $trashedCategories = Category::onlyTrashed()->whereIn('id', $selectedItems)->get();
+
+        (new PermanentlyDeleteTrashedCategoriesAction())->handle($trashedCategories);
 
         return to_route('admin.categories.trashed', $this->getQueryStringParams($request))->with('success', 'Selected :label have been permanently deleted.');
+    }
+
+    public function forceDeleteAll(Request $request): RedirectResponse
+    {
+        $trashedCategories = Category::onlyTrashed()->get();
+
+        (new PermanentlyDeleteTrashedCategoriesAction())->handle($trashedCategories);
+
+        return to_route('admin.categories.trashed', $this->getQueryStringParams($request))->with('success', 'All :label have been permanently deleted.');
     }
 }
