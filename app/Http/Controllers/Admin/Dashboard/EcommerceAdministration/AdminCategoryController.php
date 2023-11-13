@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Dashboard\EcommerceAdministration;
 
 use App\Actions\Admin\Categories\CreateCategoryAction;
+use App\Actions\Admin\Categories\UpdateCategoryAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Categories\CategoryRequest;
 use Illuminate\Database\Eloquent\Builder;
@@ -47,6 +48,20 @@ class AdminCategoryController extends Controller
         (new CreateCategoryAction())->handle($request->validated());
 
         return to_route('admin.categories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
+    }
+
+    public function edit(Category $category): Response|ResponseFactory
+    {
+        $categories = Category::select('id', 'parent_id', 'name')->get();
+
+        return inertia('Admin/Categories/Edit', compact('category', 'categories'));
+    }
+
+    public function update(CategoryRequest $request, Category $category): RedirectResponse
+    {
+        (new UpdateCategoryAction())->handle($request->validated(), $category);
+
+        return to_route('admin.categories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }
 
 }

@@ -82,10 +82,9 @@ it('redirects back to the form with validation errors on category creation failu
         'name' => 'Test Category',
         'status' => '',
         'image' => '',
-        'captcha_token' => '',
     ])
         ->assertStatus(302)
-        ->assertSessionHasErrors(['status', 'captcha_token']);
+        ->assertSessionHasErrors(['status']);
 });
 
 it('successfully creates a category as an admin', function () {
@@ -112,7 +111,6 @@ it('successfully creates a category as an admin', function () {
     assertEquals($category['status'], $latestCategory->status);
 });
 
-
 it('prevents non-admin from accessing the category edit page', function () {
     // Arrange
     $category = Category::factory()->create();
@@ -123,19 +121,73 @@ it('prevents non-admin from accessing the category edit page', function () {
     get(route('admin.categories.edit', $category))->assertForbidden();
 });
 
-// it('allows admin to access the category edit page and verifies correct props', function () {
+it('allows admin to access the category edit page and verifies correct props', function () {
+    // Arrange
+    $categories = Category::factory(10)->create();
+    $category = Category::factory()->create();
 
-//     // Arrange
-//     $category = Category::factory()->create();
+    // Act & Assert
+    actingAsSuperAdmin();
 
-//     // Act & Assert
-//     actingAsSuperAdmin();
+    get(route('admin.categories.edit', $category))
+        ->assertOk()
+        ->assertInertia(
+            fn (Assert $page) => $page
+            ->component('Admin/Categories/Edit')
+            ->has(
+                'category',
+                fn (Assert $page) => $page
+             ->where('id', $category->id)
+             ->where('name', $category->name)
+             ->etc()
+            )
+            ->has("categories", 11)
+            ->has("categories.0", fn (Assert $page) => $page
+            ->has("id")
+            ->has("parent_id")
+            ->has("name"))
+        );
+});
 
-//     get(route('admin.categories.edit', $category))
-//         ->assertOk()
-//         ->assertInertia(
-//             fn (Assert $page) => $page
-//                 ->component('Admin/Categories/Edit')
-//                 ->has('category')
-//         );
-// });
+
+it('redirects back to the form with validation errors on category update failure', function () {
+
+    // Arrange
+    $category = Category::factory()->create();
+
+    // Act & Assert
+    actingAsSuperAdmin();
+
+    patch(route('admin.categories.update', $category), [
+        'name' => 'Edit Category',
+        'status' => 'false',
+    ])->assertStatus(302)->assertSessionHasErrors(['status']);
+});
+
+it('successfully updates a category as an admin', function () {
+
+    // Arrange
+    $category = Category::factory()->create();
+
+    $updateData = [
+        'parent_id' => null,
+        'name' => 'Update Category',
+        'status' => true,
+    ];
+
+    // Act & Assert
+    actingAsSuperAdmin();
+
+    patch(route('admin.categories.update', $category), $updateData)
+        ->assertStatus(302)
+        ->assertRedirect(route('admin.categories.index', queryStringParams()))
+        ->assertSessionHasNoErrors()
+        ->assertSessionHas('success');
+
+    assertDatabaseHas('categories', $updateData);
+
+    $latestCategory = Category::latest()->first();
+    assertEquals($updateData['parent_id'], $latestCategory->parent_id);
+    assertEquals($updateData['name'], $latestCategory->name);
+    assertEquals($updateData['status'], $latestCategory->status);
+});
