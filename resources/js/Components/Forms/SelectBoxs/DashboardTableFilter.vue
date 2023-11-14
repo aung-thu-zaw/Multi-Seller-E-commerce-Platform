@@ -256,7 +256,7 @@ watch(
 <template>
   <button
     @click="isFilterBoxOpened = !isFilterBoxOpened"
-    class="relative text-sm border px-5 py-3 rounded-md ml-5 border-slate-300 hover:bg-gray-50 text-gray-600 hover:text-gray-700 focus:ring-2 focus:ring-blue-300 focus:border-blue-400"
+    class="relative text-sm border px-5 py-3 rounded-md ml-5 border-slate-300 hover:bg-gray-50 text-gray-600 hover:text-gray-700 focus:ring-2 focus:ring-orange-300 focus:border-orange-400"
   >
     <span class="">
       <i class="fa-solid fa-filter"></i>
@@ -290,7 +290,7 @@ watch(
 
           <Datepicker
             id="created-from"
-            class="block w-full p-4 font-semibold text-sm text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition-all rounded-md"
+            class="block w-full p-4 font-semibold text-sm text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all rounded-md"
             v-model="createdFrom"
             :placeholder="__('Select Date')"
           />
@@ -302,7 +302,7 @@ watch(
 
           <Datepicker
             id="created-until"
-            class="block w-full p-4 font-semibold text-sm text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition-all rounded-md"
+            class="block w-full p-4 font-semibold text-sm text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all rounded-md"
             v-model="createdUntil"
             :placeholder="__('Select Date')"
           />
@@ -317,7 +317,7 @@ watch(
 
           <Datepicker
             id="deleted-from"
-            class="block w-full p-4 font-semibold text-sm text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition-all rounded-md"
+            class="block w-full p-4 font-semibold text-sm text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all rounded-md"
             v-model="deletedFrom"
             :placeholder="__('Select Date')"
           />
@@ -329,7 +329,7 @@ watch(
 
           <Datepicker
             id="deleted-until"
-            class="block w-full p-4 font-semibold text-sm text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition-all rounded-md"
+            class="block w-full p-4 font-semibold text-sm text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all rounded-md"
             v-model="deletedUntil"
             :placeholder="__('Select Date')"
           />

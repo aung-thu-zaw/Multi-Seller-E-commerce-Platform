@@ -7,6 +7,8 @@ import TableContainer from "@/Components/Tables/TableContainer.vue";
 import ActionTable from "@/Components/Tables/ActionTable.vue";
 import DashboardTableDataSearchBox from "@/Components/Forms/SearchBoxs/DashboardTableDataSearchBox.vue";
 import DashboardTableDataPerPageSelectBox from "@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue";
+import DashboardTableFilter from "@/Components/Forms/SelectBoxs/DashboardTableFilter.vue";
+import FilteredBy from "@/Components/Tables/FilteredBy.vue";
 import SortableTableHeaderCell from "@/Components/Tables/TableCells/SortableTableHeaderCell.vue";
 import TableHeaderCell from "@/Components/Tables/TableCells/TableHeaderCell.vue";
 import TableDataCell from "@/Components/Tables/TableCells/TableDataCell.vue";
@@ -64,7 +66,7 @@ const {
             }"
           >
             <i class="fa-solid fa-left-long"></i>
-            {{ __("Go Back") }}
+            {{ __("Go To List") }}
           </InertiaLinkButton>
         </div>
       </div>
@@ -96,7 +98,7 @@ const {
       <!-- Table Start -->
       <div class="border bg-white rounded-md shadow px-5 py-3">
         <div
-          class="my-5 flex flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between"
+          class="my-3 flex flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between overflow-auto p-2"
         >
           <DashboardTableDataSearchBox
             :placeholder="__('Search by :label', { label: __('Name') }) + '...'"
@@ -105,8 +107,16 @@ const {
 
           <div class="flex items-center justify-end w-full md:space-x-5">
             <DashboardTableDataPerPageSelectBox :to="trashedCategoryList" />
+
+            <DashboardTableFilter
+              :to="trashedCategoryList"
+              :filterBy="['deleted']"
+            />
           </div>
         </div>
+
+        <!-- Filtered By -->
+        <FilteredBy :to="trashedCategoryList" />
 
         <TableContainer>
           <ActionTable :items="trashedCategories.data">

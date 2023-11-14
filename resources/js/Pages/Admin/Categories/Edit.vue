@@ -9,7 +9,7 @@ import InputField from "@/Components/Forms/Fields/InputField.vue";
 import SelectBox from "@/Components/Forms/Fields/SelectBox.vue";
 import FileInput from "@/Components/Forms/Fields/FileInput.vue";
 import FormButton from "@/Components/Buttons/FormButton.vue";
-import InertiaLinkButton from "@/Components/Buttons/InertiaLinkButton.vue";
+import GoBackButton from "@/Components/Buttons/GoBackButton.vue";
 import { useImagePreview } from "@/Composables/useImagePreview";
 import { useResourceActions } from "@/Composables/useResourceActions";
 import { Head } from "@inertiajs/vue3";
@@ -54,10 +54,7 @@ const { form, processing, errors, editAction } = useResourceActions({
         </Breadcrumb>
 
         <div class="w-full flex items-center justify-end">
-          <InertiaLinkButton :to="categoryList" :data="queryStringParams">
-            <i class="fa-solid fa-left-long"></i>
-            {{ __("Go Back") }}
-          </InertiaLinkButton>
+            <GoBackButton />
         </div>
       </div>
 

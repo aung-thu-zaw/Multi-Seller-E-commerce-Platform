@@ -25,10 +25,12 @@ export function useSorting(routeName) {
                 created_until: usePage().props.ziggy.query?.created_until,
                 deleted_from: usePage().props.ziggy.query?.deleted_from,
                 deleted_until: usePage().props.ziggy.query?.deleted_until,
+                filter_by_status: usePage().props.ziggy.query?.filter_by_status,
             },
             {
                 replace: true,
                 preserveState: true,
+                preserveScroll: true,
             }
         );
     };

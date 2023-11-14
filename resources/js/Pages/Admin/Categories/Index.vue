@@ -7,6 +7,7 @@ import ActionTable from "@/Components/Tables/ActionTable.vue";
 import DashboardTableDataSearchBox from "@/Components/Forms/SearchBoxs/DashboardTableDataSearchBox.vue";
 import DashboardTableDataPerPageSelectBox from "@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue";
 import DashboardTableFilter from "@/Components/Forms/SelectBoxs/DashboardTableFilter.vue";
+import FilteredBy from "@/Components/Tables/FilteredBy.vue";
 import SortableTableHeaderCell from "@/Components/Tables/TableCells/SortableTableHeaderCell.vue";
 import TableHeaderCell from "@/Components/Tables/TableCells/TableHeaderCell.vue";
 import TableDataCell from "@/Components/Tables/TableCells/TableDataCell.vue";
@@ -52,7 +53,6 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
         <InertiaLinkButton
           v-show="can('categories.create')"
           to="admin.categories.create"
-          :data="queryStringParams"
         >
           <i class="fa-solid fa-file-circle-plus mr-1"></i>
           {{ __("Create A New :label", { label: __("Category") }) }}
@@ -78,7 +78,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
       <!-- Table Start -->
       <div class="border bg-white rounded-md shadow px-5 py-3">
         <div
-          class="my-5 flex flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between overflow-auto p-2"
+          class="my-3 flex flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between overflow-auto p-2"
         >
           <DashboardTableDataSearchBox
             :placeholder="__('Search by :label', { label: __('Name') }) + '...'"
@@ -90,7 +90,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
 
             <DashboardTableFilter
               :to="categoryList"
-              filterBy="['created','status']"
+              :filterBy="['created', 'status']"
               :options="[
                 {
                   label: 'Show',
@@ -104,6 +104,9 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
             />
           </div>
         </div>
+
+        <!-- Filtered By -->
+        <FilteredBy :to="categoryList" />
 
         <TableContainer>
           <ActionTable :items="categories.data">
@@ -174,7 +177,6 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
                   v-show="can('categories.edit')"
                   to="admin.categories.edit"
                   :targetIdentifier="item"
-                  :data="queryStringParams"
                 >
                   <i class="fa-solid fa-edit"></i>
                   {{ __("Edit") }}

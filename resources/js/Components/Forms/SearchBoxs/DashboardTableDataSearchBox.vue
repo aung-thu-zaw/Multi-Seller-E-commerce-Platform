@@ -34,6 +34,7 @@ const handleSearch = () => {
         created_until: usePage().props.ziggy.query?.created_until,
         deleted_from: usePage().props.ziggy.query?.deleted_from,
         deleted_until: usePage().props.ziggy.query?.deleted_until,
+        filter_by_status: usePage().props.ziggy.query?.filter_by_status,
       },
       {
         replace: true,
@@ -55,6 +56,7 @@ const removeSearch = () => {
       created_until: usePage().props.ziggy.query?.created_until,
       deleted_from: usePage().props.ziggy.query?.deleted_from,
       deleted_until: usePage().props.ziggy.query?.deleted_until,
+      filter_by_status: usePage().props.ziggy.query?.filter_by_status,
     },
     {
       replace: true,
@@ -113,7 +115,7 @@ watch(
           <i class="fa-solid fa-circle-xmark"></i>
         </div>
         <input
-          type="search"
+          type="text"
           id="default-search"
           class="block w-full p-4 pl-10 text-xs text-gray-900 border border-gray-300 rounded-md bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all"
           :placeholder="placeholder"

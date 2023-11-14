@@ -27,12 +27,17 @@ const props = defineProps({
 
   preserveState: {
     type: Boolean,
-    default: true,
+    default: false,
   },
 
   preserveScroll: {
     type: Boolean,
-    default: true,
+    default: false,
+  },
+
+  replace: {
+    type: Boolean,
+    default: false,
   },
 });
 
