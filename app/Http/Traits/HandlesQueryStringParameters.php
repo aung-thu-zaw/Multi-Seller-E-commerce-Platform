@@ -21,7 +21,7 @@ trait HandlesQueryStringParameters
             'created_until' => $request->created_until ?? null,
             'deleted_from' => $request->deleted_from ?? null,
             'deleted_until' => $request->deleted_until ?? null,
-            'status' => $request->status ?? null,
+            'filter_by_status' => $request->filter_by_status ?? null,
         ];
     }
 }

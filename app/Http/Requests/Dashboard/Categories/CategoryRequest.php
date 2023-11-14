@@ -26,7 +26,7 @@ class CategoryRequest extends FormRequest
         $rules = [
             'parent_id' => ['nullable', 'numeric', Rule::exists('categories', 'id')],
             'name' => ['required', 'string', 'max:255', Rule::unique('categories', 'name')],
-            'status' => ['required', 'boolean'],
+            'status' => ['required', 'string', Rule::in(['show','hide'])],
             'captcha_token' => [new RecaptchaRule()],
         ];
 

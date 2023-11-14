@@ -21,10 +21,6 @@ class Category extends Model
     use Searchable;
     use SoftDeletes;
 
-    protected $casts = [
-        'status' => 'boolean',
-    ];
-
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()

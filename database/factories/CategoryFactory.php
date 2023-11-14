@@ -19,7 +19,7 @@ class CategoryFactory extends Factory
         return [
             'name' => fake()->unique()->word(),
             'image' => fake()->imageUrl(),
-            'status' => fake()->boolean(),
+            'status' => fake()->randomElement(['show','hide']),
         ];
     }
 }

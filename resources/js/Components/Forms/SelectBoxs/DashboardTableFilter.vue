@@ -66,7 +66,7 @@ const filteredByCreatedFrom = () => {
       created_until: usePage().props.ziggy.query?.created_until,
       deleted_from: usePage().props.ziggy.query?.deleted_from,
       deleted_until: usePage().props.ziggy.query?.deleted_until,
-      status: usePage().props.ziggy.query?.status,
+      filter_by_status: usePage().props.ziggy.query?.filter_by_status,
     },
     {
       replace: true,
@@ -90,7 +90,7 @@ const filteredByCreatedUntil = () => {
       created_until: formatDate(createdUntil.value),
       deleted_from: usePage().props.ziggy.query?.deleted_from,
       deleted_until: usePage().props.ziggy.query?.deleted_until,
-      status: usePage().props.ziggy.query?.status,
+      filter_by_status: usePage().props.ziggy.query?.filter_by_status,
     },
     {
       replace: true,
@@ -114,7 +114,7 @@ const filteredByDeletedFrom = () => {
       created_until: usePage().props.ziggy.query?.created_until,
       deleted_from: formatDate(deletedFrom.value),
       deleted_until: usePage().props.ziggy.query?.deleted_until,
-      status: usePage().props.ziggy.query?.status,
+      filter_by_status: usePage().props.ziggy.query?.filter_by_status,
     },
     {
       replace: true,
@@ -138,7 +138,7 @@ const filteredByDeletedUntil = () => {
       created_until: usePage().props.ziggy.query?.created_until,
       deleted_from: usePage().props.ziggy.query?.deleted_from,
       deleted_until: formatDate(deletedUntil.value),
-      status: usePage().props.ziggy.query?.status,
+      filter_by_status: usePage().props.ziggy.query?.filter_by_status,
     },
     {
       replace: true,
@@ -162,7 +162,7 @@ const filteredByStatus = () => {
       created_until: usePage().props.ziggy.query?.created_until,
       deleted_from: usePage().props.ziggy.query?.deleted_from,
       deleted_until: usePage().props.ziggy.query?.deleted_until,
-      status: status.value,
+      filter_by_status: status.value,
     },
     {
       replace: true,

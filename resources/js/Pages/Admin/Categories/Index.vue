@@ -94,11 +94,11 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
               :options="[
                 {
                   label: 'Show',
-                  value: true,
+                  value: 'show',
                 },
                 {
                   label: 'Hide',
-                  value: false,
+                  value: 'hide',
                 },
               ]"
             />
@@ -159,13 +159,13 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
               </TableDataCell>
 
               <TableDataCell>
-                <GreenBadge v-if="item?.status">
+                <GreenBadge v-show="item?.status === 'show'">
                   <i class="fa-solid fa-eye animate-pulse"></i>
-                  show
+                  {{ item?.status }}
                 </GreenBadge>
-                <RedBadge v-else>
+                <RedBadge v-show="item?.status === 'hide'">
                   <i class="fa-solid fa-eye-slash animate-pulse"></i>
-                  hide
+                  {{ item?.status }}
                 </RedBadge>
               </TableDataCell>
 

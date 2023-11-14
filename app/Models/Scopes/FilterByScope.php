@@ -30,9 +30,8 @@ class FilterByScope implements Scope
         ->when(request('deleted_until'), function ($query, $deletedUntil) {
             $query->whereDate('deleted_at', '<=', $deletedUntil);
         })
-        ->when(request('status'), function ($query, $status) {
-            $booleanValue = filter_var($status, FILTER_VALIDATE_BOOLEAN);
-            $query->where('status', $booleanValue);
+        ->when(request('filter_by_status'), function ($query, $filterByStatus) {
+            $query->where('status', $filterByStatus);
         });
     }
 }
