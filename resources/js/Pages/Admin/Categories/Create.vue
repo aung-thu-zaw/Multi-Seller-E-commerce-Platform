@@ -101,11 +101,11 @@ const { form, processing, errors, createAction } = useResourceActions({
               :options="[
                 {
                   label: 'Show',
-                  value: '0',
+                  value: true,
                 },
                 {
                   label: 'Hide',
-                  value: '1',
+                  value: false,
                 },
               ]"
               v-model="form.status"

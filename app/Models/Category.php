@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\FilterByScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,6 +20,10 @@ class Category extends Model
     use HasSlug;
     use Searchable;
     use SoftDeletes;
+
+    protected $casts = [
+        'status' => 'boolean',
+    ];
 
     public function getSlugOptions(): SlugOptions
     {
@@ -68,16 +73,9 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id')->with('children');
     }
 
-    /**
-     * @param  Builder<Category>  $query
-     */
-    public function scopeSearch(Builder $query, ?string $search): void
+    protected static function booted(): void
     {
-        $query->when($search ?? null, function ($query, $keyword) {
-            $query->where(function ($query) use ($keyword) {
-                $query->where('name', 'LIKE', '%'.$keyword.'%');
-            });
-        });
+        static::addGlobalScope(new FilterByScope());
     }
 
     public static function deleteImage(?string $categoryImage): void

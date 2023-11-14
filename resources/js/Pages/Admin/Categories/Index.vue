@@ -6,6 +6,7 @@ import TableContainer from "@/Components/Tables/TableContainer.vue";
 import ActionTable from "@/Components/Tables/ActionTable.vue";
 import DashboardTableDataSearchBox from "@/Components/Forms/SearchBoxs/DashboardTableDataSearchBox.vue";
 import DashboardTableDataPerPageSelectBox from "@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue";
+import DashboardTableFilter from "@/Components/Forms/SelectBoxs/DashboardTableFilter.vue";
 import SortableTableHeaderCell from "@/Components/Tables/TableCells/SortableTableHeaderCell.vue";
 import TableHeaderCell from "@/Components/Tables/TableCells/TableHeaderCell.vue";
 import TableDataCell from "@/Components/Tables/TableCells/TableDataCell.vue";
@@ -18,10 +19,10 @@ import BulkActionButton from "@/Components/Buttons/BulkActionButton.vue";
 import InertiaLinkButton from "@/Components/Buttons/InertiaLinkButton.vue";
 import NormalButton from "@/Components/Buttons/NormalButton.vue";
 import Pagination from "@/Components/Paginations/DashboardPagination.vue";
+import { useResourceActions } from "@/Composables/useResourceActions";
 import { Head } from "@inertiajs/vue3";
 import { __ } from "@/Services/translations-inside-setup.js";
 import { useQueryStringParams } from "@/Composables/useQueryStringParams";
-import { useResourceActions } from "@/Composables/useResourceActions";
 
 defineProps({ categories: Object });
 
@@ -86,6 +87,21 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
 
           <div class="flex items-center justify-end w-full md:space-x-5">
             <DashboardTableDataPerPageSelectBox :to="categoryList" />
+
+            <DashboardTableFilter
+              :to="categoryList"
+              filterBy="['created','status']"
+              :options="[
+                {
+                  label: 'Show',
+                  value: true,
+                },
+                {
+                  label: 'Hide',
+                  value: false,
+                },
+              ]"
+            />
           </div>
         </div>
 
@@ -143,7 +159,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
               </TableDataCell>
 
               <TableDataCell>
-                <GreenBadge v-if="item?.status === 1">
+                <GreenBadge v-if="item?.status">
                   <i class="fa-solid fa-eye animate-pulse"></i>
                   show
                 </GreenBadge>
@@ -158,6 +174,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
                   v-show="can('categories.edit')"
                   to="admin.categories.edit"
                   :targetIdentifier="item"
+                  :data="queryStringParams"
                 >
                   <i class="fa-solid fa-edit"></i>
                   {{ __("Edit") }}

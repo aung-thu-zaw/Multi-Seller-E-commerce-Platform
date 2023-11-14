@@ -40,6 +40,12 @@ class CategoryController extends Controller
                               ->paginate(request('per_page', 5))
                               ->appends(request()->all());
 
+        // $categories = Category::with("children")
+        //                       ->filter(request(['search','created_from','created_until','deleted_from','deleted_until','status']))
+        //                       ->orderBy(request('sort', 'id'), request('direction', 'desc'))
+        //                       ->paginate(request('per_page', 5))
+        //                       ->appends(request()->all());
+
         return inertia('Admin/Categories/Index', compact('categories'));
     }
 

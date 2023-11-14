@@ -38,7 +38,7 @@ import { Head } from "@inertiajs/vue3";
         </div>
       </div>
 
-      <div class="flex flex-wrap mt-4">
+      <!-- <div class="flex flex-wrap mt-4">
         <div class="w-full mb-12 px-4">
           <div
             class="w-full bg-white px-6 py-3 shadow rounded-sm border-t-4 border-t-orange-500"
@@ -59,9 +59,9 @@ import { Head } from "@inertiajs/vue3";
                   { testingOne: 'testingOne' },
                   { testingTwo: 'testingTwo' },
                 ]"
-              >
+              > -->
                 <!-- Table Header -->
-                <template #table-header>
+                <!-- <template #table-header>
                   <SortableTableHeaderCell label="# No" to="home" />
 
                   <SortableTableHeaderCell label="Invoice Id" to="home" />
@@ -79,10 +79,10 @@ import { Head } from "@inertiajs/vue3";
                   <SortableTableHeaderCell label="Date" to="home" />
 
                   <TableHeaderCell label="Actions" />
-                </template>
+                </template> -->
 
                 <!-- Table Body -->
-                <template #table-data>
+                <!-- <template #table-data>
                   <TableDataCell> 1 </TableDataCell>
 
                   <TableDataCell>
@@ -136,9 +136,9 @@ import { Head } from "@inertiajs/vue3";
                   </TableActionCell>
                 </template>
               </Table>
-            </TableContainer>
+            </TableContainer> -->
 
-            <div class="py-3 flex items-center justify-center">
+            <!-- <div class="py-3 flex items-center justify-center">
               <nav aria-label="Page navigation example">
                 <ul class="inline-flex -space-x-px text-base h-10">
                   <li>
@@ -193,10 +193,10 @@ import { Head } from "@inertiajs/vue3";
                   </li>
                 </ul>
               </nav>
-            </div>
-          </div>
-        </div>
-      </div>
+            </div> -->
+          <!-- </div> -->
+        <!-- </div> -->
+      <!-- </div> -->
     </div>
   </AdminDashboardLayout>
 </template>

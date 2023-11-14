@@ -11,6 +11,7 @@ export function useQueryStringParams() {
         created_until: usePage().props.ziggy.query?.created_until,
         deleted_from: usePage().props.ziggy.query?.deleted_from,
         deleted_until: usePage().props.ziggy.query?.deleted_until,
+        status: usePage().props.ziggy.query?.status,
     }));
 
     return {
