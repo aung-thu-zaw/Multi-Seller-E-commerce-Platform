@@ -127,7 +127,7 @@ const toggleCollapseShow = (classes) => {
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-blue-600 hover:text-blue-500':
+                'text-orange-600 hover:text-orange-500':
                   $page.url.startsWith('/admin/categories'),
                 'text-slate-600 hover:text-slate-500':
                   !$page.url.startsWith('/admin/categories'),
@@ -135,6 +135,29 @@ const toggleCollapseShow = (classes) => {
             >
               <i class="fa-solid fa-list mr-2 text-sm"></i>
               {{ __("Categories") }}
+            </Link>
+          </li>
+
+          <!-- Brands -->
+          <li v-show="can('brands.view')" class="items-center">
+            <Link
+              :href="route('admin.brands.index')"
+              :data="{
+                page: 1,
+                per_page: 5,
+                sort: 'id',
+                direction: 'desc',
+              }"
+              class="text-xs py-3 font-bold block"
+              :class="{
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/brands'),
+              }"
+            >
+              <i class="fa-solid fa-award mr-2 text-sm"></i>
+              {{ __("Brands") }}
             </Link>
           </li>
         </ul>

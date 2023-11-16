@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Dashboard\EcommerceAdministration;
+namespace App\Http\Controllers\Admin\Dashboard;
 
 use App\Actions\Admin\Categories\CreateCategoryAction;
 use App\Actions\Admin\Categories\PermanentlyDeleteTrashedCategoriesAction;

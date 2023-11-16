@@ -82,5 +82,9 @@
     "Category Name": "Category Name",
     "Parent Category": "Parent Category",
     "Status": "Status",
-    "Category Image": "Category Image"
+    "Category Image": "Category Image",
+    "Brands": "Brands",
+    "Brand": "Brand",
+    "brands": "brands",
+    "brand": "brand"
 }

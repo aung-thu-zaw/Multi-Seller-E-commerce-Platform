@@ -82,5 +82,9 @@
     "Category Name": "အမျိုးအစားအမည်",
     "Parent Category": "မိဘအမျိုးအစား",
     "Status": "အခြေအနေ",
-    "Category Image": "အမျိုးအစားပုံ"
+    "Category Image": "အမျိုးအစားပုံ",
+    "Brands": "အမှတ်တံဆိပ်များ",
+    "Brand": "အမှတ်တံဆိပ်",
+    "brands": "အမှတ်တံဆိပ်များ",
+    "brand": "အမှတ်တံဆိပ်"
 }
