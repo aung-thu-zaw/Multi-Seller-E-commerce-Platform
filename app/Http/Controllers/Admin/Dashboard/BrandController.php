@@ -6,7 +6,9 @@ use App\Actions\Admin\Brands\CreateBrandAction;
 use App\Actions\Admin\Brands\PermanentlyDeleteTrashedBrandsAction;
 use App\Actions\Admin\Brands\UpdateBrandAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\BrandRequest;
+use App\Http\Requests\Dashboard\Admin\BrandRequest;
+use App\Http\Requests\Dashboard\Admin\Brands\StoreBrandRequest;
+use App\Http\Requests\Dashboard\Admin\Brands\UpdateBrandRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\Brand;
 use Illuminate\Http\RedirectResponse;
@@ -32,9 +34,9 @@ class BrandController extends Controller
     public function index(): Response|ResponseFactory
     {
         $brands = Brand::search(request('search'))
-            ->orderBy(request('sort', 'id'), request('direction', 'desc'))
-            ->paginate(request('per_page', 5))
-            ->appends(request()->all());
+                        ->orderBy(request('sort', 'id'), request('direction', 'desc'))
+                        ->paginate(request('per_page', 5))
+                        ->appends(request()->all());
 
         return inertia('Admin/Brands/Index', compact('brands'));
     }
@@ -44,7 +46,7 @@ class BrandController extends Controller
         return inertia('Admin/Brands/Create');
     }
 
-    public function store(BrandRequest $request): RedirectResponse
+    public function store(StoreBrandRequest $request): RedirectResponse
     {
         (new CreateBrandAction())->handle($request->validated());
 
@@ -56,7 +58,7 @@ class BrandController extends Controller
         return inertia('Admin/Brands/Edit', compact('brand'));
     }
 
-    public function update(BrandRequest $request, Brand $brand): RedirectResponse
+    public function update(UpdateBrandRequest $request, Brand $brand): RedirectResponse
     {
         ( new UpdateBrandAction())->handle($request->validated(), $brand);
 

@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Requests\Dashboard;
+namespace App\Http\Requests\Dashboard\Admin\Categories;
 
 use App\Rules\RecaptchaRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-class CategoryRequest extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::user()->hasPermissionTo('categories.edit');
     }
 
     /**
@@ -23,21 +24,22 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $category = $this->route()->parameter('category');
+
         $rules = [
             'parent_id' => ['nullable', 'numeric', Rule::exists('categories', 'id')],
-            'name' => ['required', 'string', 'max:255', Rule::unique('categories', 'name')],
+            'name' => ['required', 'string', 'max:255', Rule::unique('categories', 'name')->ignore($category)],
             'status' => ['required', 'string', Rule::in(['show','hide'])],
             'captcha_token' => [new RecaptchaRule()],
         ];
 
-        if ($this->hasFile('image')) {
-            $rules['image'] = ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'];
-        }
+        if ($this->hasFile("image")) {
 
-        $route = $this->route();
-        if ($route && in_array($this->method(), ['POST', 'PUT', 'PATCH'])) {
-            $category = $route->parameter('category');
-            $rules['name'] = ['required', 'string', 'max:255', Rule::unique('categories', 'name')->ignore($category)];
+            $rules['image'] = ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'];
+
+        } else {
+
+            $rules['image'] = ['nullable', 'string'];
         }
 
         return $rules;

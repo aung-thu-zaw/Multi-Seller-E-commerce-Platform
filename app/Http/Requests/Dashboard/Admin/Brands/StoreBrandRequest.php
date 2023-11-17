@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Requests\Dashboard;
+namespace App\Http\Requests\Dashboard\Admin\Brands;
 
 use App\Rules\RecaptchaRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-class BrandRequest extends FormRequest
+class StoreBrandRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::user()->hasPermissionTo('brands.create');
     }
 
     /**
@@ -23,25 +24,11 @@ class BrandRequest extends FormRequest
      */
     public function rules(): array
     {
-        $route = $this->route();
-
-        $rules = [
+        return [
             'name' => ['required', 'string', 'max:255', Rule::unique('brands', 'name')],
             'status' => ['required', 'string', Rule::in(['active','inactive'])],
+            'logo' => ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'],
             'captcha_token' => [new RecaptchaRule()],
         ];
-
-        if ($route && $this->method() === "POST") {
-            $rules['logo'] = ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'];
-        }
-
-        if ($route && in_array($this->method(), ['PUT', 'PATCH'])) {
-
-            $brand = $route->parameter('brand');
-            $rules['name'] = ['required', 'string', 'max:255', Rule::unique('brands', 'name')->ignore($brand)];
-            $rules['logo'] = $this->hasFile("logo") ? ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'] : ['nullable','string'];
-        }
-
-        return $rules;
     }
 }

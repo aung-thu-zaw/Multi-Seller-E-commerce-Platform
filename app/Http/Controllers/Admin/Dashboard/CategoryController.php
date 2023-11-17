@@ -6,7 +6,9 @@ use App\Actions\Admin\Categories\CreateCategoryAction;
 use App\Actions\Admin\Categories\PermanentlyDeleteTrashedCategoriesAction;
 use App\Actions\Admin\Categories\UpdateCategoryAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\CategoryRequest;
+use App\Http\Requests\Dashboard\Admin\Categories\StoreCategoryRequest;
+use App\Http\Requests\Dashboard\Admin\Categories\UpdateCategoryRequest;
+use App\Http\Requests\Dashboard\Admin\CategoryRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Builder;
@@ -50,7 +52,7 @@ class CategoryController extends Controller
         return inertia('Admin/Categories/Create', compact('categories'));
     }
 
-    public function store(CategoryRequest $request): RedirectResponse
+    public function store(StoreCategoryRequest $request): RedirectResponse
     {
         (new CreateCategoryAction())->handle($request->validated());
 
@@ -64,7 +66,7 @@ class CategoryController extends Controller
         return inertia('Admin/Categories/Edit', compact('category', 'categories'));
     }
 
-    public function update(CategoryRequest $request, Category $category): RedirectResponse
+    public function update(UpdateCategoryRequest $request, Category $category): RedirectResponse
     {
         (new UpdateCategoryAction())->handle($request->validated(), $category);
 
