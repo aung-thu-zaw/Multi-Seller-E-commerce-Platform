@@ -55,7 +55,7 @@ class Brand extends Model
         static::addGlobalScope(new FilterByScope());
     }
 
-    public static function deleteImage(?string $brandImage): void
+    public static function deleteImage(string $brandImage): void
     {
         if (! empty($brandImage) && file_exists(storage_path('app/public/brands/'.pathinfo($brandImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/brands/'.pathinfo($brandImage, PATHINFO_BASENAME)));

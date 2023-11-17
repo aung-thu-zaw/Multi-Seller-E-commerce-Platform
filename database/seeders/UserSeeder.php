@@ -13,6 +13,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+
+        // Super Admin
         $superAdmin = User::factory()->create([
             'name' => 'Super Admin',
             'role' => 'admin',
@@ -26,6 +28,7 @@ class UserSeeder extends Seeder
 
         $superAdmin->syncPermissions($role->permissions);
 
+        // Official Seller
         User::factory()->create([
             'name' => 'Seller',
             'role' => 'seller',
@@ -33,6 +36,15 @@ class UserSeeder extends Seeder
             'password' => 'Password!',
         ]);
 
+        // Individual Seller
+        User::factory()->create([
+            'name' => 'Myo Myo',
+            'role' => 'seller',
+            'email' => 'myomyo@gmail.com',
+            'password' => 'Password!',
+        ]);
+
+        // Buyer
         User::factory()->create([
             'name' => 'Customer',
             'role' => 'user',

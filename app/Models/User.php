@@ -6,6 +6,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -53,6 +55,22 @@ class User extends Authenticatable
         );
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne<Store>
+     */
+    public function store(): HasOne
+    {
+        return $this->hasOne(Store::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Product>
+     */
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class, 'seller_id');
+    }
+
     public function getRedirectRouteName(): string
     {
         return match ((string) $this->role) {
@@ -69,5 +87,12 @@ class User extends Authenticatable
             'seller' => 'seller.login',
             'user' => 'home',
         };
+    }
+
+    public static function deleteAvatar(?string $avatar): void
+    {
+        if (!empty($avatar) && file_exists(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
+            unlink(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)));
+        }
     }
 }
