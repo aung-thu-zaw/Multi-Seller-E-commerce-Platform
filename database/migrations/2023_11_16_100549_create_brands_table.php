@@ -14,8 +14,8 @@ return new class () extends Migration {
             $table->id();
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->string('logo')->nullable();
-            $table->enum('status', ['show','hide']);
+            $table->string('logo');
+            $table->enum('status', ['active','inactive']);
             $table->softDeletes();
             $table->timestamps();
         });
