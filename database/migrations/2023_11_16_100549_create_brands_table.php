@@ -15,7 +15,7 @@ return new class () extends Migration {
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('logo');
-            $table->enum('status', ['active','inactive']);
+            $table->enum('status', ['active','inactive'])->default("inactive");
             $table->softDeletes();
             $table->timestamps();
         });

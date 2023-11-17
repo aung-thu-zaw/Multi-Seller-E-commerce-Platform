@@ -16,7 +16,7 @@ return new class () extends Migration {
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('image')->nullable();
-            $table->enum('status', ['show','hide']);
+            $table->enum('status', ['show','hide'])->default("hide");
             $table->softDeletes();
             $table->timestamps();
         });

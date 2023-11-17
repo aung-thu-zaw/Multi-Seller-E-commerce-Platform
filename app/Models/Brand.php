@@ -43,7 +43,7 @@ class Brand extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Casts\Attribute<Brand, never>
      */
-    protected function image(): Attribute
+    protected function logo(): Attribute
     {
         return Attribute::make(
             set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/brands/$value"),

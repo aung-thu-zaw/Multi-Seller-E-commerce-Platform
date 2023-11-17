@@ -6,7 +6,7 @@ use App\Actions\Admin\Categories\CreateCategoryAction;
 use App\Actions\Admin\Categories\PermanentlyDeleteTrashedCategoriesAction;
 use App\Actions\Admin\Categories\UpdateCategoryAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Categories\CategoryRequest;
+use App\Http\Requests\Dashboard\CategoryRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Builder;

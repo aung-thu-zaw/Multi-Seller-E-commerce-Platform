@@ -6,7 +6,7 @@ use App\Actions\Admin\Brands\CreateBrandAction;
 use App\Actions\Admin\Brands\PermanentlyDeleteTrashedBrandsAction;
 use App\Actions\Admin\Brands\UpdateBrandAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Brands\StoreBrandRequest;
+use App\Http\Requests\Dashboard\BrandRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\Brand;
 use Illuminate\Http\RedirectResponse;
@@ -44,7 +44,7 @@ class BrandController extends Controller
         return inertia('Admin/Brands/Create');
     }
 
-    public function store(StoreBrandRequest $request): RedirectResponse
+    public function store(BrandRequest $request): RedirectResponse
     {
         (new CreateBrandAction())->handle($request->validated());
 
@@ -56,7 +56,7 @@ class BrandController extends Controller
         return inertia('Admin/Brands/Edit', compact('brand'));
     }
 
-    public function update(StoreBrandRequest $request, Brand $brand): RedirectResponse
+    public function update(BrandRequest $request, Brand $brand): RedirectResponse
     {
         ( new UpdateBrandAction())->handle($request->validated(), $brand);
 
@@ -114,7 +114,7 @@ class BrandController extends Controller
     {
         $trashedBrand = Brand::onlyTrashed()->findOrFail($trashedBrandId);
 
-        Brand::deleteImage($trashedBrand->image);
+        Brand::deleteImage($trashedBrand->logo);
 
         $trashedBrand->forceDelete();
 
