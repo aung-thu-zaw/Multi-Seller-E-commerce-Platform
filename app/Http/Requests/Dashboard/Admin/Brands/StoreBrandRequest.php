@@ -26,7 +26,7 @@ class StoreBrandRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255', Rule::unique('brands', 'name')],
-            'status' => ['required', 'string', Rule::in(['active','inactive'])],
+            'status' => ['required', 'string', Rule::in(['active', 'inactive'])],
             'logo' => ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'],
             'captcha_token' => [new RecaptchaRule()],
         ];

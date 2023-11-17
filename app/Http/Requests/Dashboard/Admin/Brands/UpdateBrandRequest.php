@@ -28,11 +28,11 @@ class UpdateBrandRequest extends FormRequest
 
         $rules = [
             'name' => ['required', 'string', 'max:255', Rule::unique('brands', 'name')->ignore($brand)],
-            'status' => ['required', 'string', Rule::in(['active','inactive'])],
+            'status' => ['required', 'string', Rule::in(['active', 'inactive'])],
             'captcha_token' => [new RecaptchaRule()],
         ];
 
-        if ($this->hasFile("logo")) {
+        if ($this->hasFile('logo')) {
 
             $rules['logo'] = ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'];
 

@@ -14,7 +14,7 @@ class UpdateBrandAction
      */
     public function handle(array $data, Brand $brand): void
     {
-        $logo = isset($data['logo']) && !is_string($data['logo']) ? $this->updateImage($data['logo'], $brand->logo, "brands") : $brand->logo;
+        $logo = isset($data['logo']) && ! is_string($data['logo']) ? $this->updateImage($data['logo'], $brand->logo, 'brands') : $brand->logo;
 
         $brand->update([
             'name' => $data['name'],

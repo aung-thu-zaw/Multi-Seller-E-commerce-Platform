@@ -29,11 +29,11 @@ class UpdateCategoryRequest extends FormRequest
         $rules = [
             'parent_id' => ['nullable', 'numeric', Rule::exists('categories', 'id')],
             'name' => ['required', 'string', 'max:255', Rule::unique('categories', 'name')->ignore($category)],
-            'status' => ['required', 'string', Rule::in(['show','hide'])],
+            'status' => ['required', 'string', Rule::in(['show', 'hide'])],
             'captcha_token' => [new RecaptchaRule()],
         ];
 
-        if ($this->hasFile("image")) {
+        if ($this->hasFile('image')) {
 
             $rules['image'] = ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'];
 

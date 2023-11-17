@@ -17,10 +17,10 @@ trait ImageUpload
         return $fileName;
     }
 
-    public function updateImage(UploadedFile $image, ?string $oldImage = null, string $folderName): string
+    public function updateImage(UploadedFile $image, string $oldImage = null, string $folderName): string
     {
 
-        if (is_string($oldImage) && !empty($oldImage) && file_exists(storage_path("app/public/$folderName/".pathinfo($oldImage, PATHINFO_BASENAME)))) {
+        if (is_string($oldImage) && ! empty($oldImage) && file_exists(storage_path("app/public/$folderName/".pathinfo($oldImage, PATHINFO_BASENAME)))) {
             unlink(storage_path("app/public/$folderName/".pathinfo($oldImage, PATHINFO_BASENAME)));
         }
 
@@ -32,5 +32,4 @@ trait ImageUpload
 
         return $fileName;
     }
-
 }

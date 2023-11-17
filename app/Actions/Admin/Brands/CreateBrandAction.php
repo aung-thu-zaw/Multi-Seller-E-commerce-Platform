@@ -14,7 +14,7 @@ class CreateBrandAction
      */
     public function handle(array $data): void
     {
-        $logo = isset($data['logo']) ? $this->createImage($data["logo"], "brands") : null;
+        $logo = isset($data['logo']) ? $this->createImage($data['logo'], 'brands') : null;
 
         Brand::create([
             'name' => $data['name'],

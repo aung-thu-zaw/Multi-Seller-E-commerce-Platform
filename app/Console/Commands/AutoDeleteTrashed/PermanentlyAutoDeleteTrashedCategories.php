@@ -26,7 +26,7 @@ class PermanentlyAutoDeleteTrashedCategories extends Command
     /**
      * Execute the console command.
      */
-    public function handle():void
+    public function handle(): void
     {
         $cutoffDate = Carbon::now()->subDays(60);
 

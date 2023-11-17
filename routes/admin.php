@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Dashboard\BrandController;
-use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Dashboard\CategoryController;
+use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/login', LoginController::class)->middleware('guest')->name('admin.login');
