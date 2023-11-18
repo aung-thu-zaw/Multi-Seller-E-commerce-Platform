@@ -44,7 +44,7 @@ const toggleCollapseShow = (classes) => {
       </ul>
       <!-- Collapse -->
       <div
-        class="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded border border-accent-light md:border-none"
+        class="hs-accordion-group md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded border border-accent-light md:border-none"
         v-bind:class="collapseShow"
       >
         <!-- Collapse header -->
@@ -109,7 +109,7 @@ const toggleCollapseShow = (classes) => {
                     $page.url !== '/admin/dashboard',
                 }"
               >
-                <i class="fas fa-tv mr-2 text-sm"></i>
+                <i class="fas fa-tv mr-2"></i>
                 {{ __("Dashboard") }}
               </div>
             </Link>
@@ -133,7 +133,7 @@ const toggleCollapseShow = (classes) => {
                   !$page.url.startsWith('/admin/categories'),
               }"
             >
-              <i class="fa-solid fa-list mr-2 text-sm"></i>
+              <i class="fa-solid fa-list mr-2"></i>
               {{ __("Categories") }}
             </Link>
           </li>
@@ -156,8 +156,1392 @@ const toggleCollapseShow = (classes) => {
                   !$page.url.startsWith('/admin/brands'),
               }"
             >
-              <i class="fa-solid fa-award mr-2 text-sm"></i>
+              <i class="fa-solid fa-award mr-2"></i>
               {{ __("Brands") }}
+            </Link>
+          </li>
+
+          <!-- Products -->
+          <li v-show="can('brands.view')" class="items-center">
+            <Link
+              :href="route('admin.brands.index')"
+              :data="{
+                page: 1,
+                per_page: 5,
+                sort: 'id',
+                direction: 'desc',
+              }"
+              class="text-xs py-3 font-bold block"
+              :class="{
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/brands'),
+              }"
+            >
+              <i class="fa-solid fa-basket-shopping mr-2"></i>
+              {{ __("Products") }}
+            </Link>
+          </li>
+
+          <!-- Collections -->
+          <li v-show="can('brands.view')" class="items-center">
+            <Link
+              :href="route('admin.brands.index')"
+              :data="{
+                page: 1,
+                per_page: 5,
+                sort: 'id',
+                direction: 'desc',
+              }"
+              class="text-xs py-3 font-bold block"
+              :class="{
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/brands'),
+              }"
+            >
+              <i class="fa-solid fa-box mr-2"></i>
+              {{ __("Collections") }}
+            </Link>
+          </li>
+
+          <!-- Flash Sales -->
+          <li v-show="can('brands.view')" class="items-center">
+            <Link
+              :href="route('admin.brands.index')"
+              :data="{
+                page: 1,
+                per_page: 5,
+                sort: 'id',
+                direction: 'desc',
+              }"
+              class="text-xs py-3 font-bold block"
+              :class="{
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/brands'),
+              }"
+            >
+              <i class="fa-solid fa-bolt-lightning mr-2"></i>
+              {{ __("Flash Sales") }}
+            </Link>
+          </li>
+
+          <!-- Banners -->
+          <li class="hs-accordion items-center" id="banner-accordion">
+            <button
+              type="button"
+              class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
+            >
+              <span>
+                <i class="fa-solid fa-ad mr-1.5"></i>
+                {{ __("Banners") }}
+              </span>
+              <span>
+                <svg
+                  class="hs-accordion-active:block ms-auto hidden w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m18 15-6-6-6 6" />
+                </svg>
+
+                <svg
+                  class="hs-accordion-active:hidden ms-auto block w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+
+            <div
+              id="banner-accordion"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+            >
+              <ul class="pl-8">
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Slider Banners") }}
+                  </Link>
+                </li>
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Campaign Banners") }}
+                  </Link>
+                </li>
+
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Product Banners") }}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Coupons -->
+          <li v-show="can('brands.view')" class="items-center">
+            <Link
+              :href="route('admin.brands.index')"
+              :data="{
+                page: 1,
+                per_page: 5,
+                sort: 'id',
+                direction: 'desc',
+              }"
+              class="text-xs py-3 font-bold block"
+              :class="{
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/brands'),
+              }"
+            >
+              <i class="fa-solid fa-ticket mr-2"></i>
+              {{ __("Coupons") }}
+            </Link>
+          </li>
+        </ul>
+
+        <!-- Divider -->
+        <hr class="my-4 md:min-w-full" />
+        <!-- Heading -->
+        <h6
+          class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline"
+        >
+          {{ __("Shipping & Order Management") }}
+        </h6>
+        <!-- Navigation -->
+
+        <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+          <!-- Order Managements -->
+          <li class="hs-accordion items-center" id="order-management-accordion">
+            <button
+              type="button"
+              class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
+            >
+              <span>
+                <i class="fa-solid fa-boxes-packing mr-1.5"></i>
+                {{ __("Order Management") }}
+              </span>
+              <span>
+                <svg
+                  class="hs-accordion-active:block ms-auto hidden w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m18 15-6-6-6 6" />
+                </svg>
+
+                <svg
+                  class="hs-accordion-active:hidden ms-auto block w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+
+            <div
+              id="order-management-accordion"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+            >
+              <ul class="pl-8">
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("All Orders") }}
+                  </Link>
+                </li>
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Return Orders") }}
+                  </Link>
+                </li>
+
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Cancel Orders") }}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Geographic Hierarchy -->
+          <li
+            class="hs-accordion items-center"
+            id="geographic-hierarchy-accordion"
+          >
+            <button
+              type="button"
+              class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
+            >
+              <span>
+                <i class="fa-solid fa-book-atlas mr-1.5"></i>
+                {{ __("Geographic Hierarchy") }}
+              </span>
+              <span>
+                <svg
+                  class="hs-accordion-active:block ms-auto hidden w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m18 15-6-6-6 6" />
+                </svg>
+
+                <svg
+                  class="hs-accordion-active:hidden ms-auto block w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+
+            <div
+              id="geographic-hierarchy-accordion"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+            >
+              <ul class="pl-8">
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Country") }}
+                  </Link>
+                </li>
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Regions") }}
+                  </Link>
+                </li>
+
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Cities") }}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Shipping Areas -->
+          <li v-show="can('brands.view')" class="items-center">
+            <Link
+              :href="route('admin.brands.index')"
+              :data="{
+                page: 1,
+                per_page: 5,
+                sort: 'id',
+                direction: 'desc',
+              }"
+              class="text-xs py-3 font-bold block"
+              :class="{
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/brands'),
+              }"
+            >
+              <i class="fa-solid fa-map-location-dot mr-2"></i>
+              {{ __("Shipping Areas") }}
+            </Link>
+          </li>
+
+          <!-- Shipping Methods -->
+          <li v-show="can('brands.view')" class="items-center">
+            <Link
+              :href="route('admin.brands.index')"
+              :data="{
+                page: 1,
+                per_page: 5,
+                sort: 'id',
+                direction: 'desc',
+              }"
+              class="text-xs py-3 font-bold block"
+              :class="{
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/brands'),
+              }"
+            >
+              <i class="fa-solid fa-truck mr-2"></i>
+              {{ __("Shipping Methods") }}
+            </Link>
+          </li>
+
+          <!-- Shipping Rates -->
+          <li v-show="can('brands.view')" class="items-center">
+            <Link
+              :href="route('admin.brands.index')"
+              :data="{
+                page: 1,
+                per_page: 5,
+                sort: 'id',
+                direction: 'desc',
+              }"
+              class="text-xs py-3 font-bold block"
+              :class="{
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/brands'),
+              }"
+            >
+              <i class="fa-solid fa-sack-dollar mr-2"></i>
+              {{ __("Shipping Rates") }}
+            </Link>
+          </li>
+        </ul>
+
+        <!-- Divider -->
+        <hr class="my-4 md:min-w-full" />
+        <!-- Heading -->
+        <h6
+          class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline"
+        >
+          {{ __("Management & Oversight") }}
+        </h6>
+        <!-- Navigation -->
+
+        <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+          <!-- Blog Managements -->
+          <li class="hs-accordion items-center" id="blog-management-accordion">
+            <button
+              type="button"
+              class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
+            >
+              <span>
+                <i class="fa-solid fa-file-pen mr-1.5"></i>
+                {{ __("Blog Management") }}
+              </span>
+              <span>
+                <svg
+                  class="hs-accordion-active:block ms-auto hidden w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m18 15-6-6-6 6" />
+                </svg>
+
+                <svg
+                  class="hs-accordion-active:hidden ms-auto block w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+
+            <div
+              id="blog-management-accordion"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+            >
+              <ul class="pl-8">
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Categories") }}
+                  </Link>
+                </li>
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Contents") }}
+                  </Link>
+                </li>
+
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Comments & Replies") }}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Review Managements -->
+          <li
+            class="hs-accordion items-center"
+            id="review-management-accordion"
+          >
+            <button
+              type="button"
+              class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
+            >
+              <span>
+                <i class="fa-solid fa-star mr-1.5"></i>
+                {{ __("Review Management") }}
+              </span>
+              <span>
+                <svg
+                  class="hs-accordion-active:block ms-auto hidden w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m18 15-6-6-6 6" />
+                </svg>
+
+                <svg
+                  class="hs-accordion-active:hidden ms-auto block w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+
+            <div
+              id="review-management-accordion"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+            >
+              <ul class="pl-8">
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Product Reviews") }}
+                  </Link>
+                </li>
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Store Reviews") }}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Account Managements -->
+          <li
+            class="hs-accordion items-center"
+            id="account-management-accordion"
+          >
+            <button
+              type="button"
+              class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
+            >
+              <span>
+                <i class="fa-solid fa-user-gear mr-1.5"></i>
+                {{ __("Account Management") }}
+              </span>
+              <span>
+                <svg
+                  class="hs-accordion-active:block ms-auto hidden w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m18 15-6-6-6 6" />
+                </svg>
+
+                <svg
+                  class="hs-accordion-active:hidden ms-auto block w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+
+            <div
+              id="account-management-accordion"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+            >
+              <ul class="pl-8">
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Registered Accounts") }}
+                  </Link>
+                </li>
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Seller Manage") }}
+                  </Link>
+                </li>
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Admin Manage") }}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Authority Managements -->
+          <li
+            class="hs-accordion items-center"
+            id="review-management-accordion"
+          >
+            <button
+              type="button"
+              class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
+            >
+              <span>
+                <i class="fa-solid fa-user-shield mr-1.5"></i>
+                {{ __("Authority Management") }}
+              </span>
+              <span>
+                <svg
+                  class="hs-accordion-active:block ms-auto hidden w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m18 15-6-6-6 6" />
+                </svg>
+
+                <svg
+                  class="hs-accordion-active:hidden ms-auto block w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+
+            <div
+              id="authority-management-accordion"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+            >
+              <ul class="pl-8">
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Roles") }}
+                  </Link>
+                </li>
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Permissions") }}
+                  </Link>
+                </li>
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Assign Role Permissions") }}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Divider -->
+        <hr class="my-4 md:min-w-full" />
+        <!-- Heading -->
+        <h6
+          class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline"
+        >
+          {{ __("Subscribers & Newsletters") }}
+        </h6>
+        <!-- Navigation -->
+
+        <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+          <!-- Subscribers -->
+          <li v-show="can('brands.view')" class="items-center">
+            <Link
+              :href="route('admin.brands.index')"
+              :data="{
+                page: 1,
+                per_page: 5,
+                sort: 'id',
+                direction: 'desc',
+              }"
+              class="text-xs py-3 font-bold block"
+              :class="{
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/brands'),
+              }"
+            >
+              <i class="fa-solid fa-bell mr-2"></i>
+              {{ __("Subscribers") }}
+            </Link>
+          </li>
+
+          <!-- Newsletters -->
+          <li v-show="can('brands.view')" class="items-center">
+            <Link
+              :href="route('admin.brands.index')"
+              :data="{
+                page: 1,
+                per_page: 5,
+                sort: 'id',
+                direction: 'desc',
+              }"
+              class="text-xs py-3 font-bold block"
+              :class="{
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/brands'),
+              }"
+            >
+              <i class="fa-solid fa-envelope-open-text mr-2"></i>
+              {{ __("Newsletters") }}
+            </Link>
+          </li>
+        </ul>
+
+        <!-- Divider -->
+        <hr class="my-4 md:min-w-full" />
+        <!-- Heading -->
+        <h6
+          class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline"
+        >
+          {{ __("Support & Content") }}
+        </h6>
+        <!-- Navigation -->
+
+        <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+          <!-- Subscribers -->
+          <li v-show="can('brands.view')" class="items-center">
+            <Link
+              :href="route('admin.brands.index')"
+              :data="{
+                page: 1,
+                per_page: 5,
+                sort: 'id',
+                direction: 'desc',
+              }"
+              class="text-xs py-3 font-bold block"
+              :class="{
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/brands'),
+              }"
+            >
+              <i class="fa-solid fa-message mr-2"></i>
+              {{ __("Chats") }}
+            </Link>
+          </li>
+
+          <!-- FAQs -->
+          <li class="hs-accordion items-center" id="faqs-accordion">
+            <button
+              type="button"
+              class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
+            >
+              <span>
+                <i class="fa-solid fa-file-circle-question mr-1.5"></i>
+                {{ __("FAQs") }}
+              </span>
+              <span>
+                <svg
+                  class="hs-accordion-active:block ms-auto hidden w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m18 15-6-6-6 6" />
+                </svg>
+
+                <svg
+                  class="hs-accordion-active:hidden ms-auto block w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+
+            <div
+              id="faqs-accordion"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+            >
+              <ul class="pl-8">
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Categories") }}
+                  </Link>
+                </li>
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Subcategories") }}
+                  </Link>
+                </li>
+
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Faqs") }}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Pages -->
+          <li class="hs-accordion items-center" id="pages-accordion">
+            <button
+              type="button"
+              class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
+            >
+              <span>
+                <i class="fa-solid fa-file-lines mr-1.5"></i>
+                {{ __("Pages") }}
+              </span>
+              <span>
+                <svg
+                  class="hs-accordion-active:block ms-auto hidden w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m18 15-6-6-6 6" />
+                </svg>
+
+                <svg
+                  class="hs-accordion-active:hidden ms-auto block w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+
+            <div
+              id="pages-accordion"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+            >
+              <ul class="pl-8">
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("About Us") }}
+                  </Link>
+                </li>
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Our History") }}
+                  </Link>
+                </li>
+
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Terms & Conditions") }}
+                  </Link>
+                </li>
+
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc',
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories'),
+                    }"
+                  >
+                    {{ __("Privacy & Policy") }}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Divider -->
+        <hr class="my-4 md:min-w-full" />
+        <!-- Heading -->
+        <h6
+          class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline"
+        >
+          {{ __("Website Configuration") }}
+        </h6>
+        <!-- Navigation -->
+
+        <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+          <!-- Settings -->
+          <li v-show="can('brands.view')" class="items-center">
+            <Link
+              :href="route('admin.brands.index')"
+              :data="{
+                page: 1,
+                per_page: 5,
+                sort: 'id',
+                direction: 'desc',
+              }"
+              class="text-xs py-3 font-bold block"
+              :class="{
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/brands'),
+              }"
+            >
+              <i class="fa-solid fa-gears mr-2"></i>
+              {{ __("Settings") }}
+            </Link>
+          </li>
+        </ul>
+
+        <!-- Divider -->
+        <hr class="my-4 md:min-w-full" />
+        <!-- Heading -->
+        <h6
+          class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline"
+        >
+          {{ __("Important Operations") }}
+        </h6>
+        <!-- Navigation -->
+
+        <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+          <!-- Clear Database -->
+          <li v-show="can('brands.view')" class="items-center">
+            <Link
+              :href="route('admin.brands.index')"
+              :data="{
+                page: 1,
+                per_page: 5,
+                sort: 'id',
+                direction: 'desc',
+              }"
+              class="text-xs py-3 font-bold block"
+              :class="{
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/brands'),
+                'text-red-600 hover:text-red-500':
+                  !$page.url.startsWith('/admin/brands'),
+              }"
+            >
+              <i class="fa-solid fa-database mr-2"></i>
+              {{ __("Clear Database") }}
             </Link>
           </li>
         </ul>
