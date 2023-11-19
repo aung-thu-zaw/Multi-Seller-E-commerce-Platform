@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "@popperjs/core": "^2.11.6",
+        "@preline/carousel": "^2.0.0",
         "@preline/overlay": "^1.4.0",
         "preline": "^1.9.0",
         "vue-recaptcha-v3": "^2.0.1",
