@@ -9,10 +9,13 @@ import OurBrandSection from "@/Components/Sections/OurBrandSection.vue";
 import ProductForYouSection from "@/Components/Sections/ProductForYouSection.vue";
 import NewsletterSection from "@/Components/Sections/NewsletterSection.vue";
 import WhyChooseUsSection from "@/Components/Sections/WhyChooseUsSection.vue";
+import { Head } from "@inertiajs/vue3";
 </script>
 
 <template>
   <AppLayout>
+    <Head title="E-commerce Online Shopping" />
+
     <EcommerceHeader />
 
     <CampaignBannerSection />
