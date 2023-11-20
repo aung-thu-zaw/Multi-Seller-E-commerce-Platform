@@ -1,5 +1,5 @@
 <template>
-  <div class="border-t w-full p-3 pb-5 bg-gray-50">
+  <div class="border-t w-full p-5 bg-gray-50">
     <form action="#" class="">
       <div class="relative w-full">
         <input

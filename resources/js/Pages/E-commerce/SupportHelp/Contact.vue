@@ -4,9 +4,12 @@ import InputLabel from "@/Components/Forms/Fields/InputLabel.vue";
 import InputField from "@/Components/Forms/Fields/InputField.vue";
 import TextAreaField from "@/Components/Forms/Fields/TextAreaField.vue";
 import FormButton from "@/Components/Buttons/FormButton.vue";
+import { Head } from "@inertiajs/vue3";
 </script>
 
 <template>
+  <Head title="Support Contact : E-commerce Online Shopping" />
+
   <AppLayout>
     <!-- Contact Us -->
     <div class="max-w-[85rem] px-14 py-14 mx-auto">
