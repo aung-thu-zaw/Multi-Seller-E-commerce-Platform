@@ -10,7 +10,6 @@ use App\Http\Requests\Dashboard\Admin\Categories\StoreCategoryRequest;
 use App\Http\Requests\Dashboard\Admin\Categories\UpdateCategoryRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\Category;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -34,12 +33,9 @@ class CategoryController extends Controller
     public function index(): Response|ResponseFactory
     {
         $categories = Category::search(request('search'))
-            ->query(function (Builder $builder) {
-                $builder->withCount('children');
-            })
-            ->orderBy(request('sort', 'id'), request('direction', 'desc'))
-            ->paginate(request('per_page', 5))
-            ->appends(request()->all());
+                              ->orderBy(request('sort', 'id'), request('direction', 'desc'))
+                              ->paginate(request('per_page', 5))
+                              ->appends(request()->all());
 
         return inertia('Admin/Categories/Index', compact('categories'));
     }
@@ -91,10 +87,10 @@ class CategoryController extends Controller
     public function trashed(): Response|ResponseFactory
     {
         $trashedCategories = Category::search(request('search'))
-            ->onlyTrashed()
-            ->orderBy(request('sort', 'id'), request('direction', 'desc'))
-            ->paginate(request('per_page', 5))
-            ->appends(request()->all());
+                                     ->onlyTrashed()
+                                     ->orderBy(request('sort', 'id'), request('direction', 'desc'))
+                                     ->paginate(request('per_page', 5))
+                                     ->appends(request()->all());
 
         return inertia('Admin/Categories/Trash', compact('trashedCategories'));
     }

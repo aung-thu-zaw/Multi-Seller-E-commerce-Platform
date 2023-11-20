@@ -2,37 +2,39 @@
 
 namespace Tests\Unit\Actions\Admin\Categories;
 
-use App\Actions\Admin\Categories\CreateCategoryAction;
+use App\Actions\Admin\Categories\UpdateCategoryAction;
 use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class CreateCategoryActionTest extends TestCase
+class UpdateCategoryActionTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_that_the_create_category_action_class_successfully_creates_a_new_category(): void
+    public function test_that_the_update_category_action_class_successfully_update_existing_old_category(): void
     {
         // Arrange
         Storage::fake('public');
+        $existingCategory = Category::factory()->create();
         $data = [
             'parent_id' => null,
             'name' => 'Test Category',
-            'status' => 'show',
+            'status' => 'hide',
             'image' => UploadedFile::fake()->image('fake-category-image.jpg'),
         ];
 
-        $action = new CreateCategoryAction();
+        $action = new UpdateCategoryAction();
 
         // Act
-        $action->handle($data);
+        $action->handle($data, $existingCategory);
 
         // Assert
         $this->assertDatabaseHas('categories', [
             'parent_id' => $data['parent_id'],
             'name' => $data['name'],
+            'status' => $data['status'],
         ]);
 
         $category = Category::where('name', $data['name'])->first();

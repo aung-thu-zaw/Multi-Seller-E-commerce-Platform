@@ -3,7 +3,7 @@ import { computed } from "vue";
 
 export function useQueryStringParams() {
     const queryStringParams = computed(() => ({
-        page: usePage().props.ziggy.query?.page,
+        // page: usePage().props.ziggy.query?.page,
         per_page: usePage().props.ziggy.query?.per_page,
         sort: usePage().props.ziggy.query?.sort,
         direction: usePage().props.ziggy.query?.direction,

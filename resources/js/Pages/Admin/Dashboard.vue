@@ -19,7 +19,8 @@ import { Head } from "@inertiajs/vue3";
 </script>
 
 <template>
-  <Head title="Admin Dashboard" />
+  <Head :title="__('Admin Dashboard')" />
+
   <AdminDashboardLayout>
     <template #header>
       <DashboardHeaderStats />
@@ -60,8 +61,8 @@ import { Head } from "@inertiajs/vue3";
                   { testingTwo: 'testingTwo' },
                 ]"
               > -->
-                <!-- Table Header -->
-                <!-- <template #table-header>
+      <!-- Table Header -->
+      <!-- <template #table-header>
                   <SortableTableHeaderCell label="# No" to="home" />
 
                   <SortableTableHeaderCell label="Invoice Id" to="home" />
@@ -81,8 +82,8 @@ import { Head } from "@inertiajs/vue3";
                   <TableHeaderCell label="Actions" />
                 </template> -->
 
-                <!-- Table Body -->
-                <!-- <template #table-data>
+      <!-- Table Body -->
+      <!-- <template #table-data>
                   <TableDataCell> 1 </TableDataCell>
 
                   <TableDataCell>
@@ -138,7 +139,7 @@ import { Head } from "@inertiajs/vue3";
               </Table>
             </TableContainer> -->
 
-            <!-- <div class="py-3 flex items-center justify-center">
+      <!-- <div class="py-3 flex items-center justify-center">
               <nav aria-label="Page navigation example">
                 <ul class="inline-flex -space-x-px text-base h-10">
                   <li>
@@ -194,8 +195,8 @@ import { Head } from "@inertiajs/vue3";
                 </ul>
               </nav>
             </div> -->
-          <!-- </div> -->
-        <!-- </div> -->
+      <!-- </div> -->
+      <!-- </div> -->
       <!-- </div> -->
     </div>
   </AdminDashboardLayout>

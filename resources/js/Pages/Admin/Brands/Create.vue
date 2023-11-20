@@ -96,13 +96,14 @@ const { form, processing, errors, createAction } = useResourceActions({
           </div>
 
           <div>
-            <InputLabel :label="__('Brand Logo')" />
+            <InputLabel :label="__('Brand Logo')" required />
 
             <FileInput
               name="brand-logo"
               v-model="form.logo"
               text="PNG, JPG or JPEG ( Max File Size : 1.5 MB )"
               @update:modelValue="handleChangeImage"
+              required
             />
 
             <InputError :message="errors?.logo" />
