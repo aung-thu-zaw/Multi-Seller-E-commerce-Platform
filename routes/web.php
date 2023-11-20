@@ -17,7 +17,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('E-commerce/SupportHelp/LiveChat', [
+    return Inertia::render('E-commerce/SupportHelp/OtherOptions', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
