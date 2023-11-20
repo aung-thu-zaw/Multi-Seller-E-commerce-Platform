@@ -16,6 +16,7 @@ class UpdateCategoryActionTest extends TestCase
     public function test_that_the_update_category_action_class_successfully_update_existing_old_category(): void
     {
         // Arrange
+        Storage::fake('public');
         $existingCategory = Category::factory()->create();
         $data = [
             'parent_id' => null,

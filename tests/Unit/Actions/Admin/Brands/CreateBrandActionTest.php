@@ -16,6 +16,7 @@ class CreateBrandActionTest extends TestCase
     public function test_that_the_create_brand_action_class_successfully_creates_a_new_brand(): void
     {
         // Arrange
+        Storage::fake('public');
         $data = [
             'name' => 'Test Brand',
             'status' => 'active',

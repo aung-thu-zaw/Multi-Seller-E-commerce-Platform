@@ -16,6 +16,7 @@ class UpdateBrandActionTest extends TestCase
     public function test_that_the_update_brand_action_class_successfully_update_existing_old_brand(): void
     {
         // Arrange
+        Storage::fake('public');
         $existingBrand = Brand::factory()->create();
         $data = [
             'name' => 'Test Brand',
