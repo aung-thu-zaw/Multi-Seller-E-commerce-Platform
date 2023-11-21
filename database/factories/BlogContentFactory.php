@@ -1,0 +1,32 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\BlogCategory;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\BlogContent>
+ */
+class BlogContentFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        $blogCategories = BlogCategory::where("status", "show")->pluck("id")->toArray();
+        $authors = User::where("role", "admin")->pluck("id")->toArray();
+
+        return [
+            "blog_category_id" => fake()->randomElement($blogCategories),
+            "author_id" => fake()->randomElement($authors),
+            "title" => fake()->unique()->sentence(),
+            "thumbnail" => fake()->imageUrl(),
+            "content" => fake()->paragraph(12),
+        ];
+    }
+}
