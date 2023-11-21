@@ -18,6 +18,8 @@ return new class () extends Migration {
             $table->string("slug")->unique();
             $table->string("thumbnail");
             $table->text("content");
+            $table->enum('status', ['draft','published'])->default('draft');
+            $table->date("published_at");
             $table->softDeletes();
             $table->timestamps();
         });
