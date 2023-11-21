@@ -30,9 +30,9 @@ class PermanentlyAutoDeleteTrashedCategories extends Command
     {
         $cutoffDate = Carbon::now()->subDays(60);
 
-        $categories = Category::onlyTrashed()->where('deleted_at', '<=', $cutoffDate)->get();
+        $trashedCategories = Category::onlyTrashed()->where('deleted_at', '<=', $cutoffDate)->get();
 
-        (new PermanentlyDeleteTrashedCategoriesAction())->handle($categories);
+        (new PermanentlyDeleteTrashedCategoriesAction())->handle($trashedCategories);
 
     }
 }
