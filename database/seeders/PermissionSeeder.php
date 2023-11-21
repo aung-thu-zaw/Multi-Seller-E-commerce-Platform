@@ -35,5 +35,14 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'products.view.trash', 'group' => 'Product']);
         Permission::create(['name' => 'products.restore', 'group' => 'Product']);
         Permission::create(['name' => 'products.force.delete', 'group' => 'Product']);
+
+
+        Permission::create(['name' => 'blog-categories.view', 'group' => 'Blog Category']);
+        Permission::create(['name' => 'blog-categories.create', 'group' => 'Blog Category']);
+        Permission::create(['name' => 'blog-categories.edit', 'group' => 'Blog Category']);
+        Permission::create(['name' => 'blog-categories.delete', 'group' => 'Blog Category']);
+        Permission::create(['name' => 'blog-categories.view.trash', 'group' => 'Blog Category']);
+        Permission::create(['name' => 'blog-categories.restore', 'group' => 'Blog Category']);
+        Permission::create(['name' => 'blog-categories.force.delete', 'group' => 'Blog Category']);
     }
 }
