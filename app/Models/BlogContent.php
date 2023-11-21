@@ -10,6 +10,8 @@ use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class BlogContent extends Model
 {
@@ -53,6 +55,30 @@ class BlogContent extends Model
         return Attribute::make(
             set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/blog-contents/$value"),
         );
+    }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<BlogCategory,BlogContent>
+    */
+    public function blogCategory(): BelongsTo
+    {
+        return $this->belongsTo(BlogCategory::class);
+    }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,BlogContent>
+    */
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, "author_id");
+    }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<BlogTag>
+    */
+    public function blogTags(): BelongsToMany
+    {
+        return $this->belongsToMany(BlogTag::class, "blog_post_blog_tag");
     }
 
     protected static function booted(): void

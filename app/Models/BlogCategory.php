@@ -10,6 +10,7 @@ use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class BlogCategory extends Model
 {
@@ -53,6 +54,14 @@ class BlogCategory extends Model
         return Attribute::make(
             set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/blog-categories/$value"),
         );
+    }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany<BlogContent>
+    */
+    public function blogContents(): HasMany
+    {
+        return $this->hasMany(BlogContent::class);
     }
 
     protected static function booted(): void
