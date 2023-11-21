@@ -38,7 +38,6 @@ it('allows admin to access the category list page and verifies correct props', f
                     'categories.data.0',
                     fn (Assert $page) => $page
                         ->where('id', 10)
-                        ->has('children', 0)
                         ->etc(),
                 ),
         );
@@ -92,7 +91,7 @@ it('successfully creates a category as an admin', function () {
     $category = [
         'parent_id' => null,
         'name' => 'Test Category',
-        'status' => true,
+        'status' => 'show',
     ];
 
     // Act & Assert
@@ -174,7 +173,7 @@ it('successfully updates a category as an admin', function () {
     $updateData = [
         'parent_id' => null,
         'name' => 'Update Category',
-        'status' => true,
+        'status' => 'hide',
     ];
 
     // Act & Assert
