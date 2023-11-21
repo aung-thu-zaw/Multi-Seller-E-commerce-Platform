@@ -78,7 +78,7 @@ class BlogContent extends Model
      */
     public function blogTags(): BelongsToMany
     {
-        return $this->belongsToMany(BlogTag::class, 'blog_post_blog_tag');
+        return $this->belongsToMany(BlogTag::class, 'blog_content_blog_tag');
     }
 
     protected static function booted(): void

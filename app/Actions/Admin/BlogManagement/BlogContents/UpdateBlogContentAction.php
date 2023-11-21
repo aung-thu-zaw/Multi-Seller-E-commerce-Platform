@@ -4,6 +4,7 @@ namespace App\Actions\Admin\BlogManagement\BlogContents;
 
 use App\Http\Traits\ImageUpload;
 use App\Models\BlogContent;
+use App\Services\HandleBlogTagService;
 
 class UpdateBlogContentAction
 {
@@ -24,5 +25,11 @@ class UpdateBlogContentAction
             'status' => $data['status'],
             'thumbnail' => $thumbnail,
         ]);
+
+        if(isset($data["tags"])) {
+
+            (new HandleBlogTagService())->handle($data["tags"], $blogContent);
+
+        }
     }
 }

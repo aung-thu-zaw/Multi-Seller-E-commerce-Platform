@@ -59,6 +59,8 @@ class BlogContentController extends Controller
     {
         $blogCategories = BlogCategory::select("id", "name")->get();
 
+        $blogContent->load(["blogTags"]);
+
         return inertia('Admin/BlogManagement/BlogContents/Edit', compact('blogContent', 'blogCategories'));
     }
 

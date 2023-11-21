@@ -15,8 +15,13 @@ import { useResourceActions } from "@/Composables/useResourceActions";
 import { Head, usePage } from "@inertiajs/vue3";
 import { useQueryStringParams } from "@/Composables/useQueryStringParams";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { computed, ref } from "vue";
 
 const props = defineProps({ blogCategories: Object, blogContent: Object });
+
+const tag = ref(null);
+
+const tags = computed(() => props.blogContent.blog_tags.map((tag) => tag.name));
 
 const editor = ClassicEditor;
 
@@ -33,6 +38,21 @@ const handleChangeImage = (file) => {
   form.thumbnail = file;
 };
 
+const createTag = (e) => {
+  if (e.key === ",") {
+    tag.value = tag.value.split(",").join("").toLowerCase();
+    tag.value !== "" ? form.tags.push(tag.value) : null;
+    tag.value = "";
+  }
+  form.tags = [...new Set(form.tags)];
+};
+
+const removeTag = (removeTag) => {
+  form.tags = form.tags.filter((tag) => {
+    return tag !== removeTag;
+  });
+};
+
 const { form, processing, errors, editAction } = useResourceActions({
   blog_category_id: props.blogContent?.blog_category_id,
   author_id: usePage().props.auth.user?.id,
@@ -40,6 +60,7 @@ const { form, processing, errors, editAction } = useResourceActions({
   content: props.blogContent?.content,
   status: props.blogContent?.status,
   thumbnail: props.blogContent?.thumbnail,
+  tags: [...tags.value],
 });
 </script>
 
@@ -120,6 +141,39 @@ const { form, processing, errors, editAction } = useResourceActions({
             />
 
             <InputError :message="errors?.blog_category_id" />
+          </div>
+
+          <div>
+            <InputLabel :label="__('Blog Tags')" />
+
+            <InputField
+              type="text"
+              name="blog-tag"
+              v-model="tag"
+              :placeholder="
+                __('Enter :label', { label: __('Blog Tags') }) +
+                '( Eg. travel, sports, etc... )'
+              "
+              @keyup="createTag"
+            />
+
+            <div class="flex items-center space-x-3">
+              <div
+                v-for="(tag, index) in form.tags"
+                :key="index"
+                class="space-x-3 bg-orange-600 inline-block px-2.5 text-xs font-bold py-1.5 rounded-sm text-white my-3"
+              >
+                <span>{{ tag }}</span>
+                <span
+                  @click="removeTag(tag)"
+                  class="cursor-pointer hover:text-orange-200"
+                >
+                  <i class="fa-solid fa-circle-xmark"></i>
+                </span>
+              </div>
+            </div>
+
+            <InputError :message="errors?.tags" />
           </div>
 
           <div>
