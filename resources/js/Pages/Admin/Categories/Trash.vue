@@ -187,7 +187,11 @@ const {
                 <NormalButton
                   v-show="can('categories.restore')"
                   @click="
-                    restoreAction('Category', 'admin.categories.restore', item)
+                    restoreAction(
+                      'Category',
+                      'admin.categories.restore',
+                      item?.id
+                    )
                   "
                 >
                   <i class="fa-solid fa-recycle"></i>
@@ -200,7 +204,7 @@ const {
                     permanentDeleteAction(
                       'Category',
                       'admin.categories.force-delete',
-                      item
+                      item?.id
                     )
                   "
                   class="bg-red-600 text-white ring-2 ring-red-300"

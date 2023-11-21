@@ -272,7 +272,7 @@ export function useResourceActions(formFields = {}) {
             showCancelButton: true,
             confirmButtonText: __("Confirm"),
             cancelButtonText: __("Cancel"),
-            confirmButtonColor: "#d52222",
+            confirmButtonColor: "#2562c4",
             cancelButtonColor: "#626262",
             timer: 20000,
             timerProgressBar: true,

@@ -25,11 +25,11 @@ import { __ } from "@/Services/translations-inside-setup.js";
 import { useQueryStringParams } from "@/Composables/useQueryStringParams";
 import { useResourceActions } from "@/Composables/useResourceActions";
 
-defineProps({ trashedBrands: Object });
+defineProps({ trashedBlogCategories: Object });
 
-const brandList = "admin.brands.index";
+const blogCategoryList = "admin.blog-categories.index";
 
-const trashedBrandList = "admin.brands.trashed";
+const trashedBlogCategoryList = "admin.blog-categories.trashed";
 
 const { queryStringParams } = useQueryStringParams();
 
@@ -44,20 +44,24 @@ const {
 
 <template>
   <AdminDashboardLayout>
-    <Head :title="__('Deleted :label', { label: __('Brands') })" />
+    <Head :title="__('Deleted :label', { label: __('Blog Category') })" />
     <!-- Breadcrumb And Go back Button  -->
     <div class="min-h-screen py-10 font-poppins">
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="brandList" icon="fa-award" label="Brands">
-          <BreadcrumbLinkItem label="Trash" :to="trashedBrandList" />
+        <Breadcrumb
+          :to="blogCategoryList"
+          icon="fa-list"
+          label="Blog Categories"
+        >
+          <BreadcrumbLinkItem label="Trash" :to="trashedBlogCategoryList" />
           <BreadcrumbItem label="List" />
         </Breadcrumb>
 
         <div class="w-full flex items-center justify-end">
           <InertiaLinkButton
-            :to="brandList"
+            :to="blogCategoryList"
             :data="{
               page: 1,
               per_page: 5,
@@ -73,19 +77,25 @@ const {
 
       <!-- Message -->
       <div
-        v-if="can('brands.force.delete') && trashedBrands.data.length !== 0"
+        v-if="
+          can('blog-categories.force.delete') &&
+          trashedBlogCategories.data.length !== 0
+        "
         class="text-left text-sm font-bold mb-5 text-warning-600"
       >
         {{
           __(
             ":label in the trash will be automatically deleted after 60 days",
-            { label: __("Brands") }
+            { label: __("Blog Categories") }
           )
         }}
 
         <EmptyTrashButton
           @click="
-            permanentDeleteAllAction('Brand', 'admin.brands.force-delete.all')
+            permanentDeleteAllAction(
+              'Blog Category',
+              'admin.blog-categories.force-delete.all'
+            )
           "
         />
       </div>
@@ -97,32 +107,32 @@ const {
         >
           <DashboardTableDataSearchBox
             :placeholder="__('Search by :label', { label: __('Name') }) + '...'"
-            :to="trashedBrandList"
+            :to="trashedBlogCategoryList"
           />
 
           <div class="flex items-center justify-end w-full md:space-x-5">
-            <DashboardTableDataPerPageSelectBox :to="trashedBrandList" />
+            <DashboardTableDataPerPageSelectBox :to="trashedBlogCategoryList" />
 
             <DashboardTableFilter
-              :to="trashedBrandList"
+              :to="trashedBlogCategoryList"
               :filterBy="['deleted']"
             />
           </div>
         </div>
 
         <!-- Filtered By -->
-        <FilteredBy :to="trashedBrandList" />
+        <FilteredBy :to="trashedBlogCategoryList" />
 
         <TableContainer>
-          <ActionTable :items="trashedBrands.data">
+          <ActionTable :items="trashedBlogCategories.data">
             <!-- Table Actions -->
             <template #bulk-actions="{ selectedItems }">
               <BulkActionButton
-                v-show="can('brands.restore')"
+                v-show="can('blog-categories.restore')"
                 @click="
                   restoreSelectedAction(
-                    'Brands',
-                    'admin.brands.restore.selected',
+                    'Blog Categories',
+                    'admin.blog-categories.restore.selected',
                     selectedItems
                   )
                 "
@@ -132,11 +142,11 @@ const {
               </BulkActionButton>
 
               <BulkActionButton
-                v-show="can('brands.force.delete')"
+                v-show="can('blog-categories.force.delete')"
                 @click="
                   permanentDeleteSelectedAction(
-                    'Brands',
-                    'admin.brands.force-delete.selected',
+                    'Blog Categories',
+                    'admin.blog-categories.force-delete.selected',
                     selectedItems
                   )
                 "
@@ -151,7 +161,7 @@ const {
             <template #table-header>
               <SortableTableHeaderCell
                 label="# No"
-                :to="trashedBrandList"
+                :to="trashedBlogCategoryList"
                 sort="id"
               />
 
@@ -159,7 +169,7 @@ const {
 
               <SortableTableHeaderCell
                 label="Name"
-                :to="trashedBrandList"
+                :to="trashedBlogCategoryList"
                 sort="name"
               />
 
@@ -172,7 +182,7 @@ const {
                 {{ item?.id }}
               </TableDataCell>
 
-              <ImageCell :src="item?.logo" />
+              <ImageCell :src="item?.image" />
 
               <TableDataCell>
                 {{ item?.name }}
@@ -180,19 +190,25 @@ const {
 
               <TableActionCell>
                 <NormalButton
-                  v-show="can('brands.restore')"
-                  @click="restoreAction('Brand', 'admin.brands.restore', item?.id)"
+                  v-show="can('blog-categories.restore')"
+                  @click="
+                    restoreAction(
+                      'Blog Category',
+                      'admin.blog-categories.restore',
+                      item?.id
+                    )
+                  "
                 >
                   <i class="fa-solid fa-recycle"></i>
                   {{ __("Restore") }}
                 </NormalButton>
 
                 <NormalButton
-                  v-show="can('brands.force.delete')"
+                  v-show="can('blog-categories.force.delete')"
                   @click="
                     permanentDeleteAction(
-                      'Brand',
-                      'admin.brands.force-delete',
+                      'Blog Category',
+                      'admin.blog-categories.force-delete',
                       item?.id
                     )
                   "
@@ -206,9 +222,9 @@ const {
           </ActionTable>
         </TableContainer>
 
-        <Pagination :data="trashedBrands" />
+        <Pagination :data="trashedBlogCategories" />
 
-        <NoTableData v-show="!trashedBrands.data.length" />
+        <NoTableData v-show="!trashedBlogCategories.data.length" />
       </div>
       <!-- Table End -->
     </div>

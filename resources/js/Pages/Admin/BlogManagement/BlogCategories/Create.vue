@@ -15,36 +15,37 @@ import { useResourceActions } from "@/Composables/useResourceActions";
 import { Head } from "@inertiajs/vue3";
 import { useQueryStringParams } from "@/Composables/useQueryStringParams";
 
-const props = defineProps({ brand: Object });
-
-const brandList = "admin.brands.index";
+const blogCategoryList = "admin.blog-categories.index";
 
 const { queryStringParams } = useQueryStringParams();
 
-const { previewImage, setImagePreview } = useImagePreview(props.brand?.logo);
+const { previewImage, setImagePreview } = useImagePreview();
 
 const handleChangeImage = (file) => {
   setImagePreview(file);
-  form.logo = file;
+  form.image = file;
 };
 
-const { form, processing, errors, editAction } = useResourceActions({
-  name: props.brand?.name,
-  status: props.brand?.status,
-  logo: props.brand?.logo,
+const { form, processing, errors, createAction } = useResourceActions({
+  name: null,
+  status: null,
+  image: null,
 });
 </script>
 
 <template>
   <AdminDashboardLayout>
-    <Head :title="__('Edit :label', { label: __('Brand') })" />
+    <Head :title="__('Create :label', { label: __('Blog Category') })" />
     <div class="min-h-screen py-10 font-poppins">
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="brandList" icon="fa-award" label="Brands">
-          <BreadcrumbItem :label="brand.name" />
-          <BreadcrumbItem label="Edit" />
+        <Breadcrumb
+          :to="blogCategoryList"
+          icon="fa-list"
+          label="Blog Categories"
+        >
+          <BreadcrumbItem label="Create" />
         </Breadcrumb>
 
         <div class="w-full flex items-center justify-end">
@@ -56,20 +57,20 @@ const { form, processing, errors, editAction } = useResourceActions({
       <div class="border p-10 bg-white rounded-md">
         <form
           @submit.prevent="
-            editAction('Brand', 'admin.brands.update', brand?.slug)
+            createAction('Blog Category', 'admin.blog-categories.store')
           "
           class="space-y-4 md:space-y-6"
         >
           <PreviewImage :src="previewImage" />
 
           <div>
-            <InputLabel :label="__('Brand Name')" required />
+            <InputLabel :label="__('Blog Category Name')" required />
 
             <InputField
               type="text"
-              name="brand-name"
+              name="category-name"
               v-model="form.name"
-              :placeholder="__('Enter Brand Name')"
+              :placeholder="__('Enter Blog Category Name')"
               autofocus
               required
             />
@@ -84,17 +85,16 @@ const { form, processing, errors, editAction } = useResourceActions({
               name="status"
               :options="[
                 {
-                  label: 'Active',
-                  value: 'active',
+                  label: 'Show',
+                  value: 'show',
                 },
                 {
-                  label: 'Inactive',
-                  value: 'inactive',
+                  label: 'Hide',
+                  value: 'hide',
                 },
               ]"
               v-model="form.status"
               :placeholder="__('Select Option')"
-              :selected="brand.status"
               required
             />
 
@@ -102,22 +102,22 @@ const { form, processing, errors, editAction } = useResourceActions({
           </div>
 
           <div>
-            <InputLabel :label="__('Brand Logo')" />
+            <InputLabel :label="__('Blog Category Image')" />
 
             <FileInput
-              name="brand-logo"
-              v-model="form.logo"
+              name="category-image"
+              v-model="form.image"
               text="PNG, JPG or JPEG ( Max File Size : 1.5 MB )"
               @update:modelValue="handleChangeImage"
             />
 
-            <InputError :message="errors?.logo" />
+            <InputError :message="errors?.image" />
           </div>
 
           <InputError :message="errors?.captcha_token" />
 
           <FormButton type="submit" :processing="processing">
-            {{ __("Save Changes") }}
+            {{ __("Create") }}
           </FormButton>
         </form>
       </div>

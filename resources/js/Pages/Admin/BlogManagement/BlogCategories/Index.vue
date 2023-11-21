@@ -1,7 +1,6 @@
 <script setup>
 import AdminDashboardLayout from "@/Layouts/AdminDashboardLayout.vue";
 import Breadcrumb from "@/Components/Breadcrumbs/Breadcrumb.vue";
-import BreadcrumbLinkItem from "@/Components/Breadcrumbs/BreadcrumbLinkItem.vue";
 import BreadcrumbItem from "@/Components/Breadcrumbs/BreadcrumbItem.vue";
 import TableContainer from "@/Components/Tables/TableContainer.vue";
 import ActionTable from "@/Components/Tables/ActionTable.vue";
@@ -15,79 +14,69 @@ import TableDataCell from "@/Components/Tables/TableCells/TableDataCell.vue";
 import TableActionCell from "@/Components/Tables/TableCells/TableActionCell.vue";
 import ImageCell from "@/Components/Tables/TableCells/TableImageCell.vue";
 import NoTableData from "@/Components/Tables/NoTableData.vue";
+import GreenBadge from "@/Components/Badges/GreenBadge.vue";
+import RedBadge from "@/Components/Badges/RedBadge.vue";
 import BulkActionButton from "@/Components/Buttons/BulkActionButton.vue";
 import InertiaLinkButton from "@/Components/Buttons/InertiaLinkButton.vue";
 import NormalButton from "@/Components/Buttons/NormalButton.vue";
-import EmptyTrashButton from "@/Components/Buttons/EmptyTrashButton.vue";
 import Pagination from "@/Components/Paginations/DashboardPagination.vue";
+import { useResourceActions } from "@/Composables/useResourceActions";
 import { Head } from "@inertiajs/vue3";
 import { __ } from "@/Services/translations-inside-setup.js";
 import { useQueryStringParams } from "@/Composables/useQueryStringParams";
-import { useResourceActions } from "@/Composables/useResourceActions";
 
-defineProps({ trashedBrands: Object });
+defineProps({ blogCategories: Object });
 
-const brandList = "admin.brands.index";
-
-const trashedBrandList = "admin.brands.trashed";
+const blogCategoryList = "admin.blog-categories.index";
 
 const { queryStringParams } = useQueryStringParams();
 
-const {
-  restoreAction,
-  restoreSelectedAction,
-  permanentDeleteAction,
-  permanentDeleteSelectedAction,
-  permanentDeleteAllAction,
-} = useResourceActions();
+const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
 </script>
 
 <template>
   <AdminDashboardLayout>
-    <Head :title="__('Deleted :label', { label: __('Brands') })" />
-    <!-- Breadcrumb And Go back Button  -->
+    <Head :title="__('Blog Categories')" />
+
+    <!-- Breadcrumb And Trash Button  -->
     <div class="min-h-screen py-10 font-poppins">
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="brandList" icon="fa-award" label="Brands">
-          <BreadcrumbLinkItem label="Trash" :to="trashedBrandList" />
+        <Breadcrumb
+          :to="blogCategoryList"
+          icon="fa-list"
+          label="Blog Categories"
+        >
           <BreadcrumbItem label="List" />
         </Breadcrumb>
-
-        <div class="w-full flex items-center justify-end">
-          <InertiaLinkButton
-            :to="brandList"
-            :data="{
-              page: 1,
-              per_page: 5,
-              sort: 'id',
-              direction: 'desc',
-            }"
-          >
-            <i class="fa-solid fa-left-long"></i>
-            {{ __("Go To List") }}
-          </InertiaLinkButton>
-        </div>
       </div>
 
-      <!-- Message -->
-      <div
-        v-if="can('brands.force.delete') && trashedBrands.data.length !== 0"
-        class="text-left text-sm font-bold mb-5 text-warning-600"
-      >
-        {{
-          __(
-            ":label in the trash will be automatically deleted after 60 days",
-            { label: __("Brands") }
-          )
-        }}
+      <div class="flex items-center justify-between mb-3">
+        <!-- Create New Button -->
+        <InertiaLinkButton
+          v-show="can('blog-categories.create')"
+          to="admin.blog-categories.create"
+        >
+          <i class="fa-solid fa-file-circle-plus mr-1"></i>
+          {{ __("Create A New :label", { label: __("Blog Category") }) }}
+        </InertiaLinkButton>
 
-        <EmptyTrashButton
-          @click="
-            permanentDeleteAllAction('Brand', 'admin.brands.force-delete.all')
-          "
-        />
+        <!-- Trash Button -->
+        <InertiaLinkButton
+          v-show="can('blog-categories.view.trash')"
+          to="admin.blog-categories.trashed"
+          :data="{
+            page: 1,
+            per_page: 5,
+            sort: 'id',
+            direction: 'desc',
+          }"
+          class="bg-red-600 text-white ring-2 ring-red-300"
+        >
+          <i class="fa-solid fa-trash-can mr-1"></i>
+          {{ __("Trash") }}
+        </InertiaLinkButton>
       </div>
 
       <!-- Table Start -->
@@ -97,46 +86,42 @@ const {
         >
           <DashboardTableDataSearchBox
             :placeholder="__('Search by :label', { label: __('Name') }) + '...'"
-            :to="trashedBrandList"
+            :to="blogCategoryList"
           />
 
           <div class="flex items-center justify-end w-full md:space-x-5">
-            <DashboardTableDataPerPageSelectBox :to="trashedBrandList" />
+            <DashboardTableDataPerPageSelectBox :to="blogCategoryList" />
 
             <DashboardTableFilter
-              :to="trashedBrandList"
-              :filterBy="['deleted']"
+              :to="blogCategoryList"
+              :filterBy="['created', 'status']"
+              :options="[
+                {
+                  label: 'Show',
+                  value: 'show',
+                },
+                {
+                  label: 'Hide',
+                  value: 'hide',
+                },
+              ]"
             />
           </div>
         </div>
 
         <!-- Filtered By -->
-        <FilteredBy :to="trashedBrandList" />
+        <FilteredBy :to="blogCategoryList" />
 
         <TableContainer>
-          <ActionTable :items="trashedBrands.data">
+          <ActionTable :items="blogCategories.data">
             <!-- Table Actions -->
             <template #bulk-actions="{ selectedItems }">
               <BulkActionButton
-                v-show="can('brands.restore')"
+                v-show="can('blog-categories.delete')"
                 @click="
-                  restoreSelectedAction(
-                    'Brands',
-                    'admin.brands.restore.selected',
-                    selectedItems
-                  )
-                "
-              >
-                <i class="fa-solid fa-recycle"></i>
-                {{ __("Restore Selected") }} ({{ selectedItems.length }})
-              </BulkActionButton>
-
-              <BulkActionButton
-                v-show="can('brands.force.delete')"
-                @click="
-                  permanentDeleteSelectedAction(
-                    'Brands',
-                    'admin.brands.force-delete.selected',
+                  softDeleteSelectedAction(
+                    'Blog Categories',
+                    'admin.blog-categories.destroy.selected',
                     selectedItems
                   )
                 "
@@ -151,7 +136,7 @@ const {
             <template #table-header>
               <SortableTableHeaderCell
                 label="# No"
-                :to="trashedBrandList"
+                :to="blogCategoryList"
                 sort="id"
               />
 
@@ -159,9 +144,11 @@ const {
 
               <SortableTableHeaderCell
                 label="Name"
-                :to="trashedBrandList"
+                :to="blogCategoryList"
                 sort="name"
               />
+
+              <TableHeaderCell label="Status" />
 
               <TableHeaderCell label="Actions" />
             </template>
@@ -172,47 +159,58 @@ const {
                 {{ item?.id }}
               </TableDataCell>
 
-              <ImageCell :src="item?.logo" />
+              <ImageCell :src="item?.image" />
 
               <TableDataCell>
                 {{ item?.name }}
               </TableDataCell>
 
+              <TableDataCell>
+                <GreenBadge v-show="item?.status === 'show'">
+                  <i class="fa-solid fa-eye animate-pulse"></i>
+                  {{ item?.status }}
+                </GreenBadge>
+                <RedBadge v-show="item?.status === 'hide'">
+                  <i class="fa-solid fa-eye-slash animate-pulse"></i>
+                  {{ item?.status }}
+                </RedBadge>
+              </TableDataCell>
+
               <TableActionCell>
-                <NormalButton
-                  v-show="can('brands.restore')"
-                  @click="restoreAction('Brand', 'admin.brands.restore', item?.id)"
+                <InertiaLinkButton
+                  v-show="can('blog-categories.edit')"
+                  to="admin.blog-categories.edit"
+                  :targetIdentifier="{ blog_category: item?.slug }"
                 >
-                  <i class="fa-solid fa-recycle"></i>
-                  {{ __("Restore") }}
-                </NormalButton>
+                  <i class="fa-solid fa-edit"></i>
+                  {{ __("Edit") }}
+                </InertiaLinkButton>
 
                 <NormalButton
-                  v-show="can('brands.force.delete')"
+                  v-show="can('blog-categories.delete')"
                   @click="
-                    permanentDeleteAction(
-                      'Brand',
-                      'admin.brands.force-delete',
-                      item?.id
+                    softDeleteAction(
+                      'Blog Category',
+                      'admin.blog-categories.destroy',
+                      item?.slug
                     )
                   "
                   class="bg-red-600 text-white ring-2 ring-red-300"
                 >
                   <i class="fa-solid fa-trash-can"></i>
-                  {{ __("Delete Forever") }}
+                  {{ __("Delete") }}
                 </NormalButton>
               </TableActionCell>
             </template>
           </ActionTable>
         </TableContainer>
 
-        <Pagination :data="trashedBrands" />
+        <Pagination :data="blogCategories" />
 
-        <NoTableData v-show="!trashedBrands.data.length" />
+        <NoTableData v-show="!blogCategories.data.length" />
       </div>
       <!-- Table End -->
     </div>
   </AdminDashboardLayout>
 </template>
-
 

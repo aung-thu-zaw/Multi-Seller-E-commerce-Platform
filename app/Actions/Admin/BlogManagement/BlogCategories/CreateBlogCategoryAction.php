@@ -3,6 +3,7 @@
 namespace App\Actions\Admin\BlogManagement\BlogCategories;
 
 use App\Http\Traits\ImageUpload;
+use App\Models\BlogCategory;
 use App\Models\Category;
 use App\Services\UploadFiles\CategoryImageUploadService;
 
@@ -17,7 +18,7 @@ class CreateBlogCategoryAction
     {
         $image = isset($data['image']) ? $this->createImage($data['image'], 'blog-categories') : null;
 
-        Category::create([
+        BlogCategory::create([
             'name' => $data['name'],
             'status' => $data['status'],
             'image' => $image,

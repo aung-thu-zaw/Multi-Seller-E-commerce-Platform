@@ -54,7 +54,7 @@ const { form, processing, errors, editAction } = useResourceActions({
         </Breadcrumb>
 
         <div class="w-full flex items-center justify-end">
-            <GoBackButton />
+          <GoBackButton />
         </div>
       </div>
 
@@ -62,7 +62,7 @@ const { form, processing, errors, editAction } = useResourceActions({
       <div class="border p-10 bg-white rounded-md">
         <form
           @submit.prevent="
-            editAction('Category', 'admin.categories.update', category)
+            editAction('Category', 'admin.categories.update', category?.slug)
           "
           class="space-y-4 md:space-y-6"
         >

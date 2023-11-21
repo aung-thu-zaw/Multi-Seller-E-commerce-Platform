@@ -176,7 +176,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
                 <InertiaLinkButton
                   v-show="can('categories.edit')"
                   to="admin.categories.edit"
-                  :targetIdentifier="item"
+                  :targetIdentifier="{ category: item?.slug }"
                 >
                   <i class="fa-solid fa-edit"></i>
                   {{ __("Edit") }}
@@ -188,7 +188,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
                     softDeleteAction(
                       'Category',
                       'admin.categories.destroy',
-                      item
+                      item?.slug
                     )
                   "
                   class="bg-red-600 text-white ring-2 ring-red-300"
