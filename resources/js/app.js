@@ -12,6 +12,7 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import { translations } from "./Services/translations";
 import { Can } from "./Services/can";
 import store from "./store";
+import CKEditor from "@ckeditor/ckeditor5-vue";
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 
@@ -38,6 +39,7 @@ createInertiaApp({
             .use(VueSweetalert2)
             .use(store)
             .use(Can)
+            .use(CKEditor)
             .mount(el);
     },
     progress: {

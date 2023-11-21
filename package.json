@@ -20,6 +20,8 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^40.1.0",
+        "@ckeditor/ckeditor5-vue": "^5.1.0",
         "@popperjs/core": "^2.11.6",
         "@preline/carousel": "^2.0.0",
         "@preline/overlay": "^1.4.0",
