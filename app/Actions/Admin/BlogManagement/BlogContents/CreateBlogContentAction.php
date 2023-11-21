@@ -4,8 +4,6 @@ namespace App\Actions\Admin\BlogManagement\BlogContents;
 
 use App\Http\Traits\ImageUpload;
 use App\Models\BlogContent;
-use App\Models\Category;
-use App\Services\UploadFiles\CategoryImageUploadService;
 
 class CreateBlogContentAction
 {

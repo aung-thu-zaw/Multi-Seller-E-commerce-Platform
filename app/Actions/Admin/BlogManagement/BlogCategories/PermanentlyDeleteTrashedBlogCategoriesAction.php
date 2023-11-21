@@ -3,7 +3,6 @@
 namespace App\Actions\Admin\BlogManagement\BlogCategories;
 
 use App\Models\BlogCategory;
-use App\Models\Category;
 use Illuminate\Support\Collection;
 
 class PermanentlyDeleteTrashedBlogCategoriesAction

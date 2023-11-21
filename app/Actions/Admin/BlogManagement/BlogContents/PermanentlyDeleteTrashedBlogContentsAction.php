@@ -2,9 +2,7 @@
 
 namespace App\Actions\Admin\BlogManagement\BlogContents;
 
-use App\Models\BlogCategory;
 use App\Models\BlogContent;
-use App\Models\Category;
 use Illuminate\Support\Collection;
 
 class PermanentlyDeleteTrashedBlogContentsAction

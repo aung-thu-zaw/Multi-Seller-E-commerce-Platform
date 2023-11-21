@@ -4,7 +4,6 @@ namespace Tests\Unit\Actions\Admin\Brands;
 
 use App\Actions\Admin\Brands\PermanentlyDeleteTrashedBrandsAction;
 use App\Models\Brand;
-use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

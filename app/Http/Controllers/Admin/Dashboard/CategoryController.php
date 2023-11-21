@@ -33,9 +33,9 @@ class CategoryController extends Controller
     public function index(): Response|ResponseFactory
     {
         $categories = Category::search(request('search'))
-                              ->orderBy(request('sort', 'id'), request('direction', 'desc'))
-                              ->paginate(request('per_page', 5))
-                              ->appends(request()->all());
+            ->orderBy(request('sort', 'id'), request('direction', 'desc'))
+            ->paginate(request('per_page', 5))
+            ->appends(request()->all());
 
         return inertia('Admin/Categories/Index', compact('categories'));
     }
@@ -87,10 +87,10 @@ class CategoryController extends Controller
     public function trashed(): Response|ResponseFactory
     {
         $trashedCategories = Category::search(request('search'))
-                                     ->onlyTrashed()
-                                     ->orderBy(request('sort', 'id'), request('direction', 'desc'))
-                                     ->paginate(request('per_page', 5))
-                                     ->appends(request()->all());
+            ->onlyTrashed()
+            ->orderBy(request('sort', 'id'), request('direction', 'desc'))
+            ->paginate(request('per_page', 5))
+            ->appends(request()->all());
 
         return inertia('Admin/Categories/Trash', compact('trashedCategories'));
     }

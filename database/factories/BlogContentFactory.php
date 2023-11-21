@@ -18,15 +18,15 @@ class BlogContentFactory extends Factory
      */
     public function definition(): array
     {
-        $blogCategories = BlogCategory::where("status", "show")->pluck("id")->toArray();
-        $authors = User::where("role", "admin")->pluck("id")->toArray();
+        $blogCategories = BlogCategory::where('status', 'show')->pluck('id')->toArray();
+        $authors = User::where('role', 'admin')->pluck('id')->toArray();
 
         return [
-            "blog_category_id" => fake()->randomElement($blogCategories),
-            "author_id" => fake()->randomElement($authors),
-            "title" => fake()->unique()->sentence(),
-            "thumbnail" => fake()->imageUrl(),
-            "content" => fake()->paragraph(12),
+            'blog_category_id' => fake()->randomElement($blogCategories),
+            'author_id' => fake()->randomElement($authors),
+            'title' => fake()->unique()->sentence(),
+            'thumbnail' => fake()->imageUrl(),
+            'content' => fake()->paragraph(12),
         ];
     }
 }

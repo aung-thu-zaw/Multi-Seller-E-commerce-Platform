@@ -39,7 +39,7 @@ class Store extends Model
 
     public static function deleteAvatar(?string $avatar): void
     {
-        if (!empty($avatar) && file_exists(storage_path('app/public/avatars/stores/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
+        if (! empty($avatar) && file_exists(storage_path('app/public/avatars/stores/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/avatars/stores/'.pathinfo($avatar, PATHINFO_BASENAME)));
         }
     }

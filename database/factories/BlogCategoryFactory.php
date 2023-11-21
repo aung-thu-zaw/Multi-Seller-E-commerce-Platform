@@ -17,9 +17,9 @@ class BlogCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            "name"=>fake()->unique()->sentence(),
-            "image"=>fake()->imageUrl(),
-            "status"=>fake()->randomElement(["show","hide"])
+            'name' => fake()->unique()->sentence(),
+            'image' => fake()->imageUrl(),
+            'status' => fake()->randomElement(['show', 'hide']),
         ];
     }
 }

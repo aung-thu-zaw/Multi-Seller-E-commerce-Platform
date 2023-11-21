@@ -30,7 +30,7 @@ class StoreBlogContentRequest extends FormRequest
             'title' => ['required', 'string', 'max:255', Rule::unique('blog_contents', 'title')],
             'status' => ['required', 'string', Rule::in(['draft', 'published'])],
             'thumbnail' => ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'],
-            'content' => ['required','string'],
+            'content' => ['required', 'string'],
             'captcha_token' => [new RecaptchaRule()],
         ];
     }

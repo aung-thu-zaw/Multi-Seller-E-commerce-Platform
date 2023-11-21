@@ -4,7 +4,6 @@ namespace App\Actions\Admin\Categories;
 
 use App\Http\Traits\ImageUpload;
 use App\Models\Category;
-use App\Services\UploadFiles\CategoryImageUploadService;
 
 class CreateCategoryAction
 {

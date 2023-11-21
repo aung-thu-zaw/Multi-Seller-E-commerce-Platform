@@ -4,7 +4,6 @@ namespace App\Actions\Admin\Categories;
 
 use App\Http\Traits\ImageUpload;
 use App\Models\Category;
-use App\Services\UploadFiles\CategoryImageUploadService;
 
 class UpdateCategoryAction
 {
@@ -15,7 +14,7 @@ class UpdateCategoryAction
      */
     public function handle(array $data, Category $category): void
     {
-        $image = isset($data['image']) && !is_string($data['image']) ? $this->updateImage($data['image'], $category->image, 'categories') : $category->image;
+        $image = isset($data['image']) && ! is_string($data['image']) ? $this->updateImage($data['image'], $category->image, 'categories') : $category->image;
 
         $category->update([
             'parent_id' => $data['parent_id'],

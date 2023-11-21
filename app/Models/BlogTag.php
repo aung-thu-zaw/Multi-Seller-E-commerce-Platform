@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class BlogTag extends Model
 {
@@ -17,8 +17,8 @@ class BlogTag extends Model
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-                          ->generateSlugsFrom('name')
-                          ->saveSlugsTo('slug');
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
     }
 
     public function getRouteKeyName()
@@ -27,8 +27,8 @@ class BlogTag extends Model
     }
 
     /**
-       * @return \Illuminate\Database\Eloquent\Casts\Attribute<BlogTag, never>
-       */
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<BlogTag, never>
+     */
     protected function name(): Attribute
     {
         return Attribute::make(
@@ -37,10 +37,10 @@ class BlogTag extends Model
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<BlogContent>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<BlogContent>
+     */
     public function blogContents(): BelongsToMany
     {
-        return $this->belongsToMany(BlogContent::class, "blog_post_blog_tag");
+        return $this->belongsToMany(BlogContent::class, 'blog_post_blog_tag');
     }
 }

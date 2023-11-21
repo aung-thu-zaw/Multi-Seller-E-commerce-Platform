@@ -4,7 +4,6 @@ namespace App\Console\Commands\AutoDeleteTrashed;
 
 use App\Actions\Admin\Brands\PermanentlyDeleteTrashedBrandsAction;
 use App\Models\Brand;
-use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 

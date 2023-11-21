@@ -33,9 +33,9 @@ class BlogCategoryController extends Controller
     public function index(): Response|ResponseFactory
     {
         $blogCategories = BlogCategory::search(request('search'))
-                              ->orderBy(request('sort', 'id'), request('direction', 'desc'))
-                              ->paginate(request('per_page', 5))
-                              ->appends(request()->all());
+            ->orderBy(request('sort', 'id'), request('direction', 'desc'))
+            ->paginate(request('per_page', 5))
+            ->appends(request()->all());
 
         return inertia('Admin/BlogManagement/BlogCategories/Index', compact('blogCategories'));
     }
@@ -83,10 +83,10 @@ class BlogCategoryController extends Controller
     public function trashed(): Response|ResponseFactory
     {
         $trashedBlogCategories = BlogCategory::search(request('search'))
-                                     ->onlyTrashed()
-                                     ->orderBy(request('sort', 'id'), request('direction', 'desc'))
-                                     ->paginate(request('per_page', 5))
-                                     ->appends(request()->all());
+            ->onlyTrashed()
+            ->orderBy(request('sort', 'id'), request('direction', 'desc'))
+            ->paginate(request('per_page', 5))
+            ->appends(request()->all());
 
         return inertia('Admin/BlogManagement/BlogCategories/Trash', compact('trashedBlogCategories'));
     }

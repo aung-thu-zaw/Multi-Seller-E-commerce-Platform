@@ -91,7 +91,7 @@ class User extends Authenticatable
 
     public static function deleteAvatar(?string $avatar): void
     {
-        if (!empty($avatar) && file_exists(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
+        if (! empty($avatar) && file_exists(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)));
         }
     }

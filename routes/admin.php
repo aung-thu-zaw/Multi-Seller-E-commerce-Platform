@@ -48,7 +48,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-
         // Blog Category Operations
         Route::resource('blog-categories', BlogCategoryController::class)->except(['show']);
         Route::controller(BlogCategoryController::class)
@@ -63,7 +62,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
-
 
         // Blog Content Operations
         Route::resource('blog-contents', BlogContentController::class)->except(['show']);
