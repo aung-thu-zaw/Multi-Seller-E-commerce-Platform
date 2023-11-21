@@ -53,7 +53,7 @@ const removeFiltered = (queryStringKey) => {
   <div
     class="inline-flex flex-nowrap items-center bg-white border border-gray-200 rounded-full px-2 py-1.5"
   >
-    <div class="whitespace-nowrap text-xs font-bold text-gray-800">
+    <div class="whitespace-nowrap text-xs font-bold text-gray-700">
       {{ label }}
     </div>
     <div

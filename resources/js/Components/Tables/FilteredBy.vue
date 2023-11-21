@@ -1,5 +1,5 @@
 <script setup>
-import RemoveBadge from "@/Components/Badges/RemoveBadge.vue";
+import TableFilteredBadge from "@/Components/Badges/TableFilteredBadge.vue";
 import { useQueryStringParams } from "@/Composables/useQueryStringParams";
 
 defineProps({ to: String });
@@ -23,31 +23,31 @@ const { queryStringParams } = useQueryStringParams();
     </p>
 
     <div class="flex items-center space-x-3">
-      <RemoveBadge
+      <TableFilteredBadge
         v-show="queryStringParams?.created_from"
         :to="to"
         filterKey="created_from"
         label="Created From"
       />
-      <RemoveBadge
+      <TableFilteredBadge
         v-show="queryStringParams?.created_until"
         :to="to"
         filterKey="created_until"
         label="Created Until"
       />
-      <RemoveBadge
+      <TableFilteredBadge
         v-show="queryStringParams?.deleted_from"
         :to="to"
         filterKey="deleted_from"
         label="Deleted From"
       />
-      <RemoveBadge
+      <TableFilteredBadge
         v-show="queryStringParams?.deleted_until"
         :to="to"
         filterKey="deleted_until"
         label="Deleted Until"
       />
-      <RemoveBadge
+      <TableFilteredBadge
         v-show="queryStringParams?.filter_by_status"
         :to="to"
         filterKey="filter_by_status"
