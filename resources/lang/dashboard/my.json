@@ -112,7 +112,7 @@
     "Returns & Refunds": "ပြန်အမ်းငွေနှင့် ပြန်အမ်းငွေ",
     "Privacy & Policy": "ကိုယ်ရေးအချက်အလက်မူဝါဒ",
     "Settings": "ဆက်တင်များ",
-    "Website Configuration":"ဝဘ်ဆိုဒ်ဖွဲ့စည်းမှု",
+    "Website Configuration": "ဝဘ်ဆိုဒ်ဖွဲ့စည်းမှု",
     "Review Management": "သုံးသပ်ချက် စီမံခန့်ခွဲမှု",
     "Product Reviews": "ထုတ်ကုန်သုံးသပ်ချက်များ",
     "Store Reviews": "စတိုးဆိုင်သုံးသပ်ချက်များ",
@@ -143,5 +143,12 @@
     "Blog Categories": "ဘလော့အမျိုးအစားများ",
     "Blog Category": "ဘလော့အမျိုးအစား",
     "blog categories": "ဘလော့အမျိုးအစားများ",
-    "blog category": "ဘလော့အမျိုးအစား"
+    "blog category": "ဘလော့အမျိုးအစား",
+    "Blog Contents": "ဘလော့အကြောင်းအရာများ",
+    "Blog Content": "ဘလော့အကြောင်းအရာ",
+    "blog contents": "ဘလော့အကြောင်းအရာများ",
+    "blog content": "ဘလော့အကြောင်းအရာ",
+    "Blog Title": "ဘလော့ခေါင်းစဉ်",
+    "Blog Thumbnail": "ဘလော့ဂ် ပုံသေး",
+    "Change :label Status": ":label status ကို ပြောင်းပါ။"
 }

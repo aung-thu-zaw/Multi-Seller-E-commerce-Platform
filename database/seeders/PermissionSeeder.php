@@ -44,12 +44,12 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'blog-categories.restore', 'group' => 'Blog Management']);
         Permission::create(['name' => 'blog-categories.force.delete', 'group' => 'Blog Management']);
 
-        Permission::create(['name' => 'blog-content.view', 'group' => 'Blog Management']);
-        Permission::create(['name' => 'blog-content.create', 'group' => 'Blog Management']);
-        Permission::create(['name' => 'blog-content.edit', 'group' => 'Blog Management']);
-        Permission::create(['name' => 'blog-content.delete', 'group' => 'Blog Management']);
-        Permission::create(['name' => 'blog-content.view.trash', 'group' => 'Blog Management']);
-        Permission::create(['name' => 'blog-content.restore', 'group' => 'Blog Management']);
-        Permission::create(['name' => 'blog-content.force.delete', 'group' => 'Blog Management']);
+        Permission::create(['name' => 'blog-contents.view', 'group' => 'Blog Management']);
+        Permission::create(['name' => 'blog-contents.create', 'group' => 'Blog Management']);
+        Permission::create(['name' => 'blog-contents.edit', 'group' => 'Blog Management']);
+        Permission::create(['name' => 'blog-contents.delete', 'group' => 'Blog Management']);
+        Permission::create(['name' => 'blog-contents.view.trash', 'group' => 'Blog Management']);
+        Permission::create(['name' => 'blog-contents.restore', 'group' => 'Blog Management']);
+        Permission::create(['name' => 'blog-contents.force.delete', 'group' => 'Blog Management']);
     }
 }

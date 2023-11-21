@@ -19,3 +19,18 @@ import AdminDashboardSidebar from "@/Components/Sidebars/AdminDashboardSidebar.v
     </div>
   </div>
 </template>
+
+<style>
+.ck-editor__editable_inline {
+  min-height: 250px;
+  border-radius: 200px;
+}
+
+:root {
+  --ck-border-radius: 0.375rem;
+  --ck-color-focus-border: rgb(209 213 219);
+  --ck-font-size-base: 0.7rem;
+  --ck-color-shadow-drop: none;
+  --ck-color-shadow-inner: none;
+}
+</style>

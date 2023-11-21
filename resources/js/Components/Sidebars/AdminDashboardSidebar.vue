@@ -760,9 +760,9 @@ const toggleCollapseShow = (classes) => {
                     {{ __("Blog Categories") }}
                   </Link>
                 </li>
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('blog-contents.view')" class="items-center">
                   <Link
-                    :href="route('admin.categories.index')"
+                    :href="route('admin.blog-contents.index')"
                     :data="{
                       page: 1,
                       per_page: 5,
@@ -772,12 +772,12 @@ const toggleCollapseShow = (classes) => {
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
+                        $page.url.startsWith('/admin/blog-contents'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/blog-contents'),
                     }"
                   >
-                    {{ __("Contents") }}
+                    {{ __("Blog Contents") }}
                   </Link>
                 </li>
 

@@ -65,6 +65,7 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
 
         // Blog Content Operations
         Route::resource('blog-contents', BlogContentController::class)->except(['show']);
+        Route::patch('blog-contents/{blog_content}/change-status', [BlogContentController::class,'changeStatus'])->name('blog-contents.change-status');
         Route::controller(BlogContentController::class)
             ->prefix('/blog-contents/trash')
             ->name('blog-contents.')

@@ -27,6 +27,7 @@ class BlogContentFactory extends Factory
             'title' => fake()->unique()->sentence(),
             'thumbnail' => fake()->imageUrl(),
             'content' => fake()->paragraph(12),
+            'status' => fake()->randomElement(['draft','published'])
         ];
     }
 }

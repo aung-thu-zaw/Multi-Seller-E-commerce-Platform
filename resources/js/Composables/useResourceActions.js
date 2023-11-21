@@ -108,6 +108,57 @@ export function useResourceActions(formFields = {}) {
         );
     };
 
+    // Change Status Action
+    const changeStatusAction = async (
+        entityType,
+        editRouteName,
+        targetIdentifier,
+        currentStatus
+    ) => {
+        const result = await swal({
+            icon: "question",
+            title: __("Change :label Status", {
+                label: __(formatToTitleCase(entityType)),
+            }),
+            text: __("Are you sure you would like to do this?"),
+            showCancelButton: true,
+            confirmButtonText: __("Confirm"),
+            cancelButtonText: __("Cancel"),
+            confirmButtonColor: "#d52222",
+            cancelButtonColor: "#626262",
+            timer: 20000,
+            timerProgressBar: true,
+            reverseButtons: true,
+        });
+
+        if (result.isConfirmed) {
+            router.post(
+                route(editRouteName, {
+                    [formatToSnakeCase(entityType)]: targetIdentifier,
+                }),
+                {
+                    _method: "patch",
+                    status: currentStatus,
+                    ...queryStringParams.value,
+                },
+                {
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        const successMessage = usePage().props.flash.success;
+                        if (successMessage) {
+                            swal({
+                                icon: "success",
+                                title: __(successMessage, {
+                                    label: __(entityType),
+                                }),
+                            });
+                        }
+                    },
+                }
+            );
+        }
+    };
+
     // Soft Delete Action
     const softDeleteAction = async (
         entityType,
@@ -458,6 +509,7 @@ export function useResourceActions(formFields = {}) {
         processing,
         createAction,
         editAction,
+        changeStatusAction,
         softDeleteAction,
         softDeleteSelectedAction,
         restoreAction,

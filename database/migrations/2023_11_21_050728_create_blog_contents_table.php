@@ -20,7 +20,7 @@ return new class() extends Migration
             $table->string('thumbnail');
             $table->text('content');
             $table->enum('status', ['draft', 'published'])->default('draft');
-            $table->date('published_at');
+            $table->date('published_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

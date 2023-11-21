@@ -50,7 +50,7 @@ class BlogContent extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Casts\Attribute<BlogContent, never>
      */
-    protected function image(): Attribute
+    protected function thumbnail(): Attribute
     {
         return Attribute::make(
             set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/blog-contents/$value"),

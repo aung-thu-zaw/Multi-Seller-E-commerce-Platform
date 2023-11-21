@@ -14,7 +14,7 @@ class UpdateBlogContentAction
      */
     public function handle(array $data, BlogContent $blogContent): void
     {
-        $thumbnail = isset($data['thumbnail']) && ! is_string($data['thumbnail']) ? $this->updateImage($data['thumbnail'], $blogContent->thumbnail, 'blog-categories') : $blogContent->thumbnail;
+        $thumbnail = isset($data['thumbnail']) && !is_string($data['thumbnail']) ? $this->updateImage($data['thumbnail'], $blogContent->thumbnail, 'blog-contents') : $blogContent->thumbnail;
 
         $blogContent->update([
             'blog_category_id' => $data['blog_category_id'],

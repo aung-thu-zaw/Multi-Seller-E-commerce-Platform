@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Admin\BlogManagement\BlogContents\StoreBlogContentRequest;
 use App\Http\Requests\Dashboard\Admin\BlogManagement\BlogContents\UpdateBlogContentRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
+use App\Models\BlogCategory;
 use App\Models\BlogContent;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -42,7 +43,9 @@ class BlogContentController extends Controller
 
     public function create(): Response|ResponseFactory
     {
-        return inertia('Admin/BlogManagement/BlogContents/Create');
+        $blogCategories = BlogCategory::select("id", "name")->get();
+
+        return inertia('Admin/BlogManagement/BlogContents/Create', compact('blogCategories'));
     }
 
     public function store(StoreBlogContentRequest $request): RedirectResponse
@@ -54,12 +57,21 @@ class BlogContentController extends Controller
 
     public function edit(BlogContent $blogContent): Response|ResponseFactory
     {
-        return inertia('Admin/BlogManagement/BlogContents/Edit', compact('blogContent'));
+        $blogCategories = BlogCategory::select("id", "name")->get();
+
+        return inertia('Admin/BlogManagement/BlogContents/Edit', compact('blogContent', 'blogCategories'));
     }
 
     public function update(UpdateBlogContentRequest $request, BlogContent $blogContent): RedirectResponse
     {
         ( new UpdateBlogContentAction())->handle($request->validated(), $blogContent);
+
+        return to_route('admin.blog-contents.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
+    }
+
+    public function changeStatus(Request $request, BlogContent $blogContent): RedirectResponse
+    {
+        $blogContent->update(["status" => $request->status === 'draft' ? 'published' : 'draft']);
 
         return to_route('admin.blog-contents.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }
