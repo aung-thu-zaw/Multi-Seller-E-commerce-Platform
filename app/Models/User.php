@@ -56,6 +56,18 @@ class User extends Authenticatable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<User, never>
+     */
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/avatars/$value"),
+        );
+    }
+
+
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne<Store>
      */
     public function store(): HasOne
@@ -91,7 +103,7 @@ class User extends Authenticatable
 
     public static function deleteAvatar(?string $avatar): void
     {
-        if (! empty($avatar) && file_exists(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
+        if (!empty($avatar) && file_exists(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)));
         }
     }

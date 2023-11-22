@@ -6,7 +6,7 @@ defineProps({ blog: Object });
 
 <template>
   <Link
-    href="#"
+    :href="route('blogs.show', blog.slug)"
     class="flex items-center pl-3 py-5 hover:bg-gray-200 transition-all border-b border-gray-300 w-full"
   >
     <img

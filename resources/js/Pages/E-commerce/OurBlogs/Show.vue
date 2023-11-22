@@ -5,7 +5,7 @@ import RelatedBlogCard from "@/Components/Cards/Blogs/RelatedBlogCard.vue";
 import BlogCommentCard from "@/Components/Cards/Blogs/BlogCommentCard.vue";
 import BlogReplyCard from "@/Components/Cards/Blogs/BlogReplyCard.vue";
 import BlogCommentForm from "@/Components/Forms/TextareaForms/BlogCommentForm.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 
 defineProps({
   share: Object,
