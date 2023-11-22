@@ -5,6 +5,7 @@ import InputField from "@/Components/Forms/Fields/InputField.vue";
 import InputLabel from "@/Components/Forms/Fields/InputLabel.vue";
 import English from "@/assets/images/united-state.png";
 import Myanmar from "@/assets/images/myanmar.png";
+import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
@@ -501,13 +502,18 @@ import Myanmar from "@/assets/images/myanmar.png";
 
           <!-- Our Blogs -->
           <li>
-            <a
-              href="#"
+            <Link
+              :href="route('blogs.index')"
+              :data="{
+                view: 'grid',
+                sort: 'id',
+                direction: 'desc',
+              }"
               class="flex items-center text-gray-700 hover:text-gray-500 font-semibold"
             >
               <i class="fa-solid fa-newspaper mr-1 text-xs"></i>
               Our Blogs
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

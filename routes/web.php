@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ecommerce\OurBlogs\BlogController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('E-commerce/OurBlogs/Show', [
+    return Inertia::render('E-commerce/Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -34,6 +35,18 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+Route::controller(BlogController::class)
+     ->prefix("/blogs")
+     ->name("blogs.")
+     ->group(function () {
+         Route::get("/", "index")->name("index");
+         Route::get("/{blog_content}", "show")->name("show");
+         //  Route::get("/tags/{tag}", "tagBlog")->name("tag");
+     });
+
+
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';

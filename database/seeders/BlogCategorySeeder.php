@@ -12,20 +12,20 @@ class BlogCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        BlogCategory::factory()->create(['name' => 'Fashion']);
+        BlogCategory::factory()->create(['name' => 'Fashion','status' => 'show']);
 
-        BlogCategory::factory()->create(['name' => 'Foods']);
+        BlogCategory::factory()->create(['name' => 'Foods','status' => 'show']);
 
-        BlogCategory::factory()->create(['name' => 'Lifestyle']);
+        BlogCategory::factory()->create(['name' => 'Lifestyle','status' => 'show']);
 
-        BlogCategory::factory()->create(['name' => 'Sports']);
+        BlogCategory::factory()->create(['name' => 'Sports','status' => 'show']);
 
-        BlogCategory::factory()->create(['name' => 'Technology']);
+        BlogCategory::factory()->create(['name' => 'Technology','status' => 'show']);
 
-        BlogCategory::factory()->create(['name' => 'Travel']);
+        BlogCategory::factory()->create(['name' => 'Travel','status' => 'show']);
 
-        BlogCategory::factory()->create(['name' => 'Beauty & Health']);
+        BlogCategory::factory()->create(['name' => 'Beauty & Health','status' => 'show']);
 
-        BlogCategory::factory()->create(['name' => 'Home Improvement']);
+        BlogCategory::factory()->create(['name' => 'Home Improvement','status' => 'show']);
     }
 }

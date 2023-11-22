@@ -107,13 +107,14 @@ watch(
           </svg>
         </div>
 
-        <div
+        <button
+          type="button"
           v-show="search"
           @click="removeSearch"
           class="absolute inset-y-0 right-0 flex items-center pr-5 hover:cursor-pointer text-gray-500 hover:text-red-600 transition-all"
         >
           <i class="fa-solid fa-circle-xmark"></i>
-        </div>
+        </button>
         <input
           type="text"
           id="default-search"
