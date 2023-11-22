@@ -6,7 +6,7 @@ defineProps({ blog: Object });
 
 <template>
   <Link
-    class="group rounded-xl overflow-hidden focus:outline-none focus:ring-1 focus:ring-gray-600"
+    class="group rounded-xl overflow-hidden focus:outline-none"
     :href="route('blogs.show', { blog_content: blog.slug })"
   >
     <div class="relative pt-[70%] rounded-xl overflow-hidden">

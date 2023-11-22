@@ -11,9 +11,9 @@ defineProps({ category: Object });
     :data="{
       search_blog: $page.props.ziggy.query?.search_blog,
       blog_category: category?.slug,
-      sort: $page.props.ziggy.query?.sort,
-      direction: $page.props.ziggy.query?.direction,
-      view: $page.props.ziggy.query?.view,
+      sort: $page.props.ziggy.query.sort ?? 'id',
+      direction: $page.props.ziggy.query.direction ?? 'desc',
+      view: $page.props.ziggy.query.view ?? 'grid',
     }"
     class="border border-gray-300 flex items-center px-3 py-3 rounded-md hover:bg-gray-100 text-gray-600 hover:scale-105 transition-all w-full"
     :class="{

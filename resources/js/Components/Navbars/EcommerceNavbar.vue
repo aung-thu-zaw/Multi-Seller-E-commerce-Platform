@@ -510,6 +510,11 @@ import { Link } from "@inertiajs/vue3";
                 direction: 'desc',
               }"
               class="flex items-center text-gray-700 hover:text-gray-500 font-semibold"
+              :class="{
+                'text-orange-600': $page.component.startsWith(
+                  'E-commerce/OurBlogs'
+                ),
+              }"
             >
               <i class="fa-solid fa-newspaper mr-1 text-xs"></i>
               Our Blogs

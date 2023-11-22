@@ -2,7 +2,7 @@
 import { router, usePage } from "@inertiajs/vue3";
 import { ref, watch } from "vue";
 
-const blogSearch = ref(usePage().props.ziggy.query?.blog_search);
+const blogSearch = ref(usePage().props.ziggy.query?.search_blog);
 
 const delayedSearch = ref(null);
 
