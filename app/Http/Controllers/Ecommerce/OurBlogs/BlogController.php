@@ -7,6 +7,7 @@ use App\Models\BlogCategory;
 use App\Models\BlogContent;
 use Inertia\Response;
 use Inertia\ResponseFactory;
+use Jorenvh\Share\Share;
 
 class BlogController extends Controller
 {
@@ -26,6 +27,15 @@ class BlogController extends Controller
 
     public function show(BlogContent $blogContent): Response|ResponseFactory
     {
+        $share = (new Share())->currentPage("$blogContent->title")
+                              ->facebook()
+                              ->twitter()
+                              ->linkedIn()
+                              ->reddit()
+                              ->telegram()
+                              ->whatsApp()
+                              ->getRawLinks();
+
         $blogCategories = BlogCategory::where("status", "show")->get();
 
         $blogContent->load(["author:id,name","blogCategory:id,name","blogTags:id,name,slug"]);
@@ -36,6 +46,6 @@ class BlogController extends Controller
                                           ->limit(10)
                                           ->get();
 
-        return inertia("E-commerce/OurBlogs/Show", compact('blogCategories', 'blogContent', 'relatedBlogContents'));
+        return inertia("E-commerce/OurBlogs/Show", compact('share', 'blogCategories', 'blogContent', 'relatedBlogContents'));
     }
 }
