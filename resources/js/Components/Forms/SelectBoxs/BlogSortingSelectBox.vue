@@ -2,7 +2,7 @@
 import { router, usePage } from "@inertiajs/vue3";
 import { ref, watch } from "vue";
 
-const direction = ref(usePage().props.ziggy.query?.direction);
+const direction = ref(usePage().props.ziggy.query.direction ?? "desc");
 
 watch(
   () => direction.value,
@@ -36,10 +36,7 @@ watch(
       class="w-[100px] p-3.5 font-medium text-sm text-gray-500 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:border-orange-400"
       v-model="direction"
     >
-      <option
-        value="desc"
-        :selected="direction === 'desc' || direction === null"
-      >
+      <option value="desc" :selected="direction === 'desc' || !direction">
         {{ __("Latest") }}
       </option>
       <option value="asc" :selected="direction === 'asc'">

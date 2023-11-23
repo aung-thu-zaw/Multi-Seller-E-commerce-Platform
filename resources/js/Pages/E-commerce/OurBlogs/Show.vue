@@ -145,8 +145,7 @@ defineProps({
               </p>
 
               <!-- Comments -->
-
-              <div class="py-3 rounded-md border border-gray-300">
+              <div v-if="false" class="py-3 rounded-md border border-gray-300">
                 <p class="text-center font-medium text-orange-600 text-xs my-3">
                   <i class="fa-solid fa-spinner animate-spin"></i>
                   Your comment is awaiting moderation....
@@ -158,10 +157,42 @@ defineProps({
                 <!-- Reply Card -->
                 <BlogReplyCard />
               </div>
+
+              <div v-else class="py-5">
+                <p class="text-center font-bold text-gray-500 text-md">
+                  <i class="fa-solid fa-comment-slash"></i>
+                  Comments Not Yet
+                </p>
+              </div>
             </div>
 
             <!-- Comment Form -->
-            <BlogCommentForm />
+            <div
+              v-show="
+                $page.props.auth?.user &&
+                $page.props.auth.user.id !== blogContent?.author_id
+              "
+            >
+              <BlogCommentForm />
+            </div>
+            <div v-show="!$page.props.auth.user" class="py-5">
+              <p class="text-center text-sm font-medium text-gray-600">
+                If you want to write comments you need to login first. Here
+                <Link
+                  href="#"
+                  class="font-bold text-orange-600 hover:underline"
+                >
+                  Sign In
+                </Link>
+                Or
+                <Link
+                  href="#"
+                  class="font-bold text-orange-600 hover:underline"
+                >
+                  Sign Up
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>

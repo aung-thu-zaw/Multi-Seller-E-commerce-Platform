@@ -66,7 +66,7 @@ const params = computed(() => {
                   class="px-2 py-1 rounded-md cursor-pointer bg-gray-200 text-gray-600 hover:bg-gray-300 transition-none mr-2"
                   :class="{
                     'bg-orange-500 text-white hover:bg-orange-600':
-                      params.view === 'grid',
+                      params.view === 'grid' || !params.view,
                   }"
                 >
                   <i class="fa-solid fa-grip"></i>
@@ -143,10 +143,10 @@ const params = computed(() => {
             </p>
           </div>
 
-          <div>
+          <div v-if="blogContents.data.length">
             <!-- Blog Grid Card -->
             <div
-              v-show="params.view === 'grid'"
+              v-show="params.view === 'grid' || !params.view"
               class="grid grid-cols-3 gap-5 w-full"
             >
               <BlogGridCard
@@ -172,6 +172,12 @@ const params = computed(() => {
             <div class="my-5 py-5">
               <Pagination :links="blogContents.links" />
             </div>
+          </div>
+          <div v-else class="py-20">
+            <p class="text-center font-bold text-md text-red-600">
+              <i class="fa-solid fa-file-circle-xmark"></i>
+              We're sorry we can't find any matches for your filter term.
+            </p>
           </div>
         </div>
       </div>
