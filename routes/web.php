@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -46,6 +47,7 @@ Route::controller(BlogController::class)
          //  Route::get("/tags/{tag}", "tagBlog")->name("tag");
      });
 
+Route::post("/blogs/{blog_content}/comments", BlogCommentController::class)->name("blog.comments.store");
 
 
 require __DIR__.'/auth.php';

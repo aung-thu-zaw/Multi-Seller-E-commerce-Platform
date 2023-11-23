@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 use Spatie\Sluggable\HasSlug;
@@ -68,7 +69,6 @@ class BlogContent extends Model
         );
     }
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<BlogCategory,BlogContent>
      */
@@ -91,6 +91,15 @@ class BlogContent extends Model
     public function blogTags(): BelongsToMany
     {
         return $this->belongsToMany(BlogTag::class, 'blog_content_blog_tag');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<BlogComment>
+     */
+    public function blogComments(): HasMany
+    {
+        return $this->hasMany(BlogComment::class);
     }
 
     protected static function booted(): void

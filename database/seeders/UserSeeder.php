@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
 
         // Super Admin
         $superAdmin = User::factory()->create([
-            'image'=>'admin-1.jpg',
+            'avatar' => 'admin-1.jpg',
             'name' => 'Super Admin',
             'role' => 'admin',
             'email' => 'superadmin@gmail.com',
@@ -47,11 +47,13 @@ class UserSeeder extends Seeder
 
         // Buyer
         User::factory()->create([
-            'image'=>'user-4.jpg',
+            'avatar' => 'user-4.jpg',
             'name' => 'Customer',
             'role' => 'user',
             'email' => 'customer@gmail.com',
             'password' => 'Password!',
         ]);
+
+        User::factory(20)->create(["role"=>"user"]);
     }
 }

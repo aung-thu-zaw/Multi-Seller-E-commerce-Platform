@@ -12,6 +12,8 @@
 
         <div class="flex flex-col items-start">
           <h3 class="font-bold text-gray-600">Aung Thu Zaw</h3>
+
+          <!-- <span class="text-xs font-medium text-gray-400" -->
           <span class="text-xs font-medium text-orange-500"
             >Reply from author
           </span>

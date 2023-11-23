@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ecommerce\OurBlogs;
 
 use App\Http\Controllers\Controller;
 use App\Models\BlogCategory;
+use App\Models\BlogComment;
 use App\Models\BlogContent;
 use Inertia\Response;
 use Inertia\ResponseFactory;
@@ -46,6 +47,17 @@ class BlogController extends Controller
                                           ->limit(10)
                                           ->get();
 
-        return inertia("E-commerce/OurBlogs/Show", compact('share', 'blogCategories', 'blogContent', 'relatedBlogContents'));
+        $blogComments = BlogComment::with(['user:id,name,avatar'])
+                                   ->where('blog_content_id', $blogContent->id)
+                                   ->orderBy('id', 'desc')
+                                   ->paginate(5);
+
+        return inertia("E-commerce/OurBlogs/Show", compact(
+            'share',
+            'blogCategories',
+            'blogContent',
+            'relatedBlogContents',
+            'blogComments'
+        ));
     }
 }
