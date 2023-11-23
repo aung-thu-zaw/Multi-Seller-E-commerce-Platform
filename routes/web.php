@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentController;
+use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentReplyController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -48,6 +49,7 @@ Route::controller(BlogController::class)
      });
 
 Route::post("/blogs/{blog_content}/comments", BlogCommentController::class)->name("blog.comments.store");
+Route::post("/blogs/{blog_content}/comments/{blog_comment}/replies", BlogCommentReplyController::class)->name("comment.replies.store");
 
 
 require __DIR__.'/auth.php';

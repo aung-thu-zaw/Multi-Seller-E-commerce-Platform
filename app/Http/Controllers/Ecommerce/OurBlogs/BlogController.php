@@ -47,7 +47,7 @@ class BlogController extends Controller
                                           ->limit(10)
                                           ->get();
 
-        $blogComments = BlogComment::with(['user:id,name,avatar'])
+        $blogComments = BlogComment::with(['user:id,name,avatar','blogCommentReplies.user:id,name,avatar'])
                                    ->where('blog_content_id', $blogContent->id)
                                    ->orderBy('id', 'desc')
                                    ->paginate(5);

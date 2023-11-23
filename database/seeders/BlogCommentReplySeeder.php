@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\BlogComment;
+use App\Models\BlogCommentReply;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class BlogCommentSeeder extends Seeder
+class BlogCommentReplySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        BlogComment::factory(100)->create();
+        BlogCommentReply::factory(20)->create();
     }
 }

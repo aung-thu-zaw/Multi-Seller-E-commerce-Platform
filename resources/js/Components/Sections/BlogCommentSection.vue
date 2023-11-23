@@ -36,10 +36,18 @@ defineProps({
             </p> -->
 
             <!-- Comment Card -->
-            <BlogCommentCard :blogComment="blogComment" />
+            <BlogCommentCard :blogContent="blogContent" :blogComment="blogComment" />
 
             <!-- Reply Card -->
-            <BlogReplyCard />
+
+            <div v-show="blogComment.blog_comment_replies.length">
+              <BlogReplyCard
+                v-for="blogCommentReply in blogComment.blog_comment_replies"
+                :key="blogCommentReply.id"
+                :blogContent="blogContent"
+                :blogCommentReply="blogCommentReply"
+              />
+            </div>
           </div>
 
           <!-- Comment Pagination -->

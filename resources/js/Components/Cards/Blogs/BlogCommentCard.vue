@@ -1,15 +1,15 @@
 <script setup>
-import BlogReplyForm from "@/Components/Forms/TextareaForms/BlogReplyForm.vue";
+import BlogReplyForm from "@/Components/Forms/TextareaForms/BlogCommentReplyForm.vue";
 import { ref } from "vue";
 
-defineProps({ blogComment: Object });
+defineProps({ blogContent: Object, blogComment: Object });
 
 const isReplyBoxOpened = ref(false);
 </script>
 
 <template>
   <div class="p-4">
-    <div class="flex items-center justify-between">
+    <div class="flex items-start justify-between">
       <div class="flex items-center mb-2">
         <img
           :src="blogComment.user?.avatar"
@@ -57,7 +57,11 @@ const isReplyBoxOpened = ref(false);
 
     <!-- Reply Form -->
     <div v-show="isReplyBoxOpened">
-      <BlogReplyForm />
+      <BlogReplyForm
+        :blogContent="blogContent"
+        :blogComment="blogComment"
+        @updateReplyBox="isReplyBoxOpened = false"
+      />
     </div>
   </div>
 </template>

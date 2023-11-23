@@ -17,7 +17,7 @@ class BlogCommentFactory extends Factory
      */
     public function definition(): array
     {
-        $blogContent = BlogContent::where("status", "published")->pluck("id")->toArray();
+        $blogContent = BlogContent::pluck("id")->toArray();
 
         return [
             "blog_content_id" => fake()->randomElement($blogContent),

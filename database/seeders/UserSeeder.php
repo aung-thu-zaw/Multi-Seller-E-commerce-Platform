@@ -54,6 +54,6 @@ class UserSeeder extends Seeder
             'password' => 'Password!',
         ]);
 
-        User::factory(20)->create(["role"=>"user"]);
+        User::factory(30)->create(["role"=>"user"]);
     }
 }

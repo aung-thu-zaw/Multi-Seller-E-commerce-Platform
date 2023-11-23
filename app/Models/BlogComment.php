@@ -8,6 +8,7 @@ use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Attributes\SearchUsingFullText;
 
 class BlogComment extends Model
@@ -41,6 +42,14 @@ class BlogComment extends Model
     public function blogContent(): BelongsTo
     {
         return $this->belongsTo(BlogContent::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<BlogCommentReply>
+     */
+    public function blogCommentReplies(): HasMany
+    {
+        return $this->hasMany(BlogCommentReply::class);
     }
 
     /**
