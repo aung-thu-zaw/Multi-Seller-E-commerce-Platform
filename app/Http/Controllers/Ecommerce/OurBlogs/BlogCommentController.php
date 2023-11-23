@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Ecommerce\OurBlogs;
 use App\Http\Controllers\Controller;
 use App\Models\BlogComment;
 use App\Models\BlogContent;
+use App\Models\User;
+use App\Notifications\NewBlogCommentFromUserNotification;
 use App\Rules\RecaptchaRule;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -18,11 +20,15 @@ class BlogCommentController extends Controller
             'captcha_token' => [new RecaptchaRule()],
         ]);
 
-        BlogComment::create([
+        $blogComment = BlogComment::create([
              "blog_content_id" => $blogContent->id,
              "user_id" => auth()->id(),
              "comment" => $request->comment,
         ]);
+
+        $author = User::findOrFail($blogContent->author_id);
+
+        $author->notify(new NewBlogCommentFromUserNotification($blogComment));
 
         return back();
     }

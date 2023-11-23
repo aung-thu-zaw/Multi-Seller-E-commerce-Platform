@@ -6,6 +6,7 @@ import InputLabel from "@/Components/Forms/Fields/InputLabel.vue";
 import English from "@/assets/images/united-state.png";
 import Myanmar from "@/assets/images/myanmar.png";
 import UserDropdown from "@/Components/Dropdowns/UserDropdown.vue";
+import NotificationDropdownForUser from "@/Components/Dropdowns/NotificationDropdownForUser.vue";
 import { Link } from "@inertiajs/vue3";
 </script>
 
@@ -302,7 +303,9 @@ import { Link } from "@inertiajs/vue3";
           </div> -->
         </div>
 
-        <div v-if="$page.props.auth?.user" class="flex items-center space-x-3">
+        <div v-if="$page.props.auth?.user" class="flex items-center space-x-8">
+          <NotificationDropdownForUser />
+
           <UserDropdown />
         </div>
 

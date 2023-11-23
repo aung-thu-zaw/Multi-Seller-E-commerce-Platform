@@ -58,7 +58,7 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Casts\Attribute<User, never>
      */
-    protected function image(): Attribute
+    protected function avatar(): Attribute
     {
         return Attribute::make(
             set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/avatars/$value"),

@@ -1,6 +1,7 @@
 <script setup>
 import UserDropdown from "@/Components/Dropdowns/UserDropdown.vue";
 import LanguageDropdownForDashboard from "@/Components/Dropdowns/LanguageDropdownForDashboard.vue";
+import NotificationDropdownForAdminDashboard from "@/Components/Dropdowns/NotificationDropdownForAdminDashboard.vue";
 </script>
 
 <template>
@@ -34,10 +35,10 @@ import LanguageDropdownForDashboard from "@/Components/Dropdowns/LanguageDropdow
       </form>
       <!-- User -->
       <ul
-        class="z-50 flex-col md:flex-row list-none items-center hidden md:flex"
+        class="z-50 flex-col md:flex-row list-none items-center hidden md:flex space-x-3"
       >
         <!-- Admin Dashboard Notification Dropdown -->
-        <!-- <NotificationDropdownForAdminDashboard /> -->
+        <NotificationDropdownForAdminDashboard />
 
         <!-- Admin Dashboard Language Dropdown -->
         <LanguageDropdownForDashboard />
