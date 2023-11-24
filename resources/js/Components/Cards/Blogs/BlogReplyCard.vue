@@ -18,7 +18,7 @@ defineProps({ blogContent: Object, blogCommentReply: Object });
           </h3>
 
           <span
-            v-if="blogCommentReply.user_id !== blogContent.user_id"
+            v-if="blogCommentReply.user_id !== blogContent.author_id"
             class="text-xs font-medium text-gray-400"
           >
             Reply from user

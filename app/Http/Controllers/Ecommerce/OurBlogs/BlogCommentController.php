@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BlogComment;
 use App\Models\BlogContent;
 use App\Models\User;
-use App\Notifications\NewBlogCommentFromUserNotification;
+use App\Notifications\Blogs\NewBlogCommentFromUserNotification;
 use App\Rules\RecaptchaRule;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

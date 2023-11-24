@@ -20,6 +20,7 @@ const submitBlogComment = async () => {
   form.post(route("blog.comments.store", { blog_content: props.blog?.slug }), {
     replace: true,
     preserveState: true,
+    preserveScroll: true,
     onSuccess: () => (form.comment = ""),
   });
 };

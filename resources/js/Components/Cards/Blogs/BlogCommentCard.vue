@@ -36,7 +36,10 @@ const isReplyBoxOpened = ref(false);
       </p>
     </div>
 
-    <div class="flex items-center justify-end mt-3">
+    <div
+      v-show="blogContent.author_id === $page.props.auth.user?.id"
+      class="flex items-center justify-end mt-3"
+    >
       <button
         v-if="!isReplyBoxOpened"
         @click="isReplyBoxOpened = !isReplyBoxOpened"

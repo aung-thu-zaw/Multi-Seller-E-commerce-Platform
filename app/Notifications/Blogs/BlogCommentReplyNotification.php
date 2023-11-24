@@ -1,25 +1,23 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Blogs;
 
-use App\Models\BlogComment;
+use App\Models\BlogCommentReply;
 use App\Models\BlogContent;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewBlogCommentFromUserNotification extends Notification implements ShouldQueue
+class BlogCommentReplyNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(protected BlogContent $blogContent, protected BlogComment $blogComment, protected User $user)
+    public function __construct(protected BlogContent $blogContent, protected BlogCommentReply $blogCommentReply, protected User $user)
     {
         //
     }
@@ -44,7 +42,7 @@ class NewBlogCommentFromUserNotification extends Notification implements ShouldQ
     {
         return [
             'blog' => $this->blogContent->slug,
-            'comment' => $this->blogComment->comment,
+            'reply' => $this->blogCommentReply->reply,
             'user' => $this->user->only("avatar", "name")
         ];
     }

@@ -16,7 +16,7 @@ onMounted(() => {
     (notification) => {
       if (
         notification.type ===
-        "App\\Notifications\\NewBlogCommentFromUserNotification"
+        "App\\Notifications\\Blogs\\NewBlogCommentFromUserNotification"
       ) {
         notifications.value.unshift({
           id: notification.id,
@@ -118,7 +118,7 @@ const handleMarkAllAsRead = () => {
           <BlogCommentNotificationCard
             v-show="
               notification.type ===
-              'App\\Notifications\\NewBlogCommentFromUserNotification'
+              'App\\Notifications\\Blogs\\NewBlogCommentFromUserNotification'
             "
             :notification="notification"
           />

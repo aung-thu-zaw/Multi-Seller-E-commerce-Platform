@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\BlogComment;
 use App\Models\BlogCommentReply;
 use App\Models\BlogContent;
+use App\Models\User;
+use App\Notifications\Blogs\BlogCommentReplyNotification;
 use App\Rules\RecaptchaRule;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,11 +21,17 @@ class BlogCommentReplyController extends Controller
             'captcha_token' => [new RecaptchaRule()],
         ]);
 
-        BlogCommentReply::create([
+        $blogCommentReply = BlogCommentReply::create([
              "blog_comment_id" => $blogComment->id,
              "user_id" => auth()->id(),
              "reply" => $request->reply,
         ]);
+
+        $replyPerson = User::findOrFail($blogCommentReply->user_id);
+
+        $commenter = User::findOrFail($blogComment->user_id);
+
+        $commenter->notify(new BlogCommentReplyNotification($blogContent, $blogCommentReply, $replyPerson));
 
         return back();
     }
