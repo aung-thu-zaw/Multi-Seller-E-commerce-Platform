@@ -73,10 +73,10 @@ const handleNotificationReadAt = () => {
     </div>
     <div class="w-full ps-3">
       <div class="text-gray-600 font-medium text-sm mb-1.5 w-full line-clamp-2">
-        New blog comment from
-        <span class="font-semibold text-gray-700 inline">
+        {{ __('New blog comment from :label', { label: notification.data?.user?.name }) }}
+        <!-- <span class="font-semibold text-gray-700 inline">
           {{ notification.data?.user?.name }}
-        </span>
+        </span> -->
         : "{{ notification.data?.comment }}"
       </div>
       <div

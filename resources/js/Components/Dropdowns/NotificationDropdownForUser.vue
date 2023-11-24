@@ -91,13 +91,13 @@ const handleMarkAllAsRead = () => {
       aria-labelledby="hs-dropdown-hover-event"
     >
       <div class="px-4 py-3 bg-gray-100 flex items-center justify-between border-b w-full">
-        <span class="text-gray-700 font-semibold text-md"> Notifications </span>
+        <span class="text-gray-700 font-semibold text-md"> {{ __('Notifications') }} </span>
         <button
           @click="handleMarkAllAsRead"
           type="button"
           class="text-orange-600 hover:text-orange-500 text-sm font-bold"
         >
-          Mark all us read
+          {{ __('Mark all as read') }}
         </button>
       </div>
 
@@ -116,7 +116,9 @@ const handleMarkAllAsRead = () => {
       </div>
       <!-- No notification -->
       <div v-else class="py-5">
-        <p class="font-bold text-sm text-gray-600 text-center">There are no notifications.</p>
+        <p class="font-bold text-sm text-gray-600 text-center">
+          {{ __('There are no notifications.') }}
+        </p>
       </div>
     </div>
   </div>

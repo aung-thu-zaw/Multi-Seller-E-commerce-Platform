@@ -21,9 +21,11 @@
       aria-labelledby="hs-dropdown-hover-event"
     >
       <div class="px-4 py-3 bg-gray-100 flex items-center justify-between border-b">
-        <span class="text-gray-700 font-semibold text-md"> Notifications </span>
+        <span class="text-gray-700 font-semibold text-md">
+          {{ __('Notifications') }}
+        </span>
         <button href="#" class="text-orange-600 hover:text-orange-500 text-sm font-bold">
-          Mark all us read
+          {{ __('Mark all as read') }}
         </button>
       </div>
       <!-- Notification Card -->
@@ -749,7 +751,7 @@
       <!-- No notification -->
       <!-- <div class="py-5">
         <p class="font-bold text-sm text-gray-600 text-center">
-          There are no notifications.
+               {{ __('There are no notifications.') }}
         </p>
       </div> -->
     </div>

@@ -14,10 +14,15 @@
     "If you want to write comments you need to login first. Here": "If you want to write comments you need to login first. Here",
     "Share": "Share",
     "Submit": "Submit",
-    "Reply":"Reply",
-    "comment":"comment",
-    "reply message":"reply message",
-    "Comment from user":"Comment from user",
-    "Reply from user":"Reply from user",
-    "Reply from author":"Reply from author"
+    "Reply": "Reply",
+    "comment": "comment",
+    "reply message": "reply message",
+    "Comment from user": "Comment from user",
+    "Reply from user": "Reply from user",
+    "Reply from author": "Reply from author",
+    "New blog comment from :label": "New blog comment from :label",
+    "Your blog comment has been replied to by :label": "Your blog comment has been replied to by :label",
+    "Notifications": "Notifications",
+    "Mark all as read": "Mark all as read",
+    "There are no notifications.": "There are no notifications."
 }

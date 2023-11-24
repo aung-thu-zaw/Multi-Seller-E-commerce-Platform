@@ -19,5 +19,10 @@
     "reply message": "အကြောင်းပြန်စာကို",
     "Comment from user": "အသုံးပြုသူထံမှမှတ်ချက်",
     "Reply from user": "အသုံးပြုသူထံမှ အကြောင်းပြန်ချက်",
-    "Reply from author": "စာရေးသူထံမှ အကြောင်းပြန်ချက်"
+    "Reply from author": "စာရေးသူထံမှ အကြောင်းပြန်ချက်",
+    "New blog comment from :label": ":label ဆီမှ ဘလော့ဂ်မှတ်ချက်အသစ်",
+    "Your blog comment has been replied to by :label": "သင့်ဘလော့ဂ်မှတ်ချက်ကို :label မှ စာပြန်ထားသည်။",
+    "Notifications": "အသိပေးချက်များ",
+    "Mark all as read": "အားလုံးကို ဖတ်ပြီးသားအဖြစ် မှတ်ရန်",
+    "There are no notifications.": "အကြောင်းကြားချက်များ မရှိပါ။"
 }
