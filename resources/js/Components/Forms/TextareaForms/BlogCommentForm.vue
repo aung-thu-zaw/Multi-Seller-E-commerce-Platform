@@ -36,7 +36,7 @@ const submitBlogComment = async () => {
           v-model="form.comment"
         />
 
-        <InputError :message="errors?.comment" />
+        <InputError :message="form.errors?.comment" />
       </div>
 
       <div class="border w-[150px] ml-auto">

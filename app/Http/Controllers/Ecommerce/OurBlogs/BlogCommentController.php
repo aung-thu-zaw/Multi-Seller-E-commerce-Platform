@@ -28,7 +28,9 @@ class BlogCommentController extends Controller
 
         $author = User::findOrFail($blogContent->author_id);
 
-        $author->notify(new NewBlogCommentFromUserNotification($blogComment));
+        $commenter = User::findOrFail($blogComment->user_id);
+
+        $author->notify(new NewBlogCommentFromUserNotification($blogContent, $blogComment, $commenter));
 
         return back();
     }

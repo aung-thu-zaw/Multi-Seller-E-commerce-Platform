@@ -1,5 +1,6 @@
 <script setup>
 import TextAreaField from "@/Components/Forms/Fields/TextAreaField.vue";
+import InputError from "@/Components/Forms/Fields/InputError.vue";
 import FormButton from "@/Components/Buttons/FormButton.vue";
 import { useForm } from "@inertiajs/vue3";
 import { useReCaptcha } from "vue-recaptcha-v3";
@@ -46,7 +47,7 @@ const submitBlogCommentReply = async () => {
           v-model="form.reply"
         />
 
-        <InputError :message="errors?.reply" />
+        <InputError :message="form.errors?.reply" />
       </div>
 
       <div class="border w-[100px] ml-auto">

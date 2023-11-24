@@ -30,12 +30,15 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $user = $request->user();
+
         return [
             'recaptcha_site_key' => config('services.google_recaptcha.site_key'),
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user(),
-                'permissions' => $request->user()?->permissions->pluck('name')->all() ?? [],
+                'user' => $user,
+                'permissions' => $user ? $user->permissions->pluck('name')->all() : [],
+                'notifications' => $user ? $user->notifications : [],
             ],
             'flash' => [
                 'success' => session('success'),

@@ -13,7 +13,6 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-
         // Super Admin
         $superAdmin = User::factory()->create([
             'avatar' => 'admin-1.jpg',
@@ -25,7 +24,9 @@ class UserSeeder extends Seeder
 
         $superAdmin->assignRole(1);
 
-        $role = Role::with('permissions')->where('id', 1)->first();
+        $role = Role::with('permissions')
+            ->where('id', 1)
+            ->first();
 
         $superAdmin->syncPermissions($role->permissions);
 
@@ -54,6 +55,6 @@ class UserSeeder extends Seeder
             'password' => 'Password!',
         ]);
 
-        User::factory(30)->create(["role"=>"user"]);
+        User::factory(30)->create(['role' => 'user']);
     }
 }

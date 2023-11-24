@@ -3,7 +3,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import BlogCategoryCard from "@/Components/Cards/Blogs/BlogCategoryCard.vue";
 import RelatedBlogCard from "@/Components/Cards/Blogs/RelatedBlogCard.vue";
 import BlogCommentSection from "@/Components/Sections/BlogCommentSection.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 
 defineProps({
   share: Object,
@@ -15,9 +15,9 @@ defineProps({
 </script>
 
 <template>
-  <AppLayout>
-    <Head :title="blogContent?.title" />
+  <Head :title="blogContent?.title" />
 
+  <AppLayout>
     <section id="blog-content" class="py-5">
       <div class="w-[1280px] mx-auto flex items-start">
         <div class="min-w-[300px] w-[300px] max-w-[300px]">

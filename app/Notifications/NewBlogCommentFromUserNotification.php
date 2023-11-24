@@ -3,19 +3,23 @@
 namespace App\Notifications;
 
 use App\Models\BlogComment;
+use App\Models\BlogContent;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewBlogCommentFromUserNotification extends Notification
+class NewBlogCommentFromUserNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(protected BlogComment $blogComment)
+    public function __construct(protected BlogContent $blogContent, protected BlogComment $blogComment, protected User $user)
     {
         //
     }
@@ -39,8 +43,9 @@ class NewBlogCommentFromUserNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'message' => 'Your blog received a new comment from a user.',
+            'blog' => $this->blogContent->slug,
             'comment' => $this->blogComment->comment,
+            'user' => $this->user->only("avatar", "name")
         ];
     }
 }
