@@ -14,9 +14,12 @@ class BlogController extends Controller
 {
     public function index(): Response|ResponseFactory
     {
-        $blogCategories = BlogCategory::where('status', 'show')->get();
+        $blogCategories = BlogCategory::select('id', 'name', 'slug', 'image')
+            ->where('status', 'show')
+            ->get();
 
         $blogContents = BlogContent::with('author:id,name')
+            ->select('id', 'author_id', 'thumbnail', 'title', 'slug', 'content', 'published_at')
             ->filter(request(['search_blog', 'blog_category', 'tag']))
             ->where('status', 'published')
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
@@ -28,7 +31,8 @@ class BlogController extends Controller
 
     public function show(BlogContent $blogContent): Response|ResponseFactory
     {
-        $share = (new Share())->currentPage("$blogContent->title")
+        $shares = (new Share())
+            ->currentPage("$blogContent->title")
             ->facebook()
             ->twitter()
             ->linkedIn()
@@ -37,11 +41,14 @@ class BlogController extends Controller
             ->whatsApp()
             ->getRawLinks();
 
-        $blogCategories = BlogCategory::where('status', 'show')->get();
+        $blogCategories = BlogCategory::select('id', 'name', 'slug', 'image')
+            ->where('status', 'show')
+            ->get();
 
-        $blogContent->load(['author:id,name', 'blogCategory:id,name', 'blogTags:id,name,slug']);
+        $blogContent->load(['author:id,name', 'blogCategory:id,name', 'blogTags:id,name']);
 
         $relatedBlogContents = BlogContent::with('author:id,name')
+            ->select('id', 'author_id', 'thumbnail', 'title', 'slug', 'published_at')
             ->where('blog_category_id', $blogContent->blog_category_id)
             ->where('slug', '!=', $blogContent->slug)
             ->limit(10)
@@ -52,12 +59,6 @@ class BlogController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(5);
 
-        return inertia('E-commerce/OurBlogs/Show', compact(
-            'share',
-            'blogCategories',
-            'blogContent',
-            'relatedBlogContents',
-            'blogComments'
-        ));
+        return inertia('E-commerce/OurBlogs/Show', compact('shares', 'blogCategories', 'blogContent', 'relatedBlogContents', 'blogComments'));
     }
 }

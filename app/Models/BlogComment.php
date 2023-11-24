@@ -17,16 +17,16 @@ class BlogComment extends Model
     use Searchable;
     use SoftDeletes;
 
-    /**
-     *     @return array<string>
-     */
-    #[SearchUsingFullText(['comment'])]
-    public function toSearchableArray(): array
-    {
-        return [
-            'comment' => $this->comment,
-        ];
-    }
+    // /**
+    //  *     @return array<string>
+    //  */
+    // #[SearchUsingFullText(['comment'])]
+    // public function toSearchableArray(): array
+    // {
+    //     return [
+    //         'comment' => $this->comment,
+    //     ];
+    // }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,BlogComment>

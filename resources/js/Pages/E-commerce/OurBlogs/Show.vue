@@ -6,7 +6,7 @@ import BlogCommentSection from '@/Components/Sections/BlogCommentSection.vue'
 import { Head, Link } from '@inertiajs/vue3'
 
 defineProps({
-  share: Object,
+  shares: Object,
   blogCategories: Object,
   blogContent: Object,
   relatedBlogContents: Object,
@@ -76,22 +76,22 @@ defineProps({
                 <i class="fa-solid fa-share-nodes"></i> Share :
               </span>
 
-              <a :href="share?.facebook" target="_blank">
+              <a :href="shares?.facebook" target="_blank">
                 <i class="fa-brands fa-facebook mr-3 text-lg text-blue-600"></i>
               </a>
-              <a :href="share?.twitter" target="_blank">
+              <a :href="shares?.twitter" target="_blank">
                 <i class="fa-brands fa-twitter mr-3 text-lg text-sky-600"></i>
               </a>
-              <a :href="share?.linkedin" target="_blank">
+              <a :href="shares?.linkedin" target="_blank">
                 <i class="fa-brands fa-linkedin mr-3 text-lg text-blue-800"></i>
               </a>
-              <a :href="share?.reddit" target="_blank">
+              <a :href="shares?.reddit" target="_blank">
                 <i class="fa-brands fa-reddit mr-3 text-lg text-orange-500"></i>
               </a>
-              <a :href="share?.telegram" target="_blank">
+              <a :href="shares?.telegram" target="_blank">
                 <i class="fa-brands fa-telegram mr-3 text-lg text-blue-500"></i>
               </a>
-              <a :href="share?.whatsapp" target="_blank">
+              <a :href="shares?.whatsapp" target="_blank">
                 <i class="fa-brands fa-whatsapp mr-3 text-lg text-emerald-600"></i>
               </a>
             </div>
