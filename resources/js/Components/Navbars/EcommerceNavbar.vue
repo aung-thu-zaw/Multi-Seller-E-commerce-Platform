@@ -1,21 +1,19 @@
 <script setup>
-import InertiaLinkButton from "@/Components/Buttons/InertiaLinkButton.vue";
-import NormalButton from "@/Components/Buttons/NormalButton.vue";
-import InputField from "@/Components/Forms/Fields/InputField.vue";
-import InputLabel from "@/Components/Forms/Fields/InputLabel.vue";
-import English from "@/assets/images/united-state.png";
-import Myanmar from "@/assets/images/myanmar.png";
-import UserDropdown from "@/Components/Dropdowns/UserDropdown.vue";
-import NotificationDropdownForUser from "@/Components/Dropdowns/NotificationDropdownForUser.vue";
-import { Link } from "@inertiajs/vue3";
+import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
+import NormalButton from '@/Components/Buttons/NormalButton.vue'
+import InputField from '@/Components/Forms/Fields/InputField.vue'
+import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
+import English from '@/assets/images/united-state.png'
+import Myanmar from '@/assets/images/myanmar.png'
+import UserDropdown from '@/Components/Dropdowns/UserDropdown.vue'
+import NotificationDropdownForUser from '@/Components/Dropdowns/NotificationDropdownForUser.vue'
+import { Link } from '@inertiajs/vue3'
 </script>
 
 <template>
   <!-- Navbar -->
   <nav class="sticky top-0 z-50">
-    <div
-      class="bg-orange-600 text-white px-6 py-3 flex items-center justify-between"
-    >
+    <div class="bg-orange-600 text-white px-6 py-3 flex items-center justify-between">
       <div>
         <h4 class="font-bold text-md">E-commerce Platform</h4>
       </div>
@@ -148,14 +146,9 @@ import { Link } from "@inertiajs/vue3";
 
     <!-- Middle Navbar -->
     <div class="bg-white">
-      <div
-        class="w-[1280px] mx-auto px-10 py-4 flex items-center justify-between"
-      >
+      <div class="w-[1280px] mx-auto px-10 py-4 flex items-center justify-between">
         <!-- Brand -->
-        <a
-          href="#"
-          class="text-xl text-slate-600 font-bold w-auto max-w-[350px]"
-        >
+        <a href="#" class="text-xl text-slate-600 font-bold w-auto max-w-[350px]">
           E-commerce Platform
         </a>
         <!-- Search -->
@@ -163,9 +156,7 @@ import { Link } from "@inertiajs/vue3";
           <div class="min-w-[600px]">
             <form class="flex items-center">
               <div class="relative w-full mr-2">
-                <div
-                  class="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none"
-                >
+                <div class="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none">
                   <svg
                     class="w-4 h-4 text-gray-500"
                     aria-hidden="true"
@@ -326,9 +317,7 @@ import { Link } from "@inertiajs/vue3";
     </div>
 
     <!-- Category Navbar -->
-    <div
-      class="bg-gray-200 text-gray-800 px-6 py-3 flex items-center justify-between"
-    >
+    <div class="bg-gray-200 text-gray-800 px-6 py-3 flex items-center justify-between">
       <div class="w-[1280px] mx-auto px-4 text-sm">
         <ul class="flex items-center space-x-6">
           <!-- Shop by categories -->
@@ -499,10 +488,7 @@ import { Link } from "@inertiajs/vue3";
 
           <!-- Our seller shops -->
           <li>
-            <a
-              href="#"
-              class="flex items-center text-gray-700 hover:text-gray-500 font-semibold"
-            >
+            <a href="#" class="flex items-center text-gray-700 hover:text-gray-500 font-semibold">
               <i class="fa-solid fa-shop mr-1 text-xs"></i>
               Our Seller Shops
             </a>
@@ -515,13 +501,11 @@ import { Link } from "@inertiajs/vue3";
               :data="{
                 view: 'grid',
                 sort: 'id',
-                direction: 'desc',
+                direction: 'desc'
               }"
               class="flex items-center text-gray-700 hover:text-gray-500 font-semibold"
               :class="{
-                'text-orange-600': $page.component.startsWith(
-                  'E-commerce/OurBlogs'
-                ),
+                'text-orange-600': $page.component.startsWith('E-commerce/OurBlogs')
               }"
             >
               <i class="fa-solid fa-newspaper mr-1 text-xs"></i>

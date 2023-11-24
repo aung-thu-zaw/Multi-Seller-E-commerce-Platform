@@ -1,19 +1,17 @@
 <script setup>
-import InertiaLinkButton from "@/Components/Buttons/InertiaLinkButton.vue";
-import NormalButton from "@/Components/Buttons/NormalButton.vue";
-import InputField from "@/Components/Forms/Fields/InputField.vue";
-import InputLabel from "@/Components/Forms/Fields/InputLabel.vue";
-import BrandCarousel from "@/Components/Carousels/BrandCarousel.vue";
-import English from "@/assets/images/united-state.png";
-import Myanmar from "@/assets/images/myanmar.png";
-import { Link } from "@inertiajs/vue3";
+import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
+import NormalButton from '@/Components/Buttons/NormalButton.vue'
+import InputField from '@/Components/Forms/Fields/InputField.vue'
+import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
+import BrandCarousel from '@/Components/Carousels/BrandCarousel.vue'
+import English from '@/assets/images/united-state.png'
+import Myanmar from '@/assets/images/myanmar.png'
+import { Link } from '@inertiajs/vue3'
 </script>
 
 <template>
   <section id="newsletter" class="bg-gray-200 px-5 py-2">
-    <div
-      class="container max-w-screen-xl mx-auto rounded-md p-2 flex items-center justify-between"
-    >
+    <div class="container max-w-screen-xl mx-auto rounded-md p-2 flex items-center justify-between">
       <!-- Newsletter -->
       <div class="flex items-center">
         <div class="flex items-center mr-10">
@@ -23,9 +21,9 @@ import { Link } from "@inertiajs/vue3";
             <i class="fa fa-envelope fa-lg text-orange-600"></i>
           </div>
           <div>
-            <p class="font-semibold text-lg">{{ __("Subscribe") }}</p>
+            <p class="font-semibold text-lg">{{ __('Subscribe') }}</p>
             <p class="text-xs font-medium text-gray-600">
-              {{ __("Get notified on offers") }}
+              {{ __('Get notified on offers') }}
             </p>
           </div>
         </div>

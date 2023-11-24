@@ -1,17 +1,17 @@
 <script setup>
-import AppLayout from "@/Layouts/AppLayout.vue";
-import BlogCategoryCard from "@/Components/Cards/Blogs/BlogCategoryCard.vue";
-import RelatedBlogCard from "@/Components/Cards/Blogs/RelatedBlogCard.vue";
-import BlogCommentSection from "@/Components/Sections/BlogCommentSection.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import AppLayout from '@/Layouts/AppLayout.vue'
+import BlogCategoryCard from '@/Components/Cards/Blogs/BlogCategoryCard.vue'
+import RelatedBlogCard from '@/Components/Cards/Blogs/RelatedBlogCard.vue'
+import BlogCommentSection from '@/Components/Sections/BlogCommentSection.vue'
+import { Head, Link } from '@inertiajs/vue3'
 
 defineProps({
   share: Object,
   blogCategories: Object,
   blogContent: Object,
   relatedBlogContents: Object,
-  blogComments: Object,
-});
+  blogComments: Object
+})
 </script>
 
 <template>
@@ -31,9 +31,7 @@ defineProps({
           </div>
 
           <div class="border border-b-0 border-gray-300 rounded-sm">
-            <h1
-              class="text-lg font-bold text-gray-700 text-center py-3 border-b border-gray-300"
-            >
+            <h1 class="text-lg font-bold text-gray-700 text-center py-3 border-b border-gray-300">
               Related Blogs
             </h1>
 
@@ -48,10 +46,7 @@ defineProps({
 
         <div class="w-full py-5 pl-5">
           <div class="border border-gray-300 shadow-lg rounded-md p-2">
-            <img
-              :src="blogContent.thumbnail"
-              class="w-full max-h-[600px] object-cover"
-            />
+            <img :src="blogContent.thumbnail" class="w-full max-h-[600px] object-cover" />
           </div>
 
           <h1 class="font-bold text-xl text-gray-700 mt-8 mb-2">
@@ -60,9 +55,7 @@ defineProps({
 
           <div class="flex items-center justify-between mb-3">
             <div class="flex items-center space-x-4">
-              <span
-                class="text-xs font-bold bg-orange-500 text-white py-1 px-3 rounded-sm shadow"
-              >
+              <span class="text-xs font-bold bg-orange-500 text-white py-1 px-3 rounded-sm shadow">
                 {{ blogContent.blog_category?.name }}
               </span>
 
@@ -99,9 +92,7 @@ defineProps({
                 <i class="fa-brands fa-telegram mr-3 text-lg text-blue-500"></i>
               </a>
               <a :href="share?.whatsapp" target="_blank">
-                <i
-                  class="fa-brands fa-whatsapp mr-3 text-lg text-emerald-600"
-                ></i>
+                <i class="fa-brands fa-whatsapp mr-3 text-lg text-emerald-600"></i>
               </a>
             </div>
             <!-- Share Blog Social Icons End -->
@@ -110,19 +101,11 @@ defineProps({
           <hr class="my-3" />
 
           <!-- Blog Description -->
-          <p
-            v-html="blogContent.content"
-            class="text-sm font-medium text-slate-600 mb-5"
-          ></p>
+          <p v-html="blogContent.content" class="text-sm font-medium text-slate-600 mb-5"></p>
 
           <!-- Blog Tags Start -->
-          <div
-            v-show="blogContent?.blog_tags.length"
-            class="flex items-center mb-5"
-          >
-            <span class="font-bold text-gray-600 mr-3"
-              >{{ __("Blog Tags") }} :</span
-            >
+          <div v-show="blogContent?.blog_tags.length" class="flex items-center mb-5">
+            <span class="font-bold text-gray-600 mr-3">{{ __('Blog Tags') }} :</span>
             <div class="flex items-center space-x-2">
               <Link
                 v-for="tag in blogContent.blog_tags"
@@ -133,7 +116,7 @@ defineProps({
                   sort: $page.props.ziggy.query.sort ?? 'id',
                   direction: $page.props.ziggy.query.direction ?? 'desc',
                   view: $page.props.ziggy.query.view ?? 'grid',
-                  tag: tag.name,
+                  tag: tag.name
                 }"
                 class="px-3 py-1 bg-orange-600 rounded-full text-white text-xs capitalize font-bold hover:bg-orange-700 transition-all"
               >
@@ -144,10 +127,7 @@ defineProps({
           <!-- Blog Tags End -->
 
           <!-- Blog Comments Section -->
-          <BlogCommentSection
-            :blogContent="blogContent"
-            :blogComments="blogComments"
-          />
+          <BlogCommentSection :blogContent="blogContent" :blogComments="blogComments" />
         </div>
       </div>
     </section>

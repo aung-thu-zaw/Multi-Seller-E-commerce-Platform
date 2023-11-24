@@ -1,47 +1,47 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
-import { computed } from "vue";
+import { Link } from '@inertiajs/vue3'
+import { computed } from 'vue'
 
 const props = defineProps({
   to: String,
 
   class: {
     type: String,
-    default: "text-white bg-blue-600 ring-2 ring-blue-300 hover:bg-blue-700",
+    default: 'text-white bg-blue-600 ring-2 ring-blue-300 hover:bg-blue-700'
   },
 
   method: {
     type: String,
-    default: "get",
+    default: 'get'
   },
 
   targetIdentifier: {
     type: [String, Number, Object],
-    default: null,
+    default: null
   },
 
   data: {
     type: Object,
-    default: {},
+    default: {}
   },
 
   preserveState: {
     type: Boolean,
-    default: false,
+    default: false
   },
 
   preserveScroll: {
     type: Boolean,
-    default: false,
+    default: false
   },
 
   replace: {
     type: Boolean,
-    default: false,
-  },
-});
+    default: false
+  }
+})
 
-const computedClasses = computed(() => props.class);
+const computedClasses = computed(() => props.class)
 </script>
 
 <template>

@@ -1,10 +1,10 @@
 <script setup>
-import BlogReplyForm from "@/Components/Forms/TextareaForms/BlogCommentReplyForm.vue";
-import { ref } from "vue";
+import BlogReplyForm from '@/Components/Forms/TextareaForms/BlogCommentReplyForm.vue'
+import { ref } from 'vue'
 
-defineProps({ blogContent: Object, blogComment: Object });
+defineProps({ blogContent: Object, blogComment: Object })
 
-const isReplyBoxOpened = ref(false);
+const isReplyBoxOpened = ref(false)
 </script>
 
 <template>
@@ -19,9 +19,7 @@ const isReplyBoxOpened = ref(false);
 
         <div class="flex flex-col items-start">
           <h3 class="font-bold text-gray-600">{{ blogComment.user?.name }}</h3>
-          <span class="text-xs font-medium text-gray-400">
-            Comment from user
-          </span>
+          <span class="text-xs font-medium text-gray-400"> Comment from user </span>
         </div>
       </div>
 

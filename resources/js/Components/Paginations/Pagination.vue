@@ -1,8 +1,8 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link } from '@inertiajs/vue3'
 defineProps({
-  links: Array,
-});
+  links: Array
+})
 </script>
 
 <template>
@@ -39,6 +39,3 @@ defineProps({
     </div>
   </div>
 </template>
-
-
-

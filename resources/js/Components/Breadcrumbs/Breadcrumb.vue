@@ -1,22 +1,22 @@
 <script setup>
-import { useQueryStringParams } from "@/Composables/useQueryStringParams";
-import { Link } from "@inertiajs/vue3";
+import { useQueryStringParams } from '@/Composables/useQueryStringParams'
+import { Link } from '@inertiajs/vue3'
 
 defineProps({
   to: String,
 
   label: {
     type: String,
-    required: true,
+    required: true
   },
 
   icon: {
     type: String,
-    default: "fa-home",
-  },
-});
+    default: 'fa-home'
+  }
+})
 
-const { queryStringParams } = useQueryStringParams();
+const { queryStringParams } = useQueryStringParams()
 </script>
 
 <template>

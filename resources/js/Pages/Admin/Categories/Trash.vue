@@ -1,45 +1,45 @@
 <script setup>
-import AdminDashboardLayout from "@/Layouts/AdminDashboardLayout.vue";
-import Breadcrumb from "@/Components/Breadcrumbs/Breadcrumb.vue";
-import BreadcrumbLinkItem from "@/Components/Breadcrumbs/BreadcrumbLinkItem.vue";
-import BreadcrumbItem from "@/Components/Breadcrumbs/BreadcrumbItem.vue";
-import TableContainer from "@/Components/Tables/TableContainer.vue";
-import ActionTable from "@/Components/Tables/ActionTable.vue";
-import DashboardTableDataSearchBox from "@/Components/Forms/SearchBoxs/DashboardTableDataSearchBox.vue";
-import DashboardTableDataPerPageSelectBox from "@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue";
-import DashboardTableFilter from "@/Components/Forms/SelectBoxs/DashboardTableFilter.vue";
-import FilteredBy from "@/Components/Tables/FilteredBy.vue";
-import SortableTableHeaderCell from "@/Components/Tables/TableCells/SortableTableHeaderCell.vue";
-import TableHeaderCell from "@/Components/Tables/TableCells/TableHeaderCell.vue";
-import TableDataCell from "@/Components/Tables/TableCells/TableDataCell.vue";
-import TableActionCell from "@/Components/Tables/TableCells/TableActionCell.vue";
-import ImageCell from "@/Components/Tables/TableCells/TableImageCell.vue";
-import NoTableData from "@/Components/Tables/NoTableData.vue";
-import BulkActionButton from "@/Components/Buttons/BulkActionButton.vue";
-import InertiaLinkButton from "@/Components/Buttons/InertiaLinkButton.vue";
-import NormalButton from "@/Components/Buttons/NormalButton.vue";
-import EmptyTrashButton from "@/Components/Buttons/EmptyTrashButton.vue";
-import Pagination from "@/Components/Paginations/DashboardPagination.vue";
-import { Head } from "@inertiajs/vue3";
-import { __ } from "@/Services/translations-inside-setup.js";
-import { useQueryStringParams } from "@/Composables/useQueryStringParams";
-import { useResourceActions } from "@/Composables/useResourceActions";
+import AdminDashboardLayout from '@/Layouts/AdminDashboardLayout.vue'
+import Breadcrumb from '@/Components/Breadcrumbs/Breadcrumb.vue'
+import BreadcrumbLinkItem from '@/Components/Breadcrumbs/BreadcrumbLinkItem.vue'
+import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
+import TableContainer from '@/Components/Tables/TableContainer.vue'
+import ActionTable from '@/Components/Tables/ActionTable.vue'
+import DashboardTableDataSearchBox from '@/Components/Forms/SearchBoxs/DashboardTableDataSearchBox.vue'
+import DashboardTableDataPerPageSelectBox from '@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue'
+import DashboardTableFilter from '@/Components/Forms/SelectBoxs/DashboardTableFilter.vue'
+import FilteredBy from '@/Components/Tables/FilteredBy.vue'
+import SortableTableHeaderCell from '@/Components/Tables/TableCells/SortableTableHeaderCell.vue'
+import TableHeaderCell from '@/Components/Tables/TableCells/TableHeaderCell.vue'
+import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
+import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
+import ImageCell from '@/Components/Tables/TableCells/TableImageCell.vue'
+import NoTableData from '@/Components/Tables/NoTableData.vue'
+import BulkActionButton from '@/Components/Buttons/BulkActionButton.vue'
+import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
+import NormalButton from '@/Components/Buttons/NormalButton.vue'
+import EmptyTrashButton from '@/Components/Buttons/EmptyTrashButton.vue'
+import Pagination from '@/Components/Paginations/DashboardPagination.vue'
+import { Head } from '@inertiajs/vue3'
+import { __ } from '@/Services/translations-inside-setup.js'
+import { useQueryStringParams } from '@/Composables/useQueryStringParams'
+import { useResourceActions } from '@/Composables/useResourceActions'
 
-defineProps({ trashedCategories: Object });
+defineProps({ trashedCategories: Object })
 
-const categoryList = "admin.categories.index";
+const categoryList = 'admin.categories.index'
 
-const trashedCategoryList = "admin.categories.trashed";
+const trashedCategoryList = 'admin.categories.trashed'
 
-const { queryStringParams } = useQueryStringParams();
+const { queryStringParams } = useQueryStringParams()
 
 const {
   restoreAction,
   restoreSelectedAction,
   permanentDeleteAction,
   permanentDeleteSelectedAction,
-  permanentDeleteAllAction,
-} = useResourceActions();
+  permanentDeleteAllAction
+} = useResourceActions()
 </script>
 
 <template>
@@ -62,36 +62,28 @@ const {
               page: 1,
               per_page: 5,
               sort: 'id',
-              direction: 'desc',
+              direction: 'desc'
             }"
           >
             <i class="fa-solid fa-left-long"></i>
-            {{ __("Go To List") }}
+            {{ __('Go To List') }}
           </InertiaLinkButton>
         </div>
       </div>
 
       <!-- Message -->
       <div
-        v-if="
-          can('categories.force.delete') && trashedCategories.data.length !== 0
-        "
+        v-if="can('categories.force.delete') && trashedCategories.data.length !== 0"
         class="text-left text-sm font-bold mb-5 text-warning-600"
       >
         {{
-          __(
-            ":label in the trash will be automatically deleted after 60 days",
-            { label: __("Categories") }
-          )
+          __(':label in the trash will be automatically deleted after 60 days', {
+            label: __('Categories')
+          })
         }}
 
         <EmptyTrashButton
-          @click="
-            permanentDeleteAllAction(
-              'Category',
-              'admin.categories.force-delete.all'
-            )
-          "
+          @click="permanentDeleteAllAction('Category', 'admin.categories.force-delete.all')"
         />
       </div>
 
@@ -108,10 +100,7 @@ const {
           <div class="flex items-center justify-end w-full md:space-x-5">
             <DashboardTableDataPerPageSelectBox :to="trashedCategoryList" />
 
-            <DashboardTableFilter
-              :to="trashedCategoryList"
-              :filterBy="['deleted']"
-            />
+            <DashboardTableFilter :to="trashedCategoryList" :filterBy="['deleted']" />
           </div>
         </div>
 
@@ -133,7 +122,7 @@ const {
                 "
               >
                 <i class="fa-solid fa-recycle"></i>
-                {{ __("Restore Selected") }} ({{ selectedItems.length }})
+                {{ __('Restore Selected') }} ({{ selectedItems.length }})
               </BulkActionButton>
 
               <BulkActionButton
@@ -148,25 +137,17 @@ const {
                 class="text-red-600"
               >
                 <i class="fa-solid fa-trash-can"></i>
-                {{ __("Delete Selected") }} ({{ selectedItems.length }})
+                {{ __('Delete Selected') }} ({{ selectedItems.length }})
               </BulkActionButton>
             </template>
 
             <!-- Table Header -->
             <template #table-header>
-              <SortableTableHeaderCell
-                label="# No"
-                :to="trashedCategoryList"
-                sort="id"
-              />
+              <SortableTableHeaderCell label="# No" :to="trashedCategoryList" sort="id" />
 
               <TableHeaderCell label="Image" />
 
-              <SortableTableHeaderCell
-                label="Name"
-                :to="trashedCategoryList"
-                sort="name"
-              />
+              <SortableTableHeaderCell label="Name" :to="trashedCategoryList" sort="name" />
 
               <TableHeaderCell label="Actions" />
             </template>
@@ -186,31 +167,21 @@ const {
               <TableActionCell>
                 <NormalButton
                   v-show="can('categories.restore')"
-                  @click="
-                    restoreAction(
-                      'Category',
-                      'admin.categories.restore',
-                      item?.id
-                    )
-                  "
+                  @click="restoreAction('Category', 'admin.categories.restore', item?.id)"
                 >
                   <i class="fa-solid fa-recycle"></i>
-                  {{ __("Restore") }}
+                  {{ __('Restore') }}
                 </NormalButton>
 
                 <NormalButton
                   v-show="can('categories.force.delete')"
                   @click="
-                    permanentDeleteAction(
-                      'Category',
-                      'admin.categories.force-delete',
-                      item?.id
-                    )
+                    permanentDeleteAction('Category', 'admin.categories.force-delete', item?.id)
                   "
                   class="bg-red-600 text-white ring-2 ring-red-300"
                 >
                   <i class="fa-solid fa-trash-can"></i>
-                  {{ __("Delete Forever") }}
+                  {{ __('Delete Forever') }}
                 </NormalButton>
               </TableActionCell>
             </template>
@@ -225,5 +196,3 @@ const {
     </div>
   </AdminDashboardLayout>
 </template>
-
-

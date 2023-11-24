@@ -1,15 +1,15 @@
 <script setup>
-import AppLayout from "@/Layouts/AppLayout.vue";
-import EcommerceHeader from "@/Components/Headers/EcommerceHeader.vue";
-import CampaignBannerSection from "@/Components/Sections/CampaignBannerSection.vue";
-import ProductBannerSection from "@/Components/Sections/ProductBannerSection.vue";
-import FlashSaleSection from "@/Components/Sections/FlashSaleSection.vue";
-import CollectionSection from "@/Components/Sections/CollectionSection.vue";
-import OurBrandSection from "@/Components/Sections/OurBrandSection.vue";
-import ProductForYouSection from "@/Components/Sections/ProductForYouSection.vue";
-import NewsletterSection from "@/Components/Sections/NewsletterSection.vue";
-import WhyChooseUsSection from "@/Components/Sections/WhyChooseUsSection.vue";
-import { Head } from "@inertiajs/vue3";
+import AppLayout from '@/Layouts/AppLayout.vue'
+import EcommerceHeader from '@/Components/Headers/EcommerceHeader.vue'
+import CampaignBannerSection from '@/Components/Sections/CampaignBannerSection.vue'
+import ProductBannerSection from '@/Components/Sections/ProductBannerSection.vue'
+import FlashSaleSection from '@/Components/Sections/FlashSaleSection.vue'
+import CollectionSection from '@/Components/Sections/CollectionSection.vue'
+import OurBrandSection from '@/Components/Sections/OurBrandSection.vue'
+import ProductForYouSection from '@/Components/Sections/ProductForYouSection.vue'
+import NewsletterSection from '@/Components/Sections/NewsletterSection.vue'
+import WhyChooseUsSection from '@/Components/Sections/WhyChooseUsSection.vue'
+import { Head } from '@inertiajs/vue3'
 </script>
 
 <template>
@@ -35,8 +35,6 @@ import { Head } from "@inertiajs/vue3";
     <WhyChooseUsSection />
   </AppLayout>
 </template>
-
-
 
 <style>
 .badge-gradient {

@@ -1,12 +1,12 @@
 <script setup>
-import InertiaLinkButton from "@/Components/Buttons/InertiaLinkButton.vue";
-import NormalButton from "@/Components/Buttons/NormalButton.vue";
-import InputField from "@/Components/Forms/Fields/InputField.vue";
-import InputLabel from "@/Components/Forms/Fields/InputLabel.vue";
-import BrandCarousel from "@/Components/Carousels/BrandCarousel.vue";
-import English from "@/assets/images/united-state.png";
-import Myanmar from "@/assets/images/myanmar.png";
-import { Link } from "@inertiajs/vue3";
+import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
+import NormalButton from '@/Components/Buttons/NormalButton.vue'
+import InputField from '@/Components/Forms/Fields/InputField.vue'
+import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
+import BrandCarousel from '@/Components/Carousels/BrandCarousel.vue'
+import English from '@/assets/images/united-state.png'
+import Myanmar from '@/assets/images/myanmar.png'
+import { Link } from '@inertiajs/vue3'
 </script>
 
 <template>
@@ -16,19 +16,14 @@ import { Link } from "@inertiajs/vue3";
       <!-- Grid -->
       <div class="grid grid-cols-4 gap-6">
         <div class="col-span-1 text-center">
-          <a
-            class="flex-none text-xl font-semibold text-white"
-            href="#"
-            aria-label="Brand"
-          >
+          <a class="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">
             E-commerce Platform
           </a>
 
           <p class="inline-flex text-xs text-white">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum
-            cupiditate, repellat, vero nobis laboriosam labore unde nisi quo
-            possimus commodi culpa perferendis dolores impedit minima ipsam!
-            Maiores modi perferendis voluptatum!
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum cupiditate,
+            repellat, vero nobis laboriosam labore unde nisi quo possimus commodi culpa perferendis
+            dolores impedit minima ipsam! Maiores modi perferendis voluptatum!
           </p>
         </div>
         <!-- End Col -->
@@ -38,25 +33,13 @@ import { Link } from "@inertiajs/vue3";
 
           <div class="mt-3 grid space-y-3">
             <p>
-              <a
-                class="inline-flex gap-x-2 text-white hover:text-gray-300"
-                href="#"
-                >Join us</a
-              >
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">Join us</a>
             </p>
             <p>
-              <a
-                class="inline-flex gap-x-2 text-white hover:text-gray-300"
-                href="#"
-                >Find Store</a
-              >
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">Find Store</a>
             </p>
             <p>
-              <a
-                class="inline-flex gap-x-2 text-white hover:text-gray-300"
-                href="#"
-                >Partnership</a
-              >
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">Partnership</a>
             </p>
           </div>
         </div>
@@ -67,30 +50,20 @@ import { Link } from "@inertiajs/vue3";
 
           <div class="mt-3 grid space-y-3">
             <p>
-              <a
-                class="inline-flex gap-x-2 text-white hover:text-gray-300"
-                href="#"
-                >About us</a
-              >
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">About us</a>
             </p>
             <p>
-              <a
-                class="inline-flex gap-x-2 text-white hover:text-gray-300"
-                href="#"
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#"
                 >Terms & Conditions</a
               >
             </p>
             <p>
-              <a
-                class="inline-flex gap-x-2 text-white hover:text-gray-300"
-                href="#"
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#"
                 >Privacy & Policy</a
               >
             </p>
             <p>
-              <a
-                class="inline-flex gap-x-2 text-white hover:text-gray-300"
-                href="#"
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#"
                 >Support Center</a
               >
             </p>
@@ -103,32 +76,18 @@ import { Link } from "@inertiajs/vue3";
 
           <div class="mt-3 grid space-y-3">
             <p>
-              <a
-                class="inline-flex gap-x-2 text-white hover:text-gray-300"
-                href="#"
-                >Help Center</a
-              >
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">Help Center</a>
             </p>
             <p>
-              <a
-                class="inline-flex gap-x-2 text-white hover:text-gray-300"
-                href="#"
-                >Contact Us</a
-              >
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">Contact Us</a>
             </p>
             <p>
-              <a
-                class="inline-flex gap-x-2 text-white hover:text-gray-300"
-                href="#"
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#"
                 >Returns & Refunds</a
               >
             </p>
             <p>
-              <a
-                class="inline-flex gap-x-2 text-white hover:text-gray-300"
-                href="#"
-                >FAQs</a
-              >
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">FAQs</a>
             </p>
           </div>
         </div>
@@ -138,9 +97,7 @@ import { Link } from "@inertiajs/vue3";
 
       <div class="mt-5 flex items-center justify-between">
         <div class="flex justify-between items-center">
-          <p class="text-sm text-white">
-            © 2023 E-commerce Platform. All rights reserved.
-          </p>
+          <p class="text-sm text-white">© 2023 E-commerce Platform. All rights reserved.</p>
         </div>
         <!-- Social Brands -->
         <div>

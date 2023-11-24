@@ -1,49 +1,47 @@
 <script setup>
-import Checkbox from "@/Components/Forms/Fields/Checkbox.vue";
-import { ref, watch, computed } from "vue";
-import { useStore } from "vuex";
+import Checkbox from '@/Components/Forms/Fields/Checkbox.vue'
+import { ref, watch, computed } from 'vue'
+import { useStore } from 'vuex'
 
 const props = defineProps({
   items: {
     type: Array,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 
-const store = useStore();
+const store = useStore()
 
-const selectedItems = ref(store.getters.getSelectedItems || []);
+const selectedItems = ref(store.getters.getSelectedItems || [])
 
 const isSelectedAll = computed(() => {
-  const selectedIds = new Set(selectedItems.value);
-  return props.items.every((item) => selectedIds.has(item.id));
-});
+  const selectedIds = new Set(selectedItems.value)
+  return props.items.every((item) => selectedIds.has(item.id))
+})
 
 watch(
   () => selectedItems.value,
   () => {
-    isSelectedAll.value = selectedItems.value.length === props.items.length;
-    store.dispatch("setSelectedItems", selectedItems.value);
+    isSelectedAll.value = selectedItems.value.length === props.items.length
+    store.dispatch('setSelectedItems', selectedItems.value)
   }
-);
+)
 
 const selectAllItems = () => {
   if (isSelectedAll.value) {
     selectedItems.value = selectedItems.value.filter(
       (selectedId) => !props.items.some((item) => item.id === selectedId)
-    );
+    )
   } else {
-    const existingSelectedIds = selectedItems.value;
-    const newSelectedIds = props.items.map((item) => item.id);
-    selectedItems.value = [
-      ...new Set([...existingSelectedIds, ...newSelectedIds]),
-    ];
+    const existingSelectedIds = selectedItems.value
+    const newSelectedIds = props.items.map((item) => item.id)
+    selectedItems.value = [...new Set([...existingSelectedIds, ...newSelectedIds])]
   }
-};
+}
 
 const deselectAll = () => {
-  selectedItems.value = [];
-};
+  selectedItems.value = []
+}
 </script>
 
 <template>
@@ -53,7 +51,7 @@ const deselectAll = () => {
   >
     <div class="flex items-center space-x-1">
       <span class="font-semibold text-slate-700">
-        {{ __(":label Records Selected", { label: selectedItems.length }) }}
+        {{ __(':label Records Selected', { label: selectedItems.length }) }}
       </span>
 
       <div class="hs-dropdown relative inline-flex">
@@ -90,7 +88,7 @@ const deselectAll = () => {
         @click="deselectAll"
         class="text-red-600 cursor-pointer hover:bg-red-200 px-2 py-1.5 rounded-md"
       >
-        {{ __("Deselect All") }}
+        {{ __('Deselect All') }}
       </button>
     </div>
   </div>
@@ -109,7 +107,7 @@ const deselectAll = () => {
         v-for="(item, index) in items"
         :key="item.id"
         :class="{
-          'border-b': index !== items.length - 1,
+          'border-b': index !== items.length - 1
         }"
       >
         <td class="pl-4">

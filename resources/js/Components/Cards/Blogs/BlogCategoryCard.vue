@@ -1,7 +1,7 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link } from '@inertiajs/vue3'
 
-defineProps({ category: Object });
+defineProps({ category: Object })
 </script>
 
 <template>
@@ -14,12 +14,11 @@ defineProps({ category: Object });
       sort: $page.props.ziggy.query.sort ?? 'id',
       direction: $page.props.ziggy.query.direction ?? 'desc',
       tag: $page.props.ziggy.query?.tag,
-      view: $page.props.ziggy.query.view ?? 'grid',
+      view: $page.props.ziggy.query.view ?? 'grid'
     }"
     class="border border-gray-300 flex items-center px-3 py-3 rounded-md hover:bg-gray-100 text-gray-600 hover:scale-105 transition-all w-full"
     :class="{
-      'text-orange-600':
-        $page.props.ziggy.query?.blog_category === category?.slug,
+      'text-orange-600': $page.props.ziggy.query?.blog_category === category?.slug
     }"
   >
     <img

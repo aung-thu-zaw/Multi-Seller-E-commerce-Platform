@@ -2,13 +2,13 @@
 defineProps({
   label: {
     type: String,
-    default: "Label Name",
+    default: 'Label Name'
   },
   required: {
     type: Boolean,
-    default: false,
-  },
-});
+    default: false
+  }
+})
 </script>
 
 <template>

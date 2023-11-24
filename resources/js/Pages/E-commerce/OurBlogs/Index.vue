@@ -1,15 +1,15 @@
 <script setup>
-import AppLayout from "@/Layouts/AppLayout.vue";
-import BlogSearchBox from "@/Components/Forms/SearchBoxs/BlogSearchBox.vue";
-import BlogSortingSelectBox from "@/Components/Forms/SelectBoxs/BlogSortingSelectBox.vue";
-import BlogGridCard from "@/Components/Cards/Blogs/BlogGridCard.vue";
-import BlogListCard from "@/Components/Cards/Blogs/BlogListCard.vue";
-import BlogCategoryCard from "@/Components/Cards/Blogs/BlogCategoryCard.vue";
-import Pagination from "@/Components/Paginations/Pagination.vue";
-import { Head, Link, usePage } from "@inertiajs/vue3";
-import { computed } from "vue";
+import AppLayout from '@/Layouts/AppLayout.vue'
+import BlogSearchBox from '@/Components/Forms/SearchBoxs/BlogSearchBox.vue'
+import BlogSortingSelectBox from '@/Components/Forms/SelectBoxs/BlogSortingSelectBox.vue'
+import BlogGridCard from '@/Components/Cards/Blogs/BlogGridCard.vue'
+import BlogListCard from '@/Components/Cards/Blogs/BlogListCard.vue'
+import BlogCategoryCard from '@/Components/Cards/Blogs/BlogCategoryCard.vue'
+import Pagination from '@/Components/Paginations/Pagination.vue'
+import { Head, Link, usePage } from '@inertiajs/vue3'
+import { computed } from 'vue'
 
-defineProps({ blogCategories: Object, blogContents: Object });
+defineProps({ blogCategories: Object, blogContents: Object })
 
 const params = computed(() => {
   return {
@@ -19,9 +19,9 @@ const params = computed(() => {
     page: usePage().props.ziggy.query?.page,
     blog_category: usePage().props.ziggy.query?.blog_category,
     tag: usePage().props.ziggy.query?.tag,
-    view: usePage().props.ziggy.query?.view,
-  };
-});
+    view: usePage().props.ziggy.query?.view
+  }
+})
 </script>
 
 <template>
@@ -40,18 +40,14 @@ const params = computed(() => {
         </div>
 
         <div class="w-full py-5 pl-5">
-          <div
-            class="py-2 mb-3 flex items-center justify-between border-t border-b"
-          >
+          <div class="py-2 mb-3 flex items-center justify-between border-t border-b">
             <BlogSearchBox />
 
             <div class="flex items-center space-x-5">
               <BlogSortingSelectBox />
 
               <div class="">
-                <label for="view" class="font-bold text-sm text-gray-600">
-                  View :
-                </label>
+                <label for="view" class="font-bold text-sm text-gray-600"> View : </label>
 
                 <Link
                   as="button"
@@ -63,12 +59,12 @@ const params = computed(() => {
                     direction: params.direction,
                     page: params.page,
                     tag: params.tag,
-                    view: 'grid',
+                    view: 'grid'
                   }"
                   class="px-2 py-1 rounded-md cursor-pointer bg-gray-200 text-gray-600 hover:bg-gray-300 transition-none mr-2"
                   :class="{
                     'bg-orange-500 text-white hover:bg-orange-600':
-                      params.view === 'grid' || !params.view,
+                      params.view === 'grid' || !params.view
                   }"
                 >
                   <i class="fa-solid fa-grip"></i>
@@ -84,12 +80,11 @@ const params = computed(() => {
                     direction: params.direction,
                     page: params.page,
                     tag: params.tag,
-                    view: 'list',
+                    view: 'list'
                   }"
                   class="px-2 py-1 rounded-md cursor-pointer bg-gray-200 text-gray-600 hover:bg-gray-300 transition-none"
                   :class="{
-                    'bg-orange-500 text-white hover:bg-orange-600':
-                      params.view === 'list',
+                    'bg-orange-500 text-white hover:bg-orange-600': params.view === 'list'
                   }"
                 >
                   <i class="fa-solid fa-list"></i>
@@ -103,22 +98,15 @@ const params = computed(() => {
             v-if="params.blog_category || params.search_blog || params.tag"
             class="my-5 px-2 flex items-center"
           >
-            <div
-              v-show="params.blog_category || params.tag"
-              class="flex items-center"
-            >
-              <p class="font-bold text-blueGray-700 text-sm mr-1">
-                {{ __("Filtered By") }} :
-              </p>
+            <div v-show="params.blog_category || params.tag" class="flex items-center">
+              <p class="font-bold text-blueGray-700 text-sm mr-1">{{ __('Filtered By') }} :</p>
 
               <div class="flex items-center space-x-3">
                 <div
                   v-show="params.blog_category"
                   class="inline-flex flex-nowrap items-center bg-white border border-gray-200 rounded-full px-2 py-1.5"
                 >
-                  <div
-                    class="whitespace-nowrap text-xs font-bold text-gray-700 capitalize"
-                  >
+                  <div class="whitespace-nowrap text-xs font-bold text-gray-700 capitalize">
                     Category : {{ params.blog_category }}
                   </div>
                   <Link
@@ -130,7 +118,7 @@ const params = computed(() => {
                       direction: params.direction,
                       page: params.page,
                       tag: params.tag,
-                      view: params.view,
+                      view: params.view
                     }"
                     class="ms-2.5 inline-flex justify-center items-center h-2 w-2 rounded-full text-gray-600 text-xs hover:text-red-600 transition-all cursor-pointer"
                   >
@@ -142,9 +130,7 @@ const params = computed(() => {
                   v-show="params.tag"
                   class="inline-flex flex-nowrap items-center bg-white border border-gray-200 rounded-full px-2 py-1.5"
                 >
-                  <div
-                    class="whitespace-nowrap text-xs font-bold text-gray-700 capitalize"
-                  >
+                  <div class="whitespace-nowrap text-xs font-bold text-gray-700 capitalize">
                     Tag : {{ params.tag }}
                   </div>
                   <Link
@@ -156,7 +142,7 @@ const params = computed(() => {
                       direction: params.direction,
                       page: params.page,
                       blog_category: params.blog_category,
-                      view: params.view,
+                      view: params.view
                     }"
                     class="ms-2.5 inline-flex justify-center items-center h-2 w-2 rounded-full text-gray-600 text-xs hover:text-red-600 transition-all cursor-pointer"
                   >
@@ -166,14 +152,9 @@ const params = computed(() => {
               </div>
             </div>
 
-            <p
-              v-show="params.search_blog"
-              class="text-sm font-medium text-gray-700 ml-auto"
-            >
+            <p v-show="params.search_blog" class="text-sm font-medium text-gray-700 ml-auto">
               {{ blogContents.total }} post(s) found for result
-              <span class="text-orange-500 font-semibold">
-                "{{ params.search_blog }}"
-              </span>
+              <span class="text-orange-500 font-semibold"> "{{ params.search_blog }}" </span>
             </p>
           </div>
 
@@ -191,10 +172,7 @@ const params = computed(() => {
             </div>
 
             <!-- Blog List Card -->
-            <div
-              v-show="params.view === 'list'"
-              class="grid grid-cols-1 gap-5 w-full"
-            >
+            <div v-show="params.view === 'list'" class="grid grid-cols-1 gap-5 w-full">
               <BlogListCard
                 v-for="blogContent in blogContents.data"
                 :key="blogContent.id"

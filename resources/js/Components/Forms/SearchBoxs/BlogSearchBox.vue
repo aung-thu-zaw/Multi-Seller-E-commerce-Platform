@@ -1,18 +1,18 @@
 <script setup>
-import { router, usePage } from "@inertiajs/vue3";
-import { ref, watch } from "vue";
+import { router, usePage } from '@inertiajs/vue3'
+import { ref, watch } from 'vue'
 
-const blogSearch = ref(usePage().props.ziggy.query?.search_blog);
+const blogSearch = ref(usePage().props.ziggy.query?.search_blog)
 
-const delayedSearch = ref(null);
+const delayedSearch = ref(null)
 
 const handleSearch = () => {
   if (delayedSearch.value) {
-    clearTimeout(delayedSearch.value);
+    clearTimeout(delayedSearch.value)
   }
   delayedSearch.value = setTimeout(() => {
     router.get(
-      route("blogs.index"),
+      route('blogs.index'),
       {
         search_blog: blogSearch.value,
         sort: usePage().props.ziggy.query?.sort,
@@ -20,54 +20,52 @@ const handleSearch = () => {
         page: usePage().props.ziggy.query?.page,
         blog_category: usePage().props.ziggy.query?.blog_category,
         tag: usePage().props.ziggy.query?.tag,
-        view: usePage().props.ziggy.query?.view,
+        view: usePage().props.ziggy.query?.view
       },
       {
         replace: true,
-        preserveState: true,
+        preserveState: true
       }
-    );
-  }, 400);
-};
+    )
+  }, 400)
+}
 
 const removeSearch = () => {
-  blogSearch.value = "";
+  blogSearch.value = ''
   router.get(
-    route("blogs.index"),
+    route('blogs.index'),
     {
       sort: usePage().props.ziggy.query?.sort,
       direction: usePage().props.ziggy.query?.direction,
       page: usePage().props.ziggy.query?.page,
       blog_category: usePage().props.ziggy.query?.blog_category,
       tag: usePage().props.ziggy.query?.tag,
-      view: usePage().props.ziggy.query?.view,
+      view: usePage().props.ziggy.query?.view
     },
     {
       replace: true,
-      preserveState: true,
+      preserveState: true
     }
-  );
-};
+  )
+}
 
 watch(
   () => blogSearch.value,
   () => {
-    if (blogSearch.value === "") {
-      removeSearch();
+    if (blogSearch.value === '') {
+      removeSearch()
     } else {
-      handleSearch();
+      handleSearch()
     }
   }
-);
+)
 </script>
 
 <template>
   <div class="relative w-[400px]">
     <form class="flex items-center">
       <div class="relative w-full mr-2">
-        <div
-          class="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none"
-        >
+        <div class="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none">
           <svg
             class="w-4 h-4 text-gray-500"
             aria-hidden="true"

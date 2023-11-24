@@ -1,7 +1,7 @@
 <script setup>
-import EcommerceNavbar from "@/Components/Navbars/EcommerceNavbar.vue";
-import EcommerceFooter from "@/Components/Footers/EcommerceFooter.vue";
-import EcommerceChatWidget from "@/Components/Chats/EcommerceChatWidget.vue";
+import EcommerceNavbar from '@/Components/Navbars/EcommerceNavbar.vue'
+import EcommerceFooter from '@/Components/Footers/EcommerceFooter.vue'
+import EcommerceChatWidget from '@/Components/Chats/EcommerceChatWidget.vue'
 </script>
 
 <template>

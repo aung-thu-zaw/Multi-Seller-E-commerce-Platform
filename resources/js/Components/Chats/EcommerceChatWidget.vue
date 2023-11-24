@@ -1,11 +1,11 @@
 <script setup>
-import ConversationCard from "@/Components/Cards/Chats/ConversationCard.vue";
-import SenderMessageBubble from "@/Components/Cards/Chats/SenderMessageBubble.vue";
-import ReceiverMessageBubble from "@/Components/Cards/Chats/ReceiverMessageBubble.vue";
-import EcommerceSenderMessageForm from "@/Components/Forms/Chats/EcommerceSenderMessageForm.vue";
-import { ref } from "vue";
+import ConversationCard from '@/Components/Cards/Chats/ConversationCard.vue'
+import SenderMessageBubble from '@/Components/Cards/Chats/SenderMessageBubble.vue'
+import ReceiverMessageBubble from '@/Components/Cards/Chats/ReceiverMessageBubble.vue'
+import EcommerceSenderMessageForm from '@/Components/Forms/Chats/EcommerceSenderMessageForm.vue'
+import { ref } from 'vue'
 
-const isWidgetOpened = ref(false);
+const isWidgetOpened = ref(false)
 </script>
 
 <template>
@@ -32,9 +32,7 @@ const isWidgetOpened = ref(false);
         </div>
         <div class="col-span-2">
           <div class="border-b py-4 px-5">
-            <p class="font-bold text-gray-600 text-lg">
-              E-commerce Platform ( Chat Box )
-            </p>
+            <p class="font-bold text-gray-600 text-lg">E-commerce Platform ( Chat Box )</p>
           </div>
 
           <div class="h-[540px] flex items-center justify-center w-full">

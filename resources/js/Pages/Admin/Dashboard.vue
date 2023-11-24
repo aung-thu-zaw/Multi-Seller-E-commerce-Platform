@@ -1,21 +1,21 @@
 <script setup>
-import AdminDashboardLayout from "@/Layouts/AdminDashboardLayout.vue";
-import DashboardHeaderStats from "@/Components/Headers/DashboardHeaderStats.vue";
-import TotalSaleLineChart from "@/Components/Charts/TotalSaleLineChart.vue";
-import TotalOrderBarChart from "@/Components/Charts/TotalOrderBarChart.vue";
-import TotalUserBarChart from "@/Components/Charts/TotalUserBarChart.vue";
-import TableContainer from "@/Components/Tables/TableContainer.vue";
-import DashboardTableDataSearchBox from "@/Components/Forms/SearchBoxs/DashboardTableDataSearchBox.vue";
-import DashboardTableDataPerPageSelectBox from "@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue";
-import BlueBadge from "@/Components/Badges/BlueBadge.vue";
-import GreenBadge from "@/Components/Badges/GreenBadge.vue";
-import Table from "@/Components/Tables/Table.vue";
-import SortableTableHeaderCell from "@/Components/Tables/TableCells/SortableTableHeaderCell.vue";
-import TableHeaderCell from "@/Components/Tables/TableCells/TableHeaderCell.vue";
-import TableDataCell from "@/Components/Tables/TableCells/TableDataCell.vue";
-import TableActionCell from "@/Components/Tables/TableCells/TableActionCell.vue";
-import InertiaLinkButton from "@/Components/Buttons/InertiaLinkButton.vue";
-import { Head } from "@inertiajs/vue3";
+import AdminDashboardLayout from '@/Layouts/AdminDashboardLayout.vue'
+import DashboardHeaderStats from '@/Components/Headers/DashboardHeaderStats.vue'
+import TotalSaleLineChart from '@/Components/Charts/TotalSaleLineChart.vue'
+import TotalOrderBarChart from '@/Components/Charts/TotalOrderBarChart.vue'
+import TotalUserBarChart from '@/Components/Charts/TotalUserBarChart.vue'
+import TableContainer from '@/Components/Tables/TableContainer.vue'
+import DashboardTableDataSearchBox from '@/Components/Forms/SearchBoxs/DashboardTableDataSearchBox.vue'
+import DashboardTableDataPerPageSelectBox from '@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue'
+import BlueBadge from '@/Components/Badges/BlueBadge.vue'
+import GreenBadge from '@/Components/Badges/GreenBadge.vue'
+import Table from '@/Components/Tables/Table.vue'
+import SortableTableHeaderCell from '@/Components/Tables/TableCells/SortableTableHeaderCell.vue'
+import TableHeaderCell from '@/Components/Tables/TableCells/TableHeaderCell.vue'
+import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
+import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
+import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
+import { Head } from '@inertiajs/vue3'
 </script>
 
 <template>

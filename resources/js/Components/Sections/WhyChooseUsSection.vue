@@ -1,18 +1,18 @@
 <script setup>
-import InertiaLinkButton from "@/Components/Buttons/InertiaLinkButton.vue";
-import NormalButton from "@/Components/Buttons/NormalButton.vue";
-import InputField from "@/Components/Forms/Fields/InputField.vue";
-import InputLabel from "@/Components/Forms/Fields/InputLabel.vue";
-import BrandCarousel from "@/Components/Carousels/BrandCarousel.vue";
-import English from "@/assets/images/united-state.png";
-import Myanmar from "@/assets/images/myanmar.png";
-import { Link } from "@inertiajs/vue3";
+import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
+import NormalButton from '@/Components/Buttons/NormalButton.vue'
+import InputField from '@/Components/Forms/Fields/InputField.vue'
+import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
+import BrandCarousel from '@/Components/Carousels/BrandCarousel.vue'
+import English from '@/assets/images/united-state.png'
+import Myanmar from '@/assets/images/myanmar.png'
+import { Link } from '@inertiajs/vue3'
 </script>
 
 <template>
   <section id="why-choose-us" class="bg-white py-12">
     <div class="container max-w-screen-xl mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-8">{{ __("Why Choose Us") }}</h2>
+      <h2 class="text-3xl font-bold mb-8">{{ __('Why Choose Us') }}</h2>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <div>

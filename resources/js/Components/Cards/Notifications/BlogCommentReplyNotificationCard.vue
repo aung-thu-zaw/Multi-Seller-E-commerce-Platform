@@ -1,24 +1,22 @@
 <script setup>
-import { Link, router } from "@inertiajs/vue3";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-dayjs.extend(relativeTime);
+import { Link, router } from '@inertiajs/vue3'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(relativeTime)
 
-const props = defineProps({ notification: Object });
+const props = defineProps({ notification: Object })
 
 const handleNotificationReadAt = () => {
   router.post(
-    route("notifications.markAsRead", props.notification.id),
+    route('notifications.markAsRead', props.notification.id),
     {},
     {
       onSuccess: () => {
-        router.get(
-          route("blogs.show", { blog_content: props.notification.data?.blog })
-        );
-      },
+        router.get(route('blogs.show', { blog_content: props.notification.data?.blog }))
+      }
     }
-  );
-};
+  )
+}
 </script>
 
 <template>
@@ -27,7 +25,7 @@ const handleNotificationReadAt = () => {
     class="flex px-4 py-3 w-full overflow-hidden"
     :class="{
       'bg-gray-100 ': notification.read_at,
-      'hover:bg-gray-50 ': !notification.read_at,
+      'hover:bg-gray-50 ': !notification.read_at
     }"
   >
     <div class="flex-shrink-0">

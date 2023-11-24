@@ -1,5 +1,5 @@
 <script setup>
-defineProps({ blogContent: Object, blogCommentReply: Object });
+defineProps({ blogContent: Object, blogCommentReply: Object })
 </script>
 
 <template>
@@ -24,9 +24,7 @@ defineProps({ blogContent: Object, blogCommentReply: Object });
             Reply from user
           </span>
 
-          <span v-else class="text-xs font-medium text-orange-500">
-            Reply from author
-          </span>
+          <span v-else class="text-xs font-medium text-orange-500"> Reply from author </span>
         </div>
       </div>
 

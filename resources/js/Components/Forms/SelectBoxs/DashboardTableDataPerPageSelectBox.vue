@@ -1,15 +1,15 @@
 <script setup>
-import { router, usePage } from "@inertiajs/vue3";
-import { watch, ref } from "vue";
+import { router, usePage } from '@inertiajs/vue3'
+import { watch, ref } from 'vue'
 
 const props = defineProps({
   to: {
     type: String,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 
-const per_page = ref(usePage().props.ziggy.query?.per_page);
+const per_page = ref(usePage().props.ziggy.query?.per_page)
 
 watch(
   () => per_page.value,
@@ -26,15 +26,15 @@ watch(
         created_until: usePage().props.ziggy.query?.created_until,
         deleted_from: usePage().props.ziggy.query?.deleted_from,
         deleted_until: usePage().props.ziggy.query?.deleted_until,
-        filter_by_status: usePage().props.ziggy.query?.filter_by_status,
+        filter_by_status: usePage().props.ziggy.query?.filter_by_status
       },
       {
         replace: true,
-        preserveState: true,
+        preserveState: true
       }
-    );
+    )
   }
-);
+)
 </script>
 
 <template>
@@ -43,7 +43,7 @@ watch(
     class="p-3 py-3.5 font-medium text-xs text-gray-500 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:border-orange-400"
     v-model="per_page"
   >
-    <option selected disabled>{{ __("Per Page") }}</option>
+    <option selected disabled>{{ __('Per Page') }}</option>
     <option value="5">5</option>
     <option value="10">10</option>
     <option value="25">25</option>

@@ -2,9 +2,9 @@
 defineProps({
   items: {
     type: Object,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 </script>
 
 <template>
@@ -19,7 +19,7 @@ defineProps({
         v-for="(item, index) in items"
         :key="item.id"
         :class="{
-          'border-b': index !== items.length - 1,
+          'border-b': index !== items.length - 1
         }"
       >
         <slot name="table-data" :item="item" />

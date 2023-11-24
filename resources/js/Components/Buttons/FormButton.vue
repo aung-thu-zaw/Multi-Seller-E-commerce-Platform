@@ -2,14 +2,14 @@
 defineProps({
   disabled: {
     type: Boolean,
-    default: false,
+    default: false
   },
 
   processing: {
     type: Boolean,
-    default: false,
-  },
-});
+    default: false
+  }
+})
 </script>
 
 <template>
@@ -26,7 +26,7 @@ defineProps({
       >
         <span class="sr-only">Loading...</span>
       </div>
-      <span>{{ __("Processing") }}...</span>
+      <span>{{ __('Processing') }}...</span>
     </div>
     <div v-else>
       <slot />

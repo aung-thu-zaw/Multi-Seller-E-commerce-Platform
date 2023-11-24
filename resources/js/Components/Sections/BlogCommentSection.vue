@@ -1,16 +1,15 @@
 <script setup>
-import BlogCommentCard from "@/Components/Cards/Blogs/BlogCommentCard.vue";
-import BlogReplyCard from "@/Components/Cards/Blogs/BlogReplyCard.vue";
-import BlogCommentForm from "@/Components/Forms/TextareaForms/BlogCommentForm.vue";
-import Pagination from "@/Components/Paginations/Pagination.vue";
-import { Link } from "@inertiajs/vue3";
+import BlogCommentCard from '@/Components/Cards/Blogs/BlogCommentCard.vue'
+import BlogReplyCard from '@/Components/Cards/Blogs/BlogReplyCard.vue'
+import BlogCommentForm from '@/Components/Forms/TextareaForms/BlogCommentForm.vue'
+import Pagination from '@/Components/Paginations/Pagination.vue'
+import { Link } from '@inertiajs/vue3'
 
 defineProps({
   blogContent: Object,
-  blogComments: Object,
-});
+  blogComments: Object
+})
 </script>
-
 
 <template>
   <section>
@@ -65,24 +64,15 @@ defineProps({
       </div>
 
       <!-- Comment Form -->
-      <div
-        v-show="
-          $page.props.auth?.user &&
-          $page.props.auth.user.id !== blogContent?.author_id
-        "
-      >
+      <div v-show="$page.props.auth?.user && $page.props.auth.user.id !== blogContent?.author_id">
         <BlogCommentForm :blog="blogContent" />
       </div>
       <div v-show="!$page.props.auth.user" class="py-5">
         <p class="text-center text-sm font-medium text-gray-600">
           If you want to write comments you need to login first. Here
-          <Link href="#" class="font-bold text-orange-600 hover:underline">
-            Sign In
-          </Link>
+          <Link href="#" class="font-bold text-orange-600 hover:underline"> Sign In </Link>
           Or
-          <Link href="#" class="font-bold text-orange-600 hover:underline">
-            Sign Up
-          </Link>
+          <Link href="#" class="font-bold text-orange-600 hover:underline"> Sign Up </Link>
         </p>
       </div>
     </div>

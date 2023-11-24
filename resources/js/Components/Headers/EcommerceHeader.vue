@@ -1,6 +1,4 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
   <!-- Header -->
@@ -15,31 +13,23 @@
   }'
         class="relative"
       >
-        <div
-          class="hs-carousel relative overflow-hidden w-full min-h-[350px] bg-white rounded-lg"
-        >
+        <div class="hs-carousel relative overflow-hidden w-full min-h-[350px] bg-white rounded-lg">
           <div
             class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0"
           >
             <div class="hs-carousel-slide">
               <div class="flex justify-center h-full bg-gray-100 p-6">
-                <span class="self-center text-4xl transition duration-700"
-                  >First slide</span
-                >
+                <span class="self-center text-4xl transition duration-700">First slide</span>
               </div>
             </div>
             <div class="hs-carousel-slide">
               <div class="flex justify-center h-full bg-gray-200 p-6">
-                <span class="self-center text-4xl transition duration-700"
-                  >Second slide</span
-                >
+                <span class="self-center text-4xl transition duration-700">Second slide</span>
               </div>
             </div>
             <div class="hs-carousel-slide">
               <div class="flex justify-center h-full bg-gray-300 p-6">
-                <span class="self-center text-4xl transition duration-700"
-                  >Third slide</span
-                >
+                <span class="self-center text-4xl transition duration-700">Third slide</span>
               </div>
             </div>
           </div>

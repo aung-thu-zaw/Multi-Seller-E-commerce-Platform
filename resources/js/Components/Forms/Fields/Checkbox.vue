@@ -1,28 +1,28 @@
 <script setup>
-import { computed } from "vue";
+import { computed } from 'vue'
 
-const emit = defineEmits(["update:checked"]);
+const emit = defineEmits(['update:checked'])
 
 const props = defineProps({
   checked: {
     type: [Array, Boolean, Number],
-    default: false,
+    default: false
   },
 
   value: {
-    default: null,
-  },
-});
+    default: null
+  }
+})
 
 const proxyChecked = computed({
   get() {
-    return props.checked;
+    return props.checked
   },
 
   set(val) {
-    emit("update:checked", val);
-  },
-});
+    emit('update:checked', val)
+  }
+})
 </script>
 
 <template>
@@ -33,4 +33,3 @@ const proxyChecked = computed({
     class="rounded border-gray-300 text-orange-600 shadow-sm focus:ring-orange-500"
   />
 </template>
-

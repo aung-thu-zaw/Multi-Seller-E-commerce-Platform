@@ -1,9 +1,9 @@
 <script setup>
-import { Link, usePage } from "@inertiajs/vue3";
-import { computed } from "vue";
-import defaultUserImage from "@/assets/images/anonymous-user.jpg";
+import { Link, usePage } from '@inertiajs/vue3'
+import { computed } from 'vue'
+import defaultUserImage from '@/assets/images/anonymous-user.jpg'
 
-const user = computed(() => usePage().props.auth?.user);
+const user = computed(() => usePage().props.auth?.user)
 </script>
 
 <template>
@@ -25,24 +25,18 @@ const user = computed(() => usePage().props.auth?.user);
         </span>
 
         <span
-          v-if="
-            $page.url.startsWith('/admin') || $page.url.startsWith('/seller')
-          "
+          v-if="$page.url.startsWith('/admin') || $page.url.startsWith('/seller')"
           class="font-bold ml-2 hidden md:block"
           :class="{
             'text-slate-600 md:text-white':
-              $page.url === '/admin/dashboard' ||
-              $page.url === '/seller/dashboard',
+              $page.url === '/admin/dashboard' || $page.url === '/seller/dashboard',
 
             'text-slate-600 md:text-white':
-              $page.url !== '/admin/dashboard' ||
-              $page.url !== '/seller/dashboard',
+              $page.url !== '/admin/dashboard' || $page.url !== '/seller/dashboard'
           }"
           >{{ user?.name }}
         </span>
-        <span v-else class="font-bold ml-2 text-slate-600 hidden md:block"
-          >{{ user?.name }}
-        </span>
+        <span v-else class="font-bold ml-2 text-slate-600 hidden md:block">{{ user?.name }} </span>
       </div>
     </button>
 
@@ -59,7 +53,7 @@ const user = computed(() => usePage().props.auth?.user);
             class="text-left text-sm font-semibold block w-full whitespace-nowrap bg-transparent text-slate-700"
           >
             <i class="fa-solid fa-address-card mr-3"></i>
-            {{ __("My Account") }}
+            {{ __('My Account') }}
           </Link>
         </div>
       </div>
@@ -76,7 +70,7 @@ const user = computed(() => usePage().props.auth?.user);
           >
             <i class="fa-solid fa-right-from-bracket mr-3"></i>
 
-            {{ __("Logout") }}
+            {{ __('Logout') }}
           </Link>
         </div>
       </div>

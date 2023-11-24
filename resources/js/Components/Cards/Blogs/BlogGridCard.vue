@@ -1,7 +1,7 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link } from '@inertiajs/vue3'
 
-defineProps({ blog: Object });
+defineProps({ blog: Object })
 </script>
 
 <template>
@@ -29,15 +29,10 @@ defineProps({ blog: Object });
         </span>
       </div>
 
-      <h3
-        class="text-md font-semibold text-gray-800 group-hover:text-gray-600 line-clamp-2"
-      >
+      <h3 class="text-md font-semibold text-gray-800 group-hover:text-gray-600 line-clamp-2">
         {{ blog.title }}
       </h3>
-      <p
-        v-html="blog.content"
-        class="text-xs mt-3 text-gray-800 line-clamp-3"
-      ></p>
+      <p v-html="blog.content" class="text-xs mt-3 text-gray-800 line-clamp-3"></p>
       <p
         class="mt-5 text-sm inline-flex items-center gap-x-1 text-orange-600 decoration-2 group-hover:underline font-medium"
       >

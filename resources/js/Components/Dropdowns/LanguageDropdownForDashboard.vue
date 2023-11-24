@@ -1,6 +1,6 @@
 <script setup>
-import English from "@/assets/images/united-state.png";
-import Myanmar from "@/assets/images/myanmar.png";
+import English from '@/assets/images/united-state.png'
+import Myanmar from '@/assets/images/myanmar.png'
 </script>
 
 <template>

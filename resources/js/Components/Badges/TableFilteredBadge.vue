@@ -1,16 +1,16 @@
 <script setup>
-import { useFormatFunctions } from "@/Composables/useFormatFunctions";
-import { router, usePage } from "@inertiajs/vue3";
+import { useFormatFunctions } from '@/Composables/useFormatFunctions'
+import { router, usePage } from '@inertiajs/vue3'
 
 const props = defineProps({
   to: String,
 
   filterKey: String,
 
-  label: String,
-});
+  label: String
+})
 
-const { formatToTitleCase } = useFormatFunctions();
+const { formatToTitleCase } = useFormatFunctions()
 
 const removeFiltered = (queryStringKey) => {
   router.get(
@@ -21,32 +21,24 @@ const removeFiltered = (queryStringKey) => {
       sort: usePage().props.ziggy.query?.sort,
       direction: usePage().props.ziggy.query?.direction,
       created_from:
-        queryStringKey === "created_from"
-          ? undefined
-          : usePage().props.ziggy.query?.created_from,
+        queryStringKey === 'created_from' ? undefined : usePage().props.ziggy.query?.created_from,
       created_until:
-        queryStringKey === "created_until"
-          ? undefined
-          : usePage().props.ziggy.query?.created_until,
+        queryStringKey === 'created_until' ? undefined : usePage().props.ziggy.query?.created_until,
       deleted_from:
-        queryStringKey === "deleted_from"
-          ? undefined
-          : usePage().props.ziggy.query?.deleted_from,
+        queryStringKey === 'deleted_from' ? undefined : usePage().props.ziggy.query?.deleted_from,
       deleted_until:
-        queryStringKey === "deleted_until"
-          ? undefined
-          : usePage().props.ziggy.query?.deleted_until,
+        queryStringKey === 'deleted_until' ? undefined : usePage().props.ziggy.query?.deleted_until,
       filter_by_status:
-        queryStringKey === "filter_by_status"
+        queryStringKey === 'filter_by_status'
           ? undefined
-          : usePage().props.ziggy.query?.filter_by_status,
+          : usePage().props.ziggy.query?.filter_by_status
     },
     {
       replace: true,
-      preserveState: true,
+      preserveState: true
     }
-  );
-};
+  )
+}
 </script>
 
 <template>

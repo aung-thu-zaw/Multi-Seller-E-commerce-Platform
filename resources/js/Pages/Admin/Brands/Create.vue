@@ -1,36 +1,36 @@
 <script setup>
-import AdminDashboardLayout from "@/Layouts/AdminDashboardLayout.vue";
-import Breadcrumb from "@/Components/Breadcrumbs/Breadcrumb.vue";
-import BreadcrumbItem from "@/Components/Breadcrumbs/BreadcrumbItem.vue";
-import PreviewImage from "@/Components/Forms/PreviewImage.vue";
-import InputLabel from "@/Components/Forms/Fields/InputLabel.vue";
-import InputError from "@/Components/Forms/Fields/InputError.vue";
-import InputField from "@/Components/Forms/Fields/InputField.vue";
-import SelectBox from "@/Components/Forms/Fields/SelectBox.vue";
-import FileInput from "@/Components/Forms/Fields/FileInput.vue";
-import FormButton from "@/Components/Buttons/FormButton.vue";
-import GoBackButton from "@/Components/Buttons/GoBackButton.vue";
-import { useImagePreview } from "@/Composables/useImagePreview";
-import { useResourceActions } from "@/Composables/useResourceActions";
-import { Head } from "@inertiajs/vue3";
-import { useQueryStringParams } from "@/Composables/useQueryStringParams";
+import AdminDashboardLayout from '@/Layouts/AdminDashboardLayout.vue'
+import Breadcrumb from '@/Components/Breadcrumbs/Breadcrumb.vue'
+import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
+import PreviewImage from '@/Components/Forms/PreviewImage.vue'
+import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
+import InputError from '@/Components/Forms/Fields/InputError.vue'
+import InputField from '@/Components/Forms/Fields/InputField.vue'
+import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
+import FileInput from '@/Components/Forms/Fields/FileInput.vue'
+import FormButton from '@/Components/Buttons/FormButton.vue'
+import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
+import { useImagePreview } from '@/Composables/useImagePreview'
+import { useResourceActions } from '@/Composables/useResourceActions'
+import { Head } from '@inertiajs/vue3'
+import { useQueryStringParams } from '@/Composables/useQueryStringParams'
 
-const brandList = "admin.brands.index";
+const brandList = 'admin.brands.index'
 
-const { queryStringParams } = useQueryStringParams();
+const { queryStringParams } = useQueryStringParams()
 
-const { previewImage, setImagePreview } = useImagePreview();
+const { previewImage, setImagePreview } = useImagePreview()
 
 const handleChangeImage = (file) => {
-  setImagePreview(file);
-  form.logo = file;
-};
+  setImagePreview(file)
+  form.logo = file
+}
 
 const { form, processing, errors, createAction } = useResourceActions({
   name: null,
   status: null,
-  logo: null,
-});
+  logo: null
+})
 </script>
 
 <template>
@@ -80,12 +80,12 @@ const { form, processing, errors, createAction } = useResourceActions({
               :options="[
                 {
                   label: 'Active',
-                  value: 'active',
+                  value: 'active'
                 },
                 {
                   label: 'Inactive',
-                  value: 'inactive',
-                },
+                  value: 'inactive'
+                }
               ]"
               v-model="form.status"
               :placeholder="__('Select Option')"
@@ -112,7 +112,7 @@ const { form, processing, errors, createAction } = useResourceActions({
           <InputError :message="errors?.captcha_token" />
 
           <FormButton type="submit" :processing="processing">
-            {{ __("Create") }}
+            {{ __('Create') }}
           </FormButton>
         </form>
       </div>

@@ -1,13 +1,10 @@
-<script setup>
-</script>
+<script setup></script>
 
 <template>
   <div class="relative w-[700px] mx-auto">
     <form class="flex items-center">
       <div class="relative w-full mr-2">
-        <div
-          class="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none"
-        >
+        <div class="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none">
           <svg
             class="w-4 h-4 text-gray-500"
             aria-hidden="true"
@@ -33,10 +30,7 @@
         />
       </div>
 
-      <button
-        type="submit"
-        class="bg-orange-600 p-4 rounded-md focus:ring-2 focus:ring-orange-300"
-      >
+      <button type="submit" class="bg-orange-600 p-4 rounded-md focus:ring-2 focus:ring-orange-300">
         <svg
           class="w-5 h-5 text-white font-bold"
           aria-hidden="true"

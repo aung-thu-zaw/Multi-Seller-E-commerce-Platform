@@ -1,23 +1,21 @@
 <script setup>
-import InertiaLinkButton from "@/Components/Buttons/InertiaLinkButton.vue";
-import NormalButton from "@/Components/Buttons/NormalButton.vue";
-import InputField from "@/Components/Forms/Fields/InputField.vue";
-import InputLabel from "@/Components/Forms/Fields/InputLabel.vue";
-import BrandCarousel from "@/Components/Carousels/BrandCarousel.vue";
-import English from "@/assets/images/united-state.png";
-import Myanmar from "@/assets/images/myanmar.png";
-import { Link } from "@inertiajs/vue3";
+import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
+import NormalButton from '@/Components/Buttons/NormalButton.vue'
+import InputField from '@/Components/Forms/Fields/InputField.vue'
+import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
+import BrandCarousel from '@/Components/Carousels/BrandCarousel.vue'
+import English from '@/assets/images/united-state.png'
+import Myanmar from '@/assets/images/myanmar.png'
+import { Link } from '@inertiajs/vue3'
 </script>
 
 <template>
   <section id="product-for-you" class="my-5">
-    <div
-      class="container max-w-screen-xl mx-auto bg-transparent rounded-md pt-6"
-    >
+    <div class="container max-w-screen-xl mx-auto bg-transparent rounded-md pt-6">
       <!-- Title -->
       <div class="text-slate-600 flex items-center justify-between py-3">
         <h2 class="text-2xl font-bold">
-          {{ __("Products For You") }}
+          {{ __('Products For You') }}
         </h2>
 
         <div class="flex items-center space-x-2">
@@ -66,20 +64,14 @@ import { Link } from "@inertiajs/vue3";
                 <span class="font-bold text-orange-500"> Flagship </span>
               </div>
 
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -186,20 +178,14 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fas fa-crown"></i>
                 Official
               </span>
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -306,20 +292,14 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fas fa-crown"></i>
                 Official
               </span>
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -426,20 +406,14 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fas fa-crown"></i>
                 Official
               </span>
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -546,20 +520,14 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fas fa-crown"></i>
                 Official
               </span>
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -669,20 +637,14 @@ import { Link } from "@inertiajs/vue3";
                 <span class="font-bold text-orange-500"> Flagship </span>
               </div>
 
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -789,20 +751,14 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fas fa-crown"></i>
                 Official
               </span>
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -909,20 +865,14 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fas fa-crown"></i>
                 Official
               </span>
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -1029,20 +979,14 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fas fa-crown"></i>
                 Official
               </span>
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -1149,20 +1093,14 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fas fa-crown"></i>
                 Official
               </span>
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -1272,20 +1210,14 @@ import { Link } from "@inertiajs/vue3";
                 <span class="font-bold text-orange-500"> Flagship </span>
               </div>
 
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -1392,20 +1324,14 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fas fa-crown"></i>
                 Official
               </span>
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -1512,20 +1438,14 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fas fa-crown"></i>
                 Official
               </span>
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -1632,20 +1552,14 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fas fa-crown"></i>
                 Official
               </span>
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -1752,20 +1666,14 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fas fa-crown"></i>
                 Official
               </span>
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -1875,20 +1783,14 @@ import { Link } from "@inertiajs/vue3";
                 <span class="font-bold text-orange-500"> Flagship </span>
               </div>
 
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -1995,20 +1897,14 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fas fa-crown"></i>
                 Official
               </span>
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -2115,20 +2011,14 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fas fa-crown"></i>
                 Official
               </span>
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -2235,20 +2125,14 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fas fa-crown"></i>
                 Official
               </span>
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span
@@ -2355,20 +2239,14 @@ import { Link } from "@inertiajs/vue3";
                 <i class="fas fa-crown"></i>
                 Official
               </span>
-              <h3
-                class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1"
-              >
+              <h3 class="text-sm text-gray-800 font-medium line-clamp-2 cursor-pointer mt-1">
                 Cannon MS33 Photo Camera
               </h3>
 
               <div class="my-2">
                 <div>
-                  <span class="text-lg font-semibold text-orange-600 block">
-                    $ 399
-                  </span>
-                  <span
-                    class="text-[.8rem] text-gray-500 font-medium line-through mr-5"
-                  >
+                  <span class="text-lg font-semibold text-orange-600 block"> $ 399 </span>
+                  <span class="text-[.8rem] text-gray-500 font-medium line-through mr-5">
                     $ 500
                   </span>
                   <span

@@ -1,48 +1,48 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref } from 'vue'
 
 defineProps({
   icon: {
     type: String,
-    default: "",
+    default: ''
   },
   name: {
     type: String,
-    default: "",
+    default: ''
   },
   placeholder: {
     type: String,
-    default: "",
+    default: ''
   },
   disabled: {
     type: Boolean,
-    default: false,
+    default: false
   },
   required: {
     type: Boolean,
-    default: false,
+    default: false
   },
   modelValue: {
     type: String,
-    default: "",
+    default: ''
   },
   rounded: {
     type: Boolean,
-    default: false,
-  },
-});
+    default: false
+  }
+})
 
-defineEmits(["update:modelValue"]);
+defineEmits(['update:modelValue'])
 
-const textarea = ref(null);
+const textarea = ref(null)
 
 onMounted(() => {
-  if (textarea.value.hasAttribute("autofocus")) {
-    textarea.value.focus();
+  if (textarea.value.hasAttribute('autofocus')) {
+    textarea.value.focus()
   }
-});
+})
 
-defineExpose({ focus: () => textarea.value.focus() });
+defineExpose({ focus: () => textarea.value.focus() })
 </script>
 
 <template>
@@ -61,7 +61,7 @@ defineExpose({ focus: () => textarea.value.focus() });
       :class="{
         'rounded-full': rounded,
         'rounded-md': !rounded,
-        'pl-12': icon,
+        'pl-12': icon
       }"
       ref="textarea"
       :value="modelValue"

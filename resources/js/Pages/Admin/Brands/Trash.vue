@@ -1,45 +1,45 @@
 <script setup>
-import AdminDashboardLayout from "@/Layouts/AdminDashboardLayout.vue";
-import Breadcrumb from "@/Components/Breadcrumbs/Breadcrumb.vue";
-import BreadcrumbLinkItem from "@/Components/Breadcrumbs/BreadcrumbLinkItem.vue";
-import BreadcrumbItem from "@/Components/Breadcrumbs/BreadcrumbItem.vue";
-import TableContainer from "@/Components/Tables/TableContainer.vue";
-import ActionTable from "@/Components/Tables/ActionTable.vue";
-import DashboardTableDataSearchBox from "@/Components/Forms/SearchBoxs/DashboardTableDataSearchBox.vue";
-import DashboardTableDataPerPageSelectBox from "@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue";
-import DashboardTableFilter from "@/Components/Forms/SelectBoxs/DashboardTableFilter.vue";
-import FilteredBy from "@/Components/Tables/FilteredBy.vue";
-import SortableTableHeaderCell from "@/Components/Tables/TableCells/SortableTableHeaderCell.vue";
-import TableHeaderCell from "@/Components/Tables/TableCells/TableHeaderCell.vue";
-import TableDataCell from "@/Components/Tables/TableCells/TableDataCell.vue";
-import TableActionCell from "@/Components/Tables/TableCells/TableActionCell.vue";
-import ImageCell from "@/Components/Tables/TableCells/TableImageCell.vue";
-import NoTableData from "@/Components/Tables/NoTableData.vue";
-import BulkActionButton from "@/Components/Buttons/BulkActionButton.vue";
-import InertiaLinkButton from "@/Components/Buttons/InertiaLinkButton.vue";
-import NormalButton from "@/Components/Buttons/NormalButton.vue";
-import EmptyTrashButton from "@/Components/Buttons/EmptyTrashButton.vue";
-import Pagination from "@/Components/Paginations/DashboardPagination.vue";
-import { Head } from "@inertiajs/vue3";
-import { __ } from "@/Services/translations-inside-setup.js";
-import { useQueryStringParams } from "@/Composables/useQueryStringParams";
-import { useResourceActions } from "@/Composables/useResourceActions";
+import AdminDashboardLayout from '@/Layouts/AdminDashboardLayout.vue'
+import Breadcrumb from '@/Components/Breadcrumbs/Breadcrumb.vue'
+import BreadcrumbLinkItem from '@/Components/Breadcrumbs/BreadcrumbLinkItem.vue'
+import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
+import TableContainer from '@/Components/Tables/TableContainer.vue'
+import ActionTable from '@/Components/Tables/ActionTable.vue'
+import DashboardTableDataSearchBox from '@/Components/Forms/SearchBoxs/DashboardTableDataSearchBox.vue'
+import DashboardTableDataPerPageSelectBox from '@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue'
+import DashboardTableFilter from '@/Components/Forms/SelectBoxs/DashboardTableFilter.vue'
+import FilteredBy from '@/Components/Tables/FilteredBy.vue'
+import SortableTableHeaderCell from '@/Components/Tables/TableCells/SortableTableHeaderCell.vue'
+import TableHeaderCell from '@/Components/Tables/TableCells/TableHeaderCell.vue'
+import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
+import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
+import ImageCell from '@/Components/Tables/TableCells/TableImageCell.vue'
+import NoTableData from '@/Components/Tables/NoTableData.vue'
+import BulkActionButton from '@/Components/Buttons/BulkActionButton.vue'
+import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
+import NormalButton from '@/Components/Buttons/NormalButton.vue'
+import EmptyTrashButton from '@/Components/Buttons/EmptyTrashButton.vue'
+import Pagination from '@/Components/Paginations/DashboardPagination.vue'
+import { Head } from '@inertiajs/vue3'
+import { __ } from '@/Services/translations-inside-setup.js'
+import { useQueryStringParams } from '@/Composables/useQueryStringParams'
+import { useResourceActions } from '@/Composables/useResourceActions'
 
-defineProps({ trashedBrands: Object });
+defineProps({ trashedBrands: Object })
 
-const brandList = "admin.brands.index";
+const brandList = 'admin.brands.index'
 
-const trashedBrandList = "admin.brands.trashed";
+const trashedBrandList = 'admin.brands.trashed'
 
-const { queryStringParams } = useQueryStringParams();
+const { queryStringParams } = useQueryStringParams()
 
 const {
   restoreAction,
   restoreSelectedAction,
   permanentDeleteAction,
   permanentDeleteSelectedAction,
-  permanentDeleteAllAction,
-} = useResourceActions();
+  permanentDeleteAllAction
+} = useResourceActions()
 </script>
 
 <template>
@@ -62,11 +62,11 @@ const {
               page: 1,
               per_page: 5,
               sort: 'id',
-              direction: 'desc',
+              direction: 'desc'
             }"
           >
             <i class="fa-solid fa-left-long"></i>
-            {{ __("Go To List") }}
+            {{ __('Go To List') }}
           </InertiaLinkButton>
         </div>
       </div>
@@ -77,16 +77,13 @@ const {
         class="text-left text-sm font-bold mb-5 text-warning-600"
       >
         {{
-          __(
-            ":label in the trash will be automatically deleted after 60 days",
-            { label: __("Brands") }
-          )
+          __(':label in the trash will be automatically deleted after 60 days', {
+            label: __('Brands')
+          })
         }}
 
         <EmptyTrashButton
-          @click="
-            permanentDeleteAllAction('Brand', 'admin.brands.force-delete.all')
-          "
+          @click="permanentDeleteAllAction('Brand', 'admin.brands.force-delete.all')"
         />
       </div>
 
@@ -103,10 +100,7 @@ const {
           <div class="flex items-center justify-end w-full md:space-x-5">
             <DashboardTableDataPerPageSelectBox :to="trashedBrandList" />
 
-            <DashboardTableFilter
-              :to="trashedBrandList"
-              :filterBy="['deleted']"
-            />
+            <DashboardTableFilter :to="trashedBrandList" :filterBy="['deleted']" />
           </div>
         </div>
 
@@ -120,15 +114,11 @@ const {
               <BulkActionButton
                 v-show="can('brands.restore')"
                 @click="
-                  restoreSelectedAction(
-                    'Brands',
-                    'admin.brands.restore.selected',
-                    selectedItems
-                  )
+                  restoreSelectedAction('Brands', 'admin.brands.restore.selected', selectedItems)
                 "
               >
                 <i class="fa-solid fa-recycle"></i>
-                {{ __("Restore Selected") }} ({{ selectedItems.length }})
+                {{ __('Restore Selected') }} ({{ selectedItems.length }})
               </BulkActionButton>
 
               <BulkActionButton
@@ -143,25 +133,17 @@ const {
                 class="text-red-600"
               >
                 <i class="fa-solid fa-trash-can"></i>
-                {{ __("Delete Selected") }} ({{ selectedItems.length }})
+                {{ __('Delete Selected') }} ({{ selectedItems.length }})
               </BulkActionButton>
             </template>
 
             <!-- Table Header -->
             <template #table-header>
-              <SortableTableHeaderCell
-                label="# No"
-                :to="trashedBrandList"
-                sort="id"
-              />
+              <SortableTableHeaderCell label="# No" :to="trashedBrandList" sort="id" />
 
               <TableHeaderCell label="Image" />
 
-              <SortableTableHeaderCell
-                label="Name"
-                :to="trashedBrandList"
-                sort="name"
-              />
+              <SortableTableHeaderCell label="Name" :to="trashedBrandList" sort="name" />
 
               <TableHeaderCell label="Actions" />
             </template>
@@ -184,22 +166,16 @@ const {
                   @click="restoreAction('Brand', 'admin.brands.restore', item?.id)"
                 >
                   <i class="fa-solid fa-recycle"></i>
-                  {{ __("Restore") }}
+                  {{ __('Restore') }}
                 </NormalButton>
 
                 <NormalButton
                   v-show="can('brands.force.delete')"
-                  @click="
-                    permanentDeleteAction(
-                      'Brand',
-                      'admin.brands.force-delete',
-                      item?.id
-                    )
-                  "
+                  @click="permanentDeleteAction('Brand', 'admin.brands.force-delete', item?.id)"
                   class="bg-red-600 text-white ring-2 ring-red-300"
                 >
                   <i class="fa-solid fa-trash-can"></i>
-                  {{ __("Delete Forever") }}
+                  {{ __('Delete Forever') }}
                 </NormalButton>
               </TableActionCell>
             </template>
@@ -214,5 +190,3 @@ const {
     </div>
   </AdminDashboardLayout>
 </template>
-
-

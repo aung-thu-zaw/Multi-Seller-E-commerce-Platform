@@ -2,13 +2,13 @@
 defineProps({
   params: {
     type: Object,
-    required: true,
+    required: true
   },
   sort: {
     type: String,
-    default: "desc",
-  },
-});
+    default: 'desc'
+  }
+})
 </script>
 
 <template>
@@ -17,9 +17,7 @@ defineProps({
     :class="{
       'text-blue-600': params?.direction === 'asc' && params?.sort === sort,
       'visually-hidden':
-        params?.direction !== '' &&
-        params?.direction !== 'asc' &&
-        params?.sort === sort,
+        params?.direction !== '' && params?.direction !== 'asc' && params?.sort === sort
     }"
   ></i>
   <i
@@ -27,13 +25,7 @@ defineProps({
     :class="{
       'text-blue-600': params?.direction === 'desc' && params?.sort === sort,
       'visually-hidden':
-        params?.direction !== '' &&
-        params?.direction !== 'desc' &&
-        params?.sort === sort,
+        params?.direction !== '' && params?.direction !== 'desc' && params?.sort === sort
     }"
   ></i>
 </template>
-
-
-
-

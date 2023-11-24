@@ -1,44 +1,42 @@
 <script setup>
-import AdminDashboardLayout from "@/Layouts/AdminDashboardLayout.vue";
-import Breadcrumb from "@/Components/Breadcrumbs/Breadcrumb.vue";
-import BreadcrumbItem from "@/Components/Breadcrumbs/BreadcrumbItem.vue";
-import PreviewImage from "@/Components/Forms/PreviewImage.vue";
-import InputLabel from "@/Components/Forms/Fields/InputLabel.vue";
-import InputError from "@/Components/Forms/Fields/InputError.vue";
-import InputField from "@/Components/Forms/Fields/InputField.vue";
-import SelectBox from "@/Components/Forms/Fields/SelectBox.vue";
-import FileInput from "@/Components/Forms/Fields/FileInput.vue";
-import FormButton from "@/Components/Buttons/FormButton.vue";
-import GoBackButton from "@/Components/Buttons/GoBackButton.vue";
-import { useImagePreview } from "@/Composables/useImagePreview";
-import { useResourceActions } from "@/Composables/useResourceActions";
-import { Head } from "@inertiajs/vue3";
-import { useQueryStringParams } from "@/Composables/useQueryStringParams";
+import AdminDashboardLayout from '@/Layouts/AdminDashboardLayout.vue'
+import Breadcrumb from '@/Components/Breadcrumbs/Breadcrumb.vue'
+import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
+import PreviewImage from '@/Components/Forms/PreviewImage.vue'
+import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
+import InputError from '@/Components/Forms/Fields/InputError.vue'
+import InputField from '@/Components/Forms/Fields/InputField.vue'
+import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
+import FileInput from '@/Components/Forms/Fields/FileInput.vue'
+import FormButton from '@/Components/Buttons/FormButton.vue'
+import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
+import { useImagePreview } from '@/Composables/useImagePreview'
+import { useResourceActions } from '@/Composables/useResourceActions'
+import { Head } from '@inertiajs/vue3'
+import { useQueryStringParams } from '@/Composables/useQueryStringParams'
 
 const props = defineProps({
   category: Object,
-  categories: Object,
-});
+  categories: Object
+})
 
-const categoryList = "admin.categories.index";
+const categoryList = 'admin.categories.index'
 
-const { queryStringParams } = useQueryStringParams();
+const { queryStringParams } = useQueryStringParams()
 
-const { previewImage, setImagePreview } = useImagePreview(
-  props.category?.image
-);
+const { previewImage, setImagePreview } = useImagePreview(props.category?.image)
 
 const handleChangeImage = (file) => {
-  setImagePreview(file);
-  form.image = file;
-};
+  setImagePreview(file)
+  form.image = file
+}
 
 const { form, processing, errors, editAction } = useResourceActions({
   parent_id: props.category?.parent_id,
   name: props.category?.name,
   status: props.category?.status,
-  image: props.category?.image,
-});
+  image: props.category?.image
+})
 </script>
 
 <template>
@@ -61,9 +59,7 @@ const { form, processing, errors, editAction } = useResourceActions({
       <!-- Form Start -->
       <div class="border p-10 bg-white rounded-md">
         <form
-          @submit.prevent="
-            editAction('Category', 'admin.categories.update', category?.slug)
-          "
+          @submit.prevent="editAction('Category', 'admin.categories.update', category?.slug)"
           class="space-y-4 md:space-y-6"
         >
           <PreviewImage :src="previewImage" />
@@ -105,12 +101,12 @@ const { form, processing, errors, editAction } = useResourceActions({
               :options="[
                 {
                   label: 'Show',
-                  value: 'show',
+                  value: 'show'
                 },
                 {
                   label: 'Hide',
-                  value: 'hide',
-                },
+                  value: 'hide'
+                }
               ]"
               v-model="form.status"
               :placeholder="__('Select Option')"
@@ -137,7 +133,7 @@ const { form, processing, errors, editAction } = useResourceActions({
           <InputError :message="errors?.captcha_token" />
 
           <FormButton type="submit" :processing="processing">
-            {{ __("Save Changes") }}
+            {{ __('Save Changes') }}
           </FormButton>
         </form>
       </div>

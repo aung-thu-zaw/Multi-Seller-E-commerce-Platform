@@ -1,59 +1,59 @@
 <script setup>
 const props = defineProps({
   selected: {
-    type: [Number, String],
+    type: [Number, String]
   },
   options: {
     type: Object,
-    required: true,
+    required: true
   },
   icon: {
     type: String,
-    default: "",
+    default: ''
   },
   name: {
     type: String,
-    default: "",
+    default: ''
   },
   disabled: {
     type: Boolean,
-    default: false,
+    default: false
   },
   required: {
     type: Boolean,
-    default: false,
+    default: false
   },
   placeholder: {
     type: String,
-    default: "",
+    default: ''
   },
   modelValue: {
     type: [String, Number],
-    default: "",
+    default: ''
   },
   rounded: {
     type: Boolean,
-    default: false,
-  },
-});
+    default: false
+  }
+})
 
-defineEmits(["update:modelValue"]);
+defineEmits(['update:modelValue'])
 
 const optionKey = (index) => {
-  return `select_option_${index}`;
-};
+  return `select_option_${index}`
+}
 
 const optionValue = (option) => {
-  return option.id || option.value;
-};
+  return option.id || option.value
+}
 
 const isSelected = (option) => {
-  return props.selected === optionValue(option);
-};
+  return props.selected === optionValue(option)
+}
 
 const optionLabel = (option) => {
-  return option.name || option.label;
-};
+  return option.name || option.label
+}
 </script>
 
 <template>
@@ -71,7 +71,7 @@ const optionLabel = (option) => {
       :class="{
         'rounded-full': rounded,
         'rounded-md': !rounded,
-        'pl-12': icon,
+        'pl-12': icon
       }"
       @input="$emit('update:modelValue', $event.target.value)"
       :disabled="disabled"

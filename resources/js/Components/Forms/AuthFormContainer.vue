@@ -1,7 +1,7 @@
 <script setup>
-import admin from "@/assets/images/admin-login.jpg";
-import seller from "@/assets/images/seller-login.jpg";
-import user from "@/assets/images/user-login.jpg";
+import admin from '@/assets/images/admin-login.jpg'
+import seller from '@/assets/images/seller-login.jpg'
+import user from '@/assets/images/user-login.jpg'
 </script>
 
 <template>
@@ -16,9 +16,7 @@ import user from "@/assets/images/user-login.jpg";
         class="w-full md:w-1/2"
       />
       <img
-        v-show="
-          $page.url === '/seller/login' || $page.url === '/seller/register'
-        "
+        v-show="$page.url === '/seller/login' || $page.url === '/seller/register'"
         :src="seller"
         alt="seller-login"
         class="w-full md:w-1/2"

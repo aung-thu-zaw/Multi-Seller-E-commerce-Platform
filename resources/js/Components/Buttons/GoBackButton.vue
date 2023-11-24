@@ -1,18 +1,18 @@
 <script setup>
-import { computed } from "vue";
+import { computed } from 'vue'
 
 const props = defineProps({
   class: {
     type: String,
-    default: "text-white bg-blue-600 ring-2 ring-blue-300 hover:bg-blue-700",
-  },
-});
+    default: 'text-white bg-blue-600 ring-2 ring-blue-300 hover:bg-blue-700'
+  }
+})
 
-const computedClasses = computed(() => props.class);
+const computedClasses = computed(() => props.class)
 
 const navigateBack = () => {
-  window.history.back();
-};
+  window.history.back()
+}
 </script>
 
 <template>
@@ -23,6 +23,6 @@ const navigateBack = () => {
     :class="computedClasses"
   >
     <i class="fa-solid fa-left-long"></i>
-    {{ __("Go Back") }}
+    {{ __('Go Back') }}
   </button>
 </template>

@@ -1,10 +1,10 @@
 <script setup>
-import TableFilteredBadge from "@/Components/Badges/TableFilteredBadge.vue";
-import { useQueryStringParams } from "@/Composables/useQueryStringParams";
+import TableFilteredBadge from '@/Components/Badges/TableFilteredBadge.vue'
+import { useQueryStringParams } from '@/Composables/useQueryStringParams'
 
-defineProps({ to: String });
+defineProps({ to: String })
 
-const { queryStringParams } = useQueryStringParams();
+const { queryStringParams } = useQueryStringParams()
 </script>
 
 <template>
@@ -18,9 +18,7 @@ const { queryStringParams } = useQueryStringParams();
     "
     class="mb-5 px-2 flex items-center"
   >
-    <p class="font-bold text-blueGray-700 text-sm mr-1">
-      {{ __("Filtered By") }} :
-    </p>
+    <p class="font-bold text-blueGray-700 text-sm mr-1">{{ __('Filtered By') }} :</p>
 
     <div class="flex items-center space-x-3">
       <TableFilteredBadge

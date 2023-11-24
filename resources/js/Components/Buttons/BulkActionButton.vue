@@ -1,13 +1,13 @@
 <script setup>
-import { computed } from "vue";
+import { computed } from 'vue'
 
 const props = defineProps({
   class: {
     type: String,
-    default: "text-gray-700",
-  },
-});
-const computedClasses = computed(() => props.class);
+    default: 'text-gray-700'
+  }
+})
+const computedClasses = computed(() => props.class)
 </script>
 
 <template>

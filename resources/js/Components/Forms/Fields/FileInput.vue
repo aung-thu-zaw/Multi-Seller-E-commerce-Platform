@@ -2,41 +2,41 @@
 defineProps({
   text: {
     type: String,
-    default: "",
+    default: ''
   },
 
   name: {
     type: String,
-    default: "",
+    default: ''
   },
 
   disabled: {
     type: Boolean,
-    default: false,
+    default: false
   },
 
   required: {
     type: Boolean,
-    default: false,
+    default: false
   },
 
   modelValue: {
     type: [String, Object],
-    default: "",
+    default: ''
   },
 
   rounded: {
     type: Boolean,
-    default: false,
-  },
-});
+    default: false
+  }
+})
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue'])
 
 const onFileChange = (event) => {
-  const selectedFile = event.target.files[0];
-  emit("update:modelValue", selectedFile);
-};
+  const selectedFile = event.target.files[0]
+  emit('update:modelValue', selectedFile)
+}
 </script>
 
 <template>
@@ -47,7 +47,7 @@ const onFileChange = (event) => {
       class="block w-full text-sm text-gray-500 file:me-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-700 file:text-white hover:file:bg-gray-600 file:disabled:opacity-50 file:disabled:pointer-events-none border p-2 bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:border-orange-400"
       :class="{
         'rounded-full': rounded,
-        'rounded-md': !rounded,
+        'rounded-md': !rounded
       }"
       aria-describedby="file_input_help"
       type="file"
@@ -55,13 +55,8 @@ const onFileChange = (event) => {
       :disabled="disabled"
       :required="required"
     />
-    <p
-      v-show="text"
-      class="mt-1 text-xs font-bold text-gray-600"
-      :id="name + '-help'"
-    >
+    <p v-show="text" class="mt-1 text-xs font-bold text-gray-600" :id="name + '-help'">
       {{ text }}
     </p>
   </div>
 </template>
-

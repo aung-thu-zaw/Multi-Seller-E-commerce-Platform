@@ -1,10 +1,10 @@
 <script setup>
-import AppLayout from "@/Layouts/AppLayout.vue";
-import InputLabel from "@/Components/Forms/Fields/InputLabel.vue";
-import InputField from "@/Components/Forms/Fields/InputField.vue";
-import TextAreaField from "@/Components/Forms/Fields/TextAreaField.vue";
-import FormButton from "@/Components/Buttons/FormButton.vue";
-import { Head } from "@inertiajs/vue3";
+import AppLayout from '@/Layouts/AppLayout.vue'
+import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
+import InputField from '@/Components/Forms/Fields/InputField.vue'
+import TextAreaField from '@/Components/Forms/Fields/TextAreaField.vue'
+import FormButton from '@/Components/Buttons/FormButton.vue'
+import { Head } from '@inertiajs/vue3'
 </script>
 
 <template>
@@ -15,17 +15,13 @@ import { Head } from "@inertiajs/vue3";
     <div class="max-w-[85rem] px-14 py-14 mx-auto">
       <div class="text-center">
         <h1 class="text-2xl font-bold">Contact us</h1>
-        <p class="mt-1 text-gray-600">
-          We'd love to talk about how we can help you.
-        </p>
+        <p class="mt-1 text-gray-600">We'd love to talk about how we can help you.</p>
       </div>
 
       <div class="mt-12 grid items-center lg:grid-cols-2 gap-6 lg:gap-16">
         <!-- Card -->
         <div class="flex flex-col border rounded-xl p-4 sm:p-6 lg:p-8">
-          <h2 class="mb-8 text-xl font-semibold text-gray-800">
-            Fill in the form
-          </h2>
+          <h2 class="mb-8 text-xl font-semibold text-gray-800">Fill in the form</h2>
 
           <form class="space-y-4 md:space-y-6">
             <div>
@@ -73,11 +69,7 @@ import { Head } from "@inertiajs/vue3";
             <div>
               <InputLabel :label="__('Details')" required />
 
-              <TextAreaField
-                name="contact-detail"
-                :placeholder="__('Enter Detail...')"
-                required
-              />
+              <TextAreaField name="contact-detail" :placeholder="__('Enter Detail...')" required />
 
               <!-- <InputError message="" /> -->
             </div>
@@ -86,13 +78,11 @@ import { Head } from "@inertiajs/vue3";
 
             <FormButton type="submit" :processing="processing">
               <i class="fa-solid fa-paper-plane"></i>
-              {{ __("Send") }}
+              {{ __('Send') }}
             </FormButton>
 
             <div class="mt-3 text-center">
-              <p class="text-sm text-gray-500">
-                We'll get back to you in 1-2 business days.
-              </p>
+              <p class="text-sm text-gray-500">We'll get back to you in 1-2 business days.</p>
             </div>
           </form>
         </div>
@@ -120,8 +110,7 @@ import { Head } from "@inertiajs/vue3";
             <div class="grow">
               <h3 class="font-semibold text-gray-800">Help Center</h3>
               <p class="mt-1 text-sm text-gray-500">
-                "Got a question about your purchase or need some guidance? We're
-                here to help!"
+                "Got a question about your purchase or need some guidance? We're here to help!"
               </p>
               <a
                 class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800"
@@ -162,16 +151,13 @@ import { Head } from "@inertiajs/vue3";
               stroke-linecap="round"
               stroke-linejoin="round"
             >
-              <path
-                d="M14 9a2 2 0 0 1-2 2H6l-4 4V4c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v5Z"
-              />
+              <path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v5Z" />
               <path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1" />
             </svg>
             <div class="grow">
               <h3 class="font-semibold text-gray-800">FAQ</h3>
               <p class="mt-1 text-sm text-gray-500">
-                "Find answers to common questions about shopping, orders, and
-                more in our FAQ."
+                "Find answers to common questions about shopping, orders, and more in our FAQ."
               </p>
               <a
                 class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800"
@@ -251,8 +237,7 @@ import { Head } from "@inertiajs/vue3";
             <div class="grow">
               <h3 class="font-semibold text-gray-800">Contact us by email</h3>
               <p class="mt-1 text-sm text-gray-500">
-                "Have something to share? Send us an email, and we'll get back
-                to you in a jiffy!"
+                "Have something to share? Send us an email, and we'll get back to you in a jiffy!"
               </p>
               <a
                 class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800"

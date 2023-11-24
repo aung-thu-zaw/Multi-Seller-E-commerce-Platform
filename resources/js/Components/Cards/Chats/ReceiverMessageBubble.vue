@@ -9,20 +9,14 @@
 
     <div>
       <!-- Card -->
-      <div
-        class="bg-white border border-gray-200 rounded-2xl p-4 space-y-3 shadow-md"
-      >
+      <div class="bg-white border border-gray-200 rounded-2xl p-4 space-y-3 shadow-md">
         <h2 class="font-medium text-gray-800">How can we help?</h2>
         <div class="space-y-1.5">
-          <p class="mb-1.5 text-sm text-gray-800">
-            You can ask questions like:
-          </p>
+          <p class="mb-1.5 text-sm text-gray-800">You can ask questions like:</p>
           <ul class="list-disc list-outside space-y-1.5 ps-3.5">
             <li class="text-sm text-gray-800">What's Preline UI?</li>
 
-            <li class="text-sm text-gray-800">
-              How many Starter Pages & Examples are there?
-            </li>
+            <li class="text-sm text-gray-800">How many Starter Pages & Examples are there?</li>
 
             <li class="text-sm text-gray-800">Is there a PRO version?</li>
           </ul>

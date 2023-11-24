@@ -1,79 +1,72 @@
 <script setup>
-import BlogCommentNotificationCard from "@/Components/Cards/Notifications/BlogCommentNotificationCard.vue";
-import { router, usePage } from "@inertiajs/vue3";
-import { computed, onMounted, ref } from "vue";
+import BlogCommentNotificationCard from '@/Components/Cards/Notifications/BlogCommentNotificationCard.vue'
+import { router, usePage } from '@inertiajs/vue3'
+import { computed, onMounted, ref } from 'vue'
 
-const notifications = ref([]);
+const notifications = ref([])
 
 const totalUnreadNotifications = computed(() =>
   notifications.value.filter((notification) => !notification.read_at)
-);
+)
 
 onMounted(() => {
-  notifications.value = usePage().props.auth?.notifications;
+  notifications.value = usePage().props.auth?.notifications
 
-  Echo.private(`App.Models.User.${usePage().props.auth.user?.id}`).notification(
-    (notification) => {
-      if (
-        notification.type ===
-        "App\\Notifications\\Blogs\\NewBlogCommentFromUserNotification"
-      ) {
-        notifications.value.unshift({
-          id: notification.id,
-          type: notification.type,
-          data: {
-            blog: notification.blog,
-            comment: notification.comment,
-            user: notification.user,
-          },
-        });
-      }
+  Echo.private(`App.Models.User.${usePage().props.auth.user?.id}`).notification((notification) => {
+    if (notification.type === 'App\\Notifications\\Blogs\\NewBlogCommentFromUserNotification') {
+      notifications.value.unshift({
+        id: notification.id,
+        type: notification.type,
+        data: {
+          blog: notification.blog,
+          comment: notification.comment,
+          user: notification.user
+        }
+      })
     }
-  );
-});
+  })
+})
 
 const sortedNotifications = computed(() => {
   return notifications.value.sort((a, b) => {
-    const aReadAt = new Date(a.read_at);
-    const bReadAt = new Date(b.read_at);
-    const aCreatedAt = new Date(a.created_at);
-    const bCreatedAt = new Date(b.created_at);
+    const aReadAt = new Date(a.read_at)
+    const bReadAt = new Date(b.read_at)
+    const aCreatedAt = new Date(a.created_at)
+    const bCreatedAt = new Date(b.created_at)
 
     // First, sort by read_at date, with null (unread) values first
-    if (aReadAt === null && bReadAt !== null) return -1;
-    if (aReadAt !== null && bReadAt === null) return 1;
+    if (aReadAt === null && bReadAt !== null) return -1
+    if (aReadAt !== null && bReadAt === null) return 1
 
     // Then, sort by read_at date in ascending order (oldest first)
     if (aReadAt !== null && bReadAt !== null) {
-      if (aReadAt > bReadAt) return 1;
-      if (aReadAt < bReadAt) return -1;
+      if (aReadAt > bReadAt) return 1
+      if (aReadAt < bReadAt) return -1
     }
 
     // If both are unread or have the same read_at date, sort by created_at date in ascending order (oldest first)
-    if (aCreatedAt > bCreatedAt) return -1;
-    if (aCreatedAt < bCreatedAt) return 1;
+    if (aCreatedAt > bCreatedAt) return -1
+    if (aCreatedAt < bCreatedAt) return 1
 
-    return 0; // Return 0 if both read_at and created_at dates are the same
-  });
-});
+    return 0 // Return 0 if both read_at and created_at dates are the same
+  })
+})
 
 const handleMarkAllAsRead = () => {
   router.post(
-    route("notifications.markAllAsRead"),
+    route('notifications.markAllAsRead'),
     {},
     {
       onSuccess: () => {
-        window.location.reload();
-      },
+        window.location.reload()
+      }
     }
-  );
-};
+  )
+}
 </script>
 
 <template>
-  <div
-    class="hs-dropdown relative inline-flex [--trigger:hover] [--placement:bottom-right]"
-  >
+  <div class="hs-dropdown relative inline-flex [--trigger:hover] [--placement:bottom-right]">
     <button
       id="hs-dropdown-hover-event"
       type="button"
@@ -95,9 +88,7 @@ const handleMarkAllAsRead = () => {
       class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden w-[25rem] h-auto max-h-[40rem] overflow-auto bg-white shadow-md rounded-lg mt-2 border border-gray-300 divide-gray-500 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full"
       aria-labelledby="hs-dropdown-hover-event"
     >
-      <div
-        class="px-4 py-3 bg-gray-100 flex items-center justify-between border-b w-full"
-      >
+      <div class="px-4 py-3 bg-gray-100 flex items-center justify-between border-b w-full">
         <span class="text-gray-700 font-semibold text-md"> Notifications </span>
         <button
           @click="handleMarkAllAsRead"
@@ -117,8 +108,7 @@ const handleMarkAllAsRead = () => {
           <!-- Notification Cards -->
           <BlogCommentNotificationCard
             v-show="
-              notification.type ===
-              'App\\Notifications\\Blogs\\NewBlogCommentFromUserNotification'
+              notification.type === 'App\\Notifications\\Blogs\\NewBlogCommentFromUserNotification'
             "
             :notification="notification"
           />
@@ -126,9 +116,7 @@ const handleMarkAllAsRead = () => {
       </div>
       <!-- No notification -->
       <div v-else class="py-5">
-        <p class="font-bold text-sm text-gray-600 text-center">
-          There are no notifications.
-        </p>
+        <p class="font-bold text-sm text-gray-600 text-center">There are no notifications.</p>
       </div>
     </div>
   </div>

@@ -1,26 +1,19 @@
 <script setup>
-import { Head } from "@inertiajs/vue3";
-import OrangeBadge from "@/Components/Badges/OrangeBadge.vue";
-import NormalButton from "@/Components/Buttons/NormalButton.vue";
-import SenderMessageBubble from "@/Components/Cards/Chats/SenderMessageBubble.vue";
-import ReceiverMessageBubble from "@/Components/Cards/Chats/ReceiverMessageBubble.vue";
-import EcommerceSenderMessageForm from "@/Components/Forms/Chats/EcommerceSenderMessageForm.vue";
+import { Head } from '@inertiajs/vue3'
+import OrangeBadge from '@/Components/Badges/OrangeBadge.vue'
+import NormalButton from '@/Components/Buttons/NormalButton.vue'
+import SenderMessageBubble from '@/Components/Cards/Chats/SenderMessageBubble.vue'
+import ReceiverMessageBubble from '@/Components/Cards/Chats/ReceiverMessageBubble.vue'
+import EcommerceSenderMessageForm from '@/Components/Forms/Chats/EcommerceSenderMessageForm.vue'
 </script>
-
 
 <template>
   <Head title="Support Live Chat : E-commerce Online Shopping" />
 
   <section id="live-chat" class="background">
-    <div
-      class="min-h-screen w-full py-16 px-40 flex items-center justify-center"
-    >
-      <div
-        class="container mx-auto border border-gray-400 shadow-sm rounded-md overflow-hidden"
-      >
-        <nav
-          class="py-5 px-10 border-b flex items-center justify-between bg-gray-50"
-        >
+    <div class="min-h-screen w-full py-16 px-40 flex items-center justify-center">
+      <div class="container mx-auto border border-gray-400 shadow-sm rounded-md overflow-hidden">
+        <nav class="py-5 px-10 border-b flex items-center justify-between bg-gray-50">
           <div class="flex items-center space-x-3">
             <img
               src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=626&ext=jpg&ga=GA1.1.952580598.1700452342&semt=ais"
@@ -36,9 +29,7 @@ import EcommerceSenderMessageForm from "@/Components/Forms/Chats/EcommerceSender
             </div>
           </div>
 
-          <NormalButton
-            class="text-white bg-red-600 ring-2 ring-red-300 hover:bg-red-700"
-          >
+          <NormalButton class="text-white bg-red-600 ring-2 ring-red-300 hover:bg-red-700">
             End Chat
           </NormalButton>
         </nav>
@@ -63,7 +54,7 @@ import EcommerceSenderMessageForm from "@/Components/Forms/Chats/EcommerceSender
 
                   <SenderMessageBubble />
 
-                  <Review/>
+                  <Review />
                 </ul>
                 <!-- End Chat Bubble -->
               </div>
@@ -78,10 +69,9 @@ import EcommerceSenderMessageForm from "@/Components/Forms/Chats/EcommerceSender
   </section>
 </template>
 
-
 <style>
 .background {
-  background-image: url("https://png.pngtree.com/background/20220718/original/pngtree-3d-smartphone-with-floating-chat-bubble-app-online-shopping-bag-picture-image_1661411.jpg");
+  background-image: url('https://png.pngtree.com/background/20220718/original/pngtree-3d-smartphone-with-floating-chat-bubble-app-online-shopping-bag-picture-image_1661411.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

@@ -1,43 +1,43 @@
 <script setup>
-import { useReCaptcha } from "vue-recaptcha-v3";
-import FormButton from "@/Components/Buttons/FormButton.vue";
-import Checkbox from "@/Components/Forms/Fields/Checkbox.vue";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
-import AuthFormContainer from "@/Components/Forms/AuthFormContainer.vue";
-import InputLabel from "@/Components/Forms/Fields/InputLabel.vue";
-import InputError from "@/Components/Forms/Fields/InputError.vue";
-import InputField from "@/Components/Forms/Fields/InputField.vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
-import { toast } from "vue3-toastify";
-import "vue3-toastify/dist/index.css";
-import { usePage } from "@inertiajs/vue3";
+import { useReCaptcha } from 'vue-recaptcha-v3'
+import FormButton from '@/Components/Buttons/FormButton.vue'
+import Checkbox from '@/Components/Forms/Fields/Checkbox.vue'
+import GuestLayout from '@/Layouts/GuestLayout.vue'
+import AuthFormContainer from '@/Components/Forms/AuthFormContainer.vue'
+import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
+import InputError from '@/Components/Forms/Fields/InputError.vue'
+import InputField from '@/Components/Forms/Fields/InputField.vue'
+import { Head, Link, useForm } from '@inertiajs/vue3'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
+import { usePage } from '@inertiajs/vue3'
 
-defineProps({ canResetPassword: Boolean, status: String });
+defineProps({ canResetPassword: Boolean, status: String })
 
 const form = useForm({
-  email: "",
-  password: "",
+  email: '',
+  password: '',
   remember: false,
-  captcha_token: null,
-});
+  captcha_token: null
+})
 
-const { executeRecaptcha, recaptchaLoaded } = useReCaptcha();
+const { executeRecaptcha, recaptchaLoaded } = useReCaptcha()
 
 const submit = async () => {
-  await recaptchaLoaded();
-  form.captcha_token = await executeRecaptcha("login");
+  await recaptchaLoaded()
+  form.captcha_token = await executeRecaptcha('login')
 
-  form.post(route("login"), {
+  form.post(route('login'), {
     replace: true,
     preserveState: true,
-    onFinish: () => form.reset("password"),
+    onFinish: () => form.reset('password'),
     onSuccess: () => {
       toast.success(usePage().props.flash.success, {
-        autoClose: 2000,
-      });
-    },
-  });
-};
+        autoClose: 2000
+      })
+    }
+  })
+}
 </script>
 
 <template>
@@ -53,7 +53,7 @@ const submit = async () => {
       </div>
       <form @submit.prevent="submit" class="w-full space-y-4 md:space-y-6">
         <h1 class="text-center text-2xl text-dark mb-5 font-bold">
-          {{ __(":label Dashboard Login", { label: __("Admin") }) }}
+          {{ __(':label Dashboard Login', { label: __('Admin') }) }}
         </h1>
 
         <!-- Email Input -->
@@ -89,19 +89,14 @@ const submit = async () => {
           <InputError :message="form.errors?.password" />
         </div>
 
-        <InputError
-          class="mt-2 text-center font-bold"
-          :message="form.errors?.captcha_token"
-        />
+        <InputError class="mt-2 text-center font-bold" :message="form.errors?.captcha_token" />
 
         <!-- Remember me and Forgot Password -->
         <div class="flex items-center justify-between mb-5">
           <div>
             <label class="flex items-center">
               <Checkbox name="remember" v-model:checked="form.remember" />
-              <span class="ml-2 text-sm text-gray-600">
-                {{ __("Remember Me") }}</span
-              >
+              <span class="ml-2 text-sm text-gray-600"> {{ __('Remember Me') }}</span>
             </label>
           </div>
 
@@ -111,13 +106,13 @@ const submit = async () => {
               :href="route('password.request')"
               class="underline text-sm text-gray-600 rounded-md hover:text-orange-500"
             >
-              {{ __("Forgot Password ?") }}
+              {{ __('Forgot Password ?') }}
             </Link>
           </div>
         </div>
 
         <FormButton :processing="form.processing">
-          {{ __("Login") }}
+          {{ __('Login') }}
         </FormButton>
       </form>
     </AuthFormContainer>

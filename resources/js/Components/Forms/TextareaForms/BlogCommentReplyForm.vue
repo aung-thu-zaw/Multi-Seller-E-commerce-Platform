@@ -1,40 +1,39 @@
 <script setup>
-import TextAreaField from "@/Components/Forms/Fields/TextAreaField.vue";
-import InputError from "@/Components/Forms/Fields/InputError.vue";
-import FormButton from "@/Components/Buttons/FormButton.vue";
-import { useForm } from "@inertiajs/vue3";
-import { useReCaptcha } from "vue-recaptcha-v3";
+import TextAreaField from '@/Components/Forms/Fields/TextAreaField.vue'
+import InputError from '@/Components/Forms/Fields/InputError.vue'
+import FormButton from '@/Components/Buttons/FormButton.vue'
+import { useForm } from '@inertiajs/vue3'
+import { useReCaptcha } from 'vue-recaptcha-v3'
 
-const props = defineProps({ blogContent: Object, blogComment: Object });
+const props = defineProps({ blogContent: Object, blogComment: Object })
 
-const emit = defineEmits("updateReplyBox");
+const emit = defineEmits('updateReplyBox')
 
 const form = useForm({
   reply: null,
-  captcha_token: null,
-});
+  captcha_token: null
+})
 
-const { executeRecaptcha, recaptchaLoaded } = useReCaptcha();
+const { executeRecaptcha, recaptchaLoaded } = useReCaptcha()
 
 const submitBlogCommentReply = async () => {
-  await recaptchaLoaded();
-  form.captcha_token = await executeRecaptcha("create_blog_comment_reply");
+  await recaptchaLoaded()
+  form.captcha_token = await executeRecaptcha('create_blog_comment_reply')
   form.post(
-    route("comment.replies.store", {
+    route('comment.replies.store', {
       blog_content: props.blogContent?.slug,
-      blog_comment: props.blogComment?.id,
+      blog_comment: props.blogComment?.id
     }),
     {
       replace: true,
       preserveState: true,
       preserveScroll: true,
-      onSuccess: () => (form.reply = ""),
-      onFinish: () => emit("updateReplyBox", false),
+      onSuccess: () => (form.reply = ''),
+      onFinish: () => emit('updateReplyBox', false)
     }
-  );
-};
+  )
+}
 </script>
-
 
 <template>
   <div class="pl-12 mt-5">
@@ -52,14 +51,11 @@ const submitBlogCommentReply = async () => {
 
       <div class="border w-[100px] ml-auto">
         <FormButton type="submit">
-          {{ __("Submit") }}
+          {{ __('Submit') }}
         </FormButton>
       </div>
     </form>
   </div>
 </template>
 
-
-
-comment.replies.store
-//
+comment.replies.store //

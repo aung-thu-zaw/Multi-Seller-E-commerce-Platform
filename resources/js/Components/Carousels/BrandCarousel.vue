@@ -1,22 +1,20 @@
 <script setup>
-let defaultTransform = 0;
+let defaultTransform = 0
 
 const goNext = () => {
-  defaultTransform = defaultTransform - 398;
-  var brandSlider = document.getElementById("brand-slider");
-  if (Math.abs(defaultTransform) >= brandSlider.scrollWidth / 1.7)
-    defaultTransform = 0;
-  brandSlider.style.transform = "translateX(" + defaultTransform + "px)";
-};
+  defaultTransform = defaultTransform - 398
+  var brandSlider = document.getElementById('brand-slider')
+  if (Math.abs(defaultTransform) >= brandSlider.scrollWidth / 1.7) defaultTransform = 0
+  brandSlider.style.transform = 'translateX(' + defaultTransform + 'px)'
+}
 
 const goPrev = () => {
-  var brandSlider = document.getElementById("brand-slider");
-  if (Math.abs(defaultTransform) === 0) defaultTransform = 0;
-  else defaultTransform = defaultTransform + 398;
-  brandSlider.style.transform = "translateX(" + defaultTransform + "px)";
-};
+  var brandSlider = document.getElementById('brand-slider')
+  if (Math.abs(defaultTransform) === 0) defaultTransform = 0
+  else defaultTransform = defaultTransform + 398
+  brandSlider.style.transform = 'translateX(' + defaultTransform + 'px)'
+}
 </script>
-
 
 <template>
   <div class="flex items-center justify-center w-full h-full p-4">
@@ -181,4 +179,3 @@ const goPrev = () => {
     </div>
   </div>
 </template>
-

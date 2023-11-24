@@ -1,8 +1,8 @@
 <script setup>
-import AppLayout from "@/Layouts/AppLayout.vue";
-import HelpCenterQuestionSearchBox from "@/Components/Forms/SearchBoxs/HelpCenterQuestionSearchBox.vue";
-import QuestionCategoryCard from "@/Components/Cards/QuestionCategoryCard.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import AppLayout from '@/Layouts/AppLayout.vue'
+import HelpCenterQuestionSearchBox from '@/Components/Forms/SearchBoxs/HelpCenterQuestionSearchBox.vue'
+import QuestionCategoryCard from '@/Components/Cards/QuestionCategoryCard.vue'
+import { Head, Link } from '@inertiajs/vue3'
 </script>
 
 <template>
@@ -12,24 +12,18 @@ import { Head, Link } from "@inertiajs/vue3";
     <section id="help-center" class="py-5">
       <div class="container mx-auto">
         <div class="flex items-center justify-between mb-5">
-          <h1 class="font-bold text-2xl">E-commerce {{ __("Help Center") }}</h1>
+          <h1 class="font-bold text-2xl">E-commerce {{ __('Help Center') }}</h1>
 
-          <a
-            href="#"
-            class="font-bold text-sm text-orange-500 hover:text-orange-600"
-          >
+          <a href="#" class="font-bold text-sm text-orange-500 hover:text-orange-600">
             <i class="fa-solid fa-circle-question"></i>
             Find More Questions
           </a>
         </div>
 
         <div class="flex flex-col items-center justify-center py-5">
-          <img
-            src="../../assets/images/faq.png"
-            class="h-48 object-contain object-center"
-          />
+          <img src="../../assets/images/faq.png" class="h-48 object-contain object-center" />
           <h1 class="font-bold text-dark mb-5 text-3xl">
-            {{ __("Hi, How can we help ?") }}
+            {{ __('Hi, How can we help ?') }}
           </h1>
         </div>
 
@@ -42,54 +36,38 @@ import { Head, Link } from "@inertiajs/vue3";
         <div class="flex flex-col items-center my-16 justify-center">
           <h1 class="font-bold text-gray-600 text-xl py-2 mb-5">
             <i class="fa-solid fa-award"></i>
-            {{ __("Top Questions") }}
+            {{ __('Top Questions') }}
           </h1>
 
           <div class="grid grid-cols-3 gap-5 w-full">
             <div class="px-5">
               <ul class="list-disc font-medium text-sm space-y-5">
                 <li>
-                  <a
-                    href="#"
-                    class="line-clamp-2 hover:text-orange-600 transition-all"
-                  >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Minus adipisci vitae corrupti. Nam quos vero eos. Omnis, non
-                    suscipit. Sint reiciendis sapiente aspernatur id consequatur
-                    labore minus pariatur voluptates beatae!
+                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
+                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
+                    aspernatur id consequatur labore minus pariatur voluptates beatae!
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    class="line-clamp-2 hover:text-orange-600 transition-all"
-                  >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Minus adipisci vitae corrupti. Nam quos vero eos. Omnis, non
-                    suscipit. Sint reiciendis sapiente aspernatur id consequatur
-                    labore minus pariatur voluptates beatae!
+                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
+                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
+                    aspernatur id consequatur labore minus pariatur voluptates beatae!
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    class="line-clamp-2 hover:text-orange-600 transition-all"
-                  >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Minus adipisci vitae corrupti. Nam quos vero eos. Omnis, non
-                    suscipit. Sint reiciendis sapiente aspernatur id consequatur
-                    labore minus pariatur voluptates beatae!
+                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
+                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
+                    aspernatur id consequatur labore minus pariatur voluptates beatae!
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    class="line-clamp-2 hover:text-orange-600 transition-all"
-                  >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Minus adipisci vitae corrupti. Nam quos vero eos. Omnis, non
-                    suscipit. Sint reiciendis sapiente aspernatur id consequatur
-                    labore minus pariatur voluptates beatae!
+                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
+                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
+                    aspernatur id consequatur labore minus pariatur voluptates beatae!
                   </a>
                 </li>
               </ul>
@@ -97,47 +75,31 @@ import { Head, Link } from "@inertiajs/vue3";
             <div class="px-5">
               <ul class="list-disc font-medium text-sm space-y-5">
                 <li>
-                  <a
-                    href="#"
-                    class="line-clamp-2 hover:text-orange-600 transition-all"
-                  >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Minus adipisci vitae corrupti. Nam quos vero eos. Omnis, non
-                    suscipit. Sint reiciendis sapiente aspernatur id consequatur
-                    labore minus pariatur voluptates beatae!
+                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
+                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
+                    aspernatur id consequatur labore minus pariatur voluptates beatae!
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    class="line-clamp-2 hover:text-orange-600 transition-all"
-                  >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Minus adipisci vitae corrupti. Nam quos vero eos. Omnis, non
-                    suscipit. Sint reiciendis sapiente aspernatur id consequatur
-                    labore minus pariatur voluptates beatae!
+                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
+                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
+                    aspernatur id consequatur labore minus pariatur voluptates beatae!
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    class="line-clamp-2 hover:text-orange-600 transition-all"
-                  >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Minus adipisci vitae corrupti. Nam quos vero eos. Omnis, non
-                    suscipit. Sint reiciendis sapiente aspernatur id consequatur
-                    labore minus pariatur voluptates beatae!
+                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
+                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
+                    aspernatur id consequatur labore minus pariatur voluptates beatae!
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    class="line-clamp-2 hover:text-orange-600 transition-all"
-                  >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Minus adipisci vitae corrupti. Nam quos vero eos. Omnis, non
-                    suscipit. Sint reiciendis sapiente aspernatur id consequatur
-                    labore minus pariatur voluptates beatae!
+                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
+                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
+                    aspernatur id consequatur labore minus pariatur voluptates beatae!
                   </a>
                 </li>
               </ul>
@@ -145,47 +107,31 @@ import { Head, Link } from "@inertiajs/vue3";
             <div class="px-5">
               <ul class="list-disc font-medium text-sm space-y-5">
                 <li>
-                  <a
-                    href="#"
-                    class="line-clamp-2 hover:text-orange-600 transition-all"
-                  >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Minus adipisci vitae corrupti. Nam quos vero eos. Omnis, non
-                    suscipit. Sint reiciendis sapiente aspernatur id consequatur
-                    labore minus pariatur voluptates beatae!
+                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
+                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
+                    aspernatur id consequatur labore minus pariatur voluptates beatae!
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    class="line-clamp-2 hover:text-orange-600 transition-all"
-                  >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Minus adipisci vitae corrupti. Nam quos vero eos. Omnis, non
-                    suscipit. Sint reiciendis sapiente aspernatur id consequatur
-                    labore minus pariatur voluptates beatae!
+                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
+                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
+                    aspernatur id consequatur labore minus pariatur voluptates beatae!
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    class="line-clamp-2 hover:text-orange-600 transition-all"
-                  >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Minus adipisci vitae corrupti. Nam quos vero eos. Omnis, non
-                    suscipit. Sint reiciendis sapiente aspernatur id consequatur
-                    labore minus pariatur voluptates beatae!
+                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
+                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
+                    aspernatur id consequatur labore minus pariatur voluptates beatae!
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    class="line-clamp-2 hover:text-orange-600 transition-all"
-                  >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Minus adipisci vitae corrupti. Nam quos vero eos. Omnis, non
-                    suscipit. Sint reiciendis sapiente aspernatur id consequatur
-                    labore minus pariatur voluptates beatae!
+                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
+                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
+                    aspernatur id consequatur labore minus pariatur voluptates beatae!
                   </a>
                 </li>
               </ul>
@@ -199,7 +145,7 @@ import { Head, Link } from "@inertiajs/vue3";
         <div class="flex flex-col items-center my-16 justify-center">
           <h1 class="font-bold text-gray-600 text-xl py-2 mb-5">
             <i class="fa-solid fa-clipboard-question"></i>
-            {{ __("Question Categories") }}
+            {{ __('Question Categories') }}
           </h1>
 
           <div class="grid grid-cols-4 gap-3 w-full">
@@ -224,7 +170,7 @@ import { Head, Link } from "@inertiajs/vue3";
         <div class="flex flex-col items-center my-16 justify-center">
           <h1 class="font-bold text-gray-600 text-xl py-2 mb-5">
             <i class="fa-solid fa-screwdriver-wrench"></i>
-            {{ __("Self Service Tools") }}
+            {{ __('Self Service Tools') }}
           </h1>
 
           <div class="grid grid-cols-4 gap-3 w-full">
@@ -245,9 +191,8 @@ import { Head, Link } from "@inertiajs/vue3";
       <!-- Self Service Tools -->
       <div class="px-32">
         <p class="text-sm font-bold text-gray-600 text-center">
-          Still looking for answers? Chat with us by clicking 'Chat Now' or
-          clicking 'Contact Us'. You can contact us at 09-284784390034 from 8:00
-          AM to 09:30 PM (Monday to Sunday).
+          Still looking for answers? Chat with us by clicking 'Chat Now' or clicking 'Contact Us'.
+          You can contact us at 09-284784390034 from 8:00 AM to 09:30 PM (Monday to Sunday).
         </p>
         <div class="flex items-center my-5 justify-center space-x-20">
           <button

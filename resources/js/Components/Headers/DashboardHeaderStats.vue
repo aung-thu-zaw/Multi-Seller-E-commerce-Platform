@@ -1,5 +1,5 @@
 <script setup>
-import CardStats from "@/Components/Cards/CardStats.vue";
+import CardStats from '@/Components/Cards/CardStats.vue'
 </script>
 
 <template>
@@ -65,5 +65,3 @@ import CardStats from "@/Components/Cards/CardStats.vue";
     </div>
   </div>
 </template>
-
-

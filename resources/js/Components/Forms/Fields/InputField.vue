@@ -1,52 +1,52 @@
 <script setup>
-import { ref,onMounted } from "vue";
+import { ref, onMounted } from 'vue'
 
 defineProps({
   icon: {
     type: String,
-    default: "",
+    default: ''
   },
   type: {
     type: String,
-    default: "text",
+    default: 'text'
   },
   name: {
     type: String,
-    default: "",
+    default: ''
   },
   placeholder: {
     type: String,
-    default: "",
+    default: ''
   },
   disabled: {
     type: Boolean,
-    default: false,
+    default: false
   },
   required: {
     type: Boolean,
-    default: false,
+    default: false
   },
   modelValue: {
     type: String,
-    default: "",
+    default: ''
   },
   rounded: {
     type: Boolean,
-    default: false,
-  },
-});
+    default: false
+  }
+})
 
-defineEmits(["update:modelValue"]);
+defineEmits(['update:modelValue'])
 
-const input = ref(null);
+const input = ref(null)
 
 onMounted(() => {
-  if (input.value.hasAttribute("autofocus")) {
-    input.value.focus();
+  if (input.value.hasAttribute('autofocus')) {
+    input.value.focus()
   }
-});
+})
 
-defineExpose({ focus: () => input.value.focus() });
+defineExpose({ focus: () => input.value.focus() })
 </script>
 
 <template>
@@ -65,7 +65,7 @@ defineExpose({ focus: () => input.value.focus() });
       :class="{
         'rounded-full': rounded,
         'rounded-md': !rounded,
-        'pl-12': icon,
+        'pl-12': icon
       }"
       :value="modelValue"
       ref="input"
@@ -76,5 +76,3 @@ defineExpose({ focus: () => input.value.focus() });
     />
   </div>
 </template>
-
-

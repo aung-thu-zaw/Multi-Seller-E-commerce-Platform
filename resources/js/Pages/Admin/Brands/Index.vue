@@ -1,37 +1,37 @@
 <script setup>
-import AdminDashboardLayout from "@/Layouts/AdminDashboardLayout.vue";
-import Breadcrumb from "@/Components/Breadcrumbs/Breadcrumb.vue";
-import BreadcrumbItem from "@/Components/Breadcrumbs/BreadcrumbItem.vue";
-import TableContainer from "@/Components/Tables/TableContainer.vue";
-import ActionTable from "@/Components/Tables/ActionTable.vue";
-import DashboardTableDataSearchBox from "@/Components/Forms/SearchBoxs/DashboardTableDataSearchBox.vue";
-import DashboardTableDataPerPageSelectBox from "@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue";
-import DashboardTableFilter from "@/Components/Forms/SelectBoxs/DashboardTableFilter.vue";
-import FilteredBy from "@/Components/Tables/FilteredBy.vue";
-import SortableTableHeaderCell from "@/Components/Tables/TableCells/SortableTableHeaderCell.vue";
-import TableHeaderCell from "@/Components/Tables/TableCells/TableHeaderCell.vue";
-import TableDataCell from "@/Components/Tables/TableCells/TableDataCell.vue";
-import TableActionCell from "@/Components/Tables/TableCells/TableActionCell.vue";
-import ImageCell from "@/Components/Tables/TableCells/TableImageCell.vue";
-import NoTableData from "@/Components/Tables/NoTableData.vue";
-import GreenBadge from "@/Components/Badges/GreenBadge.vue";
-import RedBadge from "@/Components/Badges/RedBadge.vue";
-import BulkActionButton from "@/Components/Buttons/BulkActionButton.vue";
-import InertiaLinkButton from "@/Components/Buttons/InertiaLinkButton.vue";
-import NormalButton from "@/Components/Buttons/NormalButton.vue";
-import Pagination from "@/Components/Paginations/DashboardPagination.vue";
-import { useResourceActions } from "@/Composables/useResourceActions";
-import { Head } from "@inertiajs/vue3";
-import { __ } from "@/Services/translations-inside-setup.js";
-import { useQueryStringParams } from "@/Composables/useQueryStringParams";
+import AdminDashboardLayout from '@/Layouts/AdminDashboardLayout.vue'
+import Breadcrumb from '@/Components/Breadcrumbs/Breadcrumb.vue'
+import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
+import TableContainer from '@/Components/Tables/TableContainer.vue'
+import ActionTable from '@/Components/Tables/ActionTable.vue'
+import DashboardTableDataSearchBox from '@/Components/Forms/SearchBoxs/DashboardTableDataSearchBox.vue'
+import DashboardTableDataPerPageSelectBox from '@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue'
+import DashboardTableFilter from '@/Components/Forms/SelectBoxs/DashboardTableFilter.vue'
+import FilteredBy from '@/Components/Tables/FilteredBy.vue'
+import SortableTableHeaderCell from '@/Components/Tables/TableCells/SortableTableHeaderCell.vue'
+import TableHeaderCell from '@/Components/Tables/TableCells/TableHeaderCell.vue'
+import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
+import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
+import ImageCell from '@/Components/Tables/TableCells/TableImageCell.vue'
+import NoTableData from '@/Components/Tables/NoTableData.vue'
+import GreenBadge from '@/Components/Badges/GreenBadge.vue'
+import RedBadge from '@/Components/Badges/RedBadge.vue'
+import BulkActionButton from '@/Components/Buttons/BulkActionButton.vue'
+import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
+import NormalButton from '@/Components/Buttons/NormalButton.vue'
+import Pagination from '@/Components/Paginations/DashboardPagination.vue'
+import { useResourceActions } from '@/Composables/useResourceActions'
+import { Head } from '@inertiajs/vue3'
+import { __ } from '@/Services/translations-inside-setup.js'
+import { useQueryStringParams } from '@/Composables/useQueryStringParams'
 
-defineProps({ brands: Object });
+defineProps({ brands: Object })
 
-const brandList = "admin.brands.index";
+const brandList = 'admin.brands.index'
 
-const { queryStringParams } = useQueryStringParams();
+const { queryStringParams } = useQueryStringParams()
 
-const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
+const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 </script>
 
 <template>
@@ -50,12 +50,9 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
 
       <div class="flex items-center justify-between mb-3">
         <!-- Create New Button -->
-        <InertiaLinkButton
-          v-show="can('brands.create')"
-          to="admin.brands.create"
-        >
+        <InertiaLinkButton v-show="can('brands.create')" to="admin.brands.create">
           <i class="fa-solid fa-file-circle-plus mr-1"></i>
-          {{ __("Create A New :label", { label: __("Brand") }) }}
+          {{ __('Create A New :label', { label: __('Brand') }) }}
         </InertiaLinkButton>
 
         <!-- Trash Button -->
@@ -66,12 +63,12 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
             page: 1,
             per_page: 5,
             sort: 'id',
-            direction: 'desc',
+            direction: 'desc'
           }"
           class="bg-red-600 text-white ring-2 ring-red-300"
         >
           <i class="fa-solid fa-trash-can mr-1"></i>
-          {{ __("Trash") }}
+          {{ __('Trash') }}
         </InertiaLinkButton>
       </div>
 
@@ -94,12 +91,12 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
               :options="[
                 {
                   label: 'Active',
-                  value: 'active',
+                  value: 'active'
                 },
                 {
                   label: 'Inactive',
-                  value: 'inactive',
-                },
+                  value: 'inactive'
+                }
               ]"
             />
           </div>
@@ -115,16 +112,12 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
               <BulkActionButton
                 v-show="can('brands.delete')"
                 @click="
-                  softDeleteSelectedAction(
-                    'Brands',
-                    'admin.brands.destroy.selected',
-                    selectedItems
-                  )
+                  softDeleteSelectedAction('Brands', 'admin.brands.destroy.selected', selectedItems)
                 "
                 class="text-red-600"
               >
                 <i class="fa-solid fa-trash-can"></i>
-                {{ __("Delete Selected") }} ({{ selectedItems.length }})
+                {{ __('Delete Selected') }} ({{ selectedItems.length }})
               </BulkActionButton>
             </template>
 
@@ -134,11 +127,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
 
               <TableHeaderCell label="Logo" />
 
-              <SortableTableHeaderCell
-                label="Name"
-                :to="brandList"
-                sort="name"
-              />
+              <SortableTableHeaderCell label="Name" :to="brandList" sort="name" />
 
               <TableHeaderCell label="Status" />
 
@@ -175,22 +164,16 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
                   :targetIdentifier="{ brand: item?.slug }"
                 >
                   <i class="fa-solid fa-edit"></i>
-                  {{ __("Edit") }}
+                  {{ __('Edit') }}
                 </InertiaLinkButton>
 
                 <NormalButton
                   v-show="can('brands.delete')"
-                  @click="
-                    softDeleteAction(
-                      'Brand',
-                      'admin.brands.destroy',
-                      item?.slug
-                    )
-                  "
+                  @click="softDeleteAction('Brand', 'admin.brands.destroy', item?.slug)"
                   class="bg-red-600 text-white ring-2 ring-red-300"
                 >
                   <i class="fa-solid fa-trash-can"></i>
-                  {{ __("Delete") }}
+                  {{ __('Delete') }}
                 </NormalButton>
               </TableActionCell>
             </template>
@@ -205,4 +188,3 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions();
     </div>
   </AdminDashboardLayout>
 </template>
-

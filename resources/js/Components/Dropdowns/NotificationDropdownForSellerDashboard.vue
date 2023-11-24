@@ -1,11 +1,9 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link } from '@inertiajs/vue3'
 </script>
 
-  <template>
-  <div
-    class="hs-dropdown relative inline-flex [--trigger:hover] [--placement:bottom-right]"
-  >
+<template>
+  <div class="hs-dropdown relative inline-flex [--trigger:hover] [--placement:bottom-right]">
     <button
       id="hs-dropdown-hover-event"
       type="button"
@@ -24,14 +22,9 @@ import { Link } from "@inertiajs/vue3";
       class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden w-[25rem] h-auto max-h-[40rem] overflow-auto bg-white shadow-md rounded-lg mt-2 border border-gray-300 divide-gray-500 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full"
       aria-labelledby="hs-dropdown-hover-event"
     >
-      <div
-        class="px-4 py-3 bg-gray-100 flex items-center justify-between border-b"
-      >
+      <div class="px-4 py-3 bg-gray-100 flex items-center justify-between border-b">
         <span class="text-gray-700 font-semibold text-md"> Notifications </span>
-        <button
-          href="#"
-          class="text-orange-600 hover:text-orange-500 text-sm font-bold"
-        >
+        <button href="#" class="text-orange-600 hover:text-orange-500 text-sm font-bold">
           Mark all us read
         </button>
       </div>
@@ -100,8 +93,8 @@ import { Link } from "@inertiajs/vue3";
         <div class="w-full ps-3">
           <div class="text-gray-600 text-sm mb-1.5">
             New blog comment from
-            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey,
-            what's up? All set for the presentation?"
+            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
+            for the presentation?"
           </div>
           <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
         </div>
@@ -154,8 +147,8 @@ import { Link } from "@inertiajs/vue3";
         <div class="w-full ps-3">
           <div class="text-gray-600 text-sm mb-1.5">
             New blog comment from
-            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey,
-            what's up? All set for the presentation?"
+            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
+            for the presentation?"
           </div>
           <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
         </div>
@@ -208,8 +201,8 @@ import { Link } from "@inertiajs/vue3";
         <div class="w-full ps-3">
           <div class="text-gray-600 text-sm mb-1.5">
             New blog comment from
-            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey,
-            what's up? All set for the presentation?"
+            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
+            for the presentation?"
           </div>
           <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
         </div>
@@ -262,8 +255,8 @@ import { Link } from "@inertiajs/vue3";
         <div class="w-full ps-3">
           <div class="text-gray-600 text-sm mb-1.5">
             New blog comment from
-            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey,
-            what's up? All set for the presentation?"
+            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
+            for the presentation?"
           </div>
           <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
         </div>
@@ -316,8 +309,8 @@ import { Link } from "@inertiajs/vue3";
         <div class="w-full ps-3">
           <div class="text-gray-600 text-sm mb-1.5">
             New blog comment from
-            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey,
-            what's up? All set for the presentation?"
+            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
+            for the presentation?"
           </div>
           <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
         </div>
@@ -370,8 +363,8 @@ import { Link } from "@inertiajs/vue3";
         <div class="w-full ps-3">
           <div class="text-gray-600 text-sm mb-1.5">
             New blog comment from
-            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey,
-            what's up? All set for the presentation?"
+            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
+            for the presentation?"
           </div>
           <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
         </div>
@@ -424,8 +417,8 @@ import { Link } from "@inertiajs/vue3";
         <div class="w-full ps-3">
           <div class="text-gray-600 text-sm mb-1.5">
             New blog comment from
-            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey,
-            what's up? All set for the presentation?"
+            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
+            for the presentation?"
           </div>
           <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
         </div>
@@ -478,8 +471,8 @@ import { Link } from "@inertiajs/vue3";
         <div class="w-full ps-3">
           <div class="text-gray-600 text-sm mb-1.5">
             New blog comment from
-            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey,
-            what's up? All set for the presentation?"
+            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
+            for the presentation?"
           </div>
           <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
         </div>
@@ -532,8 +525,8 @@ import { Link } from "@inertiajs/vue3";
         <div class="w-full ps-3">
           <div class="text-gray-600 text-sm mb-1.5">
             New blog comment from
-            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey,
-            what's up? All set for the presentation?"
+            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
+            for the presentation?"
           </div>
           <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
         </div>
@@ -586,8 +579,8 @@ import { Link } from "@inertiajs/vue3";
         <div class="w-full ps-3">
           <div class="text-gray-600 text-sm mb-1.5">
             New blog comment from
-            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey,
-            what's up? All set for the presentation?"
+            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
+            for the presentation?"
           </div>
           <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
         </div>
@@ -640,8 +633,8 @@ import { Link } from "@inertiajs/vue3";
         <div class="w-full ps-3">
           <div class="text-gray-600 text-sm mb-1.5">
             New blog comment from
-            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey,
-            what's up? All set for the presentation?"
+            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
+            for the presentation?"
           </div>
           <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
         </div>
@@ -694,8 +687,8 @@ import { Link } from "@inertiajs/vue3";
         <div class="w-full ps-3">
           <div class="text-gray-600 text-sm mb-1.5">
             New blog comment from
-            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey,
-            what's up? All set for the presentation?"
+            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
+            for the presentation?"
           </div>
           <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
         </div>
@@ -748,8 +741,8 @@ import { Link } from "@inertiajs/vue3";
         <div class="w-full ps-3">
           <div class="text-gray-600 text-sm mb-1.5">
             New blog comment from
-            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey,
-            what's up? All set for the presentation?"
+            <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
+            for the presentation?"
           </div>
           <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
         </div>

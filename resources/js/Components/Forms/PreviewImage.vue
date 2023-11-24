@@ -1,12 +1,12 @@
 <script setup>
-import image from "@/assets/images/no-image.jpeg";
+import image from '@/assets/images/no-image.jpeg'
 
 defineProps({
   src: {
     type: String,
-    default: image,
-  },
-});
+    default: image
+  }
+})
 </script>
 
 <template>

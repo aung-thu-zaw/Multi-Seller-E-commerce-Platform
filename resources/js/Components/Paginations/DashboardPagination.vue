@@ -1,17 +1,14 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link } from '@inertiajs/vue3'
 defineProps({
   data: {
-    type: Object,
-  },
-});
+    type: Object
+  }
+})
 </script>
 
 <template>
-  <div
-    v-if="data.data.length !== 0"
-    class="flex flex-col items-center justify-center py-2"
-  >
+  <div v-if="data.data.length !== 0" class="flex flex-col items-center justify-center py-2">
     <p class="font-bold text-gray-600 text-xs mb-3">
       Showing {{ data.from }} - {{ data.to }} of
       {{ data.total }}
@@ -54,5 +51,3 @@ defineProps({
     </div>
   </div>
 </template>
-
-

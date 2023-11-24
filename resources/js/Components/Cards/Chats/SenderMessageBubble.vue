@@ -9,9 +9,7 @@
         </div>
         <!-- End Card -->
 
-        <span
-          class="mt-1.5 ms-auto flex items-center gap-x-1 text-xs text-gray-500"
-        >
+        <span class="mt-1.5 ms-auto flex items-center gap-x-1 text-xs text-gray-500">
           <svg
             class="flex-shrink-0 w-3 h-3"
             xmlns="http://www.w3.org/2000/svg"

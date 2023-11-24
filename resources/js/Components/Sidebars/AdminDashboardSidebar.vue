@@ -1,14 +1,14 @@
 <script setup>
-import UserDropdown from "@/Components/Dropdowns/UserDropdown.vue";
-import { Link } from "@inertiajs/vue3";
-import { ref } from "vue";
-import logo from "@/assets/images/website-logo-color.png";
+import UserDropdown from '@/Components/Dropdowns/UserDropdown.vue'
+import { Link } from '@inertiajs/vue3'
+import { ref } from 'vue'
+import logo from '@/assets/images/website-logo-color.png'
 
-const collapseShow = ref("hidden");
+const collapseShow = ref('hidden')
 
 const toggleCollapseShow = (classes) => {
-  collapseShow.value = classes;
-};
+  collapseShow.value = classes
+}
 </script>
 
 <template>
@@ -57,11 +57,7 @@ const toggleCollapseShow = (classes) => {
                 :href="route('home')"
                 class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm font-bold p-4 px-0"
               >
-                <img
-                  :src="logo"
-                  alt="logo"
-                  class="w-auto h-12 object-contain"
-                />
+                <img :src="logo" alt="logo" class="w-auto h-12 object-contain" />
               </Link>
             </div>
             <div class="w-6/12 flex justify-end">
@@ -89,10 +85,8 @@ const toggleCollapseShow = (classes) => {
         <!-- Divider -->
         <hr class="my-4 md:min-w-full" />
         <!-- Heading -->
-        <h6
-          class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline"
-        >
-          {{ __("E-commerce Administration") }}
+        <h6 class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline">
+          {{ __('E-commerce Administration') }}
         </h6>
         <!-- Navigation -->
 
@@ -103,14 +97,12 @@ const toggleCollapseShow = (classes) => {
               <div
                 class="text-xs py-3 font-bold block"
                 :class="{
-                  'text-blue-600 hover:text-blue-500':
-                    $page.url === '/admin/dashboard',
-                  'text-slate-600 hover:text-slate-500':
-                    $page.url !== '/admin/dashboard',
+                  'text-blue-600 hover:text-blue-500': $page.url === '/admin/dashboard',
+                  'text-slate-600 hover:text-slate-500': $page.url !== '/admin/dashboard'
                 }"
               >
                 <i class="fas fa-tv mr-2"></i>
-                {{ __("Dashboard") }}
+                {{ __('Dashboard') }}
               </div>
             </Link>
           </li>
@@ -123,18 +115,16 @@ const toggleCollapseShow = (classes) => {
                 page: 1,
                 per_page: 5,
                 sort: 'id',
-                direction: 'desc',
+                direction: 'desc'
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500':
-                  $page.url.startsWith('/admin/categories'),
-                'text-slate-600 hover:text-slate-500':
-                  !$page.url.startsWith('/admin/categories'),
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/categories'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/categories')
               }"
             >
               <i class="fa-solid fa-list mr-2"></i>
-              {{ __("Categories") }}
+              {{ __('Categories') }}
             </Link>
           </li>
 
@@ -146,18 +136,16 @@ const toggleCollapseShow = (classes) => {
                 page: 1,
                 per_page: 5,
                 sort: 'id',
-                direction: 'desc',
+                direction: 'desc'
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500':
-                  $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500':
-                  !$page.url.startsWith('/admin/brands'),
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
               }"
             >
               <i class="fa-solid fa-award mr-2"></i>
-              {{ __("Brands") }}
+              {{ __('Brands') }}
             </Link>
           </li>
 
@@ -169,18 +157,16 @@ const toggleCollapseShow = (classes) => {
                 page: 1,
                 per_page: 5,
                 sort: 'id',
-                direction: 'desc',
+                direction: 'desc'
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500':
-                  $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500':
-                  !$page.url.startsWith('/admin/brands'),
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
               }"
             >
               <i class="fa-solid fa-basket-shopping mr-2"></i>
-              {{ __("Products") }}
+              {{ __('Products') }}
             </Link>
           </li>
 
@@ -192,18 +178,16 @@ const toggleCollapseShow = (classes) => {
                 page: 1,
                 per_page: 5,
                 sort: 'id',
-                direction: 'desc',
+                direction: 'desc'
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500':
-                  $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500':
-                  !$page.url.startsWith('/admin/brands'),
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
               }"
             >
               <i class="fa-solid fa-box mr-2"></i>
-              {{ __("Collections") }}
+              {{ __('Collections') }}
             </Link>
           </li>
 
@@ -215,18 +199,16 @@ const toggleCollapseShow = (classes) => {
                 page: 1,
                 per_page: 5,
                 sort: 'id',
-                direction: 'desc',
+                direction: 'desc'
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500':
-                  $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500':
-                  !$page.url.startsWith('/admin/brands'),
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
               }"
             >
               <i class="fa-solid fa-bolt-lightning mr-2"></i>
-              {{ __("Flash Sales") }}
+              {{ __('Flash Sales') }}
             </Link>
           </li>
 
@@ -238,7 +220,7 @@ const toggleCollapseShow = (classes) => {
             >
               <span>
                 <i class="fa-solid fa-ad mr-1.5"></i>
-                {{ __("Banners") }}
+                {{ __('Banners') }}
               </span>
               <span>
                 <svg
@@ -286,17 +268,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Slider Banners") }}
+                    {{ __('Slider Banners') }}
                   </Link>
                 </li>
                 <li v-show="can('categories.view')" class="items-center">
@@ -306,17 +288,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Campaign Banners") }}
+                    {{ __('Campaign Banners') }}
                   </Link>
                 </li>
 
@@ -327,17 +309,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Product Banners") }}
+                    {{ __('Product Banners') }}
                   </Link>
                 </li>
               </ul>
@@ -352,18 +334,16 @@ const toggleCollapseShow = (classes) => {
                 page: 1,
                 per_page: 5,
                 sort: 'id',
-                direction: 'desc',
+                direction: 'desc'
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500':
-                  $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500':
-                  !$page.url.startsWith('/admin/brands'),
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
               }"
             >
               <i class="fa-solid fa-ticket mr-2"></i>
-              {{ __("Coupons") }}
+              {{ __('Coupons') }}
             </Link>
           </li>
         </ul>
@@ -371,10 +351,8 @@ const toggleCollapseShow = (classes) => {
         <!-- Divider -->
         <hr class="my-4 md:min-w-full" />
         <!-- Heading -->
-        <h6
-          class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline"
-        >
-          {{ __("Shipping & Order Management") }}
+        <h6 class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline">
+          {{ __('Shipping & Order Management') }}
         </h6>
         <!-- Navigation -->
 
@@ -387,7 +365,7 @@ const toggleCollapseShow = (classes) => {
             >
               <span>
                 <i class="fa-solid fa-boxes-packing mr-1.5"></i>
-                {{ __("Order Management") }}
+                {{ __('Order Management') }}
               </span>
               <span>
                 <svg
@@ -435,17 +413,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("All Orders") }}
+                    {{ __('All Orders') }}
                   </Link>
                 </li>
                 <li v-show="can('categories.view')" class="items-center">
@@ -455,17 +433,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Return Orders") }}
+                    {{ __('Return Orders') }}
                   </Link>
                 </li>
 
@@ -476,17 +454,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Cancel Orders") }}
+                    {{ __('Cancel Orders') }}
                   </Link>
                 </li>
               </ul>
@@ -494,17 +472,14 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- Geographic Hierarchy -->
-          <li
-            class="hs-accordion items-center"
-            id="geographic-hierarchy-accordion"
-          >
+          <li class="hs-accordion items-center" id="geographic-hierarchy-accordion">
             <button
               type="button"
               class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
             >
               <span>
                 <i class="fa-solid fa-book-atlas mr-1.5"></i>
-                {{ __("Geographic Hierarchy") }}
+                {{ __('Geographic Hierarchy') }}
               </span>
               <span>
                 <svg
@@ -552,17 +527,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Countries") }}
+                    {{ __('Countries') }}
                   </Link>
                 </li>
                 <li v-show="can('categories.view')" class="items-center">
@@ -572,17 +547,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Regions") }}
+                    {{ __('Regions') }}
                   </Link>
                 </li>
 
@@ -593,17 +568,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Cities") }}
+                    {{ __('Cities') }}
                   </Link>
                 </li>
               </ul>
@@ -618,18 +593,16 @@ const toggleCollapseShow = (classes) => {
                 page: 1,
                 per_page: 5,
                 sort: 'id',
-                direction: 'desc',
+                direction: 'desc'
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500':
-                  $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500':
-                  !$page.url.startsWith('/admin/brands'),
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
               }"
             >
               <i class="fa-solid fa-map-location-dot mr-2"></i>
-              {{ __("Shipping Areas") }}
+              {{ __('Shipping Areas') }}
             </Link>
           </li>
 
@@ -641,18 +614,16 @@ const toggleCollapseShow = (classes) => {
                 page: 1,
                 per_page: 5,
                 sort: 'id',
-                direction: 'desc',
+                direction: 'desc'
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500':
-                  $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500':
-                  !$page.url.startsWith('/admin/brands'),
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
               }"
             >
               <i class="fa-solid fa-truck mr-2"></i>
-              {{ __("Shipping Methods") }}
+              {{ __('Shipping Methods') }}
             </Link>
           </li>
 
@@ -664,18 +635,16 @@ const toggleCollapseShow = (classes) => {
                 page: 1,
                 per_page: 5,
                 sort: 'id',
-                direction: 'desc',
+                direction: 'desc'
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500':
-                  $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500':
-                  !$page.url.startsWith('/admin/brands'),
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
               }"
             >
               <i class="fa-solid fa-sack-dollar mr-2"></i>
-              {{ __("Shipping Rates") }}
+              {{ __('Shipping Rates') }}
             </Link>
           </li>
         </ul>
@@ -683,10 +652,8 @@ const toggleCollapseShow = (classes) => {
         <!-- Divider -->
         <hr class="my-4 md:min-w-full" />
         <!-- Heading -->
-        <h6
-          class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline"
-        >
-          {{ __("Management & Oversight") }}
+        <h6 class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline">
+          {{ __('Management & Oversight') }}
         </h6>
         <!-- Navigation -->
 
@@ -699,7 +666,7 @@ const toggleCollapseShow = (classes) => {
             >
               <span>
                 <i class="fa-solid fa-file-pen mr-1.5"></i>
-                {{ __("Blog Management") }}
+                {{ __('Blog Management') }}
               </span>
               <span>
                 <svg
@@ -747,17 +714,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/blog-categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/blog-categories'),
+                        !$page.url.startsWith('/admin/blog-categories')
                     }"
                   >
-                    {{ __("Blog Categories") }}
+                    {{ __('Blog Categories') }}
                   </Link>
                 </li>
                 <li v-show="can('blog-contents.view')" class="items-center">
@@ -767,17 +734,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/blog-contents'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/blog-contents'),
+                        !$page.url.startsWith('/admin/blog-contents')
                     }"
                   >
-                    {{ __("Blog Contents") }}
+                    {{ __('Blog Contents') }}
                   </Link>
                 </li>
 
@@ -788,17 +755,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Comments & Replies") }}
+                    {{ __('Comments & Replies') }}
                   </Link>
                 </li>
               </ul>
@@ -806,17 +773,14 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- Review Managements -->
-          <li
-            class="hs-accordion items-center"
-            id="review-management-accordion"
-          >
+          <li class="hs-accordion items-center" id="review-management-accordion">
             <button
               type="button"
               class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
             >
               <span>
                 <i class="fa-solid fa-star mr-1.5"></i>
-                {{ __("Review Management") }}
+                {{ __('Review Management') }}
               </span>
               <span>
                 <svg
@@ -864,17 +828,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Product Reviews") }}
+                    {{ __('Product Reviews') }}
                   </Link>
                 </li>
                 <li v-show="can('categories.view')" class="items-center">
@@ -884,17 +848,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Store Reviews") }}
+                    {{ __('Store Reviews') }}
                   </Link>
                 </li>
               </ul>
@@ -902,17 +866,14 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- Account Managements -->
-          <li
-            class="hs-accordion items-center"
-            id="account-management-accordion"
-          >
+          <li class="hs-accordion items-center" id="account-management-accordion">
             <button
               type="button"
               class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
             >
               <span>
                 <i class="fa-solid fa-user-gear mr-1.5"></i>
-                {{ __("Account Management") }}
+                {{ __('Account Management') }}
               </span>
               <span>
                 <svg
@@ -960,17 +921,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Registered Accounts") }}
+                    {{ __('Registered Accounts') }}
                   </Link>
                 </li>
                 <li v-show="can('categories.view')" class="items-center">
@@ -980,17 +941,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Seller Manage") }}
+                    {{ __('Seller Manage') }}
                   </Link>
                 </li>
                 <li v-show="can('categories.view')" class="items-center">
@@ -1000,17 +961,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Admin Manage") }}
+                    {{ __('Admin Manage') }}
                   </Link>
                 </li>
               </ul>
@@ -1018,17 +979,14 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- Authority Managements -->
-          <li
-            class="hs-accordion items-center"
-            id="review-management-accordion"
-          >
+          <li class="hs-accordion items-center" id="review-management-accordion">
             <button
               type="button"
               class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
             >
               <span>
                 <i class="fa-solid fa-user-shield mr-1.5"></i>
-                {{ __("Authority Management") }}
+                {{ __('Authority Management') }}
               </span>
               <span>
                 <svg
@@ -1076,17 +1034,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Roles") }}
+                    {{ __('Roles') }}
                   </Link>
                 </li>
                 <li v-show="can('categories.view')" class="items-center">
@@ -1096,17 +1054,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Permissions") }}
+                    {{ __('Permissions') }}
                   </Link>
                 </li>
                 <li v-show="can('categories.view')" class="items-center">
@@ -1116,17 +1074,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Assign Role Permissions") }}
+                    {{ __('Assign Role Permissions') }}
                   </Link>
                 </li>
               </ul>
@@ -1137,10 +1095,8 @@ const toggleCollapseShow = (classes) => {
         <!-- Divider -->
         <hr class="my-4 md:min-w-full" />
         <!-- Heading -->
-        <h6
-          class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline"
-        >
-          {{ __("Subscribers & Newsletters") }}
+        <h6 class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline">
+          {{ __('Subscribers & Newsletters') }}
         </h6>
         <!-- Navigation -->
 
@@ -1153,18 +1109,16 @@ const toggleCollapseShow = (classes) => {
                 page: 1,
                 per_page: 5,
                 sort: 'id',
-                direction: 'desc',
+                direction: 'desc'
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500':
-                  $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500':
-                  !$page.url.startsWith('/admin/brands'),
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
               }"
             >
               <i class="fa-solid fa-bell mr-2"></i>
-              {{ __("Subscribers") }}
+              {{ __('Subscribers') }}
             </Link>
           </li>
 
@@ -1176,18 +1130,16 @@ const toggleCollapseShow = (classes) => {
                 page: 1,
                 per_page: 5,
                 sort: 'id',
-                direction: 'desc',
+                direction: 'desc'
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500':
-                  $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500':
-                  !$page.url.startsWith('/admin/brands'),
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
               }"
             >
               <i class="fa-solid fa-envelope-open-text mr-2"></i>
-              {{ __("Newsletters") }}
+              {{ __('Newsletters') }}
             </Link>
           </li>
         </ul>
@@ -1195,10 +1147,8 @@ const toggleCollapseShow = (classes) => {
         <!-- Divider -->
         <hr class="my-4 md:min-w-full" />
         <!-- Heading -->
-        <h6
-          class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline"
-        >
-          {{ __("Support & Content") }}
+        <h6 class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline">
+          {{ __('Support & Content') }}
         </h6>
         <!-- Navigation -->
 
@@ -1211,18 +1161,16 @@ const toggleCollapseShow = (classes) => {
                 page: 1,
                 per_page: 5,
                 sort: 'id',
-                direction: 'desc',
+                direction: 'desc'
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500':
-                  $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500':
-                  !$page.url.startsWith('/admin/brands'),
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
               }"
             >
               <i class="fa-solid fa-message mr-2"></i>
-              {{ __("Chats") }}
+              {{ __('Chats') }}
             </Link>
           </li>
 
@@ -1234,7 +1182,7 @@ const toggleCollapseShow = (classes) => {
             >
               <span>
                 <i class="fa-solid fa-file-circle-question mr-1.5"></i>
-                {{ __("FAQs") }}
+                {{ __('FAQs') }}
               </span>
               <span>
                 <svg
@@ -1282,17 +1230,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Categories") }}
+                    {{ __('Categories') }}
                   </Link>
                 </li>
                 <li v-show="can('categories.view')" class="items-center">
@@ -1302,17 +1250,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Subcategories") }}
+                    {{ __('Subcategories') }}
                   </Link>
                 </li>
 
@@ -1323,17 +1271,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Faqs") }}
+                    {{ __('Faqs') }}
                   </Link>
                 </li>
               </ul>
@@ -1348,7 +1296,7 @@ const toggleCollapseShow = (classes) => {
             >
               <span>
                 <i class="fa-solid fa-file-lines mr-1.5"></i>
-                {{ __("Pages") }}
+                {{ __('Pages') }}
               </span>
               <span>
                 <svg
@@ -1396,17 +1344,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("About Us") }}
+                    {{ __('About Us') }}
                   </Link>
                 </li>
                 <li v-show="can('categories.view')" class="items-center">
@@ -1416,38 +1364,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Our History") }}
-                  </Link>
-                </li>
-
-                <li v-show="can('categories.view')" class="items-center">
-                  <Link
-                    :href="route('admin.categories.index')"
-                    :data="{
-                      page: 1,
-                      per_page: 5,
-                      sort: 'id',
-                      direction: 'desc',
-                    }"
-                    class="text-xs py-3 font-bold block"
-                    :class="{
-                      'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
-                      'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
-                    }"
-                  >
-                    {{ __("Terms & Conditions") }}
+                    {{ __('Our History') }}
                   </Link>
                 </li>
 
@@ -1458,17 +1385,17 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Privacy & Policy") }}
+                    {{ __('Terms & Conditions') }}
                   </Link>
                 </li>
 
@@ -1479,17 +1406,38 @@ const toggleCollapseShow = (classes) => {
                       page: 1,
                       per_page: 5,
                       sort: 'id',
-                      direction: 'desc',
+                      direction: 'desc'
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
                         $page.url.startsWith('/admin/categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories'),
+                        !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __("Returns & Refunds") }}
+                    {{ __('Privacy & Policy') }}
+                  </Link>
+                </li>
+
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc'
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories')
+                    }"
+                  >
+                    {{ __('Returns & Refunds') }}
                   </Link>
                 </li>
               </ul>
@@ -1500,10 +1448,8 @@ const toggleCollapseShow = (classes) => {
         <!-- Divider -->
         <hr class="my-4 md:min-w-full" />
         <!-- Heading -->
-        <h6
-          class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline"
-        >
-          {{ __("Website Configuration") }}
+        <h6 class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline">
+          {{ __('Website Configuration') }}
         </h6>
         <!-- Navigation -->
 
@@ -1516,18 +1462,16 @@ const toggleCollapseShow = (classes) => {
                 page: 1,
                 per_page: 5,
                 sort: 'id',
-                direction: 'desc',
+                direction: 'desc'
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500':
-                  $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500':
-                  !$page.url.startsWith('/admin/brands'),
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
               }"
             >
               <i class="fa-solid fa-gears mr-2"></i>
-              {{ __("Settings") }}
+              {{ __('Settings') }}
             </Link>
           </li>
         </ul>
@@ -1535,10 +1479,8 @@ const toggleCollapseShow = (classes) => {
         <!-- Divider -->
         <hr class="my-4 md:min-w-full" />
         <!-- Heading -->
-        <h6
-          class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline"
-        >
-          {{ __("Important Operations") }}
+        <h6 class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline">
+          {{ __('Important Operations') }}
         </h6>
         <!-- Navigation -->
 
@@ -1551,18 +1493,16 @@ const toggleCollapseShow = (classes) => {
                 page: 1,
                 per_page: 5,
                 sort: 'id',
-                direction: 'desc',
+                direction: 'desc'
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500':
-                  $page.url.startsWith('/admin/brands'),
-                'text-red-600 hover:text-red-500':
-                  !$page.url.startsWith('/admin/brands'),
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
+                'text-red-600 hover:text-red-500': !$page.url.startsWith('/admin/brands')
               }"
             >
               <i class="fa-solid fa-database mr-2"></i>
-              {{ __("Clear Database") }}
+              {{ __('Clear Database') }}
             </Link>
           </li>
         </ul>
@@ -1570,13 +1510,3 @@ const toggleCollapseShow = (classes) => {
     </div>
   </nav>
 </template>
-
-
-
-
-
-
-
-
-
-

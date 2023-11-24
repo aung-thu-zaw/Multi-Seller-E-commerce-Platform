@@ -1,26 +1,26 @@
 <script setup>
-import { router, usePage } from "@inertiajs/vue3";
-import { ref, watch } from "vue";
+import { router, usePage } from '@inertiajs/vue3'
+import { ref, watch } from 'vue'
 
 const props = defineProps({
   to: {
     type: String,
-    required: true,
+    required: true
   },
 
   placeholder: {
     type: String,
-    default: "Search by name ...",
-  },
-});
+    default: 'Search by name ...'
+  }
+})
 
-const search = ref(usePage().props.ziggy.query?.search);
+const search = ref(usePage().props.ziggy.query?.search)
 
-const delayedSearch = ref(null);
+const delayedSearch = ref(null)
 
 const handleSearch = () => {
   if (delayedSearch.value) {
-    clearTimeout(delayedSearch.value);
+    clearTimeout(delayedSearch.value)
   }
   delayedSearch.value = setTimeout(() => {
     router.get(
@@ -34,18 +34,18 @@ const handleSearch = () => {
         created_until: usePage().props.ziggy.query?.created_until,
         deleted_from: usePage().props.ziggy.query?.deleted_from,
         deleted_until: usePage().props.ziggy.query?.deleted_until,
-        filter_by_status: usePage().props.ziggy.query?.filter_by_status,
+        filter_by_status: usePage().props.ziggy.query?.filter_by_status
       },
       {
         replace: true,
-        preserveState: true,
+        preserveState: true
       }
-    );
-  }, 400);
-};
+    )
+  }, 400)
+}
 
 const removeSearch = () => {
-  search.value = "";
+  search.value = ''
   router.get(
     route(props.to),
     {
@@ -56,40 +56,35 @@ const removeSearch = () => {
       created_until: usePage().props.ziggy.query?.created_until,
       deleted_from: usePage().props.ziggy.query?.deleted_from,
       deleted_until: usePage().props.ziggy.query?.deleted_until,
-      filter_by_status: usePage().props.ziggy.query?.filter_by_status,
+      filter_by_status: usePage().props.ziggy.query?.filter_by_status
     },
     {
       replace: true,
-      preserveState: true,
+      preserveState: true
     }
-  );
-};
+  )
+}
 
 watch(
   () => search.value,
   () => {
-    if (search.value === "") {
-      removeSearch();
+    if (search.value === '') {
+      removeSearch()
     } else {
-      handleSearch();
+      handleSearch()
     }
   }
-);
+)
 </script>
 
 <template>
   <div class="min-w-[300px] max-w-[400px] w-full">
     <form>
-      <label
-        for="default-search"
-        class="mb-2 text-sm font-medium text-gray-900 sr-only"
-      >
+      <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">
         Search
       </label>
       <div class="relative">
-        <div
-          class="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none"
-        >
+        <div class="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none">
           <svg
             class="w-4 h-4 text-gray-500"
             aria-hidden="true"

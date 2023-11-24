@@ -1,23 +1,23 @@
 <script setup>
-import SortingArrow from "../SortingArrows.vue";
-import { useSorting } from "@/Composables/useSorting";
+import SortingArrow from '../SortingArrows.vue'
+import { useSorting } from '@/Composables/useSorting'
 
 const props = defineProps({
   label: {
     type: String,
-    required: true,
+    required: true
   },
   to: {
     type: String,
-    required: true,
+    required: true
   },
   sort: {
     type: String,
-    default: "desc",
-  },
-});
+    default: 'desc'
+  }
+})
 
-const { params, updateSorting } = useSorting(props.to);
+const { params, updateSorting } = useSorting(props.to)
 </script>
 
 <template>

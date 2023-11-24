@@ -1,57 +1,55 @@
 <script setup>
-import AdminDashboardLayout from "@/Layouts/AdminDashboardLayout.vue";
-import Breadcrumb from "@/Components/Breadcrumbs/Breadcrumb.vue";
-import BreadcrumbItem from "@/Components/Breadcrumbs/BreadcrumbItem.vue";
-import PreviewImage from "@/Components/Forms/PreviewImage.vue";
-import InputLabel from "@/Components/Forms/Fields/InputLabel.vue";
-import InputError from "@/Components/Forms/Fields/InputError.vue";
-import InputField from "@/Components/Forms/Fields/InputField.vue";
-import SelectBox from "@/Components/Forms/Fields/SelectBox.vue";
-import FileInput from "@/Components/Forms/Fields/FileInput.vue";
-import FormButton from "@/Components/Buttons/FormButton.vue";
-import GoBackButton from "@/Components/Buttons/GoBackButton.vue";
-import { useImagePreview } from "@/Composables/useImagePreview";
-import { useResourceActions } from "@/Composables/useResourceActions";
-import { Head, usePage } from "@inertiajs/vue3";
-import { useQueryStringParams } from "@/Composables/useQueryStringParams";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { computed, ref } from "vue";
+import AdminDashboardLayout from '@/Layouts/AdminDashboardLayout.vue'
+import Breadcrumb from '@/Components/Breadcrumbs/Breadcrumb.vue'
+import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
+import PreviewImage from '@/Components/Forms/PreviewImage.vue'
+import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
+import InputError from '@/Components/Forms/Fields/InputError.vue'
+import InputField from '@/Components/Forms/Fields/InputField.vue'
+import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
+import FileInput from '@/Components/Forms/Fields/FileInput.vue'
+import FormButton from '@/Components/Buttons/FormButton.vue'
+import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
+import { useImagePreview } from '@/Composables/useImagePreview'
+import { useResourceActions } from '@/Composables/useResourceActions'
+import { Head, usePage } from '@inertiajs/vue3'
+import { useQueryStringParams } from '@/Composables/useQueryStringParams'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import { computed, ref } from 'vue'
 
-const props = defineProps({ blogCategories: Object, blogContent: Object });
+const props = defineProps({ blogCategories: Object, blogContent: Object })
 
-const tag = ref(null);
+const tag = ref(null)
 
-const tags = computed(() => props.blogContent.blog_tags.map((tag) => tag.name));
+const tags = computed(() => props.blogContent.blog_tags.map((tag) => tag.name))
 
-const editor = ClassicEditor;
+const editor = ClassicEditor
 
-const blogContentList = "admin.blog-contents.index";
+const blogContentList = 'admin.blog-contents.index'
 
-const { queryStringParams } = useQueryStringParams();
+const { queryStringParams } = useQueryStringParams()
 
-const { previewImage, setImagePreview } = useImagePreview(
-  props.blogContent?.thumbnail
-);
+const { previewImage, setImagePreview } = useImagePreview(props.blogContent?.thumbnail)
 
 const handleChangeImage = (file) => {
-  setImagePreview(file);
-  form.thumbnail = file;
-};
+  setImagePreview(file)
+  form.thumbnail = file
+}
 
 const createTag = (e) => {
-  if (e.key === ",") {
-    tag.value = tag.value.split(",").join("").toLowerCase();
-    tag.value !== "" ? form.tags.push(tag.value) : null;
-    tag.value = "";
+  if (e.key === ',') {
+    tag.value = tag.value.split(',').join('').toLowerCase()
+    tag.value !== '' ? form.tags.push(tag.value) : null
+    tag.value = ''
   }
-  form.tags = [...new Set(form.tags)];
-};
+  form.tags = [...new Set(form.tags)]
+}
 
 const removeTag = (removeTag) => {
   form.tags = form.tags.filter((tag) => {
-    return tag !== removeTag;
-  });
-};
+    return tag !== removeTag
+  })
+}
 
 const { form, processing, errors, editAction } = useResourceActions({
   blog_category_id: props.blogContent?.blog_category_id,
@@ -60,8 +58,8 @@ const { form, processing, errors, editAction } = useResourceActions({
   content: props.blogContent?.content,
   status: props.blogContent?.status,
   thumbnail: props.blogContent?.thumbnail,
-  tags: [...tags.value],
-});
+  tags: [...tags.value]
+})
 </script>
 
 <template>
@@ -71,11 +69,7 @@ const { form, processing, errors, editAction } = useResourceActions({
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb
-          :to="blogContentList"
-          icon="fa-newspaper"
-          label="Blog Contents"
-        >
+        <Breadcrumb :to="blogContentList" icon="fa-newspaper" label="Blog Contents">
           <BreadcrumbItem :label="blogContent?.title" />
           <BreadcrumbItem label="Edit" />
         </Breadcrumb>
@@ -89,11 +83,7 @@ const { form, processing, errors, editAction } = useResourceActions({
       <div class="border p-10 bg-white rounded-md">
         <form
           @submit.prevent="
-            editAction(
-              'Blog Content',
-              'admin.blog-contents.update',
-              blogContent?.slug
-            )
+            editAction('Blog Content', 'admin.blog-contents.update', blogContent?.slug)
           "
           class="space-y-4 md:space-y-6"
         >
@@ -121,7 +111,7 @@ const { form, processing, errors, editAction } = useResourceActions({
               :editor="editor"
               v-model="form.content"
               :config="{
-                placeholder: __('Enter :label', { label: __('Blog Content') }),
+                placeholder: __('Enter :label', { label: __('Blog Content') })
               }"
             ></ckeditor>
 
@@ -151,8 +141,7 @@ const { form, processing, errors, editAction } = useResourceActions({
               name="blog-tag"
               v-model="tag"
               :placeholder="
-                __('Enter :label', { label: __('Blog Tags') }) +
-                '( Eg. travel, sports, etc... )'
+                __('Enter :label', { label: __('Blog Tags') }) + '( Eg. travel, sports, etc... )'
               "
               @keyup="createTag"
             />
@@ -164,10 +153,7 @@ const { form, processing, errors, editAction } = useResourceActions({
                 class="space-x-3 bg-orange-600 inline-block px-2.5 text-xs font-bold py-1.5 rounded-sm text-white my-3"
               >
                 <span>{{ tag }}</span>
-                <span
-                  @click="removeTag(tag)"
-                  class="cursor-pointer hover:text-orange-200"
-                >
+                <span @click="removeTag(tag)" class="cursor-pointer hover:text-orange-200">
                   <i class="fa-solid fa-circle-xmark"></i>
                 </span>
               </div>
@@ -192,7 +178,7 @@ const { form, processing, errors, editAction } = useResourceActions({
           <InputError :message="errors?.captcha_token" />
 
           <FormButton type="submit" :processing="processing">
-            {{ __("Save Changes") }}
+            {{ __('Save Changes') }}
           </FormButton>
         </form>
       </div>

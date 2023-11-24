@@ -1,16 +1,16 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link } from '@inertiajs/vue3'
 
 defineProps({
   label: {
     type: String,
-    required: true,
+    required: true
   },
   to: {
     type: String,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 </script>
 
 <template>
@@ -23,7 +23,7 @@ defineProps({
           page: 1,
           per_page: 5,
           sort: 'id',
-          direction: 'desc',
+          direction: 'desc'
         }"
         class="ml-1 text-sm font-semibold text-blueGray-600 hover:text-blue-600 md:ml-2"
       >

@@ -8,9 +8,7 @@
           placeholder="Type a message ..."
         />
 
-        <div
-          class="absolute top-1/3 left-4 text-sm flex items-center space-x-3 text-gray-500"
-        >
+        <div class="absolute top-1/3 left-4 text-sm flex items-center space-x-3 text-gray-500">
           <!-- File Attachment -->
           <label for="input-file">
             <div class="hover:text-orange-500 cursor-pointer">

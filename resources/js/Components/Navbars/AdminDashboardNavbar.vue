@@ -1,7 +1,7 @@
 <script setup>
-import UserDropdown from "@/Components/Dropdowns/UserDropdown.vue";
-import LanguageDropdownForDashboard from "@/Components/Dropdowns/LanguageDropdownForDashboard.vue";
-import NotificationDropdownForAdminDashboard from "@/Components/Dropdowns/NotificationDropdownForAdminDashboard.vue";
+import UserDropdown from '@/Components/Dropdowns/UserDropdown.vue'
+import LanguageDropdownForDashboard from '@/Components/Dropdowns/LanguageDropdownForDashboard.vue'
+import NotificationDropdownForAdminDashboard from '@/Components/Dropdowns/NotificationDropdownForAdminDashboard.vue'
 </script>
 
 <template>
@@ -13,13 +13,9 @@ import NotificationDropdownForAdminDashboard from "@/Components/Dropdowns/Notifi
       class="w-full mx-auto items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4"
     >
       <!-- Brand -->
-      <span class="text-white text-sm hidden lg:inline-block font-bold">
-        Admin Dashboard
-      </span>
+      <span class="text-white text-sm hidden lg:inline-block font-bold"> Admin Dashboard </span>
       <!-- Form -->
-      <form
-        class="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3 w-[250px]"
-      >
+      <form class="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3 w-[250px]">
         <div class="relative flex w-full flex-wrap items-stretch">
           <span
             class="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3"
@@ -34,9 +30,7 @@ import NotificationDropdownForAdminDashboard from "@/Components/Dropdowns/Notifi
         </div>
       </form>
       <!-- User -->
-      <ul
-        class="z-50 flex-col md:flex-row list-none items-center hidden md:flex space-x-3"
-      >
+      <ul class="z-50 flex-col md:flex-row list-none items-center hidden md:flex space-x-3">
         <!-- Admin Dashboard Notification Dropdown -->
         <NotificationDropdownForAdminDashboard />
 
