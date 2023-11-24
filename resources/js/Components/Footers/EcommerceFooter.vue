@@ -82,14 +82,20 @@ import { Link } from '@inertiajs/vue3'
 
           <div class="mt-3 grid space-y-3">
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+              <Link
+                :href="route('help-center')"
+                class="inline-flex gap-x-2 text-white hover:text-gray-300"
+              >
                 {{ __('Help Center') }}
-              </a>
+              </Link>
             </p>
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+              <Link
+                :href="route('contact-us')"
+                class="inline-flex gap-x-2 text-white hover:text-gray-300"
+              >
                 {{ __('Contact us') }}
-              </a>
+              </Link>
             </p>
             <p>
               <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">

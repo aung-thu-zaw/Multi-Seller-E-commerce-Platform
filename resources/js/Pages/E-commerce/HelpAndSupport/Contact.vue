@@ -8,20 +8,20 @@ import { Head } from '@inertiajs/vue3'
 </script>
 
 <template>
-  <Head title="Support Contact : E-commerce Online Shopping" />
+  <Head :title="__('Contact us')" />
 
   <AppLayout>
     <!-- Contact Us -->
     <div class="max-w-[85rem] px-14 py-14 mx-auto">
       <div class="text-center">
-        <h1 class="text-2xl font-bold">Contact us</h1>
-        <p class="mt-1 text-gray-600">We'd love to talk about how we can help you.</p>
+        <h1 class="text-2xl font-bold mb-3">{{ __('Contact us') }}</h1>
+        <p class="mt-1 text-gray-600">{{ __("We'd love to talk about how we can help you.") }}</p>
       </div>
 
       <div class="mt-12 grid items-center lg:grid-cols-2 gap-6 lg:gap-16">
         <!-- Card -->
         <div class="flex flex-col border rounded-xl p-4 sm:p-6 lg:p-8">
-          <h2 class="mb-8 text-xl font-semibold text-gray-800">Fill in the form</h2>
+          <h2 class="mb-8 text-xl font-semibold text-gray-800">{{ __('Fill in the form') }}</h2>
 
           <form class="space-y-4 md:space-y-6">
             <div>
@@ -30,7 +30,7 @@ import { Head } from '@inertiajs/vue3'
               <InputField
                 type="text"
                 name="contact-name"
-                :placeholder="__('Enter Your Full Name')"
+                :placeholder="__('Enter :label', { label: __('Your Full Name') })"
                 autofocus
                 required
               />
@@ -40,12 +40,12 @@ import { Head } from '@inertiajs/vue3'
 
             <div class="grid grid-cols-2 gap-3">
               <div>
-                <InputLabel :label="__('Email')" required />
+                <InputLabel :label="__('Email Address')" required />
 
                 <InputField
                   type="email"
                   name="contact-email"
-                  :placeholder="__('Enter Your Email')"
+                  :placeholder="__('Enter :label', { label: __('Your Email Address') })"
                   required
                 />
 
@@ -53,12 +53,12 @@ import { Head } from '@inertiajs/vue3'
               </div>
 
               <div>
-                <InputLabel :label="__('Phone')" required />
+                <InputLabel :label="__('Phone Number')" required />
 
                 <InputField
                   type="number"
                   name="contact-phone"
-                  :placeholder="__('Enter Your Phone Number')"
+                  :placeholder="__('Enter :label', { label: __('Your Phone Number') })"
                   required
                 />
 
@@ -67,9 +67,13 @@ import { Head } from '@inertiajs/vue3'
             </div>
 
             <div>
-              <InputLabel :label="__('Details')" required />
+              <InputLabel :label="__('Messages')" required />
 
-              <TextAreaField name="contact-detail" :placeholder="__('Enter Detail...')" required />
+              <TextAreaField
+                name="contact-detail"
+                :placeholder="__('Enter :label', { label: __('Messages') })"
+                required
+              />
 
               <!-- <InputError message="" /> -->
             </div>
@@ -108,15 +112,19 @@ import { Head } from '@inertiajs/vue3'
               <path d="M12 17h.01" />
             </svg>
             <div class="grow">
-              <h3 class="font-semibold text-gray-800">Help Center</h3>
+              <h3 class="font-semibold text-gray-800">{{ __('Help Center') }}</h3>
               <p class="mt-1 text-sm text-gray-500">
-                "Got a question about your purchase or need some guidance? We're here to help!"
+                "{{
+                  __(
+                    "Got a question about your purchase or need some guidance? We're here to help!"
+                  )
+                }}"
               </p>
               <a
-                class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800"
+                class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-orange-600"
                 href="#"
               >
-                Go To Help Center
+                {{ __('Go To Help Center') }}
                 <svg
                   class="flex-shrink-0 w-2.5 h-2.5 transition ease-in-out group-hover:translate-x-1"
                   width="16"
@@ -155,15 +163,19 @@ import { Head } from '@inertiajs/vue3'
               <path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1" />
             </svg>
             <div class="grow">
-              <h3 class="font-semibold text-gray-800">FAQ</h3>
+              <h3 class="font-semibold text-gray-800">{{ __('FAQs') }}</h3>
               <p class="mt-1 text-sm text-gray-500">
-                "Find answers to common questions about shopping, orders, and more in our FAQ."
+                "{{
+                  __(
+                    'Find answers to common questions about shopping, orders, and more in our FAQ.'
+                  )
+                }}"
               </p>
               <a
-                class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800"
+                class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-orange-600"
                 href="#"
               >
-                Visit FAQ
+                {{ __('Visit FAQ') }}
                 <svg
                   class="flex-shrink-0 w-2.5 h-2.5 transition ease-in-out group-hover:translate-x-1"
                   width="16"
@@ -201,9 +213,9 @@ import { Head } from '@inertiajs/vue3'
               ></path>
             </svg>
             <div class="grow">
-              <h3 class="font-semibold text-gray-800">Contact us by phone</h3>
+              <h3 class="font-semibold text-gray-800">{{ __('Contact us by phone') }}</h3>
               <p class="mt-1 text-sm text-gray-500">
-                "Need assistance? Our team is just a call away."
+                "{{ __('Need assistance? Our team is just a call away.') }}"
               </p>
               <a
                 class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800"
@@ -235,9 +247,13 @@ import { Head } from '@inertiajs/vue3'
               <path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10" />
             </svg>
             <div class="grow">
-              <h3 class="font-semibold text-gray-800">Contact us by email</h3>
+              <h3 class="font-semibold text-gray-800">{{ __('Contact us by email') }}</h3>
               <p class="mt-1 text-sm text-gray-500">
-                "Have something to share? Send us an email, and we'll get back to you in a jiffy!"
+                "{{
+                  __(
+                    "Have something to share? Send us an email, and we'll get back to you in a jiffy!"
+                  )
+                }}"
               </p>
               <a
                 class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800"

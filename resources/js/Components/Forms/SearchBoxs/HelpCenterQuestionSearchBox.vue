@@ -26,7 +26,7 @@
           type="text"
           id="default-search"
           class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-md bg-gray-50 font-semibold focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all"
-          placeholder="Search for a question"
+          :placeholder="__('Search for a question')"
         />
       </div>
 

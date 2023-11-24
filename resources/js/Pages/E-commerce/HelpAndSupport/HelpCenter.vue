@@ -2,11 +2,11 @@
 import AppLayout from '@/Layouts/AppLayout.vue'
 import HelpCenterQuestionSearchBox from '@/Components/Forms/SearchBoxs/HelpCenterQuestionSearchBox.vue'
 import QuestionCategoryCard from '@/Components/Cards/QuestionCategoryCard.vue'
-import { Head } from '@inertiajs/vue3'
+import { Head, Link } from '@inertiajs/vue3'
 </script>
 
 <template>
-  <Head title="Help Center : E-commerce Online Shopping" />
+  <Head :title="__('Help Center')" />
 
   <AppLayout>
     <section id="help-center" class="py-5">
@@ -16,7 +16,7 @@ import { Head } from '@inertiajs/vue3'
 
           <a href="#" class="font-bold text-sm text-orange-500 hover:text-orange-600">
             <i class="fa-solid fa-circle-question"></i>
-            Find More Questions
+            {{ __('Find More Questions') }}
           </a>
         </div>
 
@@ -191,22 +191,27 @@ import { Head } from '@inertiajs/vue3'
       <!-- Self Service Tools -->
       <div class="px-32">
         <p class="text-sm font-bold text-gray-600 text-center">
-          Still looking for answers? Chat with us by clicking 'Chat Now' or clicking 'Contact Us'.
-          You can contact us at 09-284784390034 from 8:00 AM to 09:30 PM (Monday to Sunday).
+          {{
+            __(
+              "Still looking for answers? Chat with us by clicking 'Chat Now' or clicking 'Contact Us'. You can contact us at 09-284784390034 from 8:00 AM to 09:30 PM (Monday to Sunday)."
+            )
+          }}
         </p>
         <div class="flex items-center my-5 justify-center space-x-20">
           <button
-            class="border font-bold text-md text-white p-5 w-60 bg-orange-600 shadow-md rounded-md hover:scale-110 transition-all"
+            class="border font-bold text-md text-white p-5 w-72 bg-orange-600 shadow-md rounded-md hover:scale-110 transition-all"
           >
             <i class="fa-solid fa-comments mr-2"></i>
-            Live Chat Now
+            {{ __('Live Chat Now') }}
           </button>
-          <button
-            class="border font-bold text-md text-orange-600 p-5 w-60 bg-white shadow-md rounded-md hover:scale-110 transition-all"
+          <Link
+            as="button"
+            :href="route('contact-us')"
+            class="border font-bold text-md text-orange-600 p-5 w-72 bg-white shadow-md rounded-md hover:scale-110 transition-all"
           >
             <i class="fa-solid fa-envelope mr-2"></i>
-            Contact Us
-          </button>
+            {{ __('Contact us') }}
+          </Link>
         </div>
       </div>
     </section>
