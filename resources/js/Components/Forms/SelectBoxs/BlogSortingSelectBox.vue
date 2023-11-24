@@ -15,6 +15,7 @@ watch(
         direction: direction.value,
         page: usePage().props.ziggy.query?.page,
         blog_category: usePage().props.ziggy.query?.blog_category,
+        tag: usePage().props.ziggy.query?.tag,
         view: usePage().props.ziggy.query?.view,
       },
       {

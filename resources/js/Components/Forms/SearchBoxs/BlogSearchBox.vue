@@ -19,6 +19,7 @@ const handleSearch = () => {
         direction: usePage().props.ziggy.query?.direction,
         page: usePage().props.ziggy.query?.page,
         blog_category: usePage().props.ziggy.query?.blog_category,
+        tag: usePage().props.ziggy.query?.tag,
         view: usePage().props.ziggy.query?.view,
       },
       {
@@ -38,6 +39,7 @@ const removeSearch = () => {
       direction: usePage().props.ziggy.query?.direction,
       page: usePage().props.ziggy.query?.page,
       blog_category: usePage().props.ziggy.query?.blog_category,
+      tag: usePage().props.ziggy.query?.tag,
       view: usePage().props.ziggy.query?.view,
     },
     {

@@ -13,6 +13,7 @@ defineProps({ category: Object });
       blog_category: category?.slug,
       sort: $page.props.ziggy.query.sort ?? 'id',
       direction: $page.props.ziggy.query.direction ?? 'desc',
+      tag: $page.props.ziggy.query?.tag,
       view: $page.props.ziggy.query.view ?? 'grid',
     }"
     class="border border-gray-300 flex items-center px-3 py-3 rounded-md hover:bg-gray-100 text-gray-600 hover:scale-105 transition-all w-full"

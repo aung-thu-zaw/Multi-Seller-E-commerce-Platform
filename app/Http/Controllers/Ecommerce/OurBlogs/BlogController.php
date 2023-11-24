@@ -17,7 +17,7 @@ class BlogController extends Controller
         $blogCategories = BlogCategory::where("status", "show")->get();
 
         $blogContents = BlogContent::with("author:id,name")
-                                   ->filter(request(["search_blog", "blog_category"]))
+                                   ->filter(request(["search_blog", "blog_category","tag"]))
                                    ->where("status", "published")
                                    ->orderBy(request("sort", "id"), request("direction", "desc"))
                                    ->paginate(15)

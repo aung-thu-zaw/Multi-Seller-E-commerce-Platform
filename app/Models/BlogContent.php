@@ -131,6 +131,12 @@ class BlogContent extends Model
                 $query->where("slug", $categorySlug);
             });
         });
+
+        $query->when($filterBy["tag"] ?? null, function ($query, $tag) {
+            $query->whereHas("blogTags", function ($query) use ($tag) {
+                $query->where("blog_tags.name", $tag);
+            });
+        });
     }
 
 

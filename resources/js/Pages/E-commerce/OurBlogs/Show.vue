@@ -127,7 +127,14 @@ defineProps({
               <Link
                 v-for="tag in blogContent.blog_tags"
                 :key="tag.id"
-                href="#"
+                :href="route('blogs.index')"
+                :data="{
+                  blog_category: $page.props.ziggy.query?.blog_category,
+                  sort: $page.props.ziggy.query.sort ?? 'id',
+                  direction: $page.props.ziggy.query.direction ?? 'desc',
+                  view: $page.props.ziggy.query.view ?? 'grid',
+                  tag: tag.name,
+                }"
                 class="px-3 py-1 bg-orange-600 rounded-full text-white text-xs capitalize font-bold hover:bg-orange-700 transition-all"
               >
                 {{ tag.name }}

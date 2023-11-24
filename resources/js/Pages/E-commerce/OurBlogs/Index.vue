@@ -18,6 +18,7 @@ const params = computed(() => {
     direction: usePage().props.ziggy.query?.direction,
     page: usePage().props.ziggy.query?.page,
     blog_category: usePage().props.ziggy.query?.blog_category,
+    tag: usePage().props.ziggy.query?.tag,
     view: usePage().props.ziggy.query?.view,
   };
 });
@@ -61,6 +62,7 @@ const params = computed(() => {
                     sort: params.sort,
                     direction: params.direction,
                     page: params.page,
+                    tag: params.tag,
                     view: 'grid',
                   }"
                   class="px-2 py-1 rounded-md cursor-pointer bg-gray-200 text-gray-600 hover:bg-gray-300 transition-none mr-2"
@@ -81,6 +83,7 @@ const params = computed(() => {
                     sort: params.sort,
                     direction: params.direction,
                     page: params.page,
+                    tag: params.tag,
                     view: 'list',
                   }"
                   class="px-2 py-1 rounded-md cursor-pointer bg-gray-200 text-gray-600 hover:bg-gray-300 transition-none"
@@ -97,16 +100,20 @@ const params = computed(() => {
 
           <!-- Filtered By -->
           <div
-            v-if="params.blog_category || params.search_blog"
+            v-if="params.blog_category || params.search_blog || params.tag"
             class="my-5 px-2 flex items-center"
           >
-            <div v-show="params.blog_category" class="flex items-center">
+            <div
+              v-show="params.blog_category || params.tag"
+              class="flex items-center"
+            >
               <p class="font-bold text-blueGray-700 text-sm mr-1">
                 {{ __("Filtered By") }} :
               </p>
 
               <div class="flex items-center space-x-3">
                 <div
+                  v-show="params.blog_category"
                   class="inline-flex flex-nowrap items-center bg-white border border-gray-200 rounded-full px-2 py-1.5"
                 >
                   <div
@@ -122,6 +129,33 @@ const params = computed(() => {
                       sort: params.sort,
                       direction: params.direction,
                       page: params.page,
+                      tag: params.tag,
+                      view: params.view,
+                    }"
+                    class="ms-2.5 inline-flex justify-center items-center h-2 w-2 rounded-full text-gray-600 text-xs hover:text-red-600 transition-all cursor-pointer"
+                  >
+                    <i class="fa-solid fa-circle-xmark"></i>
+                  </Link>
+                </div>
+
+                <div
+                  v-show="params.tag"
+                  class="inline-flex flex-nowrap items-center bg-white border border-gray-200 rounded-full px-2 py-1.5"
+                >
+                  <div
+                    class="whitespace-nowrap text-xs font-bold text-gray-700 capitalize"
+                  >
+                    Tag : {{ params.tag }}
+                  </div>
+                  <Link
+                    as="button"
+                    :href="route('blogs.index')"
+                    :data="{
+                      search_blog: params.search_blog,
+                      sort: params.sort,
+                      direction: params.direction,
+                      page: params.page,
+                      blog_category: params.blog_category,
                       view: params.view,
                     }"
                     class="ms-2.5 inline-flex justify-center items-center h-2 w-2 rounded-full text-gray-600 text-xs hover:text-red-600 transition-all cursor-pointer"
