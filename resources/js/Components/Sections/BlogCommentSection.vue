@@ -16,7 +16,7 @@ defineProps({
     <div class="border border-gray-300 bg-white rounded-sm shadow">
       <div class="border-b p-5">
         <p class="text-md font-semibold text-gray-600 mb-5">
-          Total Comments ({{ blogComments.total }})
+          {{ __('Total Comments') }} ({{ blogComments.total }})
         </p>
 
         <!-- Comments -->
@@ -58,7 +58,7 @@ defineProps({
         <div v-else class="py-5">
           <p class="text-center font-bold text-gray-500 text-md">
             <i class="fa-solid fa-comment-slash"></i>
-            Comments Not Yet
+            {{ __('Comments Not Yet') }}
           </p>
         </div>
       </div>
@@ -69,7 +69,7 @@ defineProps({
       </div>
       <div v-show="!$page.props.auth.user" class="py-5">
         <p class="text-center text-sm font-medium text-gray-600">
-          If you want to write comments you need to login first. Here
+          {{ __('If you want to write comments you need to login first. Here') }}
           <Link href="#" class="font-bold text-orange-600 hover:underline"> Sign In </Link>
           Or
           <Link href="#" class="font-bold text-orange-600 hover:underline"> Sign Up </Link>

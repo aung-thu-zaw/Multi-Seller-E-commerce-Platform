@@ -19,7 +19,7 @@ const isReplyBoxOpened = ref(false)
 
         <div class="flex flex-col items-start">
           <h3 class="font-bold text-gray-600">{{ blogComment.user?.name }}</h3>
-          <span class="text-xs font-medium text-gray-400"> Comment from user </span>
+          <span class="text-xs font-medium text-gray-400"> {{ __('Comment from user') }} </span>
         </div>
       </div>
 
@@ -44,7 +44,7 @@ const isReplyBoxOpened = ref(false)
         class="font-medium text-xs text-gray-600 hover:text-orange-500"
       >
         <i class="fa-solid fa-comment-dots"></i>
-        Reply
+        {{ __('Reply') }}
       </button>
       <button
         v-else
@@ -52,7 +52,8 @@ const isReplyBoxOpened = ref(false)
         class="font-medium text-xs text-red-600 hover:text-red-500"
       >
         <i class="fa-solid fa-circle-xmark"></i>
-        Cancel
+
+        {{ __('Cancel') }}
       </button>
     </div>
 

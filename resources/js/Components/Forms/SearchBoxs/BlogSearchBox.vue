@@ -96,7 +96,7 @@ watch(
           type="text"
           id="default-search"
           class="block w-full p-3.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-md bg-gray-50 font-semibold focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all"
-          placeholder="Search Blog"
+          :placeholder="__('Search Blog')"
           v-model="blogSearch"
         />
       </div>

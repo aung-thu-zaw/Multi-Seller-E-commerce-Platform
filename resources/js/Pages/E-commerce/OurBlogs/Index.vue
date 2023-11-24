@@ -47,7 +47,9 @@ const params = computed(() => {
               <BlogSortingSelectBox />
 
               <div class="">
-                <label for="view" class="font-bold text-sm text-gray-600"> View : </label>
+                <label for="view" class="font-bold text-sm text-gray-600">
+                  {{ __('View') }} :
+                </label>
 
                 <Link
                   as="button"
@@ -107,7 +109,7 @@ const params = computed(() => {
                   class="inline-flex flex-nowrap items-center bg-white border border-gray-200 rounded-full px-2 py-1.5"
                 >
                   <div class="whitespace-nowrap text-xs font-bold text-gray-700 capitalize">
-                    Category : {{ params.blog_category }}
+                    {{ __('Category') }} : {{ params.blog_category }}
                   </div>
                   <Link
                     as="button"
@@ -131,7 +133,7 @@ const params = computed(() => {
                   class="inline-flex flex-nowrap items-center bg-white border border-gray-200 rounded-full px-2 py-1.5"
                 >
                   <div class="whitespace-nowrap text-xs font-bold text-gray-700 capitalize">
-                    Tag : {{ params.tag }}
+                    {{ __('Tag') }} : {{ params.tag }}
                   </div>
                   <Link
                     as="button"
@@ -153,8 +155,12 @@ const params = computed(() => {
             </div>
 
             <p v-show="params.search_blog" class="text-sm font-medium text-gray-700 ml-auto">
-              {{ blogContents.total }} post(s) found for result
-              <span class="text-orange-500 font-semibold"> "{{ params.search_blog }}" </span>
+              {{
+                __(':total post(s) found for search result :result', {
+                  total: blogContents.total,
+                  result: '"' + params.search_blog + '"'
+                })
+              }}
             </p>
           </div>
 
@@ -188,7 +194,7 @@ const params = computed(() => {
           <div v-else class="py-20">
             <p class="text-center font-bold text-md text-red-600">
               <i class="fa-solid fa-file-circle-xmark"></i>
-              We're sorry we can't find any matches for your filter term.
+              {{ __("We're sorry we can't find any matches for your filter term.") }}
             </p>
           </div>
         </div>

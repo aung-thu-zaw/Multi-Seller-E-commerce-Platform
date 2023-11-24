@@ -509,7 +509,7 @@ import { Link } from '@inertiajs/vue3'
               }"
             >
               <i class="fa-solid fa-newspaper mr-1 text-xs"></i>
-              Our Blogs
+              {{ __('Our Blogs') }}
             </Link>
           </li>
         </ul>

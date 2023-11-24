@@ -21,10 +21,12 @@ defineProps({ blogContent: Object, blogCommentReply: Object })
             v-if="blogCommentReply.user_id !== blogContent.author_id"
             class="text-xs font-medium text-gray-400"
           >
-            Reply from user
+            {{ __('Reply from user') }}
           </span>
 
-          <span v-else class="text-xs font-medium text-orange-500"> Reply from author </span>
+          <span v-else class="text-xs font-medium text-orange-500">
+            {{ __('Reply from author') }}
+          </span>
         </div>
       </div>
 

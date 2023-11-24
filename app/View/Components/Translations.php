@@ -33,7 +33,7 @@ class Translations extends Component
             // List of language directories to include
             $directories = [
                 resource_path('lang/dashboard'),
-                resource_path('lang'),
+                resource_path('lang/e-commerce'),
                 // Add more directories as needed
             ];
 

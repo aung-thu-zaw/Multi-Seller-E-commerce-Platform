@@ -32,7 +32,7 @@ const submitBlogComment = async () => {
       <div class="mb-3">
         <TextAreaField
           name="comment-blog"
-          :placeholder="__('Enter comment...')"
+          :placeholder="__('Enter :label', { label: __('comment') })"
           required
           v-model="form.comment"
         />

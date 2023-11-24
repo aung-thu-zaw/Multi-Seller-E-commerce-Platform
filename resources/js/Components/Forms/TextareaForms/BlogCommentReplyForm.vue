@@ -41,7 +41,7 @@ const submitBlogCommentReply = async () => {
       <div class="mb-3">
         <TextAreaField
           name="reply-blog"
-          :placeholder="__('Enter reply message ...')"
+          :placeholder="__('Enter :label', { label: __('reply message') })"
           required
           v-model="form.reply"
         />
@@ -57,5 +57,3 @@ const submitBlogCommentReply = async () => {
     </form>
   </div>
 </template>
-
-comment.replies.store //

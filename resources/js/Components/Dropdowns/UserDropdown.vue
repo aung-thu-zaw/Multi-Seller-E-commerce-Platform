@@ -20,7 +20,7 @@ const user = computed(() => usePage().props.auth?.user)
           <img
             alt="user-photo"
             class="w-full h-full object-cover rounded-full align-middle border-none shadow-lg ring-2 ring-orange-300"
-            :src="user.image ?? defaultUserImage"
+            :src="user.avatar ?? defaultUserImage"
           />
         </span>
 

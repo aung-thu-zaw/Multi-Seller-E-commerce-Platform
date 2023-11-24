@@ -34,9 +34,9 @@ defineProps({ blog: Object })
       </h3>
       <p v-html="blog.content" class="text-xs mt-3 text-gray-800 line-clamp-3"></p>
       <p
-        class="mt-5 text-sm inline-flex items-center gap-x-1 text-orange-600 decoration-2 group-hover:underline font-medium"
+        class="mt-5 text-xs inline-flex items-center gap-x-1 text-orange-600 decoration-2 group-hover:underline font-medium"
       >
-        Read more
+        {{ __('Read more') }}
         <svg
           class="flex-shrink-0 w-4 h-4"
           xmlns="http://www.w3.org/2000/svg"

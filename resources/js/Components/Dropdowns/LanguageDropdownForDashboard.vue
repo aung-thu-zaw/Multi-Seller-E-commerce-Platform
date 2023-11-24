@@ -27,6 +27,10 @@ import Myanmar from '@/assets/images/myanmar.png'
 
               English
             </div>
+
+            <span class="ml-1">
+              <i class="fa-solid fa-circle-check"></i>
+            </span>
           </div>
         </div>
         <div

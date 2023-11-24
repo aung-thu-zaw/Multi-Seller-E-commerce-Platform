@@ -32,7 +32,7 @@ defineProps({
 
           <div class="border border-b-0 border-gray-300 rounded-sm">
             <h1 class="text-lg font-bold text-gray-700 text-center py-3 border-b border-gray-300">
-              Related Blogs
+              {{ __('Related Blogs') }}
             </h1>
 
             <!-- Card -->
@@ -73,7 +73,7 @@ defineProps({
             <!-- Share Blog Social Icons Start -->
             <div class="flex items-center">
               <span class="font-bold text-slate-600 mr-3">
-                <i class="fa-solid fa-share-nodes"></i> Share :
+                <i class="fa-solid fa-share-nodes"></i> {{ __('Share') }} :
               </span>
 
               <a :href="shares?.facebook" target="_blank">
