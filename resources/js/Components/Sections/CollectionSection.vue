@@ -1,13 +1,4 @@
-<script setup>
-import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
-import NormalButton from '@/Components/Buttons/NormalButton.vue'
-import InputField from '@/Components/Forms/Fields/InputField.vue'
-import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
-import BrandCarousel from '@/Components/Carousels/BrandCarousel.vue'
-import English from '@/assets/images/united-state.png'
-import Myanmar from '@/assets/images/myanmar.png'
-import { Link } from '@inertiajs/vue3'
-</script>
+<script setup></script>
 
 <template>
   <section id="collections" class="my-5">

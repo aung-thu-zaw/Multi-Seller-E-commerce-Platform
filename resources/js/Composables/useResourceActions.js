@@ -197,7 +197,6 @@ export function useResourceActions(formFields = {}) {
       text:
         __('Are you sure you would like to do this?') + __('It can be restored within 60 days.'),
       showCancelButton: true,
-      showCancelButton: true,
       confirmButtonText: __('Confirm'),
       cancelButtonText: __('Cancel'),
       confirmButtonColor: '#d52222',

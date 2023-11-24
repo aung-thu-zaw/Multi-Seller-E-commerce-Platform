@@ -1,5 +1,4 @@
 <script setup>
-import { useFormatFunctions } from '@/Composables/useFormatFunctions'
 import { router, usePage } from '@inertiajs/vue3'
 
 const props = defineProps({
@@ -9,8 +8,6 @@ const props = defineProps({
 
   label: String
 })
-
-const { formatToTitleCase } = useFormatFunctions()
 
 const removeFiltered = (queryStringKey) => {
   router.get(

@@ -13,13 +13,10 @@ import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
 import { useImagePreview } from '@/Composables/useImagePreview'
 import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
-import { useQueryStringParams } from '@/Composables/useQueryStringParams'
 
 defineProps({ categories: Object })
 
 const categoryList = 'admin.categories.index'
-
-const { queryStringParams } = useQueryStringParams()
 
 const { previewImage, setImagePreview } = useImagePreview()
 

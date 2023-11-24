@@ -22,7 +22,6 @@ import EmptyTrashButton from '@/Components/Buttons/EmptyTrashButton.vue'
 import Pagination from '@/Components/Paginations/DashboardPagination.vue'
 import { Head } from '@inertiajs/vue3'
 import { __ } from '@/Services/translations-inside-setup.js'
-import { useQueryStringParams } from '@/Composables/useQueryStringParams'
 import { useResourceActions } from '@/Composables/useResourceActions'
 
 defineProps({ trashedBlogContents: Object })
@@ -30,8 +29,6 @@ defineProps({ trashedBlogContents: Object })
 const blogContentList = 'admin.blog-contents.index'
 
 const trashedBlogContentList = 'admin.blog-contents.trashed'
-
-const { queryStringParams } = useQueryStringParams()
 
 const {
   restoreAction,

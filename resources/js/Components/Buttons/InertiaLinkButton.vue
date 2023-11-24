@@ -21,8 +21,7 @@ const props = defineProps({
   },
 
   data: {
-    type: Object,
-    default: {}
+    type: Object
   },
 
   preserveState: {

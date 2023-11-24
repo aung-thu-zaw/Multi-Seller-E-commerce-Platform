@@ -28,9 +28,11 @@ onMounted(() => {
 })
 
 const sortedNotifications = computed(() => {
-  return notifications.value.sort((a, b) => {
-    const aReadAt = new Date(a.read_at)
-    const bReadAt = new Date(b.read_at)
+  const notificationsCopy = [...notifications.value]
+
+  return notificationsCopy.sort((a, b) => {
+    const aReadAt = a.read_at ? new Date(a.read_at) : null
+    const bReadAt = b.read_at ? new Date(b.read_at) : null
     const aCreatedAt = new Date(a.created_at)
     const bCreatedAt = new Date(b.created_at)
 

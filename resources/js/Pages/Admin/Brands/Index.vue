@@ -23,13 +23,10 @@ import Pagination from '@/Components/Paginations/DashboardPagination.vue'
 import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 import { __ } from '@/Services/translations-inside-setup.js'
-import { useQueryStringParams } from '@/Composables/useQueryStringParams'
 
 defineProps({ brands: Object })
 
 const brandList = 'admin.brands.index'
-
-const { queryStringParams } = useQueryStringParams()
 
 const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 </script>

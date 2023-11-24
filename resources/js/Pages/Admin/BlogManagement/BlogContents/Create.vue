@@ -13,7 +13,6 @@ import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
 import { useImagePreview } from '@/Composables/useImagePreview'
 import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head, usePage } from '@inertiajs/vue3'
-import { useQueryStringParams } from '@/Composables/useQueryStringParams'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { ref } from 'vue'
 
@@ -24,8 +23,6 @@ const editor = ClassicEditor
 const tag = ref(null)
 
 const blogContentList = 'admin.blog-contents.index'
-
-const { queryStringParams } = useQueryStringParams()
 
 const { previewImage, setImagePreview } = useImagePreview()
 

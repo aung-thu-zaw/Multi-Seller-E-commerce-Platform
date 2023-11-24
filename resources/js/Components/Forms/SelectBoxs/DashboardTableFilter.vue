@@ -14,7 +14,7 @@ const props = defineProps({
 
   filterBy: {
     type: Array,
-    default: ['created'],
+    default: () => ['created'],
     validator: (value) => {
       const allowedValues = ['created', 'deleted', 'status']
       return value.every((item) => allowedValues.includes(item))
