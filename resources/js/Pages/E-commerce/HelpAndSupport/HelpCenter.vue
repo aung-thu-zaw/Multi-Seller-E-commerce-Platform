@@ -21,7 +21,7 @@ import { Head } from '@inertiajs/vue3'
         </div>
 
         <div class="flex flex-col items-center justify-center py-5">
-          <img src="../../assets/images/faq.png" class="h-48 object-contain object-center" />
+          <img src="../../../assets/images/faq.png" class="h-48 object-contain object-center" />
           <h1 class="font-bold text-dark mb-5 text-3xl">
             {{ __('Hi, How can we help ?') }}
           </h1>

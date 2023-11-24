@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ecommerce\HelpAndSupport\HelpCenterController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentReplyController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogController;
@@ -42,6 +43,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get("/about-us", AboutUsController::class)->name("about-us");
+Route::get("/help-center", HelpCenterController::class)->name("help-center");
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

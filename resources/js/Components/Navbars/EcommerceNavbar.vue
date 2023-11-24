@@ -19,10 +19,10 @@ import { Link } from '@inertiajs/vue3'
       </div>
       <ul class="font-bold text-sm flex items-centers space-x-4">
         <li>
-          <a href="#">
+          <Link :href="route('help-center')">
             <i class="fa-solid fa-circle-info mr-1"></i>
             {{ __('Help & Support') }}
-          </a>
+          </Link>
         </li>
 
         <li>
