@@ -21,7 +21,7 @@ import { Link } from '@inertiajs/vue3'
         <li>
           <a href="#">
             <i class="fa-solid fa-circle-info mr-1"></i>
-            Help & Support
+            {{ __('Help & Support') }}
           </a>
         </li>
 
@@ -32,7 +32,7 @@ import { Link } from '@inertiajs/vue3'
         <li>
           <a href="#">
             <i class="fa-solid fa-store mr-1"></i>
-            Become a Seller
+            {{ __('Become a Seller') }}
           </a>
         </li>
 
@@ -48,7 +48,7 @@ import { Link } from '@inertiajs/vue3'
               class="hs-dropdown-toggle flex items-center whitespace-nowrap text-sm font-bold leading-normal text-white"
             >
               <i class="fa-solid fa-location-crosshairs mr-1"></i>
-              Track My Order
+              {{ __('Track My Order') }}
             </button>
 
             <div
@@ -71,7 +71,7 @@ import { Link } from '@inertiajs/vue3'
                 <div class="flex items-center justify-end">
                   <NormalButton class="bg-orange-600">
                     <i class="fa-solid fa-location-crosshairs mr-1"></i>
-                    Track
+                    {{ __('Track') }}
                   </NormalButton>
                 </div>
               </form>
@@ -91,7 +91,7 @@ import { Link } from '@inertiajs/vue3'
               class="hs-dropdown-toggle flex items-center whitespace-nowrap text-sm font-bold leading-normal text-white"
             >
               <i class="fa-solid fa-globe mr-1"></i>
-              Language
+              {{ __('Language') }}
 
               <svg
                 class="hs-dropdown-open:rotate-180 w-4 h-4"
@@ -178,7 +178,7 @@ import { Link } from '@inertiajs/vue3'
                   type="text"
                   id="default-search"
                   class="block w-full p-4 pl-10 text-xs text-gray-900 border border-gray-300 rounded-md bg-gray-50 font-semibold focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all"
-                  placeholder="What are you looking for?"
+                  :placeholder="__('What are you looking for ?')"
                 />
               </div>
 
@@ -330,7 +330,7 @@ import { Link } from '@inertiajs/vue3'
                 class="flex items-center text-gray-700 hover:text-gray-500 font-semibold"
               >
                 <i class="fa-solid fa-list mr-1 text-xs"></i>
-                Shop By Categories
+                {{ __('Shop By Categories') }}
                 <svg
                   class="ms-2 flex-shrink-0 w-4 h-4"
                   xmlns="http://www.w3.org/2000/svg"
@@ -490,7 +490,7 @@ import { Link } from '@inertiajs/vue3'
           <li>
             <a href="#" class="flex items-center text-gray-700 hover:text-gray-500 font-semibold">
               <i class="fa-solid fa-shop mr-1 text-xs"></i>
-              Our Seller Shops
+              {{ __('Our Seller Shops') }}
             </a>
           </li>
 

@@ -22,24 +22,32 @@ import { Link } from '@inertiajs/vue3'
         <!-- End Col -->
 
         <div class="col-span-1 text-center">
-          <h4 class="font-semibold text-white">Store</h4>
+          <h4 class="font-semibold text-white">{{ __('Store') }}</h4>
 
           <div class="mt-3 grid space-y-3">
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">Join us</a>
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+                {{ __('Join us') }}
+              </a>
             </p>
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">Find Store</a>
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+                {{ __('Find Store') }}
+              </a>
             </p>
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">Partnership</a>
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+                {{ __('Partnership') }}
+              </a>
             </p>
           </div>
         </div>
         <!-- End Col -->
 
         <div class="col-span-1 text-center">
-          <h4 class="font-semibold text-white">Company</h4>
+          <h4 class="font-semibold text-white">
+            {{ __('Company') }}
+          </h4>
 
           <div class="mt-3 grid space-y-3">
             <p>
@@ -47,45 +55,51 @@ import { Link } from '@inertiajs/vue3'
                 :href="route('about-us')"
                 class="inline-flex gap-x-2 text-white hover:text-gray-300"
               >
-                About us
+                {{ __('About us') }}
               </Link>
             </p>
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#"
-                >Terms & Conditions</a
-              >
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+                {{ __('Terms & Conditions') }}
+              </a>
             </p>
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#"
-                >Privacy & Policy</a
-              >
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+                {{ __('Privacy & Policy') }}
+              </a>
             </p>
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#"
-                >Support Center</a
-              >
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+                {{ __('Support Center') }}
+              </a>
             </p>
           </div>
         </div>
         <!-- End Col -->
 
         <div class="col-span-1 text-center">
-          <h4 class="font-semibold text-white">Help</h4>
+          <h4 class="font-semibold text-white">{{ __('Help') }}</h4>
 
           <div class="mt-3 grid space-y-3">
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">Help Center</a>
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+                {{ __('Help Center') }}
+              </a>
             </p>
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">Contact Us</a>
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+                {{ __('Contact us') }}
+              </a>
             </p>
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#"
-                >Returns & Refunds</a
-              >
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+                {{ __('Returns & Refunds') }}
+              </a>
             </p>
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">FAQs</a>
+              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+                {{ __('FAQs') }}
+              </a>
             </p>
           </div>
         </div>

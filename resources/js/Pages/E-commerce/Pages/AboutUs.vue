@@ -4,7 +4,7 @@ import { Head } from '@inertiajs/vue3'
 </script>
 
 <template>
-  <Head :title="__('About Us')" />
+  <Head :title="__('About us')" />
 
   <AppLayout>
     <div class="min-h-screen bg-gray-50 w-full">
