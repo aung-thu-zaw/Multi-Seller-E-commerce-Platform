@@ -16,14 +16,14 @@ class BlogCommentController extends Controller
     public function __invoke(Request $request, BlogContent $blogContent): RedirectResponse
     {
         $request->validate([
-            "comment" => ["required","string"],
+            'comment' => ['required', 'string'],
             'captcha_token' => [new RecaptchaRule()],
         ]);
 
         $blogComment = BlogComment::create([
-             "blog_content_id" => $blogContent->id,
-             "user_id" => auth()->id(),
-             "comment" => $request->comment,
+            'blog_content_id' => $blogContent->id,
+            'user_id' => auth()->id(),
+            'comment' => $request->comment,
         ]);
 
         $author = User::findOrFail($blogContent->author_id);

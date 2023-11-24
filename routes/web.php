@@ -29,8 +29,6 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-
-
 Route::middleware('auth')->group(function () {
 
     // Route to mark a specific notification as read
@@ -52,19 +50,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
 Route::controller(BlogController::class)
-     ->prefix("/blogs")
-     ->name("blogs.")
-     ->group(function () {
-         Route::get("/", "index")->name("index");
-         Route::get("/{blog_content}", "show")->name("show");
-         //  Route::get("/tags/{tag}", "tagBlog")->name("tag");
-     });
+    ->prefix('/blogs')
+    ->name('blogs.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/{blog_content}', 'show')->name('show');
+        //  Route::get("/tags/{tag}", "tagBlog")->name("tag");
+    });
 
-Route::post("/blogs/{blog_content}/comments", BlogCommentController::class)->name("blog.comments.store");
-Route::post("/blogs/{blog_content}/comments/{blog_comment}/replies", BlogCommentReplyController::class)->name("comment.replies.store");
-
+Route::post('/blogs/{blog_content}/comments', BlogCommentController::class)->name('blog.comments.store');
+Route::post('/blogs/{blog_content}/comments/{blog_comment}/replies', BlogCommentReplyController::class)->name('comment.replies.store');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';

@@ -18,17 +18,17 @@ class CreateBlogContentAction
         $thumbnail = isset($data['thumbnail']) ? $this->createImage($data['thumbnail'], 'blog-contents') : null;
 
         $blogContent = BlogContent::create([
-             'blog_category_id' => $data['blog_category_id'],
-             'author_id' => $data['author_id'],
-             'title' => $data['title'],
-             'content' => $data['content'],
-             'status' => $data['status'],
-             'thumbnail' => $thumbnail,
-         ]);
+            'blog_category_id' => $data['blog_category_id'],
+            'author_id' => $data['author_id'],
+            'title' => $data['title'],
+            'content' => $data['content'],
+            'status' => $data['status'],
+            'thumbnail' => $thumbnail,
+        ]);
 
-        if(isset($data["tags"])) {
+        if (isset($data['tags'])) {
 
-            (new HandleBlogTagService())->handle($data["tags"], $blogContent);
+            (new HandleBlogTagService())->handle($data['tags'], $blogContent);
 
         }
     }

@@ -55,17 +55,17 @@ class BlogContent extends Model
     protected function thumbnail(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/blog-contents/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/blog-contents/$value"),
         );
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Casts\Attribute<BlogContent, never>
-    */
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<BlogContent, never>
+     */
     protected function publishedAt(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => date("F j, Y", strtotime($value)),
+            get: fn ($value) => date('F j, Y', strtotime($value)),
         );
     }
 
@@ -93,7 +93,6 @@ class BlogContent extends Model
         return $this->belongsToMany(BlogTag::class, 'blog_content_blog_tag');
     }
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<BlogComment>
      */
@@ -108,41 +107,39 @@ class BlogContent extends Model
     }
 
     /**
-    * @param array<string> $filterBy
-    * @param Builder<BlogContent> $query
-    */
-
+     * @param  array<string>  $filterBy
+     * @param  Builder<BlogContent>  $query
+     */
     public function scopeFilter(Builder $query, array $filterBy): void
     {
         $query->when(
-            $filterBy["search_blog"] ?? null,
+            $filterBy['search_blog'] ?? null,
             function ($query, $keyword) {
                 $query->where(
                     function ($query) use ($keyword) {
-                        $query->where("title", "LIKE", "%".$keyword."%")
-                              ->orWhere("content", "LIKE", "%".$keyword."%");
+                        $query->where('title', 'LIKE', '%'.$keyword.'%')
+                            ->orWhere('content', 'LIKE', '%'.$keyword.'%');
                     }
                 );
             }
         );
 
-        $query->when($filterBy["blog_category"] ?? null, function ($query, $categorySlug) {
-            $query->whereHas("blogCategory", function ($query) use ($categorySlug) {
-                $query->where("slug", $categorySlug);
+        $query->when($filterBy['blog_category'] ?? null, function ($query, $categorySlug) {
+            $query->whereHas('blogCategory', function ($query) use ($categorySlug) {
+                $query->where('slug', $categorySlug);
             });
         });
 
-        $query->when($filterBy["tag"] ?? null, function ($query, $tag) {
-            $query->whereHas("blogTags", function ($query) use ($tag) {
-                $query->where("blog_tags.name", $tag);
+        $query->when($filterBy['tag'] ?? null, function ($query, $tag) {
+            $query->whereHas('blogTags', function ($query) use ($tag) {
+                $query->where('blog_tags.name', $tag);
             });
         });
     }
 
-
     public static function deleteImage(?string $blogContentImage): void
     {
-        if (!empty($blogContentImage) && file_exists(storage_path('app/public/blog-contents/'.pathinfo($blogContentImage, PATHINFO_BASENAME)))) {
+        if (! empty($blogContentImage) && file_exists(storage_path('app/public/blog-contents/'.pathinfo($blogContentImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/blog-contents/'.pathinfo($blogContentImage, PATHINFO_BASENAME)));
         }
     }

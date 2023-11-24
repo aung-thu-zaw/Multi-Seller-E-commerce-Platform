@@ -32,7 +32,7 @@ class UpdateBlogContentRequest extends FormRequest
             'title' => ['required', 'string', 'max:255', Rule::unique('blog_contents', 'title')->ignore($blogContent)],
             'status' => ['required', 'string', Rule::in(['draft', 'published'])],
             'content' => ['required', 'string'],
-            'tags' => ['nullable','array'],
+            'tags' => ['nullable', 'array'],
             'captcha_token' => [new RecaptchaRule()],
         ];
 

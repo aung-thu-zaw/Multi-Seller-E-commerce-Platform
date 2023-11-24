@@ -6,10 +6,7 @@ use App\Models\BlogComment;
 use App\Models\BlogContent;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\BroadcastMessage;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class NewBlogCommentFromUserNotification extends Notification implements ShouldQueue
@@ -45,7 +42,7 @@ class NewBlogCommentFromUserNotification extends Notification implements ShouldQ
         return [
             'blog' => $this->blogContent->slug,
             'comment' => $this->blogComment->comment,
-            'user' => $this->user->only("avatar", "name")
+            'user' => $this->user->only('avatar', 'name'),
         ];
     }
 }

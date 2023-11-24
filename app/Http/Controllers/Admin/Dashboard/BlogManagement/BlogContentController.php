@@ -43,7 +43,7 @@ class BlogContentController extends Controller
 
     public function create(): Response|ResponseFactory
     {
-        $blogCategories = BlogCategory::select("id", "name")->get();
+        $blogCategories = BlogCategory::select('id', 'name')->get();
 
         return inertia('Admin/BlogManagement/BlogContents/Create', compact('blogCategories'));
     }
@@ -57,9 +57,9 @@ class BlogContentController extends Controller
 
     public function edit(BlogContent $blogContent): Response|ResponseFactory
     {
-        $blogCategories = BlogCategory::select("id", "name")->get();
+        $blogCategories = BlogCategory::select('id', 'name')->get();
 
-        $blogContent->load(["blogTags"]);
+        $blogContent->load(['blogTags']);
 
         return inertia('Admin/BlogManagement/BlogContents/Edit', compact('blogContent', 'blogCategories'));
     }
@@ -73,7 +73,7 @@ class BlogContentController extends Controller
 
     public function changeStatus(Request $request, BlogContent $blogContent): RedirectResponse
     {
-        $blogContent->update(["status" => $request->status === 'draft' ? 'published' : 'draft']);
+        $blogContent->update(['status' => $request->status === 'draft' ? 'published' : 'draft']);
 
         return to_route('admin.blog-contents.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }

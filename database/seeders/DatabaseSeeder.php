@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             BlogCategorySeeder::class,
             BlogContentSeeder::class,
             BlogCommentSeeder::class,
-            BlogCommentReplySeeder::class
+            BlogCommentReplySeeder::class,
         ]);
     }
 }

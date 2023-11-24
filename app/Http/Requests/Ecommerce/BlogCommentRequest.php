@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Ecommerce;
 
-use App\Rules\RecaptchaRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -24,9 +23,9 @@ class BlogCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "blog_content_id" => ["required","numeric",Rule::exists("blog_contents", "id")],
-            "user_id" => ["required","numeric",Rule::exists("users", "id")],
-      
+            'blog_content_id' => ['required', 'numeric', Rule::exists('blog_contents', 'id')],
+            'user_id' => ['required', 'numeric', Rule::exists('users', 'id')],
+
         ];
     }
 }

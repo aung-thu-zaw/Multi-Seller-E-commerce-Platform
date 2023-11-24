@@ -17,12 +17,12 @@ class BlogCommentFactory extends Factory
      */
     public function definition(): array
     {
-        $blogContent = BlogContent::pluck("id")->toArray();
+        $blogContent = BlogContent::pluck('id')->toArray();
 
         return [
-            "blog_content_id" => fake()->randomElement($blogContent),
-            "user_id" => fake()->numberBetween(5, 20),
-            "comment" => fake()->paragraph(),
+            'blog_content_id' => fake()->randomElement($blogContent),
+            'user_id' => fake()->numberBetween(5, 20),
+            'comment' => fake()->paragraph(),
         ];
     }
 }

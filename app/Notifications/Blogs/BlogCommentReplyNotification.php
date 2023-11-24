@@ -7,7 +7,6 @@ use App\Models\BlogContent;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class BlogCommentReplyNotification extends Notification implements ShouldQueue
@@ -43,7 +42,7 @@ class BlogCommentReplyNotification extends Notification implements ShouldQueue
         return [
             'blog' => $this->blogContent->slug,
             'reply' => $this->blogCommentReply->reply,
-            'user' => $this->user->only("avatar", "name")
+            'user' => $this->user->only('avatar', 'name'),
         ];
     }
 }

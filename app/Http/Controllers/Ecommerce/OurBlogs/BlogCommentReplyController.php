@@ -17,14 +17,14 @@ class BlogCommentReplyController extends Controller
     public function __invoke(Request $request, BlogContent $blogContent, BlogComment $blogComment): RedirectResponse
     {
         $request->validate([
-            "reply" => ["required","string"],
+            'reply' => ['required', 'string'],
             'captcha_token' => [new RecaptchaRule()],
         ]);
 
         $blogCommentReply = BlogCommentReply::create([
-             "blog_comment_id" => $blogComment->id,
-             "user_id" => auth()->id(),
-             "reply" => $request->reply,
+            'blog_comment_id' => $blogComment->id,
+            'user_id' => auth()->id(),
+            'reply' => $request->reply,
         ]);
 
         $replyPerson = User::findOrFail($blogCommentReply->user_id);

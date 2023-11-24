@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\BlogComment;
-use App\Models\BlogContent;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,12 +17,12 @@ class BlogCommentReplyFactory extends Factory
      */
     public function definition(): array
     {
-        $blogComments = BlogComment::pluck("id")->toArray();
-        
+        $blogComments = BlogComment::pluck('id')->toArray();
+
         return [
-            "blog_comment_id" => fake()->randomElement($blogComments),
-            "user_id" => fake()->numberBetween(21, 30),
-            "reply" => fake()->paragraph(),
+            'blog_comment_id' => fake()->randomElement($blogComments),
+            'user_id' => fake()->numberBetween(21, 30),
+            'reply' => fake()->paragraph(),
         ];
     }
 }
