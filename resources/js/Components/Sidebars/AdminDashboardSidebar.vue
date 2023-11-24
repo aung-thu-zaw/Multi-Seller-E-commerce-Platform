@@ -213,7 +213,16 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- Banners -->
-          <li class="hs-accordion items-center" id="banner-accordion">
+          <li
+            class="hs-accordion items-center"
+            :class="{
+              active:
+                $page.url.startsWith('/admin/slider-banners') ||
+                $page.url.startsWith('/admin/campaign-banners') ||
+                $page.url.startsWith('/admin/product-banners')
+            }"
+            id="banner-accordion"
+          >
             <button
               type="button"
               class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
@@ -259,6 +268,12 @@ const toggleCollapseShow = (classes) => {
             <div
               id="banner-accordion"
               class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+              :class="{
+                block:
+                  $page.url.startsWith('/admin/slider-banners') ||
+                  $page.url.startsWith('/admin/campaign-banners') ||
+                  $page.url.startsWith('/admin/product-banners')
+              }"
             >
               <ul class="pl-8">
                 <li v-show="can('categories.view')" class="items-center">
@@ -659,7 +674,16 @@ const toggleCollapseShow = (classes) => {
 
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
           <!-- Blog Managements -->
-          <li class="hs-accordion items-center" id="blog-management-accordion">
+          <li
+            class="hs-accordion items-center"
+            :class="{
+              active:
+                $page.url.startsWith('/admin/blog-categories') ||
+                $page.url.startsWith('/admin/blog-contents') ||
+                $page.url.startsWith('/admin/comments-and-replies')
+            }"
+            id="blog-management-accordion"
+          >
             <button
               type="button"
               class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
@@ -704,7 +728,18 @@ const toggleCollapseShow = (classes) => {
 
             <div
               id="blog-management-accordion"
-              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+              :class="{
+                block:
+                  $page.url.startsWith('/admin/blog-categories') ||
+                  $page.url.startsWith('/admin/blog-contents') ||
+                  $page.url.startsWith('/admin/comments-and-replies'),
+                hidden: !(
+                  $page.url.startsWith('/admin/blog-categories') ||
+                  $page.url.startsWith('/admin/blog-contents') ||
+                  $page.url.startsWith('/admin/comments-and-replies')
+                )
+              }"
             >
               <ul class="pl-8">
                 <li v-show="can('blog-categories.view')" class="items-center">

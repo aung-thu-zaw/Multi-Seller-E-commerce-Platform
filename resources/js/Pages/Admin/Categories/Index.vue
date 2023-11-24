@@ -32,9 +32,9 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 </script>
 
 <template>
-  <AdminDashboardLayout>
-    <Head :title="__('Categories')" />
+  <Head :title="__('Categories')" />
 
+  <AdminDashboardLayout>
     <!-- Breadcrumb And Trash Button  -->
     <div class="min-h-screen py-10 font-poppins">
       <div

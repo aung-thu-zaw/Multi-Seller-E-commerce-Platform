@@ -6,9 +6,9 @@ import { Head } from '@inertiajs/vue3'
 </script>
 
 <template>
-  <AppLayout>
-    <Head title="Help Center : E-commerce Online Shopping" />
+  <Head title="Help Center : E-commerce Online Shopping" />
 
+  <AppLayout>
     <section id="help-center" class="py-5">
       <div class="container mx-auto">
         <div class="flex items-center justify-between mb-5">

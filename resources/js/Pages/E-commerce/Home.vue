@@ -13,9 +13,9 @@ import { Head } from '@inertiajs/vue3'
 </script>
 
 <template>
-  <AppLayout>
-    <Head title="E-commerce Online Shopping" />
+  <Head title="E-commerce Online Shopping" />
 
+  <AppLayout>
     <EcommerceHeader />
 
     <CampaignBannerSection />

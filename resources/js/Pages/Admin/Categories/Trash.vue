@@ -40,8 +40,9 @@ const {
 </script>
 
 <template>
+  <Head :title="__('Deleted :label', { label: __('Category') })" />
+
   <AdminDashboardLayout>
-    <Head :title="__('Deleted :label', { label: __('Category') })" />
     <!-- Breadcrumb And Go back Button  -->
     <div class="min-h-screen py-10 font-poppins">
       <div

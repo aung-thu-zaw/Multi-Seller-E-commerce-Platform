@@ -3,6 +3,7 @@
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentReplyController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogController;
+use App\Http\Controllers\Ecommerce\Pages\AboutUsController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -39,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/notifications/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])
         ->name('notifications.markAllAsRead');
 });
+
+Route::get("/about-us", AboutUsController::class)->name("about-us");
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

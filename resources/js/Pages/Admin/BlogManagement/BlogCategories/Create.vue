@@ -31,8 +31,9 @@ const { form, processing, errors, createAction } = useResourceActions({
 </script>
 
 <template>
+  <Head :title="__('Create :label', { label: __('Blog Category') })" />
+
   <AdminDashboardLayout>
-    <Head :title="__('Create :label', { label: __('Blog Category') })" />
     <div class="min-h-screen py-10 font-poppins">
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"

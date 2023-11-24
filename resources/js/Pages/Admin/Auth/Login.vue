@@ -41,9 +41,9 @@ const submit = async () => {
 </script>
 
 <template>
-  <GuestLayout>
-    <Head :title="__(':label Dashboard Login', { label: __('Admin') })" />
+  <Head :title="__(':label Dashboard Login', { label: __('Admin') })" />
 
+  <GuestLayout>
     <AuthFormContainer>
       <div
         v-if="status"

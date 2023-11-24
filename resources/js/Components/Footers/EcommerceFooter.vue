@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import { Link } from '@inertiajs/vue3'
+</script>
 
 <template>
   <!-- Footer -->
@@ -41,7 +43,12 @@
 
           <div class="mt-3 grid space-y-3">
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">About us</a>
+              <Link
+                :href="route('about-us')"
+                class="inline-flex gap-x-2 text-white hover:text-gray-300"
+              >
+                About us
+              </Link>
             </p>
             <p>
               <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#"

@@ -32,9 +32,9 @@ const { changeStatusAction, softDeleteAction, softDeleteSelectedAction } = useRe
 </script>
 
 <template>
-  <AdminDashboardLayout>
-    <Head :title="__('Blog Contents')" />
+  <Head :title="__('Blog Contents')" />
 
+  <AdminDashboardLayout>
     <!-- Breadcrumb And Trash Button  -->
     <div class="min-h-screen py-10 font-poppins">
       <div
