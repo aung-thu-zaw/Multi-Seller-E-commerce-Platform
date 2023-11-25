@@ -32,6 +32,11 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+
+Route::get('/seller/dashboard', function () {
+    return Inertia::render('Seller/Dashboard');
+});
+
 Route::middleware('auth')->group(function () {
 
     // Route to mark a specific notification as read

@@ -12,7 +12,7 @@
       <div
         class="absolute -top-1 -right-2 bg-white flex items-center justify-center w-3.5 h-3.5 rounded-full"
       >
-        <span class="font-bold text-orange-500 text-[.6rem]">5</span>
+        <span class="font-bold text-blue-500 text-[.6rem]">5</span>
       </div>
     </button>
 
@@ -24,7 +24,7 @@
         <span class="text-gray-700 font-semibold text-md">
           {{ __('Notifications') }}
         </span>
-        <button href="#" class="text-orange-600 hover:text-orange-500 text-sm font-bold">
+        <button href="#" class="text-blue-600 hover:text-blue-500 text-sm font-bold">
           {{ __('Mark all as read') }}
         </button>
       </div>
@@ -96,7 +96,7 @@
             <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
             for the presentation?"
           </div>
-          <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
+          <div class="text-xs font-medium text-blue-600">10 minutes ago</div>
         </div>
       </a>
 
@@ -150,7 +150,7 @@
             <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
             for the presentation?"
           </div>
-          <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
+          <div class="text-xs font-medium text-blue-600">10 minutes ago</div>
         </div>
       </a>
 
@@ -204,7 +204,7 @@
             <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
             for the presentation?"
           </div>
-          <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
+          <div class="text-xs font-medium text-blue-600">10 minutes ago</div>
         </div>
       </a>
 
@@ -258,7 +258,7 @@
             <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
             for the presentation?"
           </div>
-          <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
+          <div class="text-xs font-medium text-blue-600">10 minutes ago</div>
         </div>
       </a>
 
@@ -312,7 +312,7 @@
             <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
             for the presentation?"
           </div>
-          <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
+          <div class="text-xs font-medium text-blue-600">10 minutes ago</div>
         </div>
       </a>
 
@@ -366,7 +366,7 @@
             <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
             for the presentation?"
           </div>
-          <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
+          <div class="text-xs font-medium text-blue-600">10 minutes ago</div>
         </div>
       </a>
 
@@ -420,7 +420,7 @@
             <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
             for the presentation?"
           </div>
-          <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
+          <div class="text-xs font-medium text-blue-600">10 minutes ago</div>
         </div>
       </a>
 
@@ -474,7 +474,7 @@
             <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
             for the presentation?"
           </div>
-          <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
+          <div class="text-xs font-medium text-blue-600">10 minutes ago</div>
         </div>
       </a>
 
@@ -528,7 +528,7 @@
             <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
             for the presentation?"
           </div>
-          <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
+          <div class="text-xs font-medium text-blue-600">10 minutes ago</div>
         </div>
       </a>
 
@@ -582,7 +582,7 @@
             <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
             for the presentation?"
           </div>
-          <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
+          <div class="text-xs font-medium text-blue-600">10 minutes ago</div>
         </div>
       </a>
 
@@ -636,7 +636,7 @@
             <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
             for the presentation?"
           </div>
-          <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
+          <div class="text-xs font-medium text-blue-600">10 minutes ago</div>
         </div>
       </a>
 
@@ -690,7 +690,7 @@
             <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
             for the presentation?"
           </div>
-          <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
+          <div class="text-xs font-medium text-blue-600">10 minutes ago</div>
         </div>
       </a>
 
@@ -744,7 +744,7 @@
             <span class="font-semibold text-gray-800">Aung Thu Zaw</span>: "Hey, what's up? All set
             for the presentation?"
           </div>
-          <div class="text-xs font-medium text-orange-600">10 minutes ago</div>
+          <div class="text-xs font-medium text-blue-600">10 minutes ago</div>
         </div>
       </a>
 

@@ -1,6 +1,6 @@
 <script setup>
-import AdminDashboardLayout from '@/Layouts/AdminDashboardLayout.vue'
-import DashboardHeaderStats from '@/Components/Headers/AdminDashboardHeaderStats.vue'
+import SellerDashboardLayout from '@/Layouts/SellerDashboardLayout.vue'
+import DashboardHeaderStats from '@/Components/Headers/SellerDashboardHeaderStats.vue'
 import TotalSaleLineChart from '@/Components/Charts/TotalSaleLineChart.vue'
 import TotalOrderBarChart from '@/Components/Charts/TotalOrderBarChart.vue'
 import TotalUserBarChart from '@/Components/Charts/TotalUserBarChart.vue'
@@ -8,9 +8,9 @@ import { Head } from '@inertiajs/vue3'
 </script>
 
 <template>
-  <Head :title="__('Admin Dashboard')" />
+  <Head :title="__('Seller Dashboard')" />
 
-  <AdminDashboardLayout>
+  <SellerDashboardLayout>
     <template #header>
       <DashboardHeaderStats />
     </template>
@@ -188,5 +188,5 @@ import { Head } from '@inertiajs/vue3'
       <!-- </div> -->
       <!-- </div> -->
     </div>
-  </AdminDashboardLayout>
+  </SellerDashboardLayout>
 </template>

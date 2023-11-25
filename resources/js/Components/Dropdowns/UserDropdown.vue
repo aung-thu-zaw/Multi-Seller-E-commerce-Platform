@@ -20,7 +20,7 @@ const user = computed(() => usePage().props.auth?.user)
           <img
             alt="user-photo"
             class="w-full h-full object-cover rounded-full align-middle border-none shadow-lg ring-2 ring-orange-300"
-            :src="user.avatar ?? defaultUserImage"
+            :src="user?.avatar ?? defaultUserImage"
           />
         </span>
 
@@ -34,7 +34,8 @@ const user = computed(() => usePage().props.auth?.user)
             'text-slate-600 md:text-white':
               $page.url !== '/admin/dashboard' || $page.url !== '/seller/dashboard'
           }"
-          >{{ user?.name }}
+        >
+          {{ user?.name }}
         </span>
         <span v-else class="font-bold ml-2 text-slate-600 hidden md:block">{{ user?.name }} </span>
       </div>

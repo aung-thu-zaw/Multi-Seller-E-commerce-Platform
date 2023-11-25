@@ -16,11 +16,12 @@ return new class() extends Migration
             $table->foreignId('seller_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('avatar')->nullable();
             $table->enum('store_type', ['official', 'non_official'])->default('non_official');
-            $table->string('name')->unique();
+            $table->string('namecl')->unique();
             $table->string('slug')->unique();
             $table->string('contact_email');
             $table->string('contact_phone');
-            $table->string('tax_number')->nullable();
+            $table->string('tax_number')->unique()->nullable();
+            $table->string('address')->nullable();
             $table->string('website')->nullable();
             $table->text('description')->nullable();
             $table->boolean('is_verified')->default(false);
