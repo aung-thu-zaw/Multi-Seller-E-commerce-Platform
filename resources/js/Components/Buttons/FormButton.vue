@@ -15,7 +15,13 @@ defineProps({
 <template>
   <button
     type="submit"
-    class="w-full text-sm bg-orange-600 text-white ring-2 ring-orange-300 hover:bg-orange-700 capitalize font-bold focus:ring-2 focus:ring-orange-200 py-3 rounded-md active:animate-press"
+    class="w-full text-sm text-white ring-2 capitalize font-bold focus:ring-2 py-3 rounded-md active:animate-press"
+    :class="{
+      ' bg-blue-600 ring-blue-300 hover:bg-blue-700 focus:ring-blue-200':
+        $page.url.startsWith('/seller'),
+      ' bg-orange-600 ring-orange-300 hover:bg-orange-700 focus:ring-orange-200':
+        !$page.url.startsWith('/seller')
+    }"
     :disabled="disabled"
   >
     <div v-if="processing" class="flex items-center justify-center">

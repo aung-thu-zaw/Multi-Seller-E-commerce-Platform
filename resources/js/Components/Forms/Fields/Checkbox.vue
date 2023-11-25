@@ -30,6 +30,10 @@ const proxyChecked = computed({
     type="checkbox"
     :value="value"
     v-model="proxyChecked"
-    class="rounded border-gray-300 text-orange-600 shadow-sm focus:ring-orange-500"
+    class="rounded border-gray-300 shadow-sm"
+    :class="{
+      'text-blue-600 focus:ring-blue-500': $page.url.startsWith('/seller'),
+      'text-orange-600 focus:ring-orange-500': !$page.url.startsWith('/seller')
+    }"
   />
 </template>

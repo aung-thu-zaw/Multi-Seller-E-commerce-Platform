@@ -57,11 +57,13 @@ defineExpose({ focus: () => textarea.value.focus() })
       :name="name"
       :id="name"
       rows="7"
-      class="block w-full p-4 font-semibold text-sm text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all"
+      class="block w-full p-4 font-semibold text-sm text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 transition-all"
       :class="{
         'rounded-full': rounded,
         'rounded-md': !rounded,
-        'pl-12': icon
+        'pl-12': icon,
+        'focus:ring-blue-300 focus:border-blue-400': $page.url.startsWith('/seller'),
+        'focus:ring-orange-300 focus:border-orange-400': !$page.url.startsWith('/seller')
       }"
       ref="textarea"
       :value="modelValue"

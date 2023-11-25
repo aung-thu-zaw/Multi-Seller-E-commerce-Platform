@@ -44,10 +44,12 @@ const onFileChange = (event) => {
     <input
       :name="name"
       :id="name"
-      class="block w-full text-sm text-gray-500 file:me-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-700 file:text-white hover:file:bg-gray-600 file:disabled:opacity-50 file:disabled:pointer-events-none border p-2 bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:border-orange-400"
+      class="block w-full text-sm text-gray-500 file:me-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-700 file:text-white hover:file:bg-gray-600 file:disabled:opacity-50 file:disabled:pointer-events-none border p-2 bg-gray-50 focus:ring-2"
       :class="{
         'rounded-full': rounded,
-        'rounded-md': !rounded
+        'rounded-md': !rounded,
+        'focus:ring-blue-300 focus:border-blue-400': $page.url.startsWith('/seller'),
+        'focus:ring-orange-300 focus:border-orange-400': !$page.url.startsWith('/seller')
       }"
       aria-describedby="file_input_help"
       type="file"
