@@ -16,7 +16,7 @@ return new class() extends Migration
             $table->foreignId('seller_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('avatar')->nullable();
             $table->enum('store_type', ['official', 'non_official'])->default('non_official');
-            $table->string('namecl')->unique();
+            $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('contact_email');
             $table->string('contact_phone');
