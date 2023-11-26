@@ -86,7 +86,7 @@ const toggleCollapseShow = (classes) => {
         <hr class="my-4 md:min-w-full" />
         <!-- Heading -->
         <h6 class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline">
-          {{ __('Shop Administration') }}
+          {{ __('Store Administration') }}
         </h6>
         <!-- Navigation -->
 
@@ -211,7 +211,7 @@ const toggleCollapseShow = (classes) => {
               }"
             >
               <i class="fa-solid fa-message mr-2"></i>
-              {{ __('Chat') }}
+              {{ __('Chat Inbox') }}
             </Link>
           </li>
         </ul>

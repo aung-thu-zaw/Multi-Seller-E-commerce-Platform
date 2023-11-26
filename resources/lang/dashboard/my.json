@@ -102,7 +102,7 @@
     "Subscribers": "စာရင်းသွင်းသူများ",
     "Newsletters": "သတင်းလွှာများ",
     "Support & Content": "ပံ့ပိုးမှုနှင့် အကြောင်းအရာ",
-    "Chats": "ချက်တင်များ",
+    "Chat Inbox": "ချက်ဝင်စာ",
     "Subcategories": "အမျိုးအစားခွဲများ",
     "FAQs": " အမြဲမေးလေ့ရှိသောမေးခွန်းများ",
     "Pages": "စာမျက်နှာများ",
@@ -151,5 +151,11 @@
     "Blog Title": "ဘလော့ခေါင်းစဉ်",
     "Blog Thumbnail": "ဘလော့ဂ် ပုံသေး",
     "Change :label Status": ":label status ကို ပြောင်းပါ။",
-    "Blog Tags": "ဘလော့ဂ်တဂ်များ"
+    "Blog Tags": "ဘလော့ဂ်တဂ်များ",
+    "Guides": "လမ်းညွှန်များ",
+    "My Withdraw": "ကျွန်ုပ်၏ ငွေထုတ်ခြင်း",
+    "Stock Management": "စတော့စီမံခန့်ခွဲမှု",
+    "Store Setting": "စတိုးဆိုင်ဆက်တင်",
+    "Store Administration": "စတိုးဆိုင် စီမံခန့်ခွဲမှု",
+    "Financial & Store": "ငွေကြေးနှင့် စတိုးဆိုင်"
 }

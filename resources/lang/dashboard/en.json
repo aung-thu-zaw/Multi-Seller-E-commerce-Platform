@@ -102,7 +102,7 @@
     "Subscribers": "Subscribers",
     "Newsletters": "Newsletters",
     "Support & Content": "Support & Content",
-    "Chats": "Chats",
+    "Chat Inbox": "Chat Inbox",
     "Subcategories": "Subcategories",
     "FAQs": "FAQs",
     "Pages": "Pages",
@@ -151,5 +151,11 @@
     "Blog Title": "Blog Title",
     "Blog Thumbnail": "Blog Thumbnail",
     "Change :label Status": "Change :label Status",
-    "Blog Tags": "Blog Tags"
+    "Blog Tags": "Blog Tags",
+    "Guides": "Guides",
+    "My Withdraw": "My Withdraw",
+    "Stock Management": "Stock Management",
+    "Store Setting": "Store Setting",
+    "Store Administration": "Store Administration",
+    "Financial & Store": "Financial & Store"
 }

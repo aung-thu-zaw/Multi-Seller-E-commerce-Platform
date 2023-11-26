@@ -1205,7 +1205,7 @@ const toggleCollapseShow = (classes) => {
               }"
             >
               <i class="fa-solid fa-message mr-2"></i>
-              {{ __('Chats') }}
+              {{ __('Chat Inbox') }}
             </Link>
           </li>
 
