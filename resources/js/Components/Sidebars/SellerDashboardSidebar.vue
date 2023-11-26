@@ -93,7 +93,7 @@ const toggleCollapseShow = (classes) => {
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
           <!-- Dashboard -->
           <li class="items-center">
-            <Link :href="route('admin.dashboard')">
+            <Link :href="route('seller.dashboard')">
               <div
                 class="text-xs py-3 font-bold block"
                 :class="{
