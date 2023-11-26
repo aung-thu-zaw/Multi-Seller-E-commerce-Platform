@@ -113,7 +113,11 @@ watch(
         <input
           type="text"
           id="default-search"
-          class="block w-full p-4 pl-10 text-xs text-gray-900 border border-gray-300 rounded-md bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all"
+          class="block w-full p-4 pl-10 text-xs text-gray-900 border border-gray-300 rounded-md bg-gray-50 focus:ring-2 transition-all"
+          :class="{
+            'focus:ring-blue-300 focus:border-blue-400': $page.url.startsWith('/seller'),
+            'focus:ring-orange-300 focus:border-orange-400': !$page.url.startsWith('/seller')
+          }"
           :placeholder="placeholder"
           required
           v-model="search"

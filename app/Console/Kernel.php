@@ -12,10 +12,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        // Admin
         $schedule->command('categories:delete')->daily();
         $schedule->command('brands:delete')->daily();
         $schedule->command('blog-categories:delete')->daily();
         $schedule->command('blog-contents:delete')->daily();
+
+        // Seller
+        $schedule->command('store-product-categories:delete')->daily();
     }
 
     /**

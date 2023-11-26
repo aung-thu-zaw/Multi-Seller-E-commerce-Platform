@@ -10,7 +10,7 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('store_categories', function (Blueprint $table) {
+        Schema::create('store_product_categories', function (Blueprint $table) {
             $table->id();
             $table->string("name");
             $table->string("slug");
@@ -25,6 +25,6 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('store_categories');
+        Schema::dropIfExists('store_product_categories');
     }
 };

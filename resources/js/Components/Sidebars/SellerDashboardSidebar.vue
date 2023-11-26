@@ -110,7 +110,7 @@ const toggleCollapseShow = (classes) => {
           <!-- Categories -->
           <li class="items-center">
             <Link
-              :href="route('admin.categories.index')"
+              :href="route('seller.store-product-categories.index')"
               :data="{
                 page: 1,
                 per_page: 5,
@@ -119,12 +119,16 @@ const toggleCollapseShow = (classes) => {
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-blue-600 hover:text-blue-500': $page.url.startsWith('/seller/categories'),
-                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/seller/categories')
+                'text-blue-600 hover:text-blue-500': $page.url.startsWith(
+                  '/seller/store-product-categories'
+                ),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith(
+                  '/seller/store-product-categories'
+                )
               }"
             >
               <i class="fa-solid fa-list mr-2"></i>
-              {{ __('Categories') }}
+              {{ __('Store Product Categories') }}
             </Link>
           </li>
 

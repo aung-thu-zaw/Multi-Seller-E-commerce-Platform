@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StoreCategory extends Model
+class StoreProductCategory extends Model
 {
     use HasFactory;
     use HasSlug;

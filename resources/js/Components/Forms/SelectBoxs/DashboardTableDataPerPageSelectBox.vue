@@ -40,7 +40,11 @@ watch(
 <template>
   <select
     id="countries"
-    class="p-3 py-3.5 font-medium text-xs text-gray-500 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:border-orange-400"
+    class="p-3 py-3.5 font-medium text-xs text-gray-500 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2"
+    :class="{
+      'focus:ring-blue-300 focus:border-blue-400': $page.url.startsWith('/seller'),
+      'focus:ring-orange-300 focus:border-orange-400': !$page.url.startsWith('/seller')
+    }"
     v-model="per_page"
   >
     <option selected disabled>{{ __('Per Page') }}</option>
