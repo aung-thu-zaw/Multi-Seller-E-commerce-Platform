@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Dashboard\Seller;
 
+use App\Rules\RecaptchaRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -25,6 +26,7 @@ class StoreProductCategoryRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'status' => ['required', 'string', Rule::in(['show', 'hide'])],
+            'captcha_token' => [new RecaptchaRule()],
         ];
     }
 }

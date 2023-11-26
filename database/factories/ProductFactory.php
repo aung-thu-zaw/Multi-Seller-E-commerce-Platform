@@ -19,10 +19,10 @@ class ProductFactory extends Factory
         return [
             'category_id' => fake()->numberBetween(1, 67),
             'seller_id' => fake()->numberBetween(2, 3),
-            'thumb_image' => fake()->imageUrl(),
+            'image' => fake()->imageUrl(),
             'name' => fake()->sentence(),
             'description' => fake()->text(),
-            'sku' => uniqid(),
+            'sku' => fake()->randomLetter(),
             'qty' => fake()->numberBetween(10, 200),
             'price' => fake()->numberBetween(10, 1000),
         ];
