@@ -16,6 +16,7 @@ const props = defineProps({ storeProductCategory: Object })
 const storeProductCategoryList = 'seller.store-product-categories.index'
 
 const { form, processing, errors, editAction } = useResourceActions({
+  store_id: props.storeProductCategory?.store_id,
   name: props.storeProductCategory?.name,
   status: props.storeProductCategory?.status
 })

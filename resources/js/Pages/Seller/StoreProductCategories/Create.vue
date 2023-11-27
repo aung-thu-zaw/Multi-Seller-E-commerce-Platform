@@ -11,9 +11,12 @@ import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
 import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 
+const props = defineProps({ store: Object })
+
 const storeProductCategoryList = 'seller.store-product-categories.index'
 
 const { form, processing, errors, createAction } = useResourceActions({
+  store_id: props.store?.id,
   name: null,
   status: null
 })

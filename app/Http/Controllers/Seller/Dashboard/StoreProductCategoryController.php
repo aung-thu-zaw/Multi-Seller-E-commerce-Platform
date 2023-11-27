@@ -6,6 +6,7 @@ use App\Actions\Seller\StoreProductCategories\PermanentlyDeleteTrashedStoreProdu
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Seller\StoreProductCategoryRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
+use App\Models\Store;
 use App\Models\StoreProductCategory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -18,7 +19,10 @@ class StoreProductCategoryController extends Controller
 
     public function index(): Response|ResponseFactory
     {
+        $store = Store::select("id")->where("seller_id", auth()->id())->first();
+
         $storeProductCategories = StoreProductCategory::search(request('search'))
+        ->where("store_id", $store->id)
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
@@ -28,12 +32,14 @@ class StoreProductCategoryController extends Controller
 
     public function create(): Response|ResponseFactory
     {
-        return inertia('Seller/StoreProductCategories/Create');
+        $store = Store::select("id")->where("seller_id", auth()->id())->first();
+
+        return inertia('Seller/StoreProductCategories/Create', compact("store"));
     }
 
     public function store(StoreProductCategoryRequest $request): RedirectResponse
     {
-        StoreProductCategory::create(["name" => $request->name,"status" => $request->status]);
+        StoreProductCategory::create(["store_id" => $request->store_id,"name" => $request->name,"status" => $request->status]);
 
         return to_route('seller.store-product-categories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }
@@ -45,7 +51,7 @@ class StoreProductCategoryController extends Controller
 
     public function update(StoreProductCategoryRequest $request, StoreProductCategory $storeProductCategory): RedirectResponse
     {
-        $storeProductCategory->update(["name" => $request->name,"status" => $request->status]);
+        $storeProductCategory->update(["store_id" => $request->store_id,"name" => $request->name,"status" => $request->status]);
 
         return to_route('seller.store-product-categories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }
@@ -70,6 +76,7 @@ class StoreProductCategoryController extends Controller
     {
         $trashedStoreProductCategories = StoreProductCategory::search(request('search'))
             ->onlyTrashed()
+            ->where("store_id", auth()->id())
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());

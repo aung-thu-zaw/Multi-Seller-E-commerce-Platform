@@ -17,6 +17,7 @@ class StoreProductCategoryFactory extends Factory
     public function definition(): array
     {
         return [
+            "store_id" => 2,
             "name" => fake()->sentence(),
             "slug" => fake()->slug(),
             'status' => fake()->randomElement(['show', 'hide']),

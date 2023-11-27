@@ -17,7 +17,7 @@ class StoreFactory extends Factory
     public function definition(): array
     {
         return [
-            'seller_id' => fake()->randomNumber(5, 20),
+            'seller_id' => fake()->randomNumber(2, 20),
             'avatar' => fake()->imageUrl(),
             'store_type' => fake()->randomElement(['official', 'non_official']),
             'name' => fake()->unique()->sentence(),

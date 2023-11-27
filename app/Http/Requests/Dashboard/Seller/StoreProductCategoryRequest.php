@@ -24,6 +24,7 @@ class StoreProductCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'store_id' => ["required","numeric",Rule::exists("stores", "id")],
             'name' => ['required', 'string', 'max:255'],
             'status' => ['required', 'string', Rule::in(['show', 'hide'])],
             'captcha_token' => [new RecaptchaRule()],
