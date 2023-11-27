@@ -27,7 +27,7 @@ import AdminDashboardSidebar from '@/Components/Sidebars/AdminDashboardSidebar.v
 }
 
 :root {
-  --ck-border-radius: 0.375rem;
+  --ck-border-radius: 1rem;
   --ck-color-focus-border: rgb(209 213 219);
   --ck-font-size-base: 0.7rem;
   --ck-color-shadow-drop: none;

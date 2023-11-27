@@ -167,5 +167,19 @@
     "store product category": "store product category",
     "Brand Name": "Brand Name",
     "Brand Logo": "Brand Logo",
-    "Blog Category Name": "Blog Category Name"
+    "Blog Category Name": "Blog Category Name",
+    "Product Name": "Product Name",
+    "Product Description": "Product Description",
+    "Description": "Description",
+    "Product Image": "Product Image",
+    "SKU": "SKU",
+    "Quantity": "Quantity",
+    "Price": "Price",
+    "Discount Price": "Discount Price",
+    "Discount Start Date": "Discount Start Date",
+    "Discount End Date": "Discount End Date",
+    "Product SKU": "Product SKU",
+    "Product Price": "Product Price",
+    "Product Quantity": "Product Quantity",
+    "Product Offer Price": "Product Offer Price"
 }

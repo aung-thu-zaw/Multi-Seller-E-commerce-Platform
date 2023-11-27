@@ -8,13 +8,17 @@ import InputError from '@/Components/Forms/Fields/InputError.vue'
 import InputField from '@/Components/Forms/Fields/InputField.vue'
 import FileInput from '@/Components/Forms/Fields/FileInput.vue'
 import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
+import Datepicker from 'vue3-datepicker'
 import FormButton from '@/Components/Buttons/FormButton.vue'
 import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
 import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 import { useImagePreview } from '@/Composables/useImagePreview'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 defineProps({ categories: Object, storeProductCategories: Object, brands: Object })
+
+const editor = ClassicEditor
 
 const productList = 'seller.products.index'
 
@@ -85,8 +89,8 @@ const { form, processing, errors, createAction } = useResourceActions({
           <div
             class="grid gap-3"
             :class="{
-              'grid-cols-2': storeProductCategories.length,
-              'grid-cols-1': !storeProductCategories.length
+              'grid-cols-3': storeProductCategories.length,
+              'grid-cols-2': !storeProductCategories.length
             }"
           >
             <div>
@@ -104,26 +108,133 @@ const { form, processing, errors, createAction } = useResourceActions({
             </div>
 
             <div>
-              <InputLabel :label="__('Store Product Category')" required />
+              <InputLabel :label="__('Store Product Category')" />
 
               <SelectBox
                 name="store_product_category_id"
                 :options="storeProductCategories"
                 v-model="form.store_product_category_id"
                 :placeholder="__('Select an option')"
-                required
               />
 
               <InputError :message="errors?.store_product_category_id" />
             </div>
+
+            <div>
+              <InputLabel :label="__('Brand')" />
+
+              <SelectBox
+                name="brand"
+                :options="storeProductCategories"
+                v-model="form.brand_id"
+                :placeholder="__('Select an option')"
+              />
+
+              <InputError :message="errors?.brand_id" />
+            </div>
           </div>
 
           <div>
-            <InputLabel :label="__('Image')" required />
+            <InputLabel :label="__('Description')" required />
+
+            <ckeditor
+              :editor="editor"
+              v-model="form.description"
+              :config="{
+                placeholder: __('Enter :label', { label: __('Product Description') })
+              }"
+            ></ckeditor>
+            <InputError :message="errors?.description" />
+          </div>
+
+          <div>
+            <InputLabel :label="__('SKU')" />
+
+            <InputField
+              type="text"
+              name="product-sku"
+              v-model="form.sku"
+              :placeholder="__('Enter :label', { label: __('Product SKU') })"
+            />
+
+            <InputError :message="errors?.name" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <InputLabel :label="__('Quantity')" required />
+
+              <InputField
+                type="number"
+                name="product-quantity"
+                v-model="form.qty"
+                :placeholder="__('Enter :label', { label: __('Product Quantity') })"
+                required
+              />
+
+              <InputError :message="errors?.qty" />
+            </div>
+
+            <div>
+              <InputLabel :label="__('Price')" required />
+
+              <InputField
+                type="number"
+                name="product-price"
+                v-model="form.price"
+                :placeholder="__('Enter :label', { label: __('Product Price') })"
+                required
+              />
+
+              <InputError :message="errors?.qty" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <InputLabel :label="__('Discount Price')" />
+
+              <InputField
+                type="number"
+                name="product-discount"
+                v-model="form.qty"
+                :placeholder="__('Enter :label', { label: __('Product Offer Price') })"
+              />
+
+              <InputError :message="errors?.discount" />
+            </div>
+            <div>
+              <InputLabel :label="__('Discount Start Date')" />
+
+              <Datepicker
+                typeable
+                class="block w-full p-4 font-semibold text-sm rounded-md text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition-all"
+                :placeholder="__('Enter :label', { label: __('Discount Start Date') })"
+                v-model="form.discount_start_date"
+              />
+
+              <InputError :message="errors?.discount_start_date" />
+            </div>
+            <div>
+              <InputLabel :label="__('Discount End Date')" />
+
+              <Datepicker
+                typeable
+                class="block w-full p-4 font-semibold text-sm rounded-md text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition-all"
+                :placeholder="__('Enter :label', { label: __('Discount End Date') })"
+                v-model="form.discount_end_date"
+              />
+
+              <InputError :message="errors?.discount_end_date" />
+            </div>
+          </div>
+
+          <div>
+            <InputLabel :label="__('Product Image')" required />
 
             <FileInput
-              name="brand-logo"
-              v-model="form.logo"
+              name="product-image"
+              v-model="form.image"
               text="PNG, JPG or JPEG ( Max File Size : 1.5 MB )"
               @update:modelValue="handleChangeImage"
               required
@@ -143,3 +254,18 @@ const { form, processing, errors, createAction } = useResourceActions({
     </div>
   </SellerDashboardLayout>
 </template>
+
+<style>
+.ck-editor__editable_inline {
+  min-height: 250px;
+  border-radius: 200px;
+}
+
+:root {
+  --ck-border-radius: 1rem;
+  --ck-color-focus-border: rgb(209 213 219);
+  --ck-font-size-base: 0.1rem;
+  --ck-color-shadow-drop: none;
+  --ck-color-shadow-inner: none;
+}
+</style>
