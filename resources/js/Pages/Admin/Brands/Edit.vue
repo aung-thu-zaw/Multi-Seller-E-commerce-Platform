@@ -65,7 +65,7 @@ const { form, processing, errors, editAction } = useResourceActions({
               type="text"
               name="brand-name"
               v-model="form.name"
-              :placeholder="__('Enter Brand Name')"
+              :placeholder="__('Enter :label', { label: __('Brand Name') })"
               autofocus
               required
             />
@@ -89,7 +89,7 @@ const { form, processing, errors, editAction } = useResourceActions({
                 }
               ]"
               v-model="form.status"
-              :placeholder="__('Select Option')"
+              :placeholder="__('Select an option')"
               :selected="brand.status"
               required
             />

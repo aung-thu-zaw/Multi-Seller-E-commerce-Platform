@@ -53,7 +53,7 @@
     "Delete All :label": ":label အားလုံးကို ဖျက်ပါ။",
     "Permanently Delete All :label": ":label အားလုံးကို အပြီးတိုင်ဖျက်ပါ။",
     "This action cannot be undone. Are you sure you want to permanently delete all :label in the trash?": "ဤလုပ်ဆောင်ချက်ကို ပြန်ပြင်၍မရပါ။ အမှိုက်ပုံးရှိ :label အားလုံးကို အပြီးတိုင်ဖျက်လိုသည်မှာ သေချာပါသလား။",
-    "Restore :label": ":label ကိုပြန်လည်ရယူခြင်း",
+    "Restore :label": ":label ကိုပြန်လည်ရယူပါ။",
     "Are you sure you would like to restore this?": "၎င်းကို ပြန်လည်ရယူလိုသည်မှာ သေချာပါသလား။",
     "Permanently Delete :label": ":label ကို အပြီးတိုင်ဖျက်ပါ။",
     "Permanently Delete Selected :label": "ရွေးချယ်ထားသော :label ကို အပြီးတိုင်ဖျက်ပါ",
@@ -164,5 +164,8 @@
     "Store Product Categories": "ဆိုင်ထုတ်ကုန်အမျိုးအစားများ",
     "store product categories": "ဆိုင်ထုတ်ကုန်အမျိုးအစားများ",
     "Store Product Category": "ဆိုင်ထုတ်ကုန်အမျိုးအစား",
-    "store product category": "ဆိုင်ထုတ်ကုန်အမျိုးအစား"
+    "store product category": "ဆိုင်ထုတ်ကုန်အမျိုးအစား",
+    "Brand Name":"အမှတ်တံဆိပ်အမည်",
+    "Brand Logo":"အမှတ်တံဆိပ်လိုဂို",
+    "Blog Category Name":"ဘလော့အမျိုးအစားအမည်"
 }

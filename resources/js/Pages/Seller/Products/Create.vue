@@ -1,44 +1,56 @@
 <script setup>
-import AdminDashboardLayout from '@/Layouts/AdminDashboardLayout.vue'
+import SellerDashboardLayout from '@/Layouts/SellerDashboardLayout.vue'
 import Breadcrumb from '@/Components/Breadcrumbs/Breadcrumb.vue'
 import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
 import PreviewImage from '@/Components/Forms/PreviewImage.vue'
 import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
 import InputError from '@/Components/Forms/Fields/InputError.vue'
 import InputField from '@/Components/Forms/Fields/InputField.vue'
-import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
 import FileInput from '@/Components/Forms/Fields/FileInput.vue'
+import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
 import FormButton from '@/Components/Buttons/FormButton.vue'
 import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
-import { useImagePreview } from '@/Composables/useImagePreview'
 import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
+import { useImagePreview } from '@/Composables/useImagePreview'
 
-const brandList = 'admin.brands.index'
+defineProps({ categories: Object, storeProductCategories: Object, brands: Object })
+
+const productList = 'seller.products.index'
 
 const { previewImage, setImagePreview } = useImagePreview()
 
 const handleChangeImage = (file) => {
   setImagePreview(file)
-  form.logo = file
+  form.image = file
 }
 
 const { form, processing, errors, createAction } = useResourceActions({
+  brand_id: null,
+  category_id: null,
+  store_product_category_id: null,
   name: null,
-  status: null,
-  logo: null
+  description: null,
+  sku: null,
+  qty: null,
+  price: null,
+  discount: null,
+  discount_start_date: null,
+  discount_end_date: null,
+  status: 'draft',
+  image: null
 })
 </script>
 
 <template>
-  <Head :title="__('Create :label', { label: __('Brand') })" />
+  <Head :title="__('Create :label', { label: __('Product') })" />
 
-  <AdminDashboardLayout>
+  <SellerDashboardLayout>
     <div class="min-h-screen py-10 font-poppins">
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="brandList" icon="fa-award" label="Brands">
+        <Breadcrumb :to="productList" icon="fa-basket-shopping" label="Products">
           <BreadcrumbItem label="Create" />
         </Breadcrumb>
 
@@ -50,19 +62,19 @@ const { form, processing, errors, createAction } = useResourceActions({
       <!-- Form Start -->
       <div class="border p-10 bg-white rounded-md">
         <form
-          @submit.prevent="createAction('Brand', 'admin.brands.store')"
+          @submit.prevent="createAction('Product', 'seller.products.store')"
           class="space-y-4 md:space-y-6"
         >
           <PreviewImage :src="previewImage" />
 
           <div>
-            <InputLabel :label="__('Brand Name')" required />
+            <InputLabel :label="__('Product Name')" required />
 
             <InputField
               type="text"
-              name="brand-name"
+              name="product-name"
               v-model="form.name"
-              :placeholder="__('Enter :label', { label: __('Brand Name') })"
+              :placeholder="__('Enter :label', { label: __('Product Name') })"
               autofocus
               required
             />
@@ -70,31 +82,44 @@ const { form, processing, errors, createAction } = useResourceActions({
             <InputError :message="errors?.name" />
           </div>
 
-          <div>
-            <InputLabel :label="__('Status')" required />
+          <div
+            class="grid gap-3"
+            :class="{
+              'grid-cols-2': storeProductCategories.length,
+              'grid-cols-1': !storeProductCategories.length
+            }"
+          >
+            <div>
+              <InputLabel :label="__('Category')" required />
 
-            <SelectBox
-              name="status"
-              :options="[
-                {
-                  label: 'Active',
-                  value: 'active'
-                },
-                {
-                  label: 'Inactive',
-                  value: 'inactive'
-                }
-              ]"
-              v-model="form.status"
-              :placeholder="__('Select an option')"
-              required
-            />
+              <SelectBox
+                name="category_id"
+                :options="categories"
+                v-model="form.category_id"
+                :placeholder="__('Select an option')"
+                required
+              />
 
-            <InputError :message="errors?.status" />
+              <InputError :message="errors?.category_id" />
+            </div>
+
+            <div>
+              <InputLabel :label="__('Store Product Category')" required />
+
+              <SelectBox
+                name="store_product_category_id"
+                :options="storeProductCategories"
+                v-model="form.store_product_category_id"
+                :placeholder="__('Select an option')"
+                required
+              />
+
+              <InputError :message="errors?.store_product_category_id" />
+            </div>
           </div>
 
           <div>
-            <InputLabel :label="__('Brand Logo')" required />
+            <InputLabel :label="__('Image')" required />
 
             <FileInput
               name="brand-logo"
@@ -104,7 +129,7 @@ const { form, processing, errors, createAction } = useResourceActions({
               required
             />
 
-            <InputError :message="errors?.logo" />
+            <InputError :message="errors?.image" />
           </div>
 
           <InputError :message="errors?.captcha_token" />
@@ -116,5 +141,5 @@ const { form, processing, errors, createAction } = useResourceActions({
       </div>
       <!-- Form End -->
     </div>
-  </AdminDashboardLayout>
+  </SellerDashboardLayout>
 </template>

@@ -14,10 +14,7 @@ import { useImagePreview } from '@/Composables/useImagePreview'
 import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 
-const props = defineProps({
-  category: Object,
-  categories: Object
-})
+const props = defineProps({ category: Object, categories: Object })
 
 const categoryList = 'admin.categories.index'
 
@@ -69,7 +66,7 @@ const { form, processing, errors, editAction } = useResourceActions({
               type="text"
               name="category-name"
               v-model="form.name"
-              :placeholder="__('Enter Category Name')"
+              :placeholder="__('Enter :label', { label: __('Category Name') })"
               autofocus
               required
             />
@@ -84,7 +81,7 @@ const { form, processing, errors, editAction } = useResourceActions({
               name="parent-category"
               :options="categories"
               v-model="form.parent_id"
-              :placeholder="__('Select Option')"
+              :placeholder="__('Select an option')"
               :selected="category.parent_id"
             />
 
@@ -107,7 +104,7 @@ const { form, processing, errors, editAction } = useResourceActions({
                 }
               ]"
               v-model="form.status"
-              :placeholder="__('Select Option')"
+              :placeholder="__('Select an option')"
               :selected="category.status"
               required
             />

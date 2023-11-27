@@ -40,7 +40,7 @@ const {
 </script>
 
 <template>
-  <Head :title="__('Deleted :label', { label: __('Blog Content') })" />
+  <Head :title="__('Deleted :label', { label: __('Blog Contents') })" />
 
   <AdminDashboardLayout>
     <!-- Breadcrumb And Go back Button  -->
@@ -91,7 +91,7 @@ const {
           class="my-3 flex flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between overflow-auto p-2"
         >
           <DashboardTableDataSearchBox
-            :placeholder="__('Search by :label', { label: __('Title') }) + '...'"
+            :placeholder="__('Search by :label', { label: __('Blog Title') }) + '...'"
             :to="trashedBlogContentList"
           />
 

@@ -62,7 +62,7 @@ const { form, processing, errors, createAction } = useResourceActions({
               type="text"
               name="category-name"
               v-model="form.name"
-              :placeholder="__('Enter Blog Category Name')"
+              :placeholder="__('Enter :label', { label: __('Blog Category Name') })"
               autofocus
               required
             />
@@ -86,7 +86,7 @@ const { form, processing, errors, createAction } = useResourceActions({
                 }
               ]"
               v-model="form.status"
-              :placeholder="__('Select Option')"
+              :placeholder="__('Select an option')"
               required
             />
 
@@ -94,10 +94,10 @@ const { form, processing, errors, createAction } = useResourceActions({
           </div>
 
           <div>
-            <InputLabel :label="__('Blog Category Image')" />
+            <InputLabel :label="__('Category Image')" />
 
             <FileInput
-              name="category-image"
+              name="blog-category-image"
               v-model="form.image"
               text="PNG, JPG or JPEG ( Max File Size : 1.5 MB )"
               @update:modelValue="handleChangeImage"

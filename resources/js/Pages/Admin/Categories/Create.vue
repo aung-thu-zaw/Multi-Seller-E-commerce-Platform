@@ -65,7 +65,7 @@ const { form, processing, errors, createAction } = useResourceActions({
               type="text"
               name="category-name"
               v-model="form.name"
-              :placeholder="__('Enter Category Name')"
+              :placeholder="__('Enter :label', { label: __('Category Name') })"
               autofocus
               required
             />
@@ -80,7 +80,7 @@ const { form, processing, errors, createAction } = useResourceActions({
               name="parent-category"
               :options="categories"
               v-model="form.parent_id"
-              :placeholder="__('Select Option')"
+              :placeholder="__('Select an option')"
             />
 
             <InputError :message="errors?.parent_id" />
@@ -102,7 +102,7 @@ const { form, processing, errors, createAction } = useResourceActions({
                 }
               ]"
               v-model="form.status"
-              :placeholder="__('Select Option')"
+              :placeholder="__('Select an option')"
               required
             />
 
