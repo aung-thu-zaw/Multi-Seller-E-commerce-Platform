@@ -25,6 +25,7 @@ class ProductFactory extends Factory
             'sku' => fake()->randomLetter(),
             'qty' => fake()->numberBetween(10, 200),
             'price' => fake()->numberBetween(10, 1000),
+            'status'=>fake()->randomElement(["draft","pending","approved","rejected"])
         ];
     }
 }

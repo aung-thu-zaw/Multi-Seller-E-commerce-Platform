@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\FilterByScope;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -37,7 +38,27 @@ class Product extends Model
     protected function thumbImage(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/products/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/products/$value"),
+        );
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<Product, never>
+     */
+    protected function price(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ($value == round($value, 0)) ? number_format($value, 0) : number_format($value, 2)
+        );
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<Product, never>
+     */
+    protected function discount(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ($value == round($value, 0)) ? number_format($value, 0) : number_format($value, 2)
         );
     }
 
@@ -73,9 +94,14 @@ class Product extends Model
         return $this->belongsTo(User::class, 'seller_id');
     }
 
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new FilterByScope());
+    }
+
     public static function deleteImage(string $productImage): void
     {
-        if (! empty($productImage) && file_exists(storage_path('app/public/products/'.pathinfo($productImage, PATHINFO_BASENAME)))) {
+        if (!empty($productImage) && file_exists(storage_path('app/public/products/'.pathinfo($productImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/products/'.pathinfo($productImage, PATHINFO_BASENAME)));
         }
     }

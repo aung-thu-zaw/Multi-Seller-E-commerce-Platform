@@ -27,7 +27,6 @@ class ProductRequest extends FormRequest
             'brand_id' => ['nullable', 'numeric', Rule::exists('brands', 'id')],
             'category_id' => ['required', 'numeric', Rule::exists('categories', 'id')],
             'store_product_category_id' => ['nullable', 'numeric', Rule::exists('store_product_categories', 'id')],
-            'seller_id' => ['required', 'numeric', Rule::exists('users', 'id')],
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'sku' => ['nullable', 'string', 'max:255'],
@@ -36,7 +35,6 @@ class ProductRequest extends FormRequest
             'discount' => ['nullable', 'numeric'],
             'discount_start_date' => ['nullable', 'date'],
             'discount_end_date' => ['nullable', 'date'],
-            'status' => ['required', Rule::in(['draft', 'pending'])],
             'captcha_token' => [new RecaptchaRule()],
         ];
 

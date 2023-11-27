@@ -135,7 +135,7 @@ const toggleCollapseShow = (classes) => {
           <!-- Products -->
           <li class="items-center">
             <Link
-              :href="route('admin.brands.index')"
+              :href="route('seller.products.index')"
               :data="{
                 page: 1,
                 per_page: 5,

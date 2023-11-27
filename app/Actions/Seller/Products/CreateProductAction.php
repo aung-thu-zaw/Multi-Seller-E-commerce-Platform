@@ -20,7 +20,7 @@ class CreateProductAction
             'brand_id' => $data['brand_id'],
             'category_id' => $data['category_id'],
             'store_product_category_id' => $data['store_product_category_id'],
-            'seller_id' => $data['seller_id'],
+            'seller_id' => auth()->id(),
             'name' => $data['name'],
             'description' => $data['description'],
             'sku' => $data['sku'],
@@ -29,7 +29,7 @@ class CreateProductAction
             'discount' => $data['discount'],
             'discount_start_date' => $data['discount_start_date'],
             'discount_end_date' => $data['discount_end_date'],
-            'status' => $data['status'],
+            'status' => "draft",
             'image' => $image,
         ]);
     }

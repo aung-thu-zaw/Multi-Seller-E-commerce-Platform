@@ -20,7 +20,7 @@ class UpdateProductAction
              'brand_id' => $data['brand_id'],
              'category_id' => $data['category_id'],
              'store_product_category_id' => $data['store_product_category_id'],
-             'seller_id' => $data['seller_id'],
+             'seller_id' => auth()->id(),
              'name' => $data['name'],
              'description' => $data['description'],
              'sku' => $data['sku'],
