@@ -14,6 +14,7 @@ import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
 import ImageCell from '@/Components/Tables/TableCells/TableImageCell.vue'
 import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
 import NoTableData from '@/Components/Tables/NoTableData.vue'
+import OptionDropdown from '@/Components/Dropdowns/OptionDropdown.vue'
 import OrangeBadge from '@/Components/Badges/OrangeBadge.vue'
 import BlueBadge from '@/Components/Badges/BlueBadge.vue'
 import GreenBadge from '@/Components/Badges/GreenBadge.vue'
@@ -190,14 +191,16 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
                 </RedBadge>
               </TableDataCell>
 
-              <TableActionCell>
+              <TableActionCell class="min-w-[500px]">
                 <NormalButton
                   v-show="item?.status === 'draft'"
-                  class="bg-slate-600 text-white ring-2 ring-slate-300"
+                  class="bg-amber-600 text-white ring-2 ring-amber-300"
                 >
                   <i class="fa-solid fa-paper-plane"></i>
                   {{ __('Request') }}
                 </NormalButton>
+
+                <OptionDropdown :product="item" />
 
                 <InertiaLinkButton
                   to="seller.products.edit"

@@ -23,6 +23,11 @@ defineProps({
   rounded: {
     type: Boolean,
     default: false
+  },
+
+  required: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -39,7 +44,7 @@ const onFileChange = (event) => {
     <input
       :name="name"
       :id="name"
-      class="block w-full font-medium text-md text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 transition-all"
+      class="block w-full text-sm text-gray-500 file:me-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-700 file:text-white hover:file:bg-gray-600 file:disabled:opacity-50 file:disabled:pointer-events-none border p-2 bg-gray-50 focus:ring-2"
       :class="{
         'rounded-full': rounded,
         'rounded-md': !rounded,
@@ -51,6 +56,7 @@ const onFileChange = (event) => {
       multiple
       @change="onFileChange"
       :disabled="disabled"
+      :required="required"
     />
     <p v-show="text" class="mt-1 text-xs font-bold text-gray-600" :id="name + '-help'">
       {{ text }}

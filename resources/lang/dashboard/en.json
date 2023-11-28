@@ -182,5 +182,8 @@
     "Product Price": "Product Price",
     "Product Quantity": "Product Quantity",
     "Product Offer Price": "Product Offer Price",
-    "Store Product Category Name": "Store Product Category Name"
+    "Store Product Category Name": "Store Product Category Name",
+    "Product images has been successfully created.": "Product images has been successfully created.",
+    "Product image has been successfully deleted.": "Product image has been successfully deleted.",
+    "Product Images":"Product Images"
 }

@@ -64,7 +64,7 @@ class ProductController extends Controller
         $categories = Category::select('id', 'name')
             ->where('status', 'show')
             ->get();
-            
+
         $store = Store::select("id")->where("seller_id", auth()->id())->first();
 
         $storeProductCategories = StoreProductCategory::select('id', 'name')

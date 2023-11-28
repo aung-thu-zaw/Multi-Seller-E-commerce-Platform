@@ -20,11 +20,13 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             BrandSeeder::class,
             ProductSeeder::class,
+            // ProductImageSeeder::class,
             BlogCategorySeeder::class,
             BlogContentSeeder::class,
             BlogCommentSeeder::class,
             BlogCommentReplySeeder::class,
-            StoreProductCategorySeeder::class
+            StoreProductCategorySeeder::class,
+
         ]);
     }
 }

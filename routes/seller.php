@@ -3,17 +3,18 @@
 use App\Http\Controllers\Seller\Auth\LoginController;
 use App\Http\Controllers\Seller\Dashboard\DashboardController;
 use App\Http\Controllers\Seller\Dashboard\ProductController;
+use App\Http\Controllers\Seller\Dashboard\ProductImageController;
 use App\Http\Controllers\Seller\Dashboard\StoreProductCategoryController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/seller/login', LoginController::class)->middleware('guest')->name('seller.login');
-
+Route::get('/seller/login', LoginController::class)
+    ->middleware('guest')
+    ->name('seller.login');
 
 Route::middleware(['auth', 'verified', 'user.role:seller'])
     ->prefix('seller')
     ->name('seller.')
     ->group(function () {
-
         // Dashboard
         Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
@@ -32,8 +33,7 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-
-        // Store Category Operations
+        // Product Operations
         Route::resource('products', ProductController::class)->except(['show']);
         Route::controller(ProductController::class)
             ->prefix('/products/trash')
@@ -48,4 +48,12 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
+        Route::controller(ProductImageController::class)
+            ->prefix('/products')
+            ->name('product.')
+            ->group(function () {
+                Route::get('/{product}/images', 'productImages')->name('images');
+                Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
+                Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
+            });
     });

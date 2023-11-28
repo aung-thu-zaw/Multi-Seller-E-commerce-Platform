@@ -182,5 +182,8 @@
     "Product Price": "ထုတ်ကုန်စျေးနှုန်း",
     "Product Quantity": "ထုတ်ကုန်အရေအတွက်",
     "Product Offer Price": "ထုတ်ကုန်ကမ်းလှမ်းမှုစျေးနှုန်း",
-    "Store Product Category Name":"ဆိုင်ထုတ်ကုန်အမျိုးအစားအမည်"
+    "Store Product Category Name":"ဆိုင်ထုတ်ကုန်အမျိုးအစားအမည်",
+    "Product images has been successfully created.": "ထုတ်ကုန်ပုံများကို အောင်မြင်စွာ ဖန်တီးပြီးပါပြီ။",
+    "Product image has been successfully deleted.": "ထုတ်ကုန်ပုံကို အောင်မြင်စွာ ဖျက်လိုက်ပါပြီ။",
+    "Product Images":"ထုတ်ကုန်ပုံများ"
 }
