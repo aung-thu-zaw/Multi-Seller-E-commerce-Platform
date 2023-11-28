@@ -11,6 +11,7 @@ use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Store;
 use App\Models\StoreProductCategory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -37,7 +38,10 @@ class ProductController extends Controller
             ->where('status', 'show')
             ->get();
 
+        $store = Store::select("id")->where("seller_id", auth()->id())->first();
+
         $storeProductCategories = StoreProductCategory::select('id', 'name')
+        ->where("store_id", $store->id)
             ->where('status', 'show')
             ->get();
 

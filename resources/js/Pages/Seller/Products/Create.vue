@@ -15,6 +15,8 @@ import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 import { useImagePreview } from '@/Composables/useImagePreview'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import { useFormatFunctions } from '@/Composables/useFormatFunctions'
+import { computed, ref, watchEffect } from 'vue'
 
 defineProps({ categories: Object, storeProductCategories: Object, brands: Object })
 
@@ -24,10 +26,18 @@ const productList = 'seller.products.index'
 
 const { previewImage, setImagePreview } = useImagePreview()
 
+const { formatDate } = useFormatFunctions()
+
 const handleChangeImage = (file) => {
   setImagePreview(file)
   form.image = file
 }
+
+const startDate = ref(null)
+const endDate = ref(null)
+
+const formattedStartDate = computed(() => formatDate(startDate.value))
+const formattedEndDate = computed(() => formatDate(endDate.value))
 
 const { form, processing, errors, createAction } = useResourceActions({
   brand_id: null,
@@ -43,6 +53,14 @@ const { form, processing, errors, createAction } = useResourceActions({
   discount_end_date: null,
   status: 'draft',
   image: null
+})
+
+watchEffect(() => {
+  form.discount_start_date = formattedStartDate.value
+})
+
+watchEffect(() => {
+  form.discount_end_date = formattedEndDate.value
 })
 </script>
 
@@ -107,7 +125,7 @@ const { form, processing, errors, createAction } = useResourceActions({
               <InputError :message="errors?.category_id" />
             </div>
 
-            <div>
+            <div v-show="storeProductCategories.length">
               <InputLabel :label="__('Store Product Category')" />
 
               <SelectBox
@@ -125,7 +143,7 @@ const { form, processing, errors, createAction } = useResourceActions({
 
               <SelectBox
                 name="brand"
-                :options="storeProductCategories"
+                :options="brands"
                 v-model="form.brand_id"
                 :placeholder="__('Select an option')"
               />
@@ -157,7 +175,7 @@ const { form, processing, errors, createAction } = useResourceActions({
               :placeholder="__('Enter :label', { label: __('Product SKU') })"
             />
 
-            <InputError :message="errors?.name" />
+            <InputError :message="errors?.sku" />
           </div>
 
           <div class="grid grid-cols-2 gap-3">
@@ -186,7 +204,7 @@ const { form, processing, errors, createAction } = useResourceActions({
                 required
               />
 
-              <InputError :message="errors?.qty" />
+              <InputError :message="errors?.price" />
             </div>
           </div>
 
@@ -197,12 +215,13 @@ const { form, processing, errors, createAction } = useResourceActions({
               <InputField
                 type="number"
                 name="product-discount"
-                v-model="form.qty"
+                v-model="form.discount"
                 :placeholder="__('Enter :label', { label: __('Product Offer Price') })"
               />
 
               <InputError :message="errors?.discount" />
             </div>
+
             <div>
               <InputLabel :label="__('Discount Start Date')" />
 
@@ -210,7 +229,7 @@ const { form, processing, errors, createAction } = useResourceActions({
                 typeable
                 class="block w-full p-4 font-semibold text-sm rounded-md text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition-all"
                 :placeholder="__('Enter :label', { label: __('Discount Start Date') })"
-                v-model="form.discount_start_date"
+                v-model="startDate"
               />
 
               <InputError :message="errors?.discount_start_date" />
@@ -222,7 +241,7 @@ const { form, processing, errors, createAction } = useResourceActions({
                 typeable
                 class="block w-full p-4 font-semibold text-sm rounded-md text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition-all"
                 :placeholder="__('Enter :label', { label: __('Discount End Date') })"
-                v-model="form.discount_end_date"
+                v-model="endDate"
               />
 
               <InputError :message="errors?.discount_end_date" />

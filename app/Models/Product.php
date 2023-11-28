@@ -35,7 +35,7 @@ class Product extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Casts\Attribute<Product, never>
      */
-    protected function thumbImage(): Attribute
+    protected function image(): Attribute
     {
         return Attribute::make(
             set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/products/$value"),
