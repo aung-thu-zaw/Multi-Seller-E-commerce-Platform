@@ -19,12 +19,6 @@ return new class () extends Migration {
             $table->string('name');
             $table->string('slug');
             $table->text('description');
-            $table->string('sku')->nullable();
-            $table->integer('qty');
-            $table->decimal('price', 8, 2);
-            $table->decimal('discount', 8, 2)->nullable();
-            $table->date('discount_start_date')->nullable();
-            $table->date('discount_end_date')->nullable();
             $table->boolean('is_top')->default(false);
             $table->boolean('is_best')->default(false);
             $table->boolean('is_featured')->default(false);

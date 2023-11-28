@@ -67,6 +67,14 @@ class Product extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<ProductVariant>
+     */
+    public function variants():HasMany
+    {
+        return $this->hasMany(ProductVariant::class);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,Product>
      */
     public function seller()

@@ -98,10 +98,11 @@ const handleProductImages = () => {
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
         <Breadcrumb :to="productList" icon="fa-basket-shopping" label="Products">
+          <BreadcrumbItem :label="product?.name" />
           <BreadcrumbItem label="Product Images" />
         </Breadcrumb>
 
-        <div class="w-full flex items-center justify-end">
+        <div class="flex items-center justify-end w-auto">
           <GoBackButton />
         </div>
       </div>

@@ -21,7 +21,7 @@ const { queryStringParams } = useQueryStringParams()
 
 <template>
   <nav
-    class="flex mb-5 md:mb-0 overflow-x-auto w-full md:max-w-[600px] px-0"
+    class="flex mb-5 md:mb-0 overflow-x-auto w-full md:max-w-[1000px] px-0"
     aria-label="Breadcrumb"
   >
     <ol class="inline-flex items-center space-x-1 md:space-x-3">

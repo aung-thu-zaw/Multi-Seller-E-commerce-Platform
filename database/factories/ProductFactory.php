@@ -22,10 +22,10 @@ class ProductFactory extends Factory
             'image' => fake()->imageUrl(),
             'name' => fake()->sentence(),
             'description' => fake()->text(),
-            'sku' => fake()->randomLetter(),
-            'qty' => fake()->numberBetween(10, 200),
-            'price' => fake()->numberBetween(10, 1000),
-            'status'=>fake()->randomElement(["draft","pending","approved","rejected"])
+            'is_top' => fake()->boolean(),
+            'is_best' => fake()->boolean(),
+            'is_featured' => fake()->boolean(),
+            'status' => fake()->randomElement(["draft","pending","approved","rejected"])
         ];
     }
 }
