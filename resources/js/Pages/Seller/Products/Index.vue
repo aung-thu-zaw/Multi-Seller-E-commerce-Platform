@@ -76,7 +76,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
           class="my-3 flex flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between overflow-auto p-2"
         >
           <DashboardTableDataSearchBox
-            :placeholder="__('Search by :label', { label: __('Name') }) + '...'"
+            :placeholder="__('Search by :label', { label: __('Name') })"
             :to="productList"
           />
 

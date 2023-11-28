@@ -93,7 +93,7 @@ const {
           class="my-3 flex flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between overflow-auto p-2"
         >
           <DashboardTableDataSearchBox
-            :placeholder="__('Search by :label', { label: __('Blog Category Name') }) + '...'"
+            :placeholder="__('Search by :label', { label: __('Blog Category Name') })"
             :to="trashedBlogCategoryList"
           />
 

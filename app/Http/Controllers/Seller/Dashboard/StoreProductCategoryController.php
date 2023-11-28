@@ -74,9 +74,11 @@ class StoreProductCategoryController extends Controller
 
     public function trashed(): Response|ResponseFactory
     {
+        $store = Store::select("id")->where("seller_id", auth()->id())->first();
+
         $trashedStoreProductCategories = StoreProductCategory::search(request('search'))
             ->onlyTrashed()
-            ->where("store_id", auth()->id())
+            ->where("store_id", $store->id)
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
