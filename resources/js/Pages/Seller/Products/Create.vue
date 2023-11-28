@@ -197,7 +197,7 @@ watchEffect(() => {
               <InputLabel :label="__('Price')" required />
 
               <InputField
-                type="number"
+                type="text"
                 name="product-price"
                 v-model="form.price"
                 :placeholder="__('Enter :label', { label: __('Product Price') })"
@@ -213,7 +213,7 @@ watchEffect(() => {
               <InputLabel :label="__('Discount Price')" />
 
               <InputField
-                type="number"
+                type="text"
                 name="product-discount"
                 v-model="form.discount"
                 :placeholder="__('Enter :label', { label: __('Product Offer Price') })"

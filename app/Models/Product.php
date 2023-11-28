@@ -43,26 +43,6 @@ class Product extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute<Product, never>
-     */
-    protected function price(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => ($value == round($value, 0)) ? number_format($value, 0) : number_format($value, 2)
-        );
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute<Product, never>
-     */
-    protected function discount(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => ($value == round($value, 0)) ? number_format($value, 0) : number_format($value, 2)
-        );
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<ProductImage>
      */
     public function productImages(): HasMany

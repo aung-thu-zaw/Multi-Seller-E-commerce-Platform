@@ -32,6 +32,7 @@ class ProductRequest extends FormRequest
             'sku' => ['nullable', 'string', 'max:255'],
             'qty' => ['required', 'numeric'],
             'price' => ['required', 'numeric'],
+            'status' => ['required',Rule::in(['draft','pending','approved','rejected'])],
             'discount' => ['nullable', 'numeric'],
             'discount_start_date' => ['nullable', 'date'],
             'discount_end_date' => ['nullable', 'date'],
