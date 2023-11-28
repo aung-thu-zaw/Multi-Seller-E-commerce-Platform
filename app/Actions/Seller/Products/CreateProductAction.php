@@ -23,12 +23,6 @@ class CreateProductAction
             'seller_id' => auth()->id(),
             'name' => $data['name'],
             'description' => $data['description'],
-            'sku' => $data['sku'],
-            'qty' => $data['qty'],
-            'price' => $data['price'],
-            'discount' => $data['discount'],
-            'discount_start_date' => $data['discount_start_date'],
-            'discount_end_date' => $data['discount_end_date'],
             'status' => "draft",
             'image' => $image,
         ]);

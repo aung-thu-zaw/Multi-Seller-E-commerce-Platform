@@ -26,13 +26,11 @@ import Pagination from '@/Components/Paginations/DashboardPagination.vue'
 import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 import { __ } from '@/Services/translations-inside-setup.js'
-import { useFormatFunctions } from '@/Composables/useFormatFunctions'
 
 defineProps({ products: Object })
 
 const productList = 'seller.products.index'
 
-const { formatAmount } = useFormatFunctions()
 const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 </script>
 
@@ -141,10 +139,6 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
               <SortableTableHeaderCell label="Name" :to="productList" sort="name" />
 
-              <TableHeaderCell label="Qty" />
-
-              <TableHeaderCell label="Price" />
-
               <TableHeaderCell label="Status" />
 
               <TableHeaderCell label="Actions" />
@@ -162,14 +156,6 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
                 <div class="min-w-[300px]">
                   {{ item?.name }}
                 </div>
-              </TableDataCell>
-
-              <TableDataCell>
-                {{ item?.qty }}
-              </TableDataCell>
-
-              <TableDataCell>
-                {{ formatAmount(item?.price) }}
               </TableDataCell>
 
               <TableDataCell>

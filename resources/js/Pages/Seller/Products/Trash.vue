@@ -52,7 +52,7 @@ const {
           <BreadcrumbItem label="List" />
         </Breadcrumb>
 
-        <div class="w-full flex items-center justify-end">
+        <div class="w-auto flex items-center justify-end">
           <InertiaLinkButton
             :to="productList"
             :data="{
@@ -144,10 +144,6 @@ const {
 
               <SortableTableHeaderCell label="Name" :to="productList" sort="name" />
 
-              <TableHeaderCell label="Qty" />
-
-              <TableHeaderCell label="Price" />
-
               <TableHeaderCell label="Actions" />
             </template>
 
@@ -163,14 +159,6 @@ const {
                 <div class="min-w-[300px]">
                   {{ item?.name }}
                 </div>
-              </TableDataCell>
-
-              <TableDataCell>
-                {{ item?.qty }}
-              </TableDataCell>
-
-              <TableDataCell>
-                {{ item?.price }}
               </TableDataCell>
 
               <TableActionCell>

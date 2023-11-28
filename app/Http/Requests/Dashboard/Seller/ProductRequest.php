@@ -29,16 +29,9 @@ class ProductRequest extends FormRequest
             'store_product_category_id' => ['nullable', 'numeric', Rule::exists('store_product_categories', 'id')],
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'sku' => ['nullable', 'string', 'max:255'],
-            'qty' => ['required', 'numeric'],
-            'price' => ['required', 'numeric'],
             'status' => ['required',Rule::in(['draft','pending','approved','rejected'])],
-            'discount' => ['nullable', 'numeric'],
-            'discount_start_date' => ['nullable', 'date'],
-            'discount_end_date' => ['nullable', 'date'],
             'captcha_token' => [new RecaptchaRule()],
         ];
-
 
         if ($this->method() === 'POST') {
             $rules['image'] = ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'];

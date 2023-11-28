@@ -52,7 +52,7 @@ const {
           <BreadcrumbItem label="List" />
         </Breadcrumb>
 
-        <div class="w-full flex items-center justify-end">
+        <div class="w-auto flex items-center justify-end">
           <InertiaLinkButton
             :to="storeProductCategoryList"
             :data="{
