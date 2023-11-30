@@ -37,14 +37,20 @@ defineProps({ product: Object })
         :href="route('seller.product.images', product?.slug)"
       >
         <i class="fa-solid fa-images"></i>
-        Product Images
+        {{ __('Product Images') }}
       </Link>
       <Link
         class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-        href="#"
+        :href="route('seller.product-variants.index', product?.slug)"
+        :data="{
+          page: 1,
+          per_page: 5,
+          sort: 'id',
+          direction: 'desc'
+        }"
       >
         <i class="fa-solid fa-boxes-stacked"></i>
-        Product Variants
+        {{ __('Product Variants') }}
       </Link>
     </div>
   </div>

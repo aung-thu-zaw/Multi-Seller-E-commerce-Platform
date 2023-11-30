@@ -185,5 +185,8 @@
     "Store Product Category Name": "Store Product Category Name",
     "Product images has been successfully created.": "Product images has been successfully created.",
     "Product image has been successfully deleted.": "Product image has been successfully deleted.",
-    "Product Images":"Product Images"
+    "Product Images": "Product Images",
+    "Product Variants": "Product Variants",
+    "Product Variant": "Product Variant",
+    "Upload": "Upload"
 }

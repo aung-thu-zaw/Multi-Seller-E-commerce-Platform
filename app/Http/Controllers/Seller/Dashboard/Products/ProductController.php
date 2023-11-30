@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Seller\Dashboard;
+namespace App\Http\Controllers\Seller\Dashboard\Products;
 
 use App\Actions\Seller\Products\CreateProductAction;
 use App\Actions\Seller\Products\PermanentlyDeleteTrashedProductsAction;

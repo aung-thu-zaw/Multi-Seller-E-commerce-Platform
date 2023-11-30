@@ -33,6 +33,16 @@ class Product extends Model
     }
 
     /**
+     *     @return array<string>
+     */
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name,
+        ];
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Casts\Attribute<Product, never>
      */
     protected function image(): Attribute
@@ -69,7 +79,7 @@ class Product extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<ProductVariant>
      */
-    public function variants():HasMany
+    public function variants(): HasMany
     {
         return $this->hasMany(ProductVariant::class);
     }

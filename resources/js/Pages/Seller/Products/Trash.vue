@@ -12,6 +12,7 @@ import FilteredBy from '@/Components/Tables/FilteredBy.vue'
 import SortableTableHeaderCell from '@/Components/Tables/TableCells/SortableTableHeaderCell.vue'
 import TableHeaderCell from '@/Components/Tables/TableCells/TableHeaderCell.vue'
 import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
+import ImageCell from '@/Components/Tables/TableCells/TableImageCell.vue'
 import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
 import NoTableData from '@/Components/Tables/NoTableData.vue'
 import BulkActionButton from '@/Components/Buttons/BulkActionButton.vue'
@@ -90,7 +91,7 @@ const {
           class="my-3 flex flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between overflow-auto p-2"
         >
           <DashboardTableDataSearchBox
-            :placeholder="__('Search by :label', { label: __('Name') })"
+            :placeholder="__('Search by :label', { label: __('Product Name') })"
             :to="trashedProductList"
           />
 

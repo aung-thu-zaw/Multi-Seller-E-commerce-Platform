@@ -9,6 +9,11 @@ defineProps({
   to: {
     type: String,
     required: true
+  },
+
+  targetIdentifier: {
+    type: [String, Number, Object],
+    default: null
   }
 })
 </script>
@@ -18,7 +23,7 @@ defineProps({
     <div class="flex items-center">
       <i class="fa-solid fa-angle-right text-gray-400"></i>
       <Link
-        :href="route(to)"
+        :href="route(to, targetIdentifier)"
         :data="{
           page: 1,
           per_page: 5,

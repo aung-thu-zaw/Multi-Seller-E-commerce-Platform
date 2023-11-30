@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\Seller\Auth\LoginController;
 use App\Http\Controllers\Seller\Dashboard\DashboardController;
-use App\Http\Controllers\Seller\Dashboard\ProductController;
-use App\Http\Controllers\Seller\Dashboard\ProductImageController;
+use App\Http\Controllers\Seller\Dashboard\Products\ProductController;
+use App\Http\Controllers\Seller\Dashboard\Products\ProductImageController;
+use App\Http\Controllers\Seller\Dashboard\Products\ProductVariantController;
 use App\Http\Controllers\Seller\Dashboard\StoreProductCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,4 +57,31 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
                 Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
                 Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
             });
+
+
+        Route::resource('products/{product}/product-variants', ProductVariantController::class)->except(['show']);
+        Route::controller(ProductVariantController::class)
+        ->prefix('/products/{product}/product-variants/trash')
+        ->name('product-variants.')
+        ->group(function () {
+            Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+            Route::get('/', 'trashed')->name('trashed');
+            Route::post('/{id}/restore', 'restore')->name('restore');
+            Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+            Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+            Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+            Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+        });
+
+        // Route::controller(ProductVariantController::class)
+        //     ->prefix('/products')
+        //     ->name('product.variants.')
+        //     ->group(function () {
+        //         Route::get('/{product}/variants', 'index')->name('index');
+        //         Route::get('/{product}/variants/create', 'create')->name('create');
+        //         Route::post('/{product}/variants/{product_variant}', 'store')->name('store');
+        //         Route::get('/{product}/variants/{product_variant}/edit', 'edit')->name('edit');
+        //         Route::patch('/{product}/variants{product_variant}', 'update')->name('update');
+        //         Route::delete('/{product}/variants{product_variant}', 'destroy')->name('destroy');
+        //     });
     });
