@@ -143,11 +143,15 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
               </TableDataCell>
 
               <TableDataCell>
-                {{ item?.product?.name }}
+                <div class="min-w-[250px]">
+                  {{ item?.product?.name }}
+                </div>
               </TableDataCell>
 
               <TableDataCell>
-                {{ item?.sku }}
+                <div class="min-w-[100px]">
+                  {{ item?.sku }}
+                </div>
               </TableDataCell>
 
               <TableDataCell>
@@ -159,7 +163,9 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
               </TableDataCell>
 
               <TableDataCell>
-                {{ item?.discount }}
+                <div class="min-w-[100px]">
+                  {{ item?.discount }}
+                </div>
               </TableDataCell>
 
               <TableActionCell class="min-w-[500px]">

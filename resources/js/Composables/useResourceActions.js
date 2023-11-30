@@ -25,13 +25,12 @@ export function useResourceActions(formFields = {}) {
   const { executeRecaptcha, recaptchaLoaded } = useReCaptcha()
 
   // Create Action
-  const createAction = async (entityType, createRouteName) => {
+  const createAction = async (entityType, createRouteName, targetIdentifier = null) => {
     await recaptchaLoaded()
     form.captcha_token = await executeRecaptcha(`create_${formatToSnakeCase(entityType)}`)
     processing.value = true
-
     router.post(
-      route(createRouteName),
+      route(createRouteName, targetIdentifier),
       {
         ...form,
         page: 1,
@@ -69,7 +68,9 @@ export function useResourceActions(formFields = {}) {
 
     router.post(
       route(editRouteName, {
-        [formatToSnakeCase(entityType)]: targetIdentifier
+        ...(typeof targetIdentifier === 'object'
+          ? targetIdentifier
+          : { [formatToSnakeCase(entityType)]: targetIdentifier })
       }),
       {
         _method: method === 'put' || method === 'patch' ? method : undefined,

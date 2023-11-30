@@ -103,4 +103,26 @@ class Product extends Model
             unlink(storage_path('app/public/products/'.pathinfo($productImage, PATHINFO_BASENAME)));
         }
     }
+
+    /**
+       * Generate a unique SKU for the product.
+       *
+       * @return string
+       */
+    public function generateUniqueSku(): string
+    {
+        // Generate a base SKU
+        $sequenceNumber = $this->exists ? $this->id + 1 : 1;
+        $baseSku = 'PROD' . str_pad(strval($sequenceNumber), 4, '0', STR_PAD_LEFT);
+
+        // Check if the base SKU already exists
+        $sku = $baseSku;
+        $counter = 1;
+
+        while (ProductVariant::where('sku', $sku)->exists()) {
+            $sku = $baseSku . '-' . $counter++;
+        }
+
+        return $sku;
+    }
 }

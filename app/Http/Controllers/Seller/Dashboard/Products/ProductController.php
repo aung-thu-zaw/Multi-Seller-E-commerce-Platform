@@ -6,7 +6,7 @@ use App\Actions\Seller\Products\CreateProductAction;
 use App\Actions\Seller\Products\PermanentlyDeleteTrashedProductsAction;
 use App\Actions\Seller\Products\UpdateProductAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Seller\ProductRequest;
+use App\Http\Requests\Dashboard\Seller\Products\ProductRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\Brand;
 use App\Models\Category;
