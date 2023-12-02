@@ -14,14 +14,7 @@ import { useImagePreview } from '@/Composables/useImagePreview'
 import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 
-const brandList = 'admin.brands.index'
-
 const { previewImage, setImagePreview } = useImagePreview()
-
-const handleChangeImage = (file) => {
-  setImagePreview(file)
-  form.logo = file
-}
 
 const { form, processing, errors, createAction } = useResourceActions({
   name: null,
@@ -38,7 +31,7 @@ const { form, processing, errors, createAction } = useResourceActions({
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="brandList" icon="fa-award" label="Brands">
+        <Breadcrumb to="admin.brands.index" icon="fa-award" label="Brands">
           <BreadcrumbItem label="Create" />
         </Breadcrumb>
 
@@ -98,9 +91,9 @@ const { form, processing, errors, createAction } = useResourceActions({
 
             <FileInput
               name="brand-logo"
-              v-model="form.logo"
               text="PNG, JPG or JPEG ( Max File Size : 1.5 MB )"
-              @update:modelValue="handleChangeImage"
+              v-model="form.logo"
+              @update:modelValue="setImagePreview"
               required
             />
 
@@ -109,7 +102,7 @@ const { form, processing, errors, createAction } = useResourceActions({
 
           <InputError :message="errors?.captcha_token" />
 
-          <FormButton type="submit" :processing="processing">
+          <FormButton :processing="processing">
             {{ __('Create') }}
           </FormButton>
         </form>

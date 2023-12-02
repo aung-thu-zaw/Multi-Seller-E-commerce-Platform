@@ -137,7 +137,7 @@ const {
 
             <!-- Table Header -->
             <template #table-header>
-              <SortableTableHeaderCell label="# No" :to="trashedBrandList" sort="id" />
+              <SortableTableHeaderCell label="Id" :to="trashedBrandList" sort="id" />
 
               <TableHeaderCell label="Image" />
 
@@ -161,7 +161,7 @@ const {
               <TableActionCell>
                 <NormalButton
                   v-show="can('brands.restore')"
-                  @click="restoreAction('Brand', 'admin.brands.restore', item?.id)"
+                  @click="restoreAction('Brand', 'admin.brands.restore', { id: item?.id })"
                 >
                   <i class="fa-solid fa-recycle"></i>
                   {{ __('Restore') }}
@@ -169,7 +169,9 @@ const {
 
                 <NormalButton
                   v-show="can('brands.force.delete')"
-                  @click="permanentDeleteAction('Brand', 'admin.brands.force-delete', item?.id)"
+                  @click="
+                    permanentDeleteAction('Brand', 'admin.brands.force-delete', { id: item?.id })
+                  "
                   class="bg-red-600 text-white ring-2 ring-red-300"
                 >
                   <i class="fa-solid fa-trash-can"></i>

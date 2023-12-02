@@ -141,6 +141,8 @@ const {
 
             <!-- Table Header -->
             <template #table-header>
+              <SortableTableHeaderCell label="Id" :to="trashedBlogContentList" sort="id" />
+
               <TableHeaderCell label="Image" />
 
               <SortableTableHeaderCell label="Title" :to="trashedBlogContentList" sort="title" />
@@ -150,6 +152,10 @@ const {
 
             <!-- Table Body -->
             <template #table-data="{ item }">
+              <TableDataCell>
+                {{ item?.id }}
+              </TableDataCell>
+
               <ImageCell :src="item?.thumbnail" />
 
               <TableDataCell>

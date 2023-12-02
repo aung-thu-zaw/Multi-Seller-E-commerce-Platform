@@ -124,6 +124,8 @@ const { changeStatusAction, softDeleteAction, softDeleteSelectedAction } = useRe
 
             <!-- Table Header -->
             <template #table-header>
+              <SortableTableHeaderCell label="Id" :to="blogContentList" sort="id" />
+
               <TableHeaderCell label="Thumbnail" />
 
               <SortableTableHeaderCell label="Title" :to="blogContentList" sort="title" />
@@ -135,6 +137,10 @@ const { changeStatusAction, softDeleteAction, softDeleteSelectedAction } = useRe
 
             <!-- Table Body -->
             <template #table-data="{ item }">
+              <TableDataCell>
+                {{ item?.id }}
+              </TableDataCell>
+
               <ImageCell :src="item?.thumbnail" />
 
               <TableDataCell>

@@ -16,14 +16,7 @@ import { Head } from '@inertiajs/vue3'
 
 const props = defineProps({ brand: Object })
 
-const brandList = 'admin.brands.index'
-
 const { previewImage, setImagePreview } = useImagePreview(props.brand?.logo)
-
-const handleChangeImage = (file) => {
-  setImagePreview(file)
-  form.logo = file
-}
 
 const { form, processing, errors, editAction } = useResourceActions({
   name: props.brand?.name,
@@ -40,7 +33,7 @@ const { form, processing, errors, editAction } = useResourceActions({
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="brandList" icon="fa-award" label="Brands">
+        <Breadcrumb to="admin.brands.index" icon="fa-award" label="Brands">
           <BreadcrumbItem :label="brand.name" />
           <BreadcrumbItem label="Edit" />
         </Breadcrumb>
@@ -53,7 +46,7 @@ const { form, processing, errors, editAction } = useResourceActions({
       <!-- Form Start -->
       <div class="border p-10 bg-white rounded-md">
         <form
-          @submit.prevent="editAction('Brand', 'admin.brands.update', brand?.slug)"
+          @submit.prevent="editAction('Brand', 'admin.brands.update', { brand: brand?.slug })"
           class="space-y-4 md:space-y-6"
         >
           <PreviewImage :src="previewImage" />
@@ -102,9 +95,9 @@ const { form, processing, errors, editAction } = useResourceActions({
 
             <FileInput
               name="brand-logo"
-              v-model="form.logo"
               text="PNG, JPG or JPEG ( Max File Size : 1.5 MB )"
-              @update:modelValue="handleChangeImage"
+              v-model="form.logo"
+              @update:modelValue="setImagePreview"
             />
 
             <InputError :message="errors?.logo" />
@@ -112,7 +105,7 @@ const { form, processing, errors, editAction } = useResourceActions({
 
           <InputError :message="errors?.captcha_token" />
 
-          <FormButton type="submit" :processing="processing">
+          <FormButton :processing="processing">
             {{ __('Save Changes') }}
           </FormButton>
         </form>

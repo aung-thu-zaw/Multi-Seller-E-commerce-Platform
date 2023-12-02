@@ -8,6 +8,7 @@ import DashboardTableDataSearchBox from '@/Components/Forms/SearchBoxs/Dashboard
 import DashboardTableDataPerPageSelectBox from '@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue'
 import DashboardTableFilter from '@/Components/Forms/SelectBoxs/DashboardTableFilter.vue'
 import FilteredBy from '@/Components/Tables/FilteredBy.vue'
+import SortableTableHeaderCell from '@/Components/Tables/TableCells/SortableTableHeaderCell.vue'
 import TableHeaderCell from '@/Components/Tables/TableCells/TableHeaderCell.vue'
 import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
 import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
@@ -36,7 +37,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="blogCommentList" icon="fa-comments" label="Blog Comments">
+        <Breadcrumb :to="blogCommentList" icon="fa-comment" label="Blog Comments">
           <BreadcrumbItem label="List" />
         </Breadcrumb>
       </div>
@@ -83,6 +84,8 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
             <!-- Table Header -->
             <template #table-header>
+              <SortableTableHeaderCell label="Id" :to="blogCommentList" sort="id" />
+
               <TableHeaderCell label="Blog" />
 
               <TableHeaderCell label="Comment" />
@@ -92,6 +95,10 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
             <!-- Table Body -->
             <template #table-data="{ item }">
+              <TableDataCell>
+                {{ item.id }}
+              </TableDataCell>
+
               <TableDataCell>
                 <div class="min-w-[300px]">
                   {{ item.blog_content?.title }}
@@ -105,29 +112,27 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
               </TableDataCell>
 
               <TableActionCell>
-                <div class="min-w-[500px] space-x-3">
-                  <InertiaLinkButton
-                    to="blogs.show"
-                    :targetIdentifier="{ blog_content: item.blog_content?.slug }"
-                    class="bg-slate-600 text-white ring-2 ring-slate-300"
-                  >
-                    <i class="fa-solid fa-newspaper"></i>
-                    {{ __('Go To Blog') }}
-                  </InertiaLinkButton>
+                <InertiaLinkButton
+                  to="blogs.show"
+                  :targetIdentifier="{ blog_content: item.blog_content?.slug }"
+                  class="bg-slate-600 text-white ring-2 ring-slate-300"
+                >
+                  <i class="fa-solid fa-newspaper"></i>
+                  {{ __('Go To Blog') }}
+                </InertiaLinkButton>
 
-                  <NormalButton
-                    v-show="can('blog-comments.delete')"
-                    @click="
-                      softDeleteAction('Blog Comment', 'admin.blog-comments.destroy', {
-                        blog_comment: item?.id
-                      })
-                    "
-                    class="bg-red-600 text-white ring-2 ring-red-300"
-                  >
-                    <i class="fa-solid fa-trash-can"></i>
-                    {{ __('Delete') }}
-                  </NormalButton>
-                </div>
+                <NormalButton
+                  v-show="can('blog-comments.delete')"
+                  @click="
+                    softDeleteAction('Blog Comment', 'admin.blog-comments.destroy', {
+                      blog_comment: item?.id
+                    })
+                  "
+                  class="bg-red-600 text-white ring-2 ring-red-300"
+                >
+                  <i class="fa-solid fa-trash-can"></i>
+                  {{ __('Delete') }}
+                </NormalButton>
               </TableActionCell>
             </template>
           </ActionTable>

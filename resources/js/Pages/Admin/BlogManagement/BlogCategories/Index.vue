@@ -124,6 +124,8 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
             <!-- Table Header -->
             <template #table-header>
+              <SortableTableHeaderCell label="Id" :to="blogCategoryList" sort="id" />
+
               <TableHeaderCell label="Image" />
 
               <SortableTableHeaderCell label="Name" :to="blogCategoryList" sort="name" />
@@ -135,6 +137,10 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
             <!-- Table Body -->
             <template #table-data="{ item }">
+              <TableDataCell>
+                {{ item?.id }}
+              </TableDataCell>
+
               <ImageCell :src="item?.image" />
 
               <TableDataCell>

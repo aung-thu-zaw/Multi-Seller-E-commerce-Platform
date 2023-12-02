@@ -143,6 +143,8 @@ const {
 
             <!-- Table Header -->
             <template #table-header>
+              <SortableTableHeaderCell label="Id" :to="trashedBlogCategoryList" sort="id" />
+
               <TableHeaderCell label="Image" />
 
               <SortableTableHeaderCell label="Name" :to="trashedBlogCategoryList" sort="name" />

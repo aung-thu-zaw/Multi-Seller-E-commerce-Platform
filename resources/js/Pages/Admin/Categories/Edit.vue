@@ -16,14 +16,7 @@ import { Head } from '@inertiajs/vue3'
 
 const props = defineProps({ category: Object, categories: Object })
 
-const categoryList = 'admin.categories.index'
-
 const { previewImage, setImagePreview } = useImagePreview(props.category?.image)
-
-const handleChangeImage = (file) => {
-  setImagePreview(file)
-  form.image = file
-}
 
 const { form, processing, errors, editAction } = useResourceActions({
   parent_id: props.category?.parent_id,
@@ -41,7 +34,7 @@ const { form, processing, errors, editAction } = useResourceActions({
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="categoryList" icon="fa-list" label="Categories">
+        <Breadcrumb to="admin.categories.index" icon="fa-list" label="Categories">
           <BreadcrumbItem :label="category.name" />
           <BreadcrumbItem label="Edit" />
         </Breadcrumb>
@@ -54,7 +47,9 @@ const { form, processing, errors, editAction } = useResourceActions({
       <!-- Form Start -->
       <div class="border p-10 bg-white rounded-md">
         <form
-          @submit.prevent="editAction('Category', 'admin.categories.update', category?.slug)"
+          @submit.prevent="
+            editAction('Category', 'admin.categories.update', { category: category?.slug })
+          "
           class="space-y-4 md:space-y-6"
         >
           <PreviewImage :src="previewImage" />
@@ -119,7 +114,7 @@ const { form, processing, errors, editAction } = useResourceActions({
               name="category-image"
               v-model="form.image"
               text="PNG, JPG or JPEG ( Max File Size : 1.5 MB )"
-              @update:modelValue="handleChangeImage"
+              @update:modelValue="setImagePreview"
             />
 
             <InputError :message="errors?.image" />

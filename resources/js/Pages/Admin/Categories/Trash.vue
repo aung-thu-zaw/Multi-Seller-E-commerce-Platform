@@ -141,7 +141,7 @@ const {
 
             <!-- Table Header -->
             <template #table-header>
-              <SortableTableHeaderCell label="# No" :to="trashedCategoryList" sort="id" />
+              <SortableTableHeaderCell label="Id" :to="trashedCategoryList" sort="id" />
 
               <TableHeaderCell label="Image" />
 
@@ -165,7 +165,7 @@ const {
               <TableActionCell>
                 <NormalButton
                   v-show="can('categories.restore')"
-                  @click="restoreAction('Category', 'admin.categories.restore', item?.id)"
+                  @click="restoreAction('Category', 'admin.categories.restore', { id: item?.id })"
                 >
                   <i class="fa-solid fa-recycle"></i>
                   {{ __('Restore') }}
@@ -174,7 +174,9 @@ const {
                 <NormalButton
                   v-show="can('categories.force.delete')"
                   @click="
-                    permanentDeleteAction('Category', 'admin.categories.force-delete', item?.id)
+                    permanentDeleteAction('Category', 'admin.categories.force-delete', {
+                      id: item?.id
+                    })
                   "
                   class="bg-red-600 text-white ring-2 ring-red-300"
                 >

@@ -16,14 +16,7 @@ import { Head } from '@inertiajs/vue3'
 
 defineProps({ categories: Object })
 
-const categoryList = 'admin.categories.index'
-
 const { previewImage, setImagePreview } = useImagePreview()
-
-const handleChangeImage = (file) => {
-  setImagePreview(file)
-  form.image = file
-}
 
 const { form, processing, errors, createAction } = useResourceActions({
   parent_id: null,
@@ -41,7 +34,7 @@ const { form, processing, errors, createAction } = useResourceActions({
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="categoryList" icon="fa-list" label="Categories">
+        <Breadcrumb to="admin.categories.index" icon="fa-list" label="Categories">
           <BreadcrumbItem label="Create" />
         </Breadcrumb>
 
@@ -114,9 +107,9 @@ const { form, processing, errors, createAction } = useResourceActions({
 
             <FileInput
               name="category-image"
-              v-model="form.image"
               text="PNG, JPG or JPEG ( Max File Size : 1.5 MB )"
-              @update:modelValue="handleChangeImage"
+              v-model="form.image"
+              @update:modelValue="setImagePreview"
             />
 
             <InputError :message="errors?.image" />
@@ -124,7 +117,7 @@ const { form, processing, errors, createAction } = useResourceActions({
 
           <InputError :message="errors?.captcha_token" />
 
-          <FormButton type="submit" :processing="processing">
+          <FormButton :processing="processing">
             {{ __('Create') }}
           </FormButton>
         </form>
