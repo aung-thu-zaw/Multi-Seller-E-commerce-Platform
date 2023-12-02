@@ -5,6 +5,11 @@ import { Link } from '@inertiajs/vue3'
 defineProps({
   to: String,
 
+  targetIdentifier: {
+    type: [String, Number, Object],
+    default: null
+  },
+
   label: {
     type: String,
     required: true
@@ -16,7 +21,7 @@ defineProps({
   }
 })
 
-const { queryStringParams } = useQueryStringParams()
+const { dashboardQueryStringParams } = useQueryStringParams()
 </script>
 
 <template>
@@ -27,8 +32,8 @@ const { queryStringParams } = useQueryStringParams()
     <ol class="inline-flex items-center space-x-1 md:space-x-3">
       <li class="inline-flex items-center">
         <Link
-          :href="route(to)"
-          :data="queryStringParams"
+          :href="route(to, targetIdentifier)"
+          :data="dashboardQueryStringParams"
           class="inline-flex items-center text-sm font-bold text-blueGray-600 hover:text-blue-600"
         >
           <span class="mr-2.5">

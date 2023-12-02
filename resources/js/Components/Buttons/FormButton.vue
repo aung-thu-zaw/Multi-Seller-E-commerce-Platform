@@ -1,10 +1,5 @@
 <script setup>
 defineProps({
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-
   processing: {
     type: Boolean,
     default: false
@@ -22,7 +17,7 @@ defineProps({
       ' bg-orange-600 ring-orange-300 hover:bg-orange-700 focus:ring-orange-200':
         !$page.url.startsWith('/seller')
     }"
-    :disabled="disabled"
+    :disabled="processing"
   >
     <div v-if="processing" class="flex items-center justify-center">
       <div

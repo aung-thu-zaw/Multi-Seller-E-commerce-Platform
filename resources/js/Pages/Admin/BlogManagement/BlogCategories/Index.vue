@@ -124,23 +124,17 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
             <!-- Table Header -->
             <template #table-header>
-              <SortableTableHeaderCell label="# No" :to="blogCategoryList" sort="id" />
-
               <TableHeaderCell label="Image" />
 
               <SortableTableHeaderCell label="Name" :to="blogCategoryList" sort="name" />
 
-              <TableHeaderCell label="Status" />
+              <SortableTableHeaderCell label="Status" :to="blogCategoryList" sort="status" />
 
               <TableHeaderCell label="Actions" />
             </template>
 
             <!-- Table Body -->
             <template #table-data="{ item }">
-              <TableDataCell>
-                {{ item?.id }}
-              </TableDataCell>
-
               <ImageCell :src="item?.image" />
 
               <TableDataCell>
@@ -171,7 +165,9 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
                 <NormalButton
                   v-show="can('blog-categories.delete')"
                   @click="
-                    softDeleteAction('Blog Category', 'admin.blog-categories.destroy', item?.slug)
+                    softDeleteAction('Blog Category', 'admin.blog-categories.destroy', {
+                      blog_category: item?.slug
+                    })
                   "
                   class="bg-red-600 text-white ring-2 ring-red-300"
                 >

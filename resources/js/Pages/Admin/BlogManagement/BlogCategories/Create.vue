@@ -14,14 +14,7 @@ import { useImagePreview } from '@/Composables/useImagePreview'
 import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 
-const blogCategoryList = 'admin.blog-categories.index'
-
 const { previewImage, setImagePreview } = useImagePreview()
-
-const handleChangeImage = (file) => {
-  setImagePreview(file)
-  form.image = file
-}
 
 const { form, processing, errors, createAction } = useResourceActions({
   name: null,
@@ -38,10 +31,12 @@ const { form, processing, errors, createAction } = useResourceActions({
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="blogCategoryList" icon="fa-list" label="Blog Categories">
+        <!-- Breadcrumb -->
+        <Breadcrumb to="admin.blog-categories.index" icon="fa-list" label="Blog Categories">
           <BreadcrumbItem label="Create" />
         </Breadcrumb>
 
+        <!-- Go Back Button -->
         <div class="w-auto flex items-center justify-end">
           <GoBackButton />
         </div>
@@ -53,14 +48,16 @@ const { form, processing, errors, createAction } = useResourceActions({
           @submit.prevent="createAction('Blog Category', 'admin.blog-categories.store')"
           class="space-y-4 md:space-y-6"
         >
+          <!-- Preview Blog Category Image -->
           <PreviewImage :src="previewImage" />
 
+          <!-- Blog Category Name Input -->
           <div>
             <InputLabel :label="__('Blog Category Name')" required />
 
             <InputField
               type="text"
-              name="category-name"
+              name="blog-category-name"
               v-model="form.name"
               :placeholder="__('Enter :label', { label: __('Blog Category Name') })"
               autofocus
@@ -70,11 +67,12 @@ const { form, processing, errors, createAction } = useResourceActions({
             <InputError :message="errors?.name" />
           </div>
 
+          <!-- Blog Category Status Select Box -->
           <div>
             <InputLabel :label="__('Status')" required />
 
             <SelectBox
-              name="status"
+              name="blog-category-status"
               :options="[
                 {
                   label: 'Show',
@@ -93,14 +91,15 @@ const { form, processing, errors, createAction } = useResourceActions({
             <InputError :message="errors?.status" />
           </div>
 
+          <!-- Blog Category Image Field -->
           <div>
             <InputLabel :label="__('Category Image')" />
 
             <FileInput
               name="blog-category-image"
-              v-model="form.image"
               text="PNG, JPG or JPEG ( Max File Size : 1.5 MB )"
-              @update:modelValue="handleChangeImage"
+              v-model="form.image"
+              @update:modelValue="setImagePreview"
             />
 
             <InputError :message="errors?.image" />
@@ -108,7 +107,7 @@ const { form, processing, errors, createAction } = useResourceActions({
 
           <InputError :message="errors?.captcha_token" />
 
-          <FormButton type="submit" :processing="processing">
+          <FormButton :processing="processing">
             {{ __('Create') }}
           </FormButton>
         </form>

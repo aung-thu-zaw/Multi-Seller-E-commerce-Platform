@@ -143,8 +143,6 @@ const {
 
             <!-- Table Header -->
             <template #table-header>
-              <SortableTableHeaderCell label="# No" :to="trashedBlogCategoryList" sort="id" />
-
               <TableHeaderCell label="Image" />
 
               <SortableTableHeaderCell label="Name" :to="trashedBlogCategoryList" sort="name" />
@@ -167,7 +165,11 @@ const {
               <TableActionCell>
                 <NormalButton
                   v-show="can('blog-categories.restore')"
-                  @click="restoreAction('Blog Category', 'admin.blog-categories.restore', item?.id)"
+                  @click="
+                    restoreAction('Blog Category', 'admin.blog-categories.restore', {
+                      id: item?.id
+                    })
+                  "
                 >
                   <i class="fa-solid fa-recycle"></i>
                   {{ __('Restore') }}
@@ -176,11 +178,9 @@ const {
                 <NormalButton
                   v-show="can('blog-categories.force.delete')"
                   @click="
-                    permanentDeleteAction(
-                      'Blog Category',
-                      'admin.blog-categories.force-delete',
-                      item?.id
-                    )
+                    permanentDeleteAction('Blog Category', 'admin.blog-categories.force-delete', {
+                      id: item?.id
+                    })
                   "
                   class="bg-red-600 text-white ring-2 ring-red-300"
                 >

@@ -16,7 +16,7 @@ export function useResourceActions(formFields = {}) {
   const { formatToSnakeCase, formatToTitleCase } = useFormatFunctions()
 
   // URI Query String Parameters
-  const { queryStringParams } = useQueryStringParams()
+  const { dashboardQueryStringParams } = useQueryStringParams()
 
   // Dynamic Form Fields For ( Create and Edit )
   const form = useForm({ ...formFields, captcha_token: null })
@@ -24,19 +24,15 @@ export function useResourceActions(formFields = {}) {
   // Google ReCaptcha Version 3
   const { executeRecaptcha, recaptchaLoaded } = useReCaptcha()
 
-  // Create Action
-  const createAction = async (entityType, createRouteName, targetIdentifier = null) => {
+  //  Create Action
+  const createAction = async (entityType, createRouteName, targetIdentifier = {}) => {
     await recaptchaLoaded()
     form.captcha_token = await executeRecaptcha(`create_${formatToSnakeCase(entityType)}`)
     processing.value = true
     router.post(
       route(createRouteName, targetIdentifier),
       {
-        ...form,
-        page: 1,
-        per_page: queryStringParams.value.per_page,
-        sort: 'id',
-        direction: 'desc'
+        ...form
       },
       {
         preserveState: true,
@@ -61,21 +57,15 @@ export function useResourceActions(formFields = {}) {
   }
 
   // Edit Action
-  const editAction = async (entityType, editRouteName, targetIdentifier, method = 'patch') => {
+  const editAction = async (entityType, editRouteName, targetIdentifier = {}, method = 'patch') => {
     await recaptchaLoaded()
     form.captcha_token = await executeRecaptcha(`edit_${formatToSnakeCase(entityType)}`)
     processing.value = true
-
     router.post(
-      route(editRouteName, {
-        ...(typeof targetIdentifier === 'object'
-          ? targetIdentifier
-          : { [formatToSnakeCase(entityType)]: targetIdentifier })
-      }),
+      route(editRouteName, targetIdentifier),
       {
         _method: method === 'put' || method === 'patch' ? method : undefined,
-        ...form,
-        ...queryStringParams.value
+        ...form
       },
       {
         preserveState: true,
@@ -119,13 +109,11 @@ export function useResourceActions(formFields = {}) {
 
     if (result.isConfirmed) {
       router.post(
-        route(editRouteName, {
-          [formatToSnakeCase(entityType)]: targetIdentifier
-        }),
+        route(editRouteName, targetIdentifier),
         {
           _method: 'patch',
           status: currentStatus,
-          ...queryStringParams.value
+          ...dashboardQueryStringParams.value
         },
         {
           preserveScroll: true,
@@ -146,7 +134,7 @@ export function useResourceActions(formFields = {}) {
   }
 
   // Soft Delete Action
-  const softDeleteAction = async (entityType, deleteRouteName, targetIdentifier) => {
+  const softDeleteAction = async (entityType, deleteRouteName, targetIdentifier = {}) => {
     const result = await swal({
       icon: 'question',
       title: __('Delete :label', {
@@ -167,8 +155,8 @@ export function useResourceActions(formFields = {}) {
     if (result.isConfirmed) {
       router.delete(
         route(deleteRouteName, {
-          [formatToSnakeCase(entityType)]: targetIdentifier,
-          ...queryStringParams.value
+          ...targetIdentifier,
+          ...dashboardQueryStringParams.value
         }),
         {
           preserveScroll: true,
@@ -211,7 +199,7 @@ export function useResourceActions(formFields = {}) {
       router.delete(
         route(deleteRouteName, {
           selected_items: selectedItems,
-          ...queryStringParams.value
+          ...dashboardQueryStringParams.value
         }),
         {
           preserveScroll: true,
@@ -254,11 +242,9 @@ export function useResourceActions(formFields = {}) {
 
     if (result.isConfirmed) {
       router.post(
-        route(restoreRouteName, {
-          id: targetIdentifier
-        }),
+        route(restoreRouteName, targetIdentifier),
         {
-          ...queryStringParams.value
+          ...dashboardQueryStringParams.value
         },
         {
           preserveScroll: true,
@@ -303,7 +289,7 @@ export function useResourceActions(formFields = {}) {
           selected_items: selectedItems
         }),
         {
-          ...queryStringParams.value
+          ...dashboardQueryStringParams.value
         },
         {
           preserveScroll: true,
@@ -348,8 +334,8 @@ export function useResourceActions(formFields = {}) {
     if (result.isConfirmed) {
       router.delete(
         route(deleteRouteName, {
-          id: targetIdentifier,
-          ...queryStringParams.value
+          ...targetIdentifier,
+          ...dashboardQueryStringParams.value
         }),
         {
           preserveScroll: true,
@@ -394,7 +380,7 @@ export function useResourceActions(formFields = {}) {
       router.delete(
         route(deleteRouteName, {
           selected_items: selectedItems,
-          ...queryStringParams.value
+          ...dashboardQueryStringParams.value
         }),
         {
           preserveScroll: true,
@@ -441,7 +427,7 @@ export function useResourceActions(formFields = {}) {
     if (result.isConfirmed) {
       router.delete(
         route(deleteRouteName, {
-          ...queryStringParams.value
+          ...dashboardQueryStringParams.value
         }),
         {
           preserveScroll: true,
