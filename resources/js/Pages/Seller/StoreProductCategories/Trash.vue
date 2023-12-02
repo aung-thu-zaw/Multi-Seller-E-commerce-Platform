@@ -174,7 +174,7 @@ const {
                     restoreAction(
                       'Store Product Category',
                       'seller.store-product-categories.restore',
-                      item?.id
+                      { id: item?.id }
                     )
                   "
                 >
@@ -187,7 +187,7 @@ const {
                     permanentDeleteAction(
                       'Store Product Category',
                       'seller.store-product-categories.force-delete',
-                      item?.id
+                      { id: item?.id }
                     )
                   "
                   class="bg-red-600 text-white ring-2 ring-red-300"

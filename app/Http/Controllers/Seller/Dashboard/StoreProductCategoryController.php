@@ -19,10 +19,8 @@ class StoreProductCategoryController extends Controller
 
     public function index(): Response|ResponseFactory
     {
-        $store = Store::select('id')->where('seller_id', auth()->id())->first();
-
         $storeProductCategories = StoreProductCategory::search(request('search'))
-            ->where('store_id', $store->id)
+            ->where('store_id', StoreProductCategory::getStoreId())
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
@@ -32,32 +30,37 @@ class StoreProductCategoryController extends Controller
 
     public function create(): Response|ResponseFactory
     {
-        $store = Store::select('id')->where('seller_id', auth()->id())->first();
-
-        return inertia('Seller/StoreProductCategories/Create', compact('store'));
+        return inertia('Seller/StoreProductCategories/Create');
     }
 
     public function store(StoreProductCategoryRequest $request): RedirectResponse
     {
-        StoreProductCategory::create(['store_id' => $request->store_id, 'name' => $request->name, 'status' => $request->status]);
+
+        StoreProductCategory::create(['store_id' =>  StoreProductCategory::getStoreId(), 'name' => $request->name, 'status' => $request->status]);
 
         return to_route('seller.store-product-categories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }
 
     public function edit(StoreProductCategory $storeProductCategory): Response|ResponseFactory
     {
+        $storeProductCategory->checkStoreAccess();
+
         return inertia('Seller/StoreProductCategories/Edit', compact('storeProductCategory'));
     }
 
     public function update(StoreProductCategoryRequest $request, StoreProductCategory $storeProductCategory): RedirectResponse
     {
-        $storeProductCategory->update(['store_id' => $request->store_id, 'name' => $request->name, 'status' => $request->status]);
+        $storeProductCategory->checkStoreAccess();
+
+        $storeProductCategory->update(['name' => $request->name, 'status' => $request->status]);
 
         return to_route('seller.store-product-categories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }
 
     public function destroy(Request $request, StoreProductCategory $storeProductCategory): RedirectResponse
     {
+        $storeProductCategory->checkStoreAccess();
+
         $storeProductCategory->delete();
 
         return to_route('seller.store-product-categories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully deleted.');
@@ -74,11 +77,10 @@ class StoreProductCategoryController extends Controller
 
     public function trashed(): Response|ResponseFactory
     {
-        $store = Store::select('id')->where('seller_id', auth()->id())->first();
 
         $trashedStoreProductCategories = StoreProductCategory::search(request('search'))
             ->onlyTrashed()
-            ->where('store_id', $store->id)
+            ->where('store_id', StoreProductCategory::getStoreId())
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
@@ -107,6 +109,8 @@ class StoreProductCategoryController extends Controller
     public function forceDelete(Request $request, int $trashedStoreProductCategoryId): RedirectResponse
     {
         $trashedStoreProductCategory = StoreProductCategory::onlyTrashed()->findOrFail($trashedStoreProductCategoryId);
+
+        $trashedStoreProductCategory->checkStoreAccess();
 
         $trashedStoreProductCategory->forceDelete();
 

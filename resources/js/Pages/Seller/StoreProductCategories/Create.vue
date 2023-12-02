@@ -11,12 +11,7 @@ import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
 import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 
-const props = defineProps({ store: Object })
-
-const storeProductCategoryList = 'seller.store-product-categories.index'
-
 const { form, processing, errors, createAction } = useResourceActions({
-  store_id: props.store?.id,
   name: null,
   status: null
 })
@@ -30,7 +25,11 @@ const { form, processing, errors, createAction } = useResourceActions({
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="storeProductCategoryList" icon="fa-list" label="Store Product Categories">
+        <Breadcrumb
+          to="seller.store-product-categories.index"
+          icon="fa-list"
+          label="Store Product Categories"
+        >
           <BreadcrumbItem label="Create" />
         </Breadcrumb>
 
@@ -87,7 +86,7 @@ const { form, processing, errors, createAction } = useResourceActions({
 
           <InputError :message="errors?.captcha_token" />
 
-          <FormButton type="submit" :processing="processing">
+          <FormButton :processing="processing">
             {{ __('Create') }}
           </FormButton>
         </form>

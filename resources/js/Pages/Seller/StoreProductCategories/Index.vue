@@ -165,7 +165,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
                     softDeleteAction(
                       'Store Product Category',
                       'seller.store-product-categories.destroy',
-                      item?.slug
+                      { store_product_category: item?.slug }
                     )
                   "
                   class="bg-red-600 text-white ring-2 ring-red-300"

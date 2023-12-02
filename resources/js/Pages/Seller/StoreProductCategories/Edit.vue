@@ -13,10 +13,7 @@ import { Head } from '@inertiajs/vue3'
 
 const props = defineProps({ storeProductCategory: Object })
 
-const storeProductCategoryList = 'seller.store-product-categories.index'
-
 const { form, processing, errors, editAction } = useResourceActions({
-  store_id: props.storeProductCategory?.store_id,
   name: props.storeProductCategory?.name,
   status: props.storeProductCategory?.status
 })
@@ -30,7 +27,11 @@ const { form, processing, errors, editAction } = useResourceActions({
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="storeProductCategoryList" icon="fa-list" label="Store Product Categories">
+        <Breadcrumb
+          to="seller.store-product-categories.index"
+          icon="fa-list"
+          label="Store Product Categories"
+        >
           <BreadcrumbItem :label="storeProductCategory.name" />
           <BreadcrumbItem label="Edit" />
         </Breadcrumb>
@@ -44,11 +45,9 @@ const { form, processing, errors, editAction } = useResourceActions({
       <div class="border p-10 bg-white rounded-md">
         <form
           @submit.prevent="
-            editAction(
-              'Store Product Category',
-              'seller.store-product-categories.update',
-              storeProductCategory?.slug
-            )
+            editAction('Store Product Category', 'seller.store-product-categories.update', {
+              store_product_category: storeProductCategory?.slug
+            })
           "
           class="space-y-4 md:space-y-6"
         >

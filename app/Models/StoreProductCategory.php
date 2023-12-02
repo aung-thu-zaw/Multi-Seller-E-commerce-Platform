@@ -45,4 +45,18 @@ class StoreProductCategory extends Model
 
         static::addGlobalScope(new FilterByScope());
     }
+
+    public static function getStoreId(): int
+    {
+        return Store::where('seller_id', auth()->id())->value('id');
+    }
+
+    public function checkStoreAccess(): void
+    {
+        $store = self::getStoreId();
+
+        if ($this->store_id !== $store) {
+            abort(403, 'Unauthorized access to store.');
+        }
+    }
 }

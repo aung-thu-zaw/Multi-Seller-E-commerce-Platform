@@ -108,7 +108,9 @@ class CategoryController extends Controller
     {
         $selectedItems = explode(',', $selectedItems);
 
-        Category::onlyTrashed()->whereIn('id', $selectedItems)->restore();
+        Category::onlyTrashed()
+            ->whereIn('id', $selectedItems)
+            ->restore();
 
         return to_route('admin.categories.trashed', $this->getQueryStringParams($request))->with('success', 'Selected :label have been successfully restored.');
     }
@@ -128,7 +130,9 @@ class CategoryController extends Controller
     {
         $selectedItems = explode(',', $selectedItems);
 
-        $trashedCategories = Category::onlyTrashed()->whereIn('id', $selectedItems)->get();
+        $trashedCategories = Category::onlyTrashed()
+            ->whereIn('id', $selectedItems)
+            ->get();
 
         (new PermanentlyDeleteTrashedCategoriesAction())->handle($trashedCategories);
 
