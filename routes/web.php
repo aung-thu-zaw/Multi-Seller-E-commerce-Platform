@@ -32,7 +32,6 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-
 Route::get('/seller/dashboard', function () {
     return Inertia::render('Seller/Dashboard');
 });
@@ -48,9 +47,9 @@ Route::middleware('auth')->group(function () {
         ->name('notifications.markAllAsRead');
 });
 
-Route::get("/about-us", AboutUsController::class)->name("about-us");
-Route::get("/help-center", HelpCenterController::class)->name("help-center");
-Route::get("/contact-us", ContactUsController::class)->name("contact-us");
+Route::get('/about-us', AboutUsController::class)->name('about-us');
+Route::get('/help-center', HelpCenterController::class)->name('help-center');
+Route::get('/contact-us', ContactUsController::class)->name('contact-us');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

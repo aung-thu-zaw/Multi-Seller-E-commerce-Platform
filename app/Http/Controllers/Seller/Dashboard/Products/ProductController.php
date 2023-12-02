@@ -38,10 +38,10 @@ class ProductController extends Controller
             ->where('status', 'show')
             ->get();
 
-        $store = Store::select("id")->where("seller_id", auth()->id())->first();
+        $store = Store::select('id')->where('seller_id', auth()->id())->first();
 
         $storeProductCategories = StoreProductCategory::select('id', 'name')
-        ->where("store_id", $store->id)
+            ->where('store_id', $store->id)
             ->where('status', 'show')
             ->get();
 
@@ -65,16 +65,16 @@ class ProductController extends Controller
             ->where('status', 'show')
             ->get();
 
-        $store = Store::select("id")->where("seller_id", auth()->id())->first();
+        $store = Store::select('id')->where('seller_id', auth()->id())->first();
 
         $storeProductCategories = StoreProductCategory::select('id', 'name')
-        ->where("store_id", $store->id)
+            ->where('store_id', $store->id)
             ->where('status', 'show')
             ->get();
 
         $brands = Brand::select('id', 'name')
-        ->where('status', 'active')
-        ->get();
+            ->where('status', 'active')
+            ->get();
 
         return inertia('Seller/Products/Edit', compact('product', 'categories', 'storeProductCategories', 'brands'));
     }

@@ -29,7 +29,7 @@ class ProductRequest extends FormRequest
             'store_product_category_id' => ['nullable', 'numeric', Rule::exists('store_product_categories', 'id')],
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'status' => ['required',Rule::in(['draft','pending','approved','rejected'])],
+            'status' => ['required', Rule::in(['draft', 'pending', 'approved', 'rejected'])],
             'captcha_token' => [new RecaptchaRule()],
         ];
 

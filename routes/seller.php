@@ -58,20 +58,19 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
                 Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
             });
 
-
         Route::resource('products/{product}/product-variants', ProductVariantController::class)->except(['show']);
         Route::controller(ProductVariantController::class)
-        ->prefix('/products/{product}/product-variants/trash')
-        ->name('product-variants.')
-        ->group(function () {
-            Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
-            Route::get('/', 'trashed')->name('trashed');
-            Route::post('/{id}/restore', 'restore')->name('restore');
-            Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
-            Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
-            Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
-            Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
-        });
+            ->prefix('/products/{product}/product-variants/trash')
+            ->name('product-variants.')
+            ->group(function () {
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
 
         // Route::controller(ProductVariantController::class)
         //     ->prefix('/products')

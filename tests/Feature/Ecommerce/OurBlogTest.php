@@ -44,7 +44,6 @@ it('successfully renders the blog index page with correct props', function () {
         );
 });
 
-
 it('successfully renders the blog show page with correct props', function () {
     // Arrange
     $author = User::factory()->create(['role' => 'admin']);
@@ -69,18 +68,18 @@ it('successfully renders the blog show page with correct props', function () {
                 ->has(
                     'blogContent',
                     fn (Assert $page) => $page
-                            ->has("id")
-                            ->has("author_id")
-                            ->has("blog_category_id")
-                            ->has("title")
-                            ->has("slug")
-                            ->has("thumbnail")
-                            ->has("content")
-                            ->has("published_at")
-                            ->has('author', fn (Assert $page) => $page->has('id')->has('name'))
-                            ->has('blog_category', fn (Assert $page) => $page->has('id')->has('name'))
-                            ->has('blog_tags')
-                            ->etc()
+                        ->has('id')
+                        ->has('author_id')
+                        ->has('blog_category_id')
+                        ->has('title')
+                        ->has('slug')
+                        ->has('thumbnail')
+                        ->has('content')
+                        ->has('published_at')
+                        ->has('author', fn (Assert $page) => $page->has('id')->has('name'))
+                        ->has('blog_category', fn (Assert $page) => $page->has('id')->has('name'))
+                        ->has('blog_tags')
+                        ->etc()
                 )
                 ->has('relatedBlogContents')
                 ->has('blogComments')

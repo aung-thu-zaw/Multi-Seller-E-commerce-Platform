@@ -48,7 +48,7 @@ class Product extends Model
     protected function image(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/products/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/products/$value"),
         );
     }
 
@@ -99,28 +99,26 @@ class Product extends Model
 
     public static function deleteImage(string $productImage): void
     {
-        if (!empty($productImage) && file_exists(storage_path('app/public/products/'.pathinfo($productImage, PATHINFO_BASENAME)))) {
+        if (! empty($productImage) && file_exists(storage_path('app/public/products/'.pathinfo($productImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/products/'.pathinfo($productImage, PATHINFO_BASENAME)));
         }
     }
 
     /**
-       * Generate a unique SKU for the product.
-       *
-       * @return string
-       */
+     * Generate a unique SKU for the product.
+     */
     public function generateUniqueSku(): string
     {
         // Generate a base SKU
         $sequenceNumber = $this->exists ? $this->id + 1 : 1;
-        $baseSku = 'PROD' . str_pad(strval($sequenceNumber), 4, '0', STR_PAD_LEFT);
+        $baseSku = 'PROD'.str_pad(strval($sequenceNumber), 4, '0', STR_PAD_LEFT);
 
         // Check if the base SKU already exists
         $sku = $baseSku;
         $counter = 1;
 
         while (ProductVariant::where('sku', $sku)->exists()) {
-            $sku = $baseSku . '-' . $counter++;
+            $sku = $baseSku.'-'.$counter++;
         }
 
         return $sku;

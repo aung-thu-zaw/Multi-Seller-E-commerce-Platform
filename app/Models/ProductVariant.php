@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 class ProductVariant extends Model
 {
@@ -40,5 +40,4 @@ class ProductVariant extends Model
     {
         return $this->belongsToMany(Attribute::class, 'product_variant_attributes')->withPivot('option_id');
     }
-
 }

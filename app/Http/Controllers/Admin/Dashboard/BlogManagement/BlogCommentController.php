@@ -19,7 +19,7 @@ class BlogCommentController extends Controller
     {
         $blogComments = BlogComment::search(request('search'))
             ->query(function (Builder $builder) {
-                $builder->with('blogContent:id,title,slug')->select("id", "blog_content_id", "comment");
+                $builder->with('blogContent:id,title,slug')->select('id', 'blog_content_id', 'comment');
             })
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))

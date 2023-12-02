@@ -23,7 +23,7 @@ class CreateProductAction
             'seller_id' => auth()->id(),
             'name' => $data['name'],
             'description' => $data['description'],
-            'status' => "draft",
+            'status' => 'draft',
             'image' => $image,
         ]);
     }

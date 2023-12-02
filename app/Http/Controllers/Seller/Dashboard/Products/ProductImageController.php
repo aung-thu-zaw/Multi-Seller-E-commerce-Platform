@@ -14,7 +14,7 @@ class ProductImageController extends Controller
 {
     public function productImages(Product $product): Response|ResponseFactory
     {
-        $product->load("productImages");
+        $product->load('productImages');
 
         return inertia('Seller/Products/Images', compact('product'));
     }
@@ -26,7 +26,7 @@ class ProductImageController extends Controller
 
             $fileName = time().'-'.$originalName;
 
-            $image->storeAs("products", $fileName);
+            $image->storeAs('products', $fileName);
 
             ProductImage::create(['product_id' => $product->id, 'image' => $fileName]);
         }

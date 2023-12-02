@@ -46,6 +46,6 @@ class ProductVariantController extends Controller
             'discount_end_date' => $request->discount_end_date,
         ]);
 
-        return to_route('seller.product-variants.index', $this->getQueryStringParams($request) + ["product" => $product->slug])->with('success', ':label has been successfully created.');
+        return to_route('seller.product-variants.index', $this->getQueryStringParams($request) + ['product' => $product->slug])->with('success', ':label has been successfully created.');
     }
 }

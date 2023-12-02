@@ -25,7 +25,7 @@ class ProductFactory extends Factory
             'is_top' => fake()->boolean(),
             'is_best' => fake()->boolean(),
             'is_featured' => fake()->boolean(),
-            'status' => fake()->randomElement(["draft","pending","approved","rejected"])
+            'status' => fake()->randomElement(['draft', 'pending', 'approved', 'rejected']),
         ];
     }
 }

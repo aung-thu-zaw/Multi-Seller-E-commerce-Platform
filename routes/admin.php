@@ -80,13 +80,12 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-
         Route::controller(BlogCommentController::class)
-        ->prefix('/blog-comments')
-        ->name('blog-comments.')
-        ->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::delete('/{blog_comment}', 'destroy')->name('destroy');
-            Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
-        });
+            ->prefix('/blog-comments')
+            ->name('blog-comments.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::delete('/{blog_comment}', 'destroy')->name('destroy');
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+            });
     });

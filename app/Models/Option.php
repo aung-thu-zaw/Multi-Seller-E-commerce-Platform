@@ -11,7 +11,6 @@ class Option extends Model
 {
     use HasFactory;
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Attribute,Option>
      */
