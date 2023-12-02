@@ -28,6 +28,7 @@ class BlogContentFactory extends Factory
             'thumbnail' => fake()->imageUrl(),
             'content' => fake()->paragraph(12),
             'status' => fake()->randomElement(['draft', 'published']),
+            'created_at' => fake()->dateTimeBetween('-2 months', now()),
         ];
     }
 }

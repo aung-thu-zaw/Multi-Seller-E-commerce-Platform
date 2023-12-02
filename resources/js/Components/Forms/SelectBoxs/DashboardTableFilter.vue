@@ -29,21 +29,25 @@ const props = defineProps({
 const isFilterBoxOpened = ref(false)
 
 const createdFrom = ref(
-  usePage().props.ziggy.query.created_from ? new Date(usePage().props.ziggy.query.created_from) : ''
+  usePage().props.ziggy.query.created_from
+    ? new Date(usePage().props.ziggy.query.created_from)
+    : null
 )
 const createdUntil = ref(
   usePage().props.ziggy.query.created_until
     ? new Date(usePage().props.ziggy.query.created_until)
-    : ''
+    : null
 )
 
 const deletedFrom = ref(
-  usePage().props.ziggy.query.deleted_from ? new Date(usePage().props.ziggy.query.deleted_from) : ''
+  usePage().props.ziggy.query.deleted_from
+    ? new Date(usePage().props.ziggy.query.deleted_from)
+    : null
 )
 const deletedUntil = ref(
   usePage().props.ziggy.query.deleted_until
     ? new Date(usePage().props.ziggy.query.deleted_until)
-    : ''
+    : null
 )
 
 const status = ref(usePage().props.ziggy.query?.status)
@@ -171,11 +175,11 @@ const filteredByStatus = () => {
 }
 
 const resetFiltered = () => {
-  createdFrom.value = ''
-  createdUntil.value = ''
-  deletedUntil.value = ''
-  deletedFrom.value = ''
-  status.value = ''
+  createdFrom.value = null
+  createdUntil.value = null
+  deletedUntil.value = null
+  deletedFrom.value = null
+  status.value = null
   router.get(
     route(props.to),
     {
@@ -195,7 +199,7 @@ const resetFiltered = () => {
 watch(
   () => createdFrom.value,
   () => {
-    if (createdFrom.value === '') {
+    if (!createdFrom.value) {
       resetFiltered()
     } else {
       filteredByCreatedFrom()
@@ -206,7 +210,7 @@ watch(
 watch(
   () => createdUntil.value,
   () => {
-    if (createdUntil.value === '') {
+    if (!createdUntil.value) {
       resetFiltered()
     } else {
       filteredByCreatedUntil()
@@ -217,7 +221,7 @@ watch(
 watch(
   () => deletedFrom.value,
   () => {
-    if (deletedFrom.value === '') {
+    if (!deletedFrom.value) {
       resetFiltered()
     } else {
       filteredByDeletedFrom()
@@ -228,7 +232,7 @@ watch(
 watch(
   () => deletedUntil.value,
   () => {
-    if (deletedUntil.value === '') {
+    if (!deletedUntil.value) {
       resetFiltered()
     } else {
       filteredByDeletedUntil()
@@ -239,7 +243,7 @@ watch(
 watch(
   () => status.value,
   () => {
-    if (status.value === '') {
+    if (!status.value) {
       resetFiltered()
     } else {
       filteredByStatus()
@@ -260,12 +264,6 @@ watch(
     <span class="">
       <i class="fa-solid fa-filter"></i>
     </span>
-    <!-- <span
-      v-show="true"
-      class="absolute top-1 right-2 font-bold text-[.5rem] text-white bg-red-500 w-3.5 h-3.5 rounded-full flex items-center justify-center"
-    >
-      5
-    </span> -->
   </button>
 
   <div
@@ -348,10 +346,9 @@ watch(
       <div class="w-full mb-5">
         <div>
           <InputLabel label="Status" />
-
           <SelectBox
             name="filter-by"
-            :options="options"
+            :options="options ?? {}"
             v-model="status"
             :placeholder="__('Select an option')"
             :selected="status"

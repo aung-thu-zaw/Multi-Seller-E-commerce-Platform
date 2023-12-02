@@ -4,17 +4,17 @@ import { useQueryStringParams } from '@/Composables/useQueryStringParams'
 
 defineProps({ to: String })
 
-const { queryStringParams } = useQueryStringParams()
+const { dashboardQueryStringParams } = useQueryStringParams()
 </script>
 
 <template>
   <div
     v-show="
-      queryStringParams?.created_from ||
-      queryStringParams?.created_until ||
-      queryStringParams?.deleted_from ||
-      queryStringParams?.deleted_until ||
-      queryStringParams?.filter_by_status
+      dashboardQueryStringParams?.created_from ||
+      dashboardQueryStringParams?.created_until ||
+      dashboardQueryStringParams?.deleted_from ||
+      dashboardQueryStringParams?.deleted_until ||
+      dashboardQueryStringParams?.filter_by_status
     "
     class="mb-5 px-2 flex items-center"
   >
@@ -22,31 +22,31 @@ const { queryStringParams } = useQueryStringParams()
 
     <div class="flex items-center space-x-3">
       <TableFilteredBadge
-        v-show="queryStringParams?.created_from"
+        v-show="dashboardQueryStringParams?.created_from"
         :to="to"
         filterKey="created_from"
         label="Created From"
       />
       <TableFilteredBadge
-        v-show="queryStringParams?.created_until"
+        v-show="dashboardQueryStringParams?.created_until"
         :to="to"
         filterKey="created_until"
         label="Created Until"
       />
       <TableFilteredBadge
-        v-show="queryStringParams?.deleted_from"
+        v-show="dashboardQueryStringParams?.deleted_from"
         :to="to"
         filterKey="deleted_from"
         label="Deleted From"
       />
       <TableFilteredBadge
-        v-show="queryStringParams?.deleted_until"
+        v-show="dashboardQueryStringParams?.deleted_until"
         :to="to"
         filterKey="deleted_until"
         label="Deleted Until"
       />
       <TableFilteredBadge
-        v-show="queryStringParams?.filter_by_status"
+        v-show="dashboardQueryStringParams?.filter_by_status"
         :to="to"
         filterKey="filter_by_status"
         label="Status"

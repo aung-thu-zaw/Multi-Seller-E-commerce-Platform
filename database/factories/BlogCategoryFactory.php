@@ -20,6 +20,7 @@ class BlogCategoryFactory extends Factory
             'name' => fake()->unique()->sentence(),
             'image' => fake()->imageUrl(),
             'status' => fake()->randomElement(['show', 'hide']),
+            'created_at' => fake()->dateTimeBetween('-2 months', now()),
         ];
     }
 }

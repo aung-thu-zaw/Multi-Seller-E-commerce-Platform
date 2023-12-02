@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps({
   selected: {
-    type: [Number, String]
+    type: [Number, String, Object]
   },
   options: {
     type: Object,
