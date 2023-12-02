@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Dashboard\BlogManagement\BlogCategoryController;
+use App\Http\Controllers\Admin\Dashboard\BlogManagement\BlogCommentController;
 use App\Http\Controllers\Admin\Dashboard\BlogManagement\BlogContentController;
 use App\Http\Controllers\Admin\Dashboard\BrandController;
 use App\Http\Controllers\Admin\Dashboard\CategoryController;
@@ -78,4 +79,14 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
+
+
+        Route::controller(BlogCommentController::class)
+        ->prefix('/blog-comments')
+        ->name('blog-comments.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::delete('/{blog_comment}', 'destroy')->name('destroy');
+            Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+        });
     });

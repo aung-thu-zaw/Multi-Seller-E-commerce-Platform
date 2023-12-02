@@ -94,7 +94,7 @@ const deselectAll = () => {
   </div>
 
   <table class="w-full text-sm text-left text-gray-500">
-    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+    <thead class="text-gray-700 bg-gray-50">
       <tr>
         <th v-show="items.length !== 0" class="pl-4">
           <Checkbox v-model:checked="isSelectedAll" @change="selectAllItems" />

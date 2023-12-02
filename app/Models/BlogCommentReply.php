@@ -13,7 +13,6 @@ class BlogCommentReply extends Model
 {
     use HasFactory;
     use Searchable;
-    use SoftDeletes;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<BlogComment,BlogCommentReply>

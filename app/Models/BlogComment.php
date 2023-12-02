@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\FilterByScope;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,18 +16,16 @@ class BlogComment extends Model
 {
     use HasFactory;
     use Searchable;
-    use SoftDeletes;
 
-    // /**
-    //  *     @return array<string>
-    //  */
-    // #[SearchUsingFullText(['comment'])]
-    // public function toSearchableArray(): array
-    // {
-    //     return [
-    //         'comment' => $this->comment,
-    //     ];
-    // }
+    /**
+     *     @return array<string>
+     */
+    public function toSearchableArray(): array
+    {
+        return [
+            'comment' => $this->comment,
+        ];
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,BlogComment>
@@ -61,4 +60,12 @@ class BlogComment extends Model
             get: fn ($value) => date('j/F/Y h:i A', strtotime($value)),
         );
     }
+
+    protected static function booted(): void
+    {
+        parent::boot();
+
+        static::addGlobalScope(new FilterByScope());
+    }
+
 }

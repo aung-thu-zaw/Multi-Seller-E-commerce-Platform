@@ -733,11 +733,11 @@ const toggleCollapseShow = (classes) => {
                 block:
                   $page.url.startsWith('/admin/blog-categories') ||
                   $page.url.startsWith('/admin/blog-contents') ||
-                  $page.url.startsWith('/admin/comments-and-replies'),
+                  $page.url.startsWith('/admin/blog-comments'),
                 hidden: !(
                   $page.url.startsWith('/admin/blog-categories') ||
                   $page.url.startsWith('/admin/blog-contents') ||
-                  $page.url.startsWith('/admin/comments-and-replies')
+                  $page.url.startsWith('/admin/blog-comments')
                 )
               }"
             >
@@ -783,9 +783,9 @@ const toggleCollapseShow = (classes) => {
                   </Link>
                 </li>
 
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('blog-comments.view')" class="items-center">
                   <Link
-                    :href="route('admin.categories.index')"
+                    :href="route('admin.blog-comments.index')"
                     :data="{
                       page: 1,
                       per_page: 5,
@@ -795,12 +795,12 @@ const toggleCollapseShow = (classes) => {
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
+                        $page.url.startsWith('/admin/blog-comments'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
+                        !$page.url.startsWith('/admin/blog-comments')
                     }"
                   >
-                    {{ __('Comments & Replies') }}
+                    {{ __('Blog Comments') }}
                   </Link>
                 </li>
               </ul>

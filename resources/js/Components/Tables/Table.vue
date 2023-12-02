@@ -9,7 +9,7 @@ defineProps({
 
 <template>
   <table class="w-full text-sm text-left text-gray-500">
-    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+    <thead class="text-gray-700 bg-gray-50">
       <tr>
         <slot name="table-header"></slot>
       </tr>

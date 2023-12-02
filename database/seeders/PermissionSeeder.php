@@ -51,5 +51,8 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'blog-contents.view.trash', 'group' => 'Blog Management']);
         Permission::create(['name' => 'blog-contents.restore', 'group' => 'Blog Management']);
         Permission::create(['name' => 'blog-contents.force.delete', 'group' => 'Blog Management']);
+
+        Permission::create(['name' => 'blog-comments.view', 'group' => 'Blog Management']);
+        Permission::create(['name' => 'blog-comments.delete', 'group' => 'Blog Management']);
     }
 }
