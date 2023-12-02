@@ -28,7 +28,6 @@ class UpdateBlogContentRequest extends FormRequest
 
         $rules = [
             'blog_category_id' => ['required', 'numeric', Rule::exists('blog_categories', 'id')],
-            'author_id' => ['required', 'numeric', Rule::exists('users', 'id')],
             'title' => ['required', 'string', 'max:255', Rule::unique('blog_contents', 'title')->ignore($blogContent)],
             'status' => ['required', 'string', Rule::in(['draft', 'published'])],
             'content' => ['required', 'string'],

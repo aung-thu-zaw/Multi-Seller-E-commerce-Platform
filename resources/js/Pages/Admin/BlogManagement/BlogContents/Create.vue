@@ -12,24 +12,17 @@ import FormButton from '@/Components/Buttons/FormButton.vue'
 import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
 import { useImagePreview } from '@/Composables/useImagePreview'
 import { useResourceActions } from '@/Composables/useResourceActions'
-import { Head, usePage } from '@inertiajs/vue3'
+import { Head } from '@inertiajs/vue3'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { ref } from 'vue'
 
 defineProps({ blogCategories: Object })
 
+const { previewImage, setImagePreview } = useImagePreview()
+
 const editor = ClassicEditor
 
 const tag = ref(null)
-
-const blogContentList = 'admin.blog-contents.index'
-
-const { previewImage, setImagePreview } = useImagePreview()
-
-const handleChangeImage = (file) => {
-  setImagePreview(file)
-  form.thumbnail = file
-}
 
 const createTag = (e) => {
   if (e.key === ',') {
@@ -48,7 +41,6 @@ const removeTag = (removeTag) => {
 
 const { form, processing, errors, createAction } = useResourceActions({
   blog_category_id: null,
-  author_id: usePage().props.auth.user?.id,
   title: null,
   content: null,
   status: 'draft',
@@ -65,10 +57,12 @@ const { form, processing, errors, createAction } = useResourceActions({
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="blogContentList" icon="fa-newspaper" label="Blog Contents">
+        <!-- Breadcrumb -->
+        <Breadcrumb to="admin.blog-contents.index" icon="fa-newspaper" label="Blog Contents">
           <BreadcrumbItem label="Create" />
         </Breadcrumb>
 
+        <!-- Go Back Button -->
         <div class="w-auto flex items-center justify-end">
           <GoBackButton />
         </div>
@@ -80,8 +74,10 @@ const { form, processing, errors, createAction } = useResourceActions({
           @submit.prevent="createAction('Blog Content', 'admin.blog-contents.store')"
           class="space-y-4 md:space-y-6"
         >
+          <!-- Preview Blog Content Thumbnail -->
           <PreviewImage :src="previewImage" />
 
+          <!-- Blog Content Title Input -->
           <div>
             <InputLabel :label="__('Blog Title')" required />
 
@@ -97,6 +93,7 @@ const { form, processing, errors, createAction } = useResourceActions({
             <InputError :message="errors?.title" />
           </div>
 
+          <!-- Blog Content Description -->
           <div>
             <InputLabel :label="__('Blog Content')" required />
 
@@ -111,6 +108,7 @@ const { form, processing, errors, createAction } = useResourceActions({
             <InputError :message="errors?.content" />
           </div>
 
+          <!-- Blog Category Select Box -->
           <div>
             <InputLabel :label="__('Blog Category')" required />
 
@@ -125,6 +123,7 @@ const { form, processing, errors, createAction } = useResourceActions({
             <InputError :message="errors?.blog_category_id" />
           </div>
 
+          <!-- Blog Content Tag Input -->
           <div>
             <InputLabel :label="__('Blog Tags')" />
 
@@ -154,14 +153,15 @@ const { form, processing, errors, createAction } = useResourceActions({
             <InputError :message="errors?.tags" />
           </div>
 
+          <!-- Blog Content Thumbnail Field -->
           <div>
             <InputLabel :label="__('Blog Thumbnail')" required />
 
             <FileInput
-              name="blog-thumbnail"
-              v-model="form.thumbnail"
+              name="blog-content-thumbnail"
               text="PNG, JPG or JPEG ( Max File Size : 1.5 MB )"
-              @update:modelValue="handleChangeImage"
+              v-model="form.thumbnail"
+              @update:modelValue="setImagePreview"
               required
             />
 
@@ -170,7 +170,7 @@ const { form, processing, errors, createAction } = useResourceActions({
 
           <InputError :message="errors?.captcha_token" />
 
-          <FormButton type="submit" :processing="processing">
+          <FormButton :processing="processing">
             {{ __('Create') }}
           </FormButton>
         </form>

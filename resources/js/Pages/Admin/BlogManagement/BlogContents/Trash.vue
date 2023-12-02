@@ -141,8 +141,6 @@ const {
 
             <!-- Table Header -->
             <template #table-header>
-              <SortableTableHeaderCell label="# No" :to="trashedBlogContentList" sort="id" />
-
               <TableHeaderCell label="Image" />
 
               <SortableTableHeaderCell label="Title" :to="trashedBlogContentList" sort="title" />
@@ -152,10 +150,6 @@ const {
 
             <!-- Table Body -->
             <template #table-data="{ item }">
-              <TableDataCell>
-                {{ item?.id }}
-              </TableDataCell>
-
               <ImageCell :src="item?.thumbnail" />
 
               <TableDataCell>
@@ -165,7 +159,9 @@ const {
               <TableActionCell>
                 <NormalButton
                   v-show="can('blog-contents.restore')"
-                  @click="restoreAction('Blog Content', 'admin.blog-contents.restore', item?.id)"
+                  @click="
+                    restoreAction('Blog Content', 'admin.blog-contents.restore', { id: item?.id })
+                  "
                 >
                   <i class="fa-solid fa-recycle"></i>
                   {{ __('Restore') }}
@@ -174,11 +170,9 @@ const {
                 <NormalButton
                   v-show="can('blog-contents.force.delete')"
                   @click="
-                    permanentDeleteAction(
-                      'Blog Content',
-                      'admin.blog-contents.force-delete',
-                      item?.id
-                    )
+                    permanentDeleteAction('Blog Content', 'admin.blog-contents.force-delete', {
+                      id: item?.id
+                    })
                   "
                   class="bg-red-600 text-white ring-2 ring-red-300"
                 >

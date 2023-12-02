@@ -26,7 +26,6 @@ class StoreBlogContentRequest extends FormRequest
     {
         return [
             'blog_category_id' => ['required', 'numeric', Rule::exists('blog_categories', 'id')],
-            'author_id' => ['required', 'numeric', Rule::exists('users', 'id')],
             'title' => ['required', 'string', 'max:255', Rule::unique('blog_contents', 'title')],
             'status' => ['required', 'string', Rule::in(['draft', 'published'])],
             'thumbnail' => ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'],

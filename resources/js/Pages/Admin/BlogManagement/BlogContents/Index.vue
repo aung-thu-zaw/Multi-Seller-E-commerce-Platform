@@ -124,8 +124,6 @@ const { changeStatusAction, softDeleteAction, softDeleteSelectedAction } = useRe
 
             <!-- Table Header -->
             <template #table-header>
-              <SortableTableHeaderCell label="# No" :to="blogContentList" sort="id" />
-
               <TableHeaderCell label="Thumbnail" />
 
               <SortableTableHeaderCell label="Title" :to="blogContentList" sort="title" />
@@ -137,10 +135,6 @@ const { changeStatusAction, softDeleteAction, softDeleteSelectedAction } = useRe
 
             <!-- Table Body -->
             <template #table-data="{ item }">
-              <TableDataCell>
-                {{ item?.id }}
-              </TableDataCell>
-
               <ImageCell :src="item?.thumbnail" />
 
               <TableDataCell>
@@ -165,7 +159,7 @@ const { changeStatusAction, softDeleteAction, softDeleteSelectedAction } = useRe
                     changeStatusAction(
                       'Blog Content',
                       'admin.blog-contents.change-status',
-                      item?.slug,
+                      { blog_content: item?.slug },
                       item?.status
                     )
                   "
@@ -196,7 +190,9 @@ const { changeStatusAction, softDeleteAction, softDeleteSelectedAction } = useRe
                 <NormalButton
                   v-show="can('blog-contents.delete')"
                   @click="
-                    softDeleteAction('Blog Content', 'admin.blog-contents.destroy', item?.slug)
+                    softDeleteAction('Blog Content', 'admin.blog-contents.destroy', {
+                      blog_content: item?.slug
+                    })
                   "
                   class="bg-red-600 text-white ring-2 ring-red-300"
                 >

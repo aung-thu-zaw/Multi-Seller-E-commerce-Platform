@@ -19,7 +19,7 @@ class UpdateBlogContentAction
 
         $blogContent->update([
             'blog_category_id' => $data['blog_category_id'],
-            'author_id' => $data['author_id'],
+            'author_id' => auth()->id(),
             'title' => $data['title'],
             'content' => $data['content'],
             'status' => $data['status'],

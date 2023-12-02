@@ -128,7 +128,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
               <SortableTableHeaderCell label="Name" :to="blogCategoryList" sort="name" />
 
-              <SortableTableHeaderCell label="Status" :to="blogCategoryList" sort="status" />
+              <TableHeaderCell label="Status" />
 
               <TableHeaderCell label="Actions" />
             </template>
