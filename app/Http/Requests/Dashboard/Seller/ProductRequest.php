@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Dashboard\Seller\Products;
+namespace App\Http\Requests\Dashboard\Seller;
 
 use App\Rules\RecaptchaRule;
 use Illuminate\Foundation\Http\FormRequest;

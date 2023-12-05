@@ -10,6 +10,7 @@ import FileInput from '@/Components/Forms/Fields/FileInput.vue'
 import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
 import FormButton from '@/Components/Buttons/FormButton.vue'
 import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
+import Datepicker from 'vue3-datepicker'
 import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 import { useImagePreview } from '@/Composables/useImagePreview'
@@ -124,6 +125,45 @@ const { form, processing, errors, createAction } = useResourceActions({
               />
 
               <InputError :message="errors?.brand_id" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <InputLabel :label="__('Discount Price')" />
+
+              <InputField
+                type="number"
+                name="product-discount"
+                v-model="form.discount"
+                :placeholder="__('Enter :label', { label: __('Product Offer Price') })"
+              />
+
+              <InputError :message="errors?.discount" />
+            </div>
+            <div>
+              <InputLabel :label="__('Discount Start Date')" />
+
+              <Datepicker
+                typeable
+                class="block w-full p-4 font-semibold text-sm rounded-md text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition-all"
+                :placeholder="__('Enter :label', { label: __('Discount Start Date') })"
+                v-model="startDate"
+              />
+
+              <InputError :message="errors?.discount_start_date" />
+            </div>
+            <div>
+              <InputLabel :label="__('Discount End Date')" />
+
+              <Datepicker
+                typeable
+                class="block w-full p-4 font-semibold text-sm rounded-md text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition-all"
+                :placeholder="__('Enter :label', { label: __('Discount End Date') })"
+                v-model="endDate"
+              />
+
+              <InputError :message="errors?.discount_end_date" />
             </div>
           </div>
 

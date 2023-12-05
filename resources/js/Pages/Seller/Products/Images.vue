@@ -153,7 +153,7 @@ const handleProductImages = () => {
       </div>
       <!-- Form End -->
 
-      <div class="border bg-white rounded-md shadow p-5">
+      <div class="border bg-white rounded-md p-5">
         <TableContainer>
           <Table :items="product.product_images">
             <!-- Table Header -->
