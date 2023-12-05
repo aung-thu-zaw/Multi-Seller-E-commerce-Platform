@@ -8,15 +8,14 @@ import TableHeaderCell from '@/Components/Tables/TableCells/TableHeaderCell.vue'
 import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
 import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
 import NoTableData from '@/Components/Tables/NoTableData.vue'
-import ImageCell from '@/Components/Tables/TableCells/TableImageCell.vue'
 import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
 import InputField from '@/Components/Forms/Fields/InputField.vue'
 import InputError from '@/Components/Forms/Fields/InputError.vue'
 import NormalButton from '@/Components/Buttons/NormalButton.vue'
 import FormButton from '@/Components/Buttons/FormButton.vue'
 import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
-import { Head, useForm, usePage } from '@inertiajs/vue3'
-import { computed, inject, ref } from 'vue'
+import { Head, router, useForm, usePage } from '@inertiajs/vue3'
+import { inject, ref } from 'vue'
 import { __ } from '@/Services/translations-inside-setup.js'
 
 const props = defineProps({ product: Object })
@@ -24,41 +23,6 @@ const props = defineProps({ product: Object })
 const swal = inject('$swal')
 
 const productList = 'seller.products.index'
-
-const getUniqueAttributes = () => {
-  const uniqueAttributes = []
-
-  props.product.product_variants.forEach((productVariant) => {
-    productVariant.attributes.forEach((attribute) => {
-      if (!uniqueAttributes.some((a) => a.id === attribute.id)) {
-        uniqueAttributes.push(attribute)
-      }
-    })
-  })
-
-  return uniqueAttributes
-}
-
-const flattenAttributes = () => {
-  const flattenedAttributes = {}
-
-  props.product.product_variants.forEach((productVariant) => {
-    productVariant.attributes.forEach((attribute) => {
-      const key = attribute.id
-      const value = attribute.options.map((option) => option.value).join(', ')
-
-      if (!flattenedAttributes[key]) {
-        flattenedAttributes[key] = {}
-      }
-
-      flattenedAttributes[key][productVariant.id] = value
-    })
-  })
-
-  return flattenedAttributes
-}
-
-const productAttributes = computed(() => getUniqueAttributes())
 
 const option = ref(null)
 
@@ -82,8 +46,8 @@ const form = useForm({
   options: []
 })
 
-const handleProductVariant = () => {
-  form.post(route('seller.product.variants.store', { product: props.product?.slug }), {
+const handleAttributesAndOptions = () => {
+  form.post(route('seller.product.attribute-and-options.store', { product: props.product?.slug }), {
     preserveState: true,
     preserveScroll: true,
     onSuccess: () => {
@@ -99,10 +63,50 @@ const handleProductVariant = () => {
     }
   })
 }
+
+const handleDeleteAttributeAndOptions = (attribute) => {
+  router.delete(
+    route('seller.product.attribute-and-options.destroy', {
+      attribute: attribute?.id
+    }),
+    {
+      preserveScroll: true,
+      onSuccess: () => {
+        const successMessage = usePage().props.flash.success
+        if (successMessage) {
+          swal({
+            icon: 'success',
+            title: __(successMessage)
+          })
+        }
+      }
+    }
+  )
+}
+
+const handleDeleteOption = (option) => {
+  router.delete(
+    route('seller.options.destroy', {
+      option: option?.id
+    }),
+    {
+      preserveScroll: true,
+      onSuccess: () => {
+        const successMessage = usePage().props.flash.success
+        if (successMessage) {
+          swal({
+            icon: 'success',
+            title: __(successMessage)
+          })
+        }
+      }
+    }
+  )
+}
 </script>
 
 <template>
-  <Head :title="__('Create :label', { label: __('Product Images') })" />
+  <Head :title="__('Create :label', { label: __('Attributes And Options') })" />
 
   <SellerDashboardLayout>
     <div class="min-h-screen py-10 font-poppins">
@@ -111,7 +115,7 @@ const handleProductVariant = () => {
       >
         <Breadcrumb :to="productList" icon="fa-basket-shopping" label="Products">
           <BreadcrumbItem :label="product?.name" />
-          <BreadcrumbItem label="Product Variants" />
+          <BreadcrumbItem label="Attributes And Options" />
         </Breadcrumb>
 
         <div class="flex items-center justify-end w-auto">
@@ -129,14 +133,14 @@ const handleProductVariant = () => {
             Add Variants
           </button>
         </div> -->
-        <form @submit.prevent="handleProductVariant" class="space-y-4 md:space-y-6">
+        <form @submit.prevent="handleAttributesAndOptions" class="space-y-4 md:space-y-6">
           <div class="grid lg:grid-cols-2 gap-3 w-full">
             <div>
               <InputLabel :label="__('Attribute Name')" required />
 
               <InputField
                 type="text"
-                name="product-variant-attribute-name"
+                name="attribute-name"
                 :placeholder="
                   __('Enter :label', {
                     label: __('Attribute Name' + ' ( Eg. color )')
@@ -155,7 +159,7 @@ const handleProductVariant = () => {
 
               <InputField
                 type="text"
-                name="product-variant-option-name"
+                name="option-name"
                 :placeholder="
                   __('Enter :label', { label: __('Options' + ' ( Eg. red, green, blue, etc... )') })
                 "
@@ -186,53 +190,63 @@ const handleProductVariant = () => {
 
           <div class="w-[150px] ml-auto">
             <FormButton>
-              {{ __('Create') }}
+              {{ __('Save') }}
             </FormButton>
           </div>
-
-          <!-- <div class="space-x-3 flex items-center ml-3 mt-6">
-              <button class="text-emerald-600 hover:text-emerald-700">
-                <i class="fa-solid fa-check"></i>
-              </button>
-              <button class="text-red-600 hover:text-red-700">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </div>
-
-            <div class="space-x-3 flex items-center ml-3 mt-6">
-              <button class="text-blue-600 hover:text-blue-700">
-                <i class="fa-solid fa-edit"></i>
-              </button>
-              <button class="text-red-600 hover:text-red-700">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </div> -->
         </form>
       </div>
       <!-- Form End -->
 
       <div class="border bg-white rounded-md p-5">
         <TableContainer>
-          <Table :items="flattenAttributes()">
+          <Table :items="product.attributes">
             <!-- Table Header -->
             <template #table-header>
-              <TableHeaderCell
-                :label="attribute.name"
-                v-for="attribute in productAttributes"
-                :key="attribute.id"
-              />
+              <TableHeaderCell label="Attribute" />
+
+              <TableHeaderCell label="Options" />
+
+              <TableHeaderCell label="Actions" />
             </template>
 
             <!-- Table Body -->
             <template #table-data="{ item }">
-              <TableDataCell v-for="attribute in productAttributes" :key="attribute.id">
-                {{ item[attribute.id] }}
+              <TableDataCell>
+                {{ item?.name }}
               </TableDataCell>
+
+              <TableDataCell>
+                <div class="space-x-2 min-w-[300px]">
+                  <div
+                    v-for="option in item?.options"
+                    :key="option.id"
+                    class="space-x-3 bg-blue-600 inline-block px-2.5 text-xs font-bold py-1.5 rounded-sm text-white my-3"
+                  >
+                    <span>{{ option.value }}</span>
+                    <span
+                      @click="handleDeleteOption(option)"
+                      class="cursor-pointer hover:text-blue-200"
+                    >
+                      <i class="fa-solid fa-circle-xmark"></i>
+                    </span>
+                  </div>
+                </div>
+              </TableDataCell>
+
+              <TableActionCell>
+                <NormalButton
+                  @click="handleDeleteAttributeAndOptions(item)"
+                  class="bg-red-600 text-white ring-2 ring-red-300"
+                >
+                  <i class="fa-solid fa-trash-can"></i>
+                  {{ __('Delete') }}
+                </NormalButton>
+              </TableActionCell>
             </template>
           </Table>
         </TableContainer>
 
-        <NoTableData v-show="!product.product_variants.length" />
+        <NoTableData v-show="!product.attributes.length" />
       </div>
     </div>
   </SellerDashboardLayout>

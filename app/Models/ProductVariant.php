@@ -18,12 +18,12 @@ class ProductVariant extends Model
     /**
      *     @return array<string>
      */
-    public function toSearchableArray(): array
-    {
-        return [
-            'sku' => $this->sku,
-        ];
-    }
+    // public function toSearchableArray(): array
+    // {
+    //     return [
+    //         'sku' => $this->sku,
+    //     ];
+    // }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Product,ProductVariant>
@@ -39,5 +39,13 @@ class ProductVariant extends Model
     public function attributes(): BelongsToMany
     {
         return $this->belongsToMany(Attribute::class, 'product_variant_attributes')->withPivot('option_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Option>
+     */
+    public function options(): BelongsToMany
+    {
+        return $this->belongsToMany(Option::class, 'product_variant_attributes');
     }
 }

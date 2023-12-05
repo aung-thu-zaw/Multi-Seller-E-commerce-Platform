@@ -42,6 +42,14 @@ defineProps({ product: Object })
 
       <Link
         class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+        :href="route('seller.product.attribute-and-options', product?.slug)"
+      >
+        <i class="fa-solid fa-boxes-stacked"></i>
+        {{ __('Attributes & Options') }}
+      </Link>
+
+      <Link
+        class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
         :href="route('seller.product.variants', product?.slug)"
       >
         <i class="fa-solid fa-boxes-stacked"></i>

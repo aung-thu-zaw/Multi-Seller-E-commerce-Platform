@@ -3,9 +3,8 @@
 namespace App\Http\Requests\Dashboard\Seller;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class ProductVariantRequest extends FormRequest
+class AttributeAndOptionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,13 +22,9 @@ class ProductVariantRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'product_id' => ['required', 'numeric', Rule::exists('products', 'id')],
-            // 'qty' => ['required', 'numeric'],
-            // 'price' => ['required', 'numeric'],
-            // 'discount' => ['nullable', 'numeric'],
-            // 'discount_start_date' => ['nullable', 'date'],
-            // 'discount_end_date' => ['nullable', 'date'],
 
+            "attribute" => ["required","string"],
+            "options" => ["required","array"],
         ];
     }
 }

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Seller\Auth\LoginController;
+use App\Http\Controllers\Seller\Dashboard\AttributeAndOptionController;
 use App\Http\Controllers\Seller\Dashboard\DashboardController;
+use App\Http\Controllers\Seller\Dashboard\DeleteOptionController;
 use App\Http\Controllers\Seller\Dashboard\ProductController;
 use App\Http\Controllers\Seller\Dashboard\ProductImageController;
 use App\Http\Controllers\Seller\Dashboard\ProductVariantController;
@@ -58,11 +60,23 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
                 Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
             });
 
+        Route::controller(AttributeAndOptionController::class)
+            ->prefix('/products')
+            ->name('product.')
+            ->group(function () {
+                Route::get('/{product}/attributes-and-options', 'attributeAndOptions')->name('attribute-and-options');
+                Route::post('/{product}/attributes-and-options', 'handleAttributeAndOptions')->name('attribute-and-options.store');
+                Route::delete('/attributes-and-options/{attribute}', 'destroyAttributeAndOptions')->name('attribute-and-options.destroy');
+            });
+
+        Route::delete('attributes-and-options/{option}', DeleteOptionController::class)->name("options.destroy");
+
         Route::controller(ProductVariantController::class)
             ->prefix('/products')
             ->name('product.')
             ->group(function () {
                 Route::get('/{product}/product-variants', 'productVariants')->name('variants');
+                Route::post('/{product}/product-variants', 'handleProductVariant')->name('variants.store');
                 // Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
                 // Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
             });
