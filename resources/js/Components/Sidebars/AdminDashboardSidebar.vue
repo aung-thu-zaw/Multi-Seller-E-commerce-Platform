@@ -1260,7 +1260,7 @@ const toggleCollapseShow = (classes) => {
                 active:
                   $page.url.startsWith('/admin/faq-categories') ||
                   $page.url.startsWith('/admin/faq-subcategories') ||
-                  $page.url.startsWith('/admin/faqs')
+                  $page.url.startsWith('/admin/faqs-contents')
               }"
             >
               <ul class="pl-8">

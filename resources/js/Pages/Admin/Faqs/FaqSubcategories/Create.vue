@@ -5,25 +5,30 @@ import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
 import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
 import InputError from '@/Components/Forms/Fields/InputError.vue'
 import InputField from '@/Components/Forms/Fields/InputField.vue'
+import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
 import FormButton from '@/Components/Buttons/FormButton.vue'
 import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
 import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 
+defineProps({ faqCategories: Object })
+
 const { form, processing, errors, createAction } = useResourceActions({
-  name: null
+  faq_category_id: null,
+  name: null,
+  icon: null
 })
 </script>
 
 <template>
-  <Head :title="__('Create :label', { label: __('Faq Category') })" />
+  <Head :title="__('Create :label', { label: __('Faq Subcategory') })" />
 
   <AdminDashboardLayout>
     <div class="min-h-screen py-10 font-poppins">
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb to="admin.faq-categories.index" icon="fa-list" label="Categories">
+        <Breadcrumb to="admin.faq-subcategories.index" icon="fa-list-ol" label="Faq Subcategories">
           <BreadcrumbItem label="Create" />
         </Breadcrumb>
 
@@ -35,22 +40,54 @@ const { form, processing, errors, createAction } = useResourceActions({
       <!-- Form Start -->
       <div class="border p-10 bg-white rounded-md">
         <form
-          @submit.prevent="createAction('Faq Category', 'admin.faq-categories.store')"
+          @submit.prevent="createAction('Faq Subcategory', 'admin.faq-subcategories.store')"
           class="space-y-4 md:space-y-6"
         >
           <div>
-            <InputLabel :label="__('Category Name')" required />
+            <InputLabel :label="__('Font Awesome Icon')" required />
 
             <InputField
               type="text"
-              name="category-name"
+              name="faq-subcategory-icon"
+              v-model="form.icon"
+              :placeholder="
+                __('Enter :label', {
+                  label: __('Icon name' + '( Eg. <i class=\'fa-solid fa-cart-flatbed\'></i> )')
+                })
+              "
+              autofocus
+              required
+            />
+
+            <InputError :message="errors?.icon" />
+          </div>
+
+          <div>
+            <InputLabel :label="__('Subcategory Name')" required />
+
+            <InputField
+              type="text"
+              name="faq-subcategory-name"
               v-model="form.name"
-              :placeholder="__('Enter :label', { label: __('Category Name') })"
+              :placeholder="__('Enter :label', { label: __('Subcategory Name') })"
               autofocus
               required
             />
 
             <InputError :message="errors?.name" />
+          </div>
+
+          <div>
+            <InputLabel :label="__('Faq Category')" />
+
+            <SelectBox
+              name="faq-category"
+              :options="faqCategories"
+              v-model="form.faq_category_id"
+              :placeholder="__('Select an option')"
+            />
+
+            <InputError :message="errors?.faq_category_id" />
           </div>
 
           <InputError :message="errors?.captcha_token" />
