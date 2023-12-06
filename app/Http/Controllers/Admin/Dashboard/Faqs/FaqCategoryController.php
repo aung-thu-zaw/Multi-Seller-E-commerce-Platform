@@ -19,13 +19,13 @@ class FaqCategoryController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:categories.view', ['only' => ['index']]);
-        $this->middleware('permission:categories.create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:categories.edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:categories.delete', ['only' => ['destroy', 'destroySelected']]);
-        $this->middleware('permission:categories.view.trash', ['only' => ['trashed']]);
-        $this->middleware('permission:categories.restore', ['only' => ['restore', 'restoreSelected']]);
-        $this->middleware('permission:categories.force.delete', ['only' => ['forceDelete', 'forceDeleteSelected', 'forceDeleteAll']]);
+        $this->middleware('permission:faq-categories.view', ['only' => ['index']]);
+        $this->middleware('permission:faq-categories.create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:faq-categories.edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:faq-categories.delete', ['only' => ['destroy', 'destroySelected']]);
+        $this->middleware('permission:faq-categories.view.trash', ['only' => ['trashed']]);
+        $this->middleware('permission:faq-categories.restore', ['only' => ['restore', 'restoreSelected']]);
+        $this->middleware('permission:faq-categories.force.delete', ['only' => ['forceDelete', 'forceDeleteSelected', 'forceDeleteAll']]);
     }
 
     public function index(): Response|ResponseFactory
@@ -35,12 +35,12 @@ class FaqCategoryController extends Controller
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
 
-        return inertia('Admin/Faqs/Categories/Index', compact('faqCategories'));
+        return inertia('Admin/Faqs/FaqCategories/Index', compact('faqCategories'));
     }
 
     public function create(): Response|ResponseFactory
     {
-        return inertia('Admin/Faqs/Categories/Create');
+        return inertia('Admin/Faqs/FaqCategories/Create');
     }
 
     public function store(StoreFaqCategoryRequest $request): RedirectResponse
@@ -52,7 +52,7 @@ class FaqCategoryController extends Controller
 
     public function edit(FaqCategory $faqCategory): Response|ResponseFactory
     {
-        return inertia('Admin/Faqs/Categories/Edit', compact('faqCategory'));
+        return inertia('Admin/Faqs/FaqCategories/Edit', compact('faqCategory'));
     }
 
     public function update(UpdateFaqCategoryRequest $request, FaqCategory $faqCategory): RedirectResponse
@@ -86,7 +86,7 @@ class FaqCategoryController extends Controller
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
 
-        return inertia('Admin/Faqs/Categories/Trash', compact('trashedFaqCategories'));
+        return inertia('Admin/Faqs/FaqCategories/Trash', compact('trashedFaqCategories'));
     }
 
     public function restore(Request $request, int $trashedFaqCategoryId): RedirectResponse

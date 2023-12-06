@@ -1214,12 +1214,6 @@ const toggleCollapseShow = (classes) => {
             <button
               type="button"
               class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
-              :class="{
-                active:
-                  $page.url.startsWith('/admin/faq-categories') ||
-                  $page.url.startsWith('/admin/faq-subcategories') ||
-                  $page.url.startsWith('/admin/faqs')
-              }"
             >
               <span>
                 <i class="fa-solid fa-file-circle-question mr-1.5"></i>
@@ -1262,6 +1256,12 @@ const toggleCollapseShow = (classes) => {
             <div
               id="faqs-accordion"
               class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+              :class="{
+                active:
+                  $page.url.startsWith('/admin/faq-categories') ||
+                  $page.url.startsWith('/admin/faq-subcategories') ||
+                  $page.url.startsWith('/admin/faqs')
+              }"
             >
               <ul class="pl-8">
                 <li v-show="can('faq-categories.view')" class="items-center">
@@ -1281,7 +1281,7 @@ const toggleCollapseShow = (classes) => {
                         !$page.url.startsWith('/admin/faq-categories')
                     }"
                   >
-                    {{ __('FAQ Categories') }}
+                    {{ __('Faq Categories') }}
                   </Link>
                 </li>
                 <li v-show="can('categories.view')" class="items-center">
