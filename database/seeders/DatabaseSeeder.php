@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             FaqCategorySeeder::class,
             FaqSubcategorySeeder::class,
             FaqContentSeeder::class,
+            HelpPageSeeder::class,
         ]);
     }
 }

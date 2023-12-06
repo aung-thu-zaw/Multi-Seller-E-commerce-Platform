@@ -1385,9 +1385,9 @@ const toggleCollapseShow = (classes) => {
               class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
             >
               <ul class="pl-8">
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('pages.edit')" class="items-center">
                   <Link
-                    :href="route('admin.categories.index')"
+                    :href="route('admin.terms-and-conditions.edit')"
                     :data="{
                       page: 1,
                       per_page: 5,
@@ -1396,60 +1396,21 @@ const toggleCollapseShow = (classes) => {
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
-                      'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
-                      'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
-                    }"
-                  >
-                    {{ __('About Us') }}
-                  </Link>
-                </li>
-                <li v-show="can('categories.view')" class="items-center">
-                  <Link
-                    :href="route('admin.categories.index')"
-                    :data="{
-                      page: 1,
-                      per_page: 5,
-                      sort: 'id',
-                      direction: 'desc'
-                    }"
-                    class="text-xs py-3 font-bold block"
-                    :class="{
-                      'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
-                      'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
-                    }"
-                  >
-                    {{ __('Our History') }}
-                  </Link>
-                </li>
-
-                <li v-show="can('categories.view')" class="items-center">
-                  <Link
-                    :href="route('admin.categories.index')"
-                    :data="{
-                      page: 1,
-                      per_page: 5,
-                      sort: 'id',
-                      direction: 'desc'
-                    }"
-                    class="text-xs py-3 font-bold block"
-                    :class="{
-                      'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
-                      'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
+                      'text-orange-600 hover:text-orange-500': $page.url.startsWith(
+                        '/admin/terms-and-conditions'
+                      ),
+                      'text-slate-600 hover:text-slate-500': !$page.url.startsWith(
+                        '/admin/terms-and-conditions'
+                      )
                     }"
                   >
                     {{ __('Terms & Conditions') }}
                   </Link>
                 </li>
 
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('pages.edit')" class="items-center">
                   <Link
-                    :href="route('admin.categories.index')"
+                    :href="route('admin.privacy-and-policy.edit')"
                     :data="{
                       page: 1,
                       per_page: 5,
@@ -1458,19 +1419,21 @@ const toggleCollapseShow = (classes) => {
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
-                      'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
-                      'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
+                      'text-orange-600 hover:text-orange-500': $page.url.startsWith(
+                        '/admin/privacy-and-policy'
+                      ),
+                      'text-slate-600 hover:text-slate-500': !$page.url.startsWith(
+                        '/admin/privacy-and-policy'
+                      )
                     }"
                   >
                     {{ __('Privacy & Policy') }}
                   </Link>
                 </li>
 
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('pages.edit')" class="items-center">
                   <Link
-                    :href="route('admin.categories.index')"
+                    :href="route('admin.returns-and-refunds.edit')"
                     :data="{
                       page: 1,
                       per_page: 5,
@@ -1479,10 +1442,12 @@ const toggleCollapseShow = (classes) => {
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
-                      'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
-                      'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
+                      'text-orange-600 hover:text-orange-500': $page.url.startsWith(
+                        '/admin/returns-and-refunds'
+                      ),
+                      'text-slate-600 hover:text-slate-500': !$page.url.startsWith(
+                        '/admin/returns-and-refunds'
+                      )
                     }"
                   >
                     {{ __('Returns & Refunds') }}

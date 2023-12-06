@@ -10,15 +10,17 @@ use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqCategoryController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqContentController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqSubcategoryController;
+use App\Http\Controllers\Admin\Dashboard\HelpPageController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/admin/login', LoginController::class)->middleware('guest')->name('admin.login');
+Route::get('/admin/login', LoginController::class)
+    ->middleware('guest')
+    ->name('admin.login');
 
 Route::middleware(['auth', 'verified', 'user.role:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
-
         // Dashboard
         Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
@@ -136,4 +138,12 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
+
+        // Help Page Operations
+        Route::controller(HelpPageController::class)->group(function () {
+            Route::get('/privacy-and-policy', 'privacyAndPolicy')->name('privacy-and-policy.edit');
+            Route::get('/terms-and-conditions', 'termsAndConditions')->name('terms-and-conditions.edit');
+            Route::get('/returns-and-refunds', 'returnsAndRefunds')->name('returns-and-refunds.edit');
+            Route::patch('/help-pages/{help_page}', 'update')->name('help-page.update');
+        });
     });
