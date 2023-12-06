@@ -17,24 +17,10 @@ class ProductVariantController extends Controller
 {
     use HandlesQueryStringParameters;
 
-    public function productVariants(Product $product): Response|ResponseFactory
+    public function index(Product $product): Response|ResponseFactory
     {
-        $product->load(['productVariants.attributes.options']);
+        $product->load(['attributes.options:id,attribute_id,value']);
 
-        return inertia('Seller/Products/Variants', compact('product'));
-    }
-
-    public function handleProductVariant(ProductVariantRequest $request, Product $product): RedirectResponse
-    {
-        $attribute = Attribute::firstOrCreate(['product_id' => $product->id,'name' => $request->attribute]);
-
-        foreach ($request->options as $option) {
-            Option::firstOrCreate([
-                         'attribute_id' => $attribute->id,
-                         'value' => $option,
-                     ]);
-        }
-
-        return back()->with('success', 'Product variant attributes and options added successfully.');
+        return inertia('Seller/Products/Variants/Index', compact('product'));
     }
 }

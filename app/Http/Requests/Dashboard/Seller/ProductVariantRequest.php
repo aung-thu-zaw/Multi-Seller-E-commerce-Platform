@@ -23,13 +23,14 @@ class ProductVariantRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'product_id' => ['required', 'numeric', Rule::exists('products', 'id')],
-            // 'qty' => ['required', 'numeric'],
-            // 'price' => ['required', 'numeric'],
-            // 'discount' => ['nullable', 'numeric'],
-            // 'discount_start_date' => ['nullable', 'date'],
-            // 'discount_end_date' => ['nullable', 'date'],
-
+            'product_id' => ['required', 'numeric', Rule::exists('products', 'id')],
+            'qty' => ['required', 'numeric'],
+            'price' => ['required', 'numeric'],
+            'attribute' => ['required', 'numeric',Rule::exists("attributes", "id")],
+            'option' => ['required', 'numeric',Rule::exists("options", "id")],
+            'discount' => ['nullable', 'numeric'],
+            'discount_start_date' => ['nullable', 'date'],
+            'discount_end_date' => ['nullable', 'date'],
         ];
     }
 }

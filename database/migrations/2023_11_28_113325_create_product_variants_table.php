@@ -19,7 +19,6 @@ return new class () extends Migration {
             $table->decimal('discount', 8, 2)->nullable();
             $table->date('discount_start_date')->nullable();
             $table->date('discount_end_date')->nullable();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

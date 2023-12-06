@@ -71,17 +71,17 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
 
         Route::delete('attributes-and-options/{option}', DeleteOptionController::class)->name("options.destroy");
 
-        Route::controller(ProductVariantController::class)
-            ->prefix('/products')
-            ->name('product.')
-            ->group(function () {
-                Route::get('/{product}/product-variants', 'productVariants')->name('variants');
-                Route::post('/{product}/product-variants', 'handleProductVariant')->name('variants.store');
-                // Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
-                // Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
-            });
+        // Route::controller(ProductVariantController::class)
+        //     ->prefix('/products')
+        //     ->name('product.')
+        //     ->group(function () {
+        //         Route::get('/{product}/product-variants', 'productVariants')->name('variants');
+        //         Route::post('/{product}/product-variants', 'handleProductVariant')->name('variants.store');
+        //         // Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
+        //         // Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
+        //     });
 
-        // Route::resource('products/{product}/product-variants', ProductVariantController::class)->except(['show']);
+        Route::resource('products/{product}/product-variants', ProductVariantController::class)->except(['show']);
         // Route::controller(ProductVariantController::class)
         //     ->prefix('/products/{product}/product-variants/trash')
         //     ->name('product-variants.')

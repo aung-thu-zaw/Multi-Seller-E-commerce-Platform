@@ -13,7 +13,6 @@ class ProductVariant extends Model
 {
     use HasFactory;
     use Searchable;
-    use SoftDeletes;
 
     /**
      *     @return array<string>
