@@ -54,5 +54,13 @@ class PermissionSeeder extends Seeder
 
         Permission::create(['name' => 'blog-comments.view', 'group' => 'Blog Management']);
         Permission::create(['name' => 'blog-comments.delete', 'group' => 'Blog Management']);
+
+        Permission::create(['name' => 'faq-categories.view', 'group' => 'FAQs']);
+        Permission::create(['name' => 'faq-categories.create', 'group' => 'FAQs']);
+        Permission::create(['name' => 'faq-categories.edit', 'group' => 'FAQs']);
+        Permission::create(['name' => 'faq-categories.delete', 'group' => 'FAQs']);
+        Permission::create(['name' => 'faq-categories.view.trash', 'group' => 'FAQs']);
+        Permission::create(['name' => 'faq-categories.restore', 'group' => 'FAQs']);
+        Permission::create(['name' => 'faq-categories.force.delete', 'group' => 'FAQs']);
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Dashboard\BlogManagement\BlogContentController;
 use App\Http\Controllers\Admin\Dashboard\BrandController;
 use App\Http\Controllers\Admin\Dashboard\CategoryController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
+use App\Http\Controllers\Admin\Dashboard\Faqs\FaqCategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/login', LoginController::class)->middleware('guest')->name('admin.login');
@@ -87,5 +88,20 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::get('/', 'index')->name('index');
                 Route::delete('/{blog_comment}', 'destroy')->name('destroy');
                 Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+            });
+
+        // FAQ Category Operations
+        Route::resource('faq-categories', FaqCategoryController::class)->except(['show']);
+        Route::controller(FaqCategoryController::class)
+            ->prefix('/faq-categories/trash')
+            ->name('faq-categories.')
+            ->group(function () {
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
     });

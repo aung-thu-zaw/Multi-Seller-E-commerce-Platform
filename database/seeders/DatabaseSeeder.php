@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             BlogCommentSeeder::class,
             BlogCommentReplySeeder::class,
             // StoreProductCategorySeeder::class,
+            FaqCategorySeeder::class
 
         ]);
     }

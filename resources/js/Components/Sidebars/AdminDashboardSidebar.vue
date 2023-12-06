@@ -1214,6 +1214,12 @@ const toggleCollapseShow = (classes) => {
             <button
               type="button"
               class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
+              :class="{
+                active:
+                  $page.url.startsWith('/admin/faq-categories') ||
+                  $page.url.startsWith('/admin/faq-subcategories') ||
+                  $page.url.startsWith('/admin/faqs')
+              }"
             >
               <span>
                 <i class="fa-solid fa-file-circle-question mr-1.5"></i>
@@ -1258,9 +1264,9 @@ const toggleCollapseShow = (classes) => {
               class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
             >
               <ul class="pl-8">
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('faq-categories.view')" class="items-center">
                   <Link
-                    :href="route('admin.categories.index')"
+                    :href="route('admin.faq-categories.index')"
                     :data="{
                       page: 1,
                       per_page: 5,
@@ -1270,12 +1276,12 @@ const toggleCollapseShow = (classes) => {
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
+                        $page.url.startsWith('/admin/faq-categories'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
+                        !$page.url.startsWith('/admin/faq-categories')
                     }"
                   >
-                    {{ __('Categories') }}
+                    {{ __('FAQ Categories') }}
                   </Link>
                 </li>
                 <li v-show="can('categories.view')" class="items-center">
