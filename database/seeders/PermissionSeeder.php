@@ -70,5 +70,13 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'faq-subcategories.view.trash', 'group' => 'FAQs']);
         Permission::create(['name' => 'faq-subcategories.restore', 'group' => 'FAQs']);
         Permission::create(['name' => 'faq-subcategories.force.delete', 'group' => 'FAQs']);
+
+        Permission::create(['name' => 'faq-contents.view', 'group' => 'FAQs']);
+        Permission::create(['name' => 'faq-contents.create', 'group' => 'FAQs']);
+        Permission::create(['name' => 'faq-contents.edit', 'group' => 'FAQs']);
+        Permission::create(['name' => 'faq-contents.delete', 'group' => 'FAQs']);
+        Permission::create(['name' => 'faq-contents.view.trash', 'group' => 'FAQs']);
+        Permission::create(['name' => 'faq-contents.restore', 'group' => 'FAQs']);
+        Permission::create(['name' => 'faq-contents.force.delete', 'group' => 'FAQs']);
     }
 }

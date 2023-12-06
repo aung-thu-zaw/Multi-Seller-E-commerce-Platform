@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Dashboard\Faqs;
 
-use App\Actions\Admin\Faqs\FaqCategories\PermanentlyDeleteTrashedFaqCategoriesAction;
+use App\Actions\Admin\Faqs\PermanentlyDeleteTrashedFaqCategoriesAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Admin\Faqs\FaqCategories\StoreFaqCategoryRequest;
 use App\Http\Requests\Dashboard\Admin\Faqs\FaqCategories\UpdateFaqCategoryRequest;

@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             // StoreProductCategorySeeder::class,
             FaqCategorySeeder::class,
             FaqSubcategorySeeder::class,
-
+            FaqContentSeeder::class,
         ]);
     }
 }

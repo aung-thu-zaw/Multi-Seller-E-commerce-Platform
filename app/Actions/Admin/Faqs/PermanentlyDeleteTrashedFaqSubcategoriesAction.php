@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Admin\Faqs\FaqSubcategories;
+namespace App\Actions\Admin\Faqs;
 
 use App\Models\FaqSubcategory;
 use Illuminate\Support\Collection;

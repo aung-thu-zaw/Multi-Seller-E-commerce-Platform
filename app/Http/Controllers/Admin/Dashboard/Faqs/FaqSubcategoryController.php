@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Dashboard\Faqs;
 
-use App\Actions\Admin\Faqs\FaqSubcategories\PermanentlyDeleteTrashedFaqSubcategoriesAction;
+use App\Actions\Admin\Faqs\PermanentlyDeleteTrashedFaqSubcategoriesAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Admin\Faqs\FaqSubcategories\StoreFaqSubcategoryRequest;
 use App\Http\Requests\Dashboard\Admin\Faqs\FaqSubcategories\UpdateFaqSubcategoryRequest;
