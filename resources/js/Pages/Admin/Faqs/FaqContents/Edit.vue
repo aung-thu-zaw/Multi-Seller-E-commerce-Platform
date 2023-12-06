@@ -78,7 +78,7 @@ const { form, processing, errors, editAction } = useResourceActions({
           </div>
 
           <div>
-            <InputLabel :label="__('Faq Subcategory')" />
+            <InputLabel :label="__('Faq Subcategory')" required />
 
             <SelectBox
               name="faq-subcategory"
@@ -86,6 +86,7 @@ const { form, processing, errors, editAction } = useResourceActions({
               v-model="form.faq_subcategory_id"
               :placeholder="__('Select an option')"
               :selected="form.faq_subcategory_id"
+              required
             />
 
             <InputError :message="errors?.faq_subcategory_id" />

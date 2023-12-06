@@ -44,7 +44,7 @@ const { form, processing, errors, createAction } = useResourceActions({
           class="space-y-4 md:space-y-6"
         >
           <div>
-            <InputLabel :label="__('Font Awesome Icon')" required />
+            <InputLabel :label="__('Font Awesome Icon')" />
 
             <InputField
               type="text"
@@ -55,8 +55,6 @@ const { form, processing, errors, createAction } = useResourceActions({
                   label: __('Icon name' + '( Eg. <i class=\'fa-solid fa-cart-flatbed\'></i> )')
                 })
               "
-              autofocus
-              required
             />
 
             <InputError :message="errors?.icon" />
@@ -78,13 +76,14 @@ const { form, processing, errors, createAction } = useResourceActions({
           </div>
 
           <div>
-            <InputLabel :label="__('Faq Category')" />
+            <InputLabel :label="__('Faq Category')" required />
 
             <SelectBox
               name="faq-category"
               :options="faqCategories"
               v-model="form.faq_category_id"
               :placeholder="__('Select an option')"
+              required
             />
 
             <InputError :message="errors?.faq_category_id" />

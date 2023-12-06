@@ -23,7 +23,7 @@ const { form, processing, errors, createAction } = useResourceActions({
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb to="admin.faq-categories.index" icon="fa-list" label="Categories">
+        <Breadcrumb to="admin.faq-categories.index" icon="fa-list" label="Faq Categories">
           <BreadcrumbItem label="Create" />
         </Breadcrumb>
 

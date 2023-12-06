@@ -34,7 +34,11 @@ const { dashboardQueryStringParams } = useQueryStringParams()
         <Link
           :href="route(to, targetIdentifier)"
           :data="dashboardQueryStringParams"
-          class="inline-flex items-center text-sm font-bold text-blueGray-600 hover:text-blue-600"
+          class="inline-flex items-center text-sm font-bold text-blueGray-600"
+          :class="{
+            'hover:text-orange-600': $page.url.startsWith('/admin'),
+            'hover:text-blue-600': $page.url.startsWith('/seller')
+          }"
         >
           <span class="mr-2.5">
             <i class="fa-solid" :class="icon"></i>
