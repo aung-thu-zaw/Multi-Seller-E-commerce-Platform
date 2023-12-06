@@ -27,7 +27,7 @@ class UpdateFaqContentRequest extends FormRequest
         $faqContent = $this->route()->parameter('faq_content');
 
         return [
-            'faq_sub_category_id' => ['required', Rule::exists('faq_subcategories', 'id')],
+            'faq_subcategory_id' => ['required', Rule::exists('faq_subcategories', 'id')],
             'question' => ['required', 'string', 'max:255', Rule::unique('faq_contents', 'question')->ignore($faqContent)],
             'answer' => ['required', 'string'],
             'captcha_token' => [new RecaptchaRule()],

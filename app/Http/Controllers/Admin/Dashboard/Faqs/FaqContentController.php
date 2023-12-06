@@ -8,6 +8,8 @@ use App\Http\Requests\Dashboard\Admin\Faqs\FaqContents\StoreFaqContentRequest;
 use App\Http\Requests\Dashboard\Admin\Faqs\FaqContents\UpdateFaqContentRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\FaqContent;
+use App\Models\FaqSubcategory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -31,6 +33,9 @@ class FaqContentController extends Controller
     public function index(): Response|ResponseFactory
     {
         $faqContents = FaqContent::search(request('search'))
+        ->query(function (Builder $builder) {
+            $builder->with('faqSubcategory');
+        })
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
@@ -40,7 +45,9 @@ class FaqContentController extends Controller
 
     public function create(): Response|ResponseFactory
     {
-        return inertia('Admin/Faqs/FaqContents/Create');
+        $faqSubcategories = FaqSubcategory::all();
+
+        return inertia('Admin/Faqs/FaqContents/Create', compact("faqSubcategories"));
     }
 
     public function store(StoreFaqContentRequest $request): RedirectResponse
@@ -56,7 +63,9 @@ class FaqContentController extends Controller
 
     public function edit(FaqContent $faqContent): Response|ResponseFactory
     {
-        return inertia('Admin/Faqs/FaqContents/Edit', compact('faqContent'));
+        $faqSubcategories = FaqSubCategory::all();
+
+        return inertia('Admin/Faqs/FaqContents/Edit', compact('faqContent', 'faqSubcategories'));
     }
 
     public function update(UpdateFaqContentRequest $request, FaqContent $faqContent): RedirectResponse
