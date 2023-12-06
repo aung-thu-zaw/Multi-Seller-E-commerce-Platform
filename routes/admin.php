@@ -144,6 +144,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             Route::get('/privacy-and-policy', 'privacyAndPolicy')->name('privacy-and-policy.edit');
             Route::get('/terms-and-conditions', 'termsAndConditions')->name('terms-and-conditions.edit');
             Route::get('/returns-and-refunds', 'returnsAndRefunds')->name('returns-and-refunds.edit');
-            Route::patch('/help-pages/{help_page}', 'update')->name('help-page.update');
+            Route::patch('/help-pages/{help_page}', 'update')->name('help-pages.update');
         });
     });

@@ -1336,7 +1336,7 @@ const toggleCollapseShow = (classes) => {
             </div>
           </li>
 
-          <!-- Pages -->
+          <!-- Help Pages -->
           <li class="hs-accordion items-center" id="pages-accordion">
             <button
               type="button"
@@ -1344,7 +1344,7 @@ const toggleCollapseShow = (classes) => {
             >
               <span>
                 <i class="fa-solid fa-file-lines mr-1.5"></i>
-                {{ __('Pages') }}
+                {{ __('Help Pages') }}
               </span>
               <span>
                 <svg
@@ -1382,10 +1382,21 @@ const toggleCollapseShow = (classes) => {
 
             <div
               id="pages-accordion"
-              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+              :class="{
+                block:
+                  $page.url.startsWith('/admin/privacy-and-policy') ||
+                  $page.url.startsWith('/admin/terms-and-conditions') ||
+                  $page.url.startsWith('/admin/returns-and-refunds'),
+                hidden: !(
+                  $page.url.startsWith('/admin/privacy-and-policy') ||
+                  $page.url.startsWith('/admin/terms-and-conditions') ||
+                  $page.url.startsWith('/admin/returns-and-refunds')
+                )
+              }"
             >
               <ul class="pl-8">
-                <li v-show="can('pages.edit')" class="items-center">
+                <li v-show="can('help-pages.edit')" class="items-center">
                   <Link
                     :href="route('admin.terms-and-conditions.edit')"
                     :data="{
@@ -1408,7 +1419,7 @@ const toggleCollapseShow = (classes) => {
                   </Link>
                 </li>
 
-                <li v-show="can('pages.edit')" class="items-center">
+                <li v-show="can('help-pages.edit')" class="items-center">
                   <Link
                     :href="route('admin.privacy-and-policy.edit')"
                     :data="{
@@ -1431,7 +1442,7 @@ const toggleCollapseShow = (classes) => {
                   </Link>
                 </li>
 
-                <li v-show="can('pages.edit')" class="items-center">
+                <li v-show="can('help-pages.edit')" class="items-center">
                   <Link
                     :href="route('admin.returns-and-refunds.edit')"
                     :data="{

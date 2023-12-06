@@ -108,7 +108,7 @@
     "Chat Inbox": "Chat Inbox",
     "Subcategories": "Subcategories",
     "FAQs": "FAQs",
-    "Pages": "Pages",
+    "Help Pages": "Help Pages",
     "About us": "About us",
     "Our History": "Our History",
     "Terms & Conditions": "Terms & Conditions",
@@ -206,6 +206,6 @@
     "Faq Content": "Faq Content",
     "faq content": "faq content",
     "Subcategory Name": "Subcategory Name",
-    "Question":"Question",
-    "Answer":"Answer"
+    "Question": "Question",
+    "Answer": "Answer"
 }

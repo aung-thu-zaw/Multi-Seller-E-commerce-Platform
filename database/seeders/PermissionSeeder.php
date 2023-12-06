@@ -79,6 +79,6 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'faq-contents.restore', 'group' => 'FAQs']);
         Permission::create(['name' => 'faq-contents.force.delete', 'group' => 'FAQs']);
 
-        Permission::create(['name' => 'pages.edit', 'group' => 'Pages']);
+        Permission::create(['name' => 'help-pages.edit', 'group' => 'Help Pages']);
     }
 }

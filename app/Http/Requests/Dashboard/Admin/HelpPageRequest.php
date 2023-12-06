@@ -13,7 +13,7 @@ class HelpPageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::user()->hasPermissionTo('pages.edit');
+        return Auth::user()->hasPermissionTo('help-pages.edit');
     }
 
     /**

@@ -31,13 +31,13 @@ class HelpPageController extends Controller
     {
         $returnsAndRefunds = HelpPage::where("title", "Returns And Refunds")->first();
 
-        return inertia('Admin/HelpPages/returnsAndRefunds', compact('returnsAndRefunds'));
+        return inertia('Admin/HelpPages/ReturnsAndRefunds', compact('returnsAndRefunds'));
     }
 
     public function update(HelpPageRequest $request, HelpPage $helpPage): RedirectResponse
     {
         $helpPage->update(["content" => $request->content]);
 
-        return back()->with("success", "message");
+        return back()->with('success', ':label has been successfully updated.');
     }
 }
