@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Dashboard\AccountManagement\AdminManageController;
 use App\Http\Controllers\Admin\Dashboard\AccountManagement\RegisteredAccountController;
 use App\Http\Controllers\Admin\Dashboard\AuthorityManagement\AssignRolePermissionsController;
 use App\Http\Controllers\Admin\Dashboard\AuthorityManagement\PermissionController;
@@ -197,4 +198,26 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
+
+
+        // Admin Mange Operations
+        Route::resource('admin-mange', AdminManageController::class)
+        ->except(['show'])
+        ->parameters([
+            'admin-mange' => 'user',
+        ]);
+
+        Route::controller(AdminManageController::class)
+        ->prefix('/admin-manage/trash')
+        ->name('admin-manage.')
+        ->group(function () {
+            Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+            Route::get('/', 'trashed')->name('trashed');
+            Route::post('/{id}/restore', 'restore')->name('restore');
+            Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+            Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+            Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+            Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+        });
+
     });

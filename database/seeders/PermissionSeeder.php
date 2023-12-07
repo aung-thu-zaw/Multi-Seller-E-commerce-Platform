@@ -102,5 +102,13 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'registered-accounts.view.trash', 'group' => 'Account Management']);
         Permission::create(['name' => 'registered-accounts.restore', 'group' => 'Account Management']);
         Permission::create(['name' => 'registered-accounts.force.delete', 'group' => 'Account Management']);
+
+        Permission::create(['name' => 'admin-manage.view', 'group' => 'Account Management']);
+        Permission::create(['name' => 'admin-manage.create', 'group' => 'Account Management']);
+        Permission::create(['name' => 'admin-manage.edit', 'group' => 'Account Management']);
+        Permission::create(['name' => 'admin-manage.delete', 'group' => 'Account Management']);
+        Permission::create(['name' => 'admin-manage.view.trash', 'group' => 'Account Management']);
+        Permission::create(['name' => 'admin-manage.restore', 'group' => 'Account Management']);
+        Permission::create(['name' => 'admin-manage.force.delete', 'group' => 'Account Management']);
     }
 }
