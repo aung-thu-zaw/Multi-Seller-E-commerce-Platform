@@ -3,26 +3,26 @@
 namespace App\Models;
 
 use App\Models\Scopes\FilterByScope;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class FaqContent extends Model
 {
     use HasFactory;
+    use HasSlug;
     use Searchable;
     use SoftDeletes;
-    use HasSlug;
 
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-                          ->generateSlugsFrom('question')
-                          ->saveSlugsTo('slug');
+            ->generateSlugsFrom('question')
+            ->saveSlugsTo('slug');
     }
 
     public function getRouteKeyName()

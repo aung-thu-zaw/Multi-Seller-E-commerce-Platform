@@ -2,8 +2,8 @@
 
 namespace App\Actions\Admin\AuthorityManagement;
 
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Collection;
+use Spatie\Permission\Models\Role;
 
 class PermanentlyDeleteTrashedRolesAction
 {

@@ -45,7 +45,7 @@ class FaqCategoryController extends Controller
 
     public function store(StoreFaqCategoryRequest $request): RedirectResponse
     {
-        FaqCategory::create(["name" => $request->name]);
+        FaqCategory::create(['name' => $request->name]);
 
         return to_route('admin.faq-categories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }
@@ -57,7 +57,7 @@ class FaqCategoryController extends Controller
 
     public function update(UpdateFaqCategoryRequest $request, FaqCategory $faqCategory): RedirectResponse
     {
-        $faqCategory->update(["name" => $request->name]);
+        $faqCategory->update(['name' => $request->name]);
 
         return to_route('admin.faq-categories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }

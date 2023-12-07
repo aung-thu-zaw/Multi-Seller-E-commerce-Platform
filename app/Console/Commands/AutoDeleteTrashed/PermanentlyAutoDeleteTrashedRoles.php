@@ -3,9 +3,9 @@
 namespace App\Console\Commands\AutoDeleteTrashed;
 
 use App\Actions\Admin\AuthorityManagement\PermanentlyDeleteTrashedRolesAction;
-use Spatie\Permission\Models\Role;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Spatie\Permission\Models\Role;
 
 class PermanentlyAutoDeleteTrashedRoles extends Command
 {

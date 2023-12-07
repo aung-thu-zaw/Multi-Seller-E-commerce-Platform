@@ -24,7 +24,7 @@ class HelpPageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "content" => ["required","string"],
+            'content' => ['required', 'string'],
             'captcha_token' => [new RecaptchaRule()],
         ];
     }

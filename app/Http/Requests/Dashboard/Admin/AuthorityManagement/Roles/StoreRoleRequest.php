@@ -5,7 +5,6 @@ namespace App\Http\Requests\Dashboard\Admin\AuthorityManagement\Roles;
 use App\Rules\RecaptchaRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
 class StoreRoleRequest extends FormRequest
 {

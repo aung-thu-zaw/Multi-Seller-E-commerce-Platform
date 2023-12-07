@@ -23,8 +23,8 @@ class AttributeAndOptionRequest extends FormRequest
     {
         return [
 
-            "attribute" => ["required","string"],
-            "options" => ["required","array"],
+            'attribute' => ['required', 'string'],
+            'options' => ['required', 'array'],
         ];
     }
 }

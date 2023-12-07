@@ -2,9 +2,7 @@
 
 namespace App\Console\Commands\AutoDeleteTrashed;
 
-use App\Actions\Admin\Faqs\FaqCategories\PermanentlyDeleteTrashedFaqCategoriesAction;
 use App\Actions\Admin\Faqs\PermanentlyDeleteTrashedFaqSubcategoriesAction;
-use App\Models\FaqCategory;
 use App\Models\FaqSubcategory;
 use Carbon\Carbon;
 use Illuminate\Console\Command;

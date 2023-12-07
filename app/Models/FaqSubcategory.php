@@ -3,28 +3,28 @@
 namespace App\Models;
 
 use App\Models\Scopes\FilterByScope;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class FaqSubcategory extends Model
 {
     use HasFactory;
-    use SoftDeletes;
-    use Searchable;
     use HasSlug;
+    use Searchable;
+    use SoftDeletes;
 
     protected $guarded = [];
 
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-                          ->generateSlugsFrom('name')
-                          ->saveSlugsTo('slug');
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
     }
 
     public function getRouteKeyName()
@@ -56,5 +56,4 @@ class FaqSubcategory extends Model
     {
         return $this->belongsTo(FaqCategory::class);
     }
-
 }

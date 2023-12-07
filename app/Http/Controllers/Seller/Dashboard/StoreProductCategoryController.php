@@ -6,7 +6,6 @@ use App\Actions\Seller\StoreProductCategories\PermanentlyDeleteTrashedStoreProdu
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Seller\StoreProductCategoryRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
-use App\Models\Store;
 use App\Models\StoreProductCategory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -36,7 +35,7 @@ class StoreProductCategoryController extends Controller
     public function store(StoreProductCategoryRequest $request): RedirectResponse
     {
 
-        StoreProductCategory::create(['store_id' =>  StoreProductCategory::getStoreId(), 'name' => $request->name, 'status' => $request->status]);
+        StoreProductCategory::create(['store_id' => StoreProductCategory::getStoreId(), 'name' => $request->name, 'status' => $request->status]);
 
         return to_route('seller.store-product-categories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }

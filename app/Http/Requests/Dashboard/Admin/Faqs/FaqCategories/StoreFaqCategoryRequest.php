@@ -25,7 +25,7 @@ class StoreFaqCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255', Rule::unique("faq_categories", "name")],
+            'name' => ['required', 'string', 'max:255', Rule::unique('faq_categories', 'name')],
             'captcha_token' => [new RecaptchaRule()],
         ];
     }

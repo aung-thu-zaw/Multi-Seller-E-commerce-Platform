@@ -166,12 +166,12 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             });
 
         // Permission Operations
-        Route::get("/permissions", [PermissionController::class,"index"])->name("permissions.index");
+        Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions.index');
 
         // Assign Role Permissions Operations
         Route::resource('assign-role-permissions', AssignRolePermissionsController::class)
-        ->except(['show','create','store'])
-        ->parameters([
-            'assign-role-permissions' => 'role'
-        ]);
+            ->except(['show', 'create', 'store'])
+            ->parameters([
+                'assign-role-permissions' => 'role',
+            ]);
     });

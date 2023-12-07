@@ -3,19 +3,19 @@
 namespace App\Models;
 
 use App\Models\Scopes\FilterByScope;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class FaqCategory extends Model
 {
     use HasFactory;
-    use SoftDeletes;
-    use Searchable;
     use HasSlug;
+    use Searchable;
+    use SoftDeletes;
 
     public function getSlugOptions(): SlugOptions
     {

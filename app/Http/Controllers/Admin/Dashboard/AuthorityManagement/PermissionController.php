@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin\Dashboard\AuthorityManagement;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 use Spatie\Permission\Models\Permission;

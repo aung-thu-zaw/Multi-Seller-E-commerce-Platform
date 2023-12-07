@@ -8,7 +8,6 @@ use App\Models\Attribute;
 use App\Models\Option;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
@@ -41,5 +40,4 @@ class AttributeAndOptionController extends Controller
 
         return back()->with('success', 'Attributes and options has been successfully deleted.');
     }
-
 }

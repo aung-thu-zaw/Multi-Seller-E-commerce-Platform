@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\BlogContent;
-use App\Models\BlogTag;
 use App\Models\Option;
 use App\Models\ProductVariant;
 
@@ -21,11 +19,11 @@ class HandleProductVariantOptionService
         foreach ($filteredOptions as $option) {
             $existedOption = Option::where('name', $option)->first();
 
-            if (!$existedOption) {
+            if (! $existedOption) {
                 $optionModel = Option::create(['name' => $option]);
 
                 $productVariant->options()->attach($optionModel);
-            } elseif (!in_array($existedOption->id, $attachedOptionIds)) {
+            } elseif (! in_array($existedOption->id, $attachedOptionIds)) {
                 $productVariant->options()->attach($existedOption);
             }
         }

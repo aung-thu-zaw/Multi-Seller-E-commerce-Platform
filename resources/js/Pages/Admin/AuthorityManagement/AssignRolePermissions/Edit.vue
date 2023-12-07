@@ -49,7 +49,7 @@ const { form, processing, errors, editAction } = useResourceActions({
       >
         <Breadcrumb
           to="admin.assign-role-permissions.index"
-          icon="fa-user-tie"
+          icon="fa-user-shield"
           label="Assign Role Permissions"
         >
           <BreadcrumbItem :label="role?.name" />

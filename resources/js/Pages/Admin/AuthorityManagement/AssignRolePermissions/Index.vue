@@ -34,7 +34,7 @@ const assignRolePermissionList = 'admin.assign-role-permissions.index'
       >
         <Breadcrumb
           :to="assignRolePermissionList"
-          icon="fa-user-tie"
+          icon="fa-user-shield"
           label="Assign Role Permissions"
         >
           <BreadcrumbItem label="List" />

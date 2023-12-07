@@ -33,9 +33,9 @@ class FaqContentController extends Controller
     public function index(): Response|ResponseFactory
     {
         $faqContents = FaqContent::search(request('search'))
-        ->query(function (Builder $builder) {
-            $builder->with('faqSubcategory');
-        })
+            ->query(function (Builder $builder) {
+                $builder->with('faqSubcategory');
+            })
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
@@ -47,15 +47,15 @@ class FaqContentController extends Controller
     {
         $faqSubcategories = FaqSubcategory::all();
 
-        return inertia('Admin/Faqs/FaqContents/Create', compact("faqSubcategories"));
+        return inertia('Admin/Faqs/FaqContents/Create', compact('faqSubcategories'));
     }
 
     public function store(StoreFaqContentRequest $request): RedirectResponse
     {
         FaqContent::create([
-            "faq_subcategory_id" => $request->faq_subcategory_id,
-            "question" => $request->question,
-            "answer" => $request->answer,
+            'faq_subcategory_id' => $request->faq_subcategory_id,
+            'question' => $request->question,
+            'answer' => $request->answer,
         ]);
 
         return to_route('admin.faq-contents.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
@@ -71,9 +71,9 @@ class FaqContentController extends Controller
     public function update(UpdateFaqContentRequest $request, FaqContent $faqContent): RedirectResponse
     {
         $faqContent->update([
-            "faq_subcategory_id" => $request->faq_subcategory_id,
-            "question" => $request->question,
-            "answer" => $request->answer,
+            'faq_subcategory_id' => $request->faq_subcategory_id,
+            'question' => $request->question,
+            'answer' => $request->answer,
         ]);
 
         return to_route('admin.faq-contents.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');

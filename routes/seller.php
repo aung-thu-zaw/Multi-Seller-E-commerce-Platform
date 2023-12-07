@@ -69,7 +69,7 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
                 Route::delete('/attributes-and-options/{attribute}', 'destroyAttributeAndOptions')->name('attribute-and-options.destroy');
             });
 
-        Route::delete('attributes-and-options/{option}', DeleteOptionController::class)->name("options.destroy");
+        Route::delete('attributes-and-options/{option}', DeleteOptionController::class)->name('options.destroy');
 
         // Route::controller(ProductVariantController::class)
         //     ->prefix('/products')

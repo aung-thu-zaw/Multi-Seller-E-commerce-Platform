@@ -47,12 +47,12 @@ class FaqSubcategoryController extends Controller
     {
         $faqCategories = FaqCategory::all();
 
-        return inertia('Admin/Faqs/FaqSubcategories/Create', compact("faqCategories"));
+        return inertia('Admin/Faqs/FaqSubcategories/Create', compact('faqCategories'));
     }
 
     public function store(StoreFaqSubcategoryRequest $request): RedirectResponse
     {
-        FaqSubcategory::create(["faq_category_id" => $request->faq_category_id,'name' => $request->name,"icon" => $request->icon]);
+        FaqSubcategory::create(['faq_category_id' => $request->faq_category_id, 'name' => $request->name, 'icon' => $request->icon]);
 
         return to_route('admin.faq-subcategories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }
@@ -66,7 +66,7 @@ class FaqSubcategoryController extends Controller
 
     public function update(UpdateFaqSubcategoryRequest $request, FaqSubcategory $faqSubcategory): RedirectResponse
     {
-        $faqSubcategory->update(["faq_category_id" => $request->faq_category_id,'name' => $request->name,"icon" => $request->icon]);
+        $faqSubcategory->update(['faq_category_id' => $request->faq_category_id, 'name' => $request->name, 'icon' => $request->icon]);
 
         return to_route('admin.faq-subcategories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }

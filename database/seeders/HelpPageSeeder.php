@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\HelpPage;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class HelpPageSeeder extends Seeder

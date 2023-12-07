@@ -45,7 +45,7 @@ class RoleController extends Controller
 
     public function store(StoreRoleRequest $request): RedirectResponse
     {
-        Role::create(["name" => $request->name]);
+        Role::create(['name' => $request->name]);
 
         return to_route('admin.roles.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }
@@ -57,7 +57,7 @@ class RoleController extends Controller
 
     public function update(UpdateRoleRequest $request, Role $role): RedirectResponse
     {
-        $role->update(["name" => $request->name]);
+        $role->update(['name' => $request->name]);
 
         return to_route('admin.roles.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }
@@ -103,8 +103,8 @@ class RoleController extends Controller
         $selectedItems = explode(',', $selectedItems);
 
         Role::onlyTrashed()
-                ->whereIn('id', $selectedItems)
-                ->restore();
+            ->whereIn('id', $selectedItems)
+            ->restore();
 
         return to_route('admin.roles.trashed', $this->getQueryStringParams($request))->with('success', 'Selected :label have been successfully restored.');
     }

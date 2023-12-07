@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\FaqSubcategory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class FaqSubcategorySeeder extends Seeder
@@ -15,9 +14,9 @@ class FaqSubcategorySeeder extends Seeder
     {
         // Account Managements
         FaqSubCategory::create([
-         'icon' => "<i class='fa-solid fa-user-gear'></i>",
-         'faq_category_id' => 1,
-         'name' => 'My Account',
+            'icon' => "<i class='fa-solid fa-user-gear'></i>",
+            'faq_category_id' => 1,
+            'name' => 'My Account',
         ]);
 
         FaqSubCategory::create([

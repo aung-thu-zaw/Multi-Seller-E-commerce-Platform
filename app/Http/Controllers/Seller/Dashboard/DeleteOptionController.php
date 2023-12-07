@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Seller\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Option;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class DeleteOptionController extends Controller
 {
