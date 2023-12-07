@@ -18,8 +18,6 @@ class RegisteredAccountController extends Controller
     public function __construct()
     {
         $this->middleware('permission:registered-accounts.view', ['only' => ['index']]);
-        $this->middleware('permission:registered-accounts.create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:registered-accounts.edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:registered-accounts.delete', ['only' => ['destroy', 'destroySelected']]);
         $this->middleware('permission:registered-accounts.view.trash', ['only' => ['trashed']]);
         $this->middleware('permission:registered-accounts.restore', ['only' => ['restore', 'restoreSelected']]);
@@ -33,7 +31,7 @@ class RegisteredAccountController extends Controller
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
 
-        return inertia('Admin/RegisteredAccounts/Index', compact('registeredAccounts'));
+        return inertia('Admin/AccountManagement/RegisteredAccounts/Index', compact('registeredAccounts'));
     }
 
     public function destroy(Request $request, User $user): RedirectResponse
@@ -60,7 +58,7 @@ class RegisteredAccountController extends Controller
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
 
-        return inertia('Admin/RegisteredAccounts/Trash', compact('trashedRegisteredAccounts'));
+        return inertia('Admin/AccountManagement/RegisteredAccounts/Trash', compact('trashedRegisteredAccounts'));
     }
 
     public function restore(Request $request, int $trashedRegisteredAccountId): RedirectResponse
