@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Dashboard\AuthorityManagement\AssignRolePermissionsController;
 use App\Http\Controllers\Admin\Dashboard\AuthorityManagement\PermissionController;
 use App\Http\Controllers\Admin\Dashboard\AuthorityManagement\RoleController;
 use App\Http\Controllers\Admin\Dashboard\BlogManagement\BlogCategoryController;
@@ -166,4 +167,7 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
 
         // Permission Operations
         Route::get("/permissions", [PermissionController::class,"index"])->name("permissions.index");
+
+        // Assign Role Permissions Operations
+        Route::resource('assign-role-permissions', AssignRolePermissionsController::class)->except(['show']);
     });
