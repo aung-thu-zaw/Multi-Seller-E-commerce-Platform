@@ -125,6 +125,8 @@
     "Admin Manage": "အက်မင် စီမံခန့်ခွဲမှု",
     "Authority Management": "အခွင့်အာဏာ စီမံခန့်ခွဲမှု",
     "Roles": "ရာထူးတာဝန်များ",
+    "Role": "ရာထူးတာဝန်",
+    "Role Name": "ရာထူးတာဝန် အမည်",
     "Permissions": "ခွင့်ပြုချက်များ",
     "Assign Role Permissions": "ရာထူးတာဝန် ခွင့်ပြုချက်များ",
     "Order Management": "အော်ဒါ စီမံခန့်ခွဲမှု",

@@ -125,6 +125,8 @@
     "Admin Manage": "Admin Manage",
     "Authority Management": "Authority Management",
     "Roles": "Roles",
+    "Role": "Role",
+    "Role Name": "Role Name",
     "Permissions": "Permissions",
     "Assign Role Permissions": "Assign Role Permissions",
     "Order Management": "Order Management",
