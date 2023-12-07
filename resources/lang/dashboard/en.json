@@ -210,5 +210,8 @@
     "faq content": "faq content",
     "Subcategory Name": "Subcategory Name",
     "Question": "Question",
-    "Answer": "Answer"
+    "Answer": "Answer",
+    ":label role doesn't have any permission.": ":label role doesn't have any permission.",
+    "Add Permissions": "Add Permissions",
+    "Change Permissions": "Change Permissions"
 }

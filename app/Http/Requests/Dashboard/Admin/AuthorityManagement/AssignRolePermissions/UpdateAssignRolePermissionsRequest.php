@@ -26,7 +26,7 @@ class UpdateAssignRolePermissionsRequest extends FormRequest
     {
         return [
             'role_id' => ['required', 'numeric', Rule::exists('roles', 'id')],
-            'permission_id' => ['required', 'array', Rule::exists('permissions', 'id')],
+            'permission_id' => ['nullable', 'array', Rule::exists('permissions', 'id')],
             'captcha_token' => [new RecaptchaRule()],
         ];
     }

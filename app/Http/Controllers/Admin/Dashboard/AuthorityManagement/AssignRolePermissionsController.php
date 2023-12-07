@@ -39,32 +39,6 @@ class AssignRolePermissionsController extends Controller
         return inertia('Admin/AuthorityManagement/AssignRolePermissions/Index', compact('rolesWithPermissions'));
     }
 
-    public function create(): Response|ResponseFactory
-    {
-        $roles = Role::with('permissions')->get();
-
-        $permissionGroups = DB::table('permissions')
-            ->select('group')
-            ->groupBy('group')
-            ->get();
-
-        $permissions = Permission::get();
-
-        return inertia('Admin/AuthorityManagement/AssignRolePermissions/Create', compact('roles', 'permissions', 'permissionGroups'));
-    }
-
-    public function store(StoreAssignRolePermissionsRequest $request): RedirectResponse
-    {
-        foreach ($request->permission_id as $key => $value) {
-            DB::table('role_has_permissions')->insert([
-                'role_id' => $request->role_id,
-                'permission_id' => $value,
-            ]);
-        }
-
-        return to_route('admin.assign-role-permissions.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
-    }
-
     public function edit(Role $role): Response|ResponseFactory
     {
         $permissionGroups = DB::table('permissions')

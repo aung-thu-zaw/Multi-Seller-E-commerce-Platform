@@ -94,7 +94,7 @@ const { form, processing, errors, editAction } = useResourceActions({
 
           <InputError :message="errors?.captcha_token" />
 
-          <FormButton type="submit" :processing="processing">
+          <FormButton :processing="processing">
             {{ __('Save Changes') }}
           </FormButton>
         </form>

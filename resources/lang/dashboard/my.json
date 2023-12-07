@@ -209,6 +209,9 @@
     "Faq Content": "Faq အကြောင်းအရာ",
     "faq content": "Faq အကြောင်းအရာ",
     "Subcategory Name": "အမျိုးအစားခွဲအမည်",
-    "Question":"မေးခွန်း",
-    "Answer":"အဖြေ"
+    "Question": "မေးခွန်း",
+    "Answer": "အဖြေ",
+    ":label role doesn't have any permission.": ":label ရာထူးတွင် မည်သည့်ခွင့်ပြုချက်မှ မရှိပါ။",
+    "Add Permissions": "ခွင့်ပြုချက်ထည့်ပါ",
+    "Change Permissions": "ခွင့်ပြုချက်များကိုပြောင်းလဲပါ"
 }
