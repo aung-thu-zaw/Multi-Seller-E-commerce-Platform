@@ -1093,7 +1093,7 @@ const toggleCollapseShow = (classes) => {
                 </li>
                 <li v-show="can('permissions.view')" class="items-center">
                   <Link
-                    :href="route('admin.categories.index')"
+                    :href="route('admin.permissions.index')"
                     :data="{
                       page: 1,
                       per_page: 5,

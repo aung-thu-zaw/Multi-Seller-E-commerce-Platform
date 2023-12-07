@@ -88,5 +88,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'roles.view.trash', 'group' => 'Authority Managements']);
         Permission::create(['name' => 'roles.restore', 'group' => 'Authority Managements']);
         Permission::create(['name' => 'roles.force.delete', 'group' => 'Authority Managements']);
+
+        Permission::create(['name' => 'permissions.view', 'group' => 'Authority Managements']);
     }
 }

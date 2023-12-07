@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Dashboard\AuthorityManagement\PermissionController;
 use App\Http\Controllers\Admin\Dashboard\AuthorityManagement\RoleController;
 use App\Http\Controllers\Admin\Dashboard\BlogManagement\BlogCategoryController;
 use App\Http\Controllers\Admin\Dashboard\BlogManagement\BlogCommentController;
@@ -162,4 +163,7 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
+
+        // Permission Operations
+        Route::get("/permissions", [PermissionController::class,"index"])->name("permissions.index");
     });
