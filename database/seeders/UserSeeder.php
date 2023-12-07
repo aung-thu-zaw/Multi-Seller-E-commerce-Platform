@@ -56,5 +56,6 @@ class UserSeeder extends Seeder
         ]);
 
         User::factory(30)->create(['role' => 'user']);
+        User::factory(30)->create(['role' => 'user','status'=>'suspended']);
     }
 }

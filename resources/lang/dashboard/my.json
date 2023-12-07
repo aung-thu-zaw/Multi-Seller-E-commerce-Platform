@@ -121,6 +121,7 @@
     "Store Reviews": "စတိုးဆိုင်သုံးသပ်ချက်များ",
     "Account Management": "အကောင့်စီမံခန့်ခွဲမှု",
     "Registered Accounts": "မှတ်ပုံတင်ထားသော အကောင့်များ",
+    "Registered Account": "မှတ်ပုံတင်ထားသော အကောင့်",
     "Seller Manage": "ရောင်းသူ စီမံခန့်ခွဲမှု",
     "Admin Manage": "အက်မင် စီမံခန့်ခွဲမှု",
     "Authority Management": "အခွင့်အာဏာ စီမံခန့်ခွဲမှု",
@@ -213,5 +214,9 @@
     "Answer": "အဖြေ",
     ":label role doesn't have any permission.": ":label ရာထူးတွင် မည်သည့်ခွင့်ပြုချက်မှ မရှိပါ။",
     "Add Permissions": "ခွင့်ပြုချက်ထည့်ပါ",
-    "Change Permissions": "ခွင့်ပြုချက်များကိုပြောင်းလဲပါ"
+    "Change Permissions": "ခွင့်ပြုချက်များကိုပြောင်းလဲပါ",
+    "Suspend": "ဆိုင်းငံ့",
+    "Active": "အသက်သွင်း",
+    "Draft": "အကြမ်း",
+    "Publish": "ထုတ်ဝေ"
 }

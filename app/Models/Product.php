@@ -48,7 +48,7 @@ class Product extends Model
     protected function image(): CastAttribute
     {
         return CastAttribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/products/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/products/$value"),
         );
     }
 
@@ -102,12 +102,14 @@ class Product extends Model
 
     protected static function booted(): void
     {
+        parent::boot();
+
         static::addGlobalScope(new FilterByScope());
     }
 
     public static function deleteImage(string $productImage): void
     {
-        if (! empty($productImage) && file_exists(storage_path('app/public/products/'.pathinfo($productImage, PATHINFO_BASENAME)))) {
+        if (!empty($productImage) && file_exists(storage_path('app/public/products/'.pathinfo($productImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/products/'.pathinfo($productImage, PATHINFO_BASENAME)));
         }
     }

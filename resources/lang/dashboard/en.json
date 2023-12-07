@@ -121,6 +121,7 @@
     "Store Reviews": "Store Reviews",
     "Account Management": "Account Management",
     "Registered Accounts": "Registered Accounts",
+    "Registered Account": "Registered Account",
     "Seller Manage": "Seller Manage",
     "Admin Manage": "Admin Manage",
     "Authority Management": "Authority Management",
@@ -213,5 +214,9 @@
     "Answer": "Answer",
     ":label role doesn't have any permission.": ":label role doesn't have any permission.",
     "Add Permissions": "Add Permissions",
-    "Change Permissions": "Change Permissions"
+    "Change Permissions": "Change Permissions",
+    "Suspend": "Suspend",
+    "Active": "Active",
+    "Draft": "Draft",
+    "Publish": "Publish"
 }

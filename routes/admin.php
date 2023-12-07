@@ -183,6 +183,8 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             'registered-accounts' => 'user',
         ]);
 
+        Route::patch('registered-accounts/{user}/change-status', [RegisteredAccountController::class, 'changeStatus'])->name('registered-accounts.change-status');
+
         Route::controller(RegisteredAccountController::class)
             ->prefix('/registered-accounts/trash')
             ->name('registered-accounts.')

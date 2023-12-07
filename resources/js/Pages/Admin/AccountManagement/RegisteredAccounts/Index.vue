@@ -14,6 +14,7 @@ import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
 import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
 import ImageCell from '@/Components/Tables/TableCells/TableImageCell.vue'
 import NoTableData from '@/Components/Tables/NoTableData.vue'
+import GreenBadge from '@/Components/Badges/GreenBadge.vue'
 import OrangeBadge from '@/Components/Badges/OrangeBadge.vue'
 import BlueBadge from '@/Components/Badges/BlueBadge.vue'
 import BulkActionButton from '@/Components/Buttons/BulkActionButton.vue'
@@ -24,15 +25,15 @@ import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 import { __ } from '@/Services/translations-inside-setup.js'
 
-defineProps({ blogContents: Object })
+defineProps({ registeredAccounts: Object })
 
-const blogContentList = 'admin.blog-contents.index'
+const registeredAccountList = 'admin.registered-accounts.index'
 
 const { changeStatusAction, softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 </script>
 
 <template>
-  <Head :title="__('Blog Contents')" />
+  <Head :title="__('Registered Accounts')" />
 
   <AdminDashboardLayout>
     <!-- Breadcrumb And Trash Button  -->
@@ -40,22 +41,16 @@ const { changeStatusAction, softDeleteAction, softDeleteSelectedAction } = useRe
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="blogContentList" icon="fa-newspaper" label="Blog Contents">
+        <Breadcrumb :to="registeredAccountList" icon="fa-user-plus" label="Registered Accounts">
           <BreadcrumbItem label="List" />
         </Breadcrumb>
       </div>
 
-      <div class="flex items-center justify-between mb-3">
-        <!-- Create New Button -->
-        <InertiaLinkButton v-show="can('blog-contents.create')" to="admin.blog-contents.create">
-          <i class="fa-solid fa-file-circle-plus mr-1"></i>
-          {{ __('Create A New :label', { label: __('Blog Content') }) }}
-        </InertiaLinkButton>
-
+      <div class="flex items-center justify-end mb-3">
         <!-- Trash Button -->
         <InertiaLinkButton
-          v-show="can('blog-contents.view.trash')"
-          to="admin.blog-contents.trashed"
+          v-show="can('registered-accounts.view.trash')"
+          to="admin.registered-accounts.trashed"
           :data="{
             page: 1,
             per_page: 5,
@@ -75,24 +70,24 @@ const { changeStatusAction, softDeleteAction, softDeleteSelectedAction } = useRe
           class="my-3 flex flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between overflow-auto p-2"
         >
           <DashboardTableDataSearchBox
-            :placeholder="__('Search by :label', { label: __('Blog Title') })"
-            :to="blogContentList"
+            :placeholder="__('Search by :label', { label: __('Name') })"
+            :to="registeredAccountList"
           />
 
           <div class="flex items-center justify-end w-full md:space-x-5">
-            <DashboardTableDataPerPageSelectBox :to="blogContentList" />
+            <DashboardTableDataPerPageSelectBox :to="registeredAccountList" />
 
             <DashboardTableFilter
-              :to="blogContentList"
+              :to="registeredAccountList"
               :filterBy="['created', 'status']"
               :options="[
                 {
-                  label: 'Draft',
-                  value: 'draft'
+                  label: 'Active',
+                  value: 'active'
                 },
                 {
-                  label: 'Published',
-                  value: 'published'
+                  label: 'Suspended',
+                  value: 'suspended'
                 }
               ]"
             />
@@ -100,18 +95,18 @@ const { changeStatusAction, softDeleteAction, softDeleteSelectedAction } = useRe
         </div>
 
         <!-- Filtered By -->
-        <FilteredBy :to="blogContentList" />
+        <FilteredBy :to="registeredAccountList" />
 
         <TableContainer>
-          <ActionTable :items="blogContents.data">
+          <ActionTable :items="registeredAccounts.data">
             <!-- Table Actions -->
             <template #bulk-actions="{ selectedItems }">
               <BulkActionButton
-                v-show="can('blog-contents.delete')"
+                v-show="can('registered-accounts.delete')"
                 @click="
                   softDeleteSelectedAction(
-                    'Blog Contents',
-                    'admin.blog-contents.destroy.selected',
+                    'Registered Accounts',
+                    'admin.registered-accounts.destroy.selected',
                     selectedItems
                   )
                 "
@@ -124,11 +119,15 @@ const { changeStatusAction, softDeleteAction, softDeleteSelectedAction } = useRe
 
             <!-- Table Header -->
             <template #table-header>
-              <SortableTableHeaderCell label="Id" :to="blogContentList" sort="id" />
+              <SortableTableHeaderCell label="Id" :to="registeredAccountList" sort="id" />
 
-              <TableHeaderCell label="Thumbnail" />
+              <TableHeaderCell label="Avatar" />
 
-              <SortableTableHeaderCell label="Title" :to="blogContentList" sort="title" />
+              <SortableTableHeaderCell label="Name" :to="registeredAccountList" sort="name" />
+
+              <SortableTableHeaderCell label="Email" :to="registeredAccountList" sort="email" />
+
+              <TableHeaderCell label="Role" />
 
               <TableHeaderCell label="Status" />
 
@@ -141,63 +140,67 @@ const { changeStatusAction, softDeleteAction, softDeleteSelectedAction } = useRe
                 {{ item?.id }}
               </TableDataCell>
 
-              <ImageCell :src="item?.thumbnail" />
+              <ImageCell :src="item?.avatar" />
 
               <TableDataCell>
-                {{ item?.title }}
+                <div class="min-w-[150px]">
+                  {{ item?.name }}
+                </div>
               </TableDataCell>
 
               <TableDataCell>
-                <OrangeBadge v-show="item?.status === 'draft'">
-                  <i class="fa-solid fa-file-pen animate-pulse"></i>
+                {{ item?.email }}
+              </TableDataCell>
+
+              <TableDataCell>
+                <BlueBadge>
+                  {{ item?.role }}
+                </BlueBadge>
+              </TableDataCell>
+
+              <TableDataCell>
+                <GreenBadge v-show="item?.status === 'active'">
+                  <i class="fa-solid fa-user-check animate-pulse"></i>
+                  {{ item?.status }}
+                </GreenBadge>
+                <OrangeBadge v-show="item?.status === 'suspended'">
+                  <i class="fa-solid fa-user-xmark animate-pulse"></i>
                   {{ item?.status }}
                 </OrangeBadge>
-                <BlueBadge v-show="item?.status === 'published'">
-                  <i class="fa-solid fa-circle-check animate-pulse"></i>
-                  {{ item?.status }}
-                </BlueBadge>
               </TableDataCell>
 
               <TableActionCell>
                 <NormalButton
-                  v-show="can('blog-contents.edit')"
+                  v-show="can('registered-accounts.edit')"
                   @click="
                     changeStatusAction(
-                      'Blog Content',
-                      'admin.blog-contents.change-status',
-                      { blog_content: item?.slug },
+                      'Registered Account',
+                      'admin.registered-accounts.change-status',
+                      { user: item?.id },
                       item?.status
                     )
                   "
                   :class="{
-                    'bg-emerald-600 text-white ring-2 ring-emerald-300': item?.status === 'draft',
-                    'bg-amber-600 text-white ring-2 ring-amber-300': item?.status === 'published'
+                    'bg-emerald-600 text-white ring-2 ring-emerald-300':
+                      item?.status === 'suspended',
+                    'bg-amber-600 text-white ring-2 ring-amber-300': item?.status === 'active'
                   }"
                 >
                   <i
                     class="fa-solid"
                     :class="{
-                      'fa-circle-check': item?.status === 'draft',
-                      'fa-file-pen': item?.status === 'published'
+                      'fa-user-xmark': item?.status === 'active',
+                      'fa-user-check': item?.status === 'suspended'
                     }"
                   ></i>
-                  {{ item?.status === 'draft' ? __('Publish') : __('Draft') }}
+                  {{ item?.status === 'active' ? __('Suspend') : __('Active') }}
                 </NormalButton>
 
-                <InertiaLinkButton
-                  v-show="can('blog-contents.edit')"
-                  to="admin.blog-contents.edit"
-                  :targetIdentifier="{ blog_content: item?.slug }"
-                >
-                  <i class="fa-solid fa-edit"></i>
-                  {{ __('Edit') }}
-                </InertiaLinkButton>
-
                 <NormalButton
-                  v-show="can('blog-contents.delete')"
+                  v-show="can('registered-accounts.delete')"
                   @click="
-                    softDeleteAction('Blog Content', 'admin.blog-contents.destroy', {
-                      blog_content: item?.slug
+                    softDeleteAction('Registered Account', 'admin.registered-accounts.destroy', {
+                      user: item?.id
                     })
                   "
                   class="bg-red-600 text-white ring-2 ring-red-300"
@@ -210,9 +213,9 @@ const { changeStatusAction, softDeleteAction, softDeleteSelectedAction } = useRe
           </ActionTable>
         </TableContainer>
 
-        <Pagination :data="blogContents" />
+        <Pagination :data="registeredAccounts" />
 
-        <NoTableData v-show="!blogContents.data.length" />
+        <NoTableData v-show="!registeredAccounts.data.length" />
       </div>
       <!-- Table End -->
     </div>

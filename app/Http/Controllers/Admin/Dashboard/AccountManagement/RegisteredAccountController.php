@@ -18,6 +18,7 @@ class RegisteredAccountController extends Controller
     public function __construct()
     {
         $this->middleware('permission:registered-accounts.view', ['only' => ['index']]);
+        $this->middleware('permission:registered-accounts.edit', ['only' => ['changeStatus']]);
         $this->middleware('permission:registered-accounts.delete', ['only' => ['destroy', 'destroySelected']]);
         $this->middleware('permission:registered-accounts.view.trash', ['only' => ['trashed']]);
         $this->middleware('permission:registered-accounts.restore', ['only' => ['restore', 'restoreSelected']]);
@@ -32,6 +33,13 @@ class RegisteredAccountController extends Controller
             ->appends(request()->all());
 
         return inertia('Admin/AccountManagement/RegisteredAccounts/Index', compact('registeredAccounts'));
+    }
+
+    public function changeStatus(Request $request, User $user): RedirectResponse
+    {
+        $user->update(['status' => $request->status === 'active' ? 'suspended' : 'active']);
+
+        return to_route('admin.registered-accounts.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }
 
     public function destroy(Request $request, User $user): RedirectResponse

@@ -23,7 +23,6 @@ class UserFactory extends Factory
         return [
             'avatar' => fake()->imageUrl(),
             'name' => fake()->name(),
-            'username' => fake()->userName(),
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->unique()->phoneNumber(),
             'role' => fake()->randomElement(['admin', 'seller', 'user']),
