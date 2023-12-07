@@ -80,5 +80,13 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'faq-contents.force.delete', 'group' => 'FAQs']);
 
         Permission::create(['name' => 'help-pages.edit', 'group' => 'Help Pages']);
+
+        Permission::create(['name' => 'roles.view', 'group' => 'Authority Managements']);
+        Permission::create(['name' => 'roles.create', 'group' => 'Authority Managements']);
+        Permission::create(['name' => 'roles.edit', 'group' => 'Authority Managements']);
+        Permission::create(['name' => 'roles.delete', 'group' => 'Authority Managements']);
+        Permission::create(['name' => 'roles.view.trash', 'group' => 'Authority Managements']);
+        Permission::create(['name' => 'roles.restore', 'group' => 'Authority Managements']);
+        Permission::create(['name' => 'roles.force.delete', 'group' => 'Authority Managements']);
     }
 }

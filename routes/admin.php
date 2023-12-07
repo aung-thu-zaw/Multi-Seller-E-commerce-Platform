@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Dashboard\AuthorityManagement\RoleController;
 use App\Http\Controllers\Admin\Dashboard\BlogManagement\BlogCategoryController;
 use App\Http\Controllers\Admin\Dashboard\BlogManagement\BlogCommentController;
 use App\Http\Controllers\Admin\Dashboard\BlogManagement\BlogContentController;
@@ -146,4 +147,19 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             Route::get('/returns-and-refunds', 'returnsAndRefunds')->name('returns-and-refunds.edit');
             Route::patch('/help-pages/{help_page}', 'update')->name('help-pages.update');
         });
+
+        // Role Operations
+        Route::resource('roles', RoleController::class)->except(['show']);
+        Route::controller(RoleController::class)
+            ->prefix('/roles/trash')
+            ->name('roles.')
+            ->group(function () {
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
     });

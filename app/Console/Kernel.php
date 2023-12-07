@@ -23,6 +23,7 @@ class Kernel extends ConsoleKernel
 
         // Seller
         $schedule->command('store-product-categories:delete')->daily();
+        $schedule->command('roles:delete')->daily();
     }
 
     /**
