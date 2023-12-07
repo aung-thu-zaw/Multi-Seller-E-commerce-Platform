@@ -20,10 +20,11 @@ class Kernel extends ConsoleKernel
         $schedule->command('faq-categories:delete')->daily();
         $schedule->command('faq-subcategories:delete')->daily();
         $schedule->command('faq-contents:delete')->daily();
+        $schedule->command('roles:delete')->daily();
+        $schedule->command('users:delete')->daily();
 
         // Seller
         $schedule->command('store-product-categories:delete')->daily();
-        $schedule->command('roles:delete')->daily();
     }
 
     /**

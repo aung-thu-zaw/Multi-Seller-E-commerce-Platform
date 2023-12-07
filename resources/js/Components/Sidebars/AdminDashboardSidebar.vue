@@ -946,12 +946,23 @@ const toggleCollapseShow = (classes) => {
 
             <div
               id="account-management-accordion"
-              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+              :class="{
+                block:
+                  $page.url.startsWith('/admin/registered-accounts') ||
+                  $page.url.startsWith('/admin/seller-manage') ||
+                  $page.url.startsWith('/admin/admin-manage'),
+                hidden: !(
+                  $page.url.startsWith('/admin/registered-accounts') ||
+                  $page.url.startsWith('/admin/seller-manage') ||
+                  $page.url.startsWith('/admin/admin-manage')
+                )
+              }"
             >
               <ul class="pl-8">
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('registered-accounts.view')" class="items-center">
                   <Link
-                    :href="route('admin.categories.index')"
+                    :href="route('admin.registered-accounts.index')"
                     :data="{
                       page: 1,
                       per_page: 5,
@@ -960,16 +971,18 @@ const toggleCollapseShow = (classes) => {
                     }"
                     class="text-xs py-3 font-bold block"
                     :class="{
-                      'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
-                      'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
+                      'text-orange-600 hover:text-orange-500': $page.url.startsWith(
+                        '/admin/registered-accounts'
+                      ),
+                      'text-slate-600 hover:text-slate-500': !$page.url.startsWith(
+                        '/admin/registered-accounts'
+                      )
                     }"
                   >
                     {{ __('Registered Accounts') }}
                   </Link>
                 </li>
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('seller-manage.view')" class="items-center">
                   <Link
                     :href="route('admin.categories.index')"
                     :data="{
@@ -981,15 +994,15 @@ const toggleCollapseShow = (classes) => {
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
+                        $page.url.startsWith('/admin/seller-manage'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
+                        !$page.url.startsWith('/admin/seller-manage')
                     }"
                   >
                     {{ __('Seller Manage') }}
                   </Link>
                 </li>
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('admin-manage.view')" class="items-center">
                   <Link
                     :href="route('admin.categories.index')"
                     :data="{
@@ -1001,9 +1014,9 @@ const toggleCollapseShow = (classes) => {
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
+                        $page.url.startsWith('/admin/admin-manage'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
+                        !$page.url.startsWith('/admin/admin-manage')
                     }"
                   >
                     {{ __('Admin Manage') }}

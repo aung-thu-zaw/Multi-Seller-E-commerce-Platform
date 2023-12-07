@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Scout\Searchable;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -23,6 +24,7 @@ class User extends Authenticatable
     use HasPermissions;
     use HasRoles;
     use Notifiable;
+    use Searchable;
     use SoftDeletes;
 
     /**
@@ -46,6 +48,16 @@ class User extends Authenticatable
     ];
 
     /**
+     *     @return array<string>
+     */
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name,
+        ];
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Casts\Attribute<User, never>
      */
     protected function password(): Attribute
@@ -61,7 +73,7 @@ class User extends Authenticatable
     protected function avatar(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/avatars/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/avatars/$value"),
         );
     }
 
@@ -101,7 +113,7 @@ class User extends Authenticatable
 
     public static function deleteAvatar(?string $avatar): void
     {
-        if (! empty($avatar) && file_exists(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
+        if (!empty($avatar) && file_exists(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)));
         }
     }
