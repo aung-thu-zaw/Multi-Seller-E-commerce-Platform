@@ -17,7 +17,13 @@ class ProductReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "user_id"=>fake()->numberBetween(3,50),
+            "product_id"=>fake()->numberBetween(),
+            "comment"=>fake()->numberBetween(),
+            "rating"=>fake()->numberBetween(1,5),
+            "is_flagged"=>fake()->boolean(),
+            "is_moderated"=>fake()->boolean(),
+            "status"=>fake()->randomElement(["approved","rejected"])
         ];
     }
 }

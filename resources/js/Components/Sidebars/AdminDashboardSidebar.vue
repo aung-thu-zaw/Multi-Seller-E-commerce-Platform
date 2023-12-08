@@ -818,7 +818,7 @@ const toggleCollapseShow = (classes) => {
             >
               <span>
                 <i class="fa-solid fa-star mr-1.5"></i>
-                {{ __('Review Management') }}
+                {{ __('Rating Management') }}
               </span>
               <span>
                 <svg
@@ -876,7 +876,7 @@ const toggleCollapseShow = (classes) => {
                         !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __('Product Reviews') }}
+                    {{ __('Automated Filter Words') }}
                   </Link>
                 </li>
                 <li v-show="can('categories.view')" class="items-center">
@@ -896,7 +896,47 @@ const toggleCollapseShow = (classes) => {
                         !$page.url.startsWith('/admin/categories')
                     }"
                   >
-                    {{ __('Store Reviews') }}
+                    {{ __('Product Review & Ratings') }}
+                  </Link>
+                </li>
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc'
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories')
+                    }"
+                  >
+                    {{ __('Seller Service Ratings') }}
+                  </Link>
+                </li>
+                <li v-show="can('categories.view')" class="items-center">
+                  <Link
+                    :href="route('admin.categories.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc'
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/categories'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/categories')
+                    }"
+                  >
+                    {{ __('Delivery Service Ratings') }}
                   </Link>
                 </li>
               </ul>

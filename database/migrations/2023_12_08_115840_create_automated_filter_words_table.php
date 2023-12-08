@@ -10,7 +10,7 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('automated_word_filters', function (Blueprint $table) {
+        Schema::create('automated_filter_words', function (Blueprint $table) {
             $table->id();
             $table->string('word');
             $table->softDeletes();
@@ -23,6 +23,6 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('automated_word_filters');
+        Schema::dropIfExists('automated_filter_words');
     }
 };

@@ -116,7 +116,7 @@
     "Privacy & Policy": "Privacy & Policy",
     "Settings": "Settings",
     "Website Configuration": "Website Configuration",
-    "Review Management": "Review Management",
+    "Rating Management": "Rating Management",
     "Product Reviews": "Product Reviews",
     "Store Reviews": "Store Reviews",
     "Account Management": "Account Management",
@@ -222,5 +222,9 @@
     "Admin Account": "Admin Account",
     "Confirm Password": "Confirm Password",
     "Retype Password": "Retype Password",
-    "Admins": "Admins"
+    "Admins": "Admins",
+    "Product Review & Ratings": "Product Review & Ratings",
+    "Seller Service Ratings": "Seller Service Ratings",
+    "Delivery Service Ratings": "Delivery Service Ratings",
+    "Automated Filter Words": "Automated Filter Words"
 }

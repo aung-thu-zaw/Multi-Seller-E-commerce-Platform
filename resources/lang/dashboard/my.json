@@ -116,7 +116,7 @@
     "Privacy & Policy": "ကိုယ်ရေးအချက်အလက်မူဝါဒ",
     "Settings": "ဆက်တင်များ",
     "Website Configuration": "ဝဘ်ဆိုဒ်ဖွဲ့စည်းမှု",
-    "Review Management": "သုံးသပ်ချက် စီမံခန့်ခွဲမှု",
+    "Rating Management": "အဆင့်သတ်မှတ်ချက် စီမံခန့်ခွဲမှု",
     "Product Reviews": "ထုတ်ကုန်သုံးသပ်ချက်များ",
     "Store Reviews": "စတိုးဆိုင်သုံးသပ်ချက်များ",
     "Account Management": "အကောင့်စီမံခန့်ခွဲမှု",
@@ -222,5 +222,9 @@
     "Admin Account": "စီမံခန့်ခွဲသူအကောင့်",
     "Confirm Password": "အတည်ပြုစကားဝှက်",
     "Retype Password": "စကားဝှက်အားပြန်ရိုက်ပါ",
-    "Admins":"အက်မင်များ"
+    "Admins": "အက်မင်များ",
+    "Product Review & Ratings":"ထုတ်ကုန်သုံးသပ်ချက်နှင့် အဆင့်သတ်မှတ်ချက်များ",
+    "Seller Service Ratings":"ရောင်းချသူ ဝန်ဆောင်မှု အဆင့်သတ်မှတ်ချက်များ",
+    "Delivery Service Ratings":"ပို့ဆောင်မှုဝန်ဆောင်မှု အဆင့်သတ်မှတ်ချက်များ",
+    "Automated Filter Words":"အလိုအလျောက် စစ်ထုတ်သည့်စကားလုံးများ"
 }
