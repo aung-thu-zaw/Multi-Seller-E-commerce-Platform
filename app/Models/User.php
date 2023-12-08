@@ -94,6 +94,14 @@ class User extends Authenticatable
         return $this->hasMany(Product::class, 'seller_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<ProductReview>
+     */
+    public function productReviews(): HasMany
+    {
+        return $this->hasMany(ProductReview::class, 'user_id');
+    }
+
     protected static function booted(): void
     {
         parent::boot();
