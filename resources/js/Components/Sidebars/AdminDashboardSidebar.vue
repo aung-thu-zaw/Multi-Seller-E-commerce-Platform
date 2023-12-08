@@ -675,6 +675,9 @@ const toggleCollapseShow = (classes) => {
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
           <!-- Blog Managements -->
           <li
+            v-show="
+              can('blog-categories.view') || can('blog-contents.view') || can('blog-comments.view')
+            "
             class="hs-accordion items-center"
             :class="{
               active:
@@ -901,7 +904,16 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- Account Managements -->
-          <li class="hs-accordion items-center" id="account-management-accordion">
+          <li
+            v-show="
+              can('registered-accounts.view') ||
+              can('seller-manage.view') ||
+              can('store-manage.view') ||
+              can('admin-manage.view')
+            "
+            class="hs-accordion items-center"
+            id="account-management-accordion"
+          >
             <button
               type="button"
               class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
@@ -1047,7 +1059,13 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- Authority Managements -->
-          <li class="hs-accordion items-center" id="review-management-accordion">
+          <li
+            v-show="
+              can('roles.view') || can('permissions.view') || can('assign-role-permissions.view')
+            "
+            class="hs-accordion items-center"
+            id="review-management-accordion"
+          >
             <button
               type="button"
               class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
@@ -1254,7 +1272,15 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- FAQs -->
-          <li class="hs-accordion items-center" id="faqs-accordion">
+          <li
+            v-show="
+              can('faq-categories.view') ||
+              can('faq-subcategories.view') ||
+              can('faq-contents.view')
+            "
+            class="hs-accordion items-center"
+            id="faqs-accordion"
+          >
             <button
               type="button"
               class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
@@ -1381,7 +1407,11 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- Help Pages -->
-          <li class="hs-accordion items-center" id="pages-accordion">
+          <li
+            v-show="can('help-pages.edit')"
+            class="hs-accordion items-center"
+            id="pages-accordion"
+          >
             <button
               type="button"
               class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
