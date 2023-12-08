@@ -27,9 +27,10 @@ class UpdateAdminRequest extends FormRequest
         $user = $this->route()->parameter('user');
 
         $rules = [
+            "role_id" => ["required","numeric",Rule::exists("roles", "id")],
             'name' => ['required', 'string', 'max:255', Rule::unique('users', 'name')->ignore($user)],
             'email' => ['required', 'email', 'lowercase', 'max:255', Rule::unique('users', 'email')->ignore($user)],
-            'phone' => ['required', 'numeric', 'max:20', Rule::unique('users', 'phone')->ignore($user)],
+            'phone' => ['required', 'string', Rule::unique('users', 'phone')->ignore($user)],
             'password' => ['nullable'],
             'captcha_token' => [new RecaptchaRule()],
         ];

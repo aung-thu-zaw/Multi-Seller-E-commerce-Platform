@@ -26,9 +26,10 @@ class StoreAdminRequest extends FormRequest
     public function rules(): array
     {
         return [
+            "role_id" => ["required","numeric",Rule::exists("roles", "id")],
             "name" => ["required","string","max:255",Rule::unique("users", "name")],
             "email" => ["required","email","lowercase","max:255",Rule::unique("users", "email")],
-            "phone" => ["required","numeric","max:20",Rule::unique("users", "phone")],
+            "phone" => ["required","string",Rule::unique("users", "phone")],
             "password" => ['required', 'confirmed',Password::default()],
             'avatar' => ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'],
             'captcha_token' => [new RecaptchaRule()],

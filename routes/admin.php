@@ -201,11 +201,13 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
 
 
         // Admin Mange Operations
-        Route::resource('admin-mange', AdminManageController::class)
+        Route::resource('admin-manage', AdminManageController::class)
         ->except(['show'])
         ->parameters([
-            'admin-mange' => 'user',
+            'admin-manage' => 'user',
         ]);
+
+        Route::patch('admin-manage/{user}/change-status', [AdminManageController::class, 'changeStatus'])->name('admin-manage.change-status');
 
         Route::controller(AdminManageController::class)
         ->prefix('/admin-manage/trash')

@@ -19,6 +19,7 @@ return new class () extends Migration {
             $table->enum('role', ['admin', 'seller', 'user'])->default('user');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('status', ['active', 'suspended'])->default('active');
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

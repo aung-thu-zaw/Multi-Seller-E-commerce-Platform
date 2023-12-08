@@ -74,7 +74,7 @@ class User extends Authenticatable
     protected function avatar(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/avatars/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/avatars/users/$value"),
         );
     }
 
@@ -94,12 +94,12 @@ class User extends Authenticatable
         return $this->hasMany(Product::class, 'seller_id');
     }
 
-    // protected static function booted(): void
-    // {
-    //     parent::boot();
+    protected static function booted(): void
+    {
+        parent::boot();
 
-    //     static::addGlobalScope(new FilterByScope());
-    // }
+        static::addGlobalScope(new FilterByScope());
+    }
 
     public function getRedirectRouteName(): string
     {

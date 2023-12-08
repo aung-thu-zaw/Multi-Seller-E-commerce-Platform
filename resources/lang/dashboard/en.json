@@ -218,5 +218,9 @@
     "Suspend": "Suspend",
     "Active": "Active",
     "Draft": "Draft",
-    "Publish": "Publish"
+    "Publish": "Publish",
+    "Admin Account": "Admin Account",
+    "Confirm Password": "Confirm Password",
+    "Retype Password": "Retype Password",
+    "Admins": "Admins"
 }

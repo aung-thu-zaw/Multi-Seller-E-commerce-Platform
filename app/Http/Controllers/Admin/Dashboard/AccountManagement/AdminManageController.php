@@ -3,17 +3,19 @@
 namespace App\Http\Controllers\Admin\Dashboard\AccountManagement;
 
 use App\Actions\Admin\AccountManagement\PermanentlyDeleteTrashedUsersAction;
-use App\Actions\Admin\AdminManage\CreateAdminAction;
-use App\Actions\Admin\AdminManage\UpdateAdminAction;
+use App\Actions\Admin\AccountManagement\AdminManage\CreateAdminAction;
+use App\Actions\Admin\AccountManagement\AdminManage\UpdateAdminAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Admin\AccountManagement\AdminMange\StoreAdminRequest;
 use App\Http\Requests\Dashboard\Admin\AccountManagement\AdminMange\UpdateAdminRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
+use Spatie\Permission\Models\Role;
 
 class AdminManageController extends Controller
 {
@@ -33,16 +35,22 @@ class AdminManageController extends Controller
     public function index(): Response|ResponseFactory
     {
         $admins = User::search(request('search'))
+            ->query(function (Builder $builder) {
+                $builder->with('roles');
+            })
+            ->where("role", "admin")
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
 
-        return inertia('Admin/AccountManagement/AdminMange/Index', compact('admins'));
+        return inertia('Admin/AccountManagement/AdminManage/Index', compact('admins'));
     }
 
     public function create(): Response|ResponseFactory
     {
-        return inertia('Admin/AccountManagement/AdminMange/Create');
+        $roles = Role::all();
+
+        return inertia('Admin/AccountManagement/AdminManage/Create', compact("roles"));
     }
 
     public function store(StoreAdminRequest $request): RedirectResponse
@@ -54,12 +62,23 @@ class AdminManageController extends Controller
 
     public function edit(User $user): Response|ResponseFactory
     {
-        return inertia('Admin/AccountManagement/AdminMange/Edit', compact('user'));
+        $user->load('roles');
+
+        $roles = Role::all();
+
+        return inertia('Admin/AccountManagement/AdminManage/Edit', compact('user', 'roles'));
     }
 
     public function update(UpdateAdminRequest $request, User $user): RedirectResponse
     {
         (new UpdateAdminAction())->handle($request->validated(), $user);
+
+        return to_route('admin.admin-manage.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
+    }
+
+    public function changeStatus(Request $request, User $user): RedirectResponse
+    {
+        $user->update(['status' => $request->status === 'active' ? 'suspended' : 'active']);
 
         return to_route('admin.admin-manage.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }
@@ -84,11 +103,15 @@ class AdminManageController extends Controller
     {
         $trashedAdmins = User::search(request('search'))
             ->onlyTrashed()
+            ->query(function (Builder $builder) {
+                $builder->with('roles');
+            })
+            ->where("role", "admin")
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
 
-        return inertia('Admin/AccountManagement/AdminMange/Trash', compact('trashedAdmins'));
+        return inertia('Admin/AccountManagement/AdminManage/Trash', compact('trashedAdmins'));
     }
 
     public function restore(Request $request, int $trashedAdminId): RedirectResponse
@@ -105,8 +128,8 @@ class AdminManageController extends Controller
         $selectedItems = explode(',', $selectedItems);
 
         User::onlyTrashed()
-               ->whereIn('id', $selectedItems)
-               ->restore();
+            ->whereIn('id', $selectedItems)
+            ->restore();
 
         return to_route('admin.admin-manage.trashed', $this->getQueryStringParams($request))->with('success', 'Selected :label have been successfully restored.');
     }
@@ -126,7 +149,9 @@ class AdminManageController extends Controller
     {
         $selectedItems = explode(',', $selectedItems);
 
-        $trashedAdmins = User::onlyTrashed()->whereIn('id', $selectedItems)->get();
+        $trashedAdmins = User::onlyTrashed()
+            ->whereIn('id', $selectedItems)
+            ->get();
 
         (new PermanentlyDeleteTrashedUsersAction())->handle($trashedAdmins);
 

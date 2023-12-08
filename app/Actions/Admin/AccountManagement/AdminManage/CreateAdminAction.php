@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Admin\AdminManage;
+namespace App\Actions\Admin\AccountManagement\AdminManage;
 
 use App\Http\Traits\ImageUpload;
 use App\Models\User;
@@ -26,11 +26,10 @@ class CreateAdminAction
             'avatar' => $avatar,
         ]);
 
-        $user->assignRole($data['role_id']);
-
-        $role = Role::with('permissions')->where('id', $data['role_id'])->first();
+        $role = Role::with("permissions")->where("id", $data['role_id'])->first();
 
         if ($role) {
+            $user->assignRole($role->name);
             $user->syncPermissions($role->permissions);
         }
 

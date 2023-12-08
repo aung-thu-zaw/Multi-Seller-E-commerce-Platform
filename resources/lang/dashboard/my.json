@@ -218,5 +218,9 @@
     "Suspend": "ဆိုင်းငံ့",
     "Active": "အသက်သွင်း",
     "Draft": "အကြမ်း",
-    "Publish": "ထုတ်ဝေ"
+    "Publish": "ထုတ်ဝေ",
+    "Admin Account": "စီမံခန့်ခွဲသူအကောင့်",
+    "Confirm Password": "အတည်ပြုစကားဝှက်",
+    "Retype Password": "စကားဝှက်အားပြန်ရိုက်ပါ",
+    "Admins":"အက်မင်များ"
 }
