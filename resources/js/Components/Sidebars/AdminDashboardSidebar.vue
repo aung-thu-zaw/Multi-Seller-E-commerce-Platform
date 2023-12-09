@@ -1799,7 +1799,7 @@ const toggleCollapseShow = (classes) => {
                         !$page.url.startsWith('/admin/seo-settings')
                     }"
                   >
-                    {{ __('SEO Settings') }}
+                    {{ __('Seo Settings') }}
                   </Link>
                 </li>
               </ul>

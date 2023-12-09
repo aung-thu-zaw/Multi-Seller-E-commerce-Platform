@@ -230,5 +230,22 @@
     "Automated Filter Word": "Automated Filter Word",
     "word": "word",
     "Filter Words": "Filter Words",
-    "Subscriber":"Subscriber"
+    "Subscriber": "Subscriber",
+
+    "General Settings": "General Settings",
+    "Seo Settings": "Seo Settings",
+    "Site Name": "Site Name",
+    "Tagline Or Slogan":"Tagline Or Slogan",
+    "Company Phone":"Company Phone",
+    "Company Email Address":"Company Email Address",
+    "Support Phone":"Support Phone",
+    "Support Email Address":"Support Email Address",
+    "Address":"Address",
+    "Copyright":"Copyright",
+    "Facebook URL":"Facebook URL",
+    "Twitter URL":"Twitter URL",
+    "LinkedIn URL":"LinkedIn URL",
+    "Meta Title":"Meta Title",
+    "Meta Keyword":"Meta Keyword",
+    "Meta Description":"Meta Description"
 }
