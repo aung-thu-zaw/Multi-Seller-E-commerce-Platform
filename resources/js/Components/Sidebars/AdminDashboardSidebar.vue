@@ -679,12 +679,6 @@ const toggleCollapseShow = (classes) => {
               can('blog-categories.view') || can('blog-contents.view') || can('blog-comments.view')
             "
             class="hs-accordion items-center"
-            :class="{
-              active:
-                $page.url.startsWith('/admin/blog-categories') ||
-                $page.url.startsWith('/admin/blog-contents') ||
-                $page.url.startsWith('/admin/comments-and-replies')
-            }"
             id="blog-management-accordion"
           >
             <button
@@ -856,7 +850,20 @@ const toggleCollapseShow = (classes) => {
 
             <div
               id="review-management-accordion"
-              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+              :class="{
+                block:
+                  $page.url.startsWith('/admin/automated-filter-words') ||
+                  $page.url.startsWith('/admin/product-review-and-ratings') ||
+                  $page.url.startsWith('/admin/seller-service-rating') ||
+                  $page.url.startsWith('/admin/delivery-service-rating'),
+                hidden: !(
+                  $page.url.startsWith('/admin/automated-filter-words') ||
+                  $page.url.startsWith('/admin/product-review-and-ratings') ||
+                  $page.url.startsWith('/admin/seller-service-rating') ||
+                  $page.url.startsWith('/admin/delivery-service-rating')
+                )
+              }"
             >
               <ul class="pl-8">
                 <li v-show="can('automated-filter-words.view')" class="items-center">
