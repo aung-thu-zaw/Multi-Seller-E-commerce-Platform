@@ -50,11 +50,64 @@ const user = computed(() => usePage().props.auth?.user)
           class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
         >
           <Link
+            as="button"
             href="#"
             class="text-left text-sm font-semibold block w-full whitespace-nowrap bg-transparent text-slate-700"
           >
-            <i class="fa-solid fa-address-card mr-3"></i>
+            <i class="fa-regular fa-id-card mr-1.5"></i>
             {{ __('My Account') }}
+          </Link>
+        </div>
+
+        <div
+          class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+        >
+          <Link
+            as="button"
+            href="#"
+            class="text-left text-sm font-semibold block w-full whitespace-nowrap bg-transparent text-slate-700"
+          >
+            <i class="fa-solid fa-boxes-packing mr-1.5"></i>
+            {{ __('My Orders') }}
+          </Link>
+        </div>
+
+        <div
+          class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+        >
+          <Link
+            as="button"
+            href="#"
+            class="text-left text-sm font-semibold block w-full whitespace-nowrap bg-transparent text-slate-700"
+          >
+            <i class="fa-solid fa-heart mr-1.5"></i>
+            {{ __('My Wishlists') }}
+          </Link>
+        </div>
+
+        <div
+          class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+        >
+          <Link
+            as="button"
+            href="#"
+            class="text-left text-sm font-semibold block w-full whitespace-nowrap bg-transparent text-slate-700"
+          >
+            <i class="fa-solid fa-star mr-1.5"></i>
+            {{ __('My Reviews') }}
+          </Link>
+        </div>
+
+        <div
+          class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+        >
+          <Link
+            as="button"
+            href="#"
+            class="text-left text-sm font-semibold block w-full whitespace-nowrap bg-transparent text-slate-700"
+          >
+            <i class="fa-solid fa-rotate-left mr-1.5"></i>
+            {{ __('My Returns & Cancellations') }}
           </Link>
         </div>
       </div>
@@ -69,7 +122,7 @@ const user = computed(() => usePage().props.auth?.user)
             :href="route('logout')"
             class="text-left text-sm font-semibold block w-full whitespace-nowrap bg-transparent text-slate-700"
           >
-            <i class="fa-solid fa-right-from-bracket mr-3"></i>
+            <i class="fa-solid fa-right-from-bracket mr-1.5"></i>
 
             {{ __('Logout') }}
           </Link>

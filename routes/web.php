@@ -76,3 +76,4 @@ Route::post('/blogs/{blog_content}/comments/{blog_comment}/replies', BlogComment
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
 require __DIR__.'/seller.php';
+require __DIR__.'/user.php';
