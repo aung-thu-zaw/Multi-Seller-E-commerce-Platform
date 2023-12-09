@@ -33,7 +33,8 @@ class DatabaseSeeder extends Seeder
             // ProductReviewSeeder::class,
             AutomatedFilterWordSeeder::class,
             SeoSettingSeeder::class,
-            GeneralSettingSeeder::class
+            GeneralSettingSeeder::class,
+            SubscriberSeeder::class
         ]);
     }
 }

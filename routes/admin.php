@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\Dashboard\HelpPageController;
 use App\Http\Controllers\Admin\Dashboard\RatingManagement\AutomatedFilterWordController;
 use App\Http\Controllers\Admin\Dashboard\Settings\GeneralSettingController;
 use App\Http\Controllers\Admin\Dashboard\Settings\SeoSettingController;
+use App\Http\Controllers\Admin\Dashboard\SubscribersAndNewsletters\SubscriberController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/login', LoginController::class)
@@ -256,5 +257,22 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             Route::get('/', 'edit')->name("edit");
             Route::patch('/{seo_setting}', 'update')->name("update");
         });
+
+
+
+        // Subscriber Operations
+        Route::resource('subscribers', SubscriberController::class)->only(['index','destroy']);
+        Route::controller(SubscriberController::class)
+            ->prefix('/subscribers/trash')
+            ->name('subscribers.')
+            ->group(function () {
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
 
     });

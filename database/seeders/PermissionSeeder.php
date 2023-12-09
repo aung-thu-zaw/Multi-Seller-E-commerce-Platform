@@ -120,7 +120,13 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'automated-filter-words.force.delete', 'group' => 'Rating Management']);
 
         Permission::create(['name' => 'general-settings.edit', 'group' => 'Settings']);
-        
+
         Permission::create(['name' => 'seo-settings.edit', 'group' => 'Settings']);
+
+        Permission::create(['name' => 'subscribers.view', 'group' => 'Subscribers And Newsletters']);
+        Permission::create(['name' => 'subscribers.delete', 'group' => 'Subscribers And Newsletters']);
+        Permission::create(['name' => 'subscribers.view.trash', 'group' => 'Subscribers And Newsletters']);
+        Permission::create(['name' => 'subscribers.restore', 'group' => 'Subscribers And Newsletters']);
+        Permission::create(['name' => 'subscribers.force.delete', 'group' => 'Subscribers And Newsletters']);
     }
 }

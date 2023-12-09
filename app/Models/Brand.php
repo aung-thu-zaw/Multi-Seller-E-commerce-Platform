@@ -46,18 +46,20 @@ class Brand extends Model
     protected function logo(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/brands/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/brands/$value"),
         );
     }
 
     protected static function booted(): void
     {
+        parent::boot();
+
         static::addGlobalScope(new FilterByScope());
     }
 
     public static function deleteImage(string $brandImage): void
     {
-        if (! empty($brandImage) && file_exists(storage_path('app/public/brands/'.pathinfo($brandImage, PATHINFO_BASENAME)))) {
+        if (!empty($brandImage) && file_exists(storage_path('app/public/brands/'.pathinfo($brandImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/brands/'.pathinfo($brandImage, PATHINFO_BASENAME)));
         }
     }
