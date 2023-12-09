@@ -11,6 +11,11 @@ use Inertia\ResponseFactory;
 
 class HelpPageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:help-pages.edit');
+    }
+
     public function privacyAndPolicy(): Response|ResponseFactory
     {
         $privacyAndPolicy = HelpPage::where('title', 'Privacy And Policy')->first();

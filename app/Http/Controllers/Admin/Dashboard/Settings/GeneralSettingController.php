@@ -12,6 +12,11 @@ use Inertia\ResponseFactory;
 
 class GeneralSettingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:general-settings.edit');
+    }
+
     public function edit(): Response|ResponseFactory
     {
         $generalSetting = GeneralSetting::findOrFail(1);

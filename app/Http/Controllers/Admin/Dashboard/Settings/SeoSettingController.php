@@ -12,6 +12,11 @@ use Inertia\ResponseFactory;
 
 class SeoSettingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:seo-settings.edit');
+    }
+
     public function edit(): Response|ResponseFactory
     {
         $seoSetting = SeoSetting::findOrFail(1);

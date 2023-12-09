@@ -15,6 +15,12 @@ class BlogCommentController extends Controller
 {
     use HandlesQueryStringParameters;
 
+    public function __construct()
+    {
+        $this->middleware('permission:blog-contents.view', ['only' => ['index']]);
+        $this->middleware('permission:blog-contents.delete', ['only' => ['destroy', 'destroySelected']]);
+    }
+
     public function index(): Response|ResponseFactory
     {
         $blogComments = BlogComment::search(request('search'))
