@@ -120,6 +120,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'automated-filter-words.force.delete', 'group' => 'Rating Management']);
 
         Permission::create(['name' => 'general-settings.edit', 'group' => 'Settings']);
+        
         Permission::create(['name' => 'seo-settings.edit', 'group' => 'Settings']);
     }
 }

@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\Dashboard\Faqs\FaqSubcategoryController;
 use App\Http\Controllers\Admin\Dashboard\HelpPageController;
 use App\Http\Controllers\Admin\Dashboard\RatingManagement\AutomatedFilterWordController;
 use App\Http\Controllers\Admin\Dashboard\Settings\GeneralSettingController;
+use App\Http\Controllers\Admin\Dashboard\Settings\SeoSettingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/login', LoginController::class)
@@ -240,8 +241,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-
-
         Route::controller(GeneralSettingController::class)
         ->prefix('/general-settings')
         ->name('general-settings.')
@@ -250,6 +249,12 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             Route::patch('/{general_setting}', 'update')->name("update");
         });
 
-
+        Route::controller(SeoSettingController::class)
+        ->prefix('/seo-settings')
+        ->name('seo-settings.')
+        ->group(function () {
+            Route::get('/', 'edit')->name("edit");
+            Route::patch('/{seo_setting}', 'update')->name("update");
+        });
 
     });
