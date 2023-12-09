@@ -12,7 +12,8 @@ return new class () extends Migration {
     {
         Schema::create('automated_filter_words', function (Blueprint $table) {
             $table->id();
-            $table->string('word');
+            $table->string('word')->unique();
+            $table->string('slug')->unique();
             $table->softDeletes();
             $table->timestamps();
         });

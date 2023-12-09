@@ -110,5 +110,13 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'admin-manage.view.trash', 'group' => 'Account Management']);
         Permission::create(['name' => 'admin-manage.restore', 'group' => 'Account Management']);
         Permission::create(['name' => 'admin-manage.force.delete', 'group' => 'Account Management']);
+
+        Permission::create(['name' => 'automated-filter-words.view', 'group' => 'Rating Management']);
+        Permission::create(['name' => 'automated-filter-words.create', 'group' => 'Rating Management']);
+        Permission::create(['name' => 'automated-filter-words.edit', 'group' => 'Rating Management']);
+        Permission::create(['name' => 'automated-filter-words.delete', 'group' => 'Rating Management']);
+        Permission::create(['name' => 'automated-filter-words.view.trash', 'group' => 'Rating Management']);
+        Permission::create(['name' => 'automated-filter-words.restore', 'group' => 'Rating Management']);
+        Permission::create(['name' => 'automated-filter-words.force.delete', 'group' => 'Rating Management']);
     }
 }

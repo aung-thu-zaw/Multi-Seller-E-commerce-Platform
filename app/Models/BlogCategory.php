@@ -19,11 +19,6 @@ class BlogCategory extends Model
     use Searchable;
     use SoftDeletes;
 
-    /**
-     * @var string[]
-     */
-    protected $guarded = [];
-
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()

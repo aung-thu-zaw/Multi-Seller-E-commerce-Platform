@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\Dashboard\Faqs\FaqCategoryController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqContentController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqSubcategoryController;
 use App\Http\Controllers\Admin\Dashboard\HelpPageController;
+use App\Http\Controllers\Admin\Dashboard\RatingManagement\AutomatedFilterWordController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/login', LoginController::class)
@@ -221,5 +222,21 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
             Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
         });
+
+
+        // Automated Filter Word Operations
+        Route::resource('automated-filter-words', AutomatedFilterWordController::class)->except(['show']);
+        Route::controller(AutomatedFilterWordController::class)
+            ->prefix('/automated-filter-words/trash')
+            ->name('automated-filter-words.')
+            ->group(function () {
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
 
     });

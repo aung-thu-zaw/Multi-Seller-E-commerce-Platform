@@ -17,7 +17,7 @@ class AutomatedFilterWordFactory extends Factory
     public function definition(): array
     {
         return [
-            "word" => fake()->word()
+            "word" => fake()->unique()->word()
         ];
     }
 }

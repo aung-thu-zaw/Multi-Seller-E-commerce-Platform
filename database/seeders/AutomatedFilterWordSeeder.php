@@ -13,6 +13,6 @@ class AutomatedFilterWordSeeder extends Seeder
      */
     public function run(): void
     {
-        AutomatedFilterWord::factory(200)->create();
+        AutomatedFilterWord::factory(50)->create();
     }
 }
