@@ -5,6 +5,8 @@ import { inject, ref } from 'vue'
 import { router, useForm, usePage } from '@inertiajs/vue3'
 import { useQueryStringParams } from './useQueryStringParams'
 import { useStore } from 'vuex'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 export function useResourceActions(formFields = {}) {
   const swal = inject('$swal')
@@ -57,7 +59,13 @@ export function useResourceActions(formFields = {}) {
   }
 
   // Edit Action
-  const editAction = async (entityType, editRouteName, targetIdentifier = {}, method = 'patch') => {
+  const editAction = async (
+    entityType,
+    editRouteName,
+    targetIdentifier = {},
+    method = 'patch',
+    alertType = 'sweetAlert'
+  ) => {
     await recaptchaLoaded()
     form.captcha_token = await executeRecaptcha(`edit_${formatToSnakeCase(entityType)}`)
     processing.value = true
@@ -73,12 +81,23 @@ export function useResourceActions(formFields = {}) {
         onSuccess: () => {
           const successMessage = usePage().props.flash.success
           if (successMessage) {
-            swal({
-              icon: 'success',
-              title: __(successMessage, {
-                label: __(entityType)
+            if (alertType === 'sweetAlert') {
+              swal({
+                icon: 'success',
+                title: __(successMessage, {
+                  label: __(entityType)
+                })
               })
-            })
+            } else if (alertType === 'toast') {
+              toast.success(
+                __(successMessage, {
+                  label: __(entityType)
+                }),
+                {
+                  autoClose: 2000
+                }
+              )
+            }
           }
         },
         onFinish: () => (processing.value = false),
