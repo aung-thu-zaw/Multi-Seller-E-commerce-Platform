@@ -239,4 +239,8 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
+
+
+            
+
     });
