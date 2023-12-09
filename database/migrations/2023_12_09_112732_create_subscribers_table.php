@@ -14,6 +14,7 @@ return new class () extends Migration {
             $table->id();
             $table->string("email")->unique();
             $table->enum("status", ["subscribed","unsubscribed"]);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

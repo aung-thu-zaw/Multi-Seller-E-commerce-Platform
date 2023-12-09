@@ -1389,9 +1389,9 @@ const toggleCollapseShow = (classes) => {
 
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
           <!-- Subscribers -->
-          <li v-show="can('brands.view')" class="items-center">
+          <li v-show="can('subscribers.view')" class="items-center">
             <Link
-              :href="route('admin.brands.index')"
+              :href="route('admin.subscribers.index')"
               :data="{
                 page: 1,
                 per_page: 5,
@@ -1400,8 +1400,8 @@ const toggleCollapseShow = (classes) => {
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/subscribers'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/subscribers')
               }"
             >
               <i class="fa-solid fa-bell mr-2"></i>
