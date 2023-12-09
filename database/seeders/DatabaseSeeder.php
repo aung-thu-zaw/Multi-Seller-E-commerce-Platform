@@ -31,7 +31,9 @@ class DatabaseSeeder extends Seeder
             FaqContentSeeder::class,
             HelpPageSeeder::class,
             // ProductReviewSeeder::class,
-            AutomatedFilterWordSeeder::class
+            AutomatedFilterWordSeeder::class,
+            SeoSettingSeeder::class,
+            GeneralSettingSeeder::class
         ]);
     }
 }

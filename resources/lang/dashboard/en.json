@@ -115,7 +115,7 @@
     "Returns & Refunds": "Returns & Refunds",
     "Privacy & Policy": "Privacy & Policy",
     "Settings": "Settings",
-    "Website Configuration": "Website Configuration",
+    "Settings & Configurations": "Settings & Configurations",
     "Rating Management": "Rating Management",
     "Product Reviews": "Product Reviews",
     "Store Reviews": "Store Reviews",
@@ -228,6 +228,6 @@
     "Delivery Service Ratings": "Delivery Service Ratings",
     "Automated Filter Words": "Automated Filter Words",
     "Automated Filter Word": "Automated Filter Word",
-    "word":"word",
-    "Filter Words":"Filter Words"
+    "word": "word",
+    "Filter Words": "Filter Words"
 }
