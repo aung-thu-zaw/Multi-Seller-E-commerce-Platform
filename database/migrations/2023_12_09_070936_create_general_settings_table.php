@@ -19,7 +19,7 @@ return new class () extends Migration {
             $table->string('footer_logo')->nullable();
             $table->string('company_phone')->nullable();
             $table->string('company_email')->nullable();
-            $table->string('company_address')->nullable();
+            $table->string('address')->nullable();
             $table->string('support_phone')->nullable();
             $table->string('support_email')->nullable();
             $table->string('support_address')->nullable();

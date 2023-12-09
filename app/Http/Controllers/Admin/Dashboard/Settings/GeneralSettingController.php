@@ -14,9 +14,9 @@ class GeneralSettingController extends Controller
 {
     public function edit(): Response|ResponseFactory
     {
-        $generalSettings = GeneralSetting::all();
+        $generalSetting = GeneralSetting::findOrFail(1);
 
-        return inertia("Admin/Settings/GeneralSettings/Edit", compact("generalSettings"));
+        return inertia("Admin/Settings/GeneralSettings/Edit", compact("generalSetting"));
     }
 
     public function update(GeneralSettingRequest $request, GeneralSetting $generalSetting): RedirectResponse

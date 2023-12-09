@@ -5,7 +5,6 @@ import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
 import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
 import InputError from '@/Components/Forms/Fields/InputError.vue'
 import FormButton from '@/Components/Buttons/FormButton.vue'
-import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
 import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
@@ -35,18 +34,13 @@ const { form, processing, errors, editAction } = useResourceActions({
         >
           <BreadcrumbItem label="Edit" />
         </Breadcrumb>
-
-        <!-- Go Back Button -->
-        <div class="w-auto flex items-center justify-end">
-          <GoBackButton />
-        </div>
       </div>
 
       <!-- Form Start -->
       <div class="border p-10 bg-white rounded-md">
         <form
           @submit.prevent="
-            editAction('Help Pages', 'admin.help-pages.update', {
+            editAction('Help Page', 'admin.help-pages.update', {
               help_page: returnsAndRefunds?.id
             })
           "

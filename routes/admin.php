@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\Dashboard\Faqs\FaqContentController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqSubcategoryController;
 use App\Http\Controllers\Admin\Dashboard\HelpPageController;
 use App\Http\Controllers\Admin\Dashboard\RatingManagement\AutomatedFilterWordController;
+use App\Http\Controllers\Admin\Dashboard\Settings\GeneralSettingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/login', LoginController::class)
@@ -241,6 +242,14 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
 
 
 
-            
+        Route::controller(GeneralSettingController::class)
+        ->prefix('/general-settings')
+        ->name('general-settings.')
+        ->group(function () {
+            Route::get('/', 'edit')->name("edit");
+            Route::patch('/{general_setting}', 'update')->name("update");
+        });
+
+
 
     });
