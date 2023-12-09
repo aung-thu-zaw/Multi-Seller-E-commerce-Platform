@@ -1787,6 +1787,28 @@ const toggleCollapseShow = (classes) => {
                     {{ __('General Settings') }}
                   </Link>
                 </li>
+
+                <li v-show="can('seo-settings.edit')" class="items-center">
+                  <Link
+                    :href="route('admin.seo-settings.edit')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc'
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/seo-settings'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/seo-settings')
+                    }"
+                  >
+                    {{ __('SEO Settings') }}
+                  </Link>
+                </li>
+
                 <li v-show="can('blog-contents.view')" class="items-center">
                   <Link
                     :href="route('admin.blog-contents.index')"
@@ -1805,27 +1827,6 @@ const toggleCollapseShow = (classes) => {
                     }"
                   >
                     {{ __('Appearance Settings') }}
-                  </Link>
-                </li>
-
-                <li v-show="can('blog-comments.view')" class="items-center">
-                  <Link
-                    :href="route('admin.blog-comments.index')"
-                    :data="{
-                      page: 1,
-                      per_page: 5,
-                      sort: 'id',
-                      direction: 'desc'
-                    }"
-                    class="text-xs py-3 font-bold block"
-                    :class="{
-                      'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/blog-comments'),
-                      'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/blog-comments')
-                    }"
-                  >
-                    {{ __('SEO Settings') }}
                   </Link>
                 </li>
 
