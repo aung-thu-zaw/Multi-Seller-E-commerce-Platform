@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Dashboard\Settings;
 
+use App\Actions\Admin\Settings\UpdateGeneralSettingAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Admin\Settings\GeneralSettingRequest;
 use App\Models\GeneralSetting;
@@ -18,13 +19,9 @@ class GeneralSettingController extends Controller
         return inertia("Admin/Settings/GeneralSettings/Edit", compact("generalSettings"));
     }
 
-    public function update(GeneralSettingRequest $request): RedirectResponse
+    public function update(GeneralSettingRequest $request, GeneralSetting $generalSetting): RedirectResponse
     {
-        foreach ($request->all() as $key => $value) {
-
-            GeneralSetting::updateOrCreate(['key' => $key], ['value' => $value]);
-
-        }
+        (new UpdateGeneralSettingAction())->handle($request->validated(), $generalSetting);
 
         return back()->with('success', ':label has been successfully updated.');
     }

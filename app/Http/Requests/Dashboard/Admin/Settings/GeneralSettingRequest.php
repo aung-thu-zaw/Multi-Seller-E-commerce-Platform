@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Dashboard\Admin\Settings;
 
+use App\Rules\RecaptchaRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -23,9 +24,36 @@ class GeneralSettingRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'key' => ['required', 'string', Rule::exists('general_settings', 'key')],
-            'value' => ['nullable', 'string'],
+        $rules = [
+            'site_name' => ['nullable', 'string'],
+            'tagline' => ['nullable', 'string', 'max:255'],
+            'company_phone' => ['nullable', 'string'],
+            'company_email' => ['nullable', 'email'],
+            'company_address' => ['nullable', 'string', 'max:255'],
+            'support_phone' => ['nullable', 'string'],
+            'support_email' => ['nullable', 'email'],
+            'support_address' => ['nullable', 'string', 'max:255'],
+            'copyright' => ['nullable', 'string', 'max:255'],
+            'facebook_url' => ['nullable', 'url'],
+            'twitter_url' => ['nullable', 'url'],
+            'instagram_url' => ['nullable', 'url'],
+            'linked_in_url' => ['nullable', 'url'],
+            'youtube_url' => ['nullable', 'url'],
+            'captcha_token' => [new RecaptchaRule()],
         ];
+
+        if ($this->hasFile('header_logo')) {
+            $rules['header_logo'] = ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'];
+        }
+
+        if ($this->hasFile('footer_logo')) {
+            $rules['footer_logo'] = ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'];
+        }
+
+        if ($this->hasFile('favicon')) {
+            $rules['favicon'] = ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'];
+        }
+
+        return $rules;
     }
 }
