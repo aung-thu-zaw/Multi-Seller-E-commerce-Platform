@@ -246,5 +246,9 @@
     "LinkedIn URL": "LinkedIn URL",
     "Meta Title": "Meta ခေါင်းစဉ်",
     "Meta Keyword": "Meta သော့ချက်စာလုံး",
-    "Meta Description": "Meta ဖော်ပြချက်"
+    "Meta Description": "Meta ဖော်ပြချက်",
+    "Your Current Password":"သင်၏လက်ရှိစကားဝှက်",
+    "Current Password":"လက်ရှိစကားဝှက်",
+    "New Password":"စကားဝှက်အသစ်",
+    "Password updated successfully":"စကားဝှက်ကို အောင်မြင်စွာ မွမ်းမံပြီးပါပြီ။"
 }

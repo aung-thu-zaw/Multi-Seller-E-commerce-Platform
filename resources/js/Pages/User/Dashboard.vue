@@ -1,770 +1,110 @@
-<!-- <script setup>
-import UserDashboardLayout from '@/Layouts/UserDashboardLayout.vue'
-import { Head, usePage } from '@inertiajs/vue3'
-import { computed } from 'vue'
-
-defineProps({ mustVerifyEmail: Boolean, status: String })
-
-const user = computed(() => usePage().props.auth?.user)
-</script>
-
-<template>
-  <Head :title="user?.name + '\'s ' + __('Dashboard')" />
-
-  <UserDashboardLayout>
-    <div class="ms-6 w-full pt-10">this is my dashboard</div>
-  </UserDashboardLayout>
-</template> -->
-
-
 <script setup>
+import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
+import InputError from '@/Components/Forms/Fields/InputError.vue'
+import InputField from '@/Components/Forms/Fields/InputField.vue'
+import FormButton from '@/Components/Buttons/FormButton.vue'
 import UserDashboardLayout from '@/Layouts/UserDashboardLayout.vue'
-import NormalButton from '@/Components/Buttons/NormalButton.vue'
-import { Head, Link } from '@inertiajs/vue3'
+import { Head, useForm, usePage } from '@inertiajs/vue3'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
+import { useReCaptcha } from 'vue-recaptcha-v3'
+import { __ } from '@/Services/translations-inside-setup.js'
+
+const form = useForm({
+  current_password: '',
+  password: '',
+  password_confirmation: '',
+  captcha_token: null
+})
+
+const { executeRecaptcha, recaptchaLoaded } = useReCaptcha()
+
+const updatePassword = async () => {
+  await recaptchaLoaded()
+  form.captcha_token = await executeRecaptcha('change_password')
+
+  form.put(route('password.update'), {
+    preserveScroll: true,
+    onSuccess: () => {
+      form.reset()
+
+      const successMessage = usePage().props.flash.success
+      toast.success(__(successMessage), {
+        autoClose: 2000
+      })
+    },
+    onError: () => {
+      if (form.errors.password) {
+        form.reset('password', 'password_confirmation')
+        passwordInput.value.focus()
+      }
+      if (form.errors.current_password) {
+        form.reset('current_password')
+        currentPasswordInput.value.focus()
+      }
+    }
+  })
+}
 </script>
 
 <template>
-  <Head :title="__('Followed Stores')" />
+  <Head :title="__('Change Password')" />
+
   <UserDashboardLayout>
     <h1 class="font-bold text-md text-gray-700 mb-5 pb-5 border-b">
-      <i class="fa-solid fa-store"></i>
-      {{ __('Followed Stores') }}
+      <i class="fa-solid fa-lock"></i>
+      {{ __('Change Password') }}
     </h1>
 
-    <div class="border border-gray-300 bg-white rounded-md px-5">
-      <nav class="flex space-x-2" aria-label="Tabs" role="tablist">
-        <button
-          type="button"
-          class="hs-tab-active:font-semibold hs-tab-active:border-orange-600 hs-tab-active:text-orange-600 py-4 px-1 inline-flex items-center gap-x-2 border-b-2 border-transparent text-sm font-medium whitespace-nowrap text-gray-500 hover:text-orange-600"
-          id="tabs-with-icons-item-1"
-          data-hs-tab="#tabs-with-icons-1"
-          aria-controls="tabs-with-icons-1"
-          role="tab"
-        >
-          To Review
-          <div class="bg-orange-200 rounded-full w-5 h-5 flex items-center justify-center">
-            <span class="text-xs text-orange-600">15</span>
-          </div>
-        </button>
-        <button
-          type="button"
-          class="hs-tab-active:font-semibold hs-tab-active:border-orange-600 hs-tab-active:text-orange-600 py-4 px-1 inline-flex items-center gap-x-2 border-b-2 border-transparent text-sm font-medium whitespace-nowrap text-gray-500 hover:text-orange-600"
-          id="tabs-with-icons-item-2"
-          data-hs-tab="#tabs-with-icons-2"
-          aria-controls="tabs-with-icons-2"
-          role="tab"
-        >
-          History Reviewed
-        </button>
-      </nav>
-    </div>
+    <div class="p-10 border border-gray-200 bg-white rounded-md">
+      <form @submit.prevent="updatePassword" class="space-y-4 md:space-y-6">
+        <div>
+          <InputLabel :label="__('Current Password')" required />
 
-    <div class="mt-3">
-      <div id="tabs-with-icons-1" role="tabpanel" aria-labelledby="tabs-with-icons-item-1">
-        <div class="py-10 border border-gray-200 bg-white rounded-md space-y-5">
-          <div class="px-5">
-            <div class="mb-5">
-              <h3 class="font-bold text-md text-gray-800">K Mobile Shop</h3>
-              <p class="text-xs text-gray-500 font-medium">Purchased on 13 Oct 2023</p>
-            </div>
+          <InputField
+            type="password"
+            name="current-password"
+            icon="fa-lock"
+            v-model="form.current_password"
+            :placeholder="__('Enter :label', { label: __('Your Current Password') })"
+          />
 
-            <div class="grid grid-cols-2 gap-5">
-              <!-- card -->
-              <div
-                class="border border-gray-200 rounded-md flex items-start justify-between space-x-5 p-5"
-              >
-                <div class="w-[400px] flex items-start">
-                  <div class="min-w-[100px] overflow-hidden">
-                    <img
-                      src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
-                      alt="product image"
-                      class="w-20 h-20 object-cover"
-                    />
-                  </div>
-                  <div class="space-y-1">
-                    <h3 class="font-semibold text-sm text-gray-700 line-clamp-2">
-                      Naviforce NF9049 | Men’s Dual Movement Stainless Steel Watch, Original, Black
-                      & Blue Watch Strap Color:Black
-                    </h3>
-
-                    <div class="space-x-1 flex items-center text-xs font-medium mb-5">
-                      <p>Brand : Water</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Color : Orange</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Size : Lg</p>
-                    </div>
-
-                    <div class="flex items-center justify-end pt-5">
-                      <a class="text-orange-600 text-xs font-bold hover:text-orange-500">
-                        <i class="fa-solid fa-pen"></i>
-                        Write Review
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- card -->
-              <div
-                class="border border-gray-200 rounded-md flex items-start justify-between space-x-5 p-5"
-              >
-                <div class="w-[400px] flex items-start">
-                  <div class="min-w-[100px] overflow-hidden">
-                    <img
-                      src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
-                      alt="product image"
-                      class="w-20 h-20 object-cover"
-                    />
-                  </div>
-                  <div class="space-y-1">
-                    <h3 class="font-semibold text-sm text-gray-700 line-clamp-2">
-                      Naviforce NF9049 | Men’s Dual Movement Stainless Steel Watch, Original, Black
-                      & Blue Watch Strap Color:Black
-                    </h3>
-
-                    <div class="space-x-1 flex items-center text-xs font-medium mb-5">
-                      <p>Brand : Water</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Color : Orange</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Size : Lg</p>
-                    </div>
-
-                    <div class="flex items-center justify-end pt-5">
-                      <a class="text-orange-600 text-xs font-bold hover:text-orange-500">
-                        <i class="fa-solid fa-pen"></i>
-                        Write Review
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- card -->
-              <div
-                class="border border-gray-200 rounded-md flex items-start justify-between space-x-5 p-5"
-              >
-                <div class="w-[400px] flex items-start">
-                  <div class="min-w-[100px] overflow-hidden">
-                    <img
-                      src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
-                      alt="product image"
-                      class="w-20 h-20 object-cover"
-                    />
-                  </div>
-                  <div class="space-y-1">
-                    <h3 class="font-semibold text-sm text-gray-700 line-clamp-2">
-                      Naviforce NF9049 | Men’s Dual Movement Stainless Steel Watch, Original, Black
-                      & Blue Watch Strap Color:Black
-                    </h3>
-
-                    <div class="space-x-1 flex items-center text-xs font-medium mb-5">
-                      <p>Brand : Water</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Color : Orange</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Size : Lg</p>
-                    </div>
-
-                    <div class="flex items-center justify-end pt-5">
-                      <a class="text-orange-600 text-xs font-bold hover:text-orange-500">
-                        <i class="fa-solid fa-pen"></i>
-                        Write Review
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <hr />
-
-          <div class="px-5">
-            <div class="mb-5">
-              <h3 class="font-bold text-md text-gray-800">K Mobile Shop</h3>
-              <p class="text-xs text-gray-500 font-medium">Purchased on 13 Oct 2023</p>
-            </div>
-
-            <div class="grid grid-cols-2 gap-5">
-              <!-- card -->
-              <div
-                class="border border-gray-200 rounded-md flex items-start justify-between space-x-5 p-5"
-              >
-                <div class="w-[400px] flex items-start">
-                  <div class="min-w-[100px] overflow-hidden">
-                    <img
-                      src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
-                      alt="product image"
-                      class="w-20 h-20 object-cover"
-                    />
-                  </div>
-                  <div class="space-y-1">
-                    <h3 class="font-semibold text-sm text-gray-700 line-clamp-2">
-                      Naviforce NF9049 | Men’s Dual Movement Stainless Steel Watch, Original, Black
-                      & Blue Watch Strap Color:Black
-                    </h3>
-
-                    <div class="space-x-1 flex items-center text-xs font-medium mb-5">
-                      <p>Brand : Water</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Color : Orange</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Size : Lg</p>
-                    </div>
-
-                    <div class="flex items-center justify-end pt-5">
-                      <a class="text-orange-600 text-xs font-bold hover:text-orange-500">
-                        <i class="fa-solid fa-pen"></i>
-                        Write Review
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- card -->
-              <div
-                class="border border-gray-200 rounded-md flex items-start justify-between space-x-5 p-5"
-              >
-                <div class="w-[400px] flex items-start">
-                  <div class="min-w-[100px] overflow-hidden">
-                    <img
-                      src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
-                      alt="product image"
-                      class="w-20 h-20 object-cover"
-                    />
-                  </div>
-                  <div class="space-y-1">
-                    <h3 class="font-semibold text-sm text-gray-700 line-clamp-2">
-                      Naviforce NF9049 | Men’s Dual Movement Stainless Steel Watch, Original, Black
-                      & Blue Watch Strap Color:Black
-                    </h3>
-
-                    <div class="space-x-1 flex items-center text-xs font-medium mb-5">
-                      <p>Brand : Water</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Color : Orange</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Size : Lg</p>
-                    </div>
-
-                    <div class="flex items-center justify-end pt-5">
-                      <a class="text-orange-600 text-xs font-bold hover:text-orange-500">
-                        <i class="fa-solid fa-pen"></i>
-                        Write Review
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <hr />
-
-          <div class="px-5">
-            <div class="mb-5">
-              <h3 class="font-bold text-md text-gray-800">K Mobile Shop</h3>
-              <p class="text-xs text-gray-500 font-medium">Purchased on 13 Oct 2023</p>
-            </div>
-
-            <div class="grid grid-cols-2 gap-5">
-              <!-- card -->
-              <div
-                class="border border-gray-200 rounded-md flex items-start justify-between space-x-5 p-5"
-              >
-                <div class="w-[400px] flex items-start">
-                  <div class="min-w-[100px] overflow-hidden">
-                    <img
-                      src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
-                      alt="product image"
-                      class="w-20 h-20 object-cover"
-                    />
-                  </div>
-                  <div class="space-y-1">
-                    <h3 class="font-semibold text-sm text-gray-700 line-clamp-2">
-                      Naviforce NF9049 | Men’s Dual Movement Stainless Steel Watch, Original, Black
-                      & Blue Watch Strap Color:Black
-                    </h3>
-
-                    <div class="space-x-1 flex items-center text-xs font-medium mb-5">
-                      <p>Brand : Water</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Color : Orange</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Size : Lg</p>
-                    </div>
-
-                    <div class="flex items-center justify-end pt-5">
-                      <a class="text-orange-600 text-xs font-bold hover:text-orange-500">
-                        <i class="fa-solid fa-pen"></i>
-                        Write Review
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <InputError :message="form.errors?.current_password" />
         </div>
-      </div>
+        <div>
+          <InputLabel :label="__('New Password')" required />
 
-      <div
-        id="tabs-with-icons-2"
-        class="hidden"
-        role="tabpanel"
-        aria-labelledby="tabs-with-icons-item-2"
-      >
-        <div class="py-10 border border-gray-200 bg-white rounded-md space-y-5">
-          <div class="px-5">
-            <div class="mb-5">
-              <h3 class="font-bold text-md text-gray-800">K Mobile Shop</h3>
-              <p class="text-xs text-gray-500 font-medium">Purchased on 13 Oct 2023</p>
-            </div>
-            <div class="space-y-5">
-              <!-- card -->
-              <div
-                class="border border-gray-200 rounded-md flex flex-col items-center space-y-3 justify-between p-5"
-              >
-                <div
-                  class="w-full flex items-start bg-gray-100 px-5 py-2.5 rounded-md border border-gray-200"
-                >
-                  <div class="min-w-[100px] overflow-hidden">
-                    <img
-                      src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
-                      alt="product image"
-                      class="w-20 h-20 object-cover"
-                    />
-                  </div>
-                  <div class="space-y-1">
-                    <h3 class="font-semibold text-sm text-gray-700 line-clamp-2">
-                      Naviforce NF9049 | Men’s Dual Movement Stainless Steel Watch, Original, Black
-                      & Blue Watch Strap Color:Black
-                    </h3>
+          <InputField
+            type="password"
+            name="new-password"
+            icon="fa-lock"
+            v-model="form.password"
+            :placeholder="__('Enter :label', { label: __('New Password') })"
+          />
 
-                    <div class="space-x-1 flex items-center text-xs font-medium mb-5">
-                      <p>Brand : Water</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Color : Orange</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Size : Lg</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="flex items-center justify-between w-full">
-                  <!-- Rating -->
-                  <div class="flex items-center space-x-0.5">
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                  </div>
-                  <!-- End Rating -->
-                  <button class="text-orange-600 text-sm font-bold">
-                    <i class="fa-solid fa-edit"></i>
-                    Edit
-                  </button>
-                </div>
-
-                <p class="text-sm font-medium text-gray-700">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos similique
-                  vitae nobis debitis cupiditate odit incidunt eaque nihil ipsum quasi harum
-                  perferendis magni voluptates vel ex, aperiam rerum fugiat laboriosam?
-                </p>
-              </div>
-
-              <!-- card -->
-              <div
-                class="border border-gray-200 rounded-md flex flex-col items-center space-y-3 justify-between p-5"
-              >
-                <div
-                  class="w-full flex items-start bg-gray-100 px-5 py-2.5 rounded-md border border-gray-200"
-                >
-                  <div class="min-w-[100px] overflow-hidden">
-                    <img
-                      src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
-                      alt="product image"
-                      class="w-20 h-20 object-cover"
-                    />
-                  </div>
-                  <div class="space-y-1">
-                    <h3 class="font-semibold text-sm text-gray-700 line-clamp-2">
-                      Naviforce NF9049 | Men’s Dual Movement Stainless Steel Watch, Original, Black
-                      & Blue Watch Strap Color:Black
-                    </h3>
-
-                    <div class="space-x-1 flex items-center text-xs font-medium mb-5">
-                      <p>Brand : Water</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Color : Orange</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Size : Lg</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="flex items-center justify-between w-full">
-                  <!-- Rating -->
-                  <div class="flex items-center space-x-0.5">
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                  </div>
-                  <!-- End Rating -->
-                  <button class="text-orange-600 text-sm font-bold">
-                    <i class="fa-solid fa-edit"></i>
-                    Edit
-                  </button>
-                </div>
-
-                <p class="text-sm font-medium text-gray-700">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos similique
-                  vitae nobis debitis cupiditate odit incidunt eaque nihil ipsum quasi harum
-                  perferendis magni voluptates vel ex, aperiam rerum fugiat laboriosam?
-                </p>
-              </div>
-
-              <!-- card -->
-              <div
-                class="border border-gray-200 rounded-md flex flex-col items-center space-y-3 justify-between p-5"
-              >
-                <div
-                  class="w-full flex items-start bg-gray-100 px-5 py-2.5 rounded-md border border-gray-200"
-                >
-                  <div class="min-w-[100px] overflow-hidden">
-                    <img
-                      src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
-                      alt="product image"
-                      class="w-20 h-20 object-cover"
-                    />
-                  </div>
-                  <div class="space-y-1">
-                    <h3 class="font-semibold text-sm text-gray-700 line-clamp-2">
-                      Naviforce NF9049 | Men’s Dual Movement Stainless Steel Watch, Original, Black
-                      & Blue Watch Strap Color:Black
-                    </h3>
-
-                    <div class="space-x-1 flex items-center text-xs font-medium mb-5">
-                      <p>Brand : Water</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Color : Orange</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Size : Lg</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="flex items-center justify-between w-full">
-                  <!-- Rating -->
-                  <div class="flex items-center space-x-0.5">
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                  </div>
-                  <!-- End Rating -->
-                  <button class="text-orange-600 text-sm font-bold">
-                    <i class="fa-solid fa-edit"></i>
-                    Edit
-                  </button>
-                </div>
-
-                <p class="text-sm font-medium text-gray-700">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos similique
-                  vitae nobis debitis cupiditate odit incidunt eaque nihil ipsum quasi harum
-                  perferendis magni voluptates vel ex, aperiam rerum fugiat laboriosam?
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <hr />
-          <div class="px-5">
-            <div class="mb-5">
-              <h3 class="font-bold text-md text-gray-800">K Mobile Shop</h3>
-              <p class="text-xs text-gray-500 font-medium">Purchased on 13 Oct 2023</p>
-            </div>
-            <div class="space-y-5">
-              <!-- card -->
-              <div
-                class="border border-gray-200 rounded-md flex flex-col items-center space-y-3 justify-between p-5"
-              >
-                <div
-                  class="w-full flex items-start bg-gray-100 px-5 py-2.5 rounded-md border border-gray-200"
-                >
-                  <div class="min-w-[100px] overflow-hidden">
-                    <img
-                      src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
-                      alt="product image"
-                      class="w-20 h-20 object-cover"
-                    />
-                  </div>
-                  <div class="space-y-1">
-                    <h3 class="font-semibold text-sm text-gray-700 line-clamp-2">
-                      Naviforce NF9049 | Men’s Dual Movement Stainless Steel Watch, Original, Black
-                      & Blue Watch Strap Color:Black
-                    </h3>
-
-                    <div class="space-x-1 flex items-center text-xs font-medium mb-5">
-                      <p>Brand : Water</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Color : Orange</p>
-                      <span class="text-gray-500">|</span>
-                      <p>Size : Lg</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="flex items-center justify-between w-full">
-                  <!-- Rating -->
-                  <div class="flex items-center space-x-0.5">
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <svg
-                      class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                  </div>
-                  <!-- End Rating -->
-                  <button class="text-orange-600 text-sm font-bold">
-                    <i class="fa-solid fa-edit"></i>
-                    Edit
-                  </button>
-                </div>
-
-                <p class="text-sm font-medium text-gray-700">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos similique
-                  vitae nobis debitis cupiditate odit incidunt eaque nihil ipsum quasi harum
-                  perferendis magni voluptates vel ex, aperiam rerum fugiat laboriosam?
-                </p>
-              </div>
-            </div>
-          </div>
+          <InputError :message="form.errors?.password" />
         </div>
-      </div>
+
+        <div>
+          <InputLabel :label="__('Confirm Password')" required />
+
+          <InputField
+            type="password"
+            name="password-confirmation"
+            icon="fa-lock"
+            v-model="form.password_confirmation"
+            :placeholder="__('Retype Password')"
+          />
+
+          <InputError :message="form.errors?.password_confirmation" />
+        </div>
+
+        <InputError :message="form.errors?.captcha_token" />
+
+        <FormButton :processing="form.processing">
+          {{ __('Save Changes') }}
+        </FormButton>
+      </form>
     </div>
   </UserDashboardLayout>
 </template>

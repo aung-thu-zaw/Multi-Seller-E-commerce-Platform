@@ -246,5 +246,9 @@
     "LinkedIn URL": "LinkedIn URL",
     "Meta Title": "Meta Title",
     "Meta Keyword": "Meta Keyword",
-    "Meta Description": "Meta Description"
+    "Meta Description": "Meta Description",
+    "Your Current Password": "Your Current Password",
+    "Current Password": "Current Password",
+    "New Password": "New Password",
+    "Password updated successfully":"Password updated successfully"
 }
