@@ -9,7 +9,7 @@ import AppLayout from '@/Layouts/AppLayout.vue'
       <div class="w-[1280px] min-h-screen mx-auto flex items-start">
         <UserDashboardSidebar />
 
-        <div class="ms-6 w-full pt-10">
+        <div class="ms-6 w-full">
           <slot />
         </div>
       </div>

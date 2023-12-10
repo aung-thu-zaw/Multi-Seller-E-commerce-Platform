@@ -41,6 +41,11 @@ watch(birthDate, (newBirthDate) => {
   <Head :title="__('My Account')" />
 
   <UserDashboardLayout>
+    <h1 class="font-bold text-md text-gray-700 mb-5 pb-5 border-b">
+      <i class="fa-regular fa-id-card"></i>
+      {{ __('My Account') }}
+    </h1>
+
     <div class="p-10 border border-gray-200 bg-white rounded-md">
       <div class="flex flex-col items-center overflow-hidden py-5 space-y-3">
         <img

@@ -7,6 +7,11 @@ import { Head } from '@inertiajs/vue3'
   <Head :title="__('Address Book')" />
 
   <UserDashboardLayout>
+    <h1 class="font-bold text-md text-gray-700 mb-5 pb-5 border-b">
+      <i class="fa-solid fa-address-book"></i>
+      {{ __('Address Book') }}
+    </h1>
+
     <div class="p-10 border border-gray-200 bg-white rounded-md">
       <div class="mb-5 flex items-center justify-end">
         <button
