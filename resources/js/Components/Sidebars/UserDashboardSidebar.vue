@@ -13,6 +13,7 @@ import { Link } from '@inertiajs/vue3'
       role="tablist"
       data-hs-tabs-vertical="true"
     >
+      <!-- Dashboard -->
       <Link
         :href="route('user.dashboard')"
         as="button"
@@ -27,6 +28,7 @@ import { Link } from '@inertiajs/vue3'
         {{ __('Dashboard') }}
       </Link>
 
+      <!-- My Account -->
       <Link
         :href="route('user.my-account.edit')"
         as="button"
@@ -41,103 +43,177 @@ import { Link } from '@inertiajs/vue3'
         {{ __('My Account') }}
       </Link>
 
+      <!-- Address Book -->
       <Link
         href="#"
         as="button"
         class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
-      >
-        <i class="fa-solid fa-lock"></i>
-        {{ __('Change Password') }}
-      </Link>
-
-      <Link
-        href="#"
-        as="button"
-        class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
-      >
-        <i class="fa-solid fa-ban"></i>
-        {{ __('Delete Account') }}
-      </Link>
-
-      <Link
-        href="#"
-        as="button"
-        class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
-      >
-        <i class="fa-solid fa-gear"></i>
-        {{ __('Notification Settings') }}
-      </Link>
-
-      <Link
-        href="#"
-        as="button"
-        class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
-      >
-        <i class="fa-solid fa-boxes-packing"></i>
-        {{ __('My Orders') }}
-      </Link>
-
-      <Link
-        href="#"
-        as="button"
-        class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
-      >
-        <i class="fa-solid fa-heart"></i>
-        {{ __('My Wishlists') }}
-      </Link>
-
-      <Link
-        href="#"
-        as="button"
-        class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
+        :class="{
+          'text-orange-600 hover:text-orange-500 border-s-[3px] border-orange-600':
+            $page.url === '/user/address-book',
+          'text-slate-600 hover:text-slate-500 border-transparent':
+            $page.url !== '/user/address-book'
+        }"
       >
         <i class="fa-solid fa-address-book"></i>
         {{ __('Address Book') }}
       </Link>
 
+      <!-- Vouchers -->
       <Link
         href="#"
         as="button"
         class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
+        :class="{
+          'text-orange-600 hover:text-orange-500 border-s-[3px] border-orange-600':
+            $page.url === '/user/vouchers',
+          'text-slate-600 hover:text-slate-500 border-transparent': $page.url !== '/user/vouchers'
+        }"
       >
-        <i class="fa-solid fa-store"></i>
-        {{ __('Followed Stores') }}
+        <i class="fa-solid fa-ticket"></i>
+        {{ __('Vouchers') }}
       </Link>
 
+      <!-- My Orders -->
       <Link
         href="#"
         as="button"
         class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
+        :class="{
+          'text-orange-600 hover:text-orange-500 border-s-[3px] border-orange-600':
+            $page.url === '/user/my-orders',
+          'text-slate-600 hover:text-slate-500 border-transparent': $page.url !== '/user/my-orders'
+        }"
       >
-        <i class="fa-solid fa-star"></i>
-        {{ __('My Reviews') }}
+        <i class="fa-solid fa-boxes-packing"></i>
+        {{ __('My Orders') }}
       </Link>
 
+      <!-- My Returns & Cancellations -->
       <Link
         href="#"
         as="button"
         class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
+        :class="{
+          'text-orange-600 hover:text-orange-500 border-s-[3px] border-orange-600':
+            $page.url === '/user/my-returns-and-cancellations',
+          'text-slate-600 hover:text-slate-500 border-transparent':
+            $page.url !== '/user/my-returns-and-cancellations'
+        }"
       >
         <i class="fa-solid fa-rotate-left"></i>
         {{ __('My Returns & Cancellations') }}
       </Link>
 
+      <!-- My Wishlists -->
       <Link
         href="#"
         as="button"
         class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
+        :class="{
+          'text-orange-600 hover:text-orange-500 border-s-[3px] border-orange-600':
+            $page.url === '/user/my-wishlists',
+          'text-slate-600 hover:text-slate-500 border-transparent':
+            $page.url !== '/user/my-wishlists'
+        }"
+      >
+        <i class="fa-solid fa-heart"></i>
+        {{ __('My Wishlists') }}
+      </Link>
+
+      <!-- My Reviews -->
+      <Link
+        href="#"
+        as="button"
+        class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
+        :class="{
+          'text-orange-600 hover:text-orange-500 border-s-[3px] border-orange-600':
+            $page.url === '/user/my-reviews',
+          'text-slate-600 hover:text-slate-500 border-transparent': $page.url !== '/user/my-reviews'
+        }"
+      >
+        <i class="fa-solid fa-star"></i>
+        {{ __('My Reviews') }}
+      </Link>
+
+      <!-- Followed Stores -->
+      <Link
+        href="#"
+        as="button"
+        class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
+        :class="{
+          'text-orange-600 hover:text-orange-500 border-s-[3px] border-orange-600':
+            $page.url === '/user/followed-stores',
+          'text-slate-600 hover:text-slate-500 border-transparent':
+            $page.url !== '/user/followed-stores'
+        }"
+      >
+        <i class="fa-solid fa-store"></i>
+        {{ __('Followed Stores') }}
+      </Link>
+
+      <!-- Become a Seller -->
+      <Link
+        href="#"
+        as="button"
+        class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
+        :class="{
+          'text-orange-600 hover:text-orange-500 border-s-[3px] border-orange-600':
+            $page.url === '/user/seller/register',
+          'text-slate-600 hover:text-slate-500 border-transparent':
+            $page.url !== '/user/seller/register'
+        }"
       >
         <i class="fa-solid fa-user-check"></i>
         {{ __('Become a Seller') }}
       </Link>
 
+      <!-- Notification Settings -->
       <Link
         href="#"
         as="button"
         class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
+        :class="{
+          'text-orange-600 hover:text-orange-500 border-s-[3px] border-orange-600':
+            $page.url === '/user/notification-settings',
+          'text-slate-600 hover:text-slate-500 border-transparent':
+            $page.url !== '/user/notification-settings'
+        }"
       >
-        <i class="fa-solid fa-ticket"></i>
-        {{ __('Vouchers') }}
+        <i class="fa-solid fa-gear"></i>
+        {{ __('Notification Settings') }}
+      </Link>
+
+      <!-- Change Password -->
+      <Link
+        href="#"
+        as="button"
+        class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
+        :class="{
+          'text-orange-600 hover:text-orange-500 border-s-[3px] border-orange-600':
+            $page.url === '/user/change-password',
+          'text-slate-600 hover:text-slate-500 border-transparent':
+            $page.url !== '/user/change-password'
+        }"
+      >
+        <i class="fa-solid fa-lock"></i>
+        {{ __('Change Password') }}
+      </Link>
+
+      <!-- Delete Account -->
+      <Link
+        href="#"
+        as="button"
+        class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
+        :class="{
+          'text-orange-600 hover:text-orange-500 border-s-[3px] border-orange-600':
+            $page.url === '/user/delete-account',
+          'text-slate-600 hover:text-slate-500 border-transparent':
+            $page.url !== '/user/delete-account'
+        }"
+      >
+        <i class="fa-solid fa-ban"></i>
+        {{ __('Delete Account') }}
       </Link>
     </nav>
   </div>
