@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ecommerce\HelpAndSupport;
 use App\Http\Controllers\Controller;
 use App\Models\FaqCategory;
 use App\Models\FaqContent;
+use App\Models\FaqFeedback;
 use App\Models\FaqSubcategory;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -30,6 +31,12 @@ class FaqController extends Controller
     {
         $faqContent->load(['faqSubcategory.faqCategory']);
 
+        $faqFeedback = FaqFeedback::where(
+            ["faq_content_id" => $faqContent->id],
+            ["user_id" => auth()->id()]
+        )
+            ->first();
+
         $faqCategories = FaqCategory::with('faqSubcategories')->get();
 
         $relatedFaqContents = FaqContent::where('faq_subcategory_id', $faqContent->faq_subcategory_id)
@@ -37,6 +44,6 @@ class FaqController extends Controller
                           ->take(5)
                           ->get();
 
-        return inertia('E-commerce/HelpAndSupport/Faqs/Show', compact('faqContent', 'faqCategories', 'relatedFaqContents'));
+        return inertia('E-commerce/HelpAndSupport/Faqs/Show', compact('faqContent', 'faqFeedback', 'faqCategories', 'relatedFaqContents'));
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Ecommerce\HelpAndSupport\ContactUsController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\FaqController;
+use App\Http\Controllers\Ecommerce\HelpAndSupport\FaqFeedbackController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\HelpCenterController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentReplyController;
@@ -59,6 +60,8 @@ Route::controller(FaqController::class)
          Route::get('/', 'index')->name('index');
          Route::get('/{faq_content}', 'show')->name('show');
      });
+
+Route::post("/faqs/{faq_content}/feedbacks", FaqFeedbackController::class)->name("faqs.feedbacks");
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

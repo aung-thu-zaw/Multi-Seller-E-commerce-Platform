@@ -68,7 +68,7 @@ class FaqContent extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<FaqFeedback>
      */
-    public function feedbacks(): HasMany
+    public function faqFeedbacks(): HasMany
     {
         return $this->hasMany(FaqFeedback::class);
     }
