@@ -15,7 +15,9 @@ import { Link } from '@inertiajs/vue3'
   <nav class="sticky top-0 z-50">
     <div class="bg-orange-600 text-white px-6 py-3 flex items-center justify-between">
       <div>
-        <h4 class="font-bold text-md">E-commerce Platform</h4>
+        <h4 class="font-bold text-md">
+          <Link :href="route('home')">E-commerce Platform</Link>
+        </h4>
       </div>
       <ul class="font-bold text-sm flex items-centers space-x-4">
         <li>
@@ -148,9 +150,9 @@ import { Link } from '@inertiajs/vue3'
     <div class="bg-white">
       <div class="w-[1280px] mx-auto px-10 py-4 flex items-center justify-between">
         <!-- Brand -->
-        <a href="#" class="text-xl text-slate-600 font-bold w-auto max-w-[350px]">
+        <Link :href="route('home')" class="text-xl text-slate-600 font-bold w-auto max-w-[350px]">
           E-commerce Platform
-        </a>
+        </Link>
         <!-- Search -->
         <div class="relative">
           <div class="min-w-[600px]">
@@ -486,12 +488,15 @@ import { Link } from '@inertiajs/vue3'
             </div>
           </li>
 
-          <!-- Our seller shops -->
+          <!-- Our seller stores -->
           <li>
-            <a href="#" class="flex items-center text-gray-700 hover:text-gray-500 font-semibold">
+            <Link
+              :href="route('stores.index')"
+              class="flex items-center text-gray-700 hover:text-gray-500 font-semibold"
+            >
               <i class="fa-solid fa-shop mr-1 text-xs"></i>
-              {{ __('Our Seller Shops') }}
-            </a>
+              {{ __('Our Seller Stores') }}
+            </Link>
           </li>
 
           <!-- Our Blogs -->

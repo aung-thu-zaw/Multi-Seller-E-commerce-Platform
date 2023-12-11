@@ -25,7 +25,7 @@ const params = computed(() => {
 </script>
 
 <template>
-  <Head title="Our Blogs" />
+  <Head :title="__('Our Blogs')" />
 
   <AppLayout>
     <section id="blog-content" class="py-5">

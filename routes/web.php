@@ -9,6 +9,7 @@ use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentReplyController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogController;
 use App\Http\Controllers\Ecommerce\Pages\AboutUsController;
+use App\Http\Controllers\Ecommerce\SellerStoreController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -27,7 +28,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('User/Dashboard', [
+    return Inertia::render('E-commerce/Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -54,6 +55,8 @@ Route::get('/about-us', AboutUsController::class)->name('about-us');
 Route::get('/help-center', HelpCenterController::class)->name('help-center');
 Route::get('/contact-us', [ContactUsController::class,"index"])->name('contact-us');
 Route::post('/contact-us/send-email', [ContactUsController::class,"sendEmail"])->name('contact-us.send-email');
+
+Route::get('/stores', [SellerStoreController::class,"index"])->name('stores.index');
 
 Route::controller(FaqController::class)
      ->prefix('/faqs')

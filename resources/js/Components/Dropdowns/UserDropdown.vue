@@ -51,7 +51,7 @@ const user = computed(() => usePage().props.auth?.user)
         >
           <Link
             as="button"
-            href="#"
+            :href="route('user.my-account.edit')"
             class="text-left text-sm font-semibold block w-full whitespace-nowrap bg-transparent text-slate-700"
           >
             <i class="fa-regular fa-id-card mr-1.5"></i>
