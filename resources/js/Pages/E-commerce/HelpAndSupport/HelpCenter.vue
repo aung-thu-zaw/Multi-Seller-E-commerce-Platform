@@ -1,8 +1,11 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue'
 import HelpCenterQuestionSearchBox from '@/Components/Forms/SearchBoxs/HelpCenterQuestionSearchBox.vue'
-import QuestionCategoryCard from '@/Components/Cards/QuestionCategoryCard.vue'
+import QuestionCategoryCard from '@/Components/Cards/HelpCenter/QuestionCategoryCard.vue'
+import SelfServiceTools from '@/Components/Cards/HelpCenter/SelfServiceTools.vue'
 import { Head, Link } from '@inertiajs/vue3'
+
+defineProps({ topQuestions: Object, faqSubCategories: Object })
 </script>
 
 <template>
@@ -40,101 +43,17 @@ import { Head, Link } from '@inertiajs/vue3'
           </h1>
 
           <div class="grid grid-cols-3 gap-5 w-full">
-            <div class="px-5">
-              <ul class="list-disc font-medium text-sm space-y-5">
-                <li>
-                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
-                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
-                    aspernatur id consequatur labore minus pariatur voluptates beatae!
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
-                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
-                    aspernatur id consequatur labore minus pariatur voluptates beatae!
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
-                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
-                    aspernatur id consequatur labore minus pariatur voluptates beatae!
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
-                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
-                    aspernatur id consequatur labore minus pariatur voluptates beatae!
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="px-5">
-              <ul class="list-disc font-medium text-sm space-y-5">
-                <li>
-                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
-                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
-                    aspernatur id consequatur labore minus pariatur voluptates beatae!
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
-                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
-                    aspernatur id consequatur labore minus pariatur voluptates beatae!
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
-                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
-                    aspernatur id consequatur labore minus pariatur voluptates beatae!
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
-                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
-                    aspernatur id consequatur labore minus pariatur voluptates beatae!
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="px-5">
-              <ul class="list-disc font-medium text-sm space-y-5">
-                <li>
-                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
-                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
-                    aspernatur id consequatur labore minus pariatur voluptates beatae!
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
-                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
-                    aspernatur id consequatur labore minus pariatur voluptates beatae!
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
-                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
-                    aspernatur id consequatur labore minus pariatur voluptates beatae!
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="line-clamp-2 hover:text-orange-600 transition-all">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci vitae
-                    corrupti. Nam quos vero eos. Omnis, non suscipit. Sint reiciendis sapiente
-                    aspernatur id consequatur labore minus pariatur voluptates beatae!
-                  </a>
-                </li>
-              </ul>
+            <div v-for="topQuestion in topQuestions" :key="topQuestion.id">
+              <Link
+                href="#"
+                class="line-clamp-2 text-sm font-medium hover:text-orange-600 transition-all flex items-center justify-start"
+              >
+                <i class="fa-solid fa-circle mr-2 text-[.3rem]"></i>
+
+                <span class="hover:text-orange-700 hover:underline font-medium">
+                  {{ topQuestion.question }}
+                </span>
+              </Link>
             </div>
           </div>
         </div>
@@ -149,18 +68,11 @@ import { Head, Link } from '@inertiajs/vue3'
           </h1>
 
           <div class="grid grid-cols-4 gap-3 w-full">
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
+            <QuestionCategoryCard
+              v-for="faqSubCategory in faqSubCategories"
+              :key="faqSubCategory.id"
+              :faqSubCategory="faqSubCategory"
+            />
           </div>
         </div>
       </div>
@@ -173,16 +85,7 @@ import { Head, Link } from '@inertiajs/vue3'
             {{ __('Self Service Tools') }}
           </h1>
 
-          <div class="grid grid-cols-4 gap-3 w-full">
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-            <QuestionCategoryCard />
-          </div>
+          <SelfServiceTools />
         </div>
       </div>
 

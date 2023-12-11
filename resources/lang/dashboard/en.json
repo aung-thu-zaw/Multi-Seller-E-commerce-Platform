@@ -250,5 +250,9 @@
     "Your Current Password": "Your Current Password",
     "Current Password": "Current Password",
     "New Password": "New Password",
-    "Password updated successfully":"Password updated successfully"
+    "Password updated successfully": "Password updated successfully",
+    "My Returns": "My Returns",
+    "My Cancellations": "My Cancellations",
+    "My Payment Options": "My Payment Options",
+    "My Vouchers": "My Vouchers"
 }

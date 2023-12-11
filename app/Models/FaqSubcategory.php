@@ -6,6 +6,7 @@ use App\Models\Scopes\FilterByScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 use Spatie\Sluggable\HasSlug;
@@ -55,5 +56,13 @@ class FaqSubcategory extends Model
     public function faqCategory(): BelongsTo
     {
         return $this->belongsTo(FaqCategory::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<FaqContent>
+     */
+    public function faqContents(): HasMany
+    {
+        return $this->hasMany(FaqContent::class);
     }
 }
