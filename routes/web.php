@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Ecommerce\HelpAndSupport\ContactUsController;
+use App\Http\Controllers\Ecommerce\HelpAndSupport\FaqController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\HelpCenterController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentReplyController;
@@ -50,6 +51,14 @@ Route::middleware('auth')->group(function () {
 Route::get('/about-us', AboutUsController::class)->name('about-us');
 Route::get('/help-center', HelpCenterController::class)->name('help-center');
 Route::get('/contact-us', ContactUsController::class)->name('contact-us');
+
+Route::controller(FaqController::class)
+     ->prefix('/faqs')
+     ->name('faqs.')
+     ->group(function () {
+         Route::get('/', 'index')->name('index');
+         Route::get('/{faq}', 'show')->name('show');
+     });
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

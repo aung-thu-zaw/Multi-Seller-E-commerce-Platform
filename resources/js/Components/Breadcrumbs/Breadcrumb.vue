@@ -18,6 +18,10 @@ defineProps({
   icon: {
     type: String,
     default: 'fa-home'
+  },
+
+  data: {
+    type: Object
   }
 })
 
@@ -33,7 +37,11 @@ const { dashboardQueryStringParams } = useQueryStringParams()
       <li class="inline-flex items-center">
         <Link
           :href="route(to, targetIdentifier)"
-          :data="dashboardQueryStringParams"
+          :data="
+            $page.url.startsWith('/admin') || $page.url.startsWith('/seller')
+              ? dashboardQueryStringParams
+              : data
+          "
           class="inline-flex items-center text-sm font-bold text-blueGray-600"
           :class="{
             'hover:text-orange-600': $page.url.startsWith('/admin'),

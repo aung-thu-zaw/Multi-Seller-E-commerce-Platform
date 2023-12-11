@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Scopes\FilterByScope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -70,5 +71,29 @@ class FaqContent extends Model
     public function feedbacks(): HasMany
     {
         return $this->hasMany(FaqFeedback::class);
+    }
+
+    /**
+    * @param  array<string>  $filterBy
+    * @param  Builder<FaqContent>  $query
+    */
+    public function scopeFilterBy(Builder $query, array $filterBy): void
+    {
+        $query->when(
+            $filterBy['search_question'] ?? null,
+            function ($query, $search_question) {
+                $query->where(
+                    function ($query) use ($search_question) {
+                        $query->where('question', 'LIKE', '%'.$search_question.'%');
+                    }
+                );
+            }
+        );
+
+        $query->when($filterBy['category'] ?? null, function ($query, $subCategorySlug) {
+            $query->whereHas('faqSubcategory', function ($query) use ($subCategorySlug) {
+                $query->where('slug', $subCategorySlug);
+            });
+        });
     }
 }

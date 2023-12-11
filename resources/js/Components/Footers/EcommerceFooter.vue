@@ -103,9 +103,12 @@ import { Link } from '@inertiajs/vue3'
               </a>
             </p>
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+              <Link
+                :href="route('faqs.index')"
+                class="inline-flex gap-x-2 text-white hover:text-gray-300"
+              >
                 {{ __('FAQs') }}
-              </a>
+              </Link>
             </p>
           </div>
         </div>
