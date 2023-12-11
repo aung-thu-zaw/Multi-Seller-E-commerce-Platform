@@ -17,7 +17,7 @@ const handleSearch = () => {
         search_blog: blogSearch.value,
         sort: usePage().props.ziggy.query?.sort,
         direction: usePage().props.ziggy.query?.direction,
-        page: usePage().props.ziggy.query?.page,
+        // page: usePage().props.ziggy.query?.page,
         blog_category: usePage().props.ziggy.query?.blog_category,
         tag: usePage().props.ziggy.query?.tag,
         view: usePage().props.ziggy.query?.view
@@ -37,7 +37,7 @@ const removeSearch = () => {
     {
       sort: usePage().props.ziggy.query?.sort,
       direction: usePage().props.ziggy.query?.direction,
-      page: usePage().props.ziggy.query?.page,
+      //   page: usePage().props.ziggy.query?.page,
       blog_category: usePage().props.ziggy.query?.blog_category,
       tag: usePage().props.ziggy.query?.tag,
       view: usePage().props.ziggy.query?.view

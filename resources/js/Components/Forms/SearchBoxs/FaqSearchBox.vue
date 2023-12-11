@@ -14,8 +14,7 @@ const handleSearch = () => {
     route('faqs.index'),
     {
       search_question: params.search_question,
-      category: params.category,
-      page: params.page
+      category: params.category
     },
     {
       replace: true,

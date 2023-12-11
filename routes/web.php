@@ -4,6 +4,7 @@ use App\Http\Controllers\Ecommerce\HelpAndSupport\ContactUsController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\FaqController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\FaqFeedbackController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\HelpCenterController;
+use App\Http\Controllers\Ecommerce\HelpAndSupport\QuestionSearchController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentReplyController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogController;
@@ -60,6 +61,8 @@ Route::controller(FaqController::class)
          Route::get('/', 'index')->name('index');
          Route::get('/{faq_content}', 'show')->name('show');
      });
+
+Route::get('/help-center/questions/search', QuestionSearchController::class)->name('help-center.questions.search');
 
 Route::post("/faqs/{faq_content}/feedbacks", FaqFeedbackController::class)->name("faqs.feedbacks");
 

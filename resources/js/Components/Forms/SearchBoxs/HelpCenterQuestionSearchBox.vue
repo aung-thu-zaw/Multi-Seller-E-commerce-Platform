@@ -1,8 +1,42 @@
-<script setup></script>
+<script setup>
+import { usePage, router } from '@inertiajs/vue3'
+import { reactive } from 'vue'
+
+const params = reactive({
+  search_question: usePage().props.ziggy.query?.search_question,
+  page: usePage().props.ziggy.query?.page
+})
+
+const handleSearch = () => {
+  router.get(
+    route('help-center.questions.search'),
+    {
+      search_question: params.search_question
+    },
+    {
+      replace: true,
+      preserveState: true
+    }
+  )
+}
+
+// Remove Search Param
+const removeSearch = () => {
+  params.search_question = ''
+  router.get(
+    route('help-center.questions.search'),
+    {},
+    {
+      replace: true,
+      preserveState: true
+    }
+  )
+}
+</script>
 
 <template>
   <div class="relative w-[700px] mx-auto">
-    <form class="flex items-center">
+    <form @submit.prevent="handleSearch" class="flex items-center">
       <div class="relative w-full mr-2">
         <div class="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none">
           <svg
@@ -22,11 +56,21 @@
           </svg>
         </div>
 
+        <button
+          type="button"
+          @click="removeSearch"
+          v-show="params.search_question"
+          class="absolute inset-y-0 right-0 flex items-center pr-5 hover:cursor-pointer text-gray-500 hover:text-red-600 transition-all"
+        >
+          <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+
         <input
           type="text"
           id="default-search"
           class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-md bg-gray-50 font-semibold focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all"
           :placeholder="__('Search for a question')"
+          v-model="params.search_question"
         />
       </div>
 

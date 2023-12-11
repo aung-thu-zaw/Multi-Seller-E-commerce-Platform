@@ -5,7 +5,7 @@ import QuestionCategoryCard from '@/Components/Cards/HelpCenter/QuestionCategory
 import SelfServiceTools from '@/Components/Cards/HelpCenter/SelfServiceTools.vue'
 import { Head, Link } from '@inertiajs/vue3'
 
-defineProps({ topQuestions: Object, faqSubCategories: Object })
+defineProps({ topQuestions: Object, faqSubcategories: Object })
 </script>
 
 <template>
@@ -17,10 +17,13 @@ defineProps({ topQuestions: Object, faqSubCategories: Object })
         <div class="flex items-center justify-between mb-5">
           <h1 class="font-bold text-2xl">E-commerce {{ __('Help Center') }}</h1>
 
-          <a href="#" class="font-bold text-sm text-orange-500 hover:text-orange-600">
+          <Link
+            :href="route('faqs.index')"
+            class="font-bold text-sm text-orange-500 hover:text-orange-600"
+          >
             <i class="fa-solid fa-circle-question"></i>
             {{ __('Find More Questions') }}
-          </a>
+          </Link>
         </div>
 
         <div class="flex flex-col items-center justify-center py-5">
@@ -45,7 +48,7 @@ defineProps({ topQuestions: Object, faqSubCategories: Object })
           <div class="grid grid-cols-3 gap-5 w-full">
             <div v-for="topQuestion in topQuestions" :key="topQuestion.id">
               <Link
-                href="#"
+                :href="route('faqs.show', topQuestion.slug)"
                 class="line-clamp-2 text-sm font-medium hover:text-orange-600 transition-all flex items-center justify-start"
               >
                 <i class="fa-solid fa-circle mr-2 text-[.3rem]"></i>
@@ -69,9 +72,9 @@ defineProps({ topQuestions: Object, faqSubCategories: Object })
 
           <div class="grid grid-cols-4 gap-3 w-full">
             <QuestionCategoryCard
-              v-for="faqSubCategory in faqSubCategories"
-              :key="faqSubCategory.id"
-              :faqSubCategory="faqSubCategory"
+              v-for="faqSubcategory in faqSubcategories"
+              :key="faqSubcategory.id"
+              :faqSubcategory="faqSubcategory"
             />
           </div>
         </div>

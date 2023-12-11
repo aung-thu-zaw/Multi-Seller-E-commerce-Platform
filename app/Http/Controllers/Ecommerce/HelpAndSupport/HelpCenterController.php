@@ -17,8 +17,8 @@ class HelpCenterController extends Controller
             ->take(12)
             ->get();
 
-        $faqSubCategories = FaqSubcategory::select('id', 'icon', 'name', 'slug')->get();
+        $faqSubcategories = FaqSubcategory::select('id', 'icon', 'name', 'slug')->get();
 
-        return inertia('E-commerce/HelpAndSupport/HelpCenter', compact('topQuestions', 'faqSubCategories'));
+        return inertia('E-commerce/HelpAndSupport/HelpCenter', compact('topQuestions', 'faqSubcategories'));
     }
 }
