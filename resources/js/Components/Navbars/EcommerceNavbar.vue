@@ -6,7 +6,7 @@ import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
 import English from '@/assets/images/united-state.png'
 import Myanmar from '@/assets/images/myanmar.png'
 import UserDropdown from '@/Components/Dropdowns/UserDropdown.vue'
-import NotificationDropdownForUser from '@/Components/Dropdowns/NotificationDropdownForUser.vue'
+import NotificationDropdownForUser from '@/Components/Dropdowns/Notifications/NotificationDropdownForUser.vue'
 import { Link } from '@inertiajs/vue3'
 </script>
 

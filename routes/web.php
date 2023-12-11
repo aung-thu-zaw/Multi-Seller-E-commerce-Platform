@@ -56,7 +56,8 @@ Route::get('/help-center', HelpCenterController::class)->name('help-center');
 Route::get('/contact-us', [ContactUsController::class,"index"])->name('contact-us');
 Route::post('/contact-us/send-email', [ContactUsController::class,"sendEmail"])->name('contact-us.send-email');
 
-Route::get('/stores', [SellerStoreController::class,"index"])->name('stores.index');
+// Route::get('/stores', [SellerStoreController::class,"index"])->name('stores.index');
+Route::get('/stores', [SellerStoreController::class,"show"])->name('stores.index');
 
 Route::controller(FaqController::class)
      ->prefix('/faqs')

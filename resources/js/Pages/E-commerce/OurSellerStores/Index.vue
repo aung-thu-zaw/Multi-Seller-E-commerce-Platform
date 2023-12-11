@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue'
-import StoreProfileCard from '@/Components/Cards/StoreProfileCard.vue'
+import StoreProfileCard from '@/Components/Cards/Stores/StoreProfileCard.vue'
 import StoreSearchBox from '@/Components/Forms/SearchBoxs/StoreSearchBox.vue'
 import { Head } from '@inertiajs/vue3'
 </script>
@@ -46,7 +46,6 @@ import { Head } from '@inertiajs/vue3'
     </section>
   </AppLayout>
 </template>
-
 
 <style>
 .seller-background {

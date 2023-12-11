@@ -9,8 +9,9 @@ use Inertia\ResponseFactory;
 
 class SellerStoreController extends Controller
 {
-    public function index(): Response|ResponseFactory
+    public function show(): Response|ResponseFactory
     {
-        return inertia("E-commerce/OurSellerStores/Index");
+        return inertia("E-commerce/OurSellerStores/Show");
     }
+
 }
