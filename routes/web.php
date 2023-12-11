@@ -57,7 +57,7 @@ Route::controller(FaqController::class)
      ->name('faqs.')
      ->group(function () {
          Route::get('/', 'index')->name('index');
-         Route::get('/{faq}', 'show')->name('show');
+         Route::get('/{faq_content}', 'show')->name('show');
      });
 
 Route::get('/dashboard', function () {

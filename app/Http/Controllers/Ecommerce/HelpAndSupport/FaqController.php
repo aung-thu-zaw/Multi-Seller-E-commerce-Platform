@@ -32,11 +32,11 @@ class FaqController extends Controller
 
         $faqCategories = FaqCategory::with('faqSubcategories')->get();
 
-        $relatedFaqs = FaqContent::where('faq_sub_category_id', $faqContent->faq_subcategory_id)
+        $relatedFaqContents = FaqContent::where('faq_subcategory_id', $faqContent->faq_subcategory_id)
                           ->where('slug', '!=', $faqContent->slug)
                           ->take(5)
                           ->get();
 
-        return inertia('E-commerce/HelpAndSupport/Faqs/Details', compact('faqContent', 'faqCategories', 'relatedFaqs'));
+        return inertia('E-commerce/HelpAndSupport/Faqs/Show', compact('faqContent', 'faqCategories', 'relatedFaqContents'));
     }
 }
