@@ -1,10 +1,42 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue'
+import InputError from '@/Components/Forms/Fields/InputError.vue'
 import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
 import InputField from '@/Components/Forms/Fields/InputField.vue'
 import TextAreaField from '@/Components/Forms/Fields/TextAreaField.vue'
 import FormButton from '@/Components/Buttons/FormButton.vue'
-import { Head } from '@inertiajs/vue3'
+import { Head, Link, useForm, usePage } from '@inertiajs/vue3'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
+import { useReCaptcha } from 'vue-recaptcha-v3'
+import { __ } from '@/Services/translations-inside-setup.js'
+
+const form = useForm({
+  name: null,
+  email: null,
+  phone: null,
+  messageDetail: null,
+  captcha_token: null
+})
+
+const { executeRecaptcha, recaptchaLoaded } = useReCaptcha()
+
+const handleSendEmail = async () => {
+  await recaptchaLoaded()
+  form.captcha_token = await executeRecaptcha('send_contact_email')
+
+  form.post(route('contact-us.send-email'), {
+    preserveScroll: true,
+    onSuccess: () => {
+      form.reset()
+
+      const successMessage = usePage().props.flash.success
+      toast.success(__(successMessage), {
+        autoClose: 2000
+      })
+    }
+  })
+}
 </script>
 
 <template>
@@ -18,12 +50,12 @@ import { Head } from '@inertiajs/vue3'
         <p class="mt-1 text-gray-600">{{ __("We'd love to talk about how we can help you.") }}</p>
       </div>
 
-      <div class="mt-12 grid items-center lg:grid-cols-2 gap-6 lg:gap-16">
+      <div class="mt-12 grid items-center grid-cols-2 gap-16">
         <!-- Card -->
         <div class="flex flex-col border rounded-xl p-4 sm:p-6 lg:p-8">
           <h2 class="mb-8 text-xl font-semibold text-gray-800">{{ __('Fill in the form') }}</h2>
 
-          <form class="space-y-4 md:space-y-6">
+          <form @submit.prevent="handleSendEmail" class="space-y-4 md:space-y-6">
             <div>
               <InputLabel :label="__('Name')" required />
 
@@ -31,11 +63,12 @@ import { Head } from '@inertiajs/vue3'
                 type="text"
                 name="contact-name"
                 :placeholder="__('Enter :label', { label: __('Your Full Name') })"
+                v-model="form.name"
                 autofocus
                 required
               />
 
-              <!-- <InputError message="" /> -->
+              <InputError :message="form.errors?.name" />
             </div>
 
             <div class="grid grid-cols-2 gap-3">
@@ -46,23 +79,25 @@ import { Head } from '@inertiajs/vue3'
                   type="email"
                   name="contact-email"
                   :placeholder="__('Enter :label', { label: __('Your Email Address') })"
+                  v-model="form.email"
                   required
                 />
 
-                <!-- <InputError message="" /> -->
+                <InputError :message="form.errors?.email" />
               </div>
 
               <div>
                 <InputLabel :label="__('Phone Number')" required />
 
                 <InputField
-                  type="number"
+                  type="text"
                   name="contact-phone"
                   :placeholder="__('Enter :label', { label: __('Your Phone Number') })"
+                  v-model="form.phone"
                   required
                 />
 
-                <!-- <InputError message="" /> -->
+                <InputError :message="form.errors?.phone" />
               </div>
             </div>
 
@@ -72,15 +107,16 @@ import { Head } from '@inertiajs/vue3'
               <TextAreaField
                 name="contact-detail"
                 :placeholder="__('Enter :label', { label: __('Messages') })"
+                v-model="form.messageDetail"
                 required
               />
 
-              <!-- <InputError message="" /> -->
+              <InputError :message="form.errors?.messageDetail" />
             </div>
 
-            <!-- <InputError :message="errors?.captcha_token" /> -->
+            <InputError :message="form.errors?.captcha_token" />
 
-            <FormButton type="submit" :processing="processing">
+            <FormButton :processing="form.processing">
               <i class="fa-solid fa-paper-plane"></i>
               {{ __('Send') }}
             </FormButton>
@@ -120,9 +156,9 @@ import { Head } from '@inertiajs/vue3'
                   )
                 }}"
               </p>
-              <a
-                class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-orange-600"
-                href="#"
+              <Link
+                class="mt-2 inline-flex items-center gap-x-2 text-sm font-semibold text-gray-600 hover:text-orange-600"
+                :href="route('help-center')"
               >
                 {{ __('Go To Help Center') }}
                 <svg
@@ -140,7 +176,7 @@ import { Head } from '@inertiajs/vue3'
                     fill="currentColor"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
           <!-- End Icon Block -->
@@ -171,9 +207,9 @@ import { Head } from '@inertiajs/vue3'
                   )
                 }}"
               </p>
-              <a
-                class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-orange-600"
-                href="#"
+              <Link
+                class="mt-2 inline-flex items-center gap-x-2 text-sm font-semibold text-gray-600 hover:text-orange-600"
+                :href="route('faqs.index')"
               >
                 {{ __('Visit FAQ') }}
                 <svg
@@ -191,7 +227,7 @@ import { Head } from '@inertiajs/vue3'
                     fill="currentColor"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
           <!-- End Icon Block -->
@@ -218,7 +254,7 @@ import { Head } from '@inertiajs/vue3'
                 "{{ __('Need assistance? Our team is just a call away.') }}"
               </p>
               <a
-                class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800"
+                class="mt-2 inline-flex items-center gap-x-2 text-sm font-semibold text-gray-600 hover:text-gray-800"
                 href="#"
               >
                 +959 3765475930
@@ -256,7 +292,7 @@ import { Head } from '@inertiajs/vue3'
                 }}"
               </p>
               <a
-                class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800"
+                class="mt-2 inline-flex items-center gap-x-2 text-sm font-semibold text-gray-600 hover:text-gray-800"
                 href="#"
               >
                 example@site.com

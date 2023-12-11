@@ -52,7 +52,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/about-us', AboutUsController::class)->name('about-us');
 Route::get('/help-center', HelpCenterController::class)->name('help-center');
-Route::get('/contact-us', ContactUsController::class)->name('contact-us');
+Route::get('/contact-us', [ContactUsController::class,"index"])->name('contact-us');
+Route::post('/contact-us/send-email', [ContactUsController::class,"sendEmail"])->name('contact-us.send-email');
 
 Route::controller(FaqController::class)
      ->prefix('/faqs')
