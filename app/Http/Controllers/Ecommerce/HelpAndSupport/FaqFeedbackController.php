@@ -17,6 +17,16 @@ class FaqFeedbackController extends Controller
             ->where('user_id', auth()->id())
             ->first();
 
+        if ($existingFeedback && $existingFeedback->is_helpful === $request->is_helpful) {
+            $existingFeedback->update([
+                'is_helpful' => null,
+            ]);
+
+            $request->is_helpful ? $faqContent->decrement('helpful_count') : $faqContent->decrement('not_helpful_count');
+
+            return back();
+        }
+
         if (!$existingFeedback) {
             FaqFeedback::create([
                 'faq_content_id' => $faqContent->id,
@@ -36,13 +46,14 @@ class FaqFeedbackController extends Controller
 
             if ($request->is_helpful) {
                 $faqContent->increment('helpful_count');
-                $faqContent->decrement('not_helpful_count');
+                $faqContent->not_helpful_count > 0 ? $faqContent->decrement('not_helpful_count') : 0;
             } else {
                 $faqContent->increment('not_helpful_count');
-                $faqContent->decrement('helpful_count');
+                $faqContent->helpful_count > 0 ? $faqContent->decrement('helpful_count') : 0;
             }
         }
 
-        return back()->with('success', 'Thank you for you feedback.');
+        return back()->with('success', 'Thank you for your feedback.');
     }
+
 }

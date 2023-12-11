@@ -24,9 +24,9 @@ const handleFaqFeedback = (isHelpful) => {
         <button
           type="button"
           @click="handleFaqFeedback(1)"
-          class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+          class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-300 bg-white shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
           :class="{
-            'text-orange-600': faqFeedback?.is_helpful === 1,
+            'text-orange-600 border-orange-600': faqFeedback?.is_helpful === 1,
             'text-gray-800': faqFeedback?.is_helpful === 0
           }"
         >
@@ -52,9 +52,9 @@ const handleFaqFeedback = (isHelpful) => {
         <button
           type="button"
           @click="handleFaqFeedback(0)"
-          class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+          class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-300 bg-white shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
           :class="{
-            'text-orange-600': faqFeedback?.is_helpful === 0,
+            'text-orange-600 border-orange-600': faqFeedback?.is_helpful === 0,
             'text-gray-800': faqFeedback?.is_helpful === 1
           }"
         >

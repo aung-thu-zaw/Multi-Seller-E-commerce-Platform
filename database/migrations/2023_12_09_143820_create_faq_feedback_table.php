@@ -14,7 +14,7 @@ return new class () extends Migration {
             $table->id();
             $table->foreignId('faq_content_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->boolean('is_helpful');
+            $table->boolean('is_helpful')->nullable();
             $table->timestamps();
         });
     }
