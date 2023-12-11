@@ -71,7 +71,7 @@ import { Link } from '@inertiajs/vue3'
         }"
       >
         <i class="fa-solid fa-ticket"></i>
-        {{ __('Vouchers') }}
+        {{ __('My Vouchers') }}
       </Link>
 
       <!-- My Orders -->
@@ -186,7 +186,7 @@ import { Link } from '@inertiajs/vue3'
 
       <!-- Change Password -->
       <Link
-        href="#"
+        :href="route('user.change-password.edit')"
         as="button"
         class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
         :class="{
@@ -202,7 +202,7 @@ import { Link } from '@inertiajs/vue3'
 
       <!-- Delete Account -->
       <Link
-        href="#"
+        :href="route('user.delete-account')"
         as="button"
         class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
         :class="{
