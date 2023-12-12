@@ -8,7 +8,7 @@ const props = defineProps({ notification: Object })
 
 const handleNotificationReadAt = () => {
   router.post(
-    route('notifications.markAsRead', props.notification.id),
+    route('notifications.mark-as-read', props.notification.id),
     {},
     {
       onSuccess: () => {

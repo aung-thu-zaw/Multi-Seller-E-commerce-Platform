@@ -91,7 +91,7 @@ import { Link } from '@inertiajs/vue3'
             </p>
             <p>
               <Link
-                :href="route('contact-us')"
+                :href="route('contact-us.index')"
                 class="inline-flex gap-x-2 text-white hover:text-gray-300"
               >
                 {{ __('Contact us') }}

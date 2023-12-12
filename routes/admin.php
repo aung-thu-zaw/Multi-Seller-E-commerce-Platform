@@ -30,10 +30,9 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
-        // Dashboard
+
         Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
-        // Category Operations
         Route::resource('categories', CategoryController::class)->except(['show']);
         Route::controller(CategoryController::class)
             ->prefix('/categories/trash')
@@ -48,7 +47,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-        // Brand Operations
         Route::resource('brands', BrandController::class)->except(['show']);
         Route::controller(BrandController::class)
             ->prefix('/brands/trash')
@@ -63,7 +61,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-        // Blog Category Operations
         Route::resource('blog-categories', BlogCategoryController::class)->except(['show']);
         Route::controller(BlogCategoryController::class)
             ->prefix('/blog-categories/trash')
@@ -78,7 +75,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-        // Blog Content Operations
         Route::resource('blog-contents', BlogContentController::class)->except(['show']);
         Route::patch('blog-contents/{blog_content}/change-status', [BlogContentController::class, 'changeStatus'])->name('blog-contents.change-status');
         Route::controller(BlogContentController::class)
@@ -103,7 +99,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
             });
 
-        // FAQ Category Operations
         Route::resource('faq-categories', FaqCategoryController::class)->except(['show']);
         Route::controller(FaqCategoryController::class)
             ->prefix('/faq-categories/trash')
@@ -118,7 +113,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-        // FAQ Subcategory Operations
         Route::resource('faq-subcategories', FaqSubcategoryController::class)->except(['show']);
         Route::controller(FaqSubcategoryController::class)
             ->prefix('/faq-subcategories/trash')
@@ -133,7 +127,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-        // FAQ Content Operations
         Route::resource('faq-contents', FaqContentController::class)->except(['show']);
         Route::controller(FaqContentController::class)
             ->prefix('/faq-contents/trash')
@@ -148,7 +141,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-        // Help Page Operations
         Route::controller(HelpPageController::class)->group(function () {
             Route::get('/privacy-and-policy', 'privacyAndPolicy')->name('privacy-and-policy.edit');
             Route::get('/terms-and-conditions', 'termsAndConditions')->name('terms-and-conditions.edit');
@@ -156,7 +148,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             Route::patch('/help-pages/{help_page}', 'update')->name('help-pages.update');
         });
 
-        // Role Operations
         Route::resource('roles', RoleController::class)->except(['show']);
         Route::controller(RoleController::class)
             ->prefix('/roles/trash')
@@ -171,17 +162,14 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-        // Permission Operations
         Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions.index');
 
-        // Assign Role Permissions Operations
         Route::resource('assign-role-permissions', AssignRolePermissionsController::class)
             ->except(['show', 'create', 'store'])
             ->parameters([
                 'assign-role-permissions' => 'role',
             ]);
 
-        // Registered Account Operations
         Route::resource('registered-accounts', RegisteredAccountController::class)
         ->only(["index","destroy"])
         ->parameters([
@@ -204,7 +192,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             });
 
 
-        // Admin Mange Operations
         Route::resource('admin-manage', AdminManageController::class)
         ->except(['show'])
         ->parameters([
@@ -226,8 +213,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
         });
 
-
-        // Automated Filter Word Operations
         Route::resource('automated-filter-words', AutomatedFilterWordController::class)->except(['show']);
         Route::controller(AutomatedFilterWordController::class)
             ->prefix('/automated-filter-words/trash')
@@ -258,9 +243,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             Route::patch('/{seo_setting}', 'update')->name("update");
         });
 
-
-
-        // Subscriber Operations
         Route::resource('subscribers', SubscriberController::class)->only(['index','destroy']);
         Route::controller(SubscriberController::class)
             ->prefix('/subscribers/trash')

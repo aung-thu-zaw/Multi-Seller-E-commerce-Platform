@@ -112,7 +112,7 @@ defineProps({ topQuestions: Object, faqSubcategories: Object })
           </button>
           <Link
             as="button"
-            :href="route('contact-us')"
+            :href="route('contact-us.index')"
             class="border font-bold text-md text-orange-600 p-5 w-72 bg-white shadow-md rounded-md hover:scale-110 transition-all"
           >
             <i class="fa-solid fa-envelope mr-2"></i>

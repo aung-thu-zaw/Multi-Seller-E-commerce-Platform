@@ -7,11 +7,10 @@ use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
-class SellerStoreController extends Controller
+class HomeController extends Controller
 {
-    public function show(): Response|ResponseFactory
+    public function __invoke(): Response|ResponseFactory
     {
-        return inertia("E-commerce/OurSellerStores/Index");
+        return inertia("E-commerce/Home");
     }
-
 }

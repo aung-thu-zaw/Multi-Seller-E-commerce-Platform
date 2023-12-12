@@ -56,7 +56,7 @@ const sortedNotifications = computed(() => {
 
 const handleMarkAllAsRead = () => {
   router.post(
-    route('notifications.markAllAsRead'),
+    route('notifications.mark-all-as-read'),
     {},
     {
       onSuccess: () => {

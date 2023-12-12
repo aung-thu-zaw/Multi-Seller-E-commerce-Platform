@@ -5,6 +5,7 @@ use App\Http\Controllers\Ecommerce\HelpAndSupport\FaqController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\FaqFeedbackController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\HelpCenterController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\QuestionSearchController;
+use App\Http\Controllers\Ecommerce\HomeController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentReplyController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogController;
@@ -16,70 +17,24 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/', HomeController::class)->name('home');
 
-Route::get('/', function () {
-    return Inertia::render('E-commerce/Home', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-})->name('home');
+Route::controller(NotificationController::class)
+    ->middleware('auth')
+    ->prefix('/notifications')
+    ->name('notifications.')
+    ->group(function () {
+        Route::post('/mark-as-read/{id}', 'markAsRead')->name('mark-as-read');
+        Route::post('/mark-all-as-read', 'markAllAsRead')->name('mark-all-as-read');
+    });
 
-Route::get('/seller/dashboard', function () {
-    return Inertia::render('Seller/Dashboard');
-});
-
-Route::middleware('auth')->group(function () {
-
-    // Route to mark a specific notification as read
-    Route::post('/notifications/mark-as-read/{id}', [NotificationController::class, 'markAsRead'])
-        ->name('notifications.markAsRead');
-
-    // Route to mark all notifications as read
-    Route::post('/notifications/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])
-        ->name('notifications.markAllAsRead');
-});
-
-Route::get('/about-us', AboutUsController::class)->name('about-us');
-Route::get('/help-center', HelpCenterController::class)->name('help-center');
-Route::get('/contact-us', [ContactUsController::class,"index"])->name('contact-us');
-Route::post('/contact-us/send-email', [ContactUsController::class,"sendEmail"])->name('contact-us.send-email');
-
-// Route::get('/stores', [SellerStoreController::class,"index"])->name('stores.index');
-Route::get('/stores', [SellerStoreController::class,"show"])->name('stores.index');
-
-Route::controller(FaqController::class)
-     ->prefix('/faqs')
-     ->name('faqs.')
-     ->group(function () {
-         Route::get('/', 'index')->name('index');
-         Route::get('/{faq_content}', 'show')->name('show');
-     });
-
-Route::get('/help-center/questions/search', QuestionSearchController::class)->name('help-center.questions.search');
-
-Route::post("/faqs/{faq_content}/feedbacks", FaqFeedbackController::class)->name("faqs.feedbacks");
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+Route::controller(ContactUsController::class)
+    ->prefix('/contact-us')
+    ->name('contact-us.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/send-email', 'sendEmail')->name('send-email');
+    });
 
 Route::controller(BlogController::class)
     ->prefix('/blogs')
@@ -87,13 +42,29 @@ Route::controller(BlogController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/{blog_content}', 'show')->name('show');
-        //  Route::get("/tags/{tag}", "tagBlog")->name("tag");
     });
 
 Route::post('/blogs/{blog_content}/comments', BlogCommentController::class)->name('blog.comments.store');
 Route::post('/blogs/{blog_content}/comments/{blog_comment}/replies', BlogCommentReplyController::class)->name('comment.replies.store');
 
-require __DIR__.'/auth.php';
-require __DIR__.'/admin.php';
-require __DIR__.'/seller.php';
-require __DIR__.'/user.php';
+Route::get('/help-center', HelpCenterController::class)->name('help-center');
+Route::get('/help-center/questions/search', QuestionSearchController::class)->name('help-center.questions.search');
+
+Route::controller(FaqController::class)
+    ->prefix('/faqs')
+    ->name('faqs.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/{faq_content}', 'show')->name('show');
+    });
+
+Route::post('/faqs/{faq_content}/feedbacks', FaqFeedbackController::class)->name('faqs.feedbacks');
+
+Route::get('/stores', [SellerStoreController::class, 'index'])->name('stores.index');
+
+Route::get('/about-us', AboutUsController::class)->name('about-us');
+
+require __DIR__ . '/auth.php';
+require __DIR__ . '/admin.php';
+require __DIR__ . '/seller.php';
+require __DIR__ . '/user.php';
