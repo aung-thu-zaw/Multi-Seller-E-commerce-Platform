@@ -1,7 +1,7 @@
 <script setup>
-import ReviewSortDropdown from '@/Components/Dropdowns/ProductReviews/ReveiwSortDropdown.vue'
-import ReviewFilterDropdown from '@/Components/Dropdowns/ProductReviews/ReviewFilterDropdown.vue'
-import StoreProductReviewCard from '@/Components/Cards/ProductReviews/StoreProductReviewCard.vue'
+import ReviewSortDropdown from '@/Components/Dropdowns/Reviews/ReviewSortDropdown.vue'
+import ReviewFilterDropdown from '@/Components/Dropdowns/Reviews/ReviewFilterDropdown.vue'
+import StoreProductReviewCard from '@/Components/Cards/Reviews/StoreProductReviewCard.vue'
 </script>
 
 <template>

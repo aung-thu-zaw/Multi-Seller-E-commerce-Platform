@@ -1,455 +1,134 @@
 <script setup>
+import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
+import ProductSortingSelectBox from '@/Components/Forms/SelectBoxs/ProductSortingSelectBox.vue'
+import ProductFilterSidebar from '@/Components/Sidebars/ProductFilterSidebar.vue'
+import { Link } from '@inertiajs/vue3'
 </script>
 
 <template>
-  <div class="py-10 border border-gray-200 bg-white rounded-md space-y-5">
-    <div class="px-5">
-      <div class="mb-5">
-        <h3 class="font-bold text-md text-gray-800">K Mobile Shop</h3>
-        <p class="text-xs text-gray-500 font-medium">Purchased on 13 Oct 2023</p>
-      </div>
-      <div class="space-y-5">
-        <!-- card -->
-        <div
-          class="border border-gray-200 rounded-md flex flex-col items-center space-y-3 justify-between p-5"
-        >
-          <div
-            class="w-full flex items-start bg-gray-100 px-5 py-2.5 rounded-md border border-gray-200"
-          >
-            <div class="min-w-[100px] overflow-hidden">
-              <img
-                src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
-                alt="product image"
-                class="w-20 h-20 object-cover"
-              />
-            </div>
-            <div class="space-y-1">
-              <h3 class="font-semibold text-sm text-gray-700 line-clamp-2">
-                Naviforce NF9049 | Men’s Dual Movement Stainless Steel Watch, Original, Black & Blue
-                Watch Strap Color:Black
-              </h3>
+  <AppLayout>
+    <section id="all-products" class="">
+      <div class="w-full mx-auto flex items-start">
+        <ProductFilterSidebar />
 
-              <div class="space-x-1 flex items-center text-xs font-medium mb-5">
-                <p>Brand : Water</p>
-                <span class="text-gray-500">|</span>
-                <p>Color : Orange</p>
-                <span class="text-gray-500">|</span>
-                <p>Size : Lg</p>
+        <div class="w-full pl-5">
+          <div class="py-1.5 mb-3 flex items-center justify-between border-b">
+            <div class="flex items-center space-x-5">
+              <h1 class="font-bold text-md text-gray-800">K Mobile Shop</h1>
+              <p class="font-bold text-sm text-orange-600">314 items found</p>
+            </div>
+
+            <div class="flex items-center space-x-5">
+              <ProductSortingSelectBox />
+
+              <div class="">
+                <label for="view" class="font-bold text-sm text-gray-600">
+                  {{ __('View') }} :
+                </label>
+
+                <Link
+                  as="button"
+                  href="#"
+                  class="px-2 py-1 rounded-md cursor-pointer transition-none mr-2 bg-orange-500 text-white hover:bg-orange-600"
+                >
+                  <i class="fa-solid fa-grip"></i>
+                </Link>
+
+                <Link
+                  as="button"
+                  href="#"
+                  class="px-2 py-1 rounded-md cursor-pointer bg-gray-200 text-gray-600 hover:bg-gray-300 transition-none"
+                >
+                  <i class="fa-solid fa-list"></i>
+                </Link>
               </div>
             </div>
           </div>
 
-          <div class="flex items-center justify-between w-full">
-            <!-- Rating -->
-            <div class="flex items-center space-x-0.5">
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-            </div>
-            <!-- End Rating -->
-            <button class="text-orange-600 text-sm font-bold">
-              <i class="fa-solid fa-edit"></i>
-              Edit
-            </button>
-          </div>
+          <!-- Filtered By -->
+          <div class="my-5 px-2 flex items-center">
+            <div class="flex items-center">
+              <p class="font-bold text-blueGray-700 text-sm mr-1">{{ __('Filtered By') }} :</p>
 
-          <p class="text-sm font-medium text-gray-700">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos similique vitae
-            nobis debitis cupiditate odit incidunt eaque nihil ipsum quasi harum perferendis magni
-            voluptates vel ex, aperiam rerum fugiat laboriosam?
-          </p>
-        </div>
+              <div class="flex items-center space-x-3">
+                <div
+                  class="inline-flex flex-nowrap items-center bg-white border border-gray-200 rounded-full px-2 py-1.5"
+                >
+                  <div class="whitespace-nowrap text-xs font-bold text-gray-700 capitalize">
+                    {{ __('Category') }} : Makeup
+                  </div>
+                  <Link
+                    as="button"
+                    class="ms-2.5 inline-flex justify-center items-center h-2 w-2 rounded-full text-gray-600 text-xs hover:text-red-600 transition-all cursor-pointer"
+                  >
+                    <i class="fa-solid fa-circle-xmark"></i>
+                  </Link>
+                </div>
 
-        <!-- card -->
-        <div
-          class="border border-gray-200 rounded-md flex flex-col items-center space-y-3 justify-between p-5"
-        >
-          <div
-            class="w-full flex items-start bg-gray-100 px-5 py-2.5 rounded-md border border-gray-200"
-          >
-            <div class="min-w-[100px] overflow-hidden">
-              <img
-                src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
-                alt="product image"
-                class="w-20 h-20 object-cover"
-              />
-            </div>
-            <div class="space-y-1">
-              <h3 class="font-semibold text-sm text-gray-700 line-clamp-2">
-                Naviforce NF9049 | Men’s Dual Movement Stainless Steel Watch, Original, Black & Blue
-                Watch Strap Color:Black
-              </h3>
-
-              <div class="space-x-1 flex items-center text-xs font-medium mb-5">
-                <p>Brand : Water</p>
-                <span class="text-gray-500">|</span>
-                <p>Color : Orange</p>
-                <span class="text-gray-500">|</span>
-                <p>Size : Lg</p>
+                <div
+                  class="inline-flex flex-nowrap items-center bg-white border border-gray-200 rounded-full px-2 py-1.5"
+                >
+                  <div class="whitespace-nowrap text-xs font-bold text-gray-700 capitalize">
+                    {{ __('Brand') }} : Samsung
+                  </div>
+                  <Link
+                    as="button"
+                    class="ms-2.5 inline-flex justify-center items-center h-2 w-2 rounded-full text-gray-600 text-xs hover:text-red-600 transition-all cursor-pointer"
+                  >
+                    <i class="fa-solid fa-circle-xmark"></i>
+                  </Link>
+                </div>
               </div>
             </div>
+
+            <!-- <p v-show="params.search_blog" class="text-sm font-medium text-gray-700 ml-auto">
+              {{
+                __(':total post(s) found for search result :result', {
+                  total: blogContents.total,
+                  result: '"' + params.search_blog + '"'
+                })
+              }}
+            </p> -->
           </div>
 
-          <div class="flex items-center justify-between w-full">
-            <!-- Rating -->
-            <div class="flex items-center space-x-0.5">
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
+          <div>
+            <!-- Product Grid Card -->
+            <div class="grid grid-cols-4 gap-5 w-full">
+              <ProductGridCard />
+              <ProductGridCard />
+              <ProductGridCard />
+              <ProductGridCard />
+              <ProductGridCard />
+              <ProductGridCard />
+              <ProductGridCard />
+              <ProductGridCard />
+              <ProductGridCard />
+              <ProductGridCard />
+              <ProductGridCard />
             </div>
-            <!-- End Rating -->
-            <button class="text-orange-600 text-sm font-bold">
-              <i class="fa-solid fa-edit"></i>
-              Edit
-            </button>
-          </div>
 
-          <p class="text-sm font-medium text-gray-700">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos similique vitae
-            nobis debitis cupiditate odit incidunt eaque nihil ipsum quasi harum perferendis magni
-            voluptates vel ex, aperiam rerum fugiat laboriosam?
-          </p>
-        </div>
-
-        <!-- card -->
-        <div
-          class="border border-gray-200 rounded-md flex flex-col items-center space-y-3 justify-between p-5"
-        >
-          <div
-            class="w-full flex items-start bg-gray-100 px-5 py-2.5 rounded-md border border-gray-200"
-          >
-            <div class="min-w-[100px] overflow-hidden">
-              <img
-                src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
-                alt="product image"
-                class="w-20 h-20 object-cover"
+            <!-- Blog List Card -->
+            <!-- <div v-show="params.view === 'list'" class="grid grid-cols-1 gap-5 w-full">
+              <BlogListCard
+                v-for="blogContent in blogContents.data"
+                :key="blogContent.id"
+                :blog="blogContent"
               />
-            </div>
-            <div class="space-y-1">
-              <h3 class="font-semibold text-sm text-gray-700 line-clamp-2">
-                Naviforce NF9049 | Men’s Dual Movement Stainless Steel Watch, Original, Black & Blue
-                Watch Strap Color:Black
-              </h3>
+            </div> -->
 
-              <div class="space-x-1 flex items-center text-xs font-medium mb-5">
-                <p>Brand : Water</p>
-                <span class="text-gray-500">|</span>
-                <p>Color : Orange</p>
-                <span class="text-gray-500">|</span>
-                <p>Size : Lg</p>
-              </div>
+            <!-- Pagination -->
+            <div class="my-5 py-5">
+              <!-- <Pagination :links="blogContents.links" /> -->
             </div>
           </div>
-
-          <div class="flex items-center justify-between w-full">
-            <!-- Rating -->
-            <div class="flex items-center space-x-0.5">
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-            </div>
-            <!-- End Rating -->
-            <button class="text-orange-600 text-sm font-bold">
-              <i class="fa-solid fa-edit"></i>
-              Edit
-            </button>
-          </div>
-
-          <p class="text-sm font-medium text-gray-700">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos similique vitae
-            nobis debitis cupiditate odit incidunt eaque nihil ipsum quasi harum perferendis magni
-            voluptates vel ex, aperiam rerum fugiat laboriosam?
-          </p>
+          <!-- <div v-else class="py-20">
+            <p class="text-center font-bold text-md text-red-600">
+              <i class="fa-solid fa-file-circle-xmark"></i>
+              {{ __("We're sorry we can't find any matches for your filter term.") }}
+            </p>
+          </div> -->
         </div>
       </div>
-    </div>
-
-    <hr />
-    <div class="px-5">
-      <div class="mb-5">
-        <h3 class="font-bold text-md text-gray-800">K Mobile Shop</h3>
-        <p class="text-xs text-gray-500 font-medium">Purchased on 13 Oct 2023</p>
-      </div>
-      <div class="space-y-5">
-        <!-- card -->
-        <div
-          class="border border-gray-200 rounded-md flex flex-col items-center space-y-3 justify-between p-5"
-        >
-          <div
-            class="w-full flex items-start bg-gray-100 px-5 py-2.5 rounded-md border border-gray-200"
-          >
-            <div class="min-w-[100px] overflow-hidden">
-              <img
-                src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
-                alt="product image"
-                class="w-20 h-20 object-cover"
-              />
-            </div>
-            <div class="space-y-1">
-              <h3 class="font-semibold text-sm text-gray-700 line-clamp-2">
-                Naviforce NF9049 | Men’s Dual Movement Stainless Steel Watch, Original, Black & Blue
-                Watch Strap Color:Black
-              </h3>
-
-              <div class="space-x-1 flex items-center text-xs font-medium mb-5">
-                <p>Brand : Water</p>
-                <span class="text-gray-500">|</span>
-                <p>Color : Orange</p>
-                <span class="text-gray-500">|</span>
-                <p>Size : Lg</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex items-center justify-between w-full">
-            <!-- Rating -->
-            <div class="flex items-center space-x-0.5">
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-              <svg
-                class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                />
-              </svg>
-            </div>
-            <!-- End Rating -->
-            <button class="text-orange-600 text-sm font-bold">
-              <i class="fa-solid fa-edit"></i>
-              Edit
-            </button>
-          </div>
-
-          <p class="text-sm font-medium text-gray-700">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos similique vitae
-            nobis debitis cupiditate odit incidunt eaque nihil ipsum quasi harum perferendis magni
-            voluptates vel ex, aperiam rerum fugiat laboriosam?
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+    </section>
+  </AppLayout>
 </template>

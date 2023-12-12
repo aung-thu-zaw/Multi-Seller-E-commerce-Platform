@@ -3,7 +3,7 @@
 
 <template>
   <div
-    class="w-full h-[300px] mb-10 shadow-md rounded-md overflow-hidden flex items-end p-10 seller-background"
+    class="w-full h-[300px] mb-10 shadow-md rounded-md overflow-hidden flex items-end px-10 py-6 seller-background"
   >
     <div class="flex items-center justify-between w-full">
       <div class="flex items-center space-x-5">

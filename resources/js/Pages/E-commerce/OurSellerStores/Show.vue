@@ -5,7 +5,7 @@ import StoreProfileCoverCard from '@/Components/Cards/Stores/StoreProfileCoverCa
 import Home from './Partials/Home.vue'
 import AllProducts from './Partials/AllProducts.vue'
 import ProductRatingAndReviews from './Partials/ProductRatingAndReviews.vue'
-import StoreProfile from './Partials/StoreProfile.vue'
+import SellerRatingAndReviews from './Partials/SellerRatingAndReviews.vue'
 import { Head } from '@inertiajs/vue3'
 </script>
 
@@ -64,8 +64,8 @@ import { Head } from '@inertiajs/vue3'
                 aria-controls="tabs-with-icons-4"
                 role="tab"
               >
-                <i class="fa-solid fa-store"></i>
-                Store Profile
+                <i class="fa-solid fa-user-tie"></i>
+                Seller Rating & Reviews
               </button>
             </nav>
 
@@ -101,7 +101,7 @@ import { Head } from '@inertiajs/vue3'
               role="tabpanel"
               aria-labelledby="tabs-with-icons-item-2"
             >
-              <StoreProfile />
+              <SellerRatingAndReviews />
             </div>
           </div>
         </div>

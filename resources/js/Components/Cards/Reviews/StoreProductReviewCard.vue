@@ -1,5 +1,5 @@
 <script setup>
-import ProductReviewCard from './ProductReviewCard.vue'
+import ReviewCard from './ReviewCard.vue'
 import SellerResponseCard from './SellerResponseCard.vue'
 </script>
 
@@ -32,7 +32,7 @@ import SellerResponseCard from './SellerResponseCard.vue'
     </div>
 
     <!-- Review -->
-    <ProductReviewCard />
+    <ReviewCard />
 
     <hr />
 
