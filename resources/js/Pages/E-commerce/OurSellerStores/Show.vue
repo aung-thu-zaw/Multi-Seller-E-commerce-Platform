@@ -14,7 +14,7 @@ import { Head } from '@inertiajs/vue3'
 
   <AppLayout>
     <section id="seller-stores" class="py-5">
-      <div class="w-[1200px] mx-auto flex flex-col items-start">
+      <div class="w-[1300px] mx-auto flex flex-col items-start">
         <!-- Cover Photo -->
         <StoreProfileCoverCard />
 

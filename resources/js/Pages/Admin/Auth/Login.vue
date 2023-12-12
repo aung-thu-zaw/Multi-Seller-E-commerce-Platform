@@ -51,7 +51,7 @@ const submit = async () => {
       >
         {{ status }}
       </div>
-      <form @submit.prevent="submit" class="w-full space-y-4 md:space-y-6">
+      <form @submit.prevent="submit" class="w-full space-y-6">
         <h1 class="text-center text-2xl text-dark mb-5 font-bold">
           {{ __(':label Dashboard Login', { label: __('Admin') }) }}
         </h1>

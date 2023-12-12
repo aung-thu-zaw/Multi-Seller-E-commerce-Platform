@@ -303,16 +303,16 @@ import { Link } from '@inertiajs/vue3'
         </div>
 
         <div v-else class="flex items-center space-x-3">
-          <InertiaLinkButton to="home" class="bg-orange-600 text-white">
+          <InertiaLinkButton to="register" class="bg-orange-600 text-white">
             <i class="fa-solid fa-user-plus"></i>
-            Sign Up
+            {{ __('Sign Up') }}
           </InertiaLinkButton>
           <InertiaLinkButton
-            to="home"
+            to="login"
             class="bg-transparent text-orange-600 border border-orange-600"
           >
             <i class="fa-solid fa-right-to-bracket"></i>
-            Sign In
+            {{ __('Login') }}
           </InertiaLinkButton>
         </div>
       </div>

@@ -5,7 +5,7 @@ import user from '@/assets/images/user-login.jpg'
 </script>
 
 <template>
-  <div class="container mx-auto p-5 md:p-10 flex items-center justify-center">
+  <div class="w-[1280px] mx-auto p-5 md:p-10 flex items-center justify-center">
     <div
       class="relative flex flex-col items-center md:min-h-[500px] justify-between px-10 py-10 bg-white border rounded-sm shadow-md md:flex-row md:px-5 md:w-[1000px]"
     >
