@@ -24,9 +24,9 @@ class SeoSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "meta_title" => ["required","string","max:255"],
-            "meta_keyword" => ["required","string"],
-            "meta_description" => ["required","string"],
+            'meta_title' => ['required', 'string', 'max:255'],
+            'meta_keyword' => ['required', 'string'],
+            'meta_description' => ['required', 'string'],
             'captcha_token' => [new RecaptchaRule()],
         ];
     }

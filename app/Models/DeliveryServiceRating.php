@@ -17,5 +17,4 @@ class DeliveryServiceRating extends Model
     {
         return $this->belongsTo(ProductReview::class);
     }
-
 }

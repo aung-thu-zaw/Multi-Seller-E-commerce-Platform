@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Dashboard\AccountManagement;
 
-use App\Actions\Admin\AccountManagement\PermanentlyDeleteTrashedUsersAction;
 use App\Actions\Admin\AccountManagement\AdminManage\CreateAdminAction;
 use App\Actions\Admin\AccountManagement\AdminManage\UpdateAdminAction;
+use App\Actions\Admin\AccountManagement\PermanentlyDeleteTrashedUsersAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Admin\AccountManagement\AdminMange\StoreAdminRequest;
 use App\Http\Requests\Dashboard\Admin\AccountManagement\AdminMange\UpdateAdminRequest;
@@ -38,7 +38,7 @@ class AdminManageController extends Controller
             ->query(function (Builder $builder) {
                 $builder->with('roles');
             })
-            ->where("role", "admin")
+            ->where('role', 'admin')
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
@@ -50,7 +50,7 @@ class AdminManageController extends Controller
     {
         $roles = Role::all();
 
-        return inertia('Admin/AccountManagement/AdminManage/Create', compact("roles"));
+        return inertia('Admin/AccountManagement/AdminManage/Create', compact('roles'));
     }
 
     public function store(StoreAdminRequest $request): RedirectResponse
@@ -106,7 +106,7 @@ class AdminManageController extends Controller
             ->query(function (Builder $builder) {
                 $builder->with('roles');
             })
-            ->where("role", "admin")
+            ->where('role', 'admin')
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());

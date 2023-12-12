@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Ecommerce\HelpAndSupport;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ContactUsMail;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -20,8 +19,8 @@ class ContactUsController extends Controller
 
     public function sendEmail(Request $request): RedirectResponse
     {
-        Mail::to(env("MAIL_FROM_ADDRESS"))->queue(new ContactUsMail($request->name, $request->email, $request->phone, $request->messageDetail));
+        Mail::to(env('MAIL_FROM_ADDRESS'))->queue(new ContactUsMail($request->name, $request->email, $request->phone, $request->messageDetail));
 
-        return back()->with("success", "Your email was sent successfully.");
+        return back()->with('success', 'Your email was sent successfully.');
     }
 }

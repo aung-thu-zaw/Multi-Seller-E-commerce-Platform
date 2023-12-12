@@ -12,10 +12,7 @@ use App\Http\Controllers\Ecommerce\OurBlogs\BlogController;
 use App\Http\Controllers\Ecommerce\Pages\AboutUsController;
 use App\Http\Controllers\Ecommerce\SellerStoreController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::get('/', HomeController::class)->name('home');
 
@@ -64,7 +61,7 @@ Route::get('/stores', [SellerStoreController::class, 'index'])->name('stores.ind
 
 Route::get('/about-us', AboutUsController::class)->name('about-us');
 
-require __DIR__ . '/auth.php';
-require __DIR__ . '/admin.php';
-require __DIR__ . '/seller.php';
-require __DIR__ . '/user.php';
+require __DIR__.'/auth.php';
+require __DIR__.'/admin.php';
+require __DIR__.'/seller.php';
+require __DIR__.'/user.php';

@@ -13,6 +13,7 @@ class Subscriber extends Model
     use HasFactory;
     use Searchable;
     use SoftDeletes;
+
     /**
      *     @return array<string>
      */
@@ -22,6 +23,7 @@ class Subscriber extends Model
             'email' => $this->email,
         ];
     }
+
     protected static function booted(): void
     {
         parent::boot();

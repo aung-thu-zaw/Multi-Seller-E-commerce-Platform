@@ -45,5 +45,4 @@ class AutomatedFilterWord extends Model
 
         static::addGlobalScope(new FilterByScope());
     }
-
 }

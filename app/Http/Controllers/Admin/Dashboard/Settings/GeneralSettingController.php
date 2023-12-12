@@ -21,7 +21,7 @@ class GeneralSettingController extends Controller
     {
         $generalSetting = GeneralSetting::findOrFail(1);
 
-        return inertia("Admin/Settings/GeneralSettings/Edit", compact("generalSetting"));
+        return inertia('Admin/Settings/GeneralSettings/Edit', compact('generalSetting'));
     }
 
     public function update(GeneralSettingRequest $request, GeneralSetting $generalSetting): RedirectResponse

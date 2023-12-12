@@ -5,7 +5,6 @@ namespace App\Http\Requests\Dashboard\Admin\Settings;
 use App\Rules\RecaptchaRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
 class GeneralSettingRequest extends FormRequest
 {

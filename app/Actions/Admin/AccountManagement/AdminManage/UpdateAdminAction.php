@@ -15,7 +15,7 @@ class UpdateAdminAction
      */
     public function handle(array $data, User $user): User
     {
-        $avatar = isset($data['avatar']) && !is_string($data['avatar']) ? $this->updateImage($data['avatar'], $user->avatar, 'avatars/users') : $user->avatar;
+        $avatar = isset($data['avatar']) && ! is_string($data['avatar']) ? $this->updateImage($data['avatar'], $user->avatar, 'avatars/users') : $user->avatar;
 
         $user->update([
             'name' => $data['name'],
@@ -30,7 +30,7 @@ class UpdateAdminAction
 
         $user->permissions()->detach();
 
-        $role = Role::with("permissions")->where("id", $data['role_id'])->first();
+        $role = Role::with('permissions')->where('id', $data['role_id'])->first();
 
         if ($role) {
             $user->assignRole($role->name);

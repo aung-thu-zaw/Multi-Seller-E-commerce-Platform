@@ -3,9 +3,7 @@
 namespace App\Console\Commands\AutoDeleteTrashed;
 
 use App\Actions\Admin\RatingManagement\AutomatedFilterWords\PermanentlyDeleteTrashedAutomatedFilterWordsAction;
-use App\Actions\Seller\StoreProductCategories\PermanentlyDeleteTrashedStoreProductCategoriesAction;
 use App\Models\AutomatedFilterWord;
-use App\Models\StoreProductCategory;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 

@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             AutomatedFilterWordSeeder::class,
             SeoSettingSeeder::class,
             GeneralSettingSeeder::class,
-            SubscriberSeeder::class
+            SubscriberSeeder::class,
         ]);
     }
 }

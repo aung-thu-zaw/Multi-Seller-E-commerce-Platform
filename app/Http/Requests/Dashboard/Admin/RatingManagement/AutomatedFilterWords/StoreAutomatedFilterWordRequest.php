@@ -25,7 +25,7 @@ class StoreAutomatedFilterWordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "word" => ["required","string",Rule::unique("automated_filter_words","word")],
+            'word' => ['required', 'string', Rule::unique('automated_filter_words', 'word')],
             'captcha_token' => [new RecaptchaRule()],
         ];
     }

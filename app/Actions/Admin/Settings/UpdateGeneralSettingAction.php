@@ -14,11 +14,11 @@ class UpdateGeneralSettingAction
      */
     public function handle(array $data, GeneralSetting $generalSetting): void
     {
-        $headerLogo = isset($data['header_logo']) && !is_string($data['header_logo']) ? $this->updateImage($data['header_logo'], $generalSetting->header_logo, 'settings') : $generalSetting->header_logo;
+        $headerLogo = isset($data['header_logo']) && ! is_string($data['header_logo']) ? $this->updateImage($data['header_logo'], $generalSetting->header_logo, 'settings') : $generalSetting->header_logo;
 
-        $footerLogo = isset($data['footer_logo']) && !is_string($data['footer_logo']) ? $this->updateImage($data['footer_logo'], $generalSetting->footer_logo, 'settings') : $generalSetting->footer_logo;
+        $footerLogo = isset($data['footer_logo']) && ! is_string($data['footer_logo']) ? $this->updateImage($data['footer_logo'], $generalSetting->footer_logo, 'settings') : $generalSetting->footer_logo;
 
-        $favicon = isset($data['favicon']) && !is_string($data['favicon']) ? $this->updateImage($data['favicon'], $generalSetting->favicon, 'settings') : $generalSetting->favicon;
+        $favicon = isset($data['favicon']) && ! is_string($data['favicon']) ? $this->updateImage($data['favicon'], $generalSetting->favicon, 'settings') : $generalSetting->favicon;
 
         $generalSetting->update([
             'site_name' => $data['site_name'],

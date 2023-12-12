@@ -74,9 +74,9 @@ class FaqContent extends Model
     }
 
     /**
-    * @param  array<string>  $filterBy
-    * @param  Builder<FaqContent>  $query
-    */
+     * @param  array<string>  $filterBy
+     * @param  Builder<FaqContent>  $query
+     */
     public function scopeFilterBy(Builder $query, array $filterBy): void
     {
         $query->when(

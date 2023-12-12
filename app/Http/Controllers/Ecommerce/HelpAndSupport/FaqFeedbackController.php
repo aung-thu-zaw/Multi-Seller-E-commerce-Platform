@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Ecommerce\HelpAndSupport;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Ecommerce\FaqFeedbackRequest;
 use App\Models\FaqContent;
 use App\Models\FaqFeedback;
 use Illuminate\Http\RedirectResponse;
@@ -27,7 +26,7 @@ class FaqFeedbackController extends Controller
             return back();
         }
 
-        if (!$existingFeedback) {
+        if (! $existingFeedback) {
             FaqFeedback::create([
                 'faq_content_id' => $faqContent->id,
                 'user_id' => auth()->id(),
@@ -55,5 +54,4 @@ class FaqFeedbackController extends Controller
 
         return back()->with('success', 'Thank you for your feedback.');
     }
-
 }

@@ -171,10 +171,10 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             ]);
 
         Route::resource('registered-accounts', RegisteredAccountController::class)
-        ->only(["index","destroy"])
-        ->parameters([
-            'registered-accounts' => 'user',
-        ]);
+            ->only(['index', 'destroy'])
+            ->parameters([
+                'registered-accounts' => 'user',
+            ]);
 
         Route::patch('registered-accounts/{user}/change-status', [RegisteredAccountController::class, 'changeStatus'])->name('registered-accounts.change-status');
 
@@ -191,27 +191,26 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-
         Route::resource('admin-manage', AdminManageController::class)
-        ->except(['show'])
-        ->parameters([
-            'admin-manage' => 'user',
-        ]);
+            ->except(['show'])
+            ->parameters([
+                'admin-manage' => 'user',
+            ]);
 
         Route::patch('admin-manage/{user}/change-status', [AdminManageController::class, 'changeStatus'])->name('admin-manage.change-status');
 
         Route::controller(AdminManageController::class)
-        ->prefix('/admin-manage/trash')
-        ->name('admin-manage.')
-        ->group(function () {
-            Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
-            Route::get('/', 'trashed')->name('trashed');
-            Route::post('/{id}/restore', 'restore')->name('restore');
-            Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
-            Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
-            Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
-            Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
-        });
+            ->prefix('/admin-manage/trash')
+            ->name('admin-manage.')
+            ->group(function () {
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
 
         Route::resource('automated-filter-words', AutomatedFilterWordController::class)->except(['show']);
         Route::controller(AutomatedFilterWordController::class)
@@ -228,22 +227,22 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             });
 
         Route::controller(GeneralSettingController::class)
-        ->prefix('/general-settings')
-        ->name('general-settings.')
-        ->group(function () {
-            Route::get('/', 'edit')->name("edit");
-            Route::patch('/{general_setting}', 'update')->name("update");
-        });
+            ->prefix('/general-settings')
+            ->name('general-settings.')
+            ->group(function () {
+                Route::get('/', 'edit')->name('edit');
+                Route::patch('/{general_setting}', 'update')->name('update');
+            });
 
         Route::controller(SeoSettingController::class)
-        ->prefix('/seo-settings')
-        ->name('seo-settings.')
-        ->group(function () {
-            Route::get('/', 'edit')->name("edit");
-            Route::patch('/{seo_setting}', 'update')->name("update");
-        });
+            ->prefix('/seo-settings')
+            ->name('seo-settings.')
+            ->group(function () {
+                Route::get('/', 'edit')->name('edit');
+                Route::patch('/{seo_setting}', 'update')->name('update');
+            });
 
-        Route::resource('subscribers', SubscriberController::class)->only(['index','destroy']);
+        Route::resource('subscribers', SubscriberController::class)->only(['index', 'destroy']);
         Route::controller(SubscriberController::class)
             ->prefix('/subscribers/trash')
             ->name('subscribers.')

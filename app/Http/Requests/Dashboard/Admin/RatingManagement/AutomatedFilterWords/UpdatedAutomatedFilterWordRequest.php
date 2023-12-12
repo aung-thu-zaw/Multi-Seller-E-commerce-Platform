@@ -27,7 +27,7 @@ class UpdatedAutomatedFilterWordRequest extends FormRequest
         $automatedFilterWord = $this->route()->parameter('automated_filter_word');
 
         return [
-            "word" => ["required","string",Rule::unique("automated_filter_words", "word")->ignore($automatedFilterWord)],
+            'word' => ['required', 'string', Rule::unique('automated_filter_words', 'word')->ignore($automatedFilterWord)],
             'captcha_token' => [new RecaptchaRule()],
         ];
     }

@@ -24,7 +24,7 @@ class BlogContentController extends Controller
     {
         $this->middleware('permission:blog-contents.view', ['only' => ['index']]);
         $this->middleware('permission:blog-contents.create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:blog-contents.edit', ['only' => ['edit', 'update','changeStatus']]);
+        $this->middleware('permission:blog-contents.edit', ['only' => ['edit', 'update', 'changeStatus']]);
         $this->middleware('permission:blog-contents.delete', ['only' => ['destroy', 'destroySelected']]);
         $this->middleware('permission:blog-contents.view.trash', ['only' => ['trashed']]);
         $this->middleware('permission:blog-contents.restore', ['only' => ['restore', 'restoreSelected']]);

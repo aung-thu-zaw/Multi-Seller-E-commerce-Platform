@@ -16,7 +16,7 @@ class GeneralSetting extends Model
     protected function headerLogo(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/settings/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/settings/$value"),
         );
     }
 
@@ -26,7 +26,7 @@ class GeneralSetting extends Model
     protected function footerLogo(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/settings/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/settings/$value"),
         );
     }
 
@@ -36,14 +36,13 @@ class GeneralSetting extends Model
     protected function favicon(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/settings/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/settings/$value"),
         );
     }
 
-
     public static function deleteImage(string $brandImage): void
     {
-        if (!empty($brandImage) && file_exists(storage_path('app/public/settings/'.pathinfo($brandImage, PATHINFO_BASENAME)))) {
+        if (! empty($brandImage) && file_exists(storage_path('app/public/settings/'.pathinfo($brandImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/settings/'.pathinfo($brandImage, PATHINFO_BASENAME)));
         }
     }

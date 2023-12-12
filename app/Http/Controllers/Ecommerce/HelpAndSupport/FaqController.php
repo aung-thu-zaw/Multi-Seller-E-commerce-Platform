@@ -7,7 +7,6 @@ use App\Models\FaqCategory;
 use App\Models\FaqContent;
 use App\Models\FaqFeedback;
 use App\Models\FaqSubcategory;
-use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
@@ -18,9 +17,9 @@ class FaqController extends Controller
         $faqCategories = FaqCategory::with('faqSubcategories')->get();
 
         $faqContents = FaqContent::filterBy(request(['search_question', 'category']))
-                   ->orderBy('id', 'desc')
-                   ->paginate(15)
-                   ->withQueryString();
+            ->orderBy('id', 'desc')
+            ->paginate(15)
+            ->withQueryString();
 
         $faqSubcategory = FaqSubcategory::with('faqCategory')->where('slug', request('category'))->first();
 
@@ -32,17 +31,17 @@ class FaqController extends Controller
         $faqContent->load(['faqSubcategory.faqCategory']);
 
         $faqFeedback = FaqFeedback::where(
-            ["faq_content_id" => $faqContent->id],
-            ["user_id" => auth()->id()]
+            ['faq_content_id' => $faqContent->id],
+            ['user_id' => auth()->id()]
         )
             ->first();
 
         $faqCategories = FaqCategory::with('faqSubcategories')->get();
 
         $relatedFaqContents = FaqContent::where('faq_subcategory_id', $faqContent->faq_subcategory_id)
-                          ->where('slug', '!=', $faqContent->slug)
-                          ->take(5)
-                          ->get();
+            ->where('slug', '!=', $faqContent->slug)
+            ->take(5)
+            ->get();
 
         return inertia('E-commerce/HelpAndSupport/Faqs/Show', compact('faqContent', 'faqFeedback', 'faqCategories', 'relatedFaqContents'));
     }

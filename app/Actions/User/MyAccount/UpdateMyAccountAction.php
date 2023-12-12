@@ -15,7 +15,7 @@ class UpdateMyAccountAction
      */
     public function handle(array $data, User $user): void
     {
-        $avatar = isset($data['avatar']) && !is_string($data['avatar']) ? $this->updateImage($data['avatar'], $user->avatar, 'avatars/users') : $user->avatar;
+        $avatar = isset($data['avatar']) && ! is_string($data['avatar']) ? $this->updateImage($data['avatar'], $user->avatar, 'avatars/users') : $user->avatar;
 
         $user->update([
             'name' => $data['name'],

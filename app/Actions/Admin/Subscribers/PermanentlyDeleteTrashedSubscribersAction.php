@@ -2,8 +2,8 @@
 
 namespace App\Actions\Admin\Subscribers;
 
-use Illuminate\Support\Collection;
 use App\Models\Subscriber;
+use Illuminate\Support\Collection;
 
 class PermanentlyDeleteTrashedSubscribersAction
 {

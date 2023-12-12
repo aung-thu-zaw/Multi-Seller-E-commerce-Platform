@@ -2,9 +2,7 @@
 
 namespace App\Console\Commands\AutoDeleteTrashed;
 
-use App\Actions\Admin\BlogManagement\BlogCategories\PermanentlyDeleteTrashedBlogCategoriesAction;
 use App\Actions\Admin\Subscribers\PermanentlyDeleteTrashedSubscribersAction;
-use App\Models\BlogCategory;
 use App\Models\Subscriber;
 use Carbon\Carbon;
 use Illuminate\Console\Command;

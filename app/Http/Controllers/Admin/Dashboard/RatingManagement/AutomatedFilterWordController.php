@@ -45,7 +45,7 @@ class AutomatedFilterWordController extends Controller
 
     public function store(StoreAutomatedFilterWordRequest $request): RedirectResponse
     {
-        AutomatedFilterWord::create(["word" => $request->word]);
+        AutomatedFilterWord::create(['word' => $request->word]);
 
         return to_route('admin.automated-filter-words.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }
@@ -57,7 +57,7 @@ class AutomatedFilterWordController extends Controller
 
     public function update(UpdatedAutomatedFilterWordRequest $request, AutomatedFilterWord $automatedFilterWord): RedirectResponse
     {
-        $automatedFilterWord->update(["word" => $request->word]);
+        $automatedFilterWord->update(['word' => $request->word]);
 
         return to_route('admin.automated-filter-words.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }

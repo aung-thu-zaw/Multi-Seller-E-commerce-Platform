@@ -26,15 +26,15 @@ class MyAccountRequest extends FormRequest
         $user = $this->route()->parameter('user');
 
         $rules = [
-            "name" => ["required","string","max:255",Rule::unique('users', 'name')->ignore($user)],
+            'name' => ['required', 'string', 'max:255', Rule::unique('users', 'name')->ignore($user)],
             'email' => ['required', 'lowercase', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user)],
-            "phone" => ["nullable","string",Rule::unique('users', 'phone')->ignore($user)],
-            "gender" => ["nullable","string",Rule::in(["male","female"])],
-            "birthday" => ["nullable","date"],
+            'phone' => ['nullable', 'string', Rule::unique('users', 'phone')->ignore($user)],
+            'gender' => ['nullable', 'string', Rule::in(['male', 'female'])],
+            'birthday' => ['nullable', 'date'],
             'captcha_token' => [new RecaptchaRule()],
         ];
 
-        if($this->hasFile("avatar")) {
+        if ($this->hasFile('avatar')) {
             $rules['avatar'] = ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'];
         }
 
