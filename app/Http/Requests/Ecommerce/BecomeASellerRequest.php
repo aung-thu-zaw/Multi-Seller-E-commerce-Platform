@@ -24,9 +24,9 @@ class BecomeASellerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'store_name' => ['required', 'string', 'max:255', Rule::unique('stores', 'store_name')],
-            'contact_email' => ['required', 'lowercase', 'email', 'max:255', Rule::unique('stores', 'contact_email')],
-            'contact_phone' => ['required', 'string', Rule::unique('stores', 'contact_phone')],
+            'store_name' => ['required', 'string', 'max:255', Rule::unique('seller_requests', 'store_name')],
+            'contact_email' => ['required', 'lowercase', 'email', 'max:255', Rule::unique('seller_requests', 'contact_email')],
+            'contact_phone' => ['required', 'string', Rule::unique('seller_requests', 'contact_phone')],
             'store_type' => ['nullable', 'string', Rule::in(['personal', 'business'])],
             'address' => ['nullable', 'string','max:255'],
             'additional_information' => ['nullable', 'string'],

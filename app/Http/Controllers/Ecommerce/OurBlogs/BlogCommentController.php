@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BlogComment;
 use App\Models\BlogContent;
 use App\Models\User;
-use App\Notifications\Blogs\NewBlogCommentFromUserNotification;
+use App\Notifications\Admin\NewBlogCommentNotification;
 use App\Rules\RecaptchaRule;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -30,7 +30,7 @@ class BlogCommentController extends Controller
 
         $commenter = User::findOrFail($blogComment->user_id);
 
-        $author->notify(new NewBlogCommentFromUserNotification($blogContent, $blogComment, $commenter));
+        $author->notify(new NewBlogCommentNotification($blogContent, $blogComment, $commenter));
 
         return back();
     }

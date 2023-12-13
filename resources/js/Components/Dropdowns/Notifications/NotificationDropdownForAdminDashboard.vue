@@ -1,5 +1,6 @@
 <script setup>
 import BlogCommentNotificationCard from '@/Components/Cards/Notifications/BlogCommentNotificationCard.vue'
+import SellerRequestNotificationCard from '@/Components/Cards/Notifications/SellerRequestNotificationCard.vue'
 import { router, usePage } from '@inertiajs/vue3'
 import { computed, onMounted, ref } from 'vue'
 
@@ -13,13 +14,24 @@ onMounted(() => {
   notifications.value = usePage().props.auth?.notifications
 
   Echo.private(`App.Models.User.${usePage().props.auth.user?.id}`).notification((notification) => {
-    if (notification.type === 'App\\Notifications\\Blogs\\NewBlogCommentFromUserNotification') {
+    if (notification.type === 'App\\Notifications\\Admin\\NewBlogCommentNotification') {
       notifications.value.unshift({
         id: notification.id,
         type: notification.type,
         data: {
           blog: notification.blog,
           comment: notification.comment,
+          user: notification.user
+        }
+      })
+    }
+    if (notification.type === 'App\\Notifications\\Admin\\NewSellerRequestNotification') {
+      console.log(notification)
+      notifications.value.unshift({
+        id: notification.id,
+        type: notification.type,
+        data: {
+          seller_request: notification.seller_request,
           user: notification.user
         }
       })
@@ -102,16 +114,15 @@ const handleMarkAllAsRead = () => {
       </div>
 
       <div v-if="notifications.length" class="w-full">
-        <div
-          v-for="notification in sortedNotifications"
-          :key="notification.id"
-          class="divide-y divide-gray-300 w-full"
-        >
+        <div v-for="notification in sortedNotifications" :key="notification.id" class="w-full">
           <!-- Notification Cards -->
           <BlogCommentNotificationCard
-            v-show="
-              notification.type === 'App\\Notifications\\Blogs\\NewBlogCommentFromUserNotification'
-            "
+            v-show="notification.type === 'App\\Notifications\\Admin\\NewBlogCommentNotification'"
+            :notification="notification"
+          />
+
+          <SellerRequestNotificationCard
+            v-show="notification.type === 'App\\Notifications\\Admin\\NewSellerRequestNotification'"
             :notification="notification"
           />
         </div>

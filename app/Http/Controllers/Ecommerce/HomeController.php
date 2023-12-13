@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ecommerce;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
@@ -12,4 +13,8 @@ class HomeController extends Controller
     {
         return inertia('E-commerce/Home');
     }
+    // public function __invoke(): View
+    // {
+    //     return view('mails.user.seller-request-status-update');
+    // }
 }

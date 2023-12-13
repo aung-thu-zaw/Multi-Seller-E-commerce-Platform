@@ -7,7 +7,7 @@ use App\Models\BlogComment;
 use App\Models\BlogCommentReply;
 use App\Models\BlogContent;
 use App\Models\User;
-use App\Notifications\Blogs\BlogCommentReplyNotification;
+use App\Notifications\User\BlogCommentReplyNotification;
 use App\Rules\RecaptchaRule;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

@@ -280,5 +280,6 @@
     "Claim as a seller": "Claim as a seller",
     "Seller Management": "Seller Management",
     "Additional Information": "Additional Information",
-    "Details": "Details"
+    "Details": "Details",
+    "You have a new seller request from :label":"You have a new seller request from :label"
 }

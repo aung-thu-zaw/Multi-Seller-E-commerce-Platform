@@ -13,7 +13,7 @@ onMounted(() => {
   notifications.value = usePage().props.auth?.notifications
 
   Echo.private(`App.Models.User.${usePage().props.auth.user?.id}`).notification((notification) => {
-    if (notification.type === 'App\\Notifications\\Blogs\\BlogCommentReplyNotification') {
+    if (notification.type === 'App\\Notifications\\User\\BlogCommentReplyNotification') {
       notifications.value.unshift({
         id: notification.id,
         type: notification.type,
@@ -109,7 +109,7 @@ const handleMarkAllAsRead = () => {
         >
           <!-- Notification Cards -->
           <BlogCommentReplyNotificationCard
-            v-show="notification.type === 'App\\Notifications\\Blogs\\BlogCommentReplyNotification'"
+            v-show="notification.type === 'App\\Notifications\\User\\BlogCommentReplyNotification'"
             :notification="notification"
           />
         </div>

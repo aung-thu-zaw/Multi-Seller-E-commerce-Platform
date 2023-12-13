@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Notifications\Blogs;
+namespace App\Notifications\Admin;
 
-use App\Models\BlogComment;
-use App\Models\BlogContent;
+use App\Models\SellerRequest;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewBlogCommentFromUserNotification extends Notification implements ShouldQueue
+class NewSellerRequestNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(protected BlogContent $blogContent, protected BlogComment $blogComment, protected User $user)
+    public function __construct(protected User $user, protected SellerRequest $sellerRequest)
     {
         //
     }
@@ -40,9 +40,8 @@ class NewBlogCommentFromUserNotification extends Notification implements ShouldQ
     public function toArray(object $notifiable): array
     {
         return [
-            'blog' => $this->blogContent->slug,
-            'comment' => $this->blogComment->comment,
             'user' => $this->user->only('avatar', 'name'),
+            'seller_request' => $this->sellerRequest->only('id'),
         ];
     }
 }

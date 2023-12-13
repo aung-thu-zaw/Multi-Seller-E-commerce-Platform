@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Notifications\Blogs;
+namespace App\Notifications\User;
 
 use App\Models\BlogCommentReply;
 use App\Models\BlogContent;
