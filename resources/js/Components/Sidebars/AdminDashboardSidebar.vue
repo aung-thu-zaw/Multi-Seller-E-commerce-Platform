@@ -1093,6 +1093,114 @@ const toggleCollapseShow = (classes) => {
             </div>
           </li>
 
+          <!-- Seller Managements -->
+          <li
+            v-show="can('claims-as-a-seller.view') || can('store-manage.view')"
+            class="hs-accordion items-center"
+            id="seller-management-accordion"
+          >
+            <button
+              type="button"
+              class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
+            >
+              <span>
+                <i class="fa-solid fa-store mr-1.5"></i>
+                {{ __('Seller Management') }}
+              </span>
+              <span>
+                <svg
+                  class="hs-accordion-active:block ms-auto hidden w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m18 15-6-6-6 6" />
+                </svg>
+
+                <svg
+                  class="hs-accordion-active:hidden ms-auto block w-4 h-4 text-gray-600 group-hover:text-gray-500"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+
+            <div
+              id="seller-management-accordion"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+              :class="{
+                block:
+                  $page.url.startsWith('/admin/claims-as-a-seller') ||
+                  $page.url.startsWith('/admin/store-manage'),
+                hidden: !(
+                  $page.url.startsWith('/admin/claims-as-a-seller') ||
+                  $page.url.startsWith('/admin/store-manage')
+                )
+              }"
+            >
+              <ul class="pl-8">
+                <li v-show="can('claims-as-a-seller.view')" class="items-center">
+                  <Link
+                    :href="route('admin.claims-as-a-seller.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc'
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500': $page.url.startsWith(
+                        '/admin/claims-as-a-seller'
+                      ),
+                      'text-slate-600 hover:text-slate-500': !$page.url.startsWith(
+                        '/admin/claims-as-a-seller'
+                      )
+                    }"
+                  >
+                    {{ __('Claims as a seller') }}
+                  </Link>
+                </li>
+                <!-- <li v-show="can('store-manage.view')" class="items-center">
+                          <Link
+                            :href="route('admin.store-manage.index')"
+                            :data="{
+                              page: 1,
+                              per_page: 5,
+                              sort: 'id',
+                              direction: 'desc'
+                            }"
+                            class="text-xs py-3 font-bold block"
+                            :class="{
+                              'text-orange-600 hover:text-orange-500':
+                                $page.url.startsWith('/admin/store-manage'),
+                              'text-slate-600 hover:text-slate-500':
+                                !$page.url.startsWith('/admin/store-manage')
+                            }"
+                          >
+                            {{ __('Store Manage') }}
+                          </Link>
+                        </li> -->
+              </ul>
+            </div>
+          </li>
+
           <!-- Account Managements -->
           <li
             v-show="
@@ -1152,11 +1260,9 @@ const toggleCollapseShow = (classes) => {
               :class="{
                 block:
                   $page.url.startsWith('/admin/registered-accounts') ||
-                  $page.url.startsWith('/admin/seller-manage') ||
                   $page.url.startsWith('/admin/admin-manage'),
                 hidden: !(
                   $page.url.startsWith('/admin/registered-accounts') ||
-                  $page.url.startsWith('/admin/seller-manage') ||
                   $page.url.startsWith('/admin/admin-manage')
                 )
               }"
@@ -1184,46 +1290,7 @@ const toggleCollapseShow = (classes) => {
                     {{ __('Registered Accounts') }}
                   </Link>
                 </li>
-                <li v-show="can('seller-manage.view')" class="items-center">
-                  <Link
-                    :href="route('admin.categories.index')"
-                    :data="{
-                      page: 1,
-                      per_page: 5,
-                      sort: 'id',
-                      direction: 'desc'
-                    }"
-                    class="text-xs py-3 font-bold block"
-                    :class="{
-                      'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/seller-manage'),
-                      'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/seller-manage')
-                    }"
-                  >
-                    {{ __('Seller Manage') }}
-                  </Link>
-                </li>
-                <!-- <li v-show="can('store-manage.view')" class="items-center">
-                  <Link
-                    :href="route('admin.store-manage.index')"
-                    :data="{
-                      page: 1,
-                      per_page: 5,
-                      sort: 'id',
-                      direction: 'desc'
-                    }"
-                    class="text-xs py-3 font-bold block"
-                    :class="{
-                      'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/store-manage'),
-                      'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/store-manage')
-                    }"
-                  >
-                    {{ __('Store Manage') }}
-                  </Link>
-                </li> -->
+
                 <li v-show="can('admin-manage.view')" class="items-center">
                   <Link
                     :href="route('admin.admin-manage.index')"

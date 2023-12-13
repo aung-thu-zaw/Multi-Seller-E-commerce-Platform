@@ -26,7 +26,7 @@ class StoreFactory extends Factory
             'tax_number' => fake()->randomDigit(),
             'description' => fake()->text(),
             'is_verified' => fake()->boolean(),
-            'status' => fake()->randomElement(['active', 'inactive']),
+            'status' => fake()->randomElement(['active', 'suspended']),
         ];
     }
 }

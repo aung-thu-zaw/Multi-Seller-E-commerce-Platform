@@ -25,7 +25,7 @@ return new class () extends Migration {
             $table->string('address')->nullable();
             $table->text('description')->nullable();
             $table->boolean('is_verified')->default(false);
-            $table->enum('status', ['active', 'inactive'])->default('inactive');
+            $table->enum('status', ['active', 'suspended'])->default('suspended');
             $table->softDeletes();
             $table->timestamps();
         });

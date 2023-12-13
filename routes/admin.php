@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\Dashboard\Faqs\FaqContentController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqSubcategoryController;
 use App\Http\Controllers\Admin\Dashboard\HelpPageController;
 use App\Http\Controllers\Admin\Dashboard\RatingManagement\AutomatedFilterWordController;
+use App\Http\Controllers\Admin\Dashboard\SellerManagement\ClaimsAsASellerController;
 use App\Http\Controllers\Admin\Dashboard\Settings\GeneralSettingController;
 use App\Http\Controllers\Admin\Dashboard\Settings\SeoSettingController;
 use App\Http\Controllers\Admin\Dashboard\SubscribersAndNewsletters\SubscriberController;
@@ -190,6 +191,28 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
+
+
+        Route::resource('claims-as-a-seller', ClaimsAsASellerController::class)
+        ->only(['index', 'destroy'])
+        ->parameters([
+            'claims-as-a-seller' => 'store',
+        ]);
+
+        Route::patch('claims-as-a-seller/{store}/change-status', [ClaimsAsASellerController::class, 'changeStatus'])->name('claims-as-a-seller.change-status');
+
+        Route::controller(ClaimsAsASellerController::class)
+        ->prefix('/claims-as-a-seller/trash')
+        ->name('claims-as-a-seller.')
+        ->group(function () {
+            Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+            Route::get('/', 'trashed')->name('trashed');
+            Route::post('/{id}/restore', 'restore')->name('restore');
+            Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+            Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+            Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+            Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+        });
 
         Route::resource('admin-manage', AdminManageController::class)
             ->except(['show'])

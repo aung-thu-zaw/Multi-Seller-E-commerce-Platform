@@ -32,7 +32,7 @@ class BecomeASellerController extends Controller
             "address" => $request->address,
             "description" => $request->description,
             "avatar" => $avatar,
-            "status" => "inactive"
+            "status" => "suspended"
         ]);
 
         return back()->with("success","Your request has been successfully sent.");
