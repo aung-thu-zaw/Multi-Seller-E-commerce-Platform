@@ -282,5 +282,6 @@
     "Seller Management": "ရောင်းသူ စီမံခန့်ခွဲမှု",
     "Additional Information": "နောက်ထပ်အချက်အလက်များ",
     "Details": "အသေးစိတ်",
-    "You have a new seller request from :label": "သင့်တွင် :label ထံမှ ရောင်းချသူအသစ် တောင်းဆိုချက်တစ်ခုရှိသည်။"
+    "You have a new seller request from :label": "သင့်တွင် :label ထံမှ ရောင်းချသူအသစ် တောင်းဆိုချက်တစ်ခုရှိသည်။",
+    "Reason For Rejection":"ငြင်းပယ်ရခြင်းအကြောင်းရင်း"
 }

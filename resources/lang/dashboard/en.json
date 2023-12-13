@@ -281,5 +281,6 @@
     "Seller Management": "Seller Management",
     "Additional Information": "Additional Information",
     "Details": "Details",
-    "You have a new seller request from :label":"You have a new seller request from :label"
+    "You have a new seller request from :label":"You have a new seller request from :label",
+    "Reason For Rejection":"Reason For Rejection"
 }

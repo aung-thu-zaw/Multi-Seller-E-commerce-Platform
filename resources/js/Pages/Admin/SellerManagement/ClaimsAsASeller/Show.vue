@@ -7,6 +7,7 @@ import OrangeBadge from '@/Components/Badges/OrangeBadge.vue'
 import RedBadge from '@/Components/Badges/RedBadge.vue'
 import BlueBadge from '@/Components/Badges/BlueBadge.vue'
 import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
+import TextAreaField from '@/Components/Forms/Fields/TextAreaField.vue'
 import InputError from '@/Components/Forms/Fields/InputError.vue'
 import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
 import FormButton from '@/Components/Buttons/FormButton.vue'
@@ -18,7 +19,8 @@ import { __ } from '@/Services/translations-inside-setup.js'
 const props = defineProps({ sellerRequest: Object })
 
 const { form, processing, errors, editAction } = useResourceActions({
-  status: props.sellerRequest?.status
+  status: props.sellerRequest?.status,
+  reason_for_rejection: null
 })
 </script>
 
@@ -122,10 +124,6 @@ const { form, processing, errors, editAction } = useResourceActions({
               name="status"
               :options="[
                 {
-                  label: 'Pending',
-                  value: 'pending'
-                },
-                {
                   label: 'Approved',
                   value: 'approved'
                 },
@@ -141,6 +139,17 @@ const { form, processing, errors, editAction } = useResourceActions({
             />
 
             <InputError :message="errors?.status" />
+          </div>
+
+          <div v-show="form.status === 'rejected'">
+            <InputLabel :label="__('Reason For Rejection')" />
+
+            <TextAreaField
+              name="reason-for-rejection"
+              v-model="form.reason_for_rejection"
+              :placeholder="__('Enter :label', { label: __('Reason For Rejection') })"
+            />
+            <InputError :message="errors?.reason_for_rejection" />
           </div>
 
           <FormButton :processing="processing">

@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Admin\Dashboard\SellerManagement;
 use App\Actions\Admin\SellerManagement\SellerRequests\PermanentlyDeleteTrashedSellerRequestsAction;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\HandlesQueryStringParameters;
+use App\Mail\Admin\SellerRequestApprovedEmail;
+use App\Mail\Admin\SellerRequestRejectedEmail;
 use App\Models\SellerRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
@@ -43,6 +47,12 @@ class ClaimsAsASellerController extends Controller
     public function changeStatus(Request $request, SellerRequest $sellerRequest): RedirectResponse
     {
         $sellerRequest->update(['status' => $request->status]);
+
+        $user = User::findOrFail($sellerRequest->user_id);
+
+        $request->status === 'approved' ?
+        Mail::to($user->email)->queue(new SellerRequestApprovedEmail($sellerRequest, $user->name)) :
+        Mail::to($user->email)->queue(new SellerRequestRejectedEmail($request->reason_for_rejection, $user->name));
 
         return to_route('admin.claims-as-a-seller.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }
