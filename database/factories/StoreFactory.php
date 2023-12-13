@@ -23,7 +23,6 @@ class StoreFactory extends Factory
             'contact_email' => fake()->unique()->safeEmail(),
             'contact_phone' => fake()->unique()->phoneNumber(),
             'description' => fake()->text(),
-            'is_verified' => fake()->boolean(),
             'status' => fake()->randomElement(['active', 'inactive']),
         ];
     }

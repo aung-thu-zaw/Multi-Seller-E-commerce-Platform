@@ -283,5 +283,7 @@
     "Additional Information": "နောက်ထပ်အချက်အလက်များ",
     "Details": "အသေးစိတ်",
     "You have a new seller request from :label": "သင့်တွင် :label ထံမှ ရောင်းချသူအသစ် တောင်းဆိုချက်တစ်ခုရှိသည်။",
-    "Reason For Rejection":"ငြင်းပယ်ရခြင်းအကြောင်းရင်း"
+    "Reason For Rejection": "ငြင်းပယ်ရခြင်းအကြောင်းရင်း",
+    "Go To Seller Dashboard": "ရောင်းသူ ဒက်ရှ်ဘုတ်သို့ သွားပါ",
+    "Go To Admin Dashboard": "အက်မင် ဒက်ရှ်ဘုတ်သို့ သွားပါ"
 }

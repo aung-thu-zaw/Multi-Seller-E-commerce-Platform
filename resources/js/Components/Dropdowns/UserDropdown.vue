@@ -114,6 +114,34 @@ const user = computed(() => usePage().props.auth?.user)
 
       <div class="py-2 first:pt-0 last:pb-0">
         <div
+          v-show="user?.role === 'admin'"
+          class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+        >
+          <Link
+            as="button"
+            :href="route('user.my-account.edit')"
+            class="text-left text-sm font-semibold block w-full whitespace-nowrap bg-transparent text-slate-700"
+          >
+            <i class="fa-solid fa-tv mr-1.5"></i>
+            {{ __('Go To Admin Dashboard') }}
+          </Link>
+        </div>
+
+        <div
+          v-show="user?.role === 'seller'"
+          class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+        >
+          <Link
+            as="button"
+            :href="route('user.my-account.edit')"
+            class="text-left text-sm font-semibold block w-full whitespace-nowrap bg-transparent text-slate-700"
+          >
+            <i class="fa-solid fa-tv mr-1.5"></i>
+            {{ __('Go To Seller Dashboard') }}
+          </Link>
+        </div>
+
+        <div
           class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
         >
           <Link

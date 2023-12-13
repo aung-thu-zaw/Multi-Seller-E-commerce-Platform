@@ -15,9 +15,8 @@ return new class () extends Migration {
             $table->foreignId('seller_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('store_name')->unique();
             $table->string('cover')->nullable();
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
             $table->string('slug')->unique();
-            $table->boolean('is_verified')->default(false);
             $table->enum('status', ['active', 'inactive'])->default('inactive');
             $table->text('description')->nullable();
             $table->string('contact_email')->nullable();
@@ -28,7 +27,6 @@ return new class () extends Migration {
             $table->string('instagram')->nullable();
             $table->string('twitter')->nullable();
             $table->string('linked_in')->nullable();
-            $table->text('additional_information')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

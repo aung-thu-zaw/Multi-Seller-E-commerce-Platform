@@ -16,14 +16,12 @@ class StoreSeeder extends Seeder
         Store::factory()->create([
             'seller_id' => 2,
             'store_name' => 'Business Seller',
-            'is_verified' => true,
             'status' => 'active',
         ]);
 
         Store::factory()->create([
             'seller_id' => 3,
             'store_name' => 'Personal Seller',
-            'is_verified' => true,
             'status' => 'active',
         ]);
 

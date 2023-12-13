@@ -7,8 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Traits\HandlesQueryStringParameters;
 use App\Mail\Admin\SellerRequestApprovedEmail;
 use App\Mail\Admin\SellerRequestRejectedEmail;
+use App\Models\SellerInformation;
 use App\Models\SellerRequest;
+use App\Models\Store;
 use App\Models\User;
+use App\Services\SellerVerificationService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -21,7 +24,7 @@ class ClaimsAsASellerController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:claims-as-a-seller.view', ['only' => ['index','show']]);
+        $this->middleware('permission:claims-as-a-seller.view', ['only' => ['index', 'show']]);
         $this->middleware('permission:claims-as-a-seller.edit', ['only' => ['changeStatus']]);
         $this->middleware('permission:claims-as-a-seller.delete', ['only' => ['destroy', 'destroySelected']]);
         $this->middleware('permission:claims-as-a-seller.view.trash', ['only' => ['trashed']]);
@@ -50,9 +53,14 @@ class ClaimsAsASellerController extends Controller
 
         $user = User::findOrFail($sellerRequest->user_id);
 
-        $request->status === 'approved' ?
-        Mail::to($user->email)->queue(new SellerRequestApprovedEmail($sellerRequest, $user->name)) :
-        Mail::to($user->email)->queue(new SellerRequestRejectedEmail($request->reason_for_rejection, $user->name));
+        if ($request->status === 'approved') {
+
+            (new SellerVerificationService())->handleApproval($user, $sellerRequest);
+            
+        } elseif ($request->status === 'rejected') {
+
+            (new SellerVerificationService())->handleRejection($user, $request->reason_for_rejection);
+        }
 
         return to_route('admin.claims-as-a-seller.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }
@@ -117,7 +125,9 @@ class ClaimsAsASellerController extends Controller
     {
         $selectedItems = explode(',', $selectedItems);
 
-        $trashedSellerRequests = SellerRequest::onlyTrashed()->whereIn('id', $selectedItems)->get();
+        $trashedSellerRequests = SellerRequest::onlyTrashed()
+            ->whereIn('id', $selectedItems)
+            ->get();
 
         (new PermanentlyDeleteTrashedSellerRequestsAction())->handle($trashedSellerRequests);
 
