@@ -79,7 +79,7 @@ const optionLabel = (option) => {
       :disabled="disabled"
       :required="required"
     >
-      <option value="" selected disabled>{{ placeholder }}</option>
+      <option selected disabled>{{ placeholder }}</option>
       <option
         v-for="(option, index) in options"
         :key="optionKey(index)"

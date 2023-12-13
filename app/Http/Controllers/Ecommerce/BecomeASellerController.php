@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Ecommerce;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ecommerce\BecomeASellerRequest;
 use App\Http\Traits\ImageUpload;
+use App\Models\SellerInformation;
+use App\Models\SellerRequest;
 use App\Models\Store;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
@@ -16,25 +18,22 @@ class BecomeASellerController extends Controller
 
     public function create(): Response|ResponseFactory
     {
-        return inertia("E-commerce/BecomeASeller/Index");
+        return inertia('E-commerce/BecomeASeller/Index');
     }
 
     public function store(BecomeASellerRequest $request): RedirectResponse
     {
-        $avatar = isset($request->avatar) ? $this->createImage($request->avatar, 'avatars/stores') : null;
+        SellerRequest::create([
+             'seller_id' => auth()->id(),
+             'store_name' => $request->store_name,
+             'store_type' => $request->store_type,
+             'contact_email' => $request->contact_email,
+             'contact_phone' => $request->contact_phone,
+             'address' => $request->address,
+             'additional_information' => $request->additional_information,
+             'status' => 'pending',
+         ]);
 
-        Store::create([
-            "seller_id" => auth()->id(),
-            "store_name" => $request->store_name,
-            "contact_email" => $request->contact_email,
-            "contact_phone" => $request->contact_phone,
-            "store_type" => $request->store_type,
-            "address" => $request->address,
-            "description" => $request->description,
-            "avatar" => $avatar,
-            "status" => "suspended"
-        ]);
-
-        return back()->with("success","Your request has been successfully sent.");
+        return back()->with('success', 'Your request has been successfully sent.');
     }
 }

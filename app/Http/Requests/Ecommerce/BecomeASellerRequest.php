@@ -29,8 +29,7 @@ class BecomeASellerRequest extends FormRequest
             'contact_phone' => ['required', 'string', Rule::unique('stores', 'contact_phone')],
             'store_type' => ['nullable', 'string', Rule::in(['personal', 'business'])],
             'address' => ['nullable', 'string','max:255'],
-            'description' => ['nullable', 'string'],
-            'avatar' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:1500'],
+            'additional_information' => ['nullable', 'string'],
             'captcha_token' => [new RecaptchaRule()],
         ];
     }

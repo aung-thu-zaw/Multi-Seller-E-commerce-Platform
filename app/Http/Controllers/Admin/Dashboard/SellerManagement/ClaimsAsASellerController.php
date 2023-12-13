@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Dashboard\SellerManagement;
 
+use App\Actions\Admin\SellerManagement\SellerRequests\PermanentlyDeleteTrashedSellerRequestsAction;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\HandlesQueryStringParameters;
-use App\Models\Store;
-use App\Models\User;
+use App\Models\SellerRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -17,39 +17,39 @@ class ClaimsAsASellerController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:claim-as-a-seller.view', ['only' => ['index','show']]);
-        $this->middleware('permission:claim-as-a-seller.edit', ['only' => ['changeStatus']]);
-        $this->middleware('permission:claim-as-a-seller.delete', ['only' => ['destroy', 'destroySelected']]);
-        $this->middleware('permission:claim-as-a-seller.view.trash', ['only' => ['trashed']]);
-        $this->middleware('permission:claim-as-a-seller.restore', ['only' => ['restore', 'restoreSelected']]);
-        $this->middleware('permission:claim-as-a-seller.force.delete', ['only' => ['forceDelete', 'forceDeleteSelected', 'forceDeleteAll']]);
+        $this->middleware('permission:claims-as-a-seller.view', ['only' => ['index','show']]);
+        $this->middleware('permission:claims-as-a-seller.edit', ['only' => ['changeStatus']]);
+        $this->middleware('permission:claims-as-a-seller.delete', ['only' => ['destroy', 'destroySelected']]);
+        $this->middleware('permission:claims-as-a-seller.view.trash', ['only' => ['trashed']]);
+        $this->middleware('permission:claims-as-a-seller.restore', ['only' => ['restore', 'restoreSelected']]);
+        $this->middleware('permission:claims-as-a-seller.force.delete', ['only' => ['forceDelete', 'forceDeleteSelected', 'forceDeleteAll']]);
     }
 
     public function index(): Response|ResponseFactory
     {
-        $requests = Store::search(request('search'))
+        $sellerRequests = SellerRequest::search(request('search'))
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
 
-        return inertia('Admin/SellerManagement/ClaimsAsASeller/Index', compact('requests'));
+        return inertia('Admin/SellerManagement/ClaimsAsASeller/Index', compact('sellerRequests'));
     }
 
-    public function show(Store $store): Response|ResponseFactory
+    public function show(SellerRequest $sellerRequest): Response|ResponseFactory
     {
-        return inertia('Admin/SellerManagement/ClaimsAsASeller/Show', compact('store'));
+        return inertia('Admin/SellerManagement/ClaimsAsASeller/Show', compact('sellerRequest'));
     }
 
-    public function changeStatus(Request $request, Store $store): RedirectResponse
+    public function changeStatus(Request $request, SellerRequest $sellerRequest): RedirectResponse
     {
-        $store->update(['status' => $request->status === 'active' ? 'suspended' : 'active']);
+        $sellerRequest->update(['status' => $request->status]);
 
         return to_route('admin.claims-as-a-seller.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }
 
-    public function destroy(Request $request, Store $store): RedirectResponse
+    public function destroy(Request $request, SellerRequest $sellerRequest): RedirectResponse
     {
-        $store->delete();
+        $sellerRequest->delete();
 
         return to_route('admin.claims-as-a-seller.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully deleted.');
     }
@@ -58,70 +58,68 @@ class ClaimsAsASellerController extends Controller
     {
         $selectedItems = explode(',', $selectedItems);
 
-        Store::whereIn('id', $selectedItems)->delete();
+        SellerRequest::whereIn('id', $selectedItems)->delete();
 
         return to_route('admin.claims-as-a-seller.index', $this->getQueryStringParams($request))->with('success', 'Selected :label have been successfully deleted.');
     }
 
-    // public function trashed(): Response|ResponseFactory
-    // {
-    //     $trashedRegisteredAccounts = User::search(request('search'))
-    //         ->onlyTrashed()
-    //         ->orderBy(request('sort', 'id'), request('direction', 'desc'))
-    //         ->paginate(request('per_page', 5))
-    //         ->appends(request()->all());
+    public function trashed(): Response|ResponseFactory
+    {
+        $trashedSellerRequests = SellerRequest::search(request('search'))
+            ->onlyTrashed()
+            ->orderBy(request('sort', 'id'), request('direction', 'desc'))
+            ->paginate(request('per_page', 5))
+            ->appends(request()->all());
 
-    //     return inertia('Admin/AccountManagement/RegisteredAccounts/Trash', compact('trashedRegisteredAccounts'));
-    // }
+        return inertia('Admin/SellerManagement/ClaimsAsASeller/Trash', compact('trashedSellerRequests'));
+    }
 
-    // public function restore(Request $request, int $trashedRegisteredAccountId): RedirectResponse
-    // {
-    //     $trashedRegisteredAccount = User::onlyTrashed()->findOrFail($trashedRegisteredAccountId);
+    public function restore(Request $request, int $trashedSellerRequestId): RedirectResponse
+    {
+        $trashedSellerRequest = SellerRequest::onlyTrashed()->findOrFail($trashedSellerRequestId);
 
-    //     $trashedRegisteredAccount->restore();
+        $trashedSellerRequest->restore();
 
-    //     return to_route('admin.claims-as-a-seller.trashed', $this->getQueryStringParams($request))->with('success', ':label has been successfully restored.');
-    // }
+        return to_route('admin.claims-as-a-seller.trashed', $this->getQueryStringParams($request))->with('success', ':label has been successfully restored.');
+    }
 
-    // public function restoreSelected(Request $request, string $selectedItems): RedirectResponse
-    // {
-    //     $selectedItems = explode(',', $selectedItems);
+    public function restoreSelected(Request $request, string $selectedItems): RedirectResponse
+    {
+        $selectedItems = explode(',', $selectedItems);
 
-    //     User::onlyTrashed()
-    //         ->whereIn('id', $selectedItems)
-    //         ->restore();
+        SellerRequest::onlyTrashed()
+            ->whereIn('id', $selectedItems)
+            ->restore();
 
-    //     return to_route('admin.claims-as-a-seller.trashed', $this->getQueryStringParams($request))->with('success', 'Selected :label have been successfully restored.');
-    // }
+        return to_route('admin.claims-as-a-seller.trashed', $this->getQueryStringParams($request))->with('success', 'Selected :label have been successfully restored.');
+    }
 
-    // public function forceDelete(Request $request, int $trashedRegisteredAccountId): RedirectResponse
-    // {
-    //     $trashedRegisteredAccount = User::onlyTrashed()->findOrFail($trashedRegisteredAccountId);
+    public function forceDelete(Request $request, int $trashedSellerRequestId): RedirectResponse
+    {
+        $trashedSellerRequest = SellerRequest::onlyTrashed()->findOrFail($trashedSellerRequestId);
 
-    //     User::deleteAvatar($trashedRegisteredAccount->avatar);
+        $trashedSellerRequest->forceDelete();
 
-    //     $trashedRegisteredAccount->forceDelete();
+        return to_route('admin.claims-as-a-seller.trashed', $this->getQueryStringParams($request))->with('success', 'The :label has been permanently deleted.');
+    }
 
-    //     return to_route('admin.claims-as-a-seller.trashed', $this->getQueryStringParams($request))->with('success', 'The :label has been permanently deleted.');
-    // }
+    public function forceDeleteSelected(Request $request, string $selectedItems): RedirectResponse
+    {
+        $selectedItems = explode(',', $selectedItems);
 
-    // public function forceDeleteSelected(Request $request, string $selectedItems): RedirectResponse
-    // {
-    //     $selectedItems = explode(',', $selectedItems);
+        $trashedSellerRequests = SellerRequest::onlyTrashed()->whereIn('id', $selectedItems)->get();
 
-    //     $trashedRegisteredAccounts = User::onlyTrashed()->whereIn('id', $selectedItems)->get();
+        (new PermanentlyDeleteTrashedSellerRequestsAction())->handle($trashedSellerRequests);
 
-    //     (new PermanentlyDeleteTrashedUsersAction())->handle($trashedRegisteredAccounts);
+        return to_route('admin.claims-as-a-seller.trashed', $this->getQueryStringParams($request))->with('success', 'Selected :label have been permanently deleted.');
+    }
 
-    //     return to_route('admin.claims-as-a-seller.trashed', $this->getQueryStringParams($request))->with('success', 'Selected :label have been permanently deleted.');
-    // }
+    public function forceDeleteAll(Request $request): RedirectResponse
+    {
+        $trashedSellerRequests = SellerRequest::onlyTrashed()->get();
 
-    // public function forceDeleteAll(Request $request): RedirectResponse
-    // {
-    //     $trashedRegisteredAccounts = User::onlyTrashed()->get();
+        (new PermanentlyDeleteTrashedSellerRequestsAction())->handle($trashedSellerRequests);
 
-    //     (new PermanentlyDeleteTrashedUsersAction())->handle($trashedRegisteredAccounts);
-
-    //     return to_route('admin.claims-as-a-seller.trashed', $this->getQueryStringParams($request))->with('success', 'All :label have been permanently deleted.');
-    // }
+        return to_route('admin.claims-as-a-seller.trashed', $this->getQueryStringParams($request))->with('success', 'All :label have been permanently deleted.');
+    }
 }

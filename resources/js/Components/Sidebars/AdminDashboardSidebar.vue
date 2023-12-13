@@ -1115,7 +1115,7 @@ const toggleCollapseShow = (classes) => {
                   height="20"
                   viewBox="0 0 20 20"
                   fill="none"
-                stroke="currentColor"
+                  stroke="currentColor"
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"

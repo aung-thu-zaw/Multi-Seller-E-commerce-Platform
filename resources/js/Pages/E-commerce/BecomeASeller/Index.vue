@@ -4,7 +4,6 @@ import InputError from '@/Components/Forms/Fields/InputError.vue'
 import InputField from '@/Components/Forms/Fields/InputField.vue'
 import TextAreaField from '@/Components/Forms/Fields/TextAreaField.vue'
 import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
-import FileInput from '@/Components/Forms/Fields/FileInput.vue'
 import FormButton from '@/Components/Buttons/FormButton.vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
 import { usePage, Head, useForm } from '@inertiajs/vue3'
@@ -14,13 +13,12 @@ import { useReCaptcha } from 'vue-recaptcha-v3'
 import { __ } from '@/Services/translations-inside-setup.js'
 
 const form = useForm({
-  avatar: null,
-  store_type: null,
   store_name: null,
+  store_type: null,
   contact_email: null,
   contact_phone: null,
   address: null,
-  description: null,
+  additional_information: null,
   captcha_token: null
 })
 
@@ -146,7 +144,7 @@ const handleRequestSellerStore = async () => {
                   <InputField
                     type="text"
                     name="store-address"
-                    icon="fa-location"
+                    icon="fa-location-dot"
                     v-model="form.address"
                     :placeholder="__('Enter :label', { label: __('Store Address') })"
                   />
@@ -155,28 +153,15 @@ const handleRequestSellerStore = async () => {
                 </div>
 
                 <div>
-                  <InputLabel :label="__('Description')" />
+                  <InputLabel :label="__('Additional Information')" />
 
                   <TextAreaField
-                    name="store-description"
-                    v-model="form.description"
-                    :placeholder="__('Enter :label', { label: __('Description') })"
+                    name="additional-information"
+                    v-model="form.additional_information"
+                    :placeholder="__('Enter :label', { label: __('Additional Information') })"
                   />
 
-                  <InputError :message="form.errors?.description" />
-                </div>
-
-                <div>
-                  <InputLabel :label="__('Store Profile')" required />
-
-                  <FileInput
-                    name="avatar"
-                    text="PNG, JPG or JPEG ( Max File Size : 1.5 MB )"
-                    v-model="form.avatar"
-                    required
-                  />
-
-                  <InputError :message="form.errors?.avatar" />
+                  <InputError :message="form.errors?.additional_information" />
                 </div>
 
                 <InputError :message="form.errors?.captcha_token" />

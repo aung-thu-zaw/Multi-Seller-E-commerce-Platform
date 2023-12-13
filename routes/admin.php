@@ -194,12 +194,13 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
 
 
         Route::resource('claims-as-a-seller', ClaimsAsASellerController::class)
-        ->only(['index', 'destroy'])
+        ->only(['index','destroy'])
         ->parameters([
-            'claims-as-a-seller' => 'store',
+            'claims-as-a-seller' => 'seller_request',
         ]);
 
-        Route::patch('claims-as-a-seller/{store}/change-status', [ClaimsAsASellerController::class, 'changeStatus'])->name('claims-as-a-seller.change-status');
+        Route::get("claims-as-a-seller/{seller_request}/detail", [ClaimsAsASellerController::class,"show"])->name("claims-as-a-seller.show");
+        Route::patch('claims-as-a-seller/{seller_request}/change-status', [ClaimsAsASellerController::class, 'changeStatus'])->name('claims-as-a-seller.change-status');
 
         Route::controller(ClaimsAsASellerController::class)
         ->prefix('/claims-as-a-seller/trash')
