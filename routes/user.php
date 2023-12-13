@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Seller\Dashboard\DashboardController;
+use App\Http\Controllers\User\BecomeASellerController;
 use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\User\DeleteAccountController;
 use App\Http\Controllers\User\MyAccountController;
@@ -19,5 +20,4 @@ Route::middleware(['auth'])
         Route::get('/change-password', ChangePasswordController::class)->name('change-password.edit');
 
         Route::get('/delete-account', DeleteAccountController::class)->name('delete-account');
-
     });

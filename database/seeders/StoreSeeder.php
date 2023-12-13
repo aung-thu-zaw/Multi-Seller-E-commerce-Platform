@@ -15,19 +15,17 @@ class StoreSeeder extends Seeder
 
         Store::factory()->create([
             'seller_id' => 2,
-            'store_type' => 'official',
-            'name' => 'Official Seller',
+            'store_type' => 'Business',
+            'store_name' => 'Business Seller',
             'is_verified' => true,
-            'is_featured' => true,
             'status' => 'active',
         ]);
 
         Store::factory()->create([
             'seller_id' => 3,
-            'store_type' => 'non_official',
-            'name' => 'Unofficial Seller',
+            'store_type' => 'Personal',
+            'store_name' => 'Personal Seller',
             'is_verified' => true,
-            'is_featured' => true,
             'status' => 'active',
         ]);
 

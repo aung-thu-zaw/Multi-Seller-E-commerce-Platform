@@ -32,10 +32,10 @@ import { Link } from '@inertiajs/vue3'
         </li>
 
         <li>
-          <a href="#">
+          <Link :href="route('become-a-seller.register')">
             <i class="fa-solid fa-store mr-1"></i>
             {{ __('Become a Seller') }}
-          </a>
+          </Link>
         </li>
 
         <li>

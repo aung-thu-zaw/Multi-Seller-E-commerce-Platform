@@ -80,11 +80,11 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne<Store>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Store>
      */
-    public function store(): HasOne
+    public function store(): HasMany
     {
-        return $this->hasOne(Store::class);
+        return $this->hasMany(Store::class);
     }
 
     /**

@@ -152,22 +152,6 @@ import { Link } from '@inertiajs/vue3'
         {{ __('Followed Stores') }}
       </Link>
 
-      <!-- Become a Seller -->
-      <Link
-        href="#"
-        as="button"
-        class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
-        :class="{
-          'text-orange-600 hover:text-orange-500 border-s-[3px] border-orange-600':
-            $page.url === '/user/seller/register',
-          'text-slate-600 hover:text-slate-500 border-transparent':
-            $page.url !== '/user/seller/register'
-        }"
-      >
-        <i class="fa-solid fa-user-check"></i>
-        {{ __('Become a Seller') }}
-      </Link>
-
       <!-- Notification Settings -->
       <Link
         href="#"

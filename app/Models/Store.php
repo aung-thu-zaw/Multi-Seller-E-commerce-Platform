@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,13 +21,23 @@ class Store extends Model
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('name')
+            ->generateSlugsFrom('store_name')
             ->saveSlugsTo('slug');
     }
 
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<Store, never>
+     */
+    protected function avatar(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/avatars/stores/$value"),
+        );
     }
 
     /**
@@ -39,7 +50,7 @@ class Store extends Model
 
     public static function deleteAvatar(?string $avatar): void
     {
-        if (! empty($avatar) && file_exists(storage_path('app/public/avatars/stores/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
+        if (!empty($avatar) && file_exists(storage_path('app/public/avatars/stores/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/avatars/stores/'.pathinfo($avatar, PATHINFO_BASENAME)));
         }
     }

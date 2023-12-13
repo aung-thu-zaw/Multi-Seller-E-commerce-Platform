@@ -25,7 +25,6 @@ class BlogCommentRequest extends FormRequest
         return [
             'blog_content_id' => ['required', 'numeric', Rule::exists('blog_contents', 'id')],
             'user_id' => ['required', 'numeric', Rule::exists('users', 'id')],
-
         ];
     }
 }

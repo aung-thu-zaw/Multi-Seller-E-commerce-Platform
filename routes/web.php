@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ecommerce\BecomeASellerController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\ContactUsController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\FaqController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\FaqFeedbackController;
@@ -13,6 +14,14 @@ use App\Http\Controllers\Ecommerce\Pages\AboutUsController;
 use App\Http\Controllers\Ecommerce\SellerStoreController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
+
+Route::controller(BecomeASellerController::class)
+    ->prefix('/become-a-seller')
+    ->name('become-a-seller.')
+    ->group(function () {
+        Route::get('/register', 'create')->name('register');
+        Route::post('/', 'store')->name('store');
+    });
 
 Route::get('/', HomeController::class)->name('home');
 
