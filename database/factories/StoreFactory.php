@@ -19,14 +19,12 @@ class StoreFactory extends Factory
         return [
             'seller_id' => fake()->randomNumber(2, 20),
             'avatar' => fake()->imageUrl(),
-            'store_type' => fake()->randomElement(['personal', 'business']),
             'store_name' => fake()->unique()->sentence(),
             'contact_email' => fake()->unique()->safeEmail(),
             'contact_phone' => fake()->unique()->phoneNumber(),
-            'tax_number' => fake()->randomDigit(),
             'description' => fake()->text(),
             'is_verified' => fake()->boolean(),
-            'status' => fake()->randomElement(['active', 'suspended']),
+            'status' => fake()->randomElement(['active', 'inactive']),
         ];
     }
 }
