@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Admin\Dashboard\SellerManagement;
 use App\Actions\Admin\SellerManagement\StoreManage\PermanentlyDeleteTrashedStoresAction;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\HandlesQueryStringParameters;
+use App\Mail\Seller\StoreActivationEmail;
 use App\Models\Store;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
@@ -37,6 +40,8 @@ class StoreManageController extends Controller
 
     public function show(Store $store): Response|ResponseFactory
     {
+        $store->load("seller");
+
         return inertia('Admin/SellerManagement/StoreManage/Show', compact('store'));
     }
 
@@ -44,16 +49,13 @@ class StoreManageController extends Controller
     {
         $store->update(['status' => $request->status]);
 
-        // $user = User::findOrFail($sellerRequest->user_id);
+        $seller = User::findOrFail($store->seller_id);
 
-        // if ($request->status === 'approved') {
+        if ($request->status === 'active') {
 
-        //     (new SellerVerificationService())->handleApproval($user, $sellerRequest);
+            Mail::to($seller->email)->queue(new StoreActivationEmail($seller->name));
 
-        // } elseif ($request->status === 'rejected') {
-
-        //     (new SellerVerificationService())->handleRejection($user, $request->reason_for_rejection);
-        // }
+        }
 
         return to_route('admin.store-manage.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }

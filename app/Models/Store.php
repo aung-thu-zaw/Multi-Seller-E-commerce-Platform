@@ -63,9 +63,9 @@ class Store extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,Store>
      */
-    public function user(): BelongsTo
+    public function seller(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,"seller_id");
     }
 
     public static function deleteAvatar(?string $avatar): void

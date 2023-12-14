@@ -14,6 +14,7 @@ return new class () extends Migration {
             $table->id();
             $table->foreignId('seller_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('store_name')->unique();
+            $table->enum('store_type',["personal","business"]);
             $table->string('cover')->nullable();
             $table->string('avatar')->nullable();
             $table->string('slug')->unique();

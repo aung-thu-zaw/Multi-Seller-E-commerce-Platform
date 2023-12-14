@@ -14,9 +14,10 @@ class StoreService
         return Store::create([
             'seller_id' => $user->id,
             'store_name' => $sellerRequest->store_name,
+            'store_type' => $sellerRequest->store_type,
             'contact_phone' => $sellerRequest->contact_phone,
             'contact_email' => $sellerRequest->contact_email,
-            'location' => $sellerRequest->address,
+            'address' => $sellerRequest->address,
             'status' => 'inactive',
         ]);
     }

@@ -31,7 +31,7 @@ import { Link } from '@inertiajs/vue3'
           <span class="border"></span>
         </li>
 
-        <li>
+        <li v-show="!$page.props.auth.store">
           <Link :href="route('become-a-seller.register')">
             <i class="fa-solid fa-store mr-1"></i>
             {{ __('Become a Seller') }}
