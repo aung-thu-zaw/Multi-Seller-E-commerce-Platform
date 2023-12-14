@@ -1177,26 +1177,26 @@ const toggleCollapseShow = (classes) => {
                     {{ __('Claims as a seller') }}
                   </Link>
                 </li>
-                <!-- <li v-show="can('store-manage.view')" class="items-center">
-                          <Link
-                            :href="route('admin.store-manage.index')"
-                            :data="{
-                              page: 1,
-                              per_page: 5,
-                              sort: 'id',
-                              direction: 'desc'
-                            }"
-                            class="text-xs py-3 font-bold block"
-                            :class="{
-                              'text-orange-600 hover:text-orange-500':
-                                $page.url.startsWith('/admin/store-manage'),
-                              'text-slate-600 hover:text-slate-500':
-                                !$page.url.startsWith('/admin/store-manage')
-                            }"
-                          >
-                            {{ __('Store Manage') }}
-                          </Link>
-                        </li> -->
+                <li v-show="can('store-manage.view')" class="items-center">
+                  <Link
+                    :href="route('admin.store-manage.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc'
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/store-manage'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/store-manage')
+                    }"
+                  >
+                    {{ __('Store Manage') }}
+                  </Link>
+                </li>
               </ul>
             </div>
           </li>

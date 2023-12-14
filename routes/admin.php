@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\Dashboard\Faqs\FaqSubcategoryController;
 use App\Http\Controllers\Admin\Dashboard\HelpPageController;
 use App\Http\Controllers\Admin\Dashboard\RatingManagement\AutomatedFilterWordController;
 use App\Http\Controllers\Admin\Dashboard\SellerManagement\ClaimsAsASellerController;
+use App\Http\Controllers\Admin\Dashboard\SellerManagement\StoreManageController;
 use App\Http\Controllers\Admin\Dashboard\Settings\GeneralSettingController;
 use App\Http\Controllers\Admin\Dashboard\Settings\SeoSettingController;
 use App\Http\Controllers\Admin\Dashboard\SubscribersAndNewsletters\SubscriberController;
@@ -205,6 +206,28 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
         Route::controller(ClaimsAsASellerController::class)
         ->prefix('/claims-as-a-seller/trash')
         ->name('claims-as-a-seller.')
+        ->group(function () {
+            Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+            Route::get('/', 'trashed')->name('trashed');
+            Route::post('/{id}/restore', 'restore')->name('restore');
+            Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+            Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+            Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+            Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+        });
+
+        Route::resource('store-manage', StoreManageController::class)
+        ->only(['index','destroy'])
+        ->parameters([
+            'store-manage' => 'store',
+        ]);
+
+        Route::get("store-manage/{store}/detail", [StoreManageController::class,"show"])->name("store-manage.show");
+        Route::patch('store-manage/{store}/change-status', [StoreManageController::class, 'changeStatus'])->name('store-manage.change-status');
+
+        Route::controller(StoreManageController::class)
+        ->prefix('/store-manage/trash')
+        ->name('store-manage.')
         ->group(function () {
             Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
             Route::get('/', 'trashed')->name('trashed');

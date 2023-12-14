@@ -118,6 +118,13 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'claims-as-a-seller.restore', 'group' => 'Seller Management']);
         Permission::create(['name' => 'claims-as-a-seller.force.delete', 'group' => 'Seller Management']);
 
+        Permission::create(['name' => 'store-manage.view', 'group' => 'Seller Management']);
+        Permission::create(['name' => 'store-manage.edit', 'group' => 'Seller Management']);
+        Permission::create(['name' => 'store-manage.delete', 'group' => 'Seller Management']);
+        Permission::create(['name' => 'store-manage.view.trash', 'group' => 'Seller Management']);
+        Permission::create(['name' => 'store-manage.restore', 'group' => 'Seller Management']);
+        Permission::create(['name' => 'store-manage.force.delete', 'group' => 'Seller Management']);
+
         Permission::create(['name' => 'automated-filter-words.view', 'group' => 'Rating Management']);
         Permission::create(['name' => 'automated-filter-words.create', 'group' => 'Rating Management']);
         Permission::create(['name' => 'automated-filter-words.edit', 'group' => 'Rating Management']);
