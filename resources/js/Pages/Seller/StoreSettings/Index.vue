@@ -7,7 +7,6 @@ import BankAccount from './Partials/BankAccount.vue'
 import { Head } from '@inertiajs/vue3'
 </script>
 
-
 <template>
   <Head :title="__('Store Settings')" />
 
