@@ -1,7 +1,13 @@
 <script setup>
+import GreenBadge from '@/Components/Badges/GreenBadge.vue'
+import RedBadge from '@/Components/Badges/RedBadge.vue'
 import UserDropdown from '@/Components/Dropdowns/UserDropdown.vue'
 import LanguageDropdownForDashboard from '@/Components/Dropdowns/LanguageDropdownForDashboard.vue'
 import NotificationDropdownForSellerDashboard from '@/Components/Dropdowns/Notifications/NotificationDropdownForSellerDashboard.vue'
+import { computed } from 'vue'
+import { usePage } from '@inertiajs/vue3'
+
+const store = computed(() => usePage().props.auth?.store)
 </script>
 
 <template>
@@ -13,8 +19,19 @@ import NotificationDropdownForSellerDashboard from '@/Components/Dropdowns/Notif
       class="w-full mx-auto items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4"
     >
       <!-- Brand -->
-      <span class="text-white text-sm hidden lg:inline-block font-bold">
-        {{ __('Seller Dashboard') }}
+      <span class="text-white text-sm hidden lg:inline-block font-bold space-x-3">
+        <span>
+          {{ __('Seller Dashboard') }}
+        </span>
+
+        <GreenBadge v-if="store.status === 'active'">
+          <i class="fa-solid fa-circle-check"></i>
+          Active
+        </GreenBadge>
+        <RedBadge v-else>
+          <i class="fa-solid fa-circle-xmark"></i>
+          Inactive
+        </RedBadge>
       </span>
       <!-- Form -->
       <form class="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3 w-[250px]">

@@ -21,12 +21,7 @@ return new class () extends Migration {
             $table->text('description')->nullable();
             $table->string('contact_email')->nullable();
             $table->string('contact_phone')->nullable();
-            $table->string('business_hours')->nullable();
-            $table->string('location')->nullable();
-            $table->string('facebook')->nullable();
-            $table->string('instagram')->nullable();
-            $table->string('twitter')->nullable();
-            $table->string('linked_in')->nullable();
+            $table->string('address')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

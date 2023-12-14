@@ -39,6 +39,7 @@ class HandleInertiaRequests extends Middleware
                 'user' => $user,
                 'permissions' => $user ? $user->permissions->pluck('name')->all() : [],
                 'notifications' => $user ? $user->notifications : [],
+                'store' => $user ? $user->store : [],
             ],
             'flash' => [
                 'success' => session('success'),

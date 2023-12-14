@@ -80,8 +80,8 @@
                     <p>
                         You can now log in to your account and access your <a
                             href="{{ env('APP_URL').'/seller/dashboard' }}" class="text-blue-600 hover:underline">seller
-                            dashboard</a> to start setting up your store,
-                        adding products, and managing orders. We wish you great success on our E-commerce platform.
+                            dashboard</a> to start setting up your store. We wish you great success on our E-commerce
+                        platform.
                     </p>
                     <p>
                         If you have any questions or need assistance, please feel free to reach out to our support team.

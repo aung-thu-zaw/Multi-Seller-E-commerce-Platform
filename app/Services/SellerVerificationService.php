@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\BusinessInformation;
 use App\Models\SellerInformation;
 use App\Models\SellerRequest;
 use App\Models\User;
@@ -12,13 +13,10 @@ class SellerVerificationService
     {
         $user->update(['role' => 'seller']);
 
-        $store = (new StoreService())->createStore($user, $sellerRequest);
+        (new StoreService())->createStore($user, $sellerRequest);
 
-        SellerInformation::create([
+        BusinessInformation::create([
             'seller_id' => $user->id,
-            'store_id' => $store->id,
-            'store_contact_email' => $store->contact_phone,
-            'store_contact_phone' => $store->contact_email,
         ]);
 
         (new SellerNotificationService())->sendApprovalEmail($user, $sellerRequest);

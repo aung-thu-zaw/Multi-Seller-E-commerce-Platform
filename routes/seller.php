@@ -8,6 +8,7 @@ use App\Http\Controllers\Seller\Dashboard\ProductController;
 use App\Http\Controllers\Seller\Dashboard\ProductImageController;
 use App\Http\Controllers\Seller\Dashboard\ProductVariantController;
 use App\Http\Controllers\Seller\Dashboard\StoreProductCategoryController;
+use App\Http\Controllers\Seller\Dashboard\StoreSettingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/seller/login', LoginController::class)
@@ -22,8 +23,9 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
         Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
         // Store Category Operations
-        Route::resource('store-product-categories', StoreProductCategoryController::class)->except(['show']);
+        Route::resource('store-product-categories', StoreProductCategoryController::class)->except(['show'])->middleware('strict.inactive_store');
         Route::controller(StoreProductCategoryController::class)
+        ->middleware('strict.inactive_store')
             ->prefix('/store-product-categories/trash')
             ->name('store-product-categories.')
             ->group(function () {
@@ -37,8 +39,9 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
             });
 
         // Product Operations
-        Route::resource('products', ProductController::class)->except(['show']);
+        Route::resource('products', ProductController::class)->except(['show'])->middleware('strict.inactive_store');
         Route::controller(ProductController::class)
+        ->middleware('strict.inactive_store')
             ->prefix('/products/trash')
             ->name('products.')
             ->group(function () {
@@ -52,6 +55,7 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
             });
 
         Route::controller(ProductImageController::class)
+        ->middleware('strict.inactive_store')
             ->prefix('/products')
             ->name('product.')
             ->group(function () {
@@ -61,6 +65,7 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
             });
 
         Route::controller(AttributeAndOptionController::class)
+        ->middleware('strict.inactive_store')
             ->prefix('/products')
             ->name('product.')
             ->group(function () {
@@ -69,7 +74,7 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
                 Route::delete('/attributes-and-options/{attribute}', 'destroyAttributeAndOptions')->name('attribute-and-options.destroy');
             });
 
-        Route::delete('attributes-and-options/{option}', DeleteOptionController::class)->name('options.destroy');
+        Route::delete('attributes-and-options/{option}', DeleteOptionController::class)->name('options.destroy')->middleware('strict.inactive_store');
 
         // Route::controller(ProductVariantController::class)
         //     ->prefix('/products')
@@ -81,7 +86,7 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
         //         // Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
         //     });
 
-        Route::resource('products/{product}/product-variants', ProductVariantController::class)->except(['show']);
+        Route::resource('products/{product}/product-variants', ProductVariantController::class)->middleware('strict.inactive_store');
         // Route::controller(ProductVariantController::class)
         //     ->prefix('/products/{product}/product-variants/trash')
         //     ->name('product-variants.')
@@ -95,4 +100,6 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
         //         Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
         //     });
 
+
+        Route::get("/store-settings", [StoreSettingController::class,"index"])->name("store-settings.index");
     });

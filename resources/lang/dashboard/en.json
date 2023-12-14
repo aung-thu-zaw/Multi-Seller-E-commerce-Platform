@@ -162,7 +162,7 @@
     "Guides": "Guides",
     "My Withdraw": "My Withdraw",
     "Stock Management": "Stock Management",
-    "Store Setting": "Store Setting",
+    "Store Settings": "Store Settings",
     "Store Administration": "Store Administration",
     "Financial & Store": "Financial & Store",
     "Store Product Categories": "Store Product Categories",
@@ -281,8 +281,16 @@
     "Seller Management": "Seller Management",
     "Additional Information": "Additional Information",
     "Details": "Details",
-    "You have a new seller request from :label":"You have a new seller request from :label",
-    "Reason For Rejection":"Reason For Rejection",
-    "Go To Seller Dashboard":"Go To Seller Dashboard",
-    "Go To Admin Dashboard":"Go To Admin Dashboard"
+    "You have a new seller request from :label": "You have a new seller request from :label",
+    "Reason For Rejection": "Reason For Rejection",
+    "Go To Seller Dashboard": "Go To Seller Dashboard",
+    "Go To Admin Dashboard": "Go To Admin Dashboard",
+    "Your store is currently inactive. Please fill in the required information. An administrator will verify your information and contact you.": "Your store is currently inactive. Please fill in the required information. An administrator will verify your information and contact you.",
+    "Store Description": "Store Description",
+    "Store Cover": "Store Cover",
+    "Account Title":"Account Title",
+    "Account Number":"Account Number",
+    "Bank Name":"Bank Name",
+    "Branch Code":"Branch Code"
+
 }

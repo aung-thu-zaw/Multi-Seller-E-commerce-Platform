@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('seller_information', function (Blueprint $table) {
+        Schema::create('business_information', function (Blueprint $table) {
             $table->id();
             $table->foreignId('seller_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->foreignId('store_id')->constrained();
-            $table->string('store_contact_email')->nullable();
-            $table->string('store_contact_phone')->nullable();
-            $table->string('business_contact_email')->nullable();
-            $table->string('business_contact_phone')->nullable();
+            $table->string('country')->nullable();
+            $table->string('region')->nullable();
+            $table->string('city')->nullable();
+            $table->string('township')->nullable();
+            $table->string('contact_email')->nullable();
+            $table->string('contact_phone')->nullable();
             $table->string('business_name')->nullable();
             $table->string('business_registration_number')->nullable();
             $table->string('tax_number')->nullable();
@@ -28,7 +29,6 @@ return new class extends Migration
             $table->text('business_description')->nullable();
             $table->text('products_or_services')->nullable();
             $table->text('additional_information')->nullable();
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('seller_information');
+        Schema::dropIfExists('business_information');
     }
 };

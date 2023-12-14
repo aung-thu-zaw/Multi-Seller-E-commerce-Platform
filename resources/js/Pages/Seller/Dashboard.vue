@@ -4,13 +4,18 @@ import DashboardHeaderStats from '@/Components/Headers/SellerDashboardHeaderStat
 import TotalSaleLineChart from '@/Components/Charts/TotalSaleLineChart.vue'
 import TotalOrderBarChart from '@/Components/Charts/TotalOrderBarChart.vue'
 import TotalUserBarChart from '@/Components/Charts/TotalUserBarChart.vue'
-import { Head } from '@inertiajs/vue3'
+import YellowAlert from '@/Components/Alerts/YellowAlert.vue'
+import { Head, usePage } from '@inertiajs/vue3'
+import { computed } from 'vue'
+
+const user = computed(() => usePage().props.auth?.user)
+const store = computed(() => usePage().props.auth?.store)
 </script>
 
 <template>
   <Head :title="__('Seller Dashboard')" />
 
-  <SellerDashboardLayout>
+  <SellerDashboardLayout v-if="user?.role === 'seller' && store?.status === 'active'">
     <template #header>
       <DashboardHeaderStats />
     </template>
@@ -28,11 +33,9 @@ import { Head } from '@inertiajs/vue3'
         </div>
       </div>
 
-      <!-- <div class="flex flex-wrap mt-4">
+      <div class="flex flex-wrap mt-4">
         <div class="w-full mb-12 px-4">
-          <div
-            class="w-full bg-white px-6 py-3 shadow rounded-sm border-t-4 border-t-orange-500"
-          >
+          <div class="w-full bg-white px-6 py-3 shadow rounded-sm border-t-4 border-t-orange-500">
             <h1 class="font-semibold text-blueGray-600 p-5 text-lg">
               <i class="fa-solid fa-calendar-day"></i>
               Today Orders
@@ -44,14 +47,9 @@ import { Head } from '@inertiajs/vue3'
               <DashboardTableDataPerPageSelectBox />
             </div>
             <TableContainer>
-              <Table
-                :items="[
-                  { testingOne: 'testingOne' },
-                  { testingTwo: 'testingTwo' },
-                ]"
-              > -->
-      <!-- Table Header -->
-      <!-- <template #table-header>
+              <Table :items="[{ testingOne: 'testingOne' }, { testingTwo: 'testingTwo' }]">
+                <!-- Table Header -->
+                <template #table-header>
                   <SortableTableHeaderCell label="# No" to="home" />
 
                   <SortableTableHeaderCell label="Invoice Id" to="home" />
@@ -69,10 +67,10 @@ import { Head } from '@inertiajs/vue3'
                   <SortableTableHeaderCell label="Date" to="home" />
 
                   <TableHeaderCell label="Actions" />
-                </template> -->
+                </template>
 
-      <!-- Table Body -->
-      <!-- <template #table-data>
+                <!-- Table Body -->
+                <template #table-data>
                   <TableDataCell> 1 </TableDataCell>
 
                   <TableDataCell>
@@ -126,9 +124,9 @@ import { Head } from '@inertiajs/vue3'
                   </TableActionCell>
                 </template>
               </Table>
-            </TableContainer> -->
+            </TableContainer>
 
-      <!-- <div class="py-3 flex items-center justify-center">
+            <div class="py-3 flex items-center justify-center">
               <nav aria-label="Page navigation example">
                 <ul class="inline-flex -space-x-px text-base h-10">
                   <li>
@@ -183,10 +181,27 @@ import { Head } from '@inertiajs/vue3'
                   </li>
                 </ul>
               </nav>
-            </div> -->
-      <!-- </div> -->
-      <!-- </div> -->
-      <!-- </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </SellerDashboardLayout>
+
+  <SellerDashboardLayout v-else>
+    <div class="mt-20 py-12 min-h-screen space-y-10">
+      <YellowAlert>
+        <div class="flex items-center space-x-5">
+          <i class="fa-solid fa-spinner animate-spin"></i>
+          <span>
+            {{
+              __(
+                'Your store is currently inactive. Please fill in the required information. An administrator will verify your information and contact you.'
+              )
+            }}
+          </span>
+        </div>
+      </YellowAlert>
     </div>
   </SellerDashboardLayout>
 </template>
