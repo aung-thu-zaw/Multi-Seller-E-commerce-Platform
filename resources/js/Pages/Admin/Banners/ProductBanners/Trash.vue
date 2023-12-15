@@ -1,6 +1,7 @@
 <script setup>
 import AdminDashboardLayout from '@/Layouts/AdminDashboardLayout.vue'
 import Breadcrumb from '@/Components/Breadcrumbs/Breadcrumb.vue'
+import BreadcrumbLinkItem from '@/Components/Breadcrumbs/BreadcrumbLinkItem.vue'
 import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
 import TableContainer from '@/Components/Tables/TableContainer.vue'
 import ActionTable from '@/Components/Tables/ActionTable.vue'
@@ -14,59 +15,76 @@ import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
 import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
 import ImageCell from '@/Components/Tables/TableCells/TableImageCell.vue'
 import NoTableData from '@/Components/Tables/NoTableData.vue'
-import GreenBadge from '@/Components/Badges/GreenBadge.vue'
-import RedBadge from '@/Components/Badges/RedBadge.vue'
 import BulkActionButton from '@/Components/Buttons/BulkActionButton.vue'
 import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
 import NormalButton from '@/Components/Buttons/NormalButton.vue'
+import EmptyTrashButton from '@/Components/Buttons/EmptyTrashButton.vue'
 import Pagination from '@/Components/Paginations/DashboardPagination.vue'
-import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 import { __ } from '@/Services/translations-inside-setup.js'
+import { useResourceActions } from '@/Composables/useResourceActions'
 
-defineProps({ sliderBanners: Object })
+defineProps({ trashedProductBanners: Object })
 
-const sliderBannerList = 'admin.slider-banners.index'
+const productBannerList = 'admin.product-banners.index'
 
-const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
+const trashedProductBannerList = 'admin.product-banners.trashed'
+
+const {
+  restoreAction,
+  restoreSelectedAction,
+  permanentDeleteAction,
+  permanentDeleteSelectedAction,
+  permanentDeleteAllAction
+} = useResourceActions()
 </script>
 
 <template>
-  <Head :title="__('Slider Banners')" />
+  <Head :title="__('Deleted :label', { label: __('Product Banners') })" />
 
   <AdminDashboardLayout>
-    <!-- Breadcrumb And Trash Button  -->
+    <!-- Breadcrumb And Go back Button  -->
     <div class="min-h-screen py-10 font-poppins">
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="sliderBannerList" icon="fa-ad" label="Slider Banners">
+        <Breadcrumb :to="productBannerList" icon="fa-ad" label="Product Banners">
+          <BreadcrumbLinkItem label="Trash" :to="trashedProductBannerList" />
           <BreadcrumbItem label="List" />
         </Breadcrumb>
+
+        <div class="w-auto flex items-center justify-end">
+          <InertiaLinkButton
+            :to="productBannerList"
+            :data="{
+              page: 1,
+              per_page: 5,
+              sort: 'id',
+              direction: 'desc'
+            }"
+          >
+            <i class="fa-solid fa-left-long"></i>
+            {{ __('Go To List') }}
+          </InertiaLinkButton>
+        </div>
       </div>
 
-      <div class="flex items-center justify-between mb-3">
-        <!-- Create New Button -->
-        <InertiaLinkButton v-show="can('slider-banners.create')" to="admin.slider-banners.create">
-          <i class="fa-solid fa-file-circle-plus mr-1"></i>
-          {{ __('Create A New :label', { label: __('Slider Banner') }) }}
-        </InertiaLinkButton>
+      <!-- Message -->
+      <div
+        v-if="can('product-banners.force.delete') && trashedProductBanners.data.length !== 0"
+        class="text-left text-sm font-bold mb-5 text-warning-600"
+      >
+        {{
+          __(':label in the trash will be automatically deleted after 60 days', {
+            label: __('Product Banners')
+          })
+        }}
 
-        <!-- Trash Button -->
-        <InertiaLinkButton
-          v-show="can('slider-banners.view.trash')"
-          to="admin.slider-banners.trashed"
-          :data="{
-            page: 1,
-            per_page: 5,
-            sort: 'id',
-            direction: 'desc'
-          }"
-          class="bg-red-600 text-white ring-2 ring-red-300"
-        >
-          <i class="fa-solid fa-trash-can mr-1"></i>
-          {{ __('Trash') }}
-        </InertiaLinkButton>
+        <EmptyTrashButton
+          @click="
+            permanentDeleteAllAction('Product Banner', 'admin.product-banners.force-delete.all')
+          "
+        />
       </div>
 
       <!-- Table Start -->
@@ -76,42 +94,43 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
         >
           <DashboardTableDataSearchBox
             :placeholder="__('Search by :label', { label: __('Url') })"
-            :to="sliderBannerList"
+            :to="trashedProductBannerList"
           />
 
           <div class="flex items-center justify-end w-full md:space-x-5">
-            <DashboardTableDataPerPageSelectBox :to="sliderBannerList" />
+            <DashboardTableDataPerPageSelectBox :to="trashedProductBannerList" />
 
-            <DashboardTableFilter
-              :to="sliderBannerList"
-              :filterBy="['created', 'status']"
-              :options="[
-                {
-                  label: 'Show',
-                  value: 'show'
-                },
-                {
-                  label: 'Hide',
-                  value: 'hide'
-                }
-              ]"
-            />
+            <DashboardTableFilter :to="trashedProductBannerList" :filterBy="['deleted']" />
           </div>
         </div>
 
         <!-- Filtered By -->
-        <FilteredBy :to="sliderBannerList" />
+        <FilteredBy :to="trashedProductBannerList" />
 
         <TableContainer>
-          <ActionTable :items="sliderBanners.data">
+          <ActionTable :items="trashedProductBanners.data">
             <!-- Table Actions -->
             <template #bulk-actions="{ selectedItems }">
               <BulkActionButton
-                v-show="can('slider-banners.delete')"
+                v-show="can('product-banners.restore')"
                 @click="
-                  softDeleteSelectedAction(
-                    'Slider Banners',
-                    'admin.slider-banners.destroy.selected',
+                  restoreSelectedAction(
+                    'Product Banners',
+                    'admin.product-banners.restore.selected',
+                    selectedItems
+                  )
+                "
+              >
+                <i class="fa-solid fa-recycle"></i>
+                {{ __('Restore Selected') }} ({{ selectedItems.length }})
+              </BulkActionButton>
+
+              <BulkActionButton
+                v-show="can('product-banners.force.delete')"
+                @click="
+                  permanentDeleteSelectedAction(
+                    'Product Banners',
+                    'admin.product-banners.force-delete.selected',
                     selectedItems
                   )
                 "
@@ -124,13 +143,11 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
             <!-- Table Header -->
             <template #table-header>
-              <SortableTableHeaderCell label="Id" :to="sliderBannerList" sort="id" />
+              <SortableTableHeaderCell label="Id" :to="trashedProductBannerList" sort="id" />
 
               <TableHeaderCell label="Image" />
 
-              <SortableTableHeaderCell label="Url" :to="sliderBannerList" sort="url" />
-
-              <TableHeaderCell label="Status" />
+              <SortableTableHeaderCell label="Url" :to="trashedProductBannerList" sort="url" />
 
               <TableHeaderCell label="Actions" />
             </template>
@@ -147,47 +164,39 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
                 {{ item?.url }}
               </TableDataCell>
 
-              <TableDataCell>
-                <GreenBadge v-show="item?.status === 'show'">
-                  <i class="fa-solid fa-eye animate-pulse"></i>
-                  {{ item?.status }}
-                </GreenBadge>
-                <RedBadge v-show="item?.status === 'hide'">
-                  <i class="fa-solid fa-eye-slash animate-pulse"></i>
-                  {{ item?.status }}
-                </RedBadge>
-              </TableDataCell>
-
               <TableActionCell>
-                <InertiaLinkButton
-                  v-show="can('slider-banners.edit')"
-                  to="admin.slider-banners.edit"
-                  :targetIdentifier="{ slider_banner: item?.id }"
+                <NormalButton
+                  v-show="can('product-banners.restore')"
+                  @click="
+                    restoreAction('Product Banner', 'admin.product-banners.restore', {
+                      id: item?.id
+                    })
+                  "
                 >
-                  <i class="fa-solid fa-edit"></i>
-                  {{ __('Edit') }}
-                </InertiaLinkButton>
+                  <i class="fa-solid fa-recycle"></i>
+                  {{ __('Restore') }}
+                </NormalButton>
 
                 <NormalButton
-                  v-show="can('slider-banners.delete')"
+                  v-show="can('product-banners.force.delete')"
                   @click="
-                    softDeleteAction('Slider Banner', 'admin.slider-banners.destroy', {
-                      slider_banner: item?.id
+                    permanentDeleteAction('Product Banner', 'admin.product-banners.force-delete', {
+                      id: item?.id
                     })
                   "
                   class="bg-red-600 text-white ring-2 ring-red-300"
                 >
                   <i class="fa-solid fa-trash-can"></i>
-                  {{ __('Delete') }}
+                  {{ __('Delete Forever') }}
                 </NormalButton>
               </TableActionCell>
             </template>
           </ActionTable>
         </TableContainer>
 
-        <Pagination :data="sliderBanners" />
+        <Pagination :data="trashedProductBanners" />
 
-        <NoTableData v-show="!sliderBanners.data.length" />
+        <NoTableData v-show="!trashedProductBanners.data.length" />
       </div>
       <!-- Table End -->
     </div>

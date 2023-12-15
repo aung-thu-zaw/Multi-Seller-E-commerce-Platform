@@ -24,15 +24,15 @@ import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 import { __ } from '@/Services/translations-inside-setup.js'
 
-defineProps({ sliderBanners: Object })
+defineProps({ productBanners: Object })
 
-const sliderBannerList = 'admin.slider-banners.index'
+const productBannerList = 'admin.product-banners.index'
 
 const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 </script>
 
 <template>
-  <Head :title="__('Slider Banners')" />
+  <Head :title="__('Product Banners')" />
 
   <AdminDashboardLayout>
     <!-- Breadcrumb And Trash Button  -->
@@ -40,22 +40,22 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="sliderBannerList" icon="fa-ad" label="Slider Banners">
+        <Breadcrumb :to="productBannerList" icon="fa-ad" label="Product Banners">
           <BreadcrumbItem label="List" />
         </Breadcrumb>
       </div>
 
       <div class="flex items-center justify-between mb-3">
         <!-- Create New Button -->
-        <InertiaLinkButton v-show="can('slider-banners.create')" to="admin.slider-banners.create">
+        <InertiaLinkButton v-show="can('product-banners.create')" to="admin.product-banners.create">
           <i class="fa-solid fa-file-circle-plus mr-1"></i>
-          {{ __('Create A New :label', { label: __('Slider Banner') }) }}
+          {{ __('Create A New :label', { label: __('Product Banner') }) }}
         </InertiaLinkButton>
 
         <!-- Trash Button -->
         <InertiaLinkButton
-          v-show="can('slider-banners.view.trash')"
-          to="admin.slider-banners.trashed"
+          v-show="can('product-banners.view.trash')"
+          to="admin.product-banners.trashed"
           :data="{
             page: 1,
             per_page: 5,
@@ -76,14 +76,14 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
         >
           <DashboardTableDataSearchBox
             :placeholder="__('Search by :label', { label: __('Url') })"
-            :to="sliderBannerList"
+            :to="productBannerList"
           />
 
           <div class="flex items-center justify-end w-full md:space-x-5">
-            <DashboardTableDataPerPageSelectBox :to="sliderBannerList" />
+            <DashboardTableDataPerPageSelectBox :to="productBannerList" />
 
             <DashboardTableFilter
-              :to="sliderBannerList"
+              :to="productBannerList"
               :filterBy="['created', 'status']"
               :options="[
                 {
@@ -100,18 +100,18 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
         </div>
 
         <!-- Filtered By -->
-        <FilteredBy :to="sliderBannerList" />
+        <FilteredBy :to="productBannerList" />
 
         <TableContainer>
-          <ActionTable :items="sliderBanners.data">
+          <ActionTable :items="productBanners.data">
             <!-- Table Actions -->
             <template #bulk-actions="{ selectedItems }">
               <BulkActionButton
-                v-show="can('slider-banners.delete')"
+                v-show="can('product-banners.delete')"
                 @click="
                   softDeleteSelectedAction(
-                    'Slider Banners',
-                    'admin.slider-banners.destroy.selected',
+                    'Product Banners',
+                    'admin.product-banners.destroy.selected',
                     selectedItems
                   )
                 "
@@ -124,11 +124,11 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
             <!-- Table Header -->
             <template #table-header>
-              <SortableTableHeaderCell label="Id" :to="sliderBannerList" sort="id" />
+              <SortableTableHeaderCell label="Id" :to="productBannerList" sort="id" />
 
               <TableHeaderCell label="Image" />
 
-              <SortableTableHeaderCell label="Url" :to="sliderBannerList" sort="url" />
+              <SortableTableHeaderCell label="Url" :to="productBannerList" sort="url" />
 
               <TableHeaderCell label="Status" />
 
@@ -160,19 +160,19 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
               <TableActionCell>
                 <InertiaLinkButton
-                  v-show="can('slider-banners.edit')"
-                  to="admin.slider-banners.edit"
-                  :targetIdentifier="{ slider_banner: item?.id }"
+                  v-show="can('product-banners.edit')"
+                  to="admin.product-banners.edit"
+                  :targetIdentifier="{ product_banner: item?.id }"
                 >
                   <i class="fa-solid fa-edit"></i>
                   {{ __('Edit') }}
                 </InertiaLinkButton>
 
                 <NormalButton
-                  v-show="can('slider-banners.delete')"
+                  v-show="can('product-banners.delete')"
                   @click="
-                    softDeleteAction('Slider Banner', 'admin.slider-banners.destroy', {
-                      slider_banner: item?.id
+                    softDeleteAction('Product Banner', 'admin.product-banners.destroy', {
+                      product_banner: item?.id
                     })
                   "
                   class="bg-red-600 text-white ring-2 ring-red-300"
@@ -185,9 +185,9 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
           </ActionTable>
         </TableContainer>
 
-        <Pagination :data="sliderBanners" />
+        <Pagination :data="productBanners" />
 
-        <NoTableData v-show="!sliderBanners.data.length" />
+        <NoTableData v-show="!productBanners.data.length" />
       </div>
       <!-- Table End -->
     </div>
