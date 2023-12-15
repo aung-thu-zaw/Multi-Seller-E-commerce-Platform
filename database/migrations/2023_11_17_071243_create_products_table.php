@@ -13,16 +13,18 @@ return new class() extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('brand_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('seller_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->string('image');
-            $table->string('name');
-            $table->string('slug');
-            $table->text('description');
-            $table->boolean('is_top')->default(false);
-            $table->boolean('is_best')->default(false);
-            $table->boolean('is_featured')->default(false);
+            $table->foreignId("brand_id")->constrained()->cascadeOnDelete();
+            $table->foreignId("category_id")->constrained()->cascadeOnDelete();
+            $table->foreignId("seller_id")->references("id")->on("users")->cascadeOnDelete();
+            $table->string("name");
+            $table->string("slug");
+            $table->text("description");
+            $table->decimal('price', 8, 2);
+            $table->decimal('offer_price', 8, 2)->nullable();
+            $table->date("offer_price_start_date")->nullable();
+            $table->date("offer_price_end_date")->nullable();
+            $table->integer("qty");
+            $table->string("image");
             $table->enum('status', ['draft', 'pending', 'approved', 'rejected', 'removed'])->default('draft');
             $table->softDeletes();
             $table->timestamps();
