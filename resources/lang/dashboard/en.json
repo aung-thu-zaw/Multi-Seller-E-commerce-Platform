@@ -386,5 +386,15 @@
     "Product Banner Image":"Product Banner Image",
     "Campaign Banner":"Campaign Banner",
     "Campaign Banner Url":"Campaign Banner Url",
-    "Campaign Banner Image":"Campaign Banner Image"
+    "Campaign Banner Image":"Campaign Banner Image",
+    "Coupon":"Coupon",
+    "coupon":"coupon",
+    "coupons":"coupons",
+    "Coupon Code":"Coupon Code",
+    "Coupon Type":"Coupon Type",
+    "Coupon Value":"Coupon Value",
+    "Minimum Spend Amount":"Minimum Spend Amount",
+    "Usage Limit":"Usage Limit",
+    "Coupon Status":"Coupon Status",
+    "Expiry Date":"Expiry Date"
 }

@@ -387,5 +387,15 @@
     "Product Banner Image":"ထုတ်ကုန်နဖူးစည်း",
     "Campaign Banner":"ကမ်ပိန်းနဖူးစည်း",
     "Campaign Banner Url":"ကမ်ပိန်းနဖူးစည်း Url",
-    "Campaign Banner Image":"ကမ်ပိန်းနဖူးစည်း"
+    "Campaign Banner Image":"ကမ်ပိန်းနဖူးစည်း",
+    "Coupon":"ကူပွန်",
+    "coupon":"ကူပွန်",
+    "coupons":"ကူပွန်များ",
+    "Coupon Code":"ကူပွန်ကုဒ်",
+    "Coupon Type":"ကူပွန်အမျိုးအစား",
+    "Coupon Value":"ကူပွန်တန်ဖိုး",
+    "Minimum Spend Amount":"အနည်းဆုံးဖြုန်းငွေပမာဏ",
+    "Usage Limit":"အသုံးပြုမှုကန့်သတ်ချက်",
+    "Coupon Status":"ကူပွန်အခြေအနေ",
+    "Expiry Date":"သက်တမ်းကုန်ဆုံးရက်"
 }

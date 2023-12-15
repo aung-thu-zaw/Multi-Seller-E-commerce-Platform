@@ -28,8 +28,9 @@ class StoreCouponRequest extends FormRequest
             "code"=>["required","string","max:255",Rule::unique("coupons","code")],
             "type"=>["required","string",Rule::in(['percentage', 'fixed', 'free_shipping'])],
             "value"=>["required","numeric"],
-            "usage_limit"=>["required","numeric"],
-            "expiry_date"=>["required","date"],
+            "min_spend"=>["nullable","numeric"],
+            "usage_limit"=>["nullable","numeric"],
+            "expiry_date"=>["nullable","date"],
             "status"=>["required","string",Rule::in(['active', 'inactive'])],
             'captcha_token' => [new RecaptchaRule()],
         ];
