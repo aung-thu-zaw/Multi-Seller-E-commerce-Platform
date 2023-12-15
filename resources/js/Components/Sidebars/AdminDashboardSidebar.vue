@@ -213,16 +213,7 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- Banners -->
-          <li
-            class="hs-accordion items-center"
-            :class="{
-              active:
-                $page.url.startsWith('/admin/slider-banners') ||
-                $page.url.startsWith('/admin/campaign-banners') ||
-                $page.url.startsWith('/admin/product-banners')
-            }"
-            id="banner-accordion"
-          >
+          <li class="hs-accordion items-center" id="banner-accordion">
             <button
               type="button"
               class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
@@ -267,18 +258,23 @@ const toggleCollapseShow = (classes) => {
 
             <div
               id="banner-accordion"
-              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
               :class="{
                 block:
                   $page.url.startsWith('/admin/slider-banners') ||
                   $page.url.startsWith('/admin/campaign-banners') ||
+                  $page.url.startsWith('/admin/product-banners'),
+                hidden: !(
+                  $page.url.startsWith('/admin/slider-banners') ||
+                  $page.url.startsWith('/admin/campaign-banners') ||
                   $page.url.startsWith('/admin/product-banners')
+                )
               }"
             >
               <ul class="pl-8">
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('slider-banners.view')" class="items-center">
                   <Link
-                    :href="route('admin.categories.index')"
+                    :href="route('admin.slider-banners.index')"
                     :data="{
                       page: 1,
                       per_page: 5,
@@ -288,17 +284,17 @@ const toggleCollapseShow = (classes) => {
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
+                        $page.url.startsWith('/admin/slider-banners'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
+                        !$page.url.startsWith('/admin/slider-banners')
                     }"
                   >
                     {{ __('Slider Banners') }}
                   </Link>
                 </li>
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('campaign-banners.view')" class="items-center">
                   <Link
-                    :href="route('admin.categories.index')"
+                    :href="route('admin.campaign-banners.index')"
                     :data="{
                       page: 1,
                       per_page: 5,
@@ -308,18 +304,18 @@ const toggleCollapseShow = (classes) => {
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
+                        $page.url.startsWith('/admin/campaign-banners'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
+                        !$page.url.startsWith('/admin/campaign-banners')
                     }"
                   >
                     {{ __('Campaign Banners') }}
                   </Link>
                 </li>
 
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('product-banners.view')" class="items-center">
                   <Link
-                    :href="route('admin.categories.index')"
+                    :href="route('admin.product-banners.index')"
                     :data="{
                       page: 1,
                       per_page: 5,
@@ -329,9 +325,9 @@ const toggleCollapseShow = (classes) => {
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
+                        $page.url.startsWith('/admin/product-banners'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
+                        !$page.url.startsWith('/admin/product-banners')
                     }"
                   >
                     {{ __('Product Banners') }}
