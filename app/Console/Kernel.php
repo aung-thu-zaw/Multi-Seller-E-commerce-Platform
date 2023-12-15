@@ -25,6 +25,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('automated-filter-words:delete')->daily();
         $schedule->command('subscribers:delete')->daily();
         $schedule->command('stores:delete')->daily();
+        $schedule->command('product-banners:delete')->daily();
 
         // Seller
         $schedule->command('store-product-categories:delete')->daily();

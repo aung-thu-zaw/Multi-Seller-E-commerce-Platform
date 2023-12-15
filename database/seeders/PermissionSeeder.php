@@ -44,6 +44,14 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'blog-categories.restore', 'group' => 'Blog Management']);
         Permission::create(['name' => 'blog-categories.force.delete', 'group' => 'Blog Management']);
 
+        Permission::create(['name' => 'product-banners.view', 'group' => 'Banner']);
+        Permission::create(['name' => 'product-banners.create', 'group' => 'Banner']);
+        Permission::create(['name' => 'product-banners.edit', 'group' => 'Banner']);
+        Permission::create(['name' => 'product-banners.delete', 'group' => 'Banner']);
+        Permission::create(['name' => 'product-banners.view.trash', 'group' => 'Banner']);
+        Permission::create(['name' => 'product-banners.restore', 'group' => 'Banner']);
+        Permission::create(['name' => 'product-banners.force.delete', 'group' => 'Banner']);
+
         Permission::create(['name' => 'blog-contents.view', 'group' => 'Blog Management']);
         Permission::create(['name' => 'blog-contents.create', 'group' => 'Blog Management']);
         Permission::create(['name' => 'blog-contents.edit', 'group' => 'Blog Management']);
@@ -81,20 +89,20 @@ class PermissionSeeder extends Seeder
 
         Permission::create(['name' => 'help-pages.edit', 'group' => 'Help Pages']);
 
-        Permission::create(['name' => 'roles.view', 'group' => 'Authority Managements']);
-        Permission::create(['name' => 'roles.create', 'group' => 'Authority Managements']);
-        Permission::create(['name' => 'roles.edit', 'group' => 'Authority Managements']);
-        Permission::create(['name' => 'roles.delete', 'group' => 'Authority Managements']);
-        Permission::create(['name' => 'roles.view.trash', 'group' => 'Authority Managements']);
-        Permission::create(['name' => 'roles.restore', 'group' => 'Authority Managements']);
-        Permission::create(['name' => 'roles.force.delete', 'group' => 'Authority Managements']);
+        Permission::create(['name' => 'roles.view', 'group' => 'Authority Management']);
+        Permission::create(['name' => 'roles.create', 'group' => 'Authority Management']);
+        Permission::create(['name' => 'roles.edit', 'group' => 'Authority Management']);
+        Permission::create(['name' => 'roles.delete', 'group' => 'Authority Management']);
+        Permission::create(['name' => 'roles.view.trash', 'group' => 'Authority Management']);
+        Permission::create(['name' => 'roles.restore', 'group' => 'Authority Management']);
+        Permission::create(['name' => 'roles.force.delete', 'group' => 'Authority Management']);
 
-        Permission::create(['name' => 'permissions.view', 'group' => 'Authority Managements']);
+        Permission::create(['name' => 'permissions.view', 'group' => 'Authority Management']);
 
-        Permission::create(['name' => 'assign-role-permissions.view', 'group' => 'Authority Managements']);
-        Permission::create(['name' => 'assign-role-permissions.create', 'group' => 'Authority Managements']);
-        Permission::create(['name' => 'assign-role-permissions.edit', 'group' => 'Authority Managements']);
-        Permission::create(['name' => 'assign-role-permissions.delete', 'group' => 'Authority Managements']);
+        Permission::create(['name' => 'assign-role-permissions.view', 'group' => 'Authority Management']);
+        Permission::create(['name' => 'assign-role-permissions.create', 'group' => 'Authority Management']);
+        Permission::create(['name' => 'assign-role-permissions.edit', 'group' => 'Authority Management']);
+        Permission::create(['name' => 'assign-role-permissions.delete', 'group' => 'Authority Management']);
 
         Permission::create(['name' => 'registered-accounts.view', 'group' => 'Account Management']);
         Permission::create(['name' => 'registered-accounts.edit', 'group' => 'Account Management']);
