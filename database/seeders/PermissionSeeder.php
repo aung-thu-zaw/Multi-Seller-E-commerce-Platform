@@ -36,6 +36,14 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'products.restore', 'group' => 'Product']);
         Permission::create(['name' => 'products.force.delete', 'group' => 'Product']);
 
+        Permission::create(['name' => 'coupons.view', 'group' => 'Coupon']);
+        Permission::create(['name' => 'coupons.create', 'group' => 'Coupon']);
+        Permission::create(['name' => 'coupons.edit', 'group' => 'Coupon']);
+        Permission::create(['name' => 'coupons.delete', 'group' => 'Coupon']);
+        Permission::create(['name' => 'coupons.view.trash', 'group' => 'Coupon']);
+        Permission::create(['name' => 'coupons.restore', 'group' => 'Coupon']);
+        Permission::create(['name' => 'coupons.force.delete', 'group' => 'Coupon']);
+
         Permission::create(['name' => 'blog-categories.view', 'group' => 'Blog Management']);
         Permission::create(['name' => 'blog-categories.create', 'group' => 'Blog Management']);
         Permission::create(['name' => 'blog-categories.edit', 'group' => 'Blog Management']);
