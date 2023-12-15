@@ -65,7 +65,7 @@ class ProductBannerController extends Controller
 
     public function update(UpdateProductBannerRequest $request, ProductBanner $productBanner): RedirectResponse
     {
-        $image = isset($request->image) && !is_string($request->image) ? $this->updateImage($request->image, $productBanner->image, 'slider-banners') : $productBanner->image;
+        $image = isset($request->image) && !is_string($request->image) ? $this->updateImage($request->image, $productBanner->image, 'product-banners') : $productBanner->image;
 
         $productBanner->update([
             "url" => $request->url,

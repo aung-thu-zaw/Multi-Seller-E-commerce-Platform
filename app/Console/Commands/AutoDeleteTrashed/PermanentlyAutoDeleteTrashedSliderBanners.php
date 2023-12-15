@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Console\Commands\AutoDeleteTrashed;
+
+use App\Actions\Admin\Banners\SliderBanners\PermanentlyDeleteTrashedSliderBannersAction;
+use App\Actions\Admin\Brands\PermanentlyDeleteTrashedBrandsAction;
+use App\Models\SliderBanner;
+use Carbon\Carbon;
+use Illuminate\Console\Command;
+
+class PermanentlyAutoDeleteTrashedSliderBanners extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'slider-banners:delete';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Slider banners in the trash will be automatically deleted after 60 days';
+
+    /**
+     * Execute the console command.
+     */
+    public function handle(): void
+    {
+        $cutoffDate = Carbon::now()->subDays(60);
+
+        $trashedSliderBanners = SliderBanner::onlyTrashed()->where('deleted_at', '<=', $cutoffDate)->get();
+
+        (new PermanentlyDeleteTrashedSliderBannersAction())->handle($trashedSliderBanners);
+
+    }
+}
