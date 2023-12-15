@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\Dashboard\Faqs\FaqCategoryController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqContentController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqSubcategoryController;
 use App\Http\Controllers\Admin\Dashboard\HelpPageController;
+use App\Http\Controllers\Admin\Dashboard\ProductManage\ProductController;
 use App\Http\Controllers\Admin\Dashboard\RatingManagement\AutomatedFilterWordController;
 use App\Http\Controllers\Admin\Dashboard\SellerManagement\ClaimsAsASellerController;
 use App\Http\Controllers\Admin\Dashboard\SellerManagement\StoreManageController;
@@ -66,6 +67,22 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
+
+
+
+        Route::resource('products', ProductController::class)->except(['show']);
+        Route::controller(ProductController::class)
+        ->prefix('/products/trash')
+        ->name('products.')
+        ->group(function () {
+            Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+            Route::get('/', 'trashed')->name('trashed');
+            Route::post('/{id}/restore', 'restore')->name('restore');
+            Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+            Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+            Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+            Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+        });
 
         Route::resource('blog-categories', BlogCategoryController::class)->except(['show']);
         Route::controller(BlogCategoryController::class)

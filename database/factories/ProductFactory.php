@@ -22,9 +22,8 @@ class ProductFactory extends Factory
             'image' => fake()->imageUrl(),
             'name' => fake()->sentence(),
             'description' => fake()->text(),
-            'is_top' => fake()->boolean(),
-            'is_best' => fake()->boolean(),
-            'is_featured' => fake()->boolean(),
+            'qty' => fake()->numberBetween(5,100),
+            'price' => fake()->numberBetween(10,500),
             'status' => fake()->randomElement(['draft', 'pending', 'approved', 'rejected']),
         ];
     }
