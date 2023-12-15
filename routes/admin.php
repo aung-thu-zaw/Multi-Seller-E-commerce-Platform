@@ -6,6 +6,9 @@ use App\Http\Controllers\Admin\Dashboard\AccountManagement\RegisteredAccountCont
 use App\Http\Controllers\Admin\Dashboard\AuthorityManagement\AssignRolePermissionsController;
 use App\Http\Controllers\Admin\Dashboard\AuthorityManagement\PermissionController;
 use App\Http\Controllers\Admin\Dashboard\AuthorityManagement\RoleController;
+use App\Http\Controllers\Admin\Dashboard\Banners\CampaignBannerController;
+use App\Http\Controllers\Admin\Dashboard\Banners\ProductBannerController;
+use App\Http\Controllers\Admin\Dashboard\Banners\SliderBannerController;
 use App\Http\Controllers\Admin\Dashboard\BlogManagement\BlogCategoryController;
 use App\Http\Controllers\Admin\Dashboard\BlogManagement\BlogCommentController;
 use App\Http\Controllers\Admin\Dashboard\BlogManagement\BlogContentController;
@@ -99,6 +102,48 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::get('/', 'index')->name('index');
                 Route::delete('/{blog_comment}', 'destroy')->name('destroy');
                 Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+            });
+
+        Route::resource('slider-banners', SliderBannerController::class)->except(['show']);
+        Route::controller(SliderBannerController::class)
+            ->prefix('/slider-banners/trash')
+            ->name('slider-banners.')
+            ->group(function () {
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+
+        Route::resource('campaign-banners', CampaignBannerController::class)->except(['show']);
+        Route::controller(CampaignBannerController::class)
+            ->prefix('/campaign-banners/trash')
+            ->name('campaign-banners.')
+            ->group(function () {
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+
+        Route::resource('product-banners', ProductBannerController::class)->except(['show']);
+        Route::controller(ProductBannerController::class)
+            ->prefix('/product-banners/trash')
+            ->name('product-banners.')
+            ->group(function () {
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
         Route::resource('faq-categories', FaqCategoryController::class)->except(['show']);
