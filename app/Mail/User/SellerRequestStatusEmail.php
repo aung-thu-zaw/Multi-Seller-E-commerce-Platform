@@ -18,7 +18,7 @@ class SellerRequestStatusEmail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(protected SellerRequest $sellerRequest)
+    public function __construct(protected string $userName, protected SellerRequest $sellerRequest)
     {
         //
     }
@@ -41,6 +41,7 @@ class SellerRequestStatusEmail extends Mailable
         return new Content(
             view: 'mails.users.seller-request-status',
             with: [
+                'name' => $this->userName,
                 'store_name' => $this->sellerRequest->store_name,
                 'store_type' => $this->sellerRequest->store_type,
                 'contact_phone' => $this->sellerRequest->contact_phone,

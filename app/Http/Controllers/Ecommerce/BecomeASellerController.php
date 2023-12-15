@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Ecommerce\BecomeASellerRequest;
 use App\Http\Traits\ImageUpload;
 use App\Mail\Admin\NewSellerRequestEmail;
+use App\Mail\User\SellerRequestStatusEmail;
 use App\Models\SellerInformation;
 use App\Models\SellerRequest;
 use App\Models\Store;
@@ -27,8 +28,10 @@ class BecomeASellerController extends Controller
 
     public function store(BecomeASellerRequest $request): RedirectResponse
     {
+        $user = User::find(auth()->id());
+
         $sellerRequest = SellerRequest::create([
-              'user_id' => auth()->id(),
+              'user_id' => $user->id,
               'store_name' => $request->store_name,
               'store_type' => $request->store_type,
               'contact_email' => $request->contact_email,
@@ -38,11 +41,13 @@ class BecomeASellerController extends Controller
               'status' => 'pending',
           ]);
 
+        Mail::to($user->email)->queue(new SellerRequestStatusEmail($user->name, $sellerRequest));
+
         $admins = User::where("role", "admin")->permission(["claims-as-a-seller.edit"])->get();
 
-        $admins->each(function ($admin) use ($sellerRequest) {
-            Mail::to($admin->email)->queue(new NewSellerRequestEmail(auth()->user(), $sellerRequest));
-            $admin->notify(new NewSellerRequestNotification(auth()->user(), $sellerRequest));
+        $admins->each(function ($admin) use ($user, $sellerRequest) {
+            Mail::to($admin->email)->queue(new NewSellerRequestEmail($user, $sellerRequest));
+            $admin->notify(new NewSellerRequestNotification($user, $sellerRequest));
         });
 
         return back()->with('success', 'Your request has been successfully sent.');

@@ -37,7 +37,7 @@
 
                 <div class="px-10 space-y-5">
                     <p class="font-bold">
-                        Dear Ko Aung Thu Zaw,
+                        Dear {{ $name }}
                     </p>
 
                     <p>
