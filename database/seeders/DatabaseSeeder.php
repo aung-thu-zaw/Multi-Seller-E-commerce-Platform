@@ -38,7 +38,8 @@ class DatabaseSeeder extends Seeder
             SubscriberSeeder::class,
             ProductBannerSeeder::class,
             CampaignBannerSeeder::class,
-            SliderBannerSeeder::class
+            SliderBannerSeeder::class,
+            CouponSeeder::class
         ]);
     }
 }
