@@ -13,6 +13,6 @@ class CampaignBannerSeeder extends Seeder
      */
     public function run(): void
     {
-        CampaignBanner::factory()->create();
+        CampaignBanner::factory(20)->create();
     }
 }

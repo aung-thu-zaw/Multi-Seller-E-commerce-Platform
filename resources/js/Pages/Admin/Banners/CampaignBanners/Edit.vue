@@ -14,17 +14,19 @@ import { useImagePreview } from '@/Composables/useImagePreview'
 import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 
-const { previewImage, setImagePreview } = useImagePreview()
+const props = defineProps({ campaignBanner: Object })
 
-const { form, processing, errors, createAction } = useResourceActions({
-  url: null,
-  status: null,
-  image: null
+const { previewImage, setImagePreview } = useImagePreview(props.campaignBanner?.image)
+
+const { form, processing, errors, editAction } = useResourceActions({
+  url: props.campaignBanner?.url,
+  status: props.campaignBanner?.status,
+  logo: props.campaignBanner?.logo
 })
 </script>
 
 <template>
-  <Head :title="__('Create :label', { label: __('Campaign Banner') })" />
+  <Head :title="__('Edit :label', { label: __('Campaign Banner') })" />
 
   <AdminDashboardLayout>
     <div class="min-h-screen py-10 font-poppins">
@@ -32,7 +34,8 @@ const { form, processing, errors, createAction } = useResourceActions({
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
         <Breadcrumb to="admin.campaign-banners.index" icon="fa-ad" label="Campaign Banners">
-          <BreadcrumbItem label="Create" />
+          <BreadcrumbItem :label="campaignBanner.url" />
+          <BreadcrumbItem label="Edit" />
         </Breadcrumb>
 
         <div class="w-auto flex items-center justify-end">
@@ -43,7 +46,11 @@ const { form, processing, errors, createAction } = useResourceActions({
       <!-- Form Start -->
       <div class="border p-10 bg-white rounded-md">
         <form
-          @submit.prevent="createAction('Campaign Banner', 'admin.campaign-banners.store')"
+          @submit.prevent="
+            editAction('Campaign Banner', 'admin.campaign-banners.update', {
+              campaign_banner: campaignBanner?.id
+            })
+          "
           class="space-y-4 md:space-y-6"
         >
           <PreviewImage :src="previewImage" />
@@ -53,7 +60,7 @@ const { form, processing, errors, createAction } = useResourceActions({
 
             <InputField
               type="text"
-              name="product-banner-url"
+              name="slider-banner-url"
               v-model="form.url"
               :placeholder="__('Enter :label', { label: __('Campaign Banner Url') })"
               autofocus
@@ -65,6 +72,7 @@ const { form, processing, errors, createAction } = useResourceActions({
 
           <div>
             <InputLabel :label="__('Status')" required />
+
             <SelectBox
               name="status"
               :options="[
@@ -79,6 +87,7 @@ const { form, processing, errors, createAction } = useResourceActions({
               ]"
               v-model="form.status"
               :placeholder="__('Select an option')"
+              :selected="form.status"
               required
             />
 
@@ -86,14 +95,13 @@ const { form, processing, errors, createAction } = useResourceActions({
           </div>
 
           <div>
-            <InputLabel :label="__('Campaign Banner Image')" required />
+            <InputLabel :label="__('Campaign Banner Image')" />
 
             <FileInput
               name="slider-banner-image"
               text="PNG, JPG or JPEG ( Max File Size : 1.5 MB )"
               v-model="form.image"
               @update:modelValue="setImagePreview"
-              required
             />
 
             <InputError :message="errors?.image" />
@@ -102,7 +110,7 @@ const { form, processing, errors, createAction } = useResourceActions({
           <InputError :message="errors?.captcha_token" />
 
           <FormButton :processing="processing">
-            {{ __('Create') }}
+            {{ __('Save Changes') }}
           </FormButton>
         </form>
       </div>
