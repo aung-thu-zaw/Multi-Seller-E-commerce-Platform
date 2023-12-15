@@ -44,6 +44,22 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'blog-categories.restore', 'group' => 'Blog Management']);
         Permission::create(['name' => 'blog-categories.force.delete', 'group' => 'Blog Management']);
 
+        Permission::create(['name' => 'slider-banners.view', 'group' => 'Banner']);
+        Permission::create(['name' => 'slider-banners.create', 'group' => 'Banner']);
+        Permission::create(['name' => 'slider-banners.edit', 'group' => 'Banner']);
+        Permission::create(['name' => 'slider-banners.delete', 'group' => 'Banner']);
+        Permission::create(['name' => 'slider-banners.view.trash', 'group' => 'Banner']);
+        Permission::create(['name' => 'slider-banners.restore', 'group' => 'Banner']);
+        Permission::create(['name' => 'slider-banners.force.delete', 'group' => 'Banner']);
+
+        Permission::create(['name' => 'campaign-banners.view', 'group' => 'Banner']);
+        Permission::create(['name' => 'campaign-banners.create', 'group' => 'Banner']);
+        Permission::create(['name' => 'campaign-banners.edit', 'group' => 'Banner']);
+        Permission::create(['name' => 'campaign-banners.delete', 'group' => 'Banner']);
+        Permission::create(['name' => 'campaign-banners.view.trash', 'group' => 'Banner']);
+        Permission::create(['name' => 'campaign-banners.restore', 'group' => 'Banner']);
+        Permission::create(['name' => 'campaign-banners.force.delete', 'group' => 'Banner']);
+
         Permission::create(['name' => 'product-banners.view', 'group' => 'Banner']);
         Permission::create(['name' => 'product-banners.create', 'group' => 'Banner']);
         Permission::create(['name' => 'product-banners.edit', 'group' => 'Banner']);
