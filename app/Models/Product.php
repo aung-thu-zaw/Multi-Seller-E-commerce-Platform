@@ -102,13 +102,13 @@ class Product extends Model
         return $this->belongsTo(User::class, 'seller_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Attribute>
-     */
-    public function attributes(): HasMany
-    {
-        return $this->hasMany(Attribute::class);
-    }
+    // /**
+    //  * @return \Illuminate\Database\Eloquent\Relations\HasMany<Attribute>
+    //  */
+    // public function attributes(): HasMany
+    // {
+    //     return $this->hasMany(Attribute::class);
+    // }
 
     protected static function booted(): void
     {
