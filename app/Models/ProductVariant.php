@@ -38,12 +38,4 @@ class ProductVariant extends Model
     {
         return $this->belongsToMany(Attribute::class, 'product_variant_attributes')->withPivot('option_id');
     }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Option>
-     */
-    public function options(): BelongsToMany
-    {
-        return $this->belongsToMany(Option::class, 'product_variant_attributes');
-    }
 }

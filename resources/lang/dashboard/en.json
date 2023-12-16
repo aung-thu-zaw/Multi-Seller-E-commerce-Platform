@@ -396,5 +396,10 @@
     "Minimum Spend Amount":"Minimum Spend Amount",
     "Usage Limit":"Usage Limit",
     "Coupon Status":"Coupon Status",
-    "Expiry Date":"Expiry Date"
+    "Expiry Date":"Expiry Date",
+    "Warranty Type":"Warranty Type",
+    "Warranty Period":"Warranty Period",
+    "Warranty Policy":"Warranty Policy",
+    "Return Policy":"Return Policy",
+    "Return Day":"Return Day"
 }

@@ -24,7 +24,7 @@ const store = computed(() => usePage().props.auth?.store)
           {{ __('Seller Dashboard') }}
         </span>
 
-        <GreenBadge v-if="store.status === 'active'">
+        <GreenBadge v-if="store?.status === 'active'">
           <i class="fa-solid fa-circle-check"></i>
           Active
         </GreenBadge>

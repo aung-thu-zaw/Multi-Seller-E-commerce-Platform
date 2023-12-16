@@ -12,14 +12,6 @@ class Attribute extends Model
     use HasFactory;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Option>
-     */
-    public function options(): HasMany
-    {
-        return $this->hasMany(Option::class);
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<ProductVariant>
      */
     public function variants(): BelongsToMany

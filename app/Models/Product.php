@@ -95,14 +95,6 @@ class Product extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne<Warranty>
-     */
-    public function warranty(): HasOne
-    {
-        return $this->hasOne(Warranty::class);
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,Product>
      */
     public function seller()

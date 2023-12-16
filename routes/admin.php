@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\Dashboard\Faqs\FaqContentController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqSubcategoryController;
 use App\Http\Controllers\Admin\Dashboard\HelpPageController;
 use App\Http\Controllers\Admin\Dashboard\ProductManage\ProductController;
+use App\Http\Controllers\Admin\Dashboard\ProductManage\ProductImageController;
 use App\Http\Controllers\Admin\Dashboard\RatingManagement\AutomatedFilterWordController;
 use App\Http\Controllers\Admin\Dashboard\SellerManagement\ClaimsAsASellerController;
 use App\Http\Controllers\Admin\Dashboard\SellerManagement\StoreManageController;
@@ -83,6 +84,16 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
             Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
         });
+
+
+        Route::controller(ProductImageController::class)
+            ->prefix('/products')
+            ->name('product.')
+            ->group(function () {
+                Route::get('/{product}/images', 'productImages')->name('images');
+                Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
+                Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
+            });
 
         Route::resource('blog-categories', BlogCategoryController::class)->except(['show']);
         Route::controller(BlogCategoryController::class)
