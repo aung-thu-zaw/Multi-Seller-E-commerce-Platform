@@ -111,12 +111,22 @@ class Product extends Model
     //     return $this->hasMany(Attribute::class);
     // }
 
-        /**
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Collection>
      */
-    public function collections():BelongsToMany
+    public function collections(): BelongsToMany
     {
         return $this->belongsToMany(Collection::class, 'collection_product');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<FlashSale>
+     */
+    public function flashSales(): BelongsToMany
+    {
+        return $this->belongsToMany(FlashSale::class, 'flash_sale_product')
+        ->withPivot('discount_percent')
+        ->withTimestamps();
     }
 
     protected static function booted(): void
