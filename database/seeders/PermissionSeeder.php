@@ -28,6 +28,14 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'brands.restore', 'group' => 'Brand']);
         Permission::create(['name' => 'brands.force.delete', 'group' => 'Brand']);
 
+        Permission::create(['name' => 'collections.view', 'group' => 'Collection']);
+        Permission::create(['name' => 'collections.create', 'group' => 'Collection']);
+        Permission::create(['name' => 'collections.edit', 'group' => 'Collection']);
+        Permission::create(['name' => 'collections.delete', 'group' => 'Collection']);
+        Permission::create(['name' => 'collections.view.trash', 'group' => 'Collection']);
+        Permission::create(['name' => 'collections.restore', 'group' => 'Collection']);
+        Permission::create(['name' => 'collections.force.delete', 'group' => 'Collection']);
+
         Permission::create(['name' => 'products.view', 'group' => 'Product']);
         Permission::create(['name' => 'products.create', 'group' => 'Product']);
         Permission::create(['name' => 'products.edit', 'group' => 'Product']);
