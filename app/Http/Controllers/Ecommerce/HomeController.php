@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function __invoke(): Response|ResponseFactory
     {
-        return inertia('E-commerce/Products/Details');
+        return inertia('E-commerce/Home');
     }
     // public function __invoke(): View
     // {

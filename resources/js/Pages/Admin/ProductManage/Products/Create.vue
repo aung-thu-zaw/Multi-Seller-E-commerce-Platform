@@ -18,7 +18,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { ref, watch } from 'vue'
 import { useFormatFunctions } from '@/Composables/useFormatFunctions'
 
-defineProps({ categories: Object, brands: Object, sellers: Object })
+defineProps({ categories: Object, brands: Object, stores: Object })
 
 const editor = ClassicEditor
 
@@ -35,7 +35,7 @@ const { previewImage, setImagePreview } = useImagePreview()
 const { form, processing, errors, createAction } = useResourceActions({
   brand_id: null,
   category_id: null,
-  seller_id: null,
+  store_id: null,
   name: null,
   qty: null,
   price: null,
@@ -102,17 +102,17 @@ watch(offerEndDate, (newEndDate) => {
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
-              <InputLabel :label="__('Seller')" required />
+              <InputLabel :label="__('Store')" required />
 
               <SelectBox
-                name="seller"
-                :options="sellers"
-                v-model="form.seller_id"
+                name="store"
+                :options="stores"
+                v-model="form.store_id"
                 :placeholder="__('Select an option')"
                 required
               />
 
-              <InputError :message="errors?.seller_id" />
+              <InputError :message="errors?.store_id" />
             </div>
 
             <div>

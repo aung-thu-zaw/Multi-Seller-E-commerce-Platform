@@ -55,9 +55,9 @@ class ProductController extends Controller
             ->where('status', 'active')
             ->get();
 
-        $sellers = User::select("id", "name")->where("role", "seller")->where("status", "active")->get();
+        $stores = Store::select("id", "name")->where("status", "active")->get();
 
-        return inertia('Admin/ProductManage/Products/Create', compact('categories', 'brands', 'sellers'));
+        return inertia('Admin/ProductManage/Products/Create', compact('categories', 'brands', 'stores'));
     }
 
     public function store(StoreProductRequest $request): RedirectResponse
@@ -77,9 +77,9 @@ class ProductController extends Controller
             ->where('status', 'active')
             ->get();
 
-        $sellers = User::select("id", "name")->where("role", "seller")->where("status", "active")->get();
+        $stores = Store::select("id", "name")->where("status", "active")->get();
 
-        return inertia('Admin/ProductManage/Products/Edit', compact('product', 'categories', 'brands', 'sellers'));
+        return inertia('Admin/ProductManage/Products/Edit', compact('product', 'categories', 'brands', 'stores'));
     }
 
     public function update(UpdateProductRequest $request, Product $product): RedirectResponse

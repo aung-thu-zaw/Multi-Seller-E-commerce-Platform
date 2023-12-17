@@ -67,6 +67,7 @@ Route::controller(FaqController::class)
 Route::post('/faqs/{faq_content}/feedbacks', FaqFeedbackController::class)->name('faqs.feedbacks');
 
 Route::get('/stores', [SellerStoreController::class, 'index'])->name('stores.index');
+Route::get('/stores/{store}', [SellerStoreController::class, 'show'])->name('stores.show');
 
 Route::get('/about-us', AboutUsController::class)->name('about-us');
 

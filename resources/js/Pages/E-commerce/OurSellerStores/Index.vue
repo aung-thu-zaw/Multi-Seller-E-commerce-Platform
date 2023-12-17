@@ -2,7 +2,10 @@
 import AppLayout from '@/Layouts/AppLayout.vue'
 import StoreProfileCard from '@/Components/Cards/Stores/StoreProfileCard.vue'
 import StoreSearchBox from '@/Components/Forms/SearchBoxs/StoreSearchBox.vue'
+import Pagination from '@/Components/Paginations/Pagination.vue'
 import { Head } from '@inertiajs/vue3'
+
+defineProps({ stores: Object })
 </script>
 
 <template>
@@ -27,20 +30,22 @@ import { Head } from '@inertiajs/vue3'
           <StoreSearchBox />
         </div>
 
-        <div class="grid grid-cols-3 gap-5">
-          <!-- Card -->
-          <StoreProfileCard />
-          <StoreProfileCard />
-          <StoreProfileCard />
-          <StoreProfileCard />
-          <StoreProfileCard />
-          <StoreProfileCard />
-          <StoreProfileCard />
-          <StoreProfileCard />
-          <StoreProfileCard />
-          <StoreProfileCard />
-          <StoreProfileCard />
-          <StoreProfileCard />
+        <div v-if="stores.data.length">
+          <div class="grid grid-cols-3 gap-5">
+            <!-- Card -->
+            <StoreProfileCard v-for="store in stores.data" :key="store.id" :store="store" />
+          </div>
+
+          <!-- Pagination -->
+          <div class="my-5 py-5">
+            <Pagination :links="stores.links" />
+          </div>
+        </div>
+        <div v-else class="py-20 w-full">
+          <p class="text-center font-bold text-md text-red-600">
+            <i class="fa-solid fa-file-circle-xmark"></i>
+            {{ __("We're sorry we can't find any matches for your filter term.") }}
+          </p>
         </div>
       </div>
     </section>

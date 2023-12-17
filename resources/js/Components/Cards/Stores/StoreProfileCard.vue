@@ -1,5 +1,7 @@
 <script setup>
 import { Link } from '@inertiajs/vue3'
+
+defineProps({ store: Object })
 </script>
 
 <template>
@@ -7,17 +9,11 @@ import { Link } from '@inertiajs/vue3'
     <div
       class="flex flex-col items-center justify-center w-[300px] h-full border-r border-r-slate-300 p-2"
     >
-      <img
-        src="https://img.freepik.com/free-vector/shop-with-we-are-open-sign_23-2148557016.jpg"
-        alt=""
-        class="rounded-full w-12 h-12 object-cover border border-orange-500 ring-2 ring-orange-300 shadow-md"
-      />
+      <img :src="store.avatar" alt="store-avatar" class="rounded-md w-12 h-12 object-cover" />
+
       <div class="mt-3 flex flex-col items-center justify-between">
         <h1 class="font-bold text-sm text-slate-600 text-center line-clamp-2">
-          K Mobile Shop
-          <!-- <span class="text-green-400 rounded-xl">
-            <i class="fa-solid fa-circle-check ml-2"></i>
-          </span> -->
+          {{ store.store_name }}
         </h1>
 
         <div class="space-y-2 mt-5">
@@ -108,7 +104,8 @@ import { Link } from '@inertiajs/vue3'
 
       <Link
         as="button"
-        href="#"
+        :href="route('stores.show', { store: store?.slug })"
+        :data="{ tab: 'home' }"
         class="border border-orange-600 px-2 py-2 text-orange-600 text-xs font-bold rounded-sm shadow hover:bg-orange-600 hover:text-white transition-all"
       >
         <i class="fa-solid fa-store"></i>

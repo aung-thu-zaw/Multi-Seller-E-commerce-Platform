@@ -18,13 +18,13 @@ class ProductFactory extends Factory
     {
         return [
             'category_id' => fake()->numberBetween(1, 67),
-            'seller_id' => fake()->numberBetween(2, 3),
+            'store_id' => fake()->numberBetween(1, 2),
             'image' => fake()->imageUrl(),
             'name' => fake()->sentence(),
             'description' => fake()->text(),
-            'qty' => fake()->numberBetween(5,100),
-            'price' => fake()->numberBetween(10,500),
-            'sku'=>uniqid(),
+            'qty' => fake()->numberBetween(5, 100),
+            'price' => fake()->numberBetween(10, 500),
+            'sku' => uniqid(),
             'status' => fake()->randomElement(['draft', 'pending', 'approved', 'rejected']),
         ];
     }

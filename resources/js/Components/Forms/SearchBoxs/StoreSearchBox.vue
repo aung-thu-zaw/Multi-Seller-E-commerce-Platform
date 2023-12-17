@@ -1,4 +1,52 @@
-<script setup></script>
+<script setup>
+import { router, usePage } from '@inertiajs/vue3'
+import { ref, watch } from 'vue'
+
+const searchStore = ref(usePage().props.ziggy.query?.search_store)
+
+const delayedSearch = ref(null)
+
+const handleSearch = () => {
+  if (delayedSearch.value) {
+    clearTimeout(delayedSearch.value)
+  }
+  delayedSearch.value = setTimeout(() => {
+    router.get(
+      route('stores.index'),
+      {
+        search_store: searchStore.value
+      },
+      {
+        replace: true,
+        preserveState: true
+      }
+    )
+  }, 400)
+}
+
+const removeSearch = () => {
+  searchStore.value = ''
+  router.get(
+    route('stores.index'),
+    {},
+    {
+      replace: true,
+      preserveState: true
+    }
+  )
+}
+
+watch(
+  () => searchStore.value,
+  () => {
+    if (searchStore.value === '') {
+      removeSearch()
+    } else {
+      handleSearch()
+    }
+  }
+)
+</script>
 
 <template>
   <div class="relative w-[400px]">
@@ -24,6 +72,8 @@
 
         <button
           type="button"
+          v-show="searchStore"
+          @click="removeSearch"
           class="absolute inset-y-0 right-0 flex items-center pr-5 hover:cursor-pointer text-gray-500 hover:text-red-600 transition-all"
         >
           <i class="fa-solid fa-circle-xmark"></i>
@@ -34,6 +84,7 @@
           id="default-search"
           class="block w-full p-3.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 font-semibold focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all shadow"
           :placeholder="__('Search Store')"
+          v-model="searchStore"
         />
       </div>
     </form>

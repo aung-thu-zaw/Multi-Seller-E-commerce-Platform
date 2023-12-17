@@ -96,11 +96,11 @@ class Product extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,Product>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Store,Product>
      */
-    public function seller()
+    public function store()
     {
-        return $this->belongsTo(User::class, 'seller_id');
+        return $this->belongsTo(Store::class, 'store_id');
     }
 
     // /**

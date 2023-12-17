@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 use Spatie\Sluggable\HasSlug;
@@ -65,7 +66,7 @@ class Store extends Model
      */
     public function seller(): BelongsTo
     {
-        return $this->belongsTo(User::class,"seller_id");
+        return $this->belongsTo(User::class, "seller_id");
     }
 
     public static function deleteAvatar(?string $avatar): void
@@ -81,4 +82,13 @@ class Store extends Model
             unlink(storage_path('app/public/stores/covers/'.pathinfo($cover, PATHINFO_BASENAME)));
         }
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Product>
+     */
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class, 'store_id');
+    }
+
 }

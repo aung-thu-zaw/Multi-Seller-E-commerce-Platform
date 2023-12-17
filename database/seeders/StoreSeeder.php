@@ -27,5 +27,7 @@ class StoreSeeder extends Seeder
             'status' => 'active',
         ]);
 
+        Store::factory(30)->create(["seller_id" => "10","status" => "active"]);
+
     }
 }

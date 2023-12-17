@@ -26,7 +26,7 @@ class UpdateProductAction
         $product->update([
             'brand_id' => $data['brand_id'],
             'category_id' => $data['category_id'],
-            'seller_id' => $data['seller_id'],
+            'store_id' => $data['store_id'],
             'name' => $data['name'],
             'qty' => $data['qty'],
             'price' => $data['price'],

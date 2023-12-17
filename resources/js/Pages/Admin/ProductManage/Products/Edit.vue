@@ -18,7 +18,7 @@ import { Head } from '@inertiajs/vue3'
 import { useFormatFunctions } from '@/Composables/useFormatFunctions'
 import { ref, watch } from 'vue'
 
-const props = defineProps({ product: Object, categories: Object, brands: Object, sellers: Object })
+const props = defineProps({ product: Object, categories: Object, brands: Object, stores: Object })
 
 const editor = ClassicEditor
 
@@ -37,7 +37,7 @@ const offerEndDate = ref(
 const { form, processing, errors, editAction } = useResourceActions({
   brand_id: props.product?.brand_id,
   category_id: props.product?.category_id,
-  seller_id: props.product?.seller_id,
+  store_id: props.product?.store_id,
   name: props.product?.name,
   qty: props.product?.qty,
   price: props.product?.price,
@@ -111,15 +111,15 @@ watch(offerEndDate, (newEndDate) => {
               <InputLabel :label="__('Seller')" required />
 
               <SelectBox
-                name="seller"
-                :options="sellers"
-                v-model="form.seller_id"
+                name="store"
+                :options="stores"
+                v-model="form.store_id"
                 :placeholder="__('Select an option')"
-                :selected="form.seller_id"
+                :selected="form.store_id"
                 required
               />
 
-              <InputError :message="errors?.seller_id" />
+              <InputError :message="errors?.store_id" />
             </div>
 
             <div>
