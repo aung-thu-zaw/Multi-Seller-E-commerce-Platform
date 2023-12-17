@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -41,6 +42,7 @@ class HandleInertiaRequests extends Middleware
                 'notifications' => $user ? $user->notifications : [],
                 'store' => $user ? $user->store : [],
             ],
+            'parentCategory' => Category::with("children")->whereNull("parent_id")->get(),
             'flash' => [
                 'success' => session('success'),
                 'error' => session('error'),
