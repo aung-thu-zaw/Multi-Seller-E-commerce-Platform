@@ -2,9 +2,9 @@
 
 <template>
   <section id="product-for-you" class="my-5">
-    <div class="container max-w-screen-xl mx-auto bg-transparent rounded-md pt-6">
+    <div class="max-w-screen-xl mx-auto bg-transparent rounded-md pt-6">
       <!-- Title -->
-      <div class="text-slate-600 flex items-center justify-between py-3">
+      <div class="text-gray-700 flex items-center justify-between py-3">
         <h2 class="text-2xl font-bold">
           {{ __('Products For You') }}
         </h2>
