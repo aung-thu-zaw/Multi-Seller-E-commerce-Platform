@@ -18,7 +18,7 @@ class ProductImageFactory extends Factory
     {
 
         return [
-            'product_id' => 10,
+            'product_id' => fake()->numberBetween(1, 60),
             'image' => fake()->imageUrl(),
         ];
     }

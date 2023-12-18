@@ -1,8 +1,12 @@
 <script setup>
 import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
+import ProductListCard from '@/Components/Cards/Products/ProductListCard.vue'
 import ProductSortingSelectBox from '@/Components/Forms/SelectBoxs/ProductSortingSelectBox.vue'
 import ProductFilterSidebar from '@/Components/Sidebars/ProductFilterSidebar.vue'
+import Pagination from '@/Components/Paginations/Pagination.vue'
 import { Link } from '@inertiajs/vue3'
+
+defineProps({ store: Object, products: Object })
 </script>
 
 <template>
@@ -14,8 +18,8 @@ import { Link } from '@inertiajs/vue3'
         <div class="w-full pl-5">
           <div class="py-1.5 mb-3 flex items-center justify-between border-b">
             <div class="flex items-center space-x-5">
-              <h1 class="font-bold text-md text-gray-800">K Mobile Shop</h1>
-              <p class="font-bold text-sm text-orange-600">314 items found</p>
+              <h1 class="font-bold text-md text-gray-800">{{ store?.store_name }}</h1>
+              <p class="font-bold text-sm text-orange-600">{{ products.total }} items found</p>
             </div>
 
             <div class="flex items-center space-x-5">
@@ -28,16 +32,52 @@ import { Link } from '@inertiajs/vue3'
 
                 <Link
                   as="button"
-                  href="#"
-                  class="px-2 py-1 rounded-md cursor-pointer transition-none mr-2 bg-orange-500 text-white hover:bg-orange-600"
+                  :href="route('stores.show', store?.slug)"
+                  :data="{
+                    search: $page.props.ziggy.query?.search,
+                    tab: $page.props.ziggy.query?.tab,
+                    category: $page.props.ziggy.query?.category,
+                    brand: $page.props.ziggy.query?.brand,
+                    sort: $page.props.ziggy.query?.sort,
+                    direction: $page.props.ziggy.query?.direction,
+                    page: $page.props.ziggy.query?.page,
+                    rating: $page.props.ziggy.query?.rating,
+                    price: $page.props.ziggy.query?.price,
+                    view: 'grid'
+                  }"
+                  class="px-2 py-1 rounded-md cursor-pointer transition-none mr-2"
+                  :class="{
+                    'bg-orange-500 text-white hover:bg-orange-600':
+                      $page.props.ziggy.query?.view === 'grid',
+                    'bg-gray-200 text-gray-600 hover:bg-gray-300':
+                      $page.props.ziggy.query?.view !== 'grid'
+                  }"
                 >
                   <i class="fa-solid fa-grip"></i>
                 </Link>
 
                 <Link
                   as="button"
-                  href="#"
-                  class="px-2 py-1 rounded-md cursor-pointer bg-gray-200 text-gray-600 hover:bg-gray-300 transition-none"
+                  :href="route('stores.show', store?.slug)"
+                  :data="{
+                    search: $page.props.ziggy.query?.search,
+                    tab: $page.props.ziggy.query?.tab,
+                    category: $page.props.ziggy.query?.category,
+                    brand: $page.props.ziggy.query?.brand,
+                    sort: $page.props.ziggy.query?.sort,
+                    direction: $page.props.ziggy.query?.direction,
+                    page: $page.props.ziggy.query?.page,
+                    rating: $page.props.ziggy.query?.rating,
+                    price: $page.props.ziggy.query?.price,
+                    view: 'list'
+                  }"
+                  class="px-2 py-1 rounded-md cursor-pointer transition-none"
+                  :class="{
+                    'bg-orange-500 text-white hover:bg-orange-600':
+                      $page.props.ziggy.query?.view === 'list',
+                    'bg-gray-200 text-gray-600 hover:bg-gray-300':
+                      $page.props.ziggy.query?.view !== 'list'
+                  }"
                 >
                   <i class="fa-solid fa-list"></i>
                 </Link>
@@ -93,32 +133,32 @@ import { Link } from '@inertiajs/vue3'
 
           <div>
             <!-- Product Grid Card -->
-            <div class="grid grid-cols-4 gap-5 w-full">
-              <ProductGridCard />
-              <ProductGridCard />
-              <ProductGridCard />
-              <ProductGridCard />
-              <ProductGridCard />
-              <ProductGridCard />
-              <ProductGridCard />
-              <ProductGridCard />
-              <ProductGridCard />
-              <ProductGridCard />
-              <ProductGridCard />
+            <div
+              v-show="$page.props.ziggy.query?.view === 'grid'"
+              class="grid grid-cols-4 gap-5 w-full"
+            >
+              <ProductGridCard
+                v-for="product in products.data"
+                :key="product.id"
+                :product="product"
+              />
             </div>
 
             <!-- Blog List Card -->
-            <!-- <div v-show="params.view === 'list'" class="grid grid-cols-1 gap-5 w-full">
-              <BlogListCard
-                v-for="blogContent in blogContents.data"
-                :key="blogContent.id"
-                :blog="blogContent"
+            <div
+              v-show="$page.props.ziggy.query?.view === 'list'"
+              class="grid grid-cols-1 gap-5 w-full"
+            >
+              <ProductListCard
+                v-for="product in products.data"
+                :key="product.id"
+                :product="product"
               />
-            </div> -->
+            </div>
 
             <!-- Pagination -->
             <div class="my-5 py-5">
-              <!-- <Pagination :links="blogContents.links" /> -->
+              <Pagination :links="products.links" />
             </div>
           </div>
           <!-- <div v-else class="py-20">

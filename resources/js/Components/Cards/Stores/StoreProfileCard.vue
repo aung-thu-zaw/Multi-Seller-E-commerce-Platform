@@ -1,7 +1,21 @@
 <script setup>
+import AvgRating from '@/Components/Ratings/AvgRating.vue'
 import { Link } from '@inertiajs/vue3'
+import { computed } from 'vue'
 
-defineProps({ store: Object })
+const props = defineProps({ store: Object })
+
+const avgRating = computed(() => {
+  const rawAvgRating = props.store?.store_reviews_avg_rating
+
+  const avgRatingValue = parseFloat(rawAvgRating)
+
+  if (!Number.isNaN(avgRatingValue)) {
+    return avgRatingValue.toFixed(1)
+  }
+
+  return null
+})
 </script>
 
 <template>
@@ -16,73 +30,12 @@ defineProps({ store: Object })
           {{ store.store_name }}
         </h1>
 
-        <div class="space-y-2 mt-5">
+        <div v-show="avgRating > 0" class="space-y-2 mt-5">
           <!-- Rating -->
-          <div class="flex items-center space-x-0.5">
-            <svg
-              class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-              />
-            </svg>
-            <svg
-              class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-              />
-            </svg>
-            <svg
-              class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-              />
-            </svg>
-            <svg
-              class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-              />
-            </svg>
-            <svg
-              class="flex-shrink-0 w-3.5 h-3.5 text-gray-300"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-              />
-            </svg>
-          </div>
+          <AvgRating :avgRating="avgRating" />
           <!-- End Rating -->
 
-          <p class="font-bold text-gray-600 text-xs text-center">3.5 out of 5</p>
+          <p class="font-bold text-gray-600 text-xs text-center">{{ avgRating }} out of 5</p>
         </div>
       </div>
     </div>

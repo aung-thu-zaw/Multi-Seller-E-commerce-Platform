@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             BrandSeeder::class,
             ProductSeeder::class,
-            // ProductImageSeeder::class,
+            ProductImageSeeder::class,
             BlogCategorySeeder::class,
             BlogContentSeeder::class,
             BlogCommentSeeder::class,
@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             FaqSubcategorySeeder::class,
             FaqContentSeeder::class,
             HelpPageSeeder::class,
-            // ProductReviewSeeder::class,
+            ProductReviewSeeder::class,
             AutomatedFilterWordSeeder::class,
             SeoSettingSeeder::class,
             GeneralSettingSeeder::class,
@@ -40,7 +40,8 @@ class DatabaseSeeder extends Seeder
             CampaignBannerSeeder::class,
             SliderBannerSeeder::class,
             CouponSeeder::class,
-            CollectionSeeder::class
+            CollectionSeeder::class,
+            StoreReviewSeeder::class
         ]);
     }
 }

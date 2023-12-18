@@ -8,7 +8,7 @@ import ProductRatingAndReviews from './Partials/ProductRatingAndReviews.vue'
 import SellerRatingAndReviews from './Partials/SellerRatingAndReviews.vue'
 import { Head, Link } from '@inertiajs/vue3'
 
-defineProps({ store: Object })
+defineProps({ store: Object, products: Object })
 </script>
 
 <template>
@@ -42,7 +42,7 @@ defineProps({ store: Object })
               <Link
                 as="button"
                 :href="route('stores.show', { store: store?.slug })"
-                :data="{ tab: 'all-products' }"
+                :data="{ tab: 'all-products', view: 'grid' }"
                 preserve-scroll
                 class="py-4 px-1 inline-flex items-center gap-x-1.5 text-sm font-medium whitespace-nowrap text-gray-600 hover:text-orange-600"
                 :class="{
@@ -78,7 +78,7 @@ defineProps({ store: Object })
                     $page.props.ziggy.query?.tab === 'store-rating-and-reviews'
                 }"
               >
-                <i class="fa-solid fa-user-tie"></i>
+                <i class="fa-solid fa-store"></i>
                 Store Rating & Reviews
               </Link>
             </nav>
@@ -92,7 +92,7 @@ defineProps({ store: Object })
             </div>
 
             <div v-show="$page.props.ziggy.query?.tab === 'all-products'">
-              <AllProducts />
+              <AllProducts :store="store" :products="products" />
             </div>
 
             <div v-show="$page.props.ziggy.query?.tab === 'product-rating-and-reviews'">

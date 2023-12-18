@@ -12,6 +12,6 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        Product::factory(50)->create(['store_id' => 1]);
+        Product::factory(100)->create(['store_id' => 1,"status" => "approved"]);
     }
 }

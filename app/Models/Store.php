@@ -71,6 +71,14 @@ class Store extends Model
         return $this->belongsTo(User::class, "seller_id");
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<StoreReview>
+     */
+    public function storeReviews(): HasMany
+    {
+        return $this->hasMany(StoreReview::class);
+    }
+
     public static function deleteAvatar(?string $avatar): void
     {
         if (!empty($avatar) && file_exists(storage_path('app/public/stores/avatars/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
