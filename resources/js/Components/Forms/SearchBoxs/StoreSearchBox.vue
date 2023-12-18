@@ -82,7 +82,7 @@ watch(
         <input
           type="text"
           id="default-search"
-          class="block w-full p-3.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 font-semibold focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all shadow"
+          class="block w-full p-3.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 font-semibold focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all"
           :placeholder="__('Search Store')"
           v-model="searchStore"
         />

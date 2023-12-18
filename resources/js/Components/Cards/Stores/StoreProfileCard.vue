@@ -5,7 +5,7 @@ defineProps({ store: Object })
 </script>
 
 <template>
-  <div class="shadow-md bg-white rounded-md flex items-center h-[180px]">
+  <div class="shadow-md bg-white rounded-md flex items-center h-[180px] border border-gray-300">
     <div
       class="flex flex-col items-center justify-center w-[300px] h-full border-r border-r-slate-300 p-2"
     >
@@ -92,13 +92,13 @@ defineProps({ store: Object })
           <p class="text-md text-gray-600 font-semibold border-b border-b-slate-400 mb-2">
             Products
           </p>
-          <p class="text-sm text-gray-500 text-center">13</p>
+          <p class="text-sm text-gray-500 text-center">{{ store?.products_count }}</p>
         </div>
         <div>
           <p class="text-md text-gray-600 font-semibold border-b border-b-slate-400 mb-2">
             Followers
           </p>
-          <p class="text-sm text-gray-500 text-center">5</p>
+          <p class="text-sm text-gray-500 text-center">{{ store?.followers_count }}</p>
         </div>
       </div>
 

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
+use Overtrue\LaravelFollow\Traits\Followable;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -18,6 +19,7 @@ class Store extends Model
     use HasSlug;
     use Searchable;
     use SoftDeletes;
+    use Followable;
 
     public function getSlugOptions(): SlugOptions
     {

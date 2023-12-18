@@ -6,7 +6,9 @@ import Home from './Partials/Home.vue'
 import AllProducts from './Partials/AllProducts.vue'
 import ProductRatingAndReviews from './Partials/ProductRatingAndReviews.vue'
 import SellerRatingAndReviews from './Partials/SellerRatingAndReviews.vue'
-import { Head } from '@inertiajs/vue3'
+import { Head, Link } from '@inertiajs/vue3'
+
+defineProps({ store: Object })
 </script>
 
 <template>
@@ -16,91 +18,88 @@ import { Head } from '@inertiajs/vue3'
     <section id="seller-stores" class="py-5">
       <div class="w-[1300px] mx-auto flex flex-col items-start">
         <!-- Cover Photo -->
-        <StoreProfileCoverCard />
+        <StoreProfileCoverCard :store="store" />
 
         <div class="w-full">
           <div
             class="border border-gray-300 bg-white rounded-md px-10 py-4 flex items-center justify-between"
           >
-            <nav class="flex space-x-5" aria-label="Tabs" role="tablist">
-              <button
-                type="button"
-                class="hs-tab-active:font-semibold hs-tab-active:border-orange-600 hs-tab-active:text-orange-600 py-4 px-1 inline-flex items-center gap-x-1.5 border-b-2 border-transparent text-sm font-medium whitespace-nowrap text-gray-600 hover:text-orange-600"
-                id="tabs-with-icons-item-1"
-                data-hs-tab="#tabs-with-icons-1"
-                aria-controls="tabs-with-icons-1"
-                role="tab"
+            <nav class="flex space-x-5">
+              <Link
+                as="button"
+                :href="route('stores.show', { store: store?.slug })"
+                :data="{ tab: 'home' }"
+                preserve-scroll
+                class="py-4 px-1 inline-flex items-center gap-x-1.5 text-sm font-medium whitespace-nowrap text-gray-600 hover:text-orange-600"
+                :class="{
+                  'border-b-2 font-semibold border-orange-600 text-orange-600':
+                    $page.props.ziggy.query?.tab === 'home' || !$page.props.ziggy.query?.tab
+                }"
               >
                 <i class="fa-solid fa-home"></i>
                 Home
-              </button>
-              <button
-                type="button"
-                class="hs-tab-active:font-semibold hs-tab-active:border-orange-600 hs-tab-active:text-orange-600 py-4 px-1 inline-flex items-center gap-x-1.5 border-b-2 border-transparent text-sm font-medium whitespace-nowrap text-gray-600 hover:text-orange-600"
-                id="tabs-with-icons-item-2"
-                data-hs-tab="#tabs-with-icons-2"
-                aria-controls="tabs-with-icons-2"
-                role="tab"
+              </Link>
+              <Link
+                as="button"
+                :href="route('stores.show', { store: store?.slug })"
+                :data="{ tab: 'all-products' }"
+                preserve-scroll
+                class="py-4 px-1 inline-flex items-center gap-x-1.5 text-sm font-medium whitespace-nowrap text-gray-600 hover:text-orange-600"
+                :class="{
+                  'border-b-2 font-semibold border-orange-600 text-orange-600':
+                    $page.props.ziggy.query?.tab === 'all-products'
+                }"
               >
                 <i class="fa-solid fa-basket-shopping"></i>
                 All Products
-              </button>
-              <button
-                type="button"
-                class="hs-tab-active:font-semibold hs-tab-active:border-orange-600 hs-tab-active:text-orange-600 py-4 px-1 inline-flex items-center gap-x-1.5 border-b-2 border-transparent text-sm font-medium whitespace-nowrap text-gray-600 hover:text-orange-600"
-                id="tabs-with-icons-item-2"
-                data-hs-tab="#tabs-with-icons-3"
-                aria-controls="tabs-with-icons-3"
-                role="tab"
+              </Link>
+              <Link
+                as="button"
+                :href="route('stores.show', { store: store?.slug })"
+                :data="{ tab: 'product-rating-and-reviews' }"
+                preserve-scroll
+                class="py-4 px-1 inline-flex items-center gap-x-1.5 text-sm font-medium whitespace-nowrap text-gray-600 hover:text-orange-600"
+                :class="{
+                  'border-b-2 font-semibold border-orange-600 text-orange-600':
+                    $page.props.ziggy.query?.tab === 'product-rating-and-reviews'
+                }"
               >
                 <i class="fa-solid fa-star"></i>
                 Product Rating & Reviews
-              </button>
-              <button
-                type="button"
-                class="hs-tab-active:font-semibold hs-tab-active:border-orange-600 hs-tab-active:text-orange-600 py-4 px-1 inline-flex items-center gap-x-1.5 border-b-2 border-transparent text-sm font-medium whitespace-nowrap text-gray-600 hover:text-orange-600"
-                id="tabs-with-icons-item-2"
-                data-hs-tab="#tabs-with-icons-4"
-                aria-controls="tabs-with-icons-4"
-                role="tab"
+              </Link>
+              <Link
+                as="button"
+                :href="route('stores.show', { store: store?.slug })"
+                :data="{ tab: 'store-rating-and-reviews' }"
+                preserve-scroll
+                class="py-4 px-1 inline-flex items-center gap-x-1.5 text-sm font-medium whitespace-nowrap text-gray-600 hover:text-orange-600"
+                :class="{
+                  'border-b-2 font-semibold border-orange-600 text-orange-600':
+                    $page.props.ziggy.query?.tab === 'store-rating-and-reviews'
+                }"
               >
                 <i class="fa-solid fa-user-tie"></i>
-                Seller Rating & Reviews
-              </button>
+                Store Rating & Reviews
+              </Link>
             </nav>
 
             <StoreProductSearchBox />
           </div>
 
           <div class="mt-3">
-            <div id="tabs-with-icons-1" role="tabpanel" aria-labelledby="tabs-with-icons-item-1">
+            <div v-show="$page.props.ziggy.query?.tab === 'home' || !$page.props.ziggy.query?.tab">
               <Home />
             </div>
 
-            <div
-              id="tabs-with-icons-2"
-              class="hidden"
-              role="tabpanel"
-              aria-labelledby="tabs-with-icons-item-2"
-            >
+            <div v-show="$page.props.ziggy.query?.tab === 'all-products'">
               <AllProducts />
             </div>
 
-            <div
-              id="tabs-with-icons-3"
-              class="hidden"
-              role="tabpanel"
-              aria-labelledby="tabs-with-icons-item-2"
-            >
+            <div v-show="$page.props.ziggy.query?.tab === 'product-rating-and-reviews'">
               <ProductRatingAndReviews />
             </div>
 
-            <div
-              id="tabs-with-icons-4"
-              class="hidden"
-              role="tabpanel"
-              aria-labelledby="tabs-with-icons-item-2"
-            >
+            <div v-show="$page.props.ziggy.query?.tab === 'store-rating-and-reviews'">
               <SellerRatingAndReviews />
             </div>
           </div>

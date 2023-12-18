@@ -17,6 +17,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Scout\Searchable;
+use Overtrue\LaravelFollow\Traits\Follower;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -29,6 +30,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use Searchable;
     use SoftDeletes;
+    use Follower;
 
     /**
      * The attributes that should be hidden for serialization.

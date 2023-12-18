@@ -68,6 +68,8 @@ Route::post('/faqs/{faq_content}/feedbacks', FaqFeedbackController::class)->name
 
 Route::get('/stores', [SellerStoreController::class, 'index'])->name('stores.index');
 Route::get('/stores/{store}', [SellerStoreController::class, 'show'])->name('stores.show');
+Route::post('/stores/{store}/follow', [SellerStoreController::class, 'followStore'])->name('stores.follow');
+Route::post('/stores/{store}/unfollow', [SellerStoreController::class, 'unFollowStore'])->name('stores.unfollow');
 
 Route::get('/about-us', AboutUsController::class)->name('about-us');
 
