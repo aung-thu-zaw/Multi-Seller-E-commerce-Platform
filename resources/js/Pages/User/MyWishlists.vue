@@ -41,7 +41,7 @@ const groupByStore = computed(() => {
           <WishlistByStoreCard :wishlistGroup="wishlistGroup" />
         </div>
       </div>
-      <div v-else>
+      <div v-else class="py-20">
         <h2 class="font-semibold text-md text-center text-gray-600">
           <i class="fas fa-heart"></i>
           <br />

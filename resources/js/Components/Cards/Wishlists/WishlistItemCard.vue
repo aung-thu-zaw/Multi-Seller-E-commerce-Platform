@@ -1,7 +1,53 @@
 <script setup>
 import NormalButton from '@/Components/Buttons/NormalButton.vue'
+import { useFormatFunctions } from '@/Composables/useFormatFunctions'
+import { computed, inject } from 'vue'
+import { __ } from '@/Services/translations-inside-setup.js'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
+import { router, usePage } from '@inertiajs/vue3'
 
-defineProps({ wishlist: Object })
+const props = defineProps({ wishlist: Object })
+
+const swal = inject('$swal')
+
+const product = computed(() => props.wishlist?.product)
+
+const { formatAmount } = useFormatFunctions()
+
+const discountPercentage = computed(() => {
+  const discountPercentage =
+    ((product.value?.price - product.value?.offer_price) / product.value?.price) * 100
+
+  return Math.round(discountPercentage)
+})
+
+const removeWishlistItem = async (wishlist) => {
+  const result = await swal({
+    icon: 'question',
+    title: `Remove From Watchlist`,
+    text: `Are you sure you want to remove this item(s)?`,
+    showCancelButton: true,
+    confirmButtonText: 'Yes, remove it!',
+    confirmButtonColor: '#d52222',
+    cancelButtonColor: '#626262',
+    timer: 20000,
+    timerProgressBar: true,
+    reverseButtons: true
+  })
+
+  if (result.isConfirmed) {
+    router.delete(route('user.my-wishlists.destroy', { wishlist }), {
+      preserveScroll: true,
+      onSuccess: () => {
+        const successMessage = usePage().props.flash.success
+        toast.success(__(successMessage), {
+          autoClose: 2000
+        })
+      }
+    })
+  }
+}
 </script>
 
 <template>
@@ -10,39 +56,42 @@ defineProps({ wishlist: Object })
   >
     <div class="w-[400px] flex items-start">
       <div class="min-w-[100px] overflow-hidden">
-        <img
-          src="https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
-          alt="product image"
-          class="w-20 h-20 object-cover"
-        />
+        <img :src="product?.image" alt="product image" class="w-20 h-20 rounded-md object-cover" />
       </div>
       <div class="space-y-2">
         <h3 class="font-semibold text-sm text-gray-700">
-          Naviforce NF9049 | Men’s Dual Movement Stainless Steel Watch, Original, Black & Blue Watch
-          Strap Color:Black
+          {{ product?.name }}
         </h3>
-        <p class="text-[.8rem] text-orange-600 font-bold">Only 4 item(s) left</p>
+        <p class="text-[.8rem] text-orange-600 font-bold">Only {{ product?.qty }} item(s) left</p>
       </div>
     </div>
 
-    <div class="space-y-1">
-      <p class="font-bold text-orange-600 text-xl">$ 350</p>
-      <div class="font-bold space-x-2">
-        <span class="text-gray-600 text-sm line-through"> $ 350 </span>
-        <span
-          class="px-2 py-1 text-xs text-orange-600 bg-orange-100 rounded-full border border-orange-400"
-        >
-          -23 % OFF
-        </span>
+    <div>
+      <div v-if="product?.offer_price" class="space-y-2">
+        <p class="font-bold text-orange-600 text-xl">$ {{ formatAmount(product?.offer_price) }}</p>
+        <div class="font-bold space-x-2">
+          <span class="text-gray-600 text-sm line-through">
+            $ {{ formatAmount(product?.price) }}
+          </span>
+          <span class="text-[.7rem] px-2 py-1 bg-orange-200 rounded-full text-orange-600 font-bold">
+            {{ discountPercentage }} % OFF
+          </span>
+        </div>
+        <p class="font-medium text-green-600 text-sm">Price dropped</p>
       </div>
-      <p class="font-medium text-green-600 text-sm">Price dropped</p>
+      <div v-else>
+        <p class="font-bold text-orange-600 text-xl">$ {{ formatAmount(product?.price) }}</p>
+      </div>
     </div>
     <div class="space-x-3">
       <NormalButton class="text-white bg-blue-600 hover:bg-blue-700">
         <i class="fa-solid fa-cart-plus"></i>
         Add to cart
       </NormalButton>
-      <NormalButton class="text-white bg-red-600 hover:bg-red-700">
+      <NormalButton
+        @click="removeWishlistItem(wishlist?.id)"
+        class="text-white bg-red-600 hover:bg-red-700"
+      >
         <i class="fa-solid fa-trash-can"></i>
         Remove
       </NormalButton>
