@@ -116,6 +116,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany<Wishlist>
+    */
+    public function wishlists(): HasMany
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Coupon>
      */
     public function coupons(): BelongsToMany

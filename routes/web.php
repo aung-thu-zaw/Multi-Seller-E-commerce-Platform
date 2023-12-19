@@ -75,7 +75,7 @@ Route::post('/stores/{store}/unfollow', [SellerStoreController::class, 'unFollow
 Route::get('/about-us', AboutUsController::class)->name('about-us');
 
 
-Route::post('/wishlists', [WishlistController::class,"store"])->name('wishlists.store');
+Route::post('/wishlists', [WishlistController::class,"store"])->middleware("auth")->name('wishlists.store');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';

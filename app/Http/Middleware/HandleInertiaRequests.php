@@ -41,6 +41,7 @@ class HandleInertiaRequests extends Middleware
                 'permissions' => $user ? $user->permissions->pluck('name')->all() : [],
                 'notifications' => $user ? $user->notifications : [],
                 'store' => $user ? $user->store : [],
+                'wishlists' => $user ? $user->wishlists : [],
             ],
             'parentCategory' => Category::with("children")->whereNull("parent_id")->get(),
             'flash' => [

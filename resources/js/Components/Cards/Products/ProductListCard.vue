@@ -1,7 +1,11 @@
 <script setup>
 import StarRating from '@/Components/Ratings/StarRating.vue'
 import { useFormatFunctions } from '@/Composables/useFormatFunctions'
+import { router, usePage } from '@inertiajs/vue3'
 import { computed } from 'vue'
+import { __ } from '@/Services/translations-inside-setup.js'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 const props = defineProps({ product: Object })
 
@@ -25,6 +29,31 @@ const discountPercentage = computed(() => {
 
   return Math.round(discountPercentage)
 })
+
+const saveToWishlist = () => {
+  router.post(
+    route('wishlists.store', {
+      product_id: props.product.id,
+      store_id: props.product.store_id
+    }),
+    {},
+    {
+      preserveScroll: true,
+      onSuccess: () => {
+        const successMessage = usePage().props.flash.success
+        toast.success(__(successMessage), {
+          autoClose: 2000
+        })
+      }
+    }
+  )
+}
+
+const saved = computed(() => {
+  return usePage().props.auth?.wishlists.some(
+    (wishlists) => wishlists.product_id === props.product?.id
+  )
+})
 </script>
 
 <template>
@@ -43,11 +72,13 @@ const discountPercentage = computed(() => {
               'h-64': !product?.product_images.length
             }"
           />
-          <span
-            class="absolute top-2 right-2 bg-gray-50 rounded-full flex items-center justify-center p-2 text-xs text-gray-600 hover:bg-gray-200 border"
+          <button
+            @click="saveToWishlist"
+            class="absolute top-2 right-2 bg-gray-50 rounded-full flex items-center justify-center p-2 text-xs hover:bg-gray-200 border text-gray-600"
+            :class="{ 'text-orange-600': saved }"
           >
             <i class="fa-solid fa-heart"></i>
-          </span>
+          </button>
         </div>
 
         <div class="flex items-center space-x-1 w-[250px] overflow-auto scrollbar">

@@ -20,10 +20,9 @@ class WishlistController extends Controller
         if (!$wishlist) {
             $wishlist = Wishlist::create([
                 'user_id' => auth()->id(),
-                'product_id' => auth()->id(),
-                'store_id' => auth()->id(),
+                'product_id' => $request->product_id,
+                'store_id' => $request->store_id,
             ]);
-
 
             return back()->with("success", "Item is moved to wishlist, you can re-add it to cart from wishlist.");
         } else {
