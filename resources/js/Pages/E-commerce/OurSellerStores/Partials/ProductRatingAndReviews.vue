@@ -4,7 +4,7 @@ import ReviewFilterDropdown from '@/Components/Dropdowns/Reviews/ReviewFilterDro
 import StoreProductReviewCard from '@/Components/Cards/Reviews/StoreProductReviewCard.vue'
 import Pagination from '@/Components/Paginations/Pagination.vue'
 
-defineProps({ productReviews: Object })
+defineProps({ store: Object, productReviews: Object })
 </script>
 
 <template>
@@ -16,9 +16,9 @@ defineProps({ productReviews: Object })
         </h3>
 
         <div class="space-x-5">
-          <ReviewSortDropdown />
+          <ReviewSortDropdown :store="store" />
 
-          <ReviewFilterDropdown />
+          <ReviewFilterDropdown :store="store" />
         </div>
       </div>
       <div v-if="productReviews.data.length" class="space-y-5">
@@ -35,9 +35,15 @@ defineProps({ productReviews: Object })
         </div>
       </div>
       <div v-else class="py-20">
-        <p class="text-center font-bold text-md text-red-600">
+        <p class="text-center font-bold text-md text-orange-600">
           <i class="fa-solid fa-file-circle-xmark"></i>
-          {{ __('This store does not have any product reviews.') }}
+          {{
+            $page.props.ziggy.query.rating
+              ? __('This store does not have any product reviews for :label stars', {
+                  label: $page.props.ziggy.query.rating
+                })
+              : __('This store does not have any product reviews.')
+          }}
         </p>
       </div>
     </div>

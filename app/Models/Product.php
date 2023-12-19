@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Scopes\FilterByScope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute as CastAttribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -161,5 +162,29 @@ class Product extends Model
         }
 
         return $sku;
+    }
+
+
+    /**
+    * @param Builder<Product> $query
+    * @return Builder<Product>
+    */
+    public function scopeWithApprovedReviewCount(Builder $query)
+    {
+        return $query->withCount(['productReviews' => function ($query) {
+            $query->where('status', 'approved');
+        }]);
+    }
+
+
+    /**
+    * @param Builder<Product> $query
+    * @return Builder<Product>
+    */
+    public function scopeWithApprovedReviewAvg(Builder $query)
+    {
+        return $query->withAvg(['productReviews' => function ($query) {
+            $query->where('status', 'approved');
+        }], 'rating');
     }
 }

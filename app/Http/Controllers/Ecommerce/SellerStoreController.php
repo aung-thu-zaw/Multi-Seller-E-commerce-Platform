@@ -36,21 +36,24 @@ class SellerStoreController extends Controller
 
         $products = Product::select('id', 'store_id', 'image', 'name', 'description', 'slug', 'price', 'offer_price')
             ->with(['productImages',"store:id,store_type"])
-            ->withCount(['productReviews' => function ($query) {
-                $query->where('status', 'approved');
-            }])
-            ->withAvg(['productReviews' => function ($query) {
-                $query->where('status', 'approved');
-            }], 'rating')
+            ->withApprovedReviewCount()
+            ->withApprovedReviewAvg()
             ->where('store_id', $store->id)
             ->where('status', 'approved')
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(20)
             ->withQueryString();
 
-        $productReviews = ProductReview::with(["product:id,name,image","reviewer:id,name,avatar","productReviewResponse.store:id,store_name,avatar","productReviewImages"])
+        $productReviews = ProductReview::with([
+           "product:id,name,image",
+           "reviewer:id,name,avatar",
+           "productReviewResponse.store:id,store_name,avatar",
+           "productReviewImages"
+        ])
+        ->filterByRating(request("rating"))
         ->where("store_id", $store->id)
-        ->where("status", "approved")
+        ->where('status', 'approved')
+        ->sortBy(request('review_sort'))
         ->paginate(5)
         ->withQueryString();
 

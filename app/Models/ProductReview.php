@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -69,5 +70,40 @@ class ProductReview extends Model
     public function productReviewImages(): HasMany
     {
         return $this->hasMany(ProductReviewImage::class);
+    }
+
+
+    /**
+    * @param string|null $rating
+    * @param Builder<ProductReview> $query
+    * @return Builder<ProductReview>
+    */
+
+    public function scopeFilterByRating(Builder $query, ?string $rating)
+    {
+        if ($rating !== 'all') {
+            return $query->where('rating', $rating);
+        }
+
+        return $query;
+    }
+
+    /**
+    * @param string|null $sortType
+    * @param Builder<ProductReview> $query
+    * @return Builder<ProductReview>
+    */
+    public function scopeSortBy(Builder $query, ?string $sortType)
+    {
+        switch ($sortType) {
+            case 'recent':
+                return $query->latest();
+            case 'rating_high_to_low':
+                return $query->orderBy('rating', 'desc');
+            case 'rating_low_to_high':
+                return $query->orderBy('rating', 'asc');
+            default:
+                return $query->orderBy('id', 'desc');
+        }
     }
 }

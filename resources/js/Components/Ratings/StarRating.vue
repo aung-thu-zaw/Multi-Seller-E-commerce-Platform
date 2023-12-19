@@ -1,5 +1,5 @@
 <script setup>
-defineProps({ rating: Number })
+defineProps({ rating: [Number] })
 </script>
 
 <template>

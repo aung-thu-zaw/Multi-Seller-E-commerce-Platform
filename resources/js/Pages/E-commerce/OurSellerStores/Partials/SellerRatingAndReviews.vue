@@ -3,6 +3,8 @@ import ReviewSortDropdown from '@/Components/Dropdowns/Reviews/ReviewSortDropdow
 import ReviewFilterDropdown from '@/Components/Dropdowns/Reviews/ReviewFilterDropdown.vue'
 import ReviewCard from '@/Components/Cards/Reviews/ReviewCard.vue'
 import SellerResponseCard from '@/Components/Cards/Reviews/SellerResponseCard.vue'
+
+defineProps({ store: Object })
 </script>
 
 <template>
@@ -133,9 +135,9 @@ import SellerResponseCard from '@/Components/Cards/Reviews/SellerResponseCard.vu
         <h3 class="font-bold text-md text-gray-800">Seller Ratings and Reviews (597)</h3>
 
         <div class="space-x-5">
-          <ReviewSortDropdown />
+          <ReviewSortDropdown :store="store" />
 
-          <ReviewFilterDropdown />
+          <ReviewFilterDropdown :store="store" />
         </div>
       </div>
 

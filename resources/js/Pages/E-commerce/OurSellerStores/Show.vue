@@ -56,7 +56,7 @@ defineProps({ store: Object, products: Object, productReviews: Object })
               <Link
                 as="button"
                 :href="route('stores.show', { store: store?.slug })"
-                :data="{ tab: 'product-rating-and-reviews' }"
+                :data="{ tab: 'product-rating-and-reviews', rating: 'all', review_sort: 'recent' }"
                 preserve-scroll
                 class="py-4 px-1 inline-flex items-center gap-x-1.5 text-sm font-medium whitespace-nowrap text-gray-600 hover:text-orange-600"
                 :class="{
@@ -96,11 +96,11 @@ defineProps({ store: Object, products: Object, productReviews: Object })
             </div>
 
             <div v-show="$page.props.ziggy.query?.tab === 'product-rating-and-reviews'">
-              <ProductRatingAndReviews :productReviews="productReviews" />
+              <ProductRatingAndReviews :store="store" :productReviews="productReviews" />
             </div>
 
             <div v-show="$page.props.ziggy.query?.tab === 'store-rating-and-reviews'">
-              <SellerRatingAndReviews />
+              <SellerRatingAndReviews :store="store" />
             </div>
           </div>
         </div>
