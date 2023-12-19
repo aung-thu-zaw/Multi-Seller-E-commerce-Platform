@@ -1,18 +1,20 @@
 <script setup>
+defineProps({ productBanners: Object })
+
 let defaultTransform = 0
 
 const goNext = () => {
   defaultTransform = defaultTransform - 398
-  var productBannerSlider = document.getElementById('product-banner-slider')
-  if (Math.abs(defaultTransform) >= productBannerSlider.scrollWidth / 1.7) defaultTransform = 0
-  productBannerSlider.style.transform = 'translateX(' + defaultTransform + 'px)'
+  var productBannerCarousel = document.getElementById('product-banner-carousel')
+  if (Math.abs(defaultTransform) >= productBannerCarousel.scrollWidth / 1.7) defaultTransform = 0
+  productBannerCarousel.style.transform = 'translateX(' + defaultTransform + 'px)'
 }
 
 const goPrev = () => {
-  var productBannerSlider = document.getElementById('product-banner-slider')
+  var productBannerCarousel = document.getElementById('product-banner-carousel')
   if (Math.abs(defaultTransform) === 0) defaultTransform = 0
   else defaultTransform = defaultTransform + 398
-  productBannerSlider.style.transform = 'translateX(' + defaultTransform + 'px)'
+  productBannerCarousel.style.transform = 'translateX(' + defaultTransform + 'px)'
 }
 </script>
 
@@ -43,55 +45,17 @@ const goPrev = () => {
       </button>
       <div class="w-full h-full mx-auto overflow-x-hidden overflow-y-hidden">
         <div
-          id="product-banner-slider"
+          id="product-banner-carousel"
           class="h-full flex gap-3 items-center justify-start transition ease-out duration-700"
         >
-          <div class="flex flex-shrink-0 relative">
+          <div
+            v-for="productBanner in productBanners"
+            :key="productBanner.id"
+            class="flex flex-shrink-0 relative rounded-md overflow-hidden"
+          >
             <img
-              src="https://slidebazaar.com/wp-content/uploads/2021/09/product-banner-jpg.webp"
-              alt="campaign-banner-image"
-              class="object-contain object-center w-full h-56"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://t4.ftcdn.net/jpg/04/89/28/05/360_F_489280525_nISHfaWCctYBFlyYkTQUkzQwVOPWmyvp.jpg"
-              alt="campaign-banner-image"
-              class="object-contain object-center w-full h-56"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://slidebazaar.com/wp-content/uploads/2021/09/newly-arrived-product.jpg"
-              alt="campaign-banner-image"
-              class="object-contain object-center w-full h-56"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://images.remotehub.com/d42c62669a7711eb91397e038280fee0/original_thumb/ec1eb042.jpg?version=1618112516"
-              alt="campaign-banner-image"
-              class="object-contain object-center w-full h-56"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://cdn.vectorstock.com/i/preview-1x/80/07/cosmetic-bottles-ad-poster-design-makeup-vector-47518007.jpg"
-              alt="campaign-banner-image"
-              class="object-contain object-center w-full h-56"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://cdn.vectorstock.com/i/preview-1x/74/07/beauty-product-cosmetics-bottles-mock-up-banner-vector-35787407.jpg"
-              alt="campaign-banner-image"
-              class="object-contain object-center w-full h-56"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://cdn.vectorstock.com/i/preview-1x/39/19/cosmetic-spray-bottle-mockup-banner-beauty-product-vector-27223919.jpg"
-              alt="campaign-banner-image"
+              :src="productBanner.image"
+              alt="product-banner-image"
               class="object-contain object-center w-full h-56"
             />
           </div>

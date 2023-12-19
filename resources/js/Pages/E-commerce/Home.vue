@@ -10,6 +10,8 @@ import ProductForYouSection from '@/Components/Sections/ProductForYouSection.vue
 import NewsletterSection from '@/Components/Sections/NewsletterSection.vue'
 import WhyChooseUsSection from '@/Components/Sections/WhyChooseUsSection.vue'
 import { Head } from '@inertiajs/vue3'
+
+defineProps({ campaignBanner: Object, productBanners: Object, products: Object })
 </script>
 
 <template>
@@ -18,17 +20,17 @@ import { Head } from '@inertiajs/vue3'
   <AppLayout>
     <EcommerceHeader />
 
-    <CampaignBannerSection />
+    <CampaignBannerSection :campaignBanner="campaignBanner" />
 
     <FlashSaleSection />
 
-    <ProductBannerSection />
+    <ProductBannerSection :productBanners="productBanners" />
 
     <CollectionSection />
 
     <OurBrandSection />
 
-    <ProductForYouSection />
+    <ProductForYouSection :products="products" />
 
     <NewsletterSection />
 

@@ -1,11 +1,13 @@
-<script setup></script>
+<script setup>
+defineProps({ campaignBanner: Object })
+</script>
 
 <template>
-  <section id="campaign-banner" class="my-5">
+  <section v-show="campaignBanner" id="campaign-banner" class="my-5">
     <div class="container mx-auto flex items-center justify-center">
       <div class="">
         <img
-          src="../../assets/images/campaign-banner-2.jpg"
+          :src="campaignBanner?.image"
           alt="campaign-banner-image"
           class="object-contain w-full max-h-40"
         />

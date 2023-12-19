@@ -103,9 +103,8 @@ watch(offerEndDate, (newEndDate) => {
           <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
               <InputLabel :label="__('Store')" required />
-
               <SelectBox
-                name="store"
+                name="store_name"
                 :options="stores"
                 v-model="form.store_id"
                 :placeholder="__('Select an option')"

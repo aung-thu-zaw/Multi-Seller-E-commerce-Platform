@@ -55,7 +55,7 @@ class ProductController extends Controller
             ->where('status', 'active')
             ->get();
 
-        $stores = Store::select("id", "name")->where("status", "active")->get();
+        $stores = Store::select("id", "store_name")->where("status", "active")->get();
 
         return inertia('Admin/ProductManage/Products/Create', compact('categories', 'brands', 'stores'));
     }
@@ -77,7 +77,7 @@ class ProductController extends Controller
             ->where('status', 'active')
             ->get();
 
-        $stores = Store::select("id", "name")->where("status", "active")->get();
+        $stores = Store::select("id", "store_name")->where("status", "active")->get();
 
         return inertia('Admin/ProductManage/Products/Edit', compact('product', 'categories', 'brands', 'stores'));
     }
