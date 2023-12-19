@@ -80,7 +80,13 @@ defineProps({ review: Object })
         {{ review?.comment }}
       </p>
 
-      <div v-show="review?.product_review_images.length" class="flex items-start space-x-5 w-full">
+      <div
+        v-show="
+          $page.component === 'E-commerce/OurSellerStores/Partials/ProductRatingAndReviews' &&
+          review?.product_review_images?.length
+        "
+        class="flex items-start space-x-5 w-full"
+      >
         <img
           v-for="reviewImage in review?.product_review_images"
           :key="reviewImage.id"

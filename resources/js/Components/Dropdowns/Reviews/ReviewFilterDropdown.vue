@@ -24,7 +24,7 @@ defineProps({ store: Object })
         as="button"
         :href="route('stores.show', { store: store?.slug })"
         :data="{
-          tab: 'product-rating-and-reviews',
+          tab: $page.props.ziggy.query?.tab,
           rating: 'all',
           review_sort: $page.props.ziggy.query?.review_sort
         }"
@@ -37,7 +37,7 @@ defineProps({ store: Object })
         as="button"
         :href="route('stores.show', { store: store?.slug })"
         :data="{
-          tab: 'product-rating-and-reviews',
+          tab: $page.props.ziggy.query?.tab,
           rating: '1',
           review_sort: $page.props.ziggy.query?.review_sort
         }"
@@ -50,7 +50,7 @@ defineProps({ store: Object })
         as="button"
         :href="route('stores.show', { store: store?.slug })"
         :data="{
-          tab: 'product-rating-and-reviews',
+          tab: $page.props.ziggy.query?.tab,
           rating: '2',
           review_sort: $page.props.ziggy.query?.review_sort
         }"
@@ -63,7 +63,7 @@ defineProps({ store: Object })
         as="button"
         :href="route('stores.show', { store: store?.slug })"
         :data="{
-          tab: 'product-rating-and-reviews',
+          tab: $page.props.ziggy.query?.tab,
           rating: '3',
           review_sort: $page.props.ziggy.query?.review_sort
         }"
@@ -76,7 +76,7 @@ defineProps({ store: Object })
         as="button"
         :href="route('stores.show', { store: store?.slug })"
         :data="{
-          tab: 'product-rating-and-reviews',
+          tab: $page.props.ziggy.query?.tab,
           rating: '4',
           review_sort: $page.props.ziggy.query?.review_sort
         }"
@@ -89,7 +89,7 @@ defineProps({ store: Object })
         as="button"
         :href="route('stores.show', { store: store?.slug })"
         :data="{
-          tab: 'product-rating-and-reviews',
+          tab: $page.props.ziggy.query?.tab,
           rating: '5',
           review_sort: $page.props.ziggy.query?.review_sort
         }"

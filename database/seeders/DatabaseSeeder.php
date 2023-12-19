@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
             CollectionSeeder::class,
             StoreReviewSeeder::class,
             ProductReviewResponseSeeder::class,
+            StoreReviewResponseSeeder::class,
             ProductReviewImageSeeder::class,
         ]);
     }

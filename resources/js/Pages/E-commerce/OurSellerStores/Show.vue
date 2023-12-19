@@ -5,10 +5,16 @@ import StoreProfileCoverCard from '@/Components/Cards/Stores/StoreProfileCoverCa
 import Home from './Partials/Home.vue'
 import AllProducts from './Partials/AllProducts.vue'
 import ProductRatingAndReviews from './Partials/ProductRatingAndReviews.vue'
-import SellerRatingAndReviews from './Partials/SellerRatingAndReviews.vue'
+import StoreRatingAndReviews from './Partials/StoreRatingAndReviews.vue'
 import { Head, Link } from '@inertiajs/vue3'
 
-defineProps({ store: Object, products: Object, productReviews: Object })
+defineProps({
+  store: Object,
+  products: Object,
+  productReviews: Object,
+  storeReviews: Object,
+  storeReviewsForAverageProgressBar: Object
+})
 </script>
 
 <template>
@@ -70,7 +76,7 @@ defineProps({ store: Object, products: Object, productReviews: Object })
               <Link
                 as="button"
                 :href="route('stores.show', { store: store?.slug })"
-                :data="{ tab: 'store-rating-and-reviews' }"
+                :data="{ tab: 'store-rating-and-reviews', rating: 'all', review_sort: 'recent' }"
                 preserve-scroll
                 class="py-4 px-1 inline-flex items-center gap-x-1.5 text-sm font-medium whitespace-nowrap text-gray-600 hover:text-orange-600"
                 :class="{
@@ -100,7 +106,11 @@ defineProps({ store: Object, products: Object, productReviews: Object })
             </div>
 
             <div v-show="$page.props.ziggy.query?.tab === 'store-rating-and-reviews'">
-              <SellerRatingAndReviews :store="store" />
+              <StoreRatingAndReviews
+                :store="store"
+                :storeReviews="storeReviews"
+                :storeReviewsForAverageProgressBar="storeReviewsForAverageProgressBar"
+              />
             </div>
           </div>
         </div>

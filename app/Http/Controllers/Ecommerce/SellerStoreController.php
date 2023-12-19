@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductReview;
 use App\Models\Store;
+use App\Models\StoreReview;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
@@ -57,7 +58,21 @@ class SellerStoreController extends Controller
         ->paginate(5)
         ->withQueryString();
 
-        return inertia('E-commerce/OurSellerStores/Show', compact('store', 'products', 'productReviews'));
+
+        $storeReviews = StoreReview::with([
+            "reviewer:id,name,avatar",
+            "storeReviewResponse.store:id,store_name,avatar",
+         ])
+         ->filterByRating(request("rating"))
+         ->where("store_id", $store->id)
+         ->where('status', 'approved')
+         ->sortBy(request('review_sort'))
+         ->paginate(5)
+         ->withQueryString();
+
+        $storeReviewsForAverageProgressBar = StoreReview::select("id", "rating")->where("store_id", $store->id)->where('status', 'approved')->get();
+
+        return inertia('E-commerce/OurSellerStores/Show', compact('store', 'products', 'productReviews', 'storeReviews', 'storeReviewsForAverageProgressBar'));
     }
 
     public function followStore(Store $store): RedirectResponse

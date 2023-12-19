@@ -29,7 +29,7 @@ const { formatToTitleCase } = useFormatFunctions()
         as="button"
         :href="route('stores.show', { store: store?.slug })"
         :data="{
-          tab: 'product-rating-and-reviews',
+          tab: $page.props.ziggy.query?.tab,
           review_sort: 'recent',
           rating: $page.props.ziggy.query?.rating
         }"
@@ -42,7 +42,7 @@ const { formatToTitleCase } = useFormatFunctions()
         as="button"
         :href="route('stores.show', { store: store?.slug })"
         :data="{
-          tab: 'product-rating-and-reviews',
+          tab: $page.props.ziggy.query?.tab,
           review_sort: 'rating_high_to_low',
           rating: $page.props.ziggy.query?.rating
         }"
@@ -55,7 +55,7 @@ const { formatToTitleCase } = useFormatFunctions()
         as="button"
         :href="route('stores.show', { store: store?.slug })"
         :data="{
-          tab: 'product-rating-and-reviews',
+          tab: $page.props.ziggy.query?.tab,
           review_sort: 'rating_low_to_high',
           rating: $page.props.ziggy.query?.rating
         }"

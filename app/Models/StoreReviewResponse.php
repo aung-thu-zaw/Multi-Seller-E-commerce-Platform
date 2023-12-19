@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ProductReviewResponse extends Model
+class StoreReviewResponse extends Model
 {
     use HasFactory;
 
     /**
-    * @return \Illuminate\Database\Eloquent\Casts\Attribute<ProductReviewResponse, never>
+    * @return \Illuminate\Database\Eloquent\Casts\Attribute<StoreReviewResponse, never>
     */
     protected function createdAt(): Attribute
     {
@@ -22,15 +22,15 @@ class ProductReviewResponse extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<ProductReview,ProductReviewResponse>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<StoreReview,StoreReviewResponse>
      */
-    public function productReview(): BelongsTo
+    public function storeReview(): BelongsTo
     {
-        return $this->belongsTo(ProductReview::class);
+        return $this->belongsTo(StoreReview::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Store,ProductReviewResponse>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Store,StoreReviewResponse>
      */
     public function store(): BelongsTo
     {
