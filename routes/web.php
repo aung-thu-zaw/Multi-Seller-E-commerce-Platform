@@ -12,6 +12,7 @@ use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentReplyController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogController;
 use App\Http\Controllers\Ecommerce\Pages\AboutUsController;
 use App\Http\Controllers\Ecommerce\SellerStoreController;
+use App\Http\Controllers\Ecommerce\WishlistController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
@@ -68,10 +69,13 @@ Route::post('/faqs/{faq_content}/feedbacks', FaqFeedbackController::class)->name
 
 Route::get('/stores', [SellerStoreController::class, 'index'])->name('stores.index');
 Route::get('/stores/{store}', [SellerStoreController::class, 'show'])->name('stores.show');
-Route::post('/stores/{store}/follow', [SellerStoreController::class, 'followStore'])->name('stores.follow');
-Route::post('/stores/{store}/unfollow', [SellerStoreController::class, 'unFollowStore'])->name('stores.unfollow');
+Route::post('/stores/{store}/follow', [SellerStoreController::class, 'followStore'])->middleware("auth")->name('stores.follow');
+Route::post('/stores/{store}/unfollow', [SellerStoreController::class, 'unFollowStore'])->middleware("auth")->name('stores.unfollow');
 
 Route::get('/about-us', AboutUsController::class)->name('about-us');
+
+
+Route::post('/wishlists', [WishlistController::class,"store"])->name('wishlists.store');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';

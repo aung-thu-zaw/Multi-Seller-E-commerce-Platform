@@ -5,6 +5,7 @@ use App\Http\Controllers\User\BecomeASellerController;
 use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\User\DeleteAccountController;
 use App\Http\Controllers\User\MyAccountController;
+use App\Http\Controllers\User\MyWishlistController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])
@@ -14,10 +15,14 @@ Route::middleware(['auth'])
 
         Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
-        Route::get('/my-account', [MyAccountController::class, 'edit'])->name('my-account.edit');
-        Route::patch('/my-account/{user}', [MyAccountController::class, 'update'])->name('my-account.update');
+        Route::get('/my-account', [MyAccountController::class,'edit'])->name('my-account.edit');
+        Route::patch('/my-account/{user}', [MyAccountController::class,'update'])->name('my-account.update');
 
         Route::get('/change-password', ChangePasswordController::class)->name('change-password.edit');
 
         Route::get('/delete-account', DeleteAccountController::class)->name('delete-account');
+
+        Route::get('/my-wishlists', [MyWishlistController::class,"index"])->name('my-wishlists.index');
+        Route::delete('/my-wishlists/{wishlist}', [MyWishlistController::class,"destroy"])->name('my-wishlists.destroy');
+
     });
