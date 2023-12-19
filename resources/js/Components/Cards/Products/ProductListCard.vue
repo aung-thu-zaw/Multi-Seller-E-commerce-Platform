@@ -1,5 +1,5 @@
 <script setup>
-import AvgRating from '@/Components/Ratings/AvgRating.vue'
+import StarRating from '@/Components/Ratings/StarRating.vue'
 import { useFormatFunctions } from '@/Composables/useFormatFunctions'
 import { computed } from 'vue'
 
@@ -96,7 +96,7 @@ const discountPercentage = computed(() => {
           </div>
 
           <div v-show="avgRating > 0" class="flex items-center space-x-2">
-            <AvgRating :avgRating="avgRating" />
+            <StarRating :rating="avgRating" />
 
             <span class="text-xs font-bold text-gray-400">
               ({{ product?.product_reviews_count }})

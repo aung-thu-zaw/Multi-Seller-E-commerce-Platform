@@ -8,7 +8,7 @@ import ProductRatingAndReviews from './Partials/ProductRatingAndReviews.vue'
 import SellerRatingAndReviews from './Partials/SellerRatingAndReviews.vue'
 import { Head, Link } from '@inertiajs/vue3'
 
-defineProps({ store: Object, products: Object })
+defineProps({ store: Object, products: Object, productReviews: Object })
 </script>
 
 <template>
@@ -96,7 +96,7 @@ defineProps({ store: Object, products: Object })
             </div>
 
             <div v-show="$page.props.ziggy.query?.tab === 'product-rating-and-reviews'">
-              <ProductRatingAndReviews />
+              <ProductRatingAndReviews :productReviews="productReviews" />
             </div>
 
             <div v-show="$page.props.ziggy.query?.tab === 'store-rating-and-reviews'">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductReview;
 use App\Models\Store;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -47,7 +48,13 @@ class SellerStoreController extends Controller
             ->paginate(20)
             ->withQueryString();
 
-        return inertia('E-commerce/OurSellerStores/Show', compact('store', 'products'));
+        $productReviews = ProductReview::with(["product:id,name,image","reviewer:id,name,avatar","productReviewResponse.store:id,store_name,avatar","productReviewImages"])
+        ->where("store_id", $store->id)
+        ->where("status", "approved")
+        ->paginate(5)
+        ->withQueryString();
+
+        return inertia('E-commerce/OurSellerStores/Show', compact('store', 'products', 'productReviews'));
     }
 
     public function followStore(Store $store): RedirectResponse

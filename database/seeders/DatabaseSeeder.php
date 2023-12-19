@@ -41,7 +41,9 @@ class DatabaseSeeder extends Seeder
             SliderBannerSeeder::class,
             CouponSeeder::class,
             CollectionSeeder::class,
-            StoreReviewSeeder::class
+            StoreReviewSeeder::class,
+            ProductReviewResponseSeeder::class,
+            ProductReviewImageSeeder::class,
         ]);
     }
 }

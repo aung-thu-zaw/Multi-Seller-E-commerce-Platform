@@ -1,5 +1,5 @@
 <script setup>
-import AvgRating from '@/Components/Ratings/AvgRating.vue'
+import StarRating from '@/Components/Ratings/StarRating.vue'
 import { router, usePage } from '@inertiajs/vue3'
 import { computed, inject } from 'vue'
 import { toast } from 'vue3-toastify'
@@ -101,7 +101,7 @@ const handleStoreFollowing = async () => {
 
           <div v-show="avgRating > 0">
             <!-- Rating -->
-            <AvgRating :avgRating="avgRating" />
+            <StarRating :rating="avgRating" />
             <!-- End Rating -->
           </div>
         </div>

@@ -1,5 +1,5 @@
 <script setup>
-import AvgRating from '@/Components/Ratings/AvgRating.vue'
+import StarRating from '@/Components/Ratings/StarRating.vue'
 import { Link } from '@inertiajs/vue3'
 import { computed } from 'vue'
 
@@ -32,7 +32,7 @@ const avgRating = computed(() => {
 
         <div v-show="avgRating > 0" class="space-y-2 mt-5">
           <!-- Rating -->
-          <AvgRating :avgRating="avgRating" />
+          <StarRating :rating="avgRating" />
           <!-- End Rating -->
 
           <p class="font-bold text-gray-600 text-xs text-center">{{ avgRating }} out of 5</p>

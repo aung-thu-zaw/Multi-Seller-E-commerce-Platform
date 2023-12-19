@@ -1,5 +1,5 @@
 <script setup>
-defineProps({ avgRating: Number })
+defineProps({ rating: Number })
 </script>
 
 <template>
@@ -7,8 +7,8 @@ defineProps({ avgRating: Number })
     <template v-for="starIndex in 5" :key="starIndex">
       <svg
         :class="{
-          'text-yellow-400': avgRating >= starIndex,
-          'text-gray-300': avgRating < starIndex
+          'text-yellow-400': rating >= starIndex,
+          'text-gray-300': rating < starIndex
         }"
         class="flex-shrink-0 w-3 h-3"
         xmlns="http://www.w3.org/2000/svg"

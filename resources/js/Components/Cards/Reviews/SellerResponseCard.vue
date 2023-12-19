@@ -1,7 +1,9 @@
-<script setup></script>
+<script setup>
+defineProps({ response: Object })
+</script>
 
 <template>
-  <div class="pl-14">
+  <div class="pl-14 w-full">
     <div class="w-full flex items-start justify-between">
       <div class="flex items-center space-x-3 mb-3 ml-4">
         <!-- avatar -->
@@ -9,20 +11,20 @@
           class="w-10 h-10 text-sm text-white bg-slate-200 inline-flex items-center justify-center rounded-full ring-2"
         >
           <img
-            alt="user-photo"
             class="w-full h-full object-cover rounded-full align-middle border-none shadow-lg ring-2 ring-orange-300"
-            src="https://img.freepik.com/free-vector/shop-with-we-are-open-sign_23-2148557016.jpg"
+            :src="response?.store?.avatar"
+            alt="store-avatar"
           />
         </span>
 
         <div class="flex flex-col items-start">
-          <h3 class="font-bold text-gray-700">K Mobile Shop</h3>
+          <h3 class="font-bold text-gray-700">{{ response?.store?.store_name }}</h3>
           <span class="text-xs font-medium text-orange-500"> Response from store </span>
         </div>
       </div>
 
       <div class="flex items-center space-x-2">
-        <p class="font-semibold text-sm text-gray-700">25 September, 2023</p>
+        <p class="font-semibold text-sm text-gray-700">{{ response?.created_at }}</p>
 
         <div class="hs-dropdown relative inline-flex">
           <button
@@ -64,9 +66,7 @@
     </div>
 
     <p class="text-sm font-medium text-gray-700 pl-16">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos similique vitae nobis
-      debitis cupiditate odit incidunt eaque nihil ipsum quasi harum perferendis magni voluptates
-      vel ex, aperiam rerum fugiat laboriosam?
+      {{ response?.response }}
     </p>
   </div>
 </template>

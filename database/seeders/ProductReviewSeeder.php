@@ -12,6 +12,7 @@ class ProductReviewSeeder extends Seeder
      */
     public function run(): void
     {
-        ProductReview::factory(150)->create();
+        ProductReview::factory(25)->create(["store_id" => 1,"status" => "approved"]);
+        ProductReview::factory(10)->create(["store_id" => 2,"status" => "approved"]);
     }
 }
