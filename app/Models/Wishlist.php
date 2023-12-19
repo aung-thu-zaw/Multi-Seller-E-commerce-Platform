@@ -25,4 +25,12 @@ class Wishlist extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Store,Wishlist>
+    */
+    public function store()
+    {
+        return $this->belongsTo(Store::class);
+    }
 }
