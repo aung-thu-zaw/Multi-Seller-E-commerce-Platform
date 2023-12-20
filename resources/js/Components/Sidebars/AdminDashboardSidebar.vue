@@ -171,9 +171,9 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- Collections -->
-          <li v-show="can('brands.view')" class="items-center">
+          <li v-show="can('collections.view')" class="items-center">
             <Link
-              :href="route('admin.brands.index')"
+              :href="route('admin.collections.index')"
               :data="{
                 page: 1,
                 per_page: 5,
@@ -182,8 +182,8 @@ const toggleCollapseShow = (classes) => {
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/collections'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/collections')
               }"
             >
               <i class="fa-solid fa-box mr-2"></i>

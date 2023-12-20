@@ -13,7 +13,6 @@ import SortableTableHeaderCell from '@/Components/Tables/TableCells/SortableTabl
 import TableHeaderCell from '@/Components/Tables/TableCells/TableHeaderCell.vue'
 import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
 import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
-import ImageCell from '@/Components/Tables/TableCells/TableImageCell.vue'
 import NoTableData from '@/Components/Tables/NoTableData.vue'
 import BulkActionButton from '@/Components/Buttons/BulkActionButton.vue'
 import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
@@ -24,11 +23,11 @@ import { Head } from '@inertiajs/vue3'
 import { __ } from '@/Services/translations-inside-setup.js'
 import { useResourceActions } from '@/Composables/useResourceActions'
 
-defineProps({ trashedCampaignBanners: Object })
+defineProps({ trashedCollections: Object })
 
-const campaignBannerList = 'admin.campaign-banners.index'
+const collectionList = 'admin.collections.index'
 
-const trashedCampaignBannerList = 'admin.campaign-banners.trashed'
+const trashedCollectionList = 'admin.collections.trashed'
 
 const {
   restoreAction,
@@ -40,7 +39,7 @@ const {
 </script>
 
 <template>
-  <Head :title="__('Deleted :label', { label: __('Campaign Banners') })" />
+  <Head :title="__('Deleted :label', { label: __('Collections') })" />
 
   <AdminDashboardLayout>
     <!-- Breadcrumb And Go back Button  -->
@@ -48,14 +47,14 @@ const {
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="campaignBannerList" icon="fa-ad" label="Campaign Banners">
-          <BreadcrumbLinkItem label="Trash" :to="trashedCampaignBannerList" />
+        <Breadcrumb :to="collectionList" icon="fa-box" label="Collections">
+          <BreadcrumbLinkItem label="Trash" :to="trashedCollectionList" />
           <BreadcrumbItem label="List" />
         </Breadcrumb>
 
         <div class="w-auto flex items-center justify-end">
           <InertiaLinkButton
-            :to="campaignBannerList"
+            :to="collectionList"
             :data="{
               page: 1,
               per_page: 5,
@@ -71,19 +70,17 @@ const {
 
       <!-- Message -->
       <div
-        v-if="can('campaign-banners.force.delete') && trashedCampaignBanners.data.length !== 0"
+        v-if="can('collections.force.delete') && trashedCollections.data.length !== 0"
         class="text-left text-sm font-bold mb-5 text-warning-600"
       >
         {{
           __(':label in the trash will be automatically deleted after 60 days', {
-            label: __('Campaign Banners')
+            label: __('Collections')
           })
         }}
 
         <EmptyTrashButton
-          @click="
-            permanentDeleteAllAction('Campaign Banner', 'admin.campaign-banners.force-delete.all')
-          "
+          @click="permanentDeleteAllAction('Collection', 'admin.collections.force-delete.all')"
         />
       </div>
 
@@ -93,30 +90,30 @@ const {
           class="my-3 flex flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between overflow-auto p-2"
         >
           <DashboardTableDataSearchBox
-            :placeholder="__('Search by :label', { label: __('Url') })"
-            :to="trashedCampaignBannerList"
+            :placeholder="__('Search by :label', { label: __('Collection Name') })"
+            :to="trashedCollectionList"
           />
 
           <div class="flex items-center justify-end w-full md:space-x-5">
-            <DashboardTableDataPerPageSelectBox :to="trashedCampaignBannerList" />
+            <DashboardTableDataPerPageSelectBox :to="trashedCollectionList" />
 
-            <DashboardTableFilter :to="trashedCampaignBannerList" :filterBy="['deleted']" />
+            <DashboardTableFilter :to="trashedCollectionList" :filterBy="['deleted']" />
           </div>
         </div>
 
         <!-- Filtered By -->
-        <FilteredBy :to="trashedCampaignBannerList" />
+        <FilteredBy :to="trashedCollectionList" />
 
         <TableContainer>
-          <ActionTable :items="trashedCampaignBanners.data">
+          <ActionTable :items="trashedCollections.data">
             <!-- Table Actions -->
             <template #bulk-actions="{ selectedItems }">
               <BulkActionButton
-                v-show="can('campaign-banners.restore')"
+                v-show="can('collections.restore')"
                 @click="
                   restoreSelectedAction(
-                    'Campaign Banners',
-                    'admin.campaign-banners.restore.selected',
+                    'Collections',
+                    'admin.collections.restore.selected',
                     selectedItems
                   )
                 "
@@ -126,11 +123,11 @@ const {
               </BulkActionButton>
 
               <BulkActionButton
-                v-show="can('campaign-banners.force.delete')"
+                v-show="can('collections.force.delete')"
                 @click="
                   permanentDeleteSelectedAction(
-                    'Campaign Banners',
-                    'admin.campaign-banners.force-delete.selected',
+                    'Collections',
+                    'admin.collections.force-delete.selected',
                     selectedItems
                   )
                 "
@@ -143,11 +140,11 @@ const {
 
             <!-- Table Header -->
             <template #table-header>
-              <SortableTableHeaderCell label="Id" :to="trashedCampaignBannerList" sort="id" />
+              <SortableTableHeaderCell label="Id" :to="trashedCollectionList" sort="id" />
 
-              <TableHeaderCell label="Image" />
+              <SortableTableHeaderCell label="Name" :to="trashedCollectionList" sort="name" />
 
-              <SortableTableHeaderCell label="Url" :to="trashedCampaignBannerList" sort="url" />
+              <TableHeaderCell label="Description" />
 
               <TableHeaderCell label="Actions" />
             </template>
@@ -158,19 +155,23 @@ const {
                 {{ item?.id }}
               </TableDataCell>
 
-              <ImageCell :src="item?.image" />
+              <TableDataCell>
+                <div class="min-w-[200px]">
+                  {{ item?.name }}
+                </div>
+              </TableDataCell>
 
               <TableDataCell>
-                {{ item?.url }}
+                <div class="min-w-[500px]">
+                  {{ item?.description }}
+                </div>
               </TableDataCell>
 
               <TableActionCell>
                 <NormalButton
-                  v-show="can('campaign-banners.restore')"
+                  v-show="can('collections.restore')"
                   @click="
-                    restoreAction('Campaign Banner', 'admin.campaign-banners.restore', {
-                      id: item?.id
-                    })
+                    restoreAction('Collection', 'admin.collections.restore', { id: item?.id })
                   "
                 >
                   <i class="fa-solid fa-recycle"></i>
@@ -178,15 +179,11 @@ const {
                 </NormalButton>
 
                 <NormalButton
-                  v-show="can('campaign-banners.force.delete')"
+                  v-show="can('collections.force.delete')"
                   @click="
-                    permanentDeleteAction(
-                      'Campaign Banner',
-                      'admin.campaign-banners.force-delete',
-                      {
-                        id: item?.id
-                      }
-                    )
+                    permanentDeleteAction('Collection', 'admin.collections.force-delete', {
+                      id: item?.id
+                    })
                   "
                   class="bg-red-600 text-white ring-2 ring-red-300"
                 >
@@ -198,9 +195,9 @@ const {
           </ActionTable>
         </TableContainer>
 
-        <Pagination :data="trashedCampaignBanners" />
+        <Pagination :data="trashedCollections" />
 
-        <NoTableData v-show="!trashedCampaignBanners.data.length" />
+        <NoTableData v-show="!trashedCollections.data.length" />
       </div>
       <!-- Table End -->
     </div>

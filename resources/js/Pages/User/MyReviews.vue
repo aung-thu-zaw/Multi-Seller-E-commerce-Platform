@@ -1,7 +1,6 @@
 <script setup>
 import UserDashboardLayout from '@/Layouts/UserDashboardLayout.vue'
-import NormalButton from '@/Components/Buttons/NormalButton.vue'
-import { Head, Link } from '@inertiajs/vue3'
+import { Head } from '@inertiajs/vue3'
 </script>
 
 <template>

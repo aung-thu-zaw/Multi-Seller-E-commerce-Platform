@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\Dashboard\BlogManagement\BlogCommentController;
 use App\Http\Controllers\Admin\Dashboard\BlogManagement\BlogContentController;
 use App\Http\Controllers\Admin\Dashboard\BrandController;
 use App\Http\Controllers\Admin\Dashboard\CategoryController;
+use App\Http\Controllers\Admin\Dashboard\CollectionController;
 use App\Http\Controllers\Admin\Dashboard\CouponController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqCategoryController;
@@ -60,6 +61,20 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
         Route::controller(BrandController::class)
             ->prefix('/brands/trash')
             ->name('brands.')
+            ->group(function () {
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+
+        Route::resource('collections', CollectionController::class)->except(['show']);
+        Route::controller(CollectionController::class)
+            ->prefix('/collections/trash')
+            ->name('collections.')
             ->group(function () {
                 Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
                 Route::get('/', 'trashed')->name('trashed');

@@ -29,7 +29,6 @@ class UpdateCollectionRequest extends FormRequest
         $rules = [
             'name' => ['required', 'string', 'max:255', Rule::unique('collections', 'name')->ignore($collection)],
             'description' => ['required', 'string'],
-            'products' => ['required', 'array'],
             'captcha_token' => [new RecaptchaRule()],
         ];
 

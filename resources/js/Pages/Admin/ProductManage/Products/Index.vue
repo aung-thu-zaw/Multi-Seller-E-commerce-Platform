@@ -205,7 +205,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
                   <OptionDropdown v-show="can('products.create') || can('products.edit')">
                     <Link
-                    as="button"
+                      as="button"
                       class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 w-full"
                       :href="route('admin.product.images', item?.slug)"
                     >
@@ -213,7 +213,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
                       {{ __('Product Images') }}
                     </Link>
                     <Link
-                    as="button"
+                      as="button"
                       class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 w-full"
                       :href="route('admin.product-variants.index', item?.slug)"
                     >

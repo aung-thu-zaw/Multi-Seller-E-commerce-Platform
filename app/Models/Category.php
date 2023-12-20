@@ -48,7 +48,7 @@ class Category extends Model
     protected function image(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/categories/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/categories/$value"),
         );
     }
 
@@ -70,12 +70,14 @@ class Category extends Model
 
     protected static function booted(): void
     {
+        parent::booted();
+
         static::addGlobalScope(new FilterByScope());
     }
 
     public static function deleteImage(?string $categoryImage): void
     {
-        if (! empty($categoryImage) && file_exists(storage_path('app/public/categories/'.pathinfo($categoryImage, PATHINFO_BASENAME)))) {
+        if (!empty($categoryImage) && file_exists(storage_path('app/public/categories/'.pathinfo($categoryImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/categories/'.pathinfo($categoryImage, PATHINFO_BASENAME)));
         }
     }

@@ -1,6 +1,4 @@
 <script setup>
-import { Link } from '@inertiajs/vue3'
-
 defineProps({ product: Object })
 </script>
 
@@ -33,29 +31,6 @@ defineProps({ product: Object })
       aria-labelledby="hs-dropdown-custom-icon-trigger"
     >
       <slot />
-      <!-- <Link
-        class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-        :href="route('seller.product.images', product?.slug)"
-      >
-        <i class="fa-solid fa-images"></i>
-        {{ __('Product Images') }}
-      </Link>
-
-      <Link
-        class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-        :href="route('seller.product.attribute-and-options', product?.slug)"
-      >
-        <i class="fa-solid fa-list"></i>
-        {{ __('Attributes & Options') }}
-      </Link>
-
-      <Link
-        class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-        :href="route('seller.product-variants.index', product?.slug)"
-      >
-        <i class="fa-solid fa-boxes-stacked"></i>
-        {{ __('Product Variants') }}
-      </Link> -->
     </div>
   </div>
 </template>

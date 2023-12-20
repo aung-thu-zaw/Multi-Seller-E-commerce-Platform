@@ -19,6 +19,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  multiple: {
+    type: Boolean,
+    default: false
+  },
   required: {
     type: Boolean,
     default: false
@@ -65,6 +69,7 @@ const optionLabel = (option) => {
     </div>
 
     <select
+      :multiple="multiple"
       :name="name"
       :id="name"
       class="block w-full p-4 font-semibold text-sm text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 transition-all"

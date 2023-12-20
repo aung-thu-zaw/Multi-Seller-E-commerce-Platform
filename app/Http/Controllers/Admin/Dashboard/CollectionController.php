@@ -10,6 +10,7 @@ use App\Http\Requests\Dashboard\Admin\Collections\StoreCollectionRequest;
 use App\Http\Requests\Dashboard\Admin\Collections\UpdateCollectionRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\Collection;
+use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -47,7 +48,7 @@ class CollectionController extends Controller
 
     public function store(StoreCollectionRequest $request): RedirectResponse
     {
-        (new CreateCollectionAction())->handle($request->validated());
+        Collection::create(["name" => $request->name,"description" => $request->description]);
 
         return to_route('admin.collections.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }
@@ -59,7 +60,7 @@ class CollectionController extends Controller
 
     public function update(UpdateCollectionRequest $request, Collection $collection): RedirectResponse
     {
-        ( new UpdateCollectionAction())->handle($request->validated(), $collection);
+        $collection->update(["name" => $request->name,"description" => $request->description]);
 
         return to_route('admin.collections.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }

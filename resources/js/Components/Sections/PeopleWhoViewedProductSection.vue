@@ -1,5 +1,5 @@
 <script setup>
-import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
+// import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
 </script>
 
 <template>
