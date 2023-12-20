@@ -56,7 +56,7 @@ defineProps({
         </div>
 
         <div v-else class="py-5">
-          <p class="text-center font-bold text-gray-500 text-md">
+          <p class="text-center font-bold text-gray-700 text-md">
             <i class="fa-solid fa-comment-slash"></i>
             {{ __('Comments Not Yet') }}
           </p>

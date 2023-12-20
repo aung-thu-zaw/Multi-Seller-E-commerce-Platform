@@ -10,12 +10,12 @@ import { Head, Link } from '@inertiajs/vue3'
 
 defineProps({
   product: Object,
+  productQuestions: Object,
   productReviewsForAverageProgressBar: Object,
   productReviews: Object,
   productsFromTheSameStore: Object
 })
 </script>
-
 
 <template>
   <Head :title="product?.name" />
@@ -106,8 +106,8 @@ defineProps({
               <Description :product="product" />
             </div>
 
-            <div v-show="$page.props.ziggy.query?.tab === 'question-and-answer'">
-              <QuestionAndAnswers :product="product" />
+            <div v-show="$page.props.ziggy.query?.tab === 'questions-and-answers'">
+              <QuestionAndAnswers :product="product" :productQuestions="productQuestions" />
             </div>
 
             <div v-show="$page.props.ziggy.query?.tab === 'delivery-and-services'">

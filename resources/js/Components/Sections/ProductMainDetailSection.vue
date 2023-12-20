@@ -82,40 +82,6 @@ const decrement = () => (quantity.value <= 1 ? 1 : quantity.value--)
             <div class="">
               <h2 class="font-semibold text-2xl">{{ product?.name }}</h2>
             </div>
-
-            <!-- <div class="flex items-center space-x-2"> -->
-            <!-- <button
-                    class="rounded-full w-8 h-8 bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-800 flex items-center text-xs justify-center border"
-                  >
-                    <i class="fa-solid fa-heart"></i>
-                  </button> -->
-            <!-- Popover -->
-            <!-- <div class="hs-tooltip inline-block [--trigger:click] [--placement:bottom]">
-                    <button
-                      type="button"
-                      class="hs-tooltip-toggle flex justify-center items-center h-10 w-10 text-sm font-semibold"
-                    >
-                      <span
-                        class="rounded-full w-8 h-8 bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-800 flex items-center justify-center border"
-                      >
-                        <i class="fa-solid fa-share-nodes"></i>
-                      </span>
-                      <div
-                        class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-3 px-4 bg-white border text-sm text-gray-600 rounded-lg shadow-md"
-                        role="tooltip"
-                      >
-                        <ul class="space-y-3">
-                          <li>Facebook</li>
-                          <li>Twitter</li>
-                          <li>LinkedIn</li>
-                          <li>Instagram</li>
-                          <li>Youtube</li>
-                        </ul>
-                      </div>
-                    </button>
-                  </div> -->
-            <!-- End Popover -->
-            <!-- </div> -->
           </div>
 
           <!-- Rating -->
