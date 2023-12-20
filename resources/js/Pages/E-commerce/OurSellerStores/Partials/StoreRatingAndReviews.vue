@@ -1,7 +1,7 @@
 <script setup>
 import StoreRatingWithProgressBar from '@/Components/Ratings/StoreRatingWithProgressBar.vue'
-import ReviewSortDropdown from '@/Components/Dropdowns/Reviews/ReviewSortDropdown.vue'
-import ReviewFilterDropdown from '@/Components/Dropdowns/Reviews/ReviewFilterDropdown.vue'
+import ReviewSortDropdown from '@/Components/Dropdowns/Reviews/Stores/ReviewSortDropdown.vue'
+import ReviewFilterDropdown from '@/Components/Dropdowns/Reviews/Stores/ReviewFilterDropdown.vue'
 import ReviewCard from '@/Components/Cards/Reviews/ReviewCard.vue'
 import SellerResponseCard from '@/Components/Cards/Reviews/SellerResponseCard.vue'
 import Pagination from '@/Components/Paginations/Pagination.vue'
@@ -24,6 +24,7 @@ defineProps({ store: Object, storeReviews: Object, storeReviewsForAverageProgres
         <h3 class="font-bold text-md text-gray-800">
           Store Ratings and Reviews ({{ storeReviews.total }})
         </h3>
+
         <div class="space-x-5">
           <ReviewSortDropdown :store="store" />
 
@@ -54,8 +55,8 @@ defineProps({ store: Object, storeReviews: Object, storeReviewsForAverageProgres
           <Pagination :links="storeReviews.links" />
         </div>
       </div>
-      <div v-else class="py-20">
-        <p class="text-center font-bold text-md text-orange-600">
+      <div v-else class="py-20 flex items-center border w-full">
+        <p class="text-center font-bold text-md text-gray-600 w-full">
           <i class="fa-solid fa-file-circle-xmark"></i>
           {{
             $page.props.ziggy.query.rating

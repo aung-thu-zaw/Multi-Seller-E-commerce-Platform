@@ -1,6 +1,6 @@
 <script setup>
-import ReviewSortDropdown from '@/Components/Dropdowns/Reviews/ReviewSortDropdown.vue'
-import ReviewFilterDropdown from '@/Components/Dropdowns/Reviews/ReviewFilterDropdown.vue'
+import ReviewSortDropdown from '@/Components/Dropdowns/Reviews/Stores/ReviewSortDropdown.vue'
+import ReviewFilterDropdown from '@/Components/Dropdowns/Reviews/Stores/ReviewFilterDropdown.vue'
 import StoreProductReviewCard from '@/Components/Cards/Reviews/StoreProductReviewCard.vue'
 import Pagination from '@/Components/Paginations/Pagination.vue'
 

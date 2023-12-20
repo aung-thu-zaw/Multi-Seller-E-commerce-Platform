@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ecommerce\Products;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductReview;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
@@ -18,6 +19,20 @@ class ProductDetailController extends Controller
             $query->where('status', 'approved');
         }], 'rating');
 
+        $productReviews = ProductReview::with([
+            "reviewer:id,name,avatar",
+            "productReviewResponse.store:id,store_name,avatar",
+            "productReviewImages"
+         ])
+         ->filterByRating(request("rating"))
+         ->where("product_id", $product->id)
+         ->where('status', 'approved')
+         ->sortBy(request('review_sort'))
+         ->paginate(5)
+         ->withQueryString();
+
+        $productReviewsForAverageProgressBar = ProductReview::select("id", "rating")->where("product_id", $product->id)->where('status', 'approved')->get();
+
         $productsFromTheSameStore = Product::select('id', 'store_id', 'image', 'name', 'slug', 'price', 'offer_price')
         ->with(['productImages',"store:id,store_type"])
         ->withApprovedReviewCount()
@@ -30,6 +45,6 @@ class ProductDetailController extends Controller
         ->get();
 
 
-        return inertia("E-commerce/Products/Details", compact("product", "productsFromTheSameStore"));
+        return inertia("E-commerce/Products/Show", compact("product", "productsFromTheSameStore", "productReviewsForAverageProgressBar", "productReviews"));
     }
 }
