@@ -14,7 +14,7 @@ class UpdateSliderBannerRequest extends FormRequest
      */
     public function authorize(): bool
     {
-    return Auth::user()->hasPermissionTo('slider-banners.edit');
+        return Auth::user()->hasPermissionTo('slider-banners.edit');
     }
 
     /**
@@ -24,10 +24,10 @@ class UpdateSliderBannerRequest extends FormRequest
      */
     public function rules(): array
     {
-     $rules = [
-            "url" => ["required","url"],
-            "status" => ["required","string",Rule::in(["show","hide"])],
-            "captcha_token"  => [new RecaptchaRule()],
+        $rules = [
+            'url' => ['required', 'url'],
+            'status' => ['required', 'string', Rule::in(['show', 'hide'])],
+            'captcha_token' => [new RecaptchaRule()],
         ];
 
         if ($this->hasFile('image')) {

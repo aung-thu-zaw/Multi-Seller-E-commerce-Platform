@@ -10,7 +10,7 @@ class SkuGeneratorService
 
         $uniqueIdentifier = uniqid();
 
-        $sku = $categoryId . '-' . $productNamePrefix . '-' . $uniqueIdentifier;
+        $sku = $categoryId.'-'.$productNamePrefix.'-'.$uniqueIdentifier;
 
         return $sku;
     }
@@ -21,7 +21,7 @@ class SkuGeneratorService
 
         $uniqueIdentifier = uniqid();
 
-        $sku = $productNamePrefix . '-' . $variantAttribute . '-' . $uniqueIdentifier;
+        $sku = $productNamePrefix.'-'.$variantAttribute.'-'.$uniqueIdentifier;
 
         return $sku;
     }

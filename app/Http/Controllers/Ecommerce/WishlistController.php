@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Ecommerce\WishlistRequest;
 use App\Models\Wishlist;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class WishlistController extends Controller
 {
@@ -17,14 +16,14 @@ class WishlistController extends Controller
             ->where('store_id', $request->store_id)
             ->first();
 
-        if (!$wishlist) {
+        if (! $wishlist) {
             $wishlist = Wishlist::create([
                 'user_id' => auth()->id(),
                 'product_id' => $request->product_id,
                 'store_id' => $request->store_id,
             ]);
 
-            return back()->with("success", "Item is moved to wishlist, you can re-add it to cart from wishlist.");
+            return back()->with('success', 'Item is moved to wishlist, you can re-add it to cart from wishlist.');
         } else {
 
             $wishlist->delete();
@@ -32,5 +31,4 @@ class WishlistController extends Controller
             return back()->with('success', 'Item has been removed from your wishlist');
         }
     }
-
 }

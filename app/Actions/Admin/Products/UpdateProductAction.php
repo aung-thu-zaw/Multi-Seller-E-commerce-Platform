@@ -21,7 +21,7 @@ class UpdateProductAction
             return isset($data[$key]) && $data[$key] !== $value;
         }, ARRAY_FILTER_USE_BOTH);
 
-        $image = isset($data['image']) && !is_string($data['image']) ? $this->updateImage($data['image'], $product->image, 'products') : $product->image;
+        $image = isset($data['image']) && ! is_string($data['image']) ? $this->updateImage($data['image'], $product->image, 'products') : $product->image;
 
         $product->update([
             'brand_id' => $data['brand_id'],
@@ -32,7 +32,7 @@ class UpdateProductAction
             'price' => $data['price'],
             'offer_price' => $data['offer_price'],
             'offer_price_start_date' => $data['offer_price_start_date'],
-            'offer_price_end_date' =>  $data['offer_price_end_date'],
+            'offer_price_end_date' => $data['offer_price_end_date'],
             'description' => $data['description'],
             'warranty_type' => $data['warranty_type'],
             'warranty_policy' => $data['warranty_policy'],
@@ -40,7 +40,7 @@ class UpdateProductAction
             'return_day' => $data['return_day'],
             'return_policy' => $data['return_policy'],
             'status' => $data['status'],
-            'sku' => !empty($fieldsChanged) ? SkuGeneratorService::generateProductSku($data['name'], $data['category_id']) : $product->sku,
+            'sku' => ! empty($fieldsChanged) ? SkuGeneratorService::generateProductSku($data['name'], $data['category_id']) : $product->sku,
             'image' => $image,
         ]);
     }

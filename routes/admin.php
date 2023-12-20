@@ -70,22 +70,19 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-
-
         Route::resource('products', ProductController::class)->except(['show']);
         Route::controller(ProductController::class)
-        ->prefix('/products/trash')
-        ->name('products.')
-        ->group(function () {
-            Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
-            Route::get('/', 'trashed')->name('trashed');
-            Route::post('/{id}/restore', 'restore')->name('restore');
-            Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
-            Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
-            Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
-            Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
-        });
-
+            ->prefix('/products/trash')
+            ->name('products.')
+            ->group(function () {
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
 
         Route::controller(ProductImageController::class)
             ->prefix('/products')
@@ -95,7 +92,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
                 Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
             });
-
 
         Route::resource('products/{product}/product-variants', ProductVariantController::class);
 
@@ -285,50 +281,49 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-
         Route::resource('claims-as-a-seller', ClaimsAsASellerController::class)
-        ->only(['index','destroy'])
-        ->parameters([
-            'claims-as-a-seller' => 'seller_request',
-        ]);
+            ->only(['index', 'destroy'])
+            ->parameters([
+                'claims-as-a-seller' => 'seller_request',
+            ]);
 
-        Route::get("claims-as-a-seller/{seller_request}/detail", [ClaimsAsASellerController::class,"show"])->name("claims-as-a-seller.show");
+        Route::get('claims-as-a-seller/{seller_request}/detail', [ClaimsAsASellerController::class, 'show'])->name('claims-as-a-seller.show');
         Route::patch('claims-as-a-seller/{seller_request}/change-status', [ClaimsAsASellerController::class, 'changeStatus'])->name('claims-as-a-seller.change-status');
 
         Route::controller(ClaimsAsASellerController::class)
-        ->prefix('/claims-as-a-seller/trash')
-        ->name('claims-as-a-seller.')
-        ->group(function () {
-            Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
-            Route::get('/', 'trashed')->name('trashed');
-            Route::post('/{id}/restore', 'restore')->name('restore');
-            Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
-            Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
-            Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
-            Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
-        });
+            ->prefix('/claims-as-a-seller/trash')
+            ->name('claims-as-a-seller.')
+            ->group(function () {
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
 
         Route::resource('store-manage', StoreManageController::class)
-        ->only(['index','destroy'])
-        ->parameters([
-            'store-manage' => 'store',
-        ]);
+            ->only(['index', 'destroy'])
+            ->parameters([
+                'store-manage' => 'store',
+            ]);
 
-        Route::get("store-manage/{store}/detail", [StoreManageController::class,"show"])->name("store-manage.show");
+        Route::get('store-manage/{store}/detail', [StoreManageController::class, 'show'])->name('store-manage.show');
         Route::patch('store-manage/{store}/change-status', [StoreManageController::class, 'changeStatus'])->name('store-manage.change-status');
 
         Route::controller(StoreManageController::class)
-        ->prefix('/store-manage/trash')
-        ->name('store-manage.')
-        ->group(function () {
-            Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
-            Route::get('/', 'trashed')->name('trashed');
-            Route::post('/{id}/restore', 'restore')->name('restore');
-            Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
-            Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
-            Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
-            Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
-        });
+            ->prefix('/store-manage/trash')
+            ->name('store-manage.')
+            ->group(function () {
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
 
         Route::resource('admin-manage', AdminManageController::class)
             ->except(['show'])

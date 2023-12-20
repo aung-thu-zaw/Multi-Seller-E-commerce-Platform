@@ -25,9 +25,9 @@ class UpdateProductBannerRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            "url" => ["required","url"],
-            "status" => ["required","string",Rule::in(["show","hide"])],
-            "captcha_token"  => [new RecaptchaRule()],
+            'url' => ['required', 'url'],
+            'status' => ['required', 'string', Rule::in(['show', 'hide'])],
+            'captcha_token' => [new RecaptchaRule()],
         ];
 
         if ($this->hasFile('image')) {

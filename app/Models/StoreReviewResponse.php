@@ -12,12 +12,12 @@ class StoreReviewResponse extends Model
     use HasFactory;
 
     /**
-    * @return \Illuminate\Database\Eloquent\Casts\Attribute<StoreReviewResponse, never>
-    */
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<StoreReviewResponse, never>
+     */
     protected function createdAt(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => date("j F, Y", strtotime($value)),
+            get: fn ($value) => date('j F, Y', strtotime($value)),
         );
     }
 

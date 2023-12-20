@@ -22,8 +22,8 @@ class UpdateVariantTypeAndValueRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "variant_type" => ["required","string"],
-            "variant_value" => ["required","array"]
+            'variant_type' => ['required', 'string'],
+            'variant_value' => ['required', 'array'],
         ];
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
@@ -17,6 +16,6 @@ class FollowedStoreController extends Controller
             }], 'rating');
         }])->get();
 
-        return inertia('User/FollowedStores', compact("followedStores"));
+        return inertia('User/FollowedStores', compact('followedStores'));
     }
 }

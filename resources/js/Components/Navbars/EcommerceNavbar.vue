@@ -301,6 +301,22 @@ import { Link } from '@inertiajs/vue3'
           <NotificationDropdownForUser />
 
           <UserDropdown />
+
+          <Link
+            as="button"
+            href="#"
+            class="relative text-white px-4 py-2.5 bg-orange-600 rounded-[4px] duration-150 hover:bg-orange-700"
+          >
+            <span class="text-sm font-semibold">
+              <i class="fa-solid fa-shopping-cart"></i>
+              {{ __('My Cart') }}
+            </span>
+            <span
+              class="bg-red-500 text-[.7rem] absolute -top-2 -right-2 w-5 h-5 p-2 rounded-full flex items-center justify-center border border-white"
+            >
+              5
+            </span>
+          </Link>
         </div>
 
         <div v-else class="flex items-center space-x-3">

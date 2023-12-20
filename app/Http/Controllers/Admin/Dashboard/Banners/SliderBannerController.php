@@ -50,9 +50,9 @@ class SliderBannerController extends Controller
         $image = isset($request->image) ? $this->createImage($request->image, 'slider-banners') : null;
 
         SliderBanner::create([
-            "url" => $request->url,
-            "status" => $request->status,
-            "image" => $image,
+            'url' => $request->url,
+            'status' => $request->status,
+            'image' => $image,
         ]);
 
         return to_route('admin.slider-banners.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
@@ -65,12 +65,12 @@ class SliderBannerController extends Controller
 
     public function update(UpdateSliderBannerRequest $request, SliderBanner $sliderBanner): RedirectResponse
     {
-        $image = isset($request->image) && !is_string($request->image) ? $this->updateImage($request->image, $sliderBanner->image, 'slider-banners') : $sliderBanner->image;
+        $image = isset($request->image) && ! is_string($request->image) ? $this->updateImage($request->image, $sliderBanner->image, 'slider-banners') : $sliderBanner->image;
 
         $sliderBanner->update([
-            "url" => $request->url,
-            "status" => $request->status,
-            "image" => $image,
+            'url' => $request->url,
+            'status' => $request->status,
+            'image' => $image,
         ]);
 
         return to_route('admin.slider-banners.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');

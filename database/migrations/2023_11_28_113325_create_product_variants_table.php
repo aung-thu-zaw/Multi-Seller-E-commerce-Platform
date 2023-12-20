@@ -17,8 +17,8 @@ return new class() extends Migration
             $table->string('sku')->unique();
             $table->decimal('price', 8, 2);
             $table->decimal('offer_price', 8, 2)->nullable();
-            $table->date("offer_price_start_date")->nullable();
-            $table->date("offer_price_end_date")->nullable();
+            $table->date('offer_price_start_date')->nullable();
+            $table->date('offer_price_end_date')->nullable();
             $table->integer('qty')->default(0);
             $table->timestamps();
         });

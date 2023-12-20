@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\SellerInformation;
 use App\Models\SellerRequest;
 use App\Models\Store;
 use App\Models\User;

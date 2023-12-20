@@ -13,8 +13,6 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Store;
-use App\Models\StoreProductCategory;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -55,7 +53,7 @@ class ProductController extends Controller
             ->where('status', 'active')
             ->get();
 
-        $stores = Store::select("id", "store_name")->where("status", "active")->get();
+        $stores = Store::select('id', 'store_name')->where('status', 'active')->get();
 
         return inertia('Admin/ProductManage/Products/Create', compact('categories', 'brands', 'stores'));
     }
@@ -77,7 +75,7 @@ class ProductController extends Controller
             ->where('status', 'active')
             ->get();
 
-        $stores = Store::select("id", "store_name")->where("status", "active")->get();
+        $stores = Store::select('id', 'store_name')->where('status', 'active')->get();
 
         return inertia('Admin/ProductManage/Products/Edit', compact('product', 'categories', 'brands', 'stores'));
     }
@@ -168,5 +166,4 @@ class ProductController extends Controller
 
         return to_route('admin.products.trashed', $this->getQueryStringParams($request))->with('success', 'All :label have been permanently deleted.');
     }
-
 }

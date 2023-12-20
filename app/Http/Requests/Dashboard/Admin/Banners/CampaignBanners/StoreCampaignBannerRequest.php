@@ -25,10 +25,10 @@ class StoreCampaignBannerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "url" => ["required","url"],
-            "status" => ["required","string",Rule::in(["show","hide"])],
+            'url' => ['required', 'url'],
+            'status' => ['required', 'string', Rule::in(['show', 'hide'])],
             'image' => ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'],
-            "captcha_token"  => [new RecaptchaRule()],
+            'captcha_token' => [new RecaptchaRule()],
         ];
     }
 }

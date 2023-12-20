@@ -3,7 +3,6 @@
 namespace App\Console\Commands\AutoDeleteTrashed;
 
 use App\Actions\Admin\Banners\SliderBanners\PermanentlyDeleteTrashedSliderBannersAction;
-use App\Actions\Admin\Brands\PermanentlyDeleteTrashedBrandsAction;
 use App\Models\SliderBanner;
 use Carbon\Carbon;
 use Illuminate\Console\Command;

@@ -23,8 +23,8 @@ class ProductQuestion extends Model
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,ProductQuestion>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,ProductQuestion>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -39,16 +39,16 @@ class ProductQuestion extends Model
     // }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Product,ProductQuestion>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Product,ProductQuestion>
+     */
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\HasOne<ProductQuestionAnswer>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne<ProductQuestionAnswer>
+     */
     public function productQuestionAnswer(): HasOne
     {
         return $this->hasOne(ProductQuestionAnswer::class);

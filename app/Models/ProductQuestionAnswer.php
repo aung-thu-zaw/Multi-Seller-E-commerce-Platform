@@ -22,16 +22,16 @@ class ProductQuestionAnswer extends Model
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Store,ProductQuestionAnswer>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Store,ProductQuestionAnswer>
+     */
     public function store(): BelongsTo
     {
         return $this->belongsTo(Store::class);
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<ProductQuestion,ProductQuestionAnswer>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<ProductQuestion,ProductQuestionAnswer>
+     */
     public function productQuestion(): BelongsTo
     {
         return $this->belongsTo(ProductQuestion::class);

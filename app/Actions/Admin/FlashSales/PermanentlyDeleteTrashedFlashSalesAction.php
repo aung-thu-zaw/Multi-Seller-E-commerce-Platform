@@ -8,9 +8,8 @@ use Illuminate\Support\Collection;
 class PermanentlyDeleteTrashedFlashSalesAction
 {
     /**
-    * @param Collection<int,FlashSale> $flashSales
-    */
-
+     * @param  Collection<int,FlashSale>  $flashSales
+     */
     public function handle(Collection $flashSales): void
     {
         $flashSales->each(function ($flashSale) {

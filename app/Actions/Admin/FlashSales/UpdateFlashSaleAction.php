@@ -2,7 +2,6 @@
 
 namespace App\Actions\Admin\Brands;
 
-use App\Http\Traits\ImageUpload;
 use App\Models\FlashSale;
 
 class UpdateFlashSaleAction
@@ -18,7 +17,7 @@ class UpdateFlashSaleAction
             'end_time' => $data['end_time'],
         ]);
 
-        foreach($data['products'] as $product) {
+        foreach ($data['products'] as $product) {
 
             $product->flashSales()->attach($flashSale->id);
         }

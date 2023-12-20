@@ -97,7 +97,7 @@ const toggleCollapseShow = (classes) => {
               <div
                 class="text-xs py-3 font-bold block"
                 :class="{
-                  'text-blue-600 hover:text-blue-500': $page.url === '/admin/dashboard',
+                  'text-orange-600 hover:text-orange-500': $page.url === '/admin/dashboard',
                   'text-slate-600 hover:text-slate-500': $page.url !== '/admin/dashboard'
                 }"
               >

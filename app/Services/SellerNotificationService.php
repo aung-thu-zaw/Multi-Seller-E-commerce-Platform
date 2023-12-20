@@ -4,9 +4,7 @@ namespace App\Services;
 
 use App\Mail\Admin\SellerRequestApprovedEmail;
 use App\Mail\Admin\SellerRequestRejectedEmail;
-use App\Models\SellerInformation;
 use App\Models\SellerRequest;
-use App\Models\Store;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 

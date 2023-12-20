@@ -18,7 +18,7 @@ class StoreReview extends Model
      */
     public function reviewer(): BelongsTo
     {
-        return $this->belongsTo(User::class, "user_id");
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
@@ -29,17 +29,15 @@ class StoreReview extends Model
         return $this->belongsTo(Store::class);
     }
 
-
     /**
-    * @return \Illuminate\Database\Eloquent\Casts\Attribute<StoreReview, never>
-    */
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<StoreReview, never>
+     */
     protected function createdAt(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => date("j F, Y", strtotime($value)),
+            get: fn ($value) => date('j F, Y', strtotime($value)),
         );
     }
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne<StoreReviewResponse>
@@ -50,11 +48,9 @@ class StoreReview extends Model
     }
 
     /**
-    * @param string|null $rating
-    * @param Builder<StoreReview> $query
-    * @return Builder<StoreReview>
-    */
-
+     * @param  Builder<StoreReview>  $query
+     * @return Builder<StoreReview>
+     */
     public function scopeFilterByRating(Builder $query, ?string $rating)
     {
         if ($rating !== 'all') {
@@ -65,10 +61,9 @@ class StoreReview extends Model
     }
 
     /**
-    * @param string|null $sortType
-    * @param Builder<StoreReview> $query
-    * @return Builder<StoreReview>
-    */
+     * @param  Builder<StoreReview>  $query
+     * @return Builder<StoreReview>
+     */
     public function scopeSortBy(Builder $query, ?string $sortType)
     {
         switch ($sortType) {

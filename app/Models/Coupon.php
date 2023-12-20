@@ -16,15 +16,14 @@ class Coupon extends Model
     use SoftDeletes;
 
     /**
-    *     @return array<string>
-    */
+     *     @return array<string>
+     */
     public function toSearchableArray(): array
     {
         return [
             'code' => $this->code,
         ];
     }
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<User>
@@ -33,7 +32,6 @@ class Coupon extends Model
     {
         return $this->belongsToMany(User::class, 'coupon_user')->withTimestamps();
     }
-
 
     protected static function booted(): void
     {

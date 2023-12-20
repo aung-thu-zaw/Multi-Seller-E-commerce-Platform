@@ -5,7 +5,6 @@ namespace App\Mail\Admin;
 use App\Models\SellerRequest;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -19,7 +18,7 @@ class NewSellerRequestEmail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(protected User $user,protected SellerRequest $sellerRequest)
+    public function __construct(protected User $user, protected SellerRequest $sellerRequest)
     {
         //
     }

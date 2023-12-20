@@ -27,16 +27,16 @@ class ProductReview extends Model
      */
     public function reviewer(): BelongsTo
     {
-        return $this->belongsTo(User::class, "user_id");
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Casts\Attribute<ProductReview, never>
-    */
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<ProductReview, never>
+     */
     protected function createdAt(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => date("j F, Y", strtotime($value)),
+            get: fn ($value) => date('j F, Y', strtotime($value)),
         );
     }
 
@@ -72,13 +72,10 @@ class ProductReview extends Model
         return $this->hasMany(ProductReviewImage::class);
     }
 
-
     /**
-    * @param string|null $rating
-    * @param Builder<ProductReview> $query
-    * @return Builder<ProductReview>
-    */
-
+     * @param  Builder<ProductReview>  $query
+     * @return Builder<ProductReview>
+     */
     public function scopeFilterByRating(Builder $query, ?string $rating)
     {
         if ($rating !== 'all') {
@@ -89,10 +86,9 @@ class ProductReview extends Model
     }
 
     /**
-    * @param string|null $sortType
-    * @param Builder<ProductReview> $query
-    * @return Builder<ProductReview>
-    */
+     * @param  Builder<ProductReview>  $query
+     * @return Builder<ProductReview>
+     */
     public function scopeSortBy(Builder $query, ?string $sortType)
     {
         switch ($sortType) {

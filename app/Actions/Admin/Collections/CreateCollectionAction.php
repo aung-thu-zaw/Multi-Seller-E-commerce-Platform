@@ -2,7 +2,6 @@
 
 namespace App\Actions\Admin\Collections;
 
-use App\Http\Traits\ImageUpload;
 use App\Models\Collection;
 
 class CreateCollectionAction
@@ -17,8 +16,7 @@ class CreateCollectionAction
             'description' => $data['description'],
         ]);
 
-
-        foreach($data['products'] as $product) {
+        foreach ($data['products'] as $product) {
 
             $product->collections()->attach($collection->id);
         }

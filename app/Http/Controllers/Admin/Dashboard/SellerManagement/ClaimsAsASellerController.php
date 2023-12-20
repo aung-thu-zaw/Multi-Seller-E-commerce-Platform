@@ -5,16 +5,11 @@ namespace App\Http\Controllers\Admin\Dashboard\SellerManagement;
 use App\Actions\Admin\SellerManagement\SellerRequests\PermanentlyDeleteTrashedSellerRequestsAction;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\HandlesQueryStringParameters;
-use App\Mail\Admin\SellerRequestApprovedEmail;
-use App\Mail\Admin\SellerRequestRejectedEmail;
-use App\Models\SellerInformation;
 use App\Models\SellerRequest;
-use App\Models\Store;
 use App\Models\User;
 use App\Services\SellerVerificationService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
@@ -56,7 +51,7 @@ class ClaimsAsASellerController extends Controller
         if ($request->status === 'approved') {
 
             (new SellerVerificationService())->handleApproval($user, $sellerRequest);
-            
+
         } elseif ($request->status === 'rejected') {
 
             (new SellerVerificationService())->handleRejection($user, $request->reason_for_rejection);

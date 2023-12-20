@@ -20,7 +20,7 @@ class StoreFactory extends Factory
             'seller_id' => fake()->randomNumber(2, 20),
             'avatar' => fake()->imageUrl(),
             'store_name' => fake()->unique()->sentence(),
-            'store_type' => fake()->randomElement(["personal","business"]),
+            'store_type' => fake()->randomElement(['personal', 'business']),
             'contact_email' => fake()->unique()->safeEmail(),
             'contact_phone' => fake()->unique()->phoneNumber(),
             'description' => fake()->text(),

@@ -17,9 +17,9 @@ class StoreReviewResponseFactory extends Factory
     public function definition(): array
     {
         return [
-            "store_review_id"=>fake()->numberBetween(1,10),
-            "store_id"=>fake()->numberBetween(1,2),
-            "response"=>fake()->paragraph(),
+            'store_review_id' => fake()->numberBetween(1, 10),
+            'store_id' => fake()->numberBetween(1, 2),
+            'response' => fake()->paragraph(),
         ];
     }
 }

@@ -50,9 +50,9 @@ class CampaignBannerController extends Controller
         $image = isset($request->image) ? $this->createImage($request->image, 'campaign-banners') : null;
 
         CampaignBanner::create([
-            "url" => $request->url,
-            "status" => $request->status,
-            "image" => $image,
+            'url' => $request->url,
+            'status' => $request->status,
+            'image' => $image,
         ]);
 
         return to_route('admin.campaign-banners.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
@@ -65,12 +65,12 @@ class CampaignBannerController extends Controller
 
     public function update(UpdateCampaignBannerRequest $request, CampaignBanner $campaignBanner): RedirectResponse
     {
-        $image = isset($request->image) && !is_string($request->image) ? $this->updateImage($request->image, $campaignBanner->image, 'campaign-banners') : $campaignBanner->image;
+        $image = isset($request->image) && ! is_string($request->image) ? $this->updateImage($request->image, $campaignBanner->image, 'campaign-banners') : $campaignBanner->image;
 
         $campaignBanner->update([
-            "url" => $request->url,
-            "status" => $request->status,
-            "image" => $image,
+            'url' => $request->url,
+            'status' => $request->status,
+            'image' => $image,
         ]);
 
         return to_route('admin.campaign-banners.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');

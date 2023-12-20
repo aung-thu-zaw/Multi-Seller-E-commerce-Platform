@@ -40,7 +40,7 @@ class StoreManageController extends Controller
 
     public function show(Store $store): Response|ResponseFactory
     {
-        $store->load("seller");
+        $store->load('seller');
 
         return inertia('Admin/SellerManagement/StoreManage/Show', compact('store'));
     }

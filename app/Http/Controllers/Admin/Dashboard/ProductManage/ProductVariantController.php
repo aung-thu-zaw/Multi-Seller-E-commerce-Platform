@@ -32,7 +32,7 @@ class ProductVariantController extends Controller
         foreach ($productVariants as $productVariant) {
             foreach ($productVariant->variantValues as $variantValue) {
                 $variantType = $variantValue->variantType;
-                if (!in_array($variantType, $variantTypes, true)) {
+                if (! in_array($variantType, $variantTypes, true)) {
                     $variantTypes[] = $variantType;
                 }
             }
@@ -146,7 +146,7 @@ class ProductVariantController extends Controller
             $existingVariant = $this->variantCombinationExists($product, $variantValues);
 
             // If not, create a new product variant
-            if (!$existingVariant) {
+            if (! $existingVariant) {
                 $newProductVariant = ProductVariant::create([
                     'product_id' => $product->id,
                     'sku' => SkuGeneratorService::generateVariantSku($product->name, implode('-', $combination)),
@@ -169,7 +169,7 @@ class ProductVariantController extends Controller
 
     private function generateCombinations($arrays, $i = 0)
     {
-        if (!isset($arrays[$i])) {
+        if (! isset($arrays[$i])) {
             return is_array($arrays[$i - 1]) ? [[]] : [];
         }
 
@@ -204,8 +204,6 @@ class ProductVariantController extends Controller
 
         return false; // Variant combination does not exist
     }
-
-
 }
 
 // color =red , blue

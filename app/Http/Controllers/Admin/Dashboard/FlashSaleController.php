@@ -12,8 +12,8 @@ use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\FlashSale;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Inertia\ResponseFactory;
 use Inertia\Response;
+use Inertia\ResponseFactory;
 
 class FlashSaleController extends Controller
 {

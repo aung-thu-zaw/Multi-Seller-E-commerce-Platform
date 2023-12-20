@@ -11,24 +11,24 @@ class Wishlist extends Model
     use HasFactory;
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,Wishlist>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,Wishlist>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Product,Wishlist>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Product,Wishlist>
+     */
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Store,Wishlist>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Store,Wishlist>
+     */
     public function store()
     {
         return $this->belongsTo(Store::class);

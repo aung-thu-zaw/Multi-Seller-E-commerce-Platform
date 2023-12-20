@@ -12,12 +12,12 @@ use Laravel\Scout\Searchable;
 class ProductBanner extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     use Searchable;
+    use SoftDeletes;
 
     /**
-    *     @return array<string>
-    */
+     *     @return array<string>
+     */
     public function toSearchableArray(): array
     {
         return [
@@ -26,12 +26,12 @@ class ProductBanner extends Model
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Casts\Attribute<ProductBanner, never>
-    */
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<ProductBanner, never>
+     */
     protected function image(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, "http") ? $value : asset("storage/product-banners/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') ? $value : asset("storage/product-banners/$value"),
         );
     }
 
@@ -44,8 +44,8 @@ class ProductBanner extends Model
 
     public static function deleteImage(string $productBannerImage): void
     {
-        if (!empty($productBannerImage) && file_exists(storage_path("app/public/product-banners/".pathinfo($productBannerImage, PATHINFO_BASENAME)))) {
-            unlink(storage_path("app/public/product-banners/".pathinfo($productBannerImage, PATHINFO_BASENAME)));
+        if (! empty($productBannerImage) && file_exists(storage_path('app/public/product-banners/'.pathinfo($productBannerImage, PATHINFO_BASENAME)))) {
+            unlink(storage_path('app/public/product-banners/'.pathinfo($productBannerImage, PATHINFO_BASENAME)));
         }
     }
 }

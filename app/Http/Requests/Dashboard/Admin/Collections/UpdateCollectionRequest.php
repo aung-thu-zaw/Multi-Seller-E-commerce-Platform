@@ -27,9 +27,9 @@ class UpdateCollectionRequest extends FormRequest
         $collection = $this->route()->parameter('collection');
 
         $rules = [
-            "name" => ["required","string","max:255",Rule::unique("collections", "name")->ignore($collection)],
-            "description" => ["required","string"],
-            "products" => ["required","array"],
+            'name' => ['required', 'string', 'max:255', Rule::unique('collections', 'name')->ignore($collection)],
+            'description' => ['required', 'string'],
+            'products' => ['required', 'array'],
             'captcha_token' => [new RecaptchaRule()],
         ];
 

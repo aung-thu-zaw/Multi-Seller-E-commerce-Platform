@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 use Spatie\Sluggable\HasSlug;
@@ -51,7 +50,7 @@ class Product extends Model
     protected function image(): CastAttribute
     {
         return CastAttribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/products/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/products/$value"),
         );
     }
 
@@ -70,7 +69,6 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class);
     }
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Category,Product>
@@ -126,8 +124,8 @@ class Product extends Model
     public function flashSales(): BelongsToMany
     {
         return $this->belongsToMany(FlashSale::class, 'flash_sale_product')
-        ->withPivot('discount_percent')
-        ->withTimestamps();
+            ->withPivot('discount_percent')
+            ->withTimestamps();
     }
 
     protected static function booted(): void
@@ -139,7 +137,7 @@ class Product extends Model
 
     public static function deleteImage(string $productImage): void
     {
-        if (!empty($productImage) && file_exists(storage_path('app/public/products/'.pathinfo($productImage, PATHINFO_BASENAME)))) {
+        if (! empty($productImage) && file_exists(storage_path('app/public/products/'.pathinfo($productImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/products/'.pathinfo($productImage, PATHINFO_BASENAME)));
         }
     }
@@ -164,11 +162,10 @@ class Product extends Model
         return $sku;
     }
 
-
     /**
-    * @param Builder<Product> $query
-    * @return Builder<Product>
-    */
+     * @param  Builder<Product>  $query
+     * @return Builder<Product>
+     */
     public function scopeWithApprovedReviewCount(Builder $query)
     {
         return $query->withCount(['productReviews' => function ($query) {
@@ -176,11 +173,10 @@ class Product extends Model
         }]);
     }
 
-
     /**
-    * @param Builder<Product> $query
-    * @return Builder<Product>
-    */
+     * @param  Builder<Product>  $query
+     * @return Builder<Product>
+     */
     public function scopeWithApprovedReviewAvg(Builder $query)
     {
         return $query->withAvg(['productReviews' => function ($query) {

@@ -2,9 +2,7 @@
 
 namespace App\Mail\Admin;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -42,7 +40,7 @@ class SellerRequestRejectedEmail extends Mailable
             view: 'mails.user.seller-request-rejected',
             with: [
                 'reasonForRejection' => $this->reasonForRejection,
-                'name' => $this->userName
+                'name' => $this->userName,
             ],
         );
     }

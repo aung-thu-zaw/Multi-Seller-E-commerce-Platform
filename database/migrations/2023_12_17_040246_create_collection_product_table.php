@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('collection_product', function (Blueprint $table) {
-            $table->primary(["collection_id","product_id"]);
-            $table->foreignId("collection_id")->constrained()->cascadeOnDelete();
-            $table->foreignId("product_id")->constrained()->cascadeOnDelete();
+            $table->primary(['collection_id', 'product_id']);
+            $table->foreignId('collection_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

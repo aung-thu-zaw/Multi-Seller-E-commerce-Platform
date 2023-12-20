@@ -23,6 +23,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use Follower;
     use HasApiTokens;
     use HasFactory;
     use HasPermissions;
@@ -30,7 +31,6 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use Searchable;
     use SoftDeletes;
-    use Follower;
 
     /**
      * The attributes that should be hidden for serialization.
@@ -78,7 +78,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function avatar(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/avatars/users/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/avatars/users/$value"),
         );
     }
 
@@ -87,9 +87,8 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function store(): HasOne
     {
-        return $this->hasOne(Store::class, "seller_id");
+        return $this->hasOne(Store::class, 'seller_id');
     }
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<ProductReview>
@@ -116,8 +115,8 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\HasMany<Wishlist>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Wishlist>
+     */
     public function wishlists(): HasMany
     {
         return $this->hasMany(Wishlist::class);
@@ -131,9 +130,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Coupon::class, 'coupon_user')->withTimestamps();
     }
 
-       /**
-    * @return \Illuminate\Database\Eloquent\Relations\HasMany<ProductQuestion>
-    */
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<ProductQuestion>
+     */
     public function productQuestions(): HasMany
     {
         return $this->hasMany(ProductQuestion::class);
@@ -166,7 +165,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public static function deleteAvatar(?string $avatar): void
     {
-        if (!empty($avatar) && file_exists(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
+        if (! empty($avatar) && file_exists(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)));
         }
     }

@@ -12,12 +12,12 @@ use Laravel\Scout\Searchable;
 class SliderBanner extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     use Searchable;
+    use SoftDeletes;
 
     /**
-    *     @return array<string>
-    */
+     *     @return array<string>
+     */
     public function toSearchableArray(): array
     {
         return [
@@ -26,12 +26,12 @@ class SliderBanner extends Model
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Casts\Attribute<SliderBanner, never>
-    */
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<SliderBanner, never>
+     */
     protected function image(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, "http") ? $value : asset("storage/slider-banners/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') ? $value : asset("storage/slider-banners/$value"),
         );
     }
 
@@ -44,8 +44,8 @@ class SliderBanner extends Model
 
     public static function deleteImage(string $sliderBannerImage): void
     {
-        if (!empty($sliderBannerImage) && file_exists(storage_path("app/public/slider-banners/".pathinfo($sliderBannerImage, PATHINFO_BASENAME)))) {
-            unlink(storage_path("app/public/slider-banners/".pathinfo($sliderBannerImage, PATHINFO_BASENAME)));
+        if (! empty($sliderBannerImage) && file_exists(storage_path('app/public/slider-banners/'.pathinfo($sliderBannerImage, PATHINFO_BASENAME)))) {
+            unlink(storage_path('app/public/slider-banners/'.pathinfo($sliderBannerImage, PATHINFO_BASENAME)));
         }
     }
 }

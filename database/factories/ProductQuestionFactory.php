@@ -17,13 +17,9 @@ class ProductQuestionFactory extends Factory
     public function definition(): array
     {
         return [
-            "user_id"=>fake()->numberBetween(5,20),
-            "product_id"=>fake()->numberBetween(5,20),
-            "question"=>fake()->paragraph()
+            'user_id' => fake()->numberBetween(5, 20),
+            'product_id' => fake()->numberBetween(5, 20),
+            'question' => fake()->paragraph(),
         ];
     }
 }
-
-
-
-

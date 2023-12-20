@@ -17,8 +17,8 @@ class ProductReviewImageFactory extends Factory
     public function definition(): array
     {
         return [
-            "product_review_id"=>fake()->numberBetween(1,15),
-            "image"=>fake()->imageUrl()
+            'product_review_id' => fake()->numberBetween(1, 15),
+            'image' => fake()->imageUrl(),
         ];
     }
 }

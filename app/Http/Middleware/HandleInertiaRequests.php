@@ -43,7 +43,7 @@ class HandleInertiaRequests extends Middleware
                 'store' => $user ? $user->store : [],
                 'wishlists' => $user ? $user->wishlists : [],
             ],
-            'parentCategory' => Category::with("children")->whereNull("parent_id")->get(),
+            'parentCategory' => Category::with('children')->whereNull('parent_id')->get(),
             'flash' => [
                 'success' => session('success'),
                 'error' => session('error'),

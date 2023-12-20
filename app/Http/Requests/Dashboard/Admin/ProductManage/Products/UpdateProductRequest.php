@@ -44,7 +44,6 @@ class UpdateProductRequest extends FormRequest
             'captcha_token' => [new RecaptchaRule()],
         ];
 
-
         if ($this->hasFile('image')) {
 
             $rules['image'] = ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'];
@@ -53,7 +52,6 @@ class UpdateProductRequest extends FormRequest
 
             $rules['image'] = ['nullable', 'string'];
         }
-
 
         return $rules;
 

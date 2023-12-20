@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('collections', function (Blueprint $table) {
             $table->id();
-            $table->string("name")->unique();
-            $table->string("slug")->unique();
-            $table->text("description");
+            $table->string('name')->unique();
+            $table->string('slug')->unique();
+            $table->text('description');
             $table->softDeletes();
             $table->timestamps();
         });

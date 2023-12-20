@@ -26,7 +26,7 @@ class CreateProductAction
             'price' => $data['price'],
             'offer_price' => $data['offer_price'],
             'offer_price_start_date' => $data['offer_price_start_date'],
-            'offer_price_end_date' =>  $data['offer_price_end_date'],
+            'offer_price_end_date' => $data['offer_price_end_date'],
             'description' => $data['description'],
             'warranty_type' => $data['warranty_type'] ?? 'no warranty',
             'warranty_policy' => $data['warranty_policy'],

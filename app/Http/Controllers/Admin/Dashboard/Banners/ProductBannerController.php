@@ -50,9 +50,9 @@ class ProductBannerController extends Controller
         $image = isset($request->image) ? $this->createImage($request->image, 'product-banners') : null;
 
         ProductBanner::create([
-            "url" => $request->url,
-            "status" => $request->status,
-            "image" => $image,
+            'url' => $request->url,
+            'status' => $request->status,
+            'image' => $image,
         ]);
 
         return to_route('admin.product-banners.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
@@ -65,12 +65,12 @@ class ProductBannerController extends Controller
 
     public function update(UpdateProductBannerRequest $request, ProductBanner $productBanner): RedirectResponse
     {
-        $image = isset($request->image) && !is_string($request->image) ? $this->updateImage($request->image, $productBanner->image, 'product-banners') : $productBanner->image;
+        $image = isset($request->image) && ! is_string($request->image) ? $this->updateImage($request->image, $productBanner->image, 'product-banners') : $productBanner->image;
 
         $productBanner->update([
-            "url" => $request->url,
-            "status" => $request->status,
-            "image" => $image,
+            'url' => $request->url,
+            'status' => $request->status,
+            'image' => $image,
         ]);
 
         return to_route('admin.product-banners.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');

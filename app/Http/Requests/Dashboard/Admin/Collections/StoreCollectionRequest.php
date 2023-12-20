@@ -25,9 +25,9 @@ class StoreCollectionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => ["required","string","max:255",Rule::unique("collections", "name")],
-            "description" => ["required","string"],
-            "products" => ["required","array"],
+            'name' => ['required', 'string', 'max:255', Rule::unique('collections', 'name')],
+            'description' => ['required', 'string'],
+            'products' => ['required', 'array'],
             'captcha_token' => [new RecaptchaRule()],
         ];
     }

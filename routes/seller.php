@@ -25,7 +25,7 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
         // Store Category Operations
         Route::resource('store-product-categories', StoreProductCategoryController::class)->except(['show'])->middleware('strict.inactive_store');
         Route::controller(StoreProductCategoryController::class)
-        ->middleware('strict.inactive_store')
+            ->middleware('strict.inactive_store')
             ->prefix('/store-product-categories/trash')
             ->name('store-product-categories.')
             ->group(function () {
@@ -41,7 +41,7 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
         // Product Operations
         Route::resource('products', ProductController::class)->except(['show'])->middleware('strict.inactive_store');
         Route::controller(ProductController::class)
-        ->middleware('strict.inactive_store')
+            ->middleware('strict.inactive_store')
             ->prefix('/products/trash')
             ->name('products.')
             ->group(function () {
@@ -55,7 +55,7 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
             });
 
         Route::controller(ProductImageController::class)
-        ->middleware('strict.inactive_store')
+            ->middleware('strict.inactive_store')
             ->prefix('/products')
             ->name('product.')
             ->group(function () {
@@ -65,7 +65,7 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
             });
 
         Route::controller(AttributeAndOptionController::class)
-        ->middleware('strict.inactive_store')
+            ->middleware('strict.inactive_store')
             ->prefix('/products')
             ->name('product.')
             ->group(function () {
@@ -100,6 +100,5 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
         //         Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
         //     });
 
-
-        Route::get("/store-settings", [StoreSettingController::class,"index"])->name("store-settings.index");
+        Route::get('/store-settings', [StoreSettingController::class, 'index'])->name('store-settings.index');
     });

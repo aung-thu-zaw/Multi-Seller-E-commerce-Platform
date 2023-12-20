@@ -18,7 +18,7 @@ class StoreReviewFactory extends Factory
     {
         return [
             'user_id' => fake()->numberBetween(3, 50),
-            'store_id' => fake()->numberBetween(1,2),
+            'store_id' => fake()->numberBetween(1, 2),
             'comment' => fake()->paragraph(),
             'rating' => fake()->numberBetween(1, 5),
             'is_flagged' => fake()->boolean(),

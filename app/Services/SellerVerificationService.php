@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\BusinessInformation;
-use App\Models\SellerInformation;
 use App\Models\SellerRequest;
 use App\Models\User;
 

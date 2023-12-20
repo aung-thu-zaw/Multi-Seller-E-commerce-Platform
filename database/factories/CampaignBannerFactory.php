@@ -17,9 +17,9 @@ class CampaignBannerFactory extends Factory
     public function definition(): array
     {
         return [
-            "image" => fake()->imageUrl(),
-            "url" => fake()->url(),
-            "status" => fake()->randomElement(["show","hide"])
+            'image' => fake()->imageUrl(),
+            'url' => fake()->url(),
+            'status' => fake()->randomElement(['show', 'hide']),
         ];
     }
 }

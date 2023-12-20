@@ -15,7 +15,7 @@ class StrictAreaForInactiveStore
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()->role === "seller" && $request->user()->store->status === "inactive") {
+        if ($request->user()->role === 'seller' && $request->user()->store->status === 'inactive') {
             abort(403);
         }
 

@@ -17,13 +17,13 @@ class CouponFactory extends Factory
     public function definition(): array
     {
         return [
-            "code" => fake()->unique()->word(),
-            "type" => fake()->randomElement(['percentage', 'fixed', 'free_shipping']),
-            "value" => fake()->numberBetween(10, 500),
-            "usage_limit" => fake()->numberBetween(10, 100),
-            "used" => 0,
-            "expiry_date" => $this->faker->dateTimeBetween(now(), '+2 months')->format('Y-m-d'),
-            "status" => fake()->randomElement(["active","inactive"]),
+            'code' => fake()->unique()->word(),
+            'type' => fake()->randomElement(['percentage', 'fixed', 'free_shipping']),
+            'value' => fake()->numberBetween(10, 500),
+            'usage_limit' => fake()->numberBetween(10, 100),
+            'used' => 0,
+            'expiry_date' => $this->faker->dateTimeBetween(now(), '+2 months')->format('Y-m-d'),
+            'status' => fake()->randomElement(['active', 'inactive']),
         ];
     }
 }

@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -14,7 +15,7 @@ return new class () extends Migration {
             $table->id();
             $table->foreignId('seller_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('store_name')->unique();
-            $table->enum('store_type',["personal","business"]);
+            $table->enum('store_type', ['personal', 'business']);
             $table->string('cover')->nullable();
             $table->string('avatar')->nullable();
             $table->string('slug')->unique();

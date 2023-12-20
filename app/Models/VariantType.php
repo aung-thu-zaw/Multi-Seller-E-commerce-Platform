@@ -28,6 +28,4 @@ class VariantType extends Model
             set: fn ($value) => strtolower($value)
         );
     }
-
-
 }

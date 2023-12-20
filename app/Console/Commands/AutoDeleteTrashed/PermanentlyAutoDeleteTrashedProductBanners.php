@@ -3,7 +3,6 @@
 namespace App\Console\Commands\AutoDeleteTrashed;
 
 use App\Actions\Admin\Banners\ProductBanners\PermanentlyDeleteTrashedProductBannersAction;
-use App\Actions\Admin\Brands\PermanentlyDeleteTrashedBrandsAction;
 use App\Models\ProductBanner;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
