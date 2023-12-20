@@ -11,6 +11,7 @@ use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentReplyController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogController;
 use App\Http\Controllers\Ecommerce\Pages\AboutUsController;
+use App\Http\Controllers\Ecommerce\Products\ProductDetailController;
 use App\Http\Controllers\Ecommerce\SellerStoreController;
 use App\Http\Controllers\Ecommerce\WishlistController;
 use App\Http\Controllers\NotificationController;
@@ -25,6 +26,7 @@ Route::controller(BecomeASellerController::class)
     });
 
 Route::get('/', HomeController::class)->name('home');
+Route::get('/products/{product}', [ProductDetailController::class,"show"])->name('products.show');
 
 Route::controller(NotificationController::class)
     ->middleware('auth')

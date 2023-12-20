@@ -13,6 +13,7 @@ import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
       </div>
 
       <div class="grid grid-cols-4 gap-3 py-3">
+        <!-- <ProductGridCard />
         <ProductGridCard />
         <ProductGridCard />
         <ProductGridCard />
@@ -21,8 +22,7 @@ import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
         <ProductGridCard />
         <ProductGridCard />
         <ProductGridCard />
-        <ProductGridCard />
-        <ProductGridCard />
+        <ProductGridCard /> -->
       </div>
     </div>
   </section>

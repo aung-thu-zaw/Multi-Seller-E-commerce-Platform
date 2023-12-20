@@ -18,7 +18,7 @@ import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
 
     <div class="grid grid-cols-5 gap-3 py-3">
       <!-- Product Card -->
-      <ProductGridCard />
+      <!-- <ProductGridCard /> -->
     </div>
   </div>
 </template>

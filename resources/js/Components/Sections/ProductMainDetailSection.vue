@@ -1,53 +1,86 @@
 <script setup>
+import StarRating from '@/Components/Ratings/StarRating.vue'
+import RedBadge from '@/Components/Badges/RedBadge.vue'
 import GreenBadge from '@/Components/Badges/GreenBadge.vue'
-</script>
+import { useFormatFunctions } from '@/Composables/useFormatFunctions'
+import { computed, reactive, ref } from 'vue'
 
+const props = defineProps({ product: Object })
+
+const { formatAmount } = useFormatFunctions()
+
+const avgRating = computed(() => {
+  const rawAvgRating = props.product?.product_reviews_avg_rating
+
+  const avgRatingValue = parseFloat(rawAvgRating)
+
+  if (!Number.isNaN(avgRatingValue)) {
+    return avgRatingValue.toFixed(1)
+  }
+
+  return null
+})
+
+const discountPercentage = computed(() => {
+  const discountPercentage =
+    ((props.product?.price - props.product?.offer_price) / props.product?.price) * 100
+
+  return Math.round(discountPercentage)
+})
+
+// Handle Multiple Images And Select Active Image
+const images = reactive([props.product.image])
+
+props.product.product_images.forEach((image) => images.push(image.image))
+
+const activeImageIndex = ref(0)
+
+const activeImage = computed(() => images[activeImageIndex.value])
+
+// Handle Quantity
+const quantity = ref(1)
+
+const increment = () =>
+  quantity.value >= props.product.qty ? (quantity.value = props.product.qty) : quantity.value++
+
+const decrement = () => (quantity.value <= 1 ? 1 : quantity.value--)
+</script>
 
 <template>
   <div class="rounded-md bg-white border border-gray-200 overflow-hidden">
-    <div class="flex items-start justify-between space-x-10">
-      <aside class="w-5/12 p-5">
+    <div class="flex items-start justify-between space-x-6">
+      <aside class="w-4/12 p-5">
         <!-- Dynamic Display Active Image -->
         <div class="text-center rounded mb-5">
           <img
             class="object-cover inline-block w-[500px] h-full"
-            src="https://images.pexels.com/photos/4164088/pexels-photo-4164088.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-            alt="product.name"
+            :src="activeImage"
+            alt="product-name"
           />
         </div>
 
         <!-- Multi Product Images -->
-        <div class="space-x-2 overflow-auto text-center whitespace-nowrap scrollbar">
-          <div class="inline-block border border-gray-400 p-1 rounded-md hover:border-blue-500">
-            <img
-              class="w-14 h-14"
-              src="https://www.lezzat.co.uk/wp-content/uploads/2021/03/Amazon-Product-Photography-Agency-UK-1.jpg"
-              alt="product.name"
-            />
-          </div>
-          <div class="inline-block border border-gray-400 p-1 rounded-md hover:border-blue-500">
-            <img
-              class="w-14 h-14"
-              src="https://us.123rf.com/450wm/rekalawa/rekalawa2308/rekalawa230800283/211352410-top-view-of-vintage-camera-and-travel-itemsle-background-with-copy-space.jpg?ver=6"
-              alt="product.name"
-            />
-          </div>
-          <div class="inline-block border border-gray-400 p-1 rounded-md hover:border-blue-500">
-            <img
-              class="w-14 h-14"
-              src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-              alt="product.name"
-            />
+        <div class="space-x-2 overflow-auto whitespace-nowrap p-3">
+          <div
+            v-for="(image, index) in images"
+            :key="image.id"
+            class="inline-block border border-gray-400 p-0.5 rounded-sm hover:border-orange-500"
+            :class="{
+              'border-orange-500 ring-2 ring-orange-300': activeImageIndex === index
+            }"
+            @click="activeImageIndex = index"
+          >
+            <img class="w-14 h-14 rounded-sm" :src="image" :alt="product.name" />
           </div>
         </div>
       </aside>
 
-      <div class="w-7/12 flex items-start justify-between">
+      <div class="w-8/12 min-h-[510px] flex items-start justify-between">
         <main class="space-y-5 py-5">
           <!-- Product  -->
           <div class="w-full flex items-center justify-between">
             <div class="">
-              <h2 class="font-semibold text-2xl">Cannon Camera X234 G Series</h2>
+              <h2 class="font-semibold text-2xl">{{ product?.name }}</h2>
             </div>
 
             <!-- <div class="flex items-center space-x-2"> -->
@@ -85,142 +118,169 @@ import GreenBadge from '@/Components/Badges/GreenBadge.vue'
             <!-- </div> -->
           </div>
 
-          <!-- Average Product Review -->
-          <!-- <div  class="flex items-center">
+          <!-- Rating -->
+          <div>
+            <div v-if="avgRating > 0" class="flex items-center space-x-2">
+              <StarRating :rating="avgRating" />
+              <p class="font-bold text-gray-700 text-sm text-center">{{ avgRating }} out of 5</p>
+            </div>
+            <div v-else class="flex items-center space-x-2">
               <svg
-                aria-hidden="true"
-                class="w-5 h-5 text-yellow-400"
-                fill="currentColor"
-                viewBox="0 0 20 20"
+                class="flex-shrink-0 w-3 h-3 text-yellow-400"
                 xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
               >
-                <title>Rating star</title>
                 <path
-                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                ></path>
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                />
               </svg>
-              <p class="ml-2 text-sm font-bold text-gray-900 dark:text-white">
-                {{ reviewAvg }}
-              </p>
-              <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-              <a
-                href="#"
-                class="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white"
-                >{{ productReviews.length }} reviews</a
-              >
-            </div> -->
-          <div class="flex items-center">
-            <svg
-              class="flex-shrink-0 w-3.5 h-3.5 text-yellow-400"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-              />
-            </svg>
 
-            <p class="text-sm font-medium text-gray-700 ml-3">No Reviews</p>
+              <p class="font-bold text-gray-700 text-sm text-center">No Reviews</p>
+            </div>
           </div>
-
-          <!-- Current Total Product -->
-          <div class="my-3">
-            <span class="text-secondary-700 font-semibold text-sm mr-3">Total 5 Available</span>
-            <GreenBadge> In stock </GreenBadge>
-          </div>
-          <!-- <div v-else-if="product.qty == 0" class="my-3">
-              <span class="text-secondary-700 font-semibold text-sm mr-3"
-                >{{ product.qty }} Available</span
-              >
-
-              <span class="text-red-500 font-bold text-sm bg-red-200 px-2 py-1 rounded-full"
-                >Sold Out</span
-              >
-            </div> -->
 
           <!-- Product Brand -->
-          <p class="text-gray-500 text-sm font-semibold">
+          <p class="text-gray-700 text-sm font-semibold">
             <i class="fa fa-award"></i>
-            <!-- <span v-if="product.brand"> Brand : {{ product.brand.name }} </span> -->
-            <span> Brand : No Brand </span>
+            <span v-if="product?.brand"> Brand : {{ product?.brand?.name }} </span>
+            <span v-else> Brand : No Brand </span>
           </p>
 
-          <!-- Product Price -->
-          <!-- <div v-if="product.discount" class="my-3">
-              <p class="font-semibold text-xl mb-1">${{ product.discount }}</p>
-              <p class="font-normal text-sm mb-3">
-                <span class="text-secondary-600 line-through mr-3">${{ product.price }} </span>
-                <span class="bg-green-200 text-green-500 py-[.2rem] px-2 rounded-full">
-                  {{ (((product.price - product.discount) / product.price) * 100).toFixed(1) }}%
-                </span>
-              </p>
-            </div> -->
-
-          <div class="my-3">
-            <p class="font-semibold text-xl mb-1">$ 500</p>
+          <!-- Current Product Stock -->
+          <div class="flex items-center">
+            <div v-if="product?.qty > 0">
+              <span class="text-gray-700 font-semibold text-sm mr-3">
+                Total {{ product?.qty }} Available
+              </span>
+              <GreenBadge> In stock </GreenBadge>
+            </div>
+            <div v-else class="my-3">
+              <span class="text-gray-700 font-semibold text-sm mr-3">
+                {{ product.qty }} Available
+              </span>
+              <RedBadge> In stock </RedBadge>
+            </div>
           </div>
 
-          <!-- Choose Sizes  -->
-          <!-- <div v-if="product.sizes.length" class="my-5 flex items-center">
-              <span class="text-secondary-800 mr-5"> Sizes </span>
-              <div v-for="size in product.sizes" :key="size.id" class="flex items-center">
-                <div class="flex items-center mr-3">
-                  <input
-                    type="radio"
-                    :id="size.name"
-                    name="size"
-                    :value="size.name"
-                    class="hidden peer"
-                    v-model="selectedSize"
-                    required
-                  />
-                  <label
-                    :for="size.name"
-                    class="px-3 py-1 text-secondary-800 shadow-md bg-white border-2 border-gray-200 rounded-sm cursor-pointer peer-checked:border-gray-400 hover:text-gray-600 peer-checked:text-gray-600 hover:bg-gray-50"
-                  >
-                    <div class="rounded-sm uppercase font-bold text-sm">
-                      {{ size.name }}
-                    </div>
-                  </label>
-                </div>
-              </div>
-            </div> -->
+          <!-- Product Price -->
+          <div class="my-2">
+            <div v-if="product?.offer_price">
+              <span class="text-2xl font-semibold text-orange-600 block">
+                $ {{ formatAmount(product?.offer_price) }}
+              </span>
+              <span class="text-[.9rem] text-gray-500 font-medium line-through mr-5">
+                $ {{ formatAmount(product?.price) }}
+              </span>
+              <span
+                class="text-[.6rem] px-2 py-1 bg-orange-200 rounded-full text-orange-600 font-bold"
+              >
+                {{ discountPercentage }} % OFF
+              </span>
+            </div>
+            <div v-else>
+              <span class="text-2xl font-semibold text-orange-600 block">
+                $ {{ formatAmount(product?.price) }}
+              </span>
+            </div>
+          </div>
 
-          <!-- Choose Color  -->
-          <!-- <div v-if="product.colors.length" class="my-5 flex items-center">
-              <span class="text-secondary-800 mr-5"> Colors </span>
-              <div v-for="color in product.colors" :key="color.id" class="flex items-center">
-                <div class="flex items-center mr-3">
-                  <input
-                    type="radio"
-                    :id="color.name"
-                    name="color"
-                    :value="color.name"
-                    class="hidden peer"
-                    v-model="selectedColor"
-                    required
+          <!-- Variants -->
+          <div class="space-y-5">
+            <div class="flex items-center">
+              <p class="font-semibold text-sm text-gray-700 mr-5">Color :</p>
+              <div class="flex items-center space-x-3">
+                <div
+                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                >
+                  <img
+                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
+                    alt=""
+                    class="w-full h-full object-cover"
                   />
-                  <label
-                    :for="color.name"
-                    class="w-7 h-7 text-gray-500 bg-white border-[3px] border-gray-100 shadow-md rounded-sm cursor-pointer peer-checked:border-gray-400 peer-checked:w-8 peer-checked:h-8 hover:text-gray-600 peer-checked:text-gray-600 hover:bg-gray-50"
-                  >
-                    <div
-                      class="w-full h-full rounded-sm"
-                      :class="'bg-' + color.name + '-600'"
-                    ></div>
-                  </label>
+                </div>
+                <div
+                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                >
+                  <img
+                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
+                    alt=""
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div
+                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                >
+                  <img
+                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
+                    alt=""
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div
+                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                >
+                  <img
+                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
+                    alt=""
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div
+                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                >
+                  <img
+                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
+                    alt=""
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div
+                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                >
+                  <img
+                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
+                    alt=""
+                    class="w-full h-full object-cover"
+                  />
                 </div>
               </div>
-            </div> -->
+            </div>
+            <div class="flex items-center">
+              <p class="font-semibold text-sm text-gray-700 mr-5">Size :</p>
+              <div class="flex items-center space-x-3">
+                <div
+                  class="px-3.5 py-1 flex items-center justify-center text-sm font-semibold rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                >
+                  <span> sm </span>
+                </div>
+                <div
+                  class="px-3.5 py-1 flex items-center justify-center text-sm font-semibold rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                >
+                  <span> lg </span>
+                </div>
+                <div
+                  class="px-3.5 py-1 flex items-center justify-center text-sm font-semibold rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                >
+                  <span> xl </span>
+                </div>
+                <div
+                  class="px-3.5 py-1 flex items-center justify-center text-sm font-semibold rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                >
+                  <span> 2xl </span>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <!-- Handle Quantity -->
           <div class="my-5 flex items-center">
-            <p class="font-medium text-md text-gray-700 mr-5">Quantity :</p>
+            <p class="font-semibold text-sm text-gray-700 mr-5">Quantity :</p>
             <div class="flex items-center space-x-3">
               <button
+                @click="increment"
                 class="focus:ring-2 focus:ring-orange-300 bg-orange-500 hover:bg-orange-600 rounded-full text-xs w-8 h-8 flex items-center justify-center"
               >
                 <i class="fa-solid fa-plus text-white"></i>
@@ -228,43 +288,40 @@ import GreenBadge from '@/Components/Badges/GreenBadge.vue'
 
               <input
                 type="number"
-                class="p-2 w-[100px] font-semibold text-sm text-gray-800 border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:border-orange-400 rounded-md transition-all"
+                class="p-2 w-[80px] font-semibold text-sm text-gray-800 border text-center border-gray-300 bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:border-orange-400 rounded-md transition-all"
+                v-model="quantity"
               />
+
               <button
+                @click="decrement"
                 class="focus:ring-2 focus:ring-orange-300 bg-orange-500 hover:bg-orange-600 mr-2 rounded-full text-xs w-8 h-8 flex items-center justify-center"
               >
                 <i class="fa-solid fa-minus text-white"></i>
               </button>
             </div>
+
+            <!-- <p class="ml-5 text-gray-700 font-semibold text-xs">3 item(s) left</p> -->
+            <p class="ml-5 text-orange-600 font-semibold text-xs">Out of stock</p>
           </div>
 
           <!-- Action Buttons -->
-          <div class="flex flex-wrap space-x-4 mb-5">
+          <div class="flex flex-wrap space-x-6 mb-5">
             <button
-              class="text-sm px-4 shadow-md py-3 font-bold rounded-[4px] active:animate-press bg-yellow-500 text-white hover:bg-yellow-600"
-            >
-              <i class="fa-solid fa-basket-shopping"></i>
-              Buy now
-            </button>
-            <button
-              class="text-sm px-4 shadow-md py-3 font-bold rounded-[4px] active:animate-press bg-blue-600 text-white hover:bg-blue-700"
+              class="text-sm px-6 shadow-md py-3 font-bold rounded-[4px] active:animate-press bg-blue-600 text-white hover:bg-blue-700 duration-200"
             >
               <i class="fa-solid fa-cart-plus"></i>
               Add to cart
             </button>
-            <!-- <button
-                class="text-sm px-4 shadow-md py-3 font-bold rounded-[4px] active:animate-press bg-orange-600 text-white hover:bg-orange-700"
-              >
-                <i class="fa-solid fa-message"></i>
-                Chat Now
-              </button> -->
+            <button
+              class="text-sm px-6 shadow-md py-3 font-bold rounded-[4px] active:animate-press bg-yellow-500 text-white hover:bg-yellow-600 duration-200"
+            >
+              <i class="fa-solid fa-basket-shopping"></i>
+              Buy now
+            </button>
           </div>
-
-          <!-- Product Shop Information -->
-          <!-- <ShopInformationCard :product="product" :conversation="conversation" /> -->
         </main>
 
-        <aside class="bg-gray-50">
+        <aside class="bg-gray-50 min-w-[300px]">
           <div class="px-6 py-3.5 space-y-3">
             <div class="flex items-center justify-between">
               <h3 class="font-bold text-sm text-gray-800">Available Delivery</h3>
@@ -335,3 +392,15 @@ import GreenBadge from '@/Components/Badges/GreenBadge.vue'
     </div>
   </div>
 </template>
+
+<style scoped>
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+}
+
+.scrollbar::-webkit-scrollbar {
+  height: 10px;
+}
+</style>
+

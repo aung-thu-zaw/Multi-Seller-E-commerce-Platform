@@ -1,7 +1,7 @@
 <script setup>
 import StarRating from '@/Components/Ratings/StarRating.vue'
 import { useFormatFunctions } from '@/Composables/useFormatFunctions'
-import { router, usePage } from '@inertiajs/vue3'
+import { router, usePage, Link } from '@inertiajs/vue3'
 import { computed } from 'vue'
 import { __ } from '@/Services/translations-inside-setup.js'
 import { toast } from 'vue3-toastify'
@@ -85,8 +85,13 @@ const saved = computed(() => {
           Official
         </span>
 
-        <h3 class="text-sm text-gray-700 font-semibold line-clamp-2 cursor-pointer mt-1">
-          {{ product?.name }}
+        <h3 class="text-md text-gray-700 font-semibold line-clamp-2 cursor-pointer mt-1">
+          <Link
+            :href="route('products.show', { product: product?.slug })"
+            :data="{ tab: 'description' }"
+          >
+            {{ product?.name }}
+          </Link>
         </h3>
 
         <div class="my-2">

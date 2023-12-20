@@ -13,7 +13,8 @@ defineProps({ sliderBanners: Object })
         class="hidden duration-700 ease-in-out"
         data-carousel-item
       >
-        <a :href="sliderBanner?.url">
+
+        <a :href="sliderBanner?.url" class="border">
           <img
             :src="sliderBanner?.image"
             class="h-full absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 object-contain"
