@@ -1,18 +1,20 @@
 <script setup>
+defineProps({ brands: Object })
+
 let defaultTransform = 0
 
 const goNext = () => {
   defaultTransform = defaultTransform - 398
-  var brandSlider = document.getElementById('brand-slider')
-  if (Math.abs(defaultTransform) >= brandSlider.scrollWidth / 1.7) defaultTransform = 0
-  brandSlider.style.transform = 'translateX(' + defaultTransform + 'px)'
+  var brandCarousel = document.getElementById('brand-carousel')
+  if (Math.abs(defaultTransform) >= brandCarousel.scrollWidth / 1.7) defaultTransform = 0
+  brandCarousel.style.transform = 'translateX(' + defaultTransform + 'px)'
 }
 
 const goPrev = () => {
-  var brandSlider = document.getElementById('brand-slider')
+  var brandCarousel = document.getElementById('brand-carousel')
   if (Math.abs(defaultTransform) === 0) defaultTransform = 0
   else defaultTransform = defaultTransform + 398
-  brandSlider.style.transform = 'translateX(' + defaultTransform + 'px)'
+  brandCarousel.style.transform = 'translateX(' + defaultTransform + 'px)'
 }
 </script>
 
@@ -43,112 +45,13 @@ const goPrev = () => {
       </button>
       <div class="w-full h-full mx-auto overflow-x-hidden overflow-y-hidden">
         <div
-          id="brand-slider"
+          id="brand-carousel"
           class="h-full flex gap-8 items-center justify-start transition ease-out duration-700 px-10"
         >
-          <div class="flex flex-shrink-0 relative">
+          <div v-for="brand in brands" :key="brand.id" class="flex flex-shrink-0 relative">
             <img
-              src="https://seeklogo.com/images/C/chanel-logo-12D54F4AC6-seeklogo.com.png"
-              alt="black chair and white table"
-              class="object-contain object-center w-20 h-20"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://1000logos.net/wp-content/uploads/2021/04/Suzuki-logo.png"
-              alt="black chair and white table"
-              class="object-contain object-center w-20 h-20"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://www.logo.wine/a/logo/Nike,_Inc./Nike,_Inc.-Logo.wine.svg"
-              alt="black chair and white table"
-              class="object-contain object-center w-20 h-20"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://cdn.freebiesupply.com/logos/large/2x/samsung-1-logo-black-and-white.png"
-              alt="black chair and white table"
-              class="object-contain object-center w-20 h-20"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://pngimg.com/d/amazon_PNG1.png"
-              alt="black chair and white table"
-              class="object-contain object-center w-20 h-20"
-            />
-          </div>
-
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://www.logo.wine/a/logo/Under_Armour/Under_Armour-Logo.wine.svg"
-              alt="black chair and white table"
-              class="object-contain object-center w-20 h-20"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://getvectorlogo.com/wp-content/uploads/2022/10/acuity-brands-vector-logo-2022.png"
-              alt="black chair and white table"
-              class="object-contain object-center w-20 h-20"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://www.freepnglogos.com/uploads/new-balance-png-logo/womens-stylish-shoes-new-balance-png-logo-1.png"
-              alt="black chair and white table"
-              class="object-contain object-center w-20 h-20"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://cdn.freebiesupply.com/logos/large/2x/acuity-1-logo-png-transparent.png"
-              alt="black chair and white table"
-              class="object-contain object-center w-20 h-20"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://www.kindpng.com/picc/m/10-106582_asus-logo-png-republic-of-gamers-transparent-png.png"
-              alt="black chair and white table"
-              class="object-contain object-center w-20 h-20"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://static.vecteezy.com/system/resources/previews/022/100/989/original/spotify-logo-transparent-free-png.png"
-              alt="black chair and white table"
-              class="object-contain object-center w-20 h-20"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://logovectorseek.com/wp-content/uploads/2020/07/imperial-brands-logo-vector.png"
-              alt="black chair and white table"
-              class="object-contain object-center w-20 h-20"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://vtlogo.com/wp-content/uploads/2021/06/contigo-brands-vector-logo.png"
-              alt="black chair and white table"
-              class="object-contain object-center w-20 h-20"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://1000logos.net/wp-content/uploads/2021/05/Sony-logo.png"
-              alt="black chair and white table"
-              class="object-contain object-center w-20 h-20"
-            />
-          </div>
-          <div class="flex flex-shrink-0 relative">
-            <img
-              src="https://www.freepnglogos.com/uploads/lg-logo-png/lg-logo-logo-png-transparent-svg-vector-bie-supply-0.png"
-              alt="black chair and white table"
+              :src="brand.logo"
+              alt="brand-image"
               class="object-contain object-center w-20 h-20"
             />
           </div>

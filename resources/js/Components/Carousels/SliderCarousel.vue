@@ -1,52 +1,25 @@
-<script setup></script>
+<script setup>
+defineProps({ sliderBanners: Object })
+</script>
 
 <template>
-  <div
-    id="default-carousel"
-    class="relative w-full bg-white rounded-md border border-gray-200"
-    data-carousel="slide"
-  >
+  <div id="default-carousel" class="relative w-full bg-white rounded-md" data-carousel="slide">
     <!-- Carousel wrapper -->
     <div class="relative h-[400px] overflow-hidden rounded-lg">
       <!-- Item 1 -->
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <img
-          src="https://www.shutterstock.com/image-vector/ecommerce-website-banner-template-presents-260nw-2252124451.jpg"
-          class="h-full absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 object-contain"
-          alt="..."
-        />
-      </div>
-      <!-- Item 2 -->
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <img
-          src="https://t3.ftcdn.net/jpg/04/38/59/88/360_F_438598896_D9pyLmbMZ02CrxURfHxU4nG5UlzXv6Dy.jpg"
-          class="h-full absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 object-contain"
-          alt="..."
-        />
-      </div>
-      <!-- Item 3 -->
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <img
-          src="https://t4.ftcdn.net/jpg/03/83/21/91/360_F_383219100_WLHZFHSmz1GCfxEbPPNfR6MplgplaNLx.jpg"
-          class="h-full absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 object-contain"
-          alt="..."
-        />
-      </div>
-      <!-- Item 4 -->
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <img
-          src="https://t4.ftcdn.net/jpg/03/47/83/19/360_F_347831937_oNJFzFUwEGfoKmUKj3ikH3jaYOQ9OEl3.jpg"
-          class="h-full absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 object-contain"
-          alt="..."
-        />
-      </div>
-      <!-- Item 5 -->
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <img
-          src="https://img.freepik.com/free-vector/online-shopping-horizontal-banner-illustration_1284-57252.jpg"
-          class="h-full absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 object-contain"
-          alt="..."
-        />
+      <div
+        v-for="sliderBanner in sliderBanners"
+        :key="sliderBanner.id"
+        class="hidden duration-700 ease-in-out"
+        data-carousel-item
+      >
+        <a :href="sliderBanner?.url">
+          <img
+            :src="sliderBanner?.image"
+            class="h-full absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 object-contain"
+            alt="slider-banner"
+          />
+        </a>
       </div>
     </div>
     <!-- Slider indicators -->
