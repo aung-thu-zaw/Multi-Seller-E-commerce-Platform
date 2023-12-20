@@ -150,10 +150,11 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
               </TableDataCell>
 
               <TableActionCell>
-                <OptionDropdown v-show="can('products.create') || can('products.edit')">
+                <OptionDropdown v-show="can('collections.create') || can('collections.edit')">
                   <Link
                     as="button"
-                    class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 w-full"
+                    :href="route('admin.collections.show', { collection: item?.slug })"
+                    class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-bold text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 w-full"
                   >
                     <i class="fa-solid fa-basket-shopping"></i>
                     {{ __('Add Products') }}

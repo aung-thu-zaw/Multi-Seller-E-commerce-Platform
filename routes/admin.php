@@ -71,7 +71,7 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-        Route::resource('collections', CollectionController::class)->except(['show']);
+        Route::resource('collections', CollectionController::class)->except(["show"]);
         Route::controller(CollectionController::class)
             ->prefix('/collections/trash')
             ->name('collections.')
@@ -84,6 +84,10 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
+
+        Route::get("/collections/{collection}/add-product", [CollectionController::class,"show"])->name("collections.show");
+        Route::post("/collections/{collection}/add-product", [CollectionController::class,"addProduct"])->name("collections.add-product");
+        Route::post("/collections/{collection}/remove-product", [CollectionController::class,"removeProduct"])->name("collections.remove-product");
 
         Route::resource('products', ProductController::class)->except(['show']);
         Route::controller(ProductController::class)
@@ -98,6 +102,9 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
+
+
+
 
         Route::controller(ProductImageController::class)
             ->prefix('/products')

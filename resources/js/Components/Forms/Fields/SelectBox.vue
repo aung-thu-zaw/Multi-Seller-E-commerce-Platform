@@ -56,7 +56,7 @@ const isSelected = (option) => {
 }
 
 const optionLabel = (option) => {
-  return option.name || option.label
+  return option.name || option.label || option
 }
 </script>
 

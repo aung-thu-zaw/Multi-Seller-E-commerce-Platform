@@ -13,6 +13,7 @@ use App\Models\Collection;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
@@ -23,8 +24,8 @@ class CollectionController extends Controller
     public function __construct()
     {
         $this->middleware('permission:collections.view', ['only' => ['index']]);
-        $this->middleware('permission:collections.create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:collections.edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:collections.create', ['only' => ['create', 'store','addProduct','show',"removeProduct"]]);
+        $this->middleware('permission:collections.edit', ['only' => ['edit', 'update','addProduct','show',"removeProduct"]]);
         $this->middleware('permission:collections.delete', ['only' => ['destroy', 'destroySelected']]);
         $this->middleware('permission:collections.view.trash', ['only' => ['trashed']]);
         $this->middleware('permission:collections.restore', ['only' => ['restore', 'restoreSelected']]);
@@ -39,6 +40,42 @@ class CollectionController extends Controller
             ->appends(request()->all());
 
         return inertia('Admin/Collections/Index', compact('collections'));
+    }
+
+    public function show(Collection $collection): Response|ResponseFactory
+    {
+        $collectionProducts = $collection->products()->select('id', 'image', 'name')->paginate(10);
+
+        $products = Product::select("id", "name")
+        ->where("status", "approved")
+        ->whereDoesntHave('collections', function ($query) use ($collection) {
+            $query->where('collection_id', $collection->id);
+        })
+        ->get();
+
+        return inertia("Admin/Collections/Show", compact("collection", "collectionProducts", "products"));
+    }
+
+    public function addProduct(Request $request, Collection $collection): RedirectResponse
+    {
+        $request->validate([
+            "product_id" => ["required","numeric",Rule::exists("products", "id")]
+        ]);
+
+        $collection->products()->attach($request->product_id);
+
+        return back();
+    }
+
+    public function removeProduct(Request $request, Collection $collection): RedirectResponse
+    {
+        $request->validate([
+            "product_id" => ["required","numeric",Rule::exists("products", "id")]
+        ]);
+
+        $collection->products()->detach($request->product_id);
+
+        return back();
     }
 
     public function create(): Response|ResponseFactory
