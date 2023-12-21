@@ -85,7 +85,7 @@ class CollectionController extends Controller
 
     public function store(StoreCollectionRequest $request): RedirectResponse
     {
-        Collection::create(["name" => $request->name,"description" => $request->description]);
+        Collection::create(["name" => $request->name,"description" => $request->description,"status" => $request->status]);
 
         return to_route('admin.collections.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }
@@ -97,7 +97,7 @@ class CollectionController extends Controller
 
     public function update(UpdateCollectionRequest $request, Collection $collection): RedirectResponse
     {
-        $collection->update(["name" => $request->name,"description" => $request->description]);
+        $collection->update(["name" => $request->name,"description" => $request->description,"status" => $request->status]);
 
         return to_route('admin.collections.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }

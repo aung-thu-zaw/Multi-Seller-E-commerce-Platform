@@ -27,6 +27,7 @@ class StoreCollectionRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255', Rule::unique('collections', 'name')],
             'description' => ['required', 'string'],
+            'status' => ['required','string',Rule::in(['show','hide'])],
             'captcha_token' => [new RecaptchaRule()],
         ];
     }

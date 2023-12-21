@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ecommerce;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\CampaignBanner;
+use App\Models\Collection;
 use App\Models\Product;
 use App\Models\ProductBanner;
 use App\Models\SliderBanner;
@@ -34,6 +35,18 @@ class HomeController extends Controller
             ->limit(10)
             ->get();
 
+
+        $collections = Collection::select("id", "name", "slug")
+        ->with(['products' => function ($query) {
+            $query->select("id", "image")->where('status', 'approved');
+        }])
+        ->withCount(['products' => function ($query) {
+            $query->where('status', 'approved');
+        }])
+        ->where("status", "show")
+        ->limit(12)
+        ->get();
+
         $products = Product::select('id', 'store_id', 'image', 'name', 'slug', 'price', 'offer_price')
             ->with(['productImages', 'store:id,store_type'])
             ->withApprovedReviewCount()
@@ -42,7 +55,7 @@ class HomeController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(20);
 
-        return inertia('E-commerce/Home', compact('brands', 'sliderBanners', 'campaignBanner', 'productBanners', 'products'));
+        return inertia('E-commerce/Home', compact('brands', 'sliderBanners', 'campaignBanner', 'productBanners', 'collections', 'products'));
     }
     // public function __invoke(): View
     // {

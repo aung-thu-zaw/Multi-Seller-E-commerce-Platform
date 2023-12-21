@@ -5,6 +5,7 @@ import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
 import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
 import InputError from '@/Components/Forms/Fields/InputError.vue'
 import InputField from '@/Components/Forms/Fields/InputField.vue'
+import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
 import TextAreaField from '@/Components/Forms/Fields/TextAreaField.vue'
 import FormButton from '@/Components/Buttons/FormButton.vue'
 import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
@@ -13,6 +14,7 @@ import { Head } from '@inertiajs/vue3'
 
 const { form, processing, errors, createAction } = useResourceActions({
   name: null,
+  status: null,
   description: null
 })
 </script>
@@ -66,6 +68,29 @@ const { form, processing, errors, createAction } = useResourceActions({
             />
 
             <InputError :message="errors?.description" />
+          </div>
+
+          <div>
+            <InputLabel :label="__('Status')" required />
+
+            <SelectBox
+              name="status"
+              :options="[
+                {
+                  label: 'Show',
+                  value: 'show'
+                },
+                {
+                  label: 'Hide',
+                  value: 'hide'
+                }
+              ]"
+              v-model="form.status"
+              :placeholder="__('Select an option')"
+              required
+            />
+
+            <InputError :message="errors?.status" />
           </div>
 
           <InputError :message="errors?.captcha_token" />
