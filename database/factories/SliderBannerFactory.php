@@ -20,6 +20,7 @@ class SliderBannerFactory extends Factory
             'image' => fake()->imageUrl(),
             'url' => fake()->url(),
             'status' => fake()->randomElement(['show', 'hide']),
+            'created_at' => fake()->dateTimeBetween('-4 months', now()),
         ];
     }
 }

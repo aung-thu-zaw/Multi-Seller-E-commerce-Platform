@@ -18,12 +18,11 @@ Route::middleware(['auth'])
         Route::get('/my-account', [MyAccountController::class, 'edit'])->name('my-account.edit');
         Route::patch('/my-account/{user}', [MyAccountController::class, 'update'])->name('my-account.update');
 
-        Route::get('/change-password', ChangePasswordController::class)->name('change-password.edit');
+        Route::get('/change-password', ChangePasswordController::class)->name('change-password');
 
         Route::get('/delete-account', DeleteAccountController::class)->name('delete-account');
 
-        Route::get('/my-wishlists', [MyWishlistController::class, 'index'])->name('my-wishlists.index');
-        Route::delete('/my-wishlists/{wishlist}', [MyWishlistController::class, 'destroy'])->name('my-wishlists.destroy');
+        Route::resource("/my-wishlists", MyWishlistController::class)->only(['index','destroy'])->parameters(['my_wishlist' => 'wishlist']);
 
         Route::get('/followed-stores', FollowedStoreController::class)->name('followed-stores');
 

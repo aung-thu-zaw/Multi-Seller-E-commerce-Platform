@@ -19,6 +19,8 @@ class CollectionFactory extends Factory
         return [
             'name' => fake()->name(),
             'description' => fake()->paragraph(),
+            'status' => fake()->randomElement(["show","hide"]),
+            'created_at' => fake()->dateTimeBetween('-4 months', now()),
         ];
     }
 }

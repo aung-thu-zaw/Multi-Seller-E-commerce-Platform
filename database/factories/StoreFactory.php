@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,15 +17,20 @@ class StoreFactory extends Factory
      */
     public function definition(): array
     {
+        $seller = User::where("role", "seller")->where("status", "active")->pluck("id")->toArray();
+
         return [
-            'seller_id' => fake()->randomNumber(2, 20),
+            "seller_id" => fake()->randomElement($seller),
             'avatar' => fake()->imageUrl(),
+            'cover' => fake()->imageUrl(),
             'store_name' => fake()->unique()->sentence(),
             'store_type' => fake()->randomElement(['personal', 'business']),
             'contact_email' => fake()->unique()->safeEmail(),
             'contact_phone' => fake()->unique()->phoneNumber(),
-            'description' => fake()->text(),
+            'description' => fake()->paragraph(),
+            'address' => fake()->address(),
             'status' => fake()->randomElement(['active', 'inactive']),
+            'created_at' => fake()->dateTimeBetween('-4 months', now()),
         ];
     }
 }

@@ -35,16 +35,16 @@ class ProductBanner extends Model
         );
     }
 
-    protected static function booted(): void
-    {
-        parent::boot();
+    // protected static function booted(): void
+    // {
+    //     parent::boot();
 
-        static::addGlobalScope(new FilterByScope());
-    }
+    //     static::addGlobalScope(new FilterByScope());
+    // }
 
     public static function deleteImage(string $productBannerImage): void
     {
-        if (! empty($productBannerImage) && file_exists(storage_path('app/public/product-banners/'.pathinfo($productBannerImage, PATHINFO_BASENAME)))) {
+        if (!empty($productBannerImage) && file_exists(storage_path('app/public/product-banners/'.pathinfo($productBannerImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/product-banners/'.pathinfo($productBannerImage, PATHINFO_BASENAME)));
         }
     }

@@ -24,6 +24,7 @@ class CouponFactory extends Factory
             'used' => 0,
             'expiry_date' => $this->faker->dateTimeBetween(now(), '+2 months')->format('Y-m-d'),
             'status' => fake()->randomElement(['active', 'inactive']),
+            'created_at' => fake()->dateTimeBetween('-4 months', now()),
         ];
     }
 }

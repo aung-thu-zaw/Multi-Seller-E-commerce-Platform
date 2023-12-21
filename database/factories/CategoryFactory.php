@@ -17,6 +17,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
+            'parent_id' => fake()->numberBetween(9, 67),
             'name' => fake()->unique()->word(),
             'image' => fake()->imageUrl(),
             'status' => fake()->randomElement(['show', 'hide']),

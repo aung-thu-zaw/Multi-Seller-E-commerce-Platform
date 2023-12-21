@@ -14,6 +14,16 @@ class BlogCommentReply extends Model
     use Searchable;
 
     /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<BlogCommentReply, never>
+     */
+    protected function createdAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => date('j/F/Y h:i A', strtotime($value)),
+        );
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<BlogComment,BlogCommentReply>
      */
     public function blogComment(): BelongsTo
@@ -27,15 +37,5 @@ class BlogCommentReply extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute<BlogCommentReply, never>
-     */
-    protected function createdAt(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => date('j/F/Y h:i A', strtotime($value)),
-        );
     }
 }

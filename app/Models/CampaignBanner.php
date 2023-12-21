@@ -35,16 +35,16 @@ class CampaignBanner extends Model
         );
     }
 
-    protected static function booted(): void
-    {
-        parent::boot();
+    // protected static function booted(): void
+    // {
+    //     parent::boot();
 
-        static::addGlobalScope(new FilterByScope());
-    }
+    //     static::addGlobalScope(new FilterByScope());
+    // }
 
     public static function deleteImage(string $campaignBannerImage): void
     {
-        if (! empty($campaignBannerImage) && file_exists(storage_path('app/public/campaign-banners/'.pathinfo($campaignBannerImage, PATHINFO_BASENAME)))) {
+        if (!empty($campaignBannerImage) && file_exists(storage_path('app/public/campaign-banners/'.pathinfo($campaignBannerImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/campaign-banners/'.pathinfo($campaignBannerImage, PATHINFO_BASENAME)));
         }
     }

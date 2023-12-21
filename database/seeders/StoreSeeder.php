@@ -12,7 +12,6 @@ class StoreSeeder extends Seeder
      */
     public function run(): void
     {
-
         Store::factory()->create([
             'seller_id' => 2,
             'store_name' => 'Business Seller',
@@ -27,7 +26,6 @@ class StoreSeeder extends Seeder
             'status' => 'active',
         ]);
 
-        Store::factory(30)->create(['seller_id' => '10', 'status' => 'active']);
-
+        Store::factory(50)->create();
     }
 }

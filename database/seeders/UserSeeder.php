@@ -15,7 +15,6 @@ class UserSeeder extends Seeder
     {
         // Super Admin
         $superAdmin = User::factory()->create([
-            'avatar' => 'admin-1.jpg',
             'name' => 'Super Admin',
             'role' => 'admin',
             'email' => 'superadmin@gmail.com',
@@ -30,7 +29,15 @@ class UserSeeder extends Seeder
 
         $superAdmin->syncPermissions($role->permissions);
 
-        // Official Seller
+        // Admin
+        $admin = User::factory()->create([
+            'name' => 'Admin',
+            'role' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => 'Password!',
+        ]);
+
+        // Seller
         User::factory()->create([
             'name' => 'Seller',
             'role' => 'seller',
@@ -38,25 +45,19 @@ class UserSeeder extends Seeder
             'password' => 'Password!',
         ]);
 
-        // Individual Seller
-        User::factory()->create([
-            'name' => 'Myo Myo',
-            'role' => 'seller',
-            'email' => 'myomyo@gmail.com',
-            'password' => 'Password!',
-        ]);
-
         // Buyer
         User::factory()->create([
-            'avatar' => 'user-4.jpg',
             'name' => 'Customer',
             'role' => 'user',
             'email' => 'customer@gmail.com',
             'password' => 'Password!',
         ]);
 
-        User::factory(30)->create(['role' => 'seller', 'status' => 'active']);
-        User::factory(30)->create(['role' => 'admin']);
-        User::factory(30)->create(['role' => 'user', 'status' => 'suspended']);
+        // 5 To 55
+        User::factory(50)->create(['role' => 'seller', 'status' => 'active']);
+
+        User::factory(10)->create(['role' => 'admin']);
+
+        User::factory(100)->create(["role" => "user"]);
     }
 }

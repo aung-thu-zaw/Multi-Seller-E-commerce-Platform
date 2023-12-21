@@ -55,7 +55,7 @@ class BlogContent extends Model
     protected function thumbnail(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/blog-contents/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/blog-contents/$value"),
         );
     }
 
@@ -101,12 +101,12 @@ class BlogContent extends Model
         return $this->hasMany(BlogComment::class);
     }
 
-    protected static function booted(): void
-    {
-        parent::boot();
+    // protected static function booted(): void
+    // {
+    //     parent::boot();
 
-        static::addGlobalScope(new FilterByScope());
-    }
+    //     static::addGlobalScope(new FilterByScope());
+    // }
 
     /**
      * @param  array<string>  $filterBy
@@ -141,7 +141,7 @@ class BlogContent extends Model
 
     public static function deleteImage(?string $blogContentImage): void
     {
-        if (! empty($blogContentImage) && file_exists(storage_path('app/public/blog-contents/'.pathinfo($blogContentImage, PATHINFO_BASENAME)))) {
+        if (!empty($blogContentImage) && file_exists(storage_path('app/public/blog-contents/'.pathinfo($blogContentImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/blog-contents/'.pathinfo($blogContentImage, PATHINFO_BASENAME)));
         }
     }

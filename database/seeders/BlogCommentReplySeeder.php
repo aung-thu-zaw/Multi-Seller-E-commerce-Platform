@@ -12,6 +12,6 @@ class BlogCommentReplySeeder extends Seeder
      */
     public function run(): void
     {
-        BlogCommentReply::factory(20)->create();
+        BlogCommentReply::factory(200)->create();
     }
 }

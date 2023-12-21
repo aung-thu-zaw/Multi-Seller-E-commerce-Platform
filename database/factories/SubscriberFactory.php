@@ -19,6 +19,7 @@ class SubscriberFactory extends Factory
         return [
             'email' => fake()->unique()->email(),
             'status' => fake()->randomElement(['subscribed', 'unsubscribed']),
+            'created_at' => fake()->dateTimeBetween('-4 months', now()),
         ];
     }
 }

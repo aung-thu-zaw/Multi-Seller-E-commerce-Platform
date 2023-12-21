@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\BlogContent;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,11 +18,14 @@ class BlogCommentFactory extends Factory
      */
     public function definition(): array
     {
+        $blogContents = BlogContent::where('status', 'published')->pluck('id')->toArray();
+        $users = User::where("role", "user")->pluck("id")->toArray();
+
         return [
-            'blog_content_id' => fake()->numberBetween(20, 50),
-            'user_id' => fake()->numberBetween(5, 20),
+            'blog_content_id' => fake()->randomElement($blogContents),
+            'user_id' => fake()->randomElement($users),
             'comment' => fake()->paragraph(),
-            'created_at' => fake()->dateTimeBetween('-2 months', now()),
+            'created_at' => fake()->dateTimeBetween('-1 months', now()),
         ];
     }
 }

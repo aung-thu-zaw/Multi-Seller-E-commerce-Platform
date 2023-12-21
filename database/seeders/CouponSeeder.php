@@ -12,6 +12,12 @@ class CouponSeeder extends Seeder
      */
     public function run(): void
     {
-        Coupon::factory(20)->create();
+        Coupon::factory()->create(["code" => "NEW CLIENT"]);
+        Coupon::factory()->create(["code" => "HAPPY SHOPPING"]);
+        Coupon::factory()->create(["code" => "CHRISTMAS SHOPPING"]);
+        Coupon::factory()->create(["code" => "NEW YEAR SHOPPING"]);
+        Coupon::factory()->create(["code" => "WEEKEND SHOPPING"]);
+
+        Coupon::factory(50)->create();
     }
 }

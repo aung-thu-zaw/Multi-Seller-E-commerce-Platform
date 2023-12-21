@@ -26,6 +26,16 @@ class BlogComment extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<BlogComment, never>
+     */
+    protected function createdAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => date('j/F/Y h:i A', strtotime($value)),
+        );
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,BlogComment>
      */
     public function user(): BelongsTo
@@ -49,20 +59,10 @@ class BlogComment extends Model
         return $this->hasMany(BlogCommentReply::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute<BlogComment, never>
-     */
-    protected function createdAt(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => date('j/F/Y h:i A', strtotime($value)),
-        );
-    }
+    // protected static function booted(): void
+    // {
+    //     parent::boot();
 
-    protected static function booted(): void
-    {
-        parent::boot();
-
-        static::addGlobalScope(new FilterByScope());
-    }
+    //     static::addGlobalScope(new FilterByScope());
+    // }
 }

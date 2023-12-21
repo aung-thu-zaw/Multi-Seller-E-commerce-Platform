@@ -28,7 +28,9 @@ class UserFactory extends Factory
             'role' => fake()->randomElement(['admin', 'seller', 'user']),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'status'=>fake()->randomElement(["active","suspended"]),
             'remember_token' => Str::random(10),
+            'created_at' => fake()->dateTimeBetween('-4 months', now()),
         ];
     }
 

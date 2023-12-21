@@ -40,12 +40,12 @@ class FaqCategory extends Model
         ];
     }
 
-    protected static function booted(): void
-    {
-        parent::boot();
+    // protected static function booted(): void
+    // {
+    //     parent::boot();
 
-        static::addGlobalScope(new FilterByScope());
-    }
+    //     static::addGlobalScope(new FilterByScope());
+    // }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<FaqSubcategory>

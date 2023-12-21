@@ -17,10 +17,10 @@ class RoleSeeder extends Seeder
 
         $superAdmin->syncPermissions(Permission::all());
 
-        Role::create(['name' => 'CEO']);
         Role::create(['name' => 'Admin']);
         Role::create(['name' => 'Moderator']);
         Role::create(['name' => 'Accountant']);
         Role::create(['name' => 'Marketing']);
+        Role::create(['name' => 'Support Agent']);
     }
 }

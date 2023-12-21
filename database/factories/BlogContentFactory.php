@@ -19,6 +19,7 @@ class BlogContentFactory extends Factory
     public function definition(): array
     {
         $blogCategories = BlogCategory::where('status', 'show')->pluck('id')->toArray();
+
         $authors = User::where('role', 'admin')->pluck('id')->toArray();
 
         return [
@@ -28,7 +29,7 @@ class BlogContentFactory extends Factory
             'thumbnail' => fake()->imageUrl(),
             'content' => fake()->paragraph(12),
             'status' => fake()->randomElement(['draft', 'published']),
-            'created_at' => fake()->dateTimeBetween('-2 months', now()),
+            'created_at' => fake()->dateTimeBetween('-4 months', now()),
         ];
     }
 }

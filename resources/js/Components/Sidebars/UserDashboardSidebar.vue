@@ -170,7 +170,7 @@ import { Link } from '@inertiajs/vue3'
 
       <!-- Change Password -->
       <Link
-        :href="route('user.change-password.edit')"
+        :href="route('user.change-password')"
         as="button"
         class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
         :class="{

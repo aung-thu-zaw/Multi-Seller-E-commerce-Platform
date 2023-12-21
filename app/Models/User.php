@@ -138,12 +138,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(ProductQuestion::class);
     }
 
-    protected static function booted(): void
-    {
-        parent::boot();
+    // protected static function booted(): void
+    // {
+    //     parent::boot();
 
-        static::addGlobalScope(new FilterByScope());
-    }
+    //     static::addGlobalScope(new FilterByScope());
+    // }
 
     public function getRedirectRouteName(): string
     {
