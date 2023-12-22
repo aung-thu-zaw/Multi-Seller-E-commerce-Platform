@@ -15,6 +15,7 @@ use App\Http\Controllers\Ecommerce\Pages\AboutUsController;
 use App\Http\Controllers\Ecommerce\ProductCollectionController;
 use App\Http\Controllers\Ecommerce\Products\ProductDetailController;
 use App\Http\Controllers\Ecommerce\SellerStoreController;
+use App\Http\Controllers\Ecommerce\SubscribeNewsLetterController;
 use App\Http\Controllers\Ecommerce\WishlistController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,15 @@ Route::get('/about-us', AboutUsController::class)->name('about-us');
 Route::get('/terms-and-conditions', AboutUsController::class)->name('terms-and-conditions');
 Route::get('/privacy-and-policy', AboutUsController::class)->name('privacy-and-policy');
 Route::get('/returns-and-refunds', AboutUsController::class)->name('returns-and-refunds');
+
+// Newsletter Subscribe
+Route::controller(SubscribeNewsLetterController::class)
+    ->prefix('/newsletters')
+    ->name('newsletters.')
+    ->group(function () {
+        Route::post('/subscribe', "subscribe")->name("subscribe");
+        Route::put('/unsubscribe', "unsubscribe")->name("unsubscribe");
+    });
 
 // For claims as a seller
 Route::controller(BecomeASellerController::class)
