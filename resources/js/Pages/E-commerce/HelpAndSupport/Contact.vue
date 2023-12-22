@@ -257,7 +257,7 @@ const handleSendEmail = async () => {
                 class="mt-2 inline-flex items-center gap-x-2 text-sm font-semibold text-gray-600 hover:text-gray-800"
                 href="#"
               >
-                +959 3765475930
+                {{ $page.props.generalSetting?.support_phone }}
               </a>
             </div>
           </div>
@@ -295,7 +295,7 @@ const handleSendEmail = async () => {
                 class="mt-2 inline-flex items-center gap-x-2 text-sm font-semibold text-gray-600 hover:text-gray-800"
                 href="#"
               >
-                example@site.com
+                {{ $page.props.generalSetting?.support_email }}
               </a>
             </div>
           </div>

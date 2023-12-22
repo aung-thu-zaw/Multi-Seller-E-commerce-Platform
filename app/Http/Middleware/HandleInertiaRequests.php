@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Category;
+use App\Models\GeneralSetting;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -44,6 +45,7 @@ class HandleInertiaRequests extends Middleware
                 'wishlists' => $user ? $user->wishlists : [],
             ],
             'parentCategory' => Category::with('children')->whereNull('parent_id')->get(),
+            'generalSetting'=>GeneralSetting::first(),
             'flash' => [
                 'success' => session('success'),
                 'error' => session('error'),

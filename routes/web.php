@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 
 // Pages
 Route::get('/about-us', AboutUsController::class)->name('about-us');
+Route::get('/terms-and-conditions', AboutUsController::class)->name('terms-and-conditions');
+Route::get('/privacy-and-policy', AboutUsController::class)->name('privacy-and-policy');
+Route::get('/returns-and-refunds', AboutUsController::class)->name('returns-and-refunds');
 
 // For claims as a seller
 Route::controller(BecomeASellerController::class)

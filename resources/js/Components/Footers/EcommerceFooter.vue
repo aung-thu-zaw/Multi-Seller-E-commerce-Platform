@@ -8,15 +8,17 @@ import { Link } from '@inertiajs/vue3'
     <div class="w-full max-w-[85rem] py-10 px-4 pt-14 mx-auto">
       <!-- Grid -->
       <div class="grid grid-cols-4 gap-6">
-        <div class="col-span-1 text-center">
-          <a class="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">
-            E-commerce Platform
+        <div class="col-span-1 text-center space-y-3">
+          <a class="font-semibold text-white" href="#" aria-label="Brand">
+            <img
+              :src="$page.props.generalSetting?.footer_logo"
+              class="w-full h-10 object-contain"
+              alt="footer-logo"
+            />
           </a>
 
           <p class="inline-flex text-xs text-white">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum cupiditate,
-            repellat, vero nobis laboriosam labore unde nisi quo possimus commodi culpa perferendis
-            dolores impedit minima ipsam! Maiores modi perferendis voluptatum!
+            {{ $page.props.generalSetting?.tagline }}
           </p>
         </div>
         <!-- End Col -->
@@ -26,14 +28,20 @@ import { Link } from '@inertiajs/vue3'
 
           <div class="mt-3 grid space-y-3">
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+              <Link
+                :href="route('become-a-seller.register')"
+                class="inline-flex gap-x-2 text-white hover:text-gray-300"
+              >
                 {{ __('Join us') }}
-              </a>
+              </Link>
             </p>
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+              <Link
+                :href="route('stores.index')"
+                class="inline-flex gap-x-2 text-white hover:text-gray-300"
+              >
                 {{ __('Find Store') }}
-              </a>
+              </Link>
             </p>
             <p>
               <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
@@ -59,19 +67,20 @@ import { Link } from '@inertiajs/vue3'
               </Link>
             </p>
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+              <Link
+                :href="route('terms-and-conditions')"
+                class="inline-flex gap-x-2 text-white hover:text-gray-300"
+              >
                 {{ __('Terms & Conditions') }}
-              </a>
+              </Link>
             </p>
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+              <Link
+                :href="route('privacy-and-policy')"
+                class="inline-flex gap-x-2 text-white hover:text-gray-300"
+              >
                 {{ __('Privacy & Policy') }}
-              </a>
-            </p>
-            <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
-                {{ __('Support Center') }}
-              </a>
+              </Link>
             </p>
           </div>
         </div>
@@ -98,9 +107,12 @@ import { Link } from '@inertiajs/vue3'
               </Link>
             </p>
             <p>
-              <a class="inline-flex gap-x-2 text-white hover:text-gray-300" href="#">
+              <Link
+                :href="route('returns-and-refunds')"
+                class="inline-flex gap-x-2 text-white hover:text-gray-300"
+              >
                 {{ __('Returns & Refunds') }}
-              </a>
+              </Link>
             </p>
             <p>
               <Link
@@ -118,13 +130,13 @@ import { Link } from '@inertiajs/vue3'
 
       <div class="mt-5 flex items-center justify-between">
         <div class="flex justify-between items-center">
-          <p class="text-sm text-white">© 2023 E-commerce Platform. All rights reserved.</p>
+          <p class="text-sm text-white">© {{ $page.props.generalSetting?.copyright }}</p>
         </div>
         <!-- Social Brands -->
         <div>
           <a
             class="w-10 h-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
-            href="#"
+            :href="$page.props.generalSetting?.facebook_url"
           >
             <svg
               class="flex-shrink-0 w-4 h-4"
@@ -142,7 +154,7 @@ import { Link } from '@inertiajs/vue3'
 
           <a
             class="w-10 h-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
-            href="#"
+            :href="$page.props.generalSetting?.twitter_url"
           >
             <svg
               class="flex-shrink-0 w-4 h-4"
@@ -160,7 +172,7 @@ import { Link } from '@inertiajs/vue3'
 
           <a
             class="w-10 h-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
-            href="#"
+            :href="$page.props.generalSetting?.instagram_url"
           >
             <svg
               class="flex-shrink-0 w-4 h-4"
@@ -198,7 +210,7 @@ import { Link } from '@inertiajs/vue3'
 
           <a
             class="w-10 h-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
-            href="#"
+            :href="$page.props.generalSetting?.youtube_url"
           >
             <svg
               class="flex-shrink-0 w-4 h-4"
@@ -236,7 +248,7 @@ import { Link } from '@inertiajs/vue3'
 
           <a
             class="w-10 h-10 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-white/10 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
-            href="#"
+            :href="$page.props.generalSetting?.linked_in_url"
           >
             <svg
               class="flex-shrink-0 w-4 h-4"

@@ -17,7 +17,7 @@ import { Link } from '@inertiajs/vue3'
     <div class="bg-orange-600 text-white px-6 py-3 flex items-center justify-between">
       <div>
         <h4 class="font-bold text-md">
-          <Link :href="route('home')">E-commerce Platform</Link>
+          <Link :href="route('home')">{{ $page.props.generalSetting?.site_name }}</Link>
         </h4>
       </div>
       <ul class="font-bold text-sm flex items-centers space-x-4">
@@ -32,7 +32,7 @@ import { Link } from '@inertiajs/vue3'
           <span class="border"></span>
         </li>
 
-        <li v-show="!$page.props.auth.store">
+        <li>
           <Link :href="route('become-a-seller.register')">
             <i class="fa-solid fa-store mr-1"></i>
             {{ __('Become a Seller') }}
@@ -151,8 +151,9 @@ import { Link } from '@inertiajs/vue3'
     <div class="bg-white">
       <div class="w-[1280px] mx-auto px-10 py-4 flex items-center justify-between">
         <!-- Brand -->
-        <Link :href="route('home')" class="text-xl text-slate-600 font-bold w-auto max-w-[350px]">
-          E-commerce Platform
+        <Link :href="route('home')" class="text-xl text-slate-600 font-bold w-auto max-w-[200px]">
+          <!-- E-commerce Platform -->
+          <img :src="$page.props.generalSetting?.header_logo" alt="header-logo" />
         </Link>
         <!-- Search -->
         <div class="relative">

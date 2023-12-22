@@ -99,7 +99,8 @@ defineProps({ topQuestions: Object, faqSubcategories: Object })
         <p class="text-sm font-bold text-gray-600 text-center">
           {{
             __(
-              "Still looking for answers? Chat with us by clicking 'Chat Now' or clicking 'Contact Us'. You can contact us at 09-284784390034 from 8:00 AM to 09:30 PM (Monday to Sunday)."
+              "Still looking for answers? Chat with us by clicking 'Chat Now' or clicking 'Contact Us'. You can contact us at :label from 8:00 AM to 09:30 PM (Monday to Sunday).",
+              { label: $page.props.generalSetting?.support_phone }
             )
           }}
         </p>

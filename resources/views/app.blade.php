@@ -3,6 +3,10 @@
 
 <head>
     <meta charset="utf-8">
+
+    <meta name="title" content="{{ isset($meta) ? $meta->meta_title : ''}}">
+    <meta name="keywords" content="{{ isset($meta) ? $meta->meta_keyword : ''}}">
+    <meta name="description" content="{{ isset($meta) ? $meta->meta_description : ''}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
