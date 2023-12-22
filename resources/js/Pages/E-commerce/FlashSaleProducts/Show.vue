@@ -1,10 +1,11 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue'
+import FlashSaleCountdownTimer from '@/Components/FlashSaleCountdownTimer.vue'
 import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
 import { Head, router, usePage } from '@inertiajs/vue3'
 import { ref } from 'vue'
 
-const props = defineProps({ collection: Object, products: Object })
+const props = defineProps({ flashSale: Object, products: Object })
 
 const isLoading = ref(false)
 
@@ -36,26 +37,25 @@ const loadMoreProduct = () => {
 </script>
 
 <template>
-  <Head :title="collection?.name" />
+  <Head :title="__('Flash Sale Products')" />
 
   <AppLayout>
-    <section id="collections" class="py-5">
+    <section id="flash-sales" class="py-5">
       <div class="w-[1200px] mx-auto flex flex-col items-start">
         <!-- Cover Photo -->
         <div
-          class="w-full h-[150px] mb-10 shadow-md rounded-md overflow-hidden flex items-center justify-center collection-background"
+          class="w-full h-[150px] mb-10 shadow-md rounded-md overflow-hidden flex items-center justify-center flash-sale-background"
         >
           <div class="font-semibold text-white space-y-5">
             <p class="text-center text-2xl">
-              {{ collection?.name }}
+              {{ __('Flash Sale Products') }}
             </p>
-            <p class="text-center text-sm text-gray-100 mt-2">
-              {{ collection?.description }}
-            </p>
+
+            <FlashSaleCountdownTimer :flashSale="flashSale" />
           </div>
         </div>
 
-        <div v-if="loadProducts.length">
+        <div v-if="loadProducts?.length">
           <div class="grid grid-cols-5 gap-3 py-3">
             <ProductGridCard v-for="product in loadProducts" :key="product.id" :product="product" />
           </div>
@@ -94,8 +94,8 @@ const loadMoreProduct = () => {
 </template>
 
 <style>
-.collection-background {
-  background-image: url('https://t4.ftcdn.net/jpg/01/63/50/07/360_F_163500774_LgfqC3IWQMTC26jcBD4fyX1rJ6woOsma.jpg');
+.flash-sale-background {
+  background-image: url('https://t3.ftcdn.net/jpg/05/35/13/82/360_F_535138292_62ZnI4Hcw37J8Jaeg4E9TzJwUciCwSnp.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

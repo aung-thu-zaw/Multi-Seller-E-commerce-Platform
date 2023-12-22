@@ -13,31 +13,6 @@ use Spatie\Sluggable\SlugOptions;
 class FlashSale extends Model
 {
     use HasFactory;
-    use HasSlug;
-    use Searchable;
-    use SoftDeletes;
-
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('name')
-            ->saveSlugsTo('slug');
-    }
-
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
-    /**
-     *     @return array<string>
-     */
-    public function toSearchableArray(): array
-    {
-        return [
-            'name' => $this->name,
-        ];
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Product>
@@ -45,7 +20,6 @@ class FlashSale extends Model
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'flash_sale_product')
-            ->withPivot('discount_percent')
             ->withTimestamps();
     }
 }

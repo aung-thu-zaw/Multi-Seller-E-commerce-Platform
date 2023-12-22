@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\CampaignBanner;
 use App\Models\Collection;
+use App\Models\FlashSale;
 use App\Models\Product;
 use App\Models\ProductBanner;
 use App\Models\SliderBanner;
@@ -35,6 +36,18 @@ class HomeController extends Controller
             ->limit(10)
             ->get();
 
+        $flashSale = FlashSale::with([
+            'products' => function ($query) {
+                $query->select('products.id', 'store_id', 'image', 'name', 'slug', 'price', 'offer_price')
+                    ->with(['productImages', 'store:id,store_type'])
+                    ->withApprovedReviewCount()
+                    ->withApprovedReviewAvg()
+                    ->where('status', 'approved')
+                    ->orderBy('products.id', 'desc')
+                    ->limit(5)
+                    ->get();
+            },
+        ])->first();
 
         $collections = Collection::select("id", "name", "slug")
         ->with(['products' => function ($query) {
@@ -55,7 +68,7 @@ class HomeController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(20);
 
-        return inertia('E-commerce/Home', compact('brands', 'sliderBanners', 'campaignBanner', 'productBanners', 'collections', 'products'));
+        return inertia('E-commerce/Home', compact('brands', 'sliderBanners', 'campaignBanner', 'productBanners', 'flashSale', 'collections', 'products'));
     }
     // public function __invoke(): View
     // {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Ecommerce\BecomeASellerController;
+use App\Http\Controllers\Ecommerce\FlashSaleProductController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\ContactUsController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\FaqController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\FaqFeedbackController;
@@ -53,6 +54,8 @@ Route::controller(ProductCollectionController::class)
          Route::get('/{collection}/products', "show")->name("show");
      });
 
+//  FlashSale Products
+Route::get("/flash-sale/products", FlashSaleProductController::class)->name('flash-sale.products.show');
 
 // Support And Helps
 Route::get('/help-center', HelpCenterController::class)->name('help-center');

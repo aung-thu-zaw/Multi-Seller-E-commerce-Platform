@@ -22,7 +22,7 @@ class CouponFactory extends Factory
             'value' => fake()->numberBetween(10, 500),
             'usage_limit' => fake()->numberBetween(10, 100),
             'used' => 0,
-            'expiry_date' => $this->faker->dateTimeBetween(now(), '+2 months')->format('Y-m-d'),
+            'expiry_date' => fake()->dateTimeBetween(now(), '+2 months')->format('Y-m-d'),
             'status' => fake()->randomElement(['active', 'inactive']),
             'created_at' => fake()->dateTimeBetween('-4 months', now()),
         ];

@@ -1,9 +1,15 @@
 <script setup>
+import FlashSaleCountdownTimer from '@/Components/FlashSaleCountdownTimer.vue'
+import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
 import { Link } from '@inertiajs/vue3'
+
+defineProps({
+  flashSale: Object
+})
 </script>
 
 <template>
-  <section id="flash-sales" class="my-16">
+  <section v-show="flashSale?.products?.length" id="flash-sales" class="my-16">
     <div
       class="container max-w-screen-xl mx-auto border border-gray-200 bg-white rounded-md shadow-md"
     >
@@ -13,34 +19,12 @@ import { Link } from '@inertiajs/vue3'
           <i class="fa-solid fa-bolt text-orange-600 animate-pulse"></i>
           {{ __('Flash Sales') }}
         </h2>
-        <div class="flex items-center space-x-5">
-          <div
-            class="flex flex-col items-center justify-between font-semibold bg-orange-600 text-white ring-2 ring-orange-200 w-14 h-14 p-3 rounded-sm shadow"
-          >
-            <span class="text-sm">10</span>
-            <span class="text-[.7rem]">Days</span>
-          </div>
-          <div
-            class="flex flex-col items-center justify-between font-semibold bg-orange-600 text-white ring-2 ring-orange-200 w-14 h-14 p-3 rounded-sm shadow"
-          >
-            <span class="text-sm">5</span>
-            <span class="text-[.7rem]">Hours</span>
-          </div>
-          <div
-            class="flex flex-col items-center justify-between font-semibold bg-orange-600 text-white ring-2 ring-orange-200 w-14 h-14 p-3 rounded-sm shadow"
-          >
-            <span class="text-sm">3</span>
-            <span class="text-[.7rem]">Minutes</span>
-          </div>
-          <div
-            class="flex flex-col items-center justify-between font-semibold bg-orange-600 text-white ring-2 ring-orange-200 w-14 h-14 p-3 rounded-sm shadow"
-          >
-            <span class="text-sm animate-pulse">34</span>
-            <span class="text-[.7rem]">Seconds</span>
-          </div>
-        </div>
+
+        <FlashSaleCountdownTimer :flashSale="flashSale" />
+
         <Link
-          href="#"
+          as="button"
+          :href="route('flash-sale.products.show')"
           class="font-bold text-sm rounded-full px-4 py-2 text-orange-600 border border-orange-600 hover:bg-orange-600 hover:text-white transition-all"
         >
           {{ __('Shop More') }}
@@ -49,7 +33,11 @@ import { Link } from '@inertiajs/vue3'
       </div>
 
       <div class="grid grid-cols-5 gap-4 p-5">
-        <!-- <ProductGridCard /> -->
+        <ProductGridCard
+          v-for="product in flashSale?.products"
+          :key="product?.id"
+          :product="product"
+        />
       </div>
     </div>
   </section>

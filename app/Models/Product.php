@@ -115,9 +115,7 @@ class Product extends Model
      */
     public function flashSales(): BelongsToMany
     {
-        return $this->belongsToMany(FlashSale::class, 'flash_sale_product')
-            ->withPivot('discount_percent')
-            ->withTimestamps();
+        return $this->belongsToMany(FlashSale::class, 'flash_sale_product')->withTimestamps();
     }
 
     // protected static function booted(): void

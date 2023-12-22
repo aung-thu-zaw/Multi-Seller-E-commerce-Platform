@@ -16,6 +16,7 @@ defineProps({
   sliderBanners: Object,
   campaignBanner: Object,
   productBanners: Object,
+  flashSale: Object,
   collections: Object,
   products: Object
 })
@@ -29,7 +30,7 @@ defineProps({
 
     <CampaignBannerSection :campaignBanner="campaignBanner" />
 
-    <FlashSaleSection />
+    <FlashSaleSection :flashSale="flashSale" />
 
     <ProductBannerSection :productBanners="productBanners" />
 
