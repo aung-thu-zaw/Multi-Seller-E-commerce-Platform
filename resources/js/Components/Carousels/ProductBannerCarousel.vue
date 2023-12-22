@@ -53,11 +53,13 @@ const goPrev = () => {
             :key="productBanner.id"
             class="flex flex-shrink-0 relative rounded-md overflow-hidden"
           >
-            <img
-              :src="productBanner.image"
-              alt="product-banner-image"
-              class="object-contain object-center w-full h-56"
-            />
+            <a :href="productBanner.url" target="_blank" class="h-full">
+              <img
+                :src="productBanner.image"
+                alt="product-banner-image"
+                class="object-contain object-center w-full h-56"
+              />
+            </a>
           </div>
         </div>
       </div>

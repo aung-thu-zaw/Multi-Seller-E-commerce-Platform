@@ -33,7 +33,6 @@ class ProductCollectionController extends Controller
         ->withApprovedReviewCount()
         ->withApprovedReviewAvg()
         ->where('status', 'approved')
-        ->orderBy('id', 'desc')
         ->paginate(20);
 
         return inertia("E-commerce/ProductCollections/Show", compact("collection", "products"));

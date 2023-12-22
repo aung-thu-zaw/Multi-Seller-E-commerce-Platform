@@ -61,7 +61,10 @@ const handleRequestSellerStore = async () => {
               }}
             </p>
 
-            <img src="../../../assets/images/store-register.png" class="h-[500px] object-contain" />
+            <img
+              src="../../../assets/images/genuine-product.png"
+              class="h-[500px] object-contain"
+            />
           </div>
           <div class="w-1/2">
             <div class="bg-white p-10 rounded-md border border-gray-200">
