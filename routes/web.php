@@ -14,6 +14,7 @@ use App\Http\Controllers\Ecommerce\OurBlogs\BlogController;
 use App\Http\Controllers\Ecommerce\Pages\AboutUsController;
 use App\Http\Controllers\Ecommerce\ProductCollectionController;
 use App\Http\Controllers\Ecommerce\Products\ProductDetailController;
+use App\Http\Controllers\Ecommerce\Products\ProductSearchController;
 use App\Http\Controllers\Ecommerce\SellerStoreController;
 use App\Http\Controllers\Ecommerce\SubscribeNewsLetterController;
 use App\Http\Controllers\Ecommerce\WishlistController;
@@ -57,6 +58,9 @@ Route::controller(NotificationController::class)
 // Home page and product detail
 Route::get('/', HomeController::class)->name('home');
 Route::get('/products/{product}', [ProductDetailController::class, 'show'])->name('products.show');
+
+// Search Products and Search by Category Products
+Route::get("products", ProductSearchController::class)->name("products.search");
 
 // Collection section
 Route::controller(ProductCollectionController::class)

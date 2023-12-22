@@ -59,6 +59,8 @@ class DatabaseSeeder extends Seeder
             // ProductReviewImageSeeder::class,
             // ProductQuestionSeeder::class,
             // ProductQuestionAnswerSeeder::class,
+
+            SearchHistorySeeder::class
         ]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Category;
 use App\Models\GeneralSetting;
+use App\Models\SearchHistory;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -46,6 +47,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'parentCategory' => Category::with('children')->whereNull('parent_id')->get(),
             'generalSetting'=>GeneralSetting::first(),
+            'searchHistories' => SearchHistory::orderBy("id", "desc")->get(),
             'flash' => [
                 'success' => session('success'),
                 'error' => session('error'),
