@@ -5,18 +5,17 @@ defineProps({ sliderBanners: Object })
 <template>
   <div id="default-carousel" class="relative w-full bg-white rounded-md" data-carousel="slide">
     <!-- Carousel wrapper -->
-    <div class="relative h-[400px] overflow-hidden rounded-lg">
-      <!-- Item 1 -->
+    <div class="relative -z-0 h-[400px] overflow-hidden rounded-lg">
       <div
         v-for="sliderBanner in sliderBanners"
         :key="sliderBanner.id"
         class="hidden duration-700 ease-in-out"
         data-carousel-item
       >
-        <a :href="sliderBanner?.url" class="border">
+        <a :href="sliderBanner.url" target="_blank" class="h-full">
           <img
-            :src="sliderBanner?.image"
-            class="h-full absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 object-contain"
+            :src="sliderBanner.image"
+            class="absolute block w-full h-full object-contain object-center -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
             alt="slider-banner"
           />
         </a>
@@ -24,42 +23,16 @@ defineProps({ sliderBanners: Object })
     </div>
     <!-- Slider indicators -->
     <div
-      class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse"
+      class="absolute z-50 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse"
     >
       <button
+        v-for="(sliderBanner, index) in sliderBanners"
+        :key="sliderBanner.id"
         type="button"
         class="w-3 h-3 rounded-full"
-        aria-current="true"
-        aria-label="Slide 1"
-        data-carousel-slide-to="0"
-      ></button>
-      <button
-        type="button"
-        class="w-3 h-3 rounded-full"
-        aria-current="false"
-        aria-label="Slide 2"
-        data-carousel-slide-to="1"
-      ></button>
-      <button
-        type="button"
-        class="w-3 h-3 rounded-full"
-        aria-current="false"
-        aria-label="Slide 3"
-        data-carousel-slide-to="2"
-      ></button>
-      <button
-        type="button"
-        class="w-3 h-3 rounded-full"
-        aria-current="false"
-        aria-label="Slide 4"
-        data-carousel-slide-to="3"
-      ></button>
-      <button
-        type="button"
-        class="w-3 h-3 rounded-full"
-        aria-current="false"
-        aria-label="Slide 5"
-        data-carousel-slide-to="4"
+        :aria-current="index === 0"
+        :aria-label="'Slide ' + sliderBanner.id"
+        :data-carousel-slide-to="index"
       ></button>
     </div>
     <!-- Slider controls -->

@@ -30,11 +30,11 @@ class UserSeeder extends Seeder
         $superAdmin->syncPermissions($role->permissions);
 
         // Admin
-        $admin = User::factory()->create([
-            'name' => 'Admin',
-            'role' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => 'Password!',
+        User::factory()->create([
+           'name' => 'Admin',
+           'role' => 'admin',
+           'email' => 'admin@gmail.com',
+           'password' => 'Password!',
         ]);
 
         // Seller

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,9 +17,10 @@ class ProductImageFactory extends Factory
      */
     public function definition(): array
     {
+        $products = Product::where("status", "approved")->pluck("id")->toArray();
 
         return [
-            'product_id' => fake()->numberBetween(1, 60),
+            'product_id' => fake()->randomElement($products),
             'image' => fake()->imageUrl(),
         ];
     }

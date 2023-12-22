@@ -17,7 +17,7 @@ class CollectionSeeder extends Seeder
 
         $collections->each(function ($collection) {
             $numberOfProducts = rand(5, 80);
-            $products = Product::where("status", "published")->inRandomOrder()->take($numberOfProducts)->get();
+            $products = Product::where("status", "approved")->inRandomOrder()->take($numberOfProducts)->get();
             $collection->products()->attach($products->pluck('id'));
         });
     }

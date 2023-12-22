@@ -44,7 +44,7 @@ const isCategoryHovered = (category) => {
     >
       <!-- First Category -->
       <div
-        class="flex items-center justify-center w-[35px] h-[35px] rounded-full shadow bg-slate-100 mr-2 overflow-hidden border mt-2"
+        class="flex items-center justify-center w-[35px] h-[35px] rounded-full shadow bg-gray-100 mr-2 overflow-hidden border mt-2"
       >
         <img :src="category.image" class="h-full object-cover" />
       </div>
@@ -91,7 +91,7 @@ const isCategoryHovered = (category) => {
           >
             <div class="flex items-center">
               <div
-                class="flex items-center justify-center w-[35px] h-[35px] rounded-full bg-slate-100 mr-2 shadow overflow-hidden"
+                class="flex items-center justify-center w-[35px] h-[35px] rounded-full bg-gray-100 mr-2 shadow overflow-hidden"
               >
                 <img :src="secondChildCategory.image" class="h-full object-cover" />
               </div>
@@ -102,19 +102,18 @@ const isCategoryHovered = (category) => {
                   direction: params.direction,
                   view: params.view
                 }"
-                class="font-bold text-slate-700 text-sm hover:text-orange-500 hover:underline cursor-pointer"
+                class="font-bold text-gray-700 text-sm hover:text-orange-500 hover:underline cursor-pointer"
               >
                 {{ secondChildCategory.name }}
               </Link>
             </div>
 
-            <ul>
+            <ul class="list-disc pl-14">
               <li
                 v-for="thirdChildCategory in secondChildCategory.children"
                 :key="thirdChildCategory"
                 class=""
               >
-                <i class="fa-solid fa-circle text-[.4rem] text-slate-600 mx-2"></i>
                 <Link
                   href="#"
                   :data="{
@@ -122,7 +121,7 @@ const isCategoryHovered = (category) => {
                     direction: params.direction,
                     view: params.view
                   }"
-                  class="text-[.8rem] font-bold text-slate-500 hover:text-orange-500 hover:underline cursor-pointer"
+                  class="font-medium text-[.85rem] text-gray-700 hover:underline hover:text-orange-500 transition-all"
                 >
                   {{ thirdChildCategory.name }}
                 </Link>

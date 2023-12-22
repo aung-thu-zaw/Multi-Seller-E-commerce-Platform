@@ -23,7 +23,7 @@ class HomeController extends Controller
             ->where('status', 'show')
             ->orderBy('id', 'desc')
             ->limit(10)
-            ->first();
+            ->get();
 
         $campaignBanner = CampaignBanner::select('id', 'image', 'url')
             ->where('status', 'show')
@@ -38,7 +38,7 @@ class HomeController extends Controller
 
         $collections = Collection::select("id", "name", "slug")
         ->with(['products' => function ($query) {
-            $query->select("id", "image")->where('status', 'approved');
+            $query->where('status', 'approved');
         }])
         ->withCount(['products' => function ($query) {
             $query->where('status', 'approved');

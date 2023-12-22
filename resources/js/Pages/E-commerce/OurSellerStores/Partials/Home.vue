@@ -1,12 +1,12 @@
 <script setup>
-import SliderCarousel from '@/Components/Carousels/SliderCarousel.vue'
+// import SliderCarousel from '@/Components/Carousels/SliderCarousel.vue'
 // import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
 </script>
 
 <template>
   <div class="w-full mx-auto bg-transparent rounded-md pt-6">
     <div class="mb-5">
-      <SliderCarousel />
+      <!-- <SliderCarousel /> -->
     </div>
 
     <!-- Title -->

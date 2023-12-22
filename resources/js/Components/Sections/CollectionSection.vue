@@ -1,5 +1,7 @@
 <script setup>
 import CollectionCard from '@/Components/Cards/CollectionCard.vue'
+import { Link } from '@inertiajs/vue3'
+
 defineProps({ collections: Object })
 </script>
 
@@ -13,7 +15,8 @@ defineProps({ collections: Object })
         </h2>
 
         <Link
-          href="#"
+          as="button"
+          :href="route('collections.products.index')"
           class="font-bold text-sm rounded-full px-4 py-2 text-orange-600 border border-orange-600 hover:bg-orange-600 hover:text-white transition-all"
         >
           {{ __('See More') }}
