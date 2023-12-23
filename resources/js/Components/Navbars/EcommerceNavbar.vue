@@ -2,6 +2,7 @@
 import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
 import NormalButton from '@/Components/Buttons/NormalButton.vue'
 import EcommerceCategoryDropdown from '@/Components/Dropdowns/EcommerceCategoryDropdown.vue'
+import EcommerceMainSearchBox from '@/Components/Forms/SearchBoxs/EcommerceMainSearchBox.vue'
 import InputField from '@/Components/Forms/Fields/InputField.vue'
 import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
 import English from '@/assets/images/united-state.png'
@@ -156,147 +157,7 @@ import { Link } from '@inertiajs/vue3'
           <img :src="$page.props.generalSetting?.header_logo" alt="header-logo" />
         </Link>
         <!-- Search -->
-        <div class="relative">
-          <div class="min-w-[600px]">
-            <form class="flex items-center">
-              <div class="relative w-full mr-2">
-                <div class="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none">
-                  <svg
-                    class="w-4 h-4 text-gray-500"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                    />
-                  </svg>
-                </div>
-
-                <input
-                  type="text"
-                  id="default-search"
-                  class="block w-full p-4 pl-10 text-xs text-gray-900 border border-gray-300 rounded-md bg-gray-50 font-semibold focus:ring-2 focus:ring-orange-300 focus:border-orange-400 transition-all"
-                  :placeholder="__('What are you looking for ?')"
-                />
-              </div>
-
-              <button
-                type="submit"
-                class="bg-orange-600 p-4 rounded-md focus:ring-2 focus:ring-orange-300"
-              >
-                <svg
-                  class="w-4 h-4 text-white font-bold"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                  />
-                </svg>
-              </button>
-            </form>
-          </div>
-
-          <!-- Search History -->
-          <!-- <div
-            class="border border-slate-300 shadow-lg absolute bg-white mt-3 rounded-md text-gray-600 py-3 h-auto w-full max-h-[500px] overflow-auto"
-          >
-            <ul class="text-xs font-medium">
-              <li class="px-5 py-3">
-                <h3 class="font-bold text-slate-600">
-                  <i class="fa-solid fa-clock mr-3"></i>
-                  Your Search History
-                </h3>
-              </li>
-              <li
-                class="hover:bg-orange-100 px-5 py-3 flex items-center justify-between"
-              >
-                <span>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Dolor, nihil?
-                </span>
-                <span
-                  class="w-5 h-5 rounded-full flex items-center justify-center text-sm hover:text-orange-500 hover:bg-orange-200 transition-all cursor-pointer"
-                >
-                  <i class="fa-solid fa-xmark"></i>
-                </span>
-              </li>
-              <li
-                class="hover:bg-orange-100 px-5 py-3 flex items-center justify-between"
-              >
-                <span>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Dolor, nihil?
-                </span>
-                <span
-                  class="w-5 h-5 rounded-full flex items-center justify-center text-sm hover:text-orange-500 hover:bg-orange-200 transition-all cursor-pointer"
-                >
-                  <i class="fa-solid fa-xmark"></i>
-                </span>
-              </li>
-              <li
-                class="hover:bg-orange-100 px-5 py-3 flex items-center justify-between"
-              >
-                <span>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Dolor, nihil?
-                </span>
-                <span
-                  class="w-5 h-5 rounded-full flex items-center justify-center text-sm hover:text-orange-500 hover:bg-orange-200 transition-all cursor-pointer"
-                >
-                  <i class="fa-solid fa-xmark"></i>
-                </span>
-              </li>
-
-              <li class="px-5 py-3">
-                <hr />
-              </li>
-              <li class="px-5 py-3">
-                <h3 class="font-bold text-main-orange">
-                  <i class="fa-solid fa-lightbulb mr-3"></i>
-                  Suggest Search
-                </h3>
-              </li>
-
-              <li class="hover:bg-orange-50 px-5 py-3">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor,
-                nihil?
-              </li>
-              <li class="hover:bg-orange-50 px-5 py-3">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor,
-                nihil?
-              </li>
-              <li class="hover:bg-orange-50 px-5 py-3">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor,
-                nihil?
-              </li>
-              <li class="hover:bg-orange-50 px-5 py-3">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor,
-                nihil?
-              </li>
-              <li class="hover:bg-orange-50 px-5 py-3">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor,
-                nihil?
-              </li>
-              <li class="hover:bg-orange-50 px-5 py-3">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor,
-                nihil?
-              </li>
-            </ul>
-          </div> -->
-        </div>
+        <EcommerceMainSearchBox />
 
         <div v-if="$page.props.auth?.user" class="flex items-center space-x-8">
           <NotificationDropdownForUser />

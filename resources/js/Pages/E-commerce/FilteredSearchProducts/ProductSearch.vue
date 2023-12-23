@@ -1,24 +1,29 @@
 <script setup>
+import AppLayout from '@/Layouts/AppLayout.vue'
 import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
 import ProductListCard from '@/Components/Cards/Products/ProductListCard.vue'
 import ProductSortingSelectBox from '@/Components/Forms/SelectBoxs/ProductSortingSelectBox.vue'
 import ProductFilterSidebar from '@/Components/Sidebars/ProductFilterSidebar.vue'
 import Pagination from '@/Components/Paginations/Pagination.vue'
-import { Link } from '@inertiajs/vue3'
+import { Link, Head } from '@inertiajs/vue3'
 
 defineProps({ products: Object })
 </script>
 
 <template>
+  <Head :title="$page.props.ziggy.query?.search" />
   <AppLayout>
     <section id="all-products" class="">
-      <div class="w-full mx-auto flex items-start">
+      <div class="w-[1280px] mx-auto flex items-start py-10">
         <ProductFilterSidebar />
 
         <div class="w-full pl-5">
           <div class="py-1.5 mb-3 flex items-center justify-between border-b">
             <div class="flex items-center space-x-5">
-              <p class="font-bold text-sm text-orange-600">{{ products.total }} items found</p>
+              <p class="font-bold text-sm text-gray-600">
+                {{ products.total }} items found for
+                <span class="text-orange-600"> "{{ $page.props.ziggy.query?.search }}" </span>
+              </p>
             </div>
 
             <div class="flex items-center space-x-5">
@@ -31,9 +36,9 @@ defineProps({ products: Object })
 
                 <Link
                   as="button"
+                  :href="route('products.search')"
                   :data="{
                     search: $page.props.ziggy.query?.search,
-                    tab: $page.props.ziggy.query?.tab,
                     category: $page.props.ziggy.query?.category,
                     brand: $page.props.ziggy.query?.brand,
                     sort: $page.props.ziggy.query?.sort,
@@ -55,10 +60,9 @@ defineProps({ products: Object })
                 </Link>
 
                 <Link
-                  as="button"
+                  :href="route('products.search')"
                   :data="{
                     search: $page.props.ziggy.query?.search,
-                    tab: $page.props.ziggy.query?.tab,
                     category: $page.props.ziggy.query?.category,
                     brand: $page.props.ziggy.query?.brand,
                     sort: $page.props.ziggy.query?.sort,
@@ -118,11 +122,11 @@ defineProps({ products: Object })
               </div>
             </div>
 
-            <!-- <p v-show="params.search_blog" class="text-sm font-medium text-gray-700 ml-auto">
+            <!-- <p v-show="$page.props.ziggy.query?.search_blog" class="text-sm font-medium text-gray-700 ml-auto">
               {{
                 __(':total post(s) found for search result :result', {
                   total: blogContents.total,
-                  result: '"' + params.search_blog + '"'
+                  result: '"' + $page.props.ziggy.query?.search_blog + '"'
                 })
               }}
             </p> -->
