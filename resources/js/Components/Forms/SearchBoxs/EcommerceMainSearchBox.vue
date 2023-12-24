@@ -10,9 +10,8 @@ const searchHistories = ref(usePage().props.searchHistories)
 // Query String Parameter
 const params = reactive({
   search: usePage().props.ziggy.query?.search,
-  sort: usePage().props.ziggy.query.sort ? usePage().props.ziggy.query.sort : 'id',
-  direction: usePage().props.ziggy.query.direction ? usePage().props.ziggy.query.direction : 'desc',
-  view: usePage().props.ziggy.query.view ? usePage().props.ziggy.query.view : 'grid'
+  sort: usePage().props.ziggy.query.sort ?? 'newest_arrivals',
+  view: usePage().props.ziggy.query.view ?? 'grid'
 })
 
 // Watch Search Input
@@ -29,8 +28,7 @@ const handleSearch = () => {
     params.search = params.search ? params.search : searchedKeyword.value
     router.get(route('products.search'), {
       search: params.search,
-      sort: params.sort,
-      direction: params.direction,
+      sort: 'newest_arrivals',
       view: params.view
     })
   } else {
@@ -82,7 +80,6 @@ const filteredUserSearchHistories = computed(() => {
 // Handle Search Input
 const handleSearchInputKeyword = (keyword) => {
   params.search = keyword
-
   handleSearch()
 }
 

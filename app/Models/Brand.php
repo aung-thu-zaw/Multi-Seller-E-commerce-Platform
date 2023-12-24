@@ -6,6 +6,7 @@ use App\Models\Scopes\FilterByScope;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 use Spatie\Sluggable\HasSlug;
@@ -48,6 +49,14 @@ class Brand extends Model
         return Attribute::make(
             set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/brands/$value"),
         );
+    }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Category,Brand>
+    */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
     // protected static function booted(): void

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class BrandFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->sentence(),
+            'category_id' => fake()->numberBetween(1,67),
+            'name' => fake()->unique()->sentence(2),
             'logo' => fake()->imageUrl(),
             'status' => fake()->randomElement(['active', 'inactive']),
             'created_at' => fake()->dateTimeBetween('-4 months', now()),

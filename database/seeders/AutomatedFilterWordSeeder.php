@@ -12,6 +12,6 @@ class AutomatedFilterWordSeeder extends Seeder
      */
     public function run(): void
     {
-        AutomatedFilterWord::factory(20)->create();
+        AutomatedFilterWord::factory()->create();
     }
 }

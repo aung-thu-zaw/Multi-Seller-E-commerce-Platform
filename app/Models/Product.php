@@ -173,4 +173,77 @@ class Product extends Model
             $query->where('status', 'approved');
         }], 'rating');
     }
+
+    /**
+    * @param array<string> $filterBy
+    * @param Builder<Product> $query
+    */
+
+    public function scopeFilterBy(Builder $query, array $filterBy): void
+    {
+        $query->when(
+            $filterBy["search"] ?? null,
+            function ($query, $search) {
+                $query->where(
+                    function ($query) use ($search) {
+                        $query->where("name", "LIKE", "%".$search."%");
+                    }
+                );
+            }
+        );
+
+        $query->when($filterBy["price"] ?? null, function ($query, $price) {
+            if ($price !== null) {
+                $priceRange = explode("-", $price);
+
+                if (count($priceRange) === 2) {
+                    $minPrice = $priceRange[0];
+                    $maxPrice = $priceRange[1];
+
+                    $query->where(function ($query) use ($minPrice, $maxPrice) {
+                        $query->whereBetween("price", [$minPrice, $maxPrice])
+                            ->orWhereBetween("offer_price", [$minPrice, $maxPrice]);
+                    });
+                }
+            }
+        });
+
+        $query->when($filterBy["category"] ?? null, function ($query, $categorySlug) {
+            $query->whereHas("category", function ($query) use ($categorySlug) {
+                $query->where("slug", $categorySlug);
+            });
+        });
+
+        $query->when($filterBy["brand"] ?? null, function ($query, $brandSlug) {
+            $brandSlugs = explode('--', $brandSlug);
+
+            $query->whereHas("brand", function ($query) use ($brandSlugs) {
+                $query->whereIn("slug", $brandSlugs);
+            });
+        });
+
+        $query->when($filterBy["rating"] ?? null, function ($query, $minRating) {
+            $query->whereHas("productReviews", function ($query) use ($minRating) {
+                $query->havingRaw("AVG(product_reviews.rating) >= ?", [$minRating]);
+            });
+        });
+    }
+
+    /**
+    * @param  Builder<Product>  $query
+    * @return Builder<Product>
+    */
+    public function scopeSortBy(Builder $query, ?string $sortType)
+    {
+        switch ($sortType) {
+            case 'newest_arrivals':
+                return $query->latest();
+            case 'price_high_to_low':
+                return $query->orderBy('price', 'desc');
+            case 'price_low_to_high':
+                return $query->orderBy('price', 'asc');
+            default:
+                return $query->orderBy('id', 'desc');
+        }
+    }
 }

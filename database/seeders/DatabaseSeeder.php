@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
 
 
             // StoreProductCategorySeeder::class,
-            // ProductReviewSeeder::class,
+            ProductReviewSeeder::class,
             // StoreReviewSeeder::class,
             // ProductReviewResponseSeeder::class,
             // StoreReviewResponseSeeder::class,

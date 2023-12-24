@@ -68,6 +68,14 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id')->with('children');
     }
 
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany<Brand>
+    */
+    public function brands(): HasMany
+    {
+        return $this->hasMany(Brand::class);
+    }
+
     // protected static function booted(): void
     // {
     //     parent::booted();

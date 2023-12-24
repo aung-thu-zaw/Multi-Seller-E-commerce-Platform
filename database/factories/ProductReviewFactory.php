@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
+use App\Models\Store;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,10 +19,14 @@ class ProductReviewFactory extends Factory
      */
     public function definition(): array
     {
+        $users = User::where("status", "active")->pluck("id");
+        $stores = Store::where("status", "approved")->pluck("id");
+        $products = Product::where("status", "approved")->pluck("id");
+        
         return [
-            'user_id' => fake()->numberBetween(3, 50),
-            'store_id' => fake()->numberBetween(2, 10),
-            'product_id' => fake()->numberBetween(1, 100),
+            'user_id' => fake()->randomElement($users),
+            'store_id' => fake()->randomElement($stores),
+            'product_id' => fake()->randomElement($products),
             'comment' => fake()->paragraph(),
             'rating' => fake()->numberBetween(1, 5),
             'is_flagged' => fake()->boolean(),
