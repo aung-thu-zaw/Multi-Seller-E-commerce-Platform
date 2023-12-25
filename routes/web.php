@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Ecommerce\BecomeASellerController;
+use App\Http\Controllers\Ecommerce\Conversations\ConversationController;
 use App\Http\Controllers\Ecommerce\FlashSaleProductController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\ContactUsController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\FaqController;
@@ -121,6 +122,9 @@ Route::controller(SellerStoreController::class)
     Route::post('/{store}/follow', 'followStore')->middleware('auth')->name('follow');
     Route::post('/{store}/unfollow', 'unFollowStore')->middleware('auth')->name('unfollow');
 });
+
+// Seller and Customer Communication
+Route::post("/conversations", [ConversationController::class,"store"])->name("conversations.store");
 
 Route::post('/wishlists', [WishlistController::class, 'store'])->middleware('auth')->name('wishlists.store');
 

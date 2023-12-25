@@ -3,16 +3,19 @@ import ConversationCard from '@/Components/Cards/Chats/ConversationCard.vue'
 import SenderMessageBubble from '@/Components/Cards/Chats/SenderMessageBubble.vue'
 import ReceiverMessageBubble from '@/Components/Cards/Chats/ReceiverMessageBubble.vue'
 import EcommerceSenderMessageForm from '@/Components/Forms/Chats/EcommerceSenderMessageForm.vue'
-import { ref } from 'vue'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
-const isWidgetOpened = ref(false)
+const store = useStore()
+
+const isWidgetOpened = computed(() => store.state.isWidgetOpened)
 </script>
 
 <template>
   <div class="relative">
     <div
       v-show="isWidgetOpened"
-      class="fixed bottom-24 shadow-lg shadow-gray-400 right-12 rounded-md w-[900px] h-[600px] bg-white z-[60] overflow-hidden border border-gray-400"
+      class="fixed bottom-24 right-12 rounded-md w-[900px] h-[600px] bg-white z-[60] overflow-hidden border border-gray-400"
     >
       <div class="grid grid-cols-3 h-full">
         <div class="col-span-1 h-full">
@@ -59,7 +62,7 @@ const isWidgetOpened = ref(false)
 
     <!-- Chat Button -->
     <button
-      @click="isWidgetOpened = !isWidgetOpened"
+      @click="store.commit('toggleWidget')"
       type="button"
       class="fixed bottom-10 right-8 z-30 bg-orange-600 text-white w-12 h-12 flex items-center justify-center rounded-full text-lg ring-2 ring-orange-200 shadow-lg"
     >

@@ -13,7 +13,7 @@ defineProps({ store: Object, products: Object })
   <AppLayout>
     <section id="all-products" class="">
       <div class="w-full mx-auto flex items-start">
-        <ProductFilterSidebar />
+        <!-- <ProductFilterSidebar /> -->
 
         <div class="w-full pl-5">
           <div class="py-1.5 mb-3 flex items-center justify-between border-b">

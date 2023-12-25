@@ -4,10 +4,12 @@ import { router, usePage } from '@inertiajs/vue3'
 import { computed, inject } from 'vue'
 import { toast } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
+import { useStore } from 'vuex'
 
 const props = defineProps({ store: Object })
 
 const swal = inject('$swal')
+const vuexStore = useStore()
 
 const avgRating = computed(() => {
   const rawAvgRating = props.store?.store_reviews_avg_rating
@@ -75,6 +77,16 @@ const handleStoreFollowing = async () => {
     )
   }
 }
+
+const handleCreateConversation = () => {
+  router.post(
+    route('conversations.store'),
+    { store_id: props.store?.id },
+    {
+      onSuccess: () => vuexStore.commit('toggleWidget')
+    }
+  )
+}
 </script>
 
 <template>
@@ -97,7 +109,7 @@ const handleStoreFollowing = async () => {
           </div>
           <h3 class="text-2xl">{{ store?.store_name }}</h3>
 
-          <p class="text-sm text-white mt-2">{{ store?.followers.length }} Followers</p>
+          <p class="text-sm text-white mt-2">{{ store?.followers?.length }} Followers</p>
 
           <div v-show="avgRating > 0">
             <!-- Rating -->
@@ -109,12 +121,15 @@ const handleStoreFollowing = async () => {
 
       <div class="space-x-5 self-end">
         <button
+          as="button"
+          @click="handleCreateConversation"
           class="font-bold bg-white text-gray-700 hover:bg-gray-200 duration-200 px-5 py-2.5 rounded-md text-sm"
         >
           <i class="fa-solid fa-message"></i>
           Chat Now
         </button>
         <button
+          as="button"
           @click="handleStoreFollowing"
           class="font-bold text-white bg-orange-600 hover:bg-orange-700 duration-200 px-5 py-2.5 rounded-md text-sm"
         >
