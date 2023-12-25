@@ -5,7 +5,7 @@ import GreenBadge from '@/Components/Badges/GreenBadge.vue'
 import { useFormatFunctions } from '@/Composables/useFormatFunctions'
 import { computed, reactive, ref } from 'vue'
 
-const props = defineProps({ product: Object })
+const props = defineProps({ product: Object, attributes: Object, options: Object, price: Object })
 
 const { formatAmount } = useFormatFunctions()
 
@@ -153,9 +153,10 @@ const decrement = () => (quantity.value <= 1 ? 1 : quantity.value--)
             </div>
           </div>
 
+          price= {{ price }}
           <!-- Variants -->
           <div class="space-y-5">
-            <div class="flex items-center">
+            <!-- <div class="flex items-center">
               <p class="font-semibold text-sm text-gray-700 mr-5">Color :</p>
               <div class="flex items-center space-x-3">
                 <div
@@ -213,29 +214,21 @@ const decrement = () => (quantity.value <= 1 ? 1 : quantity.value--)
                   />
                 </div>
               </div>
-            </div>
-            <div class="flex items-center">
-              <p class="font-semibold text-sm text-gray-700 mr-5">Size :</p>
+            </div> -->
+            <div
+              v-for="(attribute, index) in attributes"
+              :key="index"
+              v-show="options[index]"
+              class="flex items-center"
+            >
+              <p class="font-semibold text-sm text-gray-700 mr-5">{{ attribute }} :</p>
               <div class="flex items-center space-x-3">
                 <div
+                  v-for="option in options[index]"
+                  :key="option"
                   class="px-3.5 py-1 flex items-center justify-center text-sm font-semibold rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
                 >
-                  <span> sm </span>
-                </div>
-                <div
-                  class="px-3.5 py-1 flex items-center justify-center text-sm font-semibold rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
-                >
-                  <span> lg </span>
-                </div>
-                <div
-                  class="px-3.5 py-1 flex items-center justify-center text-sm font-semibold rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
-                >
-                  <span> xl </span>
-                </div>
-                <div
-                  class="px-3.5 py-1 flex items-center justify-center text-sm font-semibold rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
-                >
-                  <span> 2xl </span>
+                  <span> {{ option.value }} </span>
                 </div>
               </div>
             </div>

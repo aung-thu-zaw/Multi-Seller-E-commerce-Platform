@@ -26,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
 
         Model::unguard();
 
-        View::share("meta", SeoSetting::first());
+        // View::share("meta", SeoSetting::first());
     }
 }

@@ -6,28 +6,26 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Laravel\Scout\Searchable;
 
-class ProductVariant extends Model
+class Sku extends Model
 {
     use HasFactory;
-    use Searchable;
+
 
     /**
-     *     @return array<string>
-     */
-    // public function toSearchableArray(): array
-    // {
-    //     return [
-    //         'sku' => $this->sku,
-    //     ];
-    // }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Product,ProductVariant>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Product,Sku>
      */
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<AttributeOption>
+     */
+    public function attributeOptions(): BelongsToMany
+    {
+        return $this->belongsToMany(AttributeOption::class);
     }
 }

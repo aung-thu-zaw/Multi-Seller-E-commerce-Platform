@@ -3,17 +3,26 @@
 namespace App\Http\Controllers\Ecommerce\Products;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attribute;
 use App\Models\Product;
 use App\Models\ProductQuestion;
 use App\Models\ProductReview;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
 class ProductDetailController extends Controller
 {
-    public function show(Product $product): Response|ResponseFactory
+    public function show(Request $request, Product $product): Response|ResponseFactory
     {
         $product->load(['productImages', 'brand:id,name', 'store:id,store_type,seller_id']);
+
+        $attributes = Attribute::pluck('name', 'id');
+
+        $options = $this->getSelectableOptionsFromProduct($product);
+
+        $price = $this->calculatePrice($product, $request);
 
         $product->loadAvg(['productReviews' => function ($query) {
             $query->where('status', 'approved');
@@ -49,6 +58,59 @@ class ProductDetailController extends Controller
             ->limit(5)
             ->get();
 
-        return inertia('E-commerce/Products/Show', compact('product', 'productQuestions', 'productsFromTheSameStore', 'productReviewsForAverageProgressBar', 'productReviews'));
+
+        return inertia('E-commerce/Products/Show', compact('product', 'attributes', 'options', 'price', 'productQuestions', 'productsFromTheSameStore', 'productReviewsForAverageProgressBar', 'productReviews'));
+    }
+
+    private function calculatePrice(Product $product, Request $request): ?array
+    {
+        $price = null;
+        if ($request->filled('attributes')) {
+            $price = [
+                'found' => false,
+                'price' => null,
+                'sku' => null
+            ];
+
+            $skuQuery = $product->skus()->where(function ($q) use ($request) {
+                foreach ($request->input('attributes', []) as $attribute => $option) {
+                    $q->whereHas('attributeOptions', function (Builder $q) use ($attribute, $option) {
+                        return $q->where('id', $option)
+                            ->where('attribute_id', $attribute);
+                    });
+                }
+            });
+            if ($sku = $skuQuery->first()) {
+                $price['found'] = true;
+                $price['price'] = $sku->price;
+                $price['sku'] = $sku->code;
+            }
+        }
+
+        return $price;
+    }
+
+    private function getSelectableOptionsFromProduct(Product $product): array
+    {
+        $product->load([
+            'skus.attributeOptions.attribute'
+        ]);
+
+        $allOptions = [];
+
+        foreach ($product->skus as $sku) {
+            foreach ($sku->attributeOptions->groupBy('attribute_id') as $attributeID => $options) {
+                $allOptions[$attributeID][] = $options->toArray();
+            }
+        }
+        foreach ($allOptions as $attribute => $options) {
+
+            $allOptions[$attribute] = collect($options)
+                ->flatten(1)
+                ->unique('id')
+                ->toArray();
+        }
+
+        return $allOptions;
     }
 }

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class VariantValueSeeder extends Seeder
+class AttributeOptionSeeder extends Seeder
 {
     /**
      * Run the database seeds.

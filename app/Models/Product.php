@@ -118,6 +118,14 @@ class Product extends Model
         return $this->belongsToMany(FlashSale::class, 'flash_sale_product')->withTimestamps();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Sku>
+     */
+    public function skus(): HasMany
+    {
+        return $this->hasMany(Sku::class);
+    }
+
     // protected static function booted(): void
     // {
     //     parent::boot();

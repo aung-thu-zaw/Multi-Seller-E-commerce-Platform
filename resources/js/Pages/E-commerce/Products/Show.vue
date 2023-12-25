@@ -10,6 +10,9 @@ import { Head, Link } from '@inertiajs/vue3'
 
 defineProps({
   product: Object,
+  attributes: Object,
+  options: Object,
+  price: Object,
   productQuestions: Object,
   productReviewsForAverageProgressBar: Object,
   productReviews: Object,
@@ -21,7 +24,12 @@ defineProps({
   <Head :title="product?.name" />
   <AppLayout>
     <div class="w-[1280px] mx-auto my-5 space-y-5">
-      <ProductMainDetailSection :product="product" />
+      <ProductMainDetailSection
+        :product="product"
+        :attributes="attributes"
+        :options="options"
+        :price="price"
+      />
       <div class="flex items-start justify-between gap-x-5">
         <div class="w-full">
           <div class="border border-gray-300 bg-white p-5 rounded-md">
