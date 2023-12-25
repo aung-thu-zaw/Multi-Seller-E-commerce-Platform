@@ -78,7 +78,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function avatar(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/avatars/users/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/avatars/users/$value"),
         );
     }
 
@@ -138,6 +138,15 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(ProductQuestion::class);
     }
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne<Cart>
+     */
+    public function cart(): HasOne
+    {
+        return $this->hasOne(Cart::class);
+    }
+
     // protected static function booted(): void
     // {
     //     parent::boot();
@@ -165,7 +174,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public static function deleteAvatar(?string $avatar): void
     {
-        if (! empty($avatar) && file_exists(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
+        if (!empty($avatar) && file_exists(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)));
         }
     }
