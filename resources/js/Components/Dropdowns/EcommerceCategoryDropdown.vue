@@ -1,4 +1,14 @@
-<script setup></script>
+<script setup>
+import { Link, usePage } from '@inertiajs/vue3'
+import { computed } from 'vue'
+
+const params = computed(() => {
+  return {
+    sort: usePage().props.ziggy.query.sort ?? 'newest_arrivals',
+    view: usePage().props.ziggy.query.view ?? 'grid'
+  }
+})
+</script>
 
 <template>
   <li>
@@ -43,12 +53,16 @@
                 class="w-10 h-10 rounded-full ring-2 ring-orange-200 mr-2"
               />
 
-              <a
+              <Link
                 class="font-bold text-lg text-gray-700 hover:underline hover:text-orange-500 transition-all"
-                href="#"
+                :href="route('products.category', category.slug)"
+                :data="{
+                  sort: params.sort,
+                  view: params.view
+                }"
               >
                 {{ category?.name }}
-              </a>
+              </Link>
             </div>
             <ul
               v-for="childCategory in category.children"
@@ -56,12 +70,16 @@
               class="list-disc pl-14"
             >
               <li>
-                <a
-                  href="#"
+                <Link
+                  :href="route('products.category', childCategory.slug)"
+                  :data="{
+                    sort: params.sort,
+                    view: params.view
+                  }"
                   class="font-medium text-gray-600 hover:underline hover:text-orange-500 transition-all"
                 >
                   {{ childCategory.name }}
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

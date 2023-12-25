@@ -44,7 +44,7 @@ const { dashboardQueryStringParams } = useQueryStringParams()
           "
           class="inline-flex items-center text-sm font-bold text-blueGray-600"
           :class="{
-            'hover:text-orange-600': $page.url.startsWith('/admin'),
+            'hover:text-orange-600': $page.url.startsWith('/admin') || $page.url.startsWith('/'),
             'hover:text-blue-600': $page.url.startsWith('/seller')
           }"
         >

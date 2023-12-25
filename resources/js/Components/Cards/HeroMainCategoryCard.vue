@@ -1,11 +1,12 @@
 <script setup>
 import { Link, usePage } from '@inertiajs/vue3'
-import { computed, reactive, ref } from 'vue'
+import { computed, ref } from 'vue'
 
-const params = reactive({
-  sort: usePage().props.ziggy.query.sort ? usePage().props.ziggy.query.sort : 'id',
-  direction: usePage().props.ziggy.query.direction ? usePage().props.ziggy.query.direction : 'desc',
-  view: usePage().props.ziggy.query.view ? usePage().props.ziggy.query.view : 'grid'
+const params = computed(() => {
+  return {
+    sort: usePage().props.ziggy.query.sort ?? 'newest_arrivals',
+    view: usePage().props.ziggy.query.view ?? 'grid'
+  }
 })
 
 const filteredMainCategories = computed(() =>
@@ -49,10 +50,9 @@ const isCategoryHovered = (category) => {
         <img :src="category.image" class="h-full object-cover" />
       </div>
       <Link
-        href="#"
+        :href="route('products.category', category.slug)"
         :data="{
-          sort: params.sort,
-          direction: params.direction,
+          sort: 'newest_arrivals',
           view: params.view
         }"
         id="dropdownHoverButton"
@@ -96,10 +96,9 @@ const isCategoryHovered = (category) => {
                 <img :src="secondChildCategory.image" class="h-full object-cover" />
               </div>
               <Link
-                href="#"
+                :href="route('products.category', secondChildCategory.slug)"
                 :data="{
-                  sort: params.sort,
-                  direction: params.direction,
+                  sort: 'newest_arrivals',
                   view: params.view
                 }"
                 class="font-bold text-gray-700 text-sm hover:text-orange-500 hover:underline cursor-pointer"
@@ -115,10 +114,9 @@ const isCategoryHovered = (category) => {
                 class=""
               >
                 <Link
-                  href="#"
+                  :href="route('products.category', thirdChildCategory.slug)"
                   :data="{
-                    sort: params.sort,
-                    direction: params.direction,
+                    sort: 'newest_arrivals',
                     view: params.view
                   }"
                   class="font-medium text-[.85rem] text-gray-700 hover:underline hover:text-orange-500 transition-all"

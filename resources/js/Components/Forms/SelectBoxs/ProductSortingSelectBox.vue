@@ -6,6 +6,11 @@ const props = defineProps({
   to: {
     type: String,
     required: true
+  },
+
+  targetIdentifier: {
+    type: [String, Number, Object],
+    default: null
   }
 })
 
@@ -15,7 +20,7 @@ watch(
   () => sort.value,
   () => {
     router.get(
-      route(props.to),
+      route(props.to, props.targetIdentifier),
       {
         search: usePage().props.ziggy.query.search,
         sort: sort.value,
@@ -40,7 +45,7 @@ watch(
     <label for="sort-by" class="font-bold text-sm text-gray-600"> {{ __('Sort By') }} : </label>
     <select
       id="product-sort-by"
-      class="w-[175px] p-3.5 font-medium text-sm text-gray-500 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:border-orange-400"
+      class="w-[175px] p-3.5 font-medium text-sm text-gray-700 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:border-orange-400"
       v-model="sort"
     >
       <option value="newest_arrivals">

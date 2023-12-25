@@ -14,6 +14,11 @@ const props = defineProps({
     required: true
   },
 
+  targetIdentifier: {
+    type: [String, Number, Object],
+    default: null
+  },
+
   categories: Object,
   brands: Object
 })
@@ -49,14 +54,14 @@ watch(
   () => selectedBrands.value,
   () => {
     params.brand = selectedBrands.value.join('--')
-    router.get(route(props.to), { ...params })
+    router.get(route(props.to, props.targetIdentifier), { ...params })
   }
 )
 
 watch(
   () => params.rating,
   () => {
-    router.get(route(props.to), { ...params })
+    router.get(route(props.to, props.targetIdentifier), { ...params })
   }
 )
 
@@ -67,7 +72,7 @@ onMounted(() => {
 
 const handlePrice = () => {
   params.price = `${minPrice.value}-${maxPrice.value}`
-  router.get(route(props.to), { ...params })
+  router.get(route(props.to, props.targetIdentifier), { ...params })
 }
 </script>
 
@@ -81,7 +86,7 @@ const handlePrice = () => {
           <Link
             class="hover:text-orange-600"
             :class="{ 'text-orange-600': params?.category === category.slug }"
-            :href="route(to)"
+            :href="route(to, targetIdentifier)"
             :data="{ ...params, category: category.slug }"
           >
             {{ category.name }}
@@ -93,7 +98,7 @@ const handlePrice = () => {
           <Link
             class="hover:text-orange-600"
             :class="{ 'text-orange-600': params?.category === category?.slug }"
-            :href="route(to)"
+            :href="route(to, targetIdentifier)"
             :data="{ ...params, category: category.slug }"
           >
             {{ category.name }}

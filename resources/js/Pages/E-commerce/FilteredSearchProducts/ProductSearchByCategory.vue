@@ -1,6 +1,7 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue'
 import Breadcrumb from '@/Components/Breadcrumbs/Breadcrumb.vue'
+import BreadcrumbLinkItem from '@/Components/Breadcrumbs/BreadcrumbLinkItem.vue'
 import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
 import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
 import ProductListCard from '@/Components/Cards/Products/ProductListCard.vue'
@@ -10,7 +11,12 @@ import Pagination from '@/Components/Paginations/Pagination.vue'
 import { Link, Head, usePage, router } from '@inertiajs/vue3'
 import { computed } from 'vue'
 
-defineProps({ products: Object, categories: Object, brands: Object })
+const props = defineProps({
+  category: Object,
+  products: Object,
+  categories: Object,
+  brands: Object
+})
 
 const params = computed(() => {
   return {
@@ -33,7 +39,7 @@ const handleRemoveBrand = (brand) => {
   formattedBrandQuery.value.splice(brand, 1)
   params.value.brand = formattedBrandQuery.value.join('--')
 
-  router.get(route('products.search'), {
+  router.get(route('products.category', { category: props.category?.slug }), {
     search: params.value.search,
     sort: params.value.sort,
     page: params.value.page,
@@ -47,30 +53,75 @@ const handleRemoveBrand = (brand) => {
 </script>
 
 <template>
-  <Head :title="params?.search" />
+  <Head :title="category?.name" />
   <AppLayout>
     <section id="all-products" class="">
       <div class="w-[1280px] mx-auto flex flex-col items-start py-10">
         <div class="mb-5 border-b w-full pb-8">
           <Breadcrumb to="home" icon="fa-home" label="Home">
-            <BreadcrumbItem label="Search Result(s)" />
+            <BreadcrumbLinkItem
+              v-if="category.parent?.parent?.parent?.parent"
+              to="products.category"
+              :targetIdentifier="{ category: category.parent.parent.parent.parent.slug }"
+              :data="{
+                sort: params.sort,
+                view: params.view
+              }"
+              :label="category.parent.parent.parent.parent.name"
+            />
+            <BreadcrumbLinkItem
+              v-if="category.parent?.parent?.parent"
+              to="products.category"
+              :targetIdentifier="{ category: category.parent.parent.parent.slug }"
+              :data="{
+                sort: params.sort,
+                view: params.view
+              }"
+              :label="category.parent.parent.parent.name"
+            />
+            <BreadcrumbLinkItem
+              v-if="category.parent?.parent"
+              to="products.category"
+              :targetIdentifier="{ category: category.parent.parent.slug }"
+              :data="{
+                sort: params.sort,
+                view: params.view
+              }"
+              :label="category.parent.parent.name"
+            />
+            <BreadcrumbLinkItem
+              v-if="category.parent"
+              to="products.category"
+              :targetIdentifier="{ category: category.parent.slug }"
+              :data="{
+                sort: params.sort,
+                view: params.view
+              }"
+              :label="category.parent.name"
+            />
+            <BreadcrumbItem v-if="category" :label="category.name" />
           </Breadcrumb>
         </div>
 
         <div class="w-[1280px] mx-auto flex items-start">
-          <ProductFilterSidebar to="products.search" :categories="categories" :brands="brands" />
+          <ProductFilterSidebar
+            to="products.category"
+            :targetIdentifier="{ category: category?.slug }"
+            :categories="categories"
+            :brands="brands"
+          />
 
           <div class="w-full pl-5">
             <div class="py-1.5 mb-3 flex items-center justify-between border-b">
               <div class="flex items-center space-x-5">
-                <p class="font-bold text-sm text-gray-600">
-                  {{ products.total }} items found for
-                  <span class="text-orange-600"> "{{ params?.search }}" </span>
-                </p>
+                <p class="font-bold text-sm text-gray-600">{{ products.total }} items found</p>
               </div>
 
               <div class="flex items-center space-x-5">
-                <ProductSortingSelectBox to="products.search" />
+                <ProductSortingSelectBox
+                  to="products.category"
+                  :targetIdentifier="{ category: category?.slug }"
+                />
 
                 <div class="">
                   <label for="view" class="font-bold text-sm text-gray-600">
@@ -79,7 +130,7 @@ const handleRemoveBrand = (brand) => {
 
                   <Link
                     as="button"
-                    :href="route('products.search')"
+                    :href="route('products.category', { category: category?.slug })"
                     :data="{
                       search: params?.search,
                       category: params?.category,
@@ -100,7 +151,7 @@ const handleRemoveBrand = (brand) => {
                   </Link>
 
                   <Link
-                    :href="route('products.search')"
+                    :href="route('products.category', { category: category?.slug })"
                     :data="{
                       search: params?.search,
                       category: params?.category,
@@ -141,7 +192,7 @@ const handleRemoveBrand = (brand) => {
                     </div>
                     <Link
                       as="button"
-                      :href="route('products.search')"
+                      :href="route('products.category', { category: category?.slug })"
                       :data="{
                         search: params.search,
                         sort: params.sort,
@@ -184,7 +235,7 @@ const handleRemoveBrand = (brand) => {
                     </div>
                     <Link
                       as="button"
-                      :href="route('products.search')"
+                      :href="route('products.category', { category: category?.slug })"
                       :data="{
                         search: params.search,
                         sort: params.sort,
@@ -210,7 +261,7 @@ const handleRemoveBrand = (brand) => {
                     </div>
                     <Link
                       as="button"
-                      :href="route('products.search')"
+                      :href="route('products.category', { category: category?.slug })"
                       :data="{
                         search: params.search,
                         sort: params.sort,

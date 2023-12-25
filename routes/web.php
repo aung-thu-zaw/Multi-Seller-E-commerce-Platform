@@ -14,6 +14,7 @@ use App\Http\Controllers\Ecommerce\OurBlogs\BlogController;
 use App\Http\Controllers\Ecommerce\Pages\AboutUsController;
 use App\Http\Controllers\Ecommerce\ProductCollectionController;
 use App\Http\Controllers\Ecommerce\Products\ProductDetailController;
+use App\Http\Controllers\Ecommerce\Products\ProductSearchByCategoryController;
 use App\Http\Controllers\Ecommerce\Products\ProductSearchController;
 use App\Http\Controllers\Ecommerce\SellerStoreController;
 use App\Http\Controllers\Ecommerce\SubscribeNewsLetterController;
@@ -62,6 +63,7 @@ Route::get('/products/{product}', [ProductDetailController::class, 'show'])->nam
 
 // Search Products and Search by Category Products
 Route::get("products", ProductSearchController::class)->name("products.search");
+Route::get("{category}/products", ProductSearchByCategoryController::class)->name("products.category");
 Route::patch('/search-histories/{search_history}', UpdateSearchHistoryController::class)->name("search-histories.update");
 
 // Collection section
