@@ -31,7 +31,6 @@ const discountPercentage = computed(() => {
 })
 
 const saveToWishlist = () => {
-  console.log('hello')
   router.post(
     route('wishlists.store', {
       product_id: props.product.id,

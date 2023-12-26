@@ -85,5 +85,3 @@ const loadMoreCollection = () => {
     </section>
   </AppLayout>
 </template>
-
-

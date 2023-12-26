@@ -10,6 +10,9 @@ import { Head, Link } from '@inertiajs/vue3'
 
 defineProps({
   store: Object,
+  brands: Object,
+  categories: Object,
+  justForYouProducts: Object,
   products: Object,
   productReviews: Object,
   storeReviews: Object,
@@ -48,7 +51,7 @@ defineProps({
               <Link
                 as="button"
                 :href="route('stores.show', { store: store?.slug })"
-                :data="{ tab: 'all-products', view: 'grid' }"
+                :data="{ tab: 'all-products', sort: 'newest_arrivals', view: 'grid' }"
                 preserve-scroll
                 class="py-4 px-1 inline-flex items-center gap-x-1.5 text-sm font-medium whitespace-nowrap text-gray-600 hover:text-orange-600"
                 :class="{
@@ -89,16 +92,21 @@ defineProps({
               </Link>
             </nav>
 
-            <StoreProductSearchBox />
+            <StoreProductSearchBox :store="store" />
           </div>
 
           <div class="mt-3">
             <div v-show="$page.props.ziggy.query?.tab === 'home' || !$page.props.ziggy.query?.tab">
-              <Home />
+              <Home :products="justForYouProducts" />
             </div>
 
             <div v-show="$page.props.ziggy.query?.tab === 'all-products'">
-              <AllProducts :store="store" :products="products" />
+              <AllProducts
+                :store="store"
+                :products="products"
+                :brands="brands"
+                :categories="categories"
+              />
             </div>
 
             <div v-show="$page.props.ziggy.query?.tab === 'product-rating-and-reviews'">

@@ -24,6 +24,7 @@ watch(
       {
         search: usePage().props.ziggy.query.search,
         sort: sort.value,
+        tab: usePage().props.ziggy.query.tab,
         page: usePage().props.ziggy.query.page,
         category: usePage().props.ziggy.query.category,
         brand: usePage().props.ziggy.query.brand,
@@ -33,7 +34,8 @@ watch(
       },
       {
         replace: true,
-        preserveState: true
+        preserveState: true,
+        preserveScroll: true
       }
     )
   }

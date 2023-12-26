@@ -124,7 +124,7 @@ class ProductSeeder extends Seeder
             });
         }
 
-        // Product::factory(95)->create(['status' => 'approved']);
+        Product::factory(95)->create(['status' => 'approved']);
 
         Product::factory()->create(["image" => "product-1.jpg",'status' => 'approved']);
         Product::factory()->create(["image" => "product-2.jpg",'status' => 'approved']);
@@ -188,6 +188,6 @@ class ProductSeeder extends Seeder
         Product::factory()->create(["image" => "product-55.jpg",'status' => 'approved']);
 
         Product::factory(1000)->create();
-        // Product::factory(50)->create(['store_id' => 2, 'status' => 'approved']);
+        Product::factory(50)->create(['store_id' => 2, 'status' => 'approved']);
     }
 }

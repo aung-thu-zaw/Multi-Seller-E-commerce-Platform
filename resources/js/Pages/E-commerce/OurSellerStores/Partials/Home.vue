@@ -1,6 +1,8 @@
 <script setup>
 // import SliderCarousel from '@/Components/Carousels/SliderCarousel.vue'
-// import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
+import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
+
+defineProps({ products: Object })
 </script>
 
 <template>
@@ -18,7 +20,7 @@
 
     <div class="grid grid-cols-5 gap-3 py-3">
       <!-- Product Card -->
-      <!-- <ProductGridCard /> -->
+      <ProductGridCard v-for="product in products" :key="product.id" :product="product" />
     </div>
   </div>
 </template>

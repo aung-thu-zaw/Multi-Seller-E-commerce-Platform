@@ -153,68 +153,8 @@ const decrement = () => (quantity.value <= 1 ? 1 : quantity.value--)
             </div>
           </div>
 
-          price= {{ price }}
           <!-- Variants -->
-          <div class="space-y-5">
-            <!-- <div class="flex items-center">
-              <p class="font-semibold text-sm text-gray-700 mr-5">Color :</p>
-              <div class="flex items-center space-x-3">
-                <div
-                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
-                >
-                  <img
-                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
-                    alt=""
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-                <div
-                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
-                >
-                  <img
-                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
-                    alt=""
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-                <div
-                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
-                >
-                  <img
-                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
-                    alt=""
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-                <div
-                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
-                >
-                  <img
-                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
-                    alt=""
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-                <div
-                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
-                >
-                  <img
-                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
-                    alt=""
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-                <div
-                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
-                >
-                  <img
-                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
-                    alt=""
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            </div> -->
+          <div class="space-y-5 capitalize">
             <div
               v-for="(attribute, index) in attributes"
               :key="index"
@@ -362,3 +302,63 @@ input::-webkit-inner-spin-button {
   height: 10px;
 }
 </style>
+
+<!-- <div class="flex items-center">
+              <p class="font-semibold text-sm text-gray-700 mr-5">Color :</p>
+              <div class="flex items-center space-x-3">
+                <div
+                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                >
+                  <img
+                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
+                    alt=""
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div
+                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                >
+                  <img
+                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
+                    alt=""
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div
+                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                >
+                  <img
+                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
+                    alt=""
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div
+                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                >
+                  <img
+                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
+                    alt=""
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div
+                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                >
+                  <img
+                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
+                    alt=""
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div
+                  class="w-10 h-10 p-0.5 rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                >
+                  <img
+                    src="https://storage.sg.content-cdn.io/cdn-cgi/image/width=1000,height=1333,quality=90,format=auto,fit=cover,g=top/in-resources/22a79ec5-e694-4d7a-ac5a-85c8fa45b7f1/Images/ProductImages/Source/ITMTR01118-Ash-Blue_01.jpg"
+                    alt=""
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div> -->

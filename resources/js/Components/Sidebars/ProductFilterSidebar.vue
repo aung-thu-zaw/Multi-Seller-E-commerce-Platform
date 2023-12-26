@@ -31,7 +31,7 @@ const limitedBrands = ref([])
 const params = reactive({
   search: usePage().props.ziggy.query.search,
   sort: usePage().props.ziggy.query.sort ?? 'newest_arrivals',
-  page: usePage().props.ziggy.query.page,
+  tab: usePage().props.ziggy.query.tab,
   category: usePage().props.ziggy.query.category,
   brand: usePage().props.ziggy.query.brand,
   rating: usePage().props.ziggy.query.rating,

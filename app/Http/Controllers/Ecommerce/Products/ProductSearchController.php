@@ -46,7 +46,6 @@ class ProductSearchController extends Controller
             $selectedCategory = Category::where("slug", request("category"))->first();
 
             $brands = Brand::select("id", "name", "slug")->where("category_id", $selectedCategory->id)->where("status", "active")->get();
-
         }
 
         if (request("brand")) {

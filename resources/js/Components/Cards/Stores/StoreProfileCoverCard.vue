@@ -121,6 +121,7 @@ const handleCreateConversation = () => {
 
       <div class="space-x-5 self-end">
         <button
+          v-show="store.id !== $page.props.auth?.store?.id"
           as="button"
           @click="handleCreateConversation"
           class="font-bold bg-white text-gray-700 hover:bg-gray-200 duration-200 px-5 py-2.5 rounded-md text-sm"

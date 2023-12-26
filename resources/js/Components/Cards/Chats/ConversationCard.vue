@@ -40,7 +40,6 @@ onMounted(() => {
   Echo.leave(`conversation.${props.conversation.id}`)
   Echo.private(`conversation.${props.conversation.id}`)
     .listen('ConversationMessageSent', (message) => {
-      console.log(message)
       conversationMessages.value.push(message.message)
     })
     .listenForWhisper('typing', (e) => {

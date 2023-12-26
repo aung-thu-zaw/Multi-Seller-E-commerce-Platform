@@ -2,7 +2,6 @@
 import UserDropdown from '@/Components/Dropdowns/UserDropdown.vue'
 import { Link } from '@inertiajs/vue3'
 import { ref } from 'vue'
-import logo from '@/assets/images/website-logo-color.png'
 
 const collapseShow = ref('hidden')
 
@@ -31,7 +30,11 @@ const toggleCollapseShow = (classes) => {
         :href="route('home')"
         class="md:block text-left text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm font-bold px-0"
       >
-        <img :src="logo" alt="logo" class="w-auto h-4 md:h-12 object-contain" />
+        <img
+          :src="$page.props.generalSetting?.header_logo"
+          alt="logo"
+          class="w-auto h-4 md:h-12 object-contain"
+        />
       </Link>
       <!-- User -->
       <ul class="md:hidden items-center flex flex-wrap list-none ml-auto">
@@ -57,7 +60,11 @@ const toggleCollapseShow = (classes) => {
                 :href="route('home')"
                 class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm font-bold p-4 px-0"
               >
-                <img :src="logo" alt="logo" class="w-auto h-12 object-contain" />
+                <img
+                  :src="$page.props.generalSetting?.header_logo"
+                  alt="logo"
+                  class="w-auto h-12 object-contain"
+                />
               </Link>
             </div>
             <div class="w-6/12 flex justify-end">
