@@ -13,12 +13,10 @@ return new class () extends Migration {
         Schema::create('conversation_messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('conversation_id')->constrained('conversations')->cascadeOnDelete();
-            $table->foreignId('sender_id')->constrained('users');
-            $table->foreignId('receiver_id')->constrained('users');
+            $table->foreignId('customer_id')->nullable()->constrained('users');
+            $table->foreignId('store_id')->nullable()->constrained('stores');
             $table->enum('type', ['text', 'image', 'video'])->default("text");
             $table->text('message')->nullable();
-            $table->boolean("is_read_by_user")->default(false);
-            $table->boolean("is_read_by_agent")->default(false);
             $table->boolean("is_deleted_by_user")->default(false);
             $table->boolean("is_deleted_by_agent")->default(false);
             $table->foreignId("reply_to_message_id")->nullable()->references("id")->on("conversation_messages")->cascadeOnDelete();

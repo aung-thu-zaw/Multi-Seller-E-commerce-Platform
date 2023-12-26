@@ -138,6 +138,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(ProductQuestion::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Conversation>
+     */
+    public function conversations(): HasMany
+    {
+        return $this->hasMany(Conversation::class, 'customer_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne<Cart>

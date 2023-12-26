@@ -1,4 +1,5 @@
 <script setup>
+import AppLayout from '@/Layouts/AppLayout.vue'
 import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
 import ProductListCard from '@/Components/Cards/Products/ProductListCard.vue'
 import ProductSortingSelectBox from '@/Components/Forms/SelectBoxs/ProductSortingSelectBox.vue'
@@ -23,7 +24,7 @@ defineProps({ store: Object, products: Object })
             </div>
 
             <div class="flex items-center space-x-5">
-              <ProductSortingSelectBox />
+              <!-- <ProductSortingSelectBox /> -->
 
               <div class="">
                 <label for="view" class="font-bold text-sm text-gray-600">
@@ -97,12 +98,12 @@ defineProps({ store: Object, products: Object })
                   <div class="whitespace-nowrap text-xs font-bold text-gray-700 capitalize">
                     {{ __('Category') }} : Makeup
                   </div>
-                  <Link
+                  <!-- <Link
                     as="button"
                     class="ms-2.5 inline-flex justify-center items-center h-2 w-2 rounded-full text-gray-600 text-xs hover:text-red-600 transition-all cursor-pointer"
                   >
                     <i class="fa-solid fa-circle-xmark"></i>
-                  </Link>
+                  </Link> -->
                 </div>
 
                 <div
@@ -111,12 +112,12 @@ defineProps({ store: Object, products: Object })
                   <div class="whitespace-nowrap text-xs font-bold text-gray-700 capitalize">
                     {{ __('Brand') }} : Samsung
                   </div>
-                  <Link
+                  <!-- <Link
                     as="button"
                     class="ms-2.5 inline-flex justify-center items-center h-2 w-2 rounded-full text-gray-600 text-xs hover:text-red-600 transition-all cursor-pointer"
                   >
                     <i class="fa-solid fa-circle-xmark"></i>
-                  </Link>
+                  </Link> -->
                 </div>
               </div>
             </div>

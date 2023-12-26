@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conversation_file_attachments', function (Blueprint $table) {
+        Schema::create('message_file_attachments', function (Blueprint $table) {
             $table->id();
             $table->foreignId("conversation_message_id")->nullable()->constrained()->cascadeOnDelete();
             $table->enum('type', ['image', 'video']);
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conversation_file_attachments');
+        Schema::dropIfExists('message_file_attachments');
     }
 };

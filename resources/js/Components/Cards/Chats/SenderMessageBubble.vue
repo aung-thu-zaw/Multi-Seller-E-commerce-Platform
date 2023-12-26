@@ -1,3 +1,7 @@
+<script setup>
+defineProps({ message: Object })
+</script>
+
 <template>
   <!-- Chat -->
   <li class="flex ms-auto gap-x-2 sm:gap-x-4">
@@ -5,7 +9,7 @@
       <div class="inline-flex flex-col justify-end">
         <!-- Card -->
         <div class="inline-block bg-orange-600 rounded-2xl p-4 shadow-md">
-          <p class="text-sm text-white">what's preline ui?</p>
+          <p class="text-sm text-white">{{ message?.message }}</p>
         </div>
         <!-- End Card -->
 
@@ -30,11 +34,11 @@
       </div>
     </div>
 
-    <span
-      class="flex-shrink-0 inline-flex items-center justify-center h-[2.375rem] w-[2.375rem] rounded-full bg-gray-600"
-    >
-      <span class="text-sm font-medium text-white leading-none">AZ</span>
-    </span>
+    <img
+      class="inline-block h-9 w-9 rounded-full"
+      :src="message?.customer?.avatar"
+      alt="sender-image"
+    />
   </li>
   <!-- End Chat -->
 </template>

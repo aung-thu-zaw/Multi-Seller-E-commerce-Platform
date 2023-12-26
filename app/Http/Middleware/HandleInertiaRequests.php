@@ -44,9 +44,10 @@ class HandleInertiaRequests extends Middleware
                 'notifications' => $user ? $user->notifications : [],
                 'store' => $user ? $user->store : [],
                 'wishlists' => $user ? $user->wishlists : [],
+                'conversations' => $user ? $user->conversations()->with(['conversationMessages.customer:id,name,avatar','conversationMessages.store:id,store_name,avatar','customer:id,name,avatar', 'store:id,store_name,avatar'])->latest()->get() : [],
             ],
             'parentCategory' => Category::with('children')->whereNull('parent_id')->get(),
-            'generalSetting'=>GeneralSetting::first(),
+            'generalSetting' => GeneralSetting::first(),
             'searchHistories' => SearchHistory::orderBy("id", "desc")->get(),
             'flash' => [
                 'success' => session('success'),

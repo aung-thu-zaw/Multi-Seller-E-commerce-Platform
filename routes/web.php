@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Ecommerce\BecomeASellerController;
 use App\Http\Controllers\Ecommerce\Conversations\ConversationController;
+use App\Http\Controllers\Ecommerce\Conversations\ConversationMessageController;
 use App\Http\Controllers\Ecommerce\FlashSaleProductController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\ContactUsController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\FaqController;
@@ -124,7 +125,8 @@ Route::controller(SellerStoreController::class)
 });
 
 // Seller and Customer Communication
-Route::post("/conversations", [ConversationController::class,"store"])->name("conversations.store");
+Route::post("/conversations", [ConversationController::class,"store"])->name("conversations.store")->middleware("auth");
+Route::post("/conversations/{conversation}/messages", [ConversationMessageController::class,"store"])->middleware("auth");
 
 Route::post('/wishlists', [WishlistController::class, 'store'])->middleware('auth')->name('wishlists.store');
 

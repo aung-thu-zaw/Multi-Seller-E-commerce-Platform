@@ -3,14 +3,16 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     selectedItems: [],
-    isWidgetOpened: false
+    isWidgetOpened: false,
+    storeId: null
   },
   mutations: {
     setSelectedItems(state, items) {
       state.selectedItems = items
     },
-    toggleWidget(state) {
+    toggleWidget(state, storeId) {
       state.isWidgetOpened = !state.isWidgetOpened
+      state.storeId = storeId
     }
   },
   actions: {

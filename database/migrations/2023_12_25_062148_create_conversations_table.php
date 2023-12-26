@@ -12,7 +12,7 @@ return new class () extends Migration {
     {
         Schema::create('conversations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("customer_id")->constrained("users");
+            $table->foreignId("customer_id")->references("id")->on("users");
             $table->foreignId("store_id")->constrained();
             $table->boolean("is_deleted_by_customer")->default(false);
             $table->boolean("is_deleted_by_store")->default(false);

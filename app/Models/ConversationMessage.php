@@ -10,29 +10,29 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class ConversationMessage extends Model
 {
     use HasFactory;
-    
-    /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,ConversationMessage>
-    */
-    public function sender(): BelongsTo
-    {
-        return $this->belongsTo(User::class, "sender_id");
-    }
 
     /**
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,ConversationMessage>
     */
-    public function receiver(): BelongsTo
+    public function customer(): BelongsTo
     {
-        return $this->belongsTo(User::class, "receiver_id");
+        return $this->belongsTo(User::class);
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\HasMany<ConversationFileAttachment>
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Store,ConversationMessage>
     */
-    public function conversationFileAttachments(): HasMany
+    public function store(): BelongsTo
     {
-        return $this->hasMany(ConversationFileAttachment::class);
+        return $this->belongsTo(Store::class);
+    }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany<MessageFileAttachment>
+    */
+    public function messageFileAttachments(): HasMany
+    {
+        return $this->hasMany(MessageFileAttachment::class);
     }
 
     /**

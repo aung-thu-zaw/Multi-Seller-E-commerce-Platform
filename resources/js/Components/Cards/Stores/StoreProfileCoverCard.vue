@@ -83,7 +83,7 @@ const handleCreateConversation = () => {
     route('conversations.store'),
     { store_id: props.store?.id },
     {
-      onSuccess: () => vuexStore.commit('toggleWidget')
+      onSuccess: () => vuexStore.commit('toggleWidget', props.store?.id)
     }
   )
 }

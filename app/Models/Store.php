@@ -49,7 +49,7 @@ class Store extends Model
     protected function avatar(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/stores/avatars/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/stores/avatars/$value"),
         );
     }
 
@@ -59,7 +59,7 @@ class Store extends Model
     protected function cover(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/stores/covers/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/stores/covers/$value"),
         );
     }
 
@@ -79,16 +79,24 @@ class Store extends Model
         return $this->hasMany(StoreReview::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Conversation>
+     */
+    public function conversations(): HasMany
+    {
+        return $this->hasMany(Conversation::class, 'store_id');
+    }
+
     public static function deleteAvatar(?string $avatar): void
     {
-        if (! empty($avatar) && file_exists(storage_path('app/public/stores/avatars/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
+        if (!empty($avatar) && file_exists(storage_path('app/public/stores/avatars/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/stores/avatars/'.pathinfo($avatar, PATHINFO_BASENAME)));
         }
     }
 
     public static function deleteCover(?string $cover): void
     {
-        if (! empty($cover) && file_exists(storage_path('app/public/stores/covers/'.pathinfo($cover, PATHINFO_BASENAME)))) {
+        if (!empty($cover) && file_exists(storage_path('app/public/stores/covers/'.pathinfo($cover, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/stores/covers/'.pathinfo($cover, PATHINFO_BASENAME)));
         }
     }
