@@ -21,6 +21,8 @@ class ConversationMessageController extends Controller
             "customer_id" => $request->customer_id,
             "store_id" => $request->store_id,
             'message' => $request->message,
+            'is_read_by_customer' => $request->customer_id ? true : false,
+            'is_read_by_store' => $request->store_id ? true : false,
             'reply_to_message_id' => $request->reply_to_message_id ?? null,
         ]);
 

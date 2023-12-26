@@ -161,7 +161,7 @@ const store = computed(() => usePage().props.auth?.store)
             </li>
 
             <!-- Categories -->
-            <li class="items-center">
+            <!-- <li class="items-center">
               <Link
                 :href="route('seller.store-product-categories.index')"
                 :data="{
@@ -183,12 +183,12 @@ const store = computed(() => usePage().props.auth?.store)
                 <i class="fa-solid fa-list mr-2"></i>
                 {{ __('Store Product Categories') }}
               </Link>
-            </li>
+            </li> -->
 
             <!-- Products -->
             <li class="items-center">
               <Link
-                :href="route('seller.products.index')"
+                href="#"
                 :data="{
                   page: 1,
                   per_page: 5,
@@ -255,17 +255,11 @@ const store = computed(() => usePage().props.auth?.store)
             <!-- Store Profile -->
             <li class="items-center">
               <Link
-                :href="route('admin.brands.index')"
-                :data="{
-                  page: 1,
-                  per_page: 5,
-                  sort: 'id',
-                  direction: 'desc'
-                }"
+                :href="route('seller.chat-inbox')"
                 class="text-xs py-3 font-bold block"
                 :class="{
-                  'text-blue-600 hover:text-blue-500': $page.url.startsWith('/seller/chat'),
-                  'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/seller/chat')
+                  'text-blue-600 hover:text-blue-500': $page.url.startsWith('/seller/chat-inbox'),
+                  'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/seller/chat-inbox')
                 }"
               >
                 <i class="fa-solid fa-message mr-2"></i>

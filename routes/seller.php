@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Seller\Auth\LoginController;
+use App\Http\Controllers\Seller\Dashboard\ChatInboxController;
 use App\Http\Controllers\Seller\Dashboard\DashboardController;
 use App\Http\Controllers\Seller\Dashboard\StoreProductCategoryController;
 use App\Http\Controllers\Seller\Dashboard\StoreSettingController;
@@ -32,4 +33,7 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
             });
 
         Route::get('/store-settings', [StoreSettingController::class, 'index'])->name('store-settings.index');
+
+        Route::get('/chat-inbox', ChatInboxController::class)->name('chat-inbox');
+
     });

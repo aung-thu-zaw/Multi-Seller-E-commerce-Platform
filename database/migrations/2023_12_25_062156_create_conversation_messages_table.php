@@ -17,8 +17,10 @@ return new class () extends Migration {
             $table->foreignId('store_id')->nullable()->constrained('stores');
             $table->enum('type', ['text', 'image', 'video'])->default("text");
             $table->text('message')->nullable();
-            $table->boolean("is_deleted_by_user")->default(false);
-            $table->boolean("is_deleted_by_agent")->default(false);
+            $table->boolean("is_read_by_customer")->default(false);
+            $table->boolean("is_read_by_store")->default(false);
+            $table->boolean("is_deleted_by_customer")->default(false);
+            $table->boolean("is_deleted_by_store")->default(false);
             $table->foreignId("reply_to_message_id")->nullable()->references("id")->on("conversation_messages")->cascadeOnDelete();
             $table->timestamps();
         });

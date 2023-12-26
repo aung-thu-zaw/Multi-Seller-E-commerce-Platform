@@ -8,7 +8,13 @@ defineProps({ message: Object })
     <div class="grow text-end space-y-3">
       <div class="inline-flex flex-col justify-end">
         <!-- Card -->
-        <div class="inline-block bg-orange-600 rounded-2xl p-4 shadow-md">
+        <div
+          class="inline-block rounded-2xl p-4 shadow-md"
+          :class="{
+            'bg-blue-600': $page.url.startsWith('/seller'),
+            'bg-orange-600': !$page.url.startsWith('/seller')
+          }"
+        >
           <p class="text-sm text-white">{{ message?.message }}</p>
         </div>
         <!-- End Card -->
@@ -35,8 +41,12 @@ defineProps({ message: Object })
     </div>
 
     <img
-      class="inline-block h-9 w-9 rounded-full"
-      :src="message?.customer?.avatar"
+      class="inline-block h-9 w-9 rounded-full object-cover"
+      :src="
+        $page.url.startsWith('/seller/chat-inbox')
+          ? message?.store?.avatar
+          : message?.customer?.avatar
+      "
       alt="sender-image"
     />
   </li>

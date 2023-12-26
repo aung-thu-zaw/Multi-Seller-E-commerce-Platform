@@ -33,4 +33,4 @@ window.Echo = new Echo({
   enabledTransports: ['ws', 'wss']
 })
 
-Pusher.logToConsole = true
+// Pusher.logToConsole = true

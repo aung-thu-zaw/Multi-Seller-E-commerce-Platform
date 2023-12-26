@@ -12,7 +12,9 @@ import SellerDashboardSidebar from '@/Components/Sidebars/SellerDashboardSidebar
 
       <div
         class="px-4 md:px-10 mx-auto w-full"
-        :class="{ '-m-24': $page.url === '/seller/dashboard' }"
+        :class="{
+          '-m-24': $page.url === '/seller/dashboard'
+        }"
       >
         <slot />
       </div>

@@ -126,7 +126,7 @@ Route::controller(SellerStoreController::class)
 
 // Seller and Customer Communication
 Route::post("/conversations", [ConversationController::class,"store"])->name("conversations.store")->middleware("auth");
-Route::post("/conversations/{conversation}/messages", [ConversationMessageController::class,"store"])->middleware("auth");
+Route::post("/conversations/{conversation}/messages", [ConversationMessageController::class,"store"])->name('conversation.messages.store')->middleware("auth");
 
 Route::post('/wishlists', [WishlistController::class, 'store'])->middleware('auth')->name('wishlists.store');
 

@@ -3,7 +3,7 @@ import ConversationCard from '@/Components/Cards/Chats/ConversationCard.vue'
 import SenderMessageBubble from '@/Components/Cards/Chats/SenderMessageBubble.vue'
 import ReceiverMessageBubble from '@/Components/Cards/Chats/ReceiverMessageBubble.vue'
 import EcommerceSenderMessageForm from '@/Components/Forms/Chats/EcommerceSenderMessageForm.vue'
-import { computed, watch, onUpdated, ref } from 'vue'
+import { computed, onUpdated, ref } from 'vue'
 import { useStore } from 'vuex'
 import { usePage } from '@inertiajs/vue3'
 
@@ -13,21 +13,30 @@ const isWidgetOpened = computed(() => store.state.isWidgetOpened)
 
 const conversations = computed(() => usePage().props.auth?.conversations)
 
-const defaultSelectedConversation = computed(() => {
-  return conversations.value.find(
-    (conversation) =>
-      conversation.store_id === store.state.storeId &&
-      conversation.customer_id === usePage().props.auth.user?.id
-  )
-})
-
 const selectedConversation = ref(null)
 
 const messageScroll = ref(null)
 
 const scrollToBottom = () => {
   if (messageScroll.value) {
-    messageScroll.value.scrollTop = messageScroll.value.scrollHeight
+    const scrollHeight = messageScroll.value.scrollHeight
+    const scrollTop = messageScroll.value.scrollTop
+    const clientHeight = messageScroll.value.clientHeight
+    const targetScrollTop = scrollHeight - clientHeight
+
+    const animation = () => {
+      const distance = targetScrollTop - scrollTop
+      const step = distance / 15
+
+      if (Math.abs(distance) > 1) {
+        messageScroll.value.scrollTop += step
+        requestAnimationFrame(animation)
+      } else {
+        messageScroll.value.scrollTop = targetScrollTop
+      }
+    }
+
+    requestAnimationFrame(animation)
   }
 }
 
@@ -42,26 +51,7 @@ const handleSelectConversation = (conversationId) => {
 }
 
 const messages = computed(() => {
-  return selectedConversation.value?.conversation_messages ?? []
-})
-
-watch(selectedConversation, (newSelectedConversation) => {
-  if (newSelectedConversation) {
-    Echo.private(`conversation.${newSelectedConversation.id}`)
-      .listen('ConversationMessageSent', (message) => {
-        messages.value.push(message.message)
-        scrollToBottom() // Scroll to bottom when a new message is received
-      })
-      .listenForWhisper('typing', (e) => {
-        console.log('Typing:', e)
-      })
-  }
-})
-
-watch(defaultSelectedConversation, () => {
-  if (defaultSelectedConversation.value) {
-    handleSelectConversation(defaultSelectedConversation.value.id)
-  }
+  return selectedConversation.value?.conversation_messages || []
 })
 </script>
 
@@ -69,7 +59,7 @@ watch(defaultSelectedConversation, () => {
   <div v-show="$page.props.auth?.user" class="relative">
     <div
       v-show="isWidgetOpened"
-      class="fixed bottom-24 right-12 rounded-md w-[900px] h-[600px] bg-white z-[60] overflow-hidden border border-gray-400"
+      class="fixed bottom-24 right-12 rounded-md w-[1000px] h-[600px] bg-white z-[60] overflow-hidden border border-gray-400"
     >
       <div class="grid grid-cols-3 h-full">
         <div class="col-span-1 h-full">
@@ -81,7 +71,7 @@ watch(defaultSelectedConversation, () => {
           </div>
 
           <div class="border-r h-full">
-            <div class="h-[525px] overflow-scroll pb-3">
+            <div class="h-[525px] overflow-scroll message-container pb-3">
               <!-- Conversation Card -->
               <ConversationCard
                 v-for="conversation in conversations"
@@ -100,7 +90,10 @@ watch(defaultSelectedConversation, () => {
 
           <div class="h-[540px] flex items-center justify-center w-full">
             <div v-if="selectedConversation" class="flex flex-col items-center w-full h-full">
-              <div ref="messageScroll" class="h-full overflow-scroll py-3 px-2.5 w-full">
+              <div
+                ref="messageScroll"
+                class="h-full overflow-scroll py-3 px-2.5 w-full message-container"
+              >
                 <!-- Chat Bubble -->
                 <ul class="space-y-5">
                   <li v-for="message in messages" :key="message.id">
@@ -155,23 +148,8 @@ watch(defaultSelectedConversation, () => {
   </div>
 </template>
 
-
-<!-- <style>
-.message-container {
-  scrollbar-width: thin;
-  scrollbar-color: #999 #f0f0f0;
-}
-
+<style>
 .message-container::-webkit-scrollbar {
-  width: 6px;
+  display: none;
 }
-
-.message-container::-webkit-scrollbar-track {
-  background-color: #f0f0f0;
-}
-
-.message-container::-webkit-scrollbar-thumb {
-  background-color: #999;
-  border-radius: 3px;
-}
-</style> -->
+</style>

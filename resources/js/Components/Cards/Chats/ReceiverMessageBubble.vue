@@ -6,8 +6,12 @@ defineProps({ message: Object })
   <!-- Chat -->
   <li class="max-w-lg flex gap-x-2 sm:gap-x-4 me-11">
     <img
-      class="inline-block h-9 w-9 rounded-full"
-      :src="message?.store?.avatar"
+      class="inline-block h-9 w-9 rounded-full object-cover"
+      :src="
+        $page.url.startsWith('/seller/chat-inbox')
+          ? message?.customer?.avatar
+          : message?.store?.avatar
+      "
       alt="receiver-image"
     />
 
