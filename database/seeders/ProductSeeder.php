@@ -24,30 +24,35 @@ class ProductSeeder extends Seeder
                 'SKUs' => [
                     [
                         'price' => 349,
+                        'qty' => 20,
                         'attributes' => [
                             'color' => 'Red', 'ram' => '2GB', 'storage' => '32GB'
                         ],
                     ],
                     [
                         'price' => 349,
+                        'qty' => 10,
                         'attributes' => [
                             'color' => 'Green', 'ram' => '4GB', 'storage' => '32GB'
                         ],
                     ],
                     [
                         'price' => 349,
+                        'qty' => 2,
                         'attributes' => [
                             'color' => 'Yellow', 'ram' => '8GB', 'storage' => '32GB'
                         ],
                     ],
                     [
                         'price' => 1099,
+                        'qty' => 4,
                         'attributes' => [
                             'color' => 'Blue', 'ram' => '8GB', 'storage' => '512GB'
                         ],
                     ],
                     [
                         'price' => 1499,
+                        'qty' => 5,
                         'attributes' => [
                             'color' => 'Black', 'ram' => '16GB', 'storage' => '1TB'
                         ],
@@ -60,30 +65,35 @@ class ProductSeeder extends Seeder
                 'SKUs' => [
                     [
                         'price' => 449,
+                           'qty' => 7,
                         'attributes' => [
                             'color' => 'Red', 'ram' => '2GB', 'storage' => '32GB'
                         ],
                     ],
                     [
                         'price' => 449,
+                           'qty' => 6,
                         'attributes' => [
                             'color' => 'Green', 'ram' => '4GB', 'storage' => '32GB'
                         ],
                     ],
                     [
                         'price' => 449,
+                           'qty' => 4,
                         'attributes' => [
                             'color' => 'Yellow', 'ram' => '8GB', 'storage' => '32GB'
                         ],
                     ],
                     [
                         'price' => 1299,
+                        'qty' => 20,
                         'attributes' => [
                             'color' => 'Blue', 'ram' => '8GB', 'storage' => '512GB'
                         ],
                     ],
                     [
                         'price' => 1999,
+                        'qty' => 10,
                         'attributes' => [
                             'color' => 'Blue', 'ram' => '16GB', 'storage' => '512GB'
                         ],
@@ -117,7 +127,8 @@ class ProductSeeder extends Seeder
                     }
                     $sku = $DBProduct->skus()->create([
                         'code' => str()->slug($skuCode),
-                        'price' => $sku['price']
+                        'price' => $sku['price'],
+                        'qty' => $sku['qty'],
                     ]);
                     $sku->attributeOptions()->attach($skuOptions);
                 }
@@ -187,7 +198,7 @@ class ProductSeeder extends Seeder
         Product::factory()->create(["image" => "product-54.jpg",'status' => 'approved']);
         Product::factory()->create(["image" => "product-55.jpg",'status' => 'approved']);
 
-        Product::factory(1000)->create();
-        Product::factory(50)->create(['store_id' => 2, 'status' => 'approved']);
+        // Product::factory(1000)->create();
+        // Product::factory(50)->create(['store_id' => 2, 'status' => 'approved']);
     }
 }

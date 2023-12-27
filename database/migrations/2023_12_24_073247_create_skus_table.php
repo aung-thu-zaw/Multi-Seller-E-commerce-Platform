@@ -15,6 +15,7 @@ return new class () extends Migration {
             $table->foreignId("product_id")->constrained();
             $table->string("code");
             $table->decimal('price', 8, 2);
+            $table->integer('qty')->default(0);
             $table->timestamps();
 
 
@@ -22,7 +23,7 @@ return new class () extends Migration {
             // $table->decimal('offer_price', 8, 2)->nullable();
             // $table->date('offer_price_start_date')->nullable();
             // $table->date('offer_price_end_date')->nullable();
-            // $table->integer('qty')->default(0);
+
         });
     }
 

@@ -16,7 +16,7 @@ class ProductDetailController extends Controller
 {
     public function show(Request $request, Product $product): Response|ResponseFactory
     {
-        $product->load(['productImages', 'brand:id,name', 'store:id,store_type,seller_id']);
+        $product->load(['productImages', 'brand:id,name', 'store:id,store_type,seller_id','skus']);
 
         $attributes = Attribute::pluck('name', 'id');
 

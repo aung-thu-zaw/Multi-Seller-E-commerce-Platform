@@ -1,9 +1,11 @@
 <script setup>
+import ProductImageGallery from '@/Components/ProductImageGallery.vue'
 import StarRating from '@/Components/Ratings/StarRating.vue'
 import RedBadge from '@/Components/Badges/RedBadge.vue'
 import GreenBadge from '@/Components/Badges/GreenBadge.vue'
 import { useFormatFunctions } from '@/Composables/useFormatFunctions'
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
+import { router, usePage } from '@inertiajs/vue3'
 
 const props = defineProps({ product: Object, attributes: Object, options: Object, price: Object })
 
@@ -28,15 +30,6 @@ const discountPercentage = computed(() => {
   return Math.round(discountPercentage)
 })
 
-// Handle Multiple Images And Select Active Image
-const images = reactive([props.product.image])
-
-props.product.product_images.forEach((image) => images.push(image.image))
-
-const activeImageIndex = ref(0)
-
-const activeImage = computed(() => images[activeImageIndex.value])
-
 // Handle Quantity
 const quantity = ref(1)
 
@@ -44,35 +37,96 @@ const increment = () =>
   quantity.value >= props.product.qty ? (quantity.value = props.product.qty) : quantity.value++
 
 const decrement = () => (quantity.value <= 1 ? 1 : quantity.value--)
+
+const formData = reactive({
+  product_id: props.product.id,
+  qty: quantity.value,
+  total_price: props.product.offer_price
+    ? quantity.value * props.product.offer_price
+    : quantity.value * props.product.price,
+  attributes: {}
+})
+
+const calculateTotalPrice = () => {
+  let totalPrice = 0
+
+  for (const sku of props.product.skus) {
+    let isMatch = true
+
+    for (const option of sku.attribute_options) {
+      if (formData.attributes[option.attribute.name] !== option.value) {
+        isMatch = false
+        break
+      }
+    }
+
+    if (isMatch) {
+      totalPrice = sku.price * formData.qty
+      break
+    }
+  }
+
+  return totalPrice
+}
+
+const remainingQuantityInStock = computed(() => {
+  for (const sku of props.product.skus) {
+    let isMatch = true
+
+    for (const option of sku.attribute_options) {
+      if (formData.attributes[option.attribute.name] !== option.value) {
+        isMatch = false
+        break
+      }
+    }
+
+    if (isMatch && sku.qty > 0) {
+      return sku.qty
+    }
+  }
+
+  return 0
+})
+
+const handleSelectedAttributes = (option) => {
+  formData.attributes[option.attribute.name] = option.value
+  formData.total_price = calculateTotalPrice()
+}
+
+watch(quantity, (newValue) => {
+  formData.qty = newValue
+  formData.total_price = calculateTotalPrice()
+})
+
+const handleAddToCart = () => {
+  if (props.product.qty !== 0) {
+    router.post(
+      route('cart-items.store'),
+      {
+        ...formData
+      },
+      {
+        preserveScroll: true,
+        onSuccess: () => {
+          toast.success(usePage().props.flash.success, {
+            autoClose: 2000
+          })
+        }
+      }
+    )
+  } else {
+    toast.error('Product is sold out.', {
+      autoClose: 2000
+    })
+  }
+}
 </script>
 
 <template>
   <div class="rounded-md bg-white border border-gray-200 overflow-hidden">
     <div class="flex items-start justify-between space-x-6">
       <aside class="w-4/12 p-5">
-        <!-- Dynamic Display Active Image -->
-        <div class="text-center rounded mb-5">
-          <img
-            class="object-cover inline-block w-[500px] h-full"
-            :src="activeImage"
-            alt="product-name"
-          />
-        </div>
-
-        <!-- Multi Product Images -->
-        <div class="space-x-2 overflow-auto whitespace-nowrap p-3">
-          <div
-            v-for="(image, index) in images"
-            :key="image.id"
-            class="inline-block border border-gray-400 p-0.5 rounded-sm hover:border-orange-500"
-            :class="{
-              'border-orange-500 ring-2 ring-orange-300': activeImageIndex === index
-            }"
-            @click="activeImageIndex = index"
-          >
-            <img class="w-14 h-14 rounded-sm" :src="image" :alt="product.name" />
-          </div>
-        </div>
+        <ProductImageGallery :product="product" />
       </aside>
 
       <div class="w-8/12 min-h-[510px] flex items-start justify-between">
@@ -116,7 +170,7 @@ const decrement = () => (quantity.value <= 1 ? 1 : quantity.value--)
           </p>
 
           <!-- Current Product Stock -->
-          <div class="flex items-center">
+          <!-- <div class="flex items-center">
             <div v-if="product?.qty > 0">
               <span class="text-gray-700 font-semibold text-sm mr-3">
                 Total {{ product?.qty }} Available
@@ -129,7 +183,7 @@ const decrement = () => (quantity.value <= 1 ? 1 : quantity.value--)
               </span>
               <RedBadge> In stock </RedBadge>
             </div>
-          </div>
+          </div> -->
 
           <!-- Product Price -->
           <div class="my-2">
@@ -153,6 +207,10 @@ const decrement = () => (quantity.value <= 1 ? 1 : quantity.value--)
             </div>
           </div>
 
+          {{ formData }}
+
+          {{ remainingQuantityInStock }}
+
           <!-- Variants -->
           <div class="space-y-5 capitalize">
             <div
@@ -163,13 +221,18 @@ const decrement = () => (quantity.value <= 1 ? 1 : quantity.value--)
             >
               <p class="font-semibold text-sm text-gray-700 mr-5">{{ attribute }} :</p>
               <div class="flex items-center space-x-3">
-                <div
+                <button
                   v-for="option in options[index]"
                   :key="option"
                   class="px-3.5 py-1 flex items-center justify-center text-sm font-semibold rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
+                  :class="{
+                    'border-orange-500 ring-2 ring-orange-300':
+                      formData.attributes[attribute] === option.value
+                  }"
+                  @click="handleSelectedAttributes(option)"
                 >
                   <span> {{ option.value }} </span>
-                </div>
+                </button>
               </div>
             </div>
           </div>
@@ -199,13 +262,24 @@ const decrement = () => (quantity.value <= 1 ? 1 : quantity.value--)
               </button>
             </div>
 
-            <!-- <p class="ml-5 text-gray-700 font-semibold text-xs">3 item(s) left</p> -->
-            <p class="ml-5 text-orange-600 font-semibold text-xs">Out of stock</p>
+            <div class="flex items-center ml-5">
+              <div v-if="remainingQuantityInStock > 0">
+                <span class="text-gray-700 font-semibold text-sm mr-3">
+                  {{ remainingQuantityInStock }} item(s) left
+                </span>
+                <GreenBadge> In stock </GreenBadge>
+              </div>
+              <div v-else class="my-3">
+                <RedBadge> Out of stock </RedBadge>
+              </div>
+            </div>
           </div>
 
           <!-- Action Buttons -->
           <div class="flex flex-wrap space-x-6 mb-5">
             <button
+              type="button"
+              @click="handleAddToCart"
               class="text-sm px-6 shadow-md py-3 font-bold rounded-[4px] active:animate-press bg-blue-600 text-white hover:bg-blue-700 duration-200"
             >
               <i class="fa-solid fa-cart-plus"></i>
@@ -219,8 +293,24 @@ const decrement = () => (quantity.value <= 1 ? 1 : quantity.value--)
             </button>
           </div>
         </main>
+      </div>
+    </div>
+  </div>
+</template>
 
-        <aside class="bg-gray-50 min-w-[300px]">
+<style scoped>
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+}
+
+.scrollbar::-webkit-scrollbar {
+  height: 10px;
+}
+</style>
+
+
+        <!-- <aside class="bg-gray-50 min-w-[300px]">
           <div class="px-6 py-3.5 space-y-3">
             <div class="flex items-center justify-between">
               <h3 class="font-bold text-sm text-gray-800">Available Delivery</h3>
@@ -286,22 +376,7 @@ const decrement = () => (quantity.value <= 1 ? 1 : quantity.value--)
               K Mobile Shop
             </div>
           </div>
-        </aside>
-      </div>
-    </div>
-  </div>
-</template>
-
-<style scoped>
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  display: none;
-}
-
-.scrollbar::-webkit-scrollbar {
-  height: 10px;
-}
-</style>
+        </aside> -->
 
 <!-- <div class="flex items-center">
               <p class="font-semibold text-sm text-gray-700 mr-5">Color :</p>
