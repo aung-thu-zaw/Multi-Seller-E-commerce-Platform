@@ -10,6 +10,7 @@ use App\Http\Controllers\Ecommerce\HelpAndSupport\FaqFeedbackController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\HelpCenterController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\QuestionSearchController;
 use App\Http\Controllers\Ecommerce\HomeController;
+use App\Http\Controllers\Ecommerce\CartItemController;
 use App\Http\Controllers\Ecommerce\MyCartController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentReplyController;
@@ -143,7 +144,8 @@ Route::post('/wishlists', [WishlistController::class, 'store'])
     ->middleware('auth')
     ->name('wishlists.store');
 
-Route::controller(MyCartController::class)
+Route::controller(CartItemController::class)
+->middleware('auth')
     ->prefix('/cart/cart-items')
     ->name('cart-items.')
     ->group(function () {
@@ -151,6 +153,8 @@ Route::controller(MyCartController::class)
         Route::patch('/{cart_item}', 'update')->name('update');
         Route::delete('/{cart_item}', 'destroy')->name('destroy');
     });
+
+Route::get("/my-carts", [MyCartController::class,"index"])->name("my-cart.index");
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

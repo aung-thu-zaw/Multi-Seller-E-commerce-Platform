@@ -8,46 +8,19 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Response;
+use Inertia\ResponseFactory;
 
 class MyCartController extends Controller
 {
-    public function store(CartItemRequest $request): RedirectResponse
+    public function index(): Response|ResponseFactory
     {
         $cart = Cart::firstOrCreate(["user_id" => auth()->id()]);
 
-        $cartItem = CartItem::where('product_id', $request->product_id)->whereJsonContains('attributes', $request->validated()['attributes'])->first();
+        $cartItems = $cart->cartItems()->with(['product.store:id,store_name,slug'])->get();
 
-        if($cartItem) {
+        // $myWishlists = Wishlist::with('product:id,store_id,name,image,qty,price,offer_price', 'store:id,store_name,slug')->where('user_id', auth()->id())->get();
 
-            $cartItem->update(["qty" => $cartItem->qty + $request->qty,'total_price' => $cartItem->total_price + $request->total_price]);
-
-        } else {
-
-            CartItem::create([
-                'cart_id' => $cart->id,
-                'product_id' => $request->product_id,
-                'qty' => $request->qty,
-                'total_price' => $request->total_price,
-                'attributes' => $request->validated()['attributes'] ? json_encode($request->validated()['attributes']) : null,
-            ]);
-        }
-
-        return back()->with("success", "$request->qty item(s) have been added to your cart");
-    }
-
-    public function update(Request $request, CartItem $cartItem): RedirectResponse
-    {
-        $cartItem->update([
-            "qty" => $request->qty,
-            "total_price" => $request->total_price
-        ]);
-
-        return back();
-    }
-    public function destroy(CartItem $cartItem): RedirectResponse
-    {
-        $cartItem->delete();
-
-        return back()->with("success", "$cartItem->qty item(s) have been removed from your cart");
+        return inertia("E-commerce/MyCart/Index", compact("cartItems"));
     }
 }

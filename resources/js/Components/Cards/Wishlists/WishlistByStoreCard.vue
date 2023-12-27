@@ -11,14 +11,14 @@ defineProps({ wishlistGroup: Object })
       <h3 class="font-bold text-md text-gray-800">
         Item(s) from
         <span class="text-orange-600">
-          {{ wishlistGroup[0].store.store_name }}
+          {{ wishlistGroup[0].store?.store_name }}
         </span>
       </h3>
       <Link
         as="button"
-        :href="route('stores.show', { store: wishlistGroup[0].store.slug })"
+        :href="route('stores.show', { store: wishlistGroup[0].store?.slug })"
         :data="{ tab: 'home' }"
-        class="font-bold text-sm text-orange-600 hover:bg-orange-100 rounded-full px-3 py-1.5 duration-300"
+        class="font-bold text-sm text-orange-600 hover:text-orange-700"
       >
         <i class="fa-solid fa-store"></i>
         Go To Store

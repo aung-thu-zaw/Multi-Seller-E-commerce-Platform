@@ -166,7 +166,7 @@ import { Link } from '@inertiajs/vue3'
 
           <Link
             as="button"
-            href="#"
+            :href="route('my-cart.index')"
             class="relative text-white px-4 py-2.5 bg-orange-600 rounded-[4px] duration-150 hover:bg-orange-700"
           >
             <span class="text-sm font-semibold">
