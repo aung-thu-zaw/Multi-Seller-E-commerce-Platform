@@ -15,15 +15,21 @@ class MyCartController extends Controller
     {
         $cart = Cart::firstOrCreate(["user_id" => auth()->id()]);
 
-        $cartItem = CartItem::where('product_id', $request->product_id)->whereJsonContains('attributes', $request->attributes)->first();
+        $cartItem = CartItem::where('product_id', $request->product_id)->whereJsonContains('attributes', $request->validated()['attributes'])->first();
 
         if($cartItem) {
 
-            $cartItem->update(["qty" => $cartItem->qty + $request->qty]);
+            $cartItem->update(["qty" => $cartItem->qty + $request->qty,'total_price' => $cartItem->total_price + $request->total_price]);
 
         } else {
 
-            CartItem::create($request->validated() + ["cart_id" => $cart->id]);
+            CartItem::create([
+                'cart_id' => $cart->id,
+                'product_id' => $request->product_id,
+                'qty' => $request->qty,
+                'total_price' => $request->total_price,
+                'attributes' => $request->validated()['attributes'] ? json_encode($request->validated()['attributes']) : null,
+            ]);
         }
 
         return back()->with("success", "$request->qty item(s) have been added to your cart");

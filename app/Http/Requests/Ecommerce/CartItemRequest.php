@@ -26,7 +26,7 @@ class CartItemRequest extends FormRequest
             "product_id" => ["required","numeric",Rule::exists("products", "id")],
             "qty" => ["required","numeric"],
             "total_price" => ["required","numeric"],
-            "attributes" => ["nullable", "json"],
+            "attributes" => ["nullable", "array"],
         ];
     }
 }

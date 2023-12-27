@@ -4,8 +4,11 @@ import StarRating from '@/Components/Ratings/StarRating.vue'
 import RedBadge from '@/Components/Badges/RedBadge.vue'
 import GreenBadge from '@/Components/Badges/GreenBadge.vue'
 import { useFormatFunctions } from '@/Composables/useFormatFunctions'
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { router, usePage } from '@inertiajs/vue3'
+import { __ } from '@/Services/translations-inside-setup.js'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 const props = defineProps({ product: Object, attributes: Object, options: Object, price: Object })
 
@@ -23,13 +26,6 @@ const avgRating = computed(() => {
   return null
 })
 
-const discountPercentage = computed(() => {
-  const discountPercentage =
-    ((props.product?.price - props.product?.offer_price) / props.product?.price) * 100
-
-  return Math.round(discountPercentage)
-})
-
 // Handle Quantity
 const quantity = ref(1)
 
@@ -41,51 +37,111 @@ const decrement = () => (quantity.value <= 1 ? 1 : quantity.value--)
 const formData = reactive({
   product_id: props.product.id,
   qty: quantity.value,
-  total_price: props.product.offer_price
-    ? quantity.value * props.product.offer_price
-    : quantity.value * props.product.price,
+  total_price: 0,
   attributes: {}
 })
 
 const calculateTotalPrice = () => {
   let totalPrice = 0
 
-  for (const sku of props.product.skus) {
-    let isMatch = true
+  if (props.attributes && props.options && props.product?.skus.length) {
+    for (const sku of props.product.skus) {
+      let isMatch = true
 
-    for (const option of sku.attribute_options) {
-      if (formData.attributes[option.attribute.name] !== option.value) {
-        isMatch = false
+      for (const option of sku.attribute_options) {
+        if (formData.attributes[option.attribute.name] !== option.value) {
+          isMatch = false
+          break
+        }
+      }
+
+      if (isMatch) {
+        totalPrice = sku.offer_price ? formData.qty * sku.offer_price : formData.qty * sku.price
         break
       }
     }
 
-    if (isMatch) {
-      totalPrice = sku.price * formData.qty
-      break
-    }
-  }
+    return totalPrice
+  } else {
+    console.log(totalPrice)
+    totalPrice = props.product.offer_price
+      ? formData.qty * props.product.offer_price
+      : formData.qty * props.product.price
 
-  return totalPrice
+    return totalPrice
+  }
 }
 
-const remainingQuantityInStock = computed(() => {
-  for (const sku of props.product.skus) {
-    let isMatch = true
+const selectedSKU = computed(() => {
+  const selectedAttributes = Object.values(formData.attributes)
 
-    for (const option of sku.attribute_options) {
-      if (formData.attributes[option.attribute.name] !== option.value) {
-        isMatch = false
-        break
-      }
-    }
+  return props.product?.skus.find((sku) => {
+    const skuAttributes = sku.attribute_options.map((option) => option.value)
+    return selectedAttributes.every((attr) => skuAttributes.includes(attr))
+  })
+})
 
-    if (isMatch && sku.qty > 0) {
-      return sku.qty
-    }
+const productOfferPrice = computed(() =>
+  selectedSKU.value ? selectedSKU.value.offer_price : props.product.offer_price
+)
+const productNormalPrice = computed(() =>
+  selectedSKU.value ? selectedSKU.value.price : props.product.price
+)
+
+const discountPercentage = computed(() => {
+  const offerPrice = productOfferPrice.value
+  const normalPrice = productNormalPrice.value
+
+  if (offerPrice && normalPrice) {
+    return Math.round(((normalPrice - offerPrice) / normalPrice) * 100)
   }
 
   return 0
+})
+
+const remainingQuantityInStock = computed(() => {
+  if (props.attributes && props.options && props.product?.skus.length) {
+    for (const sku of props.product.skus) {
+      let isMatch = true
+
+      for (const option of sku.attribute_options) {
+        if (formData.attributes[option.attribute.name] !== option.value) {
+          isMatch = false
+          break
+        }
+      }
+
+      if (isMatch && sku.qty > 0) {
+        return sku.qty
+      }
+    }
+
+    return 0
+  } else {
+    return props.product?.qty
+  }
+})
+
+const getDefaultAttributes = () => {
+  if (props.attributes && props.options && props.product?.skus.length) {
+    const defaultAttributes = {}
+
+    for (const attributeId in props.attributes) {
+      const attributeName = props.attributes[attributeId]
+      const options = props.options[attributeId]
+
+      defaultAttributes[attributeName] = options[0].value
+    }
+
+    return defaultAttributes
+  } else {
+    return {}
+  }
+}
+
+onMounted(() => {
+  Object.assign(formData.attributes, getDefaultAttributes())
+  formData.total_price = calculateTotalPrice()
 })
 
 const handleSelectedAttributes = (option) => {
@@ -108,7 +164,7 @@ const handleAddToCart = () => {
       {
         preserveScroll: true,
         onSuccess: () => {
-          toast.success(usePage().props.flash.success, {
+          toast.success(__(usePage().props.flash.success), {
             autoClose: 2000
           })
         }
@@ -170,31 +226,36 @@ const handleAddToCart = () => {
           </p>
 
           <!-- Current Product Stock -->
-          <!-- <div class="flex items-center">
-            <div v-if="product?.qty > 0">
+          <div class="flex items-center">
+            <div v-if="remainingQuantityInStock > 0">
               <span class="text-gray-700 font-semibold text-sm mr-3">
-                Total {{ product?.qty }} Available
+                Total {{ remainingQuantityInStock }} item(s) Available
               </span>
               <GreenBadge> In stock </GreenBadge>
             </div>
             <div v-else class="my-3">
               <span class="text-gray-700 font-semibold text-sm mr-3">
-                {{ product.qty }} Available
+                Total {{ remainingQuantityInStock }} item(s) Available
               </span>
-              <RedBadge> In stock </RedBadge>
+              <RedBadge> Out of stock </RedBadge>
             </div>
-          </div> -->
+          </div>
 
           <!-- Product Price -->
           <div class="my-2">
-            <div v-if="product?.offer_price">
+            <div v-if="productOfferPrice">
               <span class="text-2xl font-semibold text-orange-600 block">
-                $ {{ formatAmount(product?.offer_price) }}
-              </span>
-              <span class="text-[.9rem] text-gray-500 font-medium line-through mr-5">
-                $ {{ formatAmount(product?.price) }}
+                $ {{ formatAmount(productOfferPrice) }}
               </span>
               <span
+                v-if="productNormalPrice"
+                class="text-[.9rem] text-gray-500 font-medium line-through mr-5"
+              >
+                $ {{ formatAmount(productNormalPrice) }}
+              </span>
+
+              <span
+                v-if="discountPercentage"
                 class="text-[.6rem] px-2 py-1 bg-orange-200 rounded-full text-orange-600 font-bold"
               >
                 {{ discountPercentage }} % OFF
@@ -202,14 +263,10 @@ const handleAddToCart = () => {
             </div>
             <div v-else>
               <span class="text-2xl font-semibold text-orange-600 block">
-                $ {{ formatAmount(product?.price) }}
+                $ {{ formatAmount(productNormalPrice) }}
               </span>
             </div>
           </div>
-
-          {{ formData }}
-
-          {{ remainingQuantityInStock }}
 
           <!-- Variants -->
           <div class="space-y-5 capitalize">
@@ -261,18 +318,6 @@ const handleAddToCart = () => {
                 <i class="fa-solid fa-minus text-white"></i>
               </button>
             </div>
-
-            <div class="flex items-center ml-5">
-              <div v-if="remainingQuantityInStock > 0">
-                <span class="text-gray-700 font-semibold text-sm mr-3">
-                  {{ remainingQuantityInStock }} item(s) left
-                </span>
-                <GreenBadge> In stock </GreenBadge>
-              </div>
-              <div v-else class="my-3">
-                <RedBadge> Out of stock </RedBadge>
-              </div>
-            </div>
           </div>
 
           <!-- Action Buttons -->
@@ -281,6 +326,7 @@ const handleAddToCart = () => {
               type="button"
               @click="handleAddToCart"
               class="text-sm px-6 shadow-md py-3 font-bold rounded-[4px] active:animate-press bg-blue-600 text-white hover:bg-blue-700 duration-200"
+              :disabled="remainingQuantityInStock === 0"
             >
               <i class="fa-solid fa-cart-plus"></i>
               Add to cart
