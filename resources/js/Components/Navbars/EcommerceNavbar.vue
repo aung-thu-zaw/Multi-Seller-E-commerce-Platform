@@ -9,7 +9,15 @@ import English from '@/assets/images/united-state.png'
 import Myanmar from '@/assets/images/myanmar.png'
 import UserDropdown from '@/Components/Dropdowns/UserDropdown.vue'
 import NotificationDropdownForUser from '@/Components/Dropdowns/Notifications/NotificationDropdownForUser.vue'
-import { Link } from '@inertiajs/vue3'
+import { Link, usePage } from '@inertiajs/vue3'
+import { computed } from 'vue'
+
+const totalItems = computed(() => {
+  if (usePage().props.auth.cart.cart_items) {
+    return usePage().props.auth.cart?.cart_items.reduce((acc, item) => acc + item.qty, 0)
+  }
+  return ''
+})
 </script>
 
 <template>
@@ -174,9 +182,10 @@ import { Link } from '@inertiajs/vue3'
               {{ __('My Cart') }}
             </span>
             <span
+              v-show="totalItems"
               class="bg-red-500 text-[.7rem] absolute -top-2 -right-2 w-5 h-5 p-2 rounded-full flex items-center justify-center border border-white"
             >
-              5
+              {{ totalItems }}
             </span>
           </Link>
         </div>

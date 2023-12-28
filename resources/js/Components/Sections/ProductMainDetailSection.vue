@@ -63,7 +63,6 @@ const calculateTotalPrice = () => {
 
     return totalPrice
   } else {
-    console.log(totalPrice)
     totalPrice = props.product.offer_price
       ? formData.qty * props.product.offer_price
       : formData.qty * props.product.price

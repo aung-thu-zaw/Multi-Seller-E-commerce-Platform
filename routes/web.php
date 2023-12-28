@@ -154,7 +154,7 @@ Route::controller(CartItemController::class)
         Route::delete('/{cart_item}', 'destroy')->name('destroy');
     });
 
-Route::get("/my-carts", [MyCartController::class,"index"])->name("my-cart.index");
+Route::get("/my-carts", [MyCartController::class,"index"])->middleware("auth")->name("my-cart.index");
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

@@ -1,7 +1,6 @@
 <script setup>
 import { Link } from '@inertiajs/vue3'
 import CartItemCard from './CartItemCard.vue'
-import Checkbox from '@/Components/Forms/Fields/Checkbox.vue'
 
 defineProps({ cartItemGroup: Object })
 </script>
@@ -10,7 +9,6 @@ defineProps({ cartItemGroup: Object })
   <div class="px-5">
     <div class="mb-5 flex items-center justify-between">
       <div class="flex items-center space-x-2">
-        <Checkbox />
         <h3 class="font-bold text-md text-gray-800">
           Item(s) from
           <span class="text-orange-600">
@@ -30,8 +28,8 @@ defineProps({ cartItemGroup: Object })
       </Link>
     </div>
 
-    <div class="">
-      <CartItemCard v-for="cartItem in cartItemGroup" :key="cartItem.id" :cartItem="cartItem" />
+    <div class="flex items-start space-x-2" v-for="cartItem in cartItemGroup" :key="cartItem.id">
+      <CartItemCard :cartItem="cartItem" />
     </div>
   </div>
 </template>

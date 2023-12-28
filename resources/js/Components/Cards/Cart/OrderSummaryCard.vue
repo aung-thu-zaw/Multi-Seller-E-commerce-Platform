@@ -1,6 +1,26 @@
 <script setup>
 import InputField from '@/Components/Forms/Fields/InputField.vue'
 import { Link } from '@inertiajs/vue3'
+import { computed } from 'vue'
+
+const props = defineProps({ cartItems: Object })
+
+const totalCartItems = computed(() => {
+  if (props.cartItems.length) {
+    return props.cartItems.reduce((acc, item) => acc + item.qty, 0)
+  }
+  return 0
+})
+
+const calculateTotalPrice = () => {
+  let totalPrice = 0
+
+  for (const item of props.cartItems) {
+    totalPrice += parseFloat(item.total_price)
+  }
+
+  return totalPrice.toFixed(2)
+}
 </script>
 
 <template>
@@ -11,30 +31,31 @@ import { Link } from '@inertiajs/vue3'
     <ul class="space-y-3 text-sm font-semibold mb-5">
       <li class="flex justify-between text-gray-700">
         <span> {{ __('Total Items') }}:</span>
-        <span>5 {{ __('Items') }}</span>
+        <span>{{ totalCartItems }} {{ __('Items') }}</span>
       </li>
 
       <li class="flex justify-between text-gray-700">
         <span> {{ __('Total Price') }}:</span>
-        <span>$ 600</span>
+        <span>$ {{ calculateTotalPrice() }}</span>
       </li>
 
-      <li class="flex justify-between text-gray-700">
+      <!-- <li class="flex justify-between text-gray-700">
         <span> {{ __('Delivery') }}:</span>
         <span>$ 300</span>
-      </li>
+      </li> -->
 
-      <li class="flex justify-between text-gray-700">
+      <!-- <li class="flex justify-between text-gray-700">
         <span> {{ __('Coupon Code') }}:</span>
         <span class="text-yellow-600 text-sm font-bold">
           E-commerce1245
           <i class="fas fa-xmark text-gray-700 cursor-pointer hover:text-red-600"></i>
         </span>
       </li>
+
       <li class="flex justify-between text-gray-700">
         <span> {{ __('Coupon Discount') }}:</span>
         <span class="text-gray-700 text-sm font-bold"> - $ 100 </span>
-      </li>
+      </li> -->
 
       <li class="text-lg font-bold border-t flex justify-between mt-3 pt-3">
         <span> {{ __('Total Price') }}:</span>
@@ -64,13 +85,9 @@ import { Link } from '@inertiajs/vue3'
   </div>
 
   <div class="border border-gray-200 bg-white shadow-sm rounded-md mb-5 p-5">
-    <h2 class="font-bold text-lg mb-1 text-gray-700">
-      {{ __('Apply Code') }}
-    </h2>
-
-    <span class="font-bold text-orange-600 text-sm my-4">
+    <!-- <span class="font-bold text-orange-600 text-sm my-4">
       {{ __('Coupon code applied') }}
-    </span>
+    </span> -->
 
     <form action="" class="space-y-3">
       <div>
