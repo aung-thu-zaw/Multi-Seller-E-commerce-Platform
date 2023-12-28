@@ -59,11 +59,11 @@ const groupByStore = computed(() => {
             </div> -->
 
             <div class="py-5 border border-gray-200 bg-white rounded-md">
-              <div v-if="cartItems.length">
+              <div v-if="cartItems && groupByStore">
                 <div
                   v-for="(cartItemGroup, index) in groupByStore"
                   :key="index"
-                  :class="{ 'border-b border-gray-200': index < groupByStore.length - 1 }"
+                  :class="{ 'border-b border-gray-200': index < groupByStore?.length - 1 }"
                   class="py-5"
                 >
                   <CartItemByStoreCard :cartItemGroup="cartItemGroup" />

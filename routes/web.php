@@ -11,6 +11,7 @@ use App\Http\Controllers\Ecommerce\HelpAndSupport\HelpCenterController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\QuestionSearchController;
 use App\Http\Controllers\Ecommerce\HomeController;
 use App\Http\Controllers\Ecommerce\CartItemController;
+use App\Http\Controllers\Ecommerce\CheckoutController;
 use App\Http\Controllers\Ecommerce\MyCartController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentReplyController;
@@ -158,6 +159,7 @@ Route::controller(CartItemController::class)
     });
 
 Route::get("/my-carts", [MyCartController::class,"index"])->middleware("auth")->name("my-cart.index");
+Route::get("/checkout", [CheckoutController::class,"index"])->middleware("auth")->name("checkout.index");
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

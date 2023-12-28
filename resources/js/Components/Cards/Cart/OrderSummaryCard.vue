@@ -6,20 +6,24 @@ import { computed } from 'vue'
 const props = defineProps({ cartItems: Object })
 
 const totalCartItems = computed(() => {
-  if (props.cartItems.length) {
-    return props.cartItems.reduce((acc, item) => acc + item.qty, 0)
+  if (props.cartItems?.length) {
+    return props.cartItems?.reduce((acc, item) => acc + item.qty, 0)
   }
   return 0
 })
 
 const calculateTotalPrice = () => {
   let totalPrice = 0
-
-  for (const item of props.cartItems) {
-    totalPrice += parseFloat(item.total_price)
+  if (props.cartItems) {
+    for (const item of props.cartItems) {
+      totalPrice += parseFloat(item.total_price)
+    }
   }
-
-  return totalPrice.toFixed(2)
+  if (Number.isInteger(totalPrice)) {
+    return totalPrice.toFixed(0)
+  } else {
+    return totalPrice.toFixed(2)
+  }
 }
 </script>
 
@@ -66,11 +70,11 @@ const calculateTotalPrice = () => {
     <div class="space-y-3">
       <Link
         as="button"
-        href="#"
+        :href="route('checkout.index')"
         class="px-4 py-3 inline-block text-sm w-full text-center font-semibold text-white bg-orange-600 shadow-sm border border-gray-200 rounded-md hover:bg-orange-700 duration-200"
       >
         <i class="fa-solid fa-right-from-bracket"></i>
-        {{ __('Proceed To Checkout') }} (0)
+        {{ __('Proceed To Checkout') }}
       </Link>
 
       <Link

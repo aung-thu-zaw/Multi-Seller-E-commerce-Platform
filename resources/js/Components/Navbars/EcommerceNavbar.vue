@@ -13,7 +13,7 @@ import { Link, usePage } from '@inertiajs/vue3'
 import { computed } from 'vue'
 
 const totalItems = computed(() => {
-  if (usePage().props.auth.cart.cart_items) {
+  if (usePage().props.auth.cart?.cart_items) {
     return usePage().props.auth.cart?.cart_items.reduce((acc, item) => acc + item.qty, 0)
   }
   return ''
