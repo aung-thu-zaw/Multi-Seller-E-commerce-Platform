@@ -25,6 +25,7 @@ class WishlistRequest extends FormRequest
         return [
             'product_id' => ['required', 'numeric', Rule::exists('products', 'id')],
             'store_id' => ['required', 'numeric', Rule::exists('stores', 'id')],
+            "attributes" => ["nullable", "json"],
         ];
     }
 }

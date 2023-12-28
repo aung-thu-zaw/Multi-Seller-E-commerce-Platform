@@ -1,11 +1,15 @@
 <script setup>
 import NormalButton from '@/Components/Buttons/NormalButton.vue'
 import { useFormatFunctions } from '@/Composables/useFormatFunctions'
-import { computed, ref, watch } from 'vue'
-import { Link, router } from '@inertiajs/vue3'
+import { computed, inject, ref, watch } from 'vue'
+import { Link, router, usePage } from '@inertiajs/vue3'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
+import { __ } from '@/Services/translations-inside-setup.js'
 
-const props = defineProps({ cartItem: Object, selected: Boolean })
+const props = defineProps({ cartItem: Object })
 
+const swal = inject('$swal')
 const product = computed(() => props.cartItem?.product)
 
 const attributes = computed(() => {
@@ -125,6 +129,53 @@ const discountPercentage = computed(() => {
 
   return 0
 })
+
+const saveToWishlist = () => {
+  router.post(
+    route('wishlists.store', {
+      product_id: props.cartItem?.product.id,
+      store_id: props.cartItem?.product.store_id,
+      attributes: props.cartItem?.attributes
+    }),
+    {},
+    {
+      preserveScroll: true,
+      onSuccess: () => {
+        router.delete(route('cart-items.destroy', props.cartItem?.id))
+        const successMessage = usePage().props.flash.success
+        toast.success(__(successMessage), {
+          autoClose: 2000
+        })
+      }
+    }
+  )
+}
+
+const removeItem = async () => {
+  const result = await swal({
+    icon: 'question',
+    title: `Remove From Shopping Cart`,
+    text: `Are you sure you want to remove this item(s)?`,
+    showCancelButton: true,
+    confirmButtonText: 'Yes, remove it!',
+    confirmButtonColor: '#d52222',
+    cancelButtonColor: '#626262',
+    timer: 20000,
+    timerProgressBar: true,
+    reverseButtons: true
+  })
+
+  if (result.isConfirmed) {
+    router.delete(route('cart-items.destroy', { cart_item: props.cartItem?.id }), {
+      preserveScroll: true,
+      onSuccess: () => {
+        toast.success(__(usePage().props.flash.success), {
+          autoClose: 2000
+        })
+      }
+    })
+  }
+}
 </script>
 
 <template>
@@ -219,10 +270,10 @@ const discountPercentage = computed(() => {
     </div>
 
     <div class="space-x-3 flex items-center">
-      <NormalButton class="text-white bg-blue-600 hover:bg-blue-700">
+      <NormalButton @click="saveToWishlist" class="text-white bg-blue-600 hover:bg-blue-700">
         <i class="fa-solid fa-heart"></i>
       </NormalButton>
-      <NormalButton class="text-white bg-red-600 hover:bg-red-700">
+      <NormalButton @click="removeItem" class="text-white bg-red-600 hover:bg-red-700">
         <i class="fa-solid fa-trash-can"></i>
       </NormalButton>
     </div>

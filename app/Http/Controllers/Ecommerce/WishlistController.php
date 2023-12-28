@@ -14,13 +14,15 @@ class WishlistController extends Controller
         $wishlist = Wishlist::where('user_id', auth()->id())
             ->where('product_id', $request->product_id)
             ->where('store_id', $request->store_id)
+            ->whereJsonContains('attributes', $request->validated()['attributes'] ?? null)
             ->first();
 
-        if (! $wishlist) {
+        if (!$wishlist) {
             $wishlist = Wishlist::create([
                 'user_id' => auth()->id(),
                 'product_id' => $request->product_id,
                 'store_id' => $request->store_id,
+                'attributes' => $request->validated()['attributes'] ?? null,
             ]);
 
             return back()->with('success', 'Item is moved to wishlist, you can re-add it to cart from wishlist.');
@@ -30,5 +32,12 @@ class WishlistController extends Controller
 
             return back()->with('success', 'Item has been removed from your wishlist');
         }
+    }
+
+    public function destroy(Wishlist $wishlist): RedirectResponse
+    {
+        $wishlist->delete();
+
+        return back()->with("success", "Item has been removed from your wishlist");
     }
 }

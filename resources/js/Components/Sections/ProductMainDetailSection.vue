@@ -154,7 +154,7 @@ watch(quantity, (newValue) => {
 })
 
 const handleAddToCart = () => {
-  if (props.product.qty !== 0) {
+  if (remainingQuantityInStock.value !== 0) {
     router.post(
       route('cart-items.store'),
       {

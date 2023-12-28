@@ -17,6 +17,8 @@ class CartItemController extends Controller
 
         $cartItem = CartItem::where('product_id', $request->product_id)->whereJsonContains('attributes', $request->validated()['attributes'])->first();
 
+        $attributes = is_array($request->validated()['attributes']) ? json_encode($request->validated()['attributes']) : $request->validated()['attributes'];
+
         if($cartItem) {
 
             $cartItem->update(["qty" => $cartItem->qty + $request->qty,'total_price' => $cartItem->total_price + $request->total_price]);
@@ -28,7 +30,7 @@ class CartItemController extends Controller
                 'product_id' => $request->product_id,
                 'qty' => $request->qty,
                 'total_price' => $request->total_price,
-                'attributes' => $request->validated()['attributes'] ? json_encode($request->validated()['attributes']) : null,
+                'attributes' => $request->validated()['attributes'] ? $attributes : null,
             ]);
         }
 

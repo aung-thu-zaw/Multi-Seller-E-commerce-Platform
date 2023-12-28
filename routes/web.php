@@ -143,6 +143,9 @@ Route::post('/conversations/{conversation}/messages', [ConversationMessageContro
 Route::post('/wishlists', [WishlistController::class, 'store'])
     ->middleware('auth')
     ->name('wishlists.store');
+Route::delete('/wishlists/{wishlist}', [WishlistController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('wishlists.destroy');
 
 Route::controller(CartItemController::class)
 ->middleware('auth')
