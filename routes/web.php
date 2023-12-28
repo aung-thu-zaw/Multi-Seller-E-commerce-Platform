@@ -17,6 +17,8 @@ use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentReplyController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogController;
 use App\Http\Controllers\Ecommerce\Pages\AboutUsController;
+use App\Http\Controllers\Ecommerce\Payments\PaymentController;
+use App\Http\Controllers\Ecommerce\Payments\PaypalController;
 use App\Http\Controllers\Ecommerce\ProductCollectionController;
 use App\Http\Controllers\Ecommerce\Products\ProductDetailController;
 use App\Http\Controllers\Ecommerce\Products\ProductSearchByCategoryController;
@@ -160,6 +162,11 @@ Route::controller(CartItemController::class)
 
 Route::get("/my-carts", [MyCartController::class,"index"])->middleware("auth")->name("my-cart.index");
 Route::get("/checkout", [CheckoutController::class,"index"])->middleware("auth")->name("checkout.index");
+Route::get("/payments", [PaymentController::class,"index"])->middleware("auth")->name("payments.index");
+
+Route::get("/payments/paypal/pay", [PaypalController::class,"payWithPaypal"])->middleware("auth")->name("payments.paypal.pay");
+Route::get("/payments/paypal/success", [PaypalController::class,"paypalSuccess"])->middleware("auth")->name("payments.paypal.success");
+Route::get("/payments/paypal/cancel", [PaypalController::class,"paypalCancel"])->middleware("auth")->name("payments.paypal.cancel");
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

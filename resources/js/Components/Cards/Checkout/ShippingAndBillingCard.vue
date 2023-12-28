@@ -157,8 +157,9 @@ const calculateTotalPrice = () => {
 
     <div class="space-y-3 p-5">
       <Link
+        v-show="$page.url !== '/payments'"
         as="button"
-        href="#"
+        :href="route('payments.index')"
         class="px-4 py-3 inline-block text-sm w-full text-center font-semibold text-white bg-orange-600 shadow-sm border border-gray-200 rounded-md hover:bg-orange-700 duration-200"
       >
         <i class="fa-solid fa-box"></i>
