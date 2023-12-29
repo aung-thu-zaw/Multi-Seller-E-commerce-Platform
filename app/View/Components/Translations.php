@@ -25,19 +25,18 @@ class Translations extends Component
      */
     public function render(): View|Closure|string
     {
-        $locale = session('locale') ? session('locale') : App::getLocale();
+        $locale = session('language') ? session('language') : App::getLocale();
 
         $translations = Cache::rememberForever("translations_$locale", function () use ($locale) {
             $allTranslations = [];
 
-            // List of language directories to include
             $directories = [
-                resource_path('lang/dashboard'),
-                resource_path('lang/e-commerce'),
+                // resource_path('lang/dashboard'),
+                // resource_path('lang/e-commerce'),
+                resource_path('lang/'),
                 // Add more directories as needed
             ];
 
-            // Iterate through each directory and load translations
             foreach ($directories as $directory) {
                 if (File::exists($directory)) {
                     // Load PHP language files

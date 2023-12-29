@@ -1,6 +1,6 @@
 <script setup>
 import UserDropdown from '@/Components/Dropdowns/UserDropdown.vue'
-import LanguageDropdownForDashboard from '@/Components/Dropdowns/LanguageDropdownForDashboard.vue'
+import LanguageDropdown from '@/Components/Dropdowns/LanguageDropdown.vue'
 import NotificationDropdownForAdminDashboard from '@/Components/Dropdowns/Notifications/NotificationDropdownForAdminDashboard.vue'
 </script>
 
@@ -37,7 +37,7 @@ import NotificationDropdownForAdminDashboard from '@/Components/Dropdowns/Notifi
         <NotificationDropdownForAdminDashboard />
 
         <!-- Admin Dashboard Language Dropdown -->
-        <LanguageDropdownForDashboard />
+        <LanguageDropdown />
 
         <!-- User Dropdown -->
         <UserDropdown />

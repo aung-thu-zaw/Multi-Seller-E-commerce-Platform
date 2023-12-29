@@ -2,7 +2,7 @@
 import GreenBadge from '@/Components/Badges/GreenBadge.vue'
 import RedBadge from '@/Components/Badges/RedBadge.vue'
 import UserDropdown from '@/Components/Dropdowns/UserDropdown.vue'
-import LanguageDropdownForDashboard from '@/Components/Dropdowns/LanguageDropdownForDashboard.vue'
+import LanguageDropdown from '@/Components/Dropdowns/LanguageDropdown.vue'
 import NotificationDropdownForSellerDashboard from '@/Components/Dropdowns/Notifications/NotificationDropdownForSellerDashboard.vue'
 import { computed } from 'vue'
 import { usePage } from '@inertiajs/vue3'
@@ -54,7 +54,7 @@ const store = computed(() => usePage().props.auth?.store)
         <NotificationDropdownForSellerDashboard />
 
         <!-- Seller Dashboard Language Dropdown -->
-        <LanguageDropdownForDashboard />
+        <LanguageDropdown />
 
         <!-- User Dropdown -->
         <UserDropdown />

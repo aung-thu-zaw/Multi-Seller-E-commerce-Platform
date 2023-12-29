@@ -5,9 +5,8 @@ import EcommerceCategoryDropdown from '@/Components/Dropdowns/EcommerceCategoryD
 import EcommerceMainSearchBox from '@/Components/Forms/SearchBoxs/EcommerceMainSearchBox.vue'
 import InputField from '@/Components/Forms/Fields/InputField.vue'
 import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
-import English from '@/assets/images/united-state.png'
-import Myanmar from '@/assets/images/myanmar.png'
 import UserDropdown from '@/Components/Dropdowns/UserDropdown.vue'
+import LanguageDropdown from '@/Components/Dropdowns/LanguageDropdown.vue'
 import NotificationDropdownForUser from '@/Components/Dropdowns/Notifications/NotificationDropdownForUser.vue'
 import { Link, usePage } from '@inertiajs/vue3'
 import { computed } from 'vue'
@@ -96,62 +95,7 @@ const totalItems = computed(() => {
         </li>
 
         <li>
-          <div class="hs-dropdown relative inline-flex">
-            <button
-              id="hs-dropdown-custom-icon-trigger"
-              type="button"
-              class="hs-dropdown-toggle flex items-center whitespace-nowrap text-sm font-bold leading-normal text-white"
-            >
-              <i class="fa-solid fa-globe mr-1"></i>
-              {{ __('Language') }}
-
-              <svg
-                class="hs-dropdown-open:rotate-180 w-4 h-4"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
-            </button>
-
-            <div
-              class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden bg-white shadow-md rounded-lg p-2 mt-2"
-              aria-labelledby="hs-dropdown-custom-icon-trigger"
-            >
-              <div>
-                <div
-                  class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                >
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center">
-                      <img :src="English" alt="English" class="w-5 mr-2" />
-
-                      English
-                      <i class="fa-solid fa-circle-check ml-2"></i>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                >
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center">
-                      <img :src="Myanmar" alt="Myanmar" class="w-5 mr-2" />
-
-                      Myanmar
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <LanguageDropdown />
         </li>
       </ul>
     </div>

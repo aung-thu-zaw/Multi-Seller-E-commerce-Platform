@@ -50,6 +50,7 @@ class HandleInertiaRequests extends Middleware
             'parentCategory' => Category::with('children')->whereNull('parent_id')->get(),
             'generalSetting' => GeneralSetting::first(),
             'searchHistories' => SearchHistory::orderBy("id", "desc")->get(),
+            'language' => session('language'),
             'flash' => [
                 'success' => session('success'),
                 'error' => session('error'),

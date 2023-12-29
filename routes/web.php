@@ -12,6 +12,7 @@ use App\Http\Controllers\Ecommerce\HelpAndSupport\QuestionSearchController;
 use App\Http\Controllers\Ecommerce\HomeController;
 use App\Http\Controllers\Ecommerce\CartItemController;
 use App\Http\Controllers\Ecommerce\CheckoutController;
+use App\Http\Controllers\Ecommerce\ChangeLanguageController;
 use App\Http\Controllers\Ecommerce\MyCartController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentReplyController;
@@ -167,6 +168,9 @@ Route::get("/payments", [PaymentController::class,"index"])->middleware("auth")-
 Route::get("/payments/paypal/pay", [PaypalController::class,"payWithPaypal"])->middleware("auth")->name("payments.paypal.pay");
 Route::get("/payments/paypal/success", [PaypalController::class,"paypalSuccess"])->middleware("auth")->name("payments.paypal.success");
 Route::get("/payments/paypal/cancel", [PaypalController::class,"paypalCancel"])->middleware("auth")->name("payments.paypal.cancel");
+
+
+Route::get('/languages/change', ChangeLanguageController::class)->name("languages.change");
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
