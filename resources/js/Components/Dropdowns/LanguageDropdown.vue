@@ -37,7 +37,10 @@ import Myanmar from '@/assets/images/myanmar.png'
               English
             </div>
 
-            <span v-show="$page.props.language === 'en'" class="ml-1">
+            <span
+              v-show="$page.props.language === 'en' || $page.props.language !== 'my'"
+              class="ml-1"
+            >
               <i class="fa-solid fa-circle-check"></i>
             </span>
           </a>

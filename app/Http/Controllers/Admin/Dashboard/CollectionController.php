@@ -64,7 +64,7 @@ class CollectionController extends Controller
 
         $collection->products()->attach($request->product_id);
 
-        return back();
+        return back()->with("success", "Product successfully added to this collection.");
     }
 
     public function removeProduct(Request $request, Collection $collection): RedirectResponse
@@ -75,7 +75,7 @@ class CollectionController extends Controller
 
         $collection->products()->detach($request->product_id);
 
-        return back();
+        return back()->with("success", "Product successfully removed to this collection.");
     }
 
     public function create(): Response|ResponseFactory

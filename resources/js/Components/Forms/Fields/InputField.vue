@@ -7,7 +7,7 @@ defineProps({
     default: ''
   },
   type: {
-    type: String,
+    type: [String, Number],
     default: 'text'
   },
   name: {

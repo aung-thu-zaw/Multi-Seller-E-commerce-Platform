@@ -59,12 +59,12 @@ class Brand extends Model
         return $this->belongsTo(Category::class);
     }
 
-    // protected static function booted(): void
-    // {
-    //     parent::boot();
+    protected static function booted(): void
+    {
+        parent::boot();
 
-    //     static::addGlobalScope(new FilterByScope());
-    // }
+        static::addGlobalScope(new FilterByScope());
+    }
 
     public static function deleteImage(string $brandImage): void
     {

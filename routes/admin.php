@@ -41,12 +41,15 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
 
         Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
+        // ***** Category Operations *****
         Route::resource('categories', CategoryController::class)->except(['show']);
+
+        Route::delete('/categories/destroy/selected/{selected_items}', [CategoryController::class, 'destroySelected'])->name('categories.destroy.selected');
+
         Route::controller(CategoryController::class)
             ->prefix('/categories/trash')
             ->name('categories.')
             ->group(function () {
-                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
                 Route::get('/', 'trashed')->name('trashed');
                 Route::post('/{id}/restore', 'restore')->name('restore');
                 Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
@@ -55,12 +58,15 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
+        // ***** Brand Operations *****
         Route::resource('brands', BrandController::class)->except(['show']);
+
+        Route::delete('/brands/destroy/selected/{selected_items}', [BrandController::class, 'destroySelected'])->name('brands.destroy.selected');
+
         Route::controller(BrandController::class)
             ->prefix('/brands/trash')
             ->name('brands.')
             ->group(function () {
-                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
                 Route::get('/', 'trashed')->name('trashed');
                 Route::post('/{id}/restore', 'restore')->name('restore');
                 Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
@@ -69,25 +75,9 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-        Route::resource('collections', CollectionController::class)->except(["show"]);
-        Route::controller(CollectionController::class)
-            ->prefix('/collections/trash')
-            ->name('collections.')
-            ->group(function () {
-                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
-                Route::get('/', 'trashed')->name('trashed');
-                Route::post('/{id}/restore', 'restore')->name('restore');
-                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
-                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
-                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
-                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
-            });
-
-        Route::get("/collections/{collection}/add-product", [CollectionController::class,"show"])->name("collections.show");
-        Route::post("/collections/{collection}/add-product", [CollectionController::class,"addProduct"])->name("collections.add-product");
-        Route::post("/collections/{collection}/remove-product", [CollectionController::class,"removeProduct"])->name("collections.remove-product");
-
+        // ***** Product Operations *****
         Route::resource('products', ProductController::class)->except(['show']);
+
         Route::controller(ProductController::class)
             ->prefix('/products/trash')
             ->name('products.')
@@ -101,19 +91,113 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-
-
-
         Route::controller(ProductImageController::class)
-            ->prefix('/products')
-            ->name('product.')
-            ->group(function () {
-                Route::get('/{product}/images', 'productImages')->name('images');
-                Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
-                Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
-            });
+        ->prefix('/products')
+        ->name('product.')
+        ->group(function () {
+            Route::get('/{product}/images', 'productImages')->name('images');
+            Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
+            Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
+        });
 
         Route::resource('products/{product}/product-variants', ProductVariantController::class);
+
+        // ***** Collection Operations *****
+        Route::resource('collections', CollectionController::class)->except(["show"]);
+
+        Route::controller(CollectionController::class)
+        ->prefix('/collections')
+        ->name('collections.')
+        ->group(function () {
+            Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+            Route::get("/{collection}/add-product", "show")->name("show");
+            Route::post("/{collection}/add-product", "addProduct")->name("add-product");
+            Route::post("/{collection}/remove-product", "removeProduct")->name("remove-product");
+        });
+
+        Route::controller(CollectionController::class)
+            ->prefix('/collections/trash')
+            ->name('collections.')
+            ->group(function () {
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+
+        // ***** Slider Banner Operations *****
+        Route::resource('slider-banners', SliderBannerController::class)->except(['show']);
+
+        Route::delete('/slider-banners/destroy/selected/{selected_items}', [SliderBannerController::class, 'destroySelected'])->name('slider-banners.destroy.selected');
+
+        Route::controller(SliderBannerController::class)
+            ->prefix('/slider-banners/trash')
+            ->name('slider-banners.')
+            ->group(function () {
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+
+        // ***** Campaign Banner Operations *****
+        Route::resource('campaign-banners', CampaignBannerController::class)->except(['show']);
+
+        Route::delete('/campaign-banners/destroy/selected/{selected_items}', [CampaignBannerController::class, 'destroySelected'])->name('campaign-banners.destroy.selected');
+
+        Route::controller(CampaignBannerController::class)
+            ->prefix('/campaign-banners/trash')
+            ->name('campaign-banners.')
+            ->group(function () {
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+
+        // ***** Product Banner Operations *****
+        Route::resource('product-banners', ProductBannerController::class)->except(['show']);
+
+        Route::delete('/product-banners/destroy/selected/{selected_items}', [ProductBannerController::class, 'destroySelected'])->name('product-banners.destroy.selected');
+
+        Route::controller(ProductBannerController::class)
+            ->prefix('/product-banners/trash')
+            ->name('product-banners.')
+            ->group(function () {
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+
+        // ***** Coupon Operations *****
+        Route::resource('coupons', CouponController::class)->except(['show']);
+
+        Route::delete('/coupons/destroy/selected/{selected_items}', [CouponController::class, 'destroySelected'])->name('coupons.destroy.selected');
+
+        Route::controller(CouponController::class)
+            ->prefix('/coupons/trash')
+            ->name('coupons.')
+            ->group(function () {
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+
+
+
 
         Route::resource('blog-categories', BlogCategoryController::class)->except(['show']);
         Route::controller(BlogCategoryController::class)
@@ -153,61 +237,7 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
             });
 
-        Route::resource('slider-banners', SliderBannerController::class)->except(['show']);
-        Route::controller(SliderBannerController::class)
-            ->prefix('/slider-banners/trash')
-            ->name('slider-banners.')
-            ->group(function () {
-                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
-                Route::get('/', 'trashed')->name('trashed');
-                Route::post('/{id}/restore', 'restore')->name('restore');
-                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
-                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
-                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
-                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
-            });
 
-        Route::resource('campaign-banners', CampaignBannerController::class)->except(['show']);
-        Route::controller(CampaignBannerController::class)
-            ->prefix('/campaign-banners/trash')
-            ->name('campaign-banners.')
-            ->group(function () {
-                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
-                Route::get('/', 'trashed')->name('trashed');
-                Route::post('/{id}/restore', 'restore')->name('restore');
-                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
-                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
-                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
-                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
-            });
-
-        Route::resource('product-banners', ProductBannerController::class)->except(['show']);
-        Route::controller(ProductBannerController::class)
-            ->prefix('/product-banners/trash')
-            ->name('product-banners.')
-            ->group(function () {
-                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
-                Route::get('/', 'trashed')->name('trashed');
-                Route::post('/{id}/restore', 'restore')->name('restore');
-                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
-                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
-                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
-                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
-            });
-
-        Route::resource('coupons', CouponController::class)->except(['show']);
-        Route::controller(CouponController::class)
-            ->prefix('/coupons/trash')
-            ->name('coupons.')
-            ->group(function () {
-                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
-                Route::get('/', 'trashed')->name('trashed');
-                Route::post('/{id}/restore', 'restore')->name('restore');
-                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
-                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
-                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
-                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
-            });
 
         Route::resource('faq-categories', FaqCategoryController::class)->except(['show']);
         Route::controller(FaqCategoryController::class)

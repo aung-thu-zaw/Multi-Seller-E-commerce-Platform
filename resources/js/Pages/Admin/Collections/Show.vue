@@ -16,10 +16,13 @@ import NormalButton from '@/Components/Buttons/NormalButton.vue'
 import FormButton from '@/Components/Buttons/FormButton.vue'
 import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
 import Pagination from '@/Components/Paginations/DashboardPagination.vue'
-import { Head, router, useForm } from '@inertiajs/vue3'
+import { Head, router, useForm, usePage } from '@inertiajs/vue3'
 import { __ } from '@/Services/translations-inside-setup.js'
+import { inject } from 'vue'
 
 const props = defineProps({ collection: Object, collectionProducts: Object, products: Object })
+
+const swal = inject('$swal')
 
 const form = useForm({
   product_id: null
@@ -31,6 +34,15 @@ const handleAddProduct = () => {
       collection: props.collection?.slug
     }),
     {
+      onSuccess: () => {
+        const successMessage = usePage().props.flash.success
+        if (successMessage) {
+          swal({
+            icon: 'success',
+            title: __(successMessage)
+          })
+        }
+      },
       onFinish: () => (form.product_id = null)
     }
   )
@@ -45,6 +57,15 @@ const handleRemoveProduct = (productId) => {
       product_id: productId
     },
     {
+      onSuccess: () => {
+        const successMessage = usePage().props.flash.success
+        if (successMessage) {
+          swal({
+            icon: 'success',
+            title: __(successMessage)
+          })
+        }
+      },
       onFinish: () => (form.product_id = null)
     }
   )

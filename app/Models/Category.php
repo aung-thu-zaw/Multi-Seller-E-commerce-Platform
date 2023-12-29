@@ -76,12 +76,12 @@ class Category extends Model
         return $this->hasMany(Brand::class);
     }
 
-    // protected static function booted(): void
-    // {
-    //     parent::booted();
+    protected static function booted(): void
+    {
+        parent::booted();
 
-    //     static::addGlobalScope(new FilterByScope());
-    // }
+        static::addGlobalScope(new FilterByScope());
+    }
 
     public static function deleteImage(?string $categoryImage): void
     {

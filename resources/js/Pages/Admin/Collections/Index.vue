@@ -12,6 +12,8 @@ import SortableTableHeaderCell from '@/Components/Tables/TableCells/SortableTabl
 import TableHeaderCell from '@/Components/Tables/TableCells/TableHeaderCell.vue'
 import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
 import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
+import GreenBadge from '@/Components/Badges/GreenBadge.vue'
+import RedBadge from '@/Components/Badges/RedBadge.vue'
 import NoTableData from '@/Components/Tables/NoTableData.vue'
 import OptionDropdown from '@/Components/Dropdowns/OptionDropdown.vue'
 import BulkActionButton from '@/Components/Buttons/BulkActionButton.vue'
@@ -85,12 +87,12 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
               :filterBy="['created', 'status']"
               :options="[
                 {
-                  label: 'Active',
-                  value: 'active'
+                  label: 'Show',
+                  value: 'show'
                 },
                 {
-                  label: 'Inactive',
-                  value: 'inactive'
+                  label: 'Hide',
+                  value: 'hide'
                 }
               ]"
             />
@@ -128,6 +130,8 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
               <TableHeaderCell label="Description" />
 
+              <TableHeaderCell label="Status" />
+
               <TableHeaderCell label="Actions" />
             </template>
 
@@ -144,9 +148,20 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
               </TableDataCell>
 
               <TableDataCell>
-                <div class="min-w-[500px]">
+                <div class="min-w-[300px]">
                   {{ item?.description }}
                 </div>
+              </TableDataCell>
+
+              <TableDataCell>
+                <GreenBadge v-show="item?.status === 'show'">
+                  <i class="fa-solid fa-eye animate-pulse"></i>
+                  {{ item?.status }}
+                </GreenBadge>
+                <RedBadge v-show="item?.status === 'hide'">
+                  <i class="fa-solid fa-eye-slash animate-pulse"></i>
+                  {{ item?.status }}
+                </RedBadge>
               </TableDataCell>
 
               <TableActionCell>

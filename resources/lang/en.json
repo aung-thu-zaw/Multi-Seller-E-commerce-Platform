@@ -401,5 +401,12 @@
     "Warranty Period": "Warranty Period",
     "Warranty Policy": "Warranty Policy",
     "Return Policy": "Return Policy",
-    "Return Day": "Return Day"
+    "Return Day": "Return Day",
+    "Collection": "Collection",
+    "Collection Name": "Collection Name",
+    "Add Products": "Add Products",
+    "Remove": "Remove",
+    "Add Products To Collection": "Add Products To Collection",
+    "Product successfully added to this collection.":"Product successfully added to this collection.",
+    "Product successfully removed to this collection.":"Product successfully removed to this collection."
 }

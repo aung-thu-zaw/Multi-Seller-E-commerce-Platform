@@ -1,4 +1,5 @@
 <script setup>
+import { useQueryStringParams } from '@/Composables/useQueryStringParams'
 import { Link } from '@inertiajs/vue3'
 
 defineProps({
@@ -14,10 +15,18 @@ defineProps({
     required: true
   },
 
+  icon: {
+    type: String,
+    default: ''
+  },
+
   data: {
-    type: Object
+    type: Object,
+    default: () => ({})
   }
 })
+
+const { dashboardQueryStringParams } = useQueryStringParams()
 </script>
 
 <template>

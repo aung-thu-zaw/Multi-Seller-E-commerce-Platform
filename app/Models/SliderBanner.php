@@ -35,16 +35,16 @@ class SliderBanner extends Model
         );
     }
 
-    // protected static function booted(): void
-    // {
-    //     parent::boot();
+    protected static function booted(): void
+    {
+        parent::boot();
 
-    //     static::addGlobalScope(new FilterByScope());
-    // }
+        static::addGlobalScope(new FilterByScope());
+    }
 
     public static function deleteImage(string $sliderBannerImage): void
     {
-        if (! empty($sliderBannerImage) && file_exists(storage_path('app/public/slider-banners/'.pathinfo($sliderBannerImage, PATHINFO_BASENAME)))) {
+        if (!empty($sliderBannerImage) && file_exists(storage_path('app/public/slider-banners/'.pathinfo($sliderBannerImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/slider-banners/'.pathinfo($sliderBannerImage, PATHINFO_BASENAME)));
         }
     }

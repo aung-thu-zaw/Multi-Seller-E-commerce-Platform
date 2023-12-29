@@ -15,6 +15,14 @@ class Kernel extends ConsoleKernel
         // Admin
         $schedule->command('categories:delete')->daily();
         $schedule->command('brands:delete')->daily();
+        // $schedule->command('products:delete')->daily();
+        $schedule->command('collections:delete')->daily();
+        $schedule->command('product-banners:delete')->daily();
+        $schedule->command('slider-banners:delete')->daily();
+        $schedule->command('campaign-banners:delete')->daily();
+        $schedule->command('coupons:delete')->daily();
+
+
         $schedule->command('blog-categories:delete')->daily();
         $schedule->command('blog-contents:delete')->daily();
         $schedule->command('faq-categories:delete')->daily();
@@ -25,10 +33,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('automated-filter-words:delete')->daily();
         $schedule->command('subscribers:delete')->daily();
         $schedule->command('stores:delete')->daily();
-        $schedule->command('product-banners:delete')->daily();
-        $schedule->command('slider-banners:delete')->daily();
-        $schedule->command('campaign-banners:delete')->daily();
-        $schedule->command('collection:delete')->daily();
+
+
 
         // Seller
         $schedule->command('store-product-categories:delete')->daily();
