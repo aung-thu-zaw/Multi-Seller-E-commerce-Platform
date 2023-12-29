@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\City;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class TownshipFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "city_id" => City::factory(),
+            "name" => fake()->unique()->sentence(),
+            'created_at' => fake()->dateTimeBetween('-3 months', now()),
         ];
     }
 }

@@ -538,9 +538,9 @@ const toggleCollapseShow = (classes) => {
               class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
             >
               <ul class="pl-8">
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('regions.view')" class="items-center">
                   <Link
-                    :href="route('admin.categories.index')"
+                    :href="route('admin.regions.index')"
                     :data="{
                       page: 1,
                       per_page: 5,
@@ -550,18 +550,17 @@ const toggleCollapseShow = (classes) => {
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
-                      'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
+                        $page.url.startsWith('/admin/regions'),
+                      'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/regions')
                     }"
                   >
                     {{ __('Regions') }}
                   </Link>
                 </li>
 
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('cities.view')" class="items-center">
                   <Link
-                    :href="route('admin.categories.index')"
+                    :href="route('admin.cities.index')"
                     :data="{
                       page: 1,
                       per_page: 5,
@@ -571,12 +570,32 @@ const toggleCollapseShow = (classes) => {
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
-                      'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
+                        $page.url.startsWith('/admin/cities'),
+                      'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/cities')
                     }"
                   >
                     {{ __('Cities') }}
+                  </Link>
+                </li>
+
+                <li v-show="can('townships.view')" class="items-center">
+                  <Link
+                    :href="route('admin.townships.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc'
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/townships'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/townships')
+                    }"
+                  >
+                    {{ __('Townships') }}
                   </Link>
                 </li>
               </ul>

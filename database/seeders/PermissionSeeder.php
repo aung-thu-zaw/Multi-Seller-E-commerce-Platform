@@ -84,6 +84,30 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'coupons.restore', 'group' => 'Coupon']);
         Permission::create(['name' => 'coupons.force.delete', 'group' => 'Coupon']);
 
+        Permission::create(['name' => 'regions.view', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'regions.create', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'regions.edit', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'regions.delete', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'regions.view.trash', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'regions.restore', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'regions.force.delete', 'group' => 'Geographic Hierarchy']);
+
+        Permission::create(['name' => 'cities.view', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'cities.create', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'cities.edit', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'cities.delete', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'cities.view.trash', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'cities.restore', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'cities.force.delete', 'group' => 'Geographic Hierarchy']);
+
+        Permission::create(['name' => 'townships.view', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'townships.create', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'townships.edit', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'townships.delete', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'townships.view.trash', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'townships.restore', 'group' => 'Geographic Hierarchy']);
+        Permission::create(['name' => 'townships.force.delete', 'group' => 'Geographic Hierarchy']);
+
         Permission::create(['name' => 'blog-categories.view', 'group' => 'Blog Management']);
         Permission::create(['name' => 'blog-categories.create', 'group' => 'Blog Management']);
         Permission::create(['name' => 'blog-categories.edit', 'group' => 'Blog Management']);

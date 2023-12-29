@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Region;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class CityFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "region_id" => Region::factory(),
+            "name" => fake()->unique()->city(),
+            'created_at' => fake()->dateTimeBetween('-3 months', now()),
         ];
     }
 }

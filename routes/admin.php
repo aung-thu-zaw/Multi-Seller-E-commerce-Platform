@@ -20,6 +20,9 @@ use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqCategoryController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqContentController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqSubcategoryController;
+use App\Http\Controllers\Admin\Dashboard\GeographicHierarchy\CityController;
+use App\Http\Controllers\Admin\Dashboard\GeographicHierarchy\RegionController;
+use App\Http\Controllers\Admin\Dashboard\GeographicHierarchy\TownshipController;
 use App\Http\Controllers\Admin\Dashboard\HelpPageController;
 use App\Http\Controllers\Admin\Dashboard\ProductManage\ProductController;
 use App\Http\Controllers\Admin\Dashboard\ProductManage\ProductImageController;
@@ -187,6 +190,57 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
         Route::controller(CouponController::class)
             ->prefix('/coupons/trash')
             ->name('coupons.')
+            ->group(function () {
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+
+        // ***** Region Operations *****
+        Route::resource('regions', RegionController::class)->except(['show']);
+
+        Route::delete('/regions/destroy/selected/{selected_items}', [RegionController::class, 'destroySelected'])->name('regions.destroy.selected');
+
+        Route::controller(RegionController::class)
+            ->prefix('/regions/trash')
+            ->name('regions.')
+            ->group(function () {
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+
+        // ***** City Operations *****
+        Route::resource('cities', CityController::class)->except(['show']);
+
+        Route::delete('/cities/destroy/selected/{selected_items}', [CityController::class, 'destroySelected'])->name('cities.destroy.selected');
+
+        Route::controller(CityController::class)
+            ->prefix('/cities/trash')
+            ->name('cities.')
+            ->group(function () {
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+
+        // ***** Township Operations *****
+        Route::resource('townships', TownshipController::class)->except(['show']);
+
+        Route::delete('/townships/destroy/selected/{selected_items}', [TownshipController::class, 'destroySelected'])->name('townships.destroy.selected');
+
+        Route::controller(TownshipController::class)
+            ->prefix('/townships/trash')
+            ->name('townships.')
             ->group(function () {
                 Route::get('/', 'trashed')->name('trashed');
                 Route::post('/{id}/restore', 'restore')->name('restore');
