@@ -32,6 +32,7 @@ class PaypalController extends Controller
             'validate_ssl' => env('PAYPAL_VALIDATE_SSL', true),
         ];
     }
+
     public function payWithPaypal()
     {
         try {
@@ -74,7 +75,6 @@ class PaypalController extends Controller
             return response()->json(['error' => 'Internal Server Error'], 500);
         }
     }
-
 
     public function paypalSuccess(Request $request)
     {
