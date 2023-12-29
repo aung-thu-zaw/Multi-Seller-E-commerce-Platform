@@ -18,6 +18,7 @@ return new class () extends Migration {
             $table->decimal('max_order_total', 8, 2)->nullable();
             $table->decimal("rate", 8, 2)->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

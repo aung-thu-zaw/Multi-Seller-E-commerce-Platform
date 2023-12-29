@@ -17,6 +17,7 @@ return new class () extends Migration {
             $table->foreignId("township_id")->constrained();
             $table->string("name");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
