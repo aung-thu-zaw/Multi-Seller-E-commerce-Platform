@@ -199,19 +199,13 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- Flash Sales -->
-          <li v-show="can('brands.view')" class="items-center">
+          <li v-show="can('flash-sales.edit')" class="items-center">
             <Link
-              :href="route('admin.brands.index')"
-              :data="{
-                page: 1,
-                per_page: 5,
-                sort: 'id',
-                direction: 'desc'
-              }"
+              :href="route('admin.flash-sales.edit')"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/flash-sales'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/flash-sales')
               }"
             >
               <i class="fa-solid fa-bolt-lightning mr-2"></i>

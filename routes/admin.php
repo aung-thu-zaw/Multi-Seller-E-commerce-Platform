@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqCategoryController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqContentController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqSubcategoryController;
+use App\Http\Controllers\Admin\Dashboard\FlashSaleController;
 use App\Http\Controllers\Admin\Dashboard\GeographicHierarchy\CityController;
 use App\Http\Controllers\Admin\Dashboard\GeographicHierarchy\RegionController;
 use App\Http\Controllers\Admin\Dashboard\GeographicHierarchy\TownshipController;
@@ -132,6 +133,19 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
+
+        // ***** Flash Sale Operations *****
+        Route::controller(FlashSaleController::class)
+        ->prefix("/flash-sales")
+        ->name("flash-sales.")
+        ->middleware('permission:flash-sales.edit')
+        ->group(function () {
+            Route::get("/", "edit")->name("edit");
+            Route::patch("/{flash_sale}", "update")->name("update");
+            Route::post("/{flash_sale}/add-product", "addProduct")->name("add-product");
+            Route::post("/{flash_sale}/remove-product", "removeProduct")->name("remove-product");
+        });
+
 
         // ***** Slider Banner Operations *****
         Route::resource('slider-banners', SliderBannerController::class)->except(['show']);
@@ -303,15 +317,15 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-
-
-
+        // ***** Blog Category Operations *****
         Route::resource('blog-categories', BlogCategoryController::class)->except(['show']);
+
+        Route::delete('/blog-categories/destroy/selected/{selected_items}', [BlogCategoryController::class, 'destroySelected'])->name('blog-categories.destroy.selected');
+
         Route::controller(BlogCategoryController::class)
             ->prefix('/blog-categories/trash')
             ->name('blog-categories.')
             ->group(function () {
-                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
                 Route::get('/', 'trashed')->name('trashed');
                 Route::post('/{id}/restore', 'restore')->name('restore');
                 Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
@@ -320,13 +334,17 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
+        // ***** Blog Content Operations *****
         Route::resource('blog-contents', BlogContentController::class)->except(['show']);
+
+        Route::delete('/blog-contents/destroy/selected/{selected_items}', [BlogContentController::class, 'destroySelected'])->name('blog-contents.destroy.selected');
+
         Route::patch('blog-contents/{blog_content}/change-status', [BlogContentController::class, 'changeStatus'])->name('blog-contents.change-status');
+
         Route::controller(BlogContentController::class)
             ->prefix('/blog-contents/trash')
             ->name('blog-contents.')
             ->group(function () {
-                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
                 Route::get('/', 'trashed')->name('trashed');
                 Route::post('/{id}/restore', 'restore')->name('restore');
                 Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
@@ -335,6 +353,7 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
+        // ***** Blog Comment Operations *****
         Route::controller(BlogCommentController::class)
             ->prefix('/blog-comments')
             ->name('blog-comments.')
@@ -343,6 +362,16 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/{blog_comment}', 'destroy')->name('destroy');
                 Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
             });
+
+
+
+
+
+
+
+
+
+
 
 
 

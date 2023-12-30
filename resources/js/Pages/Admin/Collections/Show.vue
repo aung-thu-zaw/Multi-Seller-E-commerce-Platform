@@ -34,6 +34,7 @@ const handleAddProduct = () => {
       collection: props.collection?.slug
     }),
     {
+      preserveScroll: true,
       onSuccess: () => {
         const successMessage = usePage().props.flash.success
         if (successMessage) {
@@ -57,6 +58,7 @@ const handleRemoveProduct = (productId) => {
       product_id: productId
     },
     {
+      preserveScroll: true,
       onSuccess: () => {
         const successMessage = usePage().props.flash.success
         if (successMessage) {

@@ -11,7 +11,7 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('flash_sale_product', function (Blueprint $table) {
-            $table->id();
+            $table->primary(['flash_sale_id', 'product_id']);
             $table->foreignId('flash_sale_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

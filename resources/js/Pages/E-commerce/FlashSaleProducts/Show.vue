@@ -3,7 +3,7 @@ import AppLayout from '@/Layouts/AppLayout.vue'
 import FlashSaleCountdownTimer from '@/Components/FlashSaleCountdownTimer.vue'
 import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
 import { Head, router, usePage } from '@inertiajs/vue3'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps({ flashSale: Object, products: Object })
 
@@ -34,6 +34,13 @@ const loadMoreProduct = () => {
     }
   )
 }
+
+const isFlashSaleActive = computed(() => {
+  const endDate = new Date(props.flashSale?.end_date)
+  const currentDate = new Date()
+
+  return endDate > currentDate
+})
 </script>
 
 <template>
@@ -55,7 +62,7 @@ const loadMoreProduct = () => {
           </div>
         </div>
 
-        <div v-if="loadProducts?.length">
+        <div v-if="loadProducts?.length && isFlashSaleActive">
           <div class="grid grid-cols-5 gap-3 py-3">
             <ProductGridCard v-for="product in loadProducts" :key="product.id" :product="product" />
           </div>
@@ -86,7 +93,12 @@ const loadMoreProduct = () => {
           </div>
         </div>
         <div v-else>
-          <p class="text-center text-red-600 font-semibold">No Products Found!</p>
+          <p v-show="!loadProducts.length" class="text-center text-red-600 font-semibold">
+            __{{ 'No Products Found!' }}
+          </p>
+          <p v-show="!isFlashSaleActive" class="text-center text-red-600 font-semibold">
+            {{ __('Sorry, the flash sale has ended.') }}
+          </p>
         </div>
       </div>
     </section>

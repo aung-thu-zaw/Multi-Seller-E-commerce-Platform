@@ -2,14 +2,20 @@
 import FlashSaleCountdownTimer from '@/Components/FlashSaleCountdownTimer.vue'
 import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
 import { Link } from '@inertiajs/vue3'
+import { computed } from 'vue'
 
-defineProps({
-  flashSale: Object
+const props = defineProps({ flashSale: Object })
+
+const isFlashSaleActive = computed(() => {
+  const endDate = new Date(props.flashSale?.end_date)
+  const currentDate = new Date()
+
+  return endDate > currentDate
 })
 </script>
 
 <template>
-  <section v-show="flashSale?.products?.length" id="flash-sales" class="my-16">
+  <section v-show="flashSale?.products?.length && isFlashSaleActive" id="flash-sales" class="my-16">
     <div
       class="container max-w-screen-xl mx-auto border border-gray-200 bg-white rounded-md shadow-md"
     >

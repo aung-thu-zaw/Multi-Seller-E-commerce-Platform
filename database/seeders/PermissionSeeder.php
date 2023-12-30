@@ -44,13 +44,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'collections.restore', 'group' => 'Collection']);
         Permission::create(['name' => 'collections.force.delete', 'group' => 'Collection']);
 
-        Permission::create(['name' => 'flash-sales.view', 'group' => 'Flash Sale']);
-        Permission::create(['name' => 'flash-sales.create', 'group' => 'Flash Sale']);
         Permission::create(['name' => 'flash-sales.edit', 'group' => 'Flash Sale']);
-        Permission::create(['name' => 'flash-sales.delete', 'group' => 'Flash Sale']);
-        Permission::create(['name' => 'flash-sales.view.trash', 'group' => 'Flash Sale']);
-        Permission::create(['name' => 'flash-sales.restore', 'group' => 'Flash Sale']);
-        Permission::create(['name' => 'flash-sales.force.delete', 'group' => 'Flash Sale']);
 
         Permission::create(['name' => 'slider-banners.view', 'group' => 'Banner']);
         Permission::create(['name' => 'slider-banners.create', 'group' => 'Banner']);

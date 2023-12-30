@@ -4,7 +4,7 @@ import { ref, computed, onMounted } from 'vue'
 const props = defineProps({ flashSale: Object })
 
 const currentTime = ref(new Date().getTime())
-const endDate = ref(new Date(props.flashSale.end_time).getTime())
+const endDate = ref(new Date(props.flashSale.end_date).getTime())
 
 const timeLeft = computed(() => endDate.value - currentTime.value)
 

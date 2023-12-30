@@ -410,7 +410,7 @@
     "Remove": "ဖယ်ရှားပါ",
     "Add Products To Collection": "ထုတ်ကုန်များကို စုစည်းမှုသို့ ထည့်ပါ",
     "Product successfully added to this collection.": "ထုတ်ကုန်ကို ဤစုစည်းမှုသို့ အောင်မြင်စွာ ထည့်သွင်းခဲ့သည်။",
-    "Product successfully removed to this collection.": "ထုတ်ကုန်ကို ဤစုစည်းမှုသို့ အောင်မြင်စွာ ဖယ်ရှားခဲ့သည်။",
+    "Product successfully removed to this collection.": "ထုတ်ကုန်ကို ဤစုစည်းမှုမှ အောင်မြင်စွာ ဖယ်ရှားခဲ့သည်။",
     "shipping areas": "ပို့ဆောင်ပေးသောဧရိယာများ",
     "shipping area": "ပို့ဆောင်ပေးသောဧရိယာ",
     "Shipping Area": "ပို့ဆောင်ပေးသောဧရိယာ",
@@ -437,5 +437,7 @@
     "Shipping Method Name": "ပို့ဆောင်ရေးနည်းလမ်း အမည်",
     "Shipping Area Name": "ပို့ဆောင်ပေးသောဧရိယာ အမည်",
     "Minimum Order Amount":"အနည်းဆုံး မှာယူမှုပမာဏ",
-    "Maximum Order Amount":"အများဆုံးမှာယူမှုပမာဏ"
+    "Maximum Order Amount":"အများဆုံးမှာယူမှုပမာဏ",
+    "Product successfully added to this flash sale.":"ထုတ်ကုန်ကို အမြန်လျှော့ဈေးသို့ အောင်မြင်စွာ ထည့်သွင်းခဲ့သည်။",
+    "Product successfully removed to this flash sale.":"ထုတ်ကုန်ကို အမြန်လျှော့ဈေးမှ အောင်မြင်စွာ ဖယ်ရှားခဲ့သည်။"
 }
