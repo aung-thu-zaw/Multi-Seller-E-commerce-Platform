@@ -30,4 +30,20 @@ class ShippingRate extends Model
 
         static::addGlobalScope(new FilterByScope());
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<ShippingArea,ShippingRate>
+     */
+    public function shippingArea()
+    {
+        return $this->belongsTo(ShippingArea::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<ShippingMethod,ShippingRate>
+     */
+    public function shippingMethod()
+    {
+        return $this->belongsTo(ShippingMethod::class);
+    }
 }

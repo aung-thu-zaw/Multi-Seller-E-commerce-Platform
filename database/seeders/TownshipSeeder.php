@@ -13,6 +13,6 @@ class TownshipSeeder extends Seeder
      */
     public function run(): void
     {
-        Township::factory(100)->create();
+        Township::factory(10)->create();
     }
 }

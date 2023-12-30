@@ -9,7 +9,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Admin\ShippingRates\StoreShippingRateRequest;
 use App\Http\Requests\Dashboard\Admin\ShippingRates\UpdateShippingRateRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
+use App\Models\ShippingArea;
+use App\Models\ShippingMethod;
 use App\Models\ShippingRate;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -33,6 +36,9 @@ class ShippingRateController extends Controller
     public function index(): Response|ResponseFactory
     {
         $shippingRates = ShippingRate::search(request('search'))
+            ->query(function (Builder $builder) {
+                $builder->with(['shippingArea:id,name', 'shippingMethod:id,name']);
+            })
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
@@ -42,7 +48,11 @@ class ShippingRateController extends Controller
 
     public function create(): Response|ResponseFactory
     {
-        return inertia('Admin/ShippingRates/Create');
+        $shippingAreas = ShippingArea::select("id", "name")->get();
+
+        $shippingMethods = ShippingMethod::select("id", "name")->get();
+
+        return inertia('Admin/ShippingRates/Create', compact("shippingAreas", "shippingMethods"));
     }
 
     public function store(StoreShippingRateRequest $request): RedirectResponse
@@ -54,7 +64,11 @@ class ShippingRateController extends Controller
 
     public function edit(ShippingRate $shippingRate): Response|ResponseFactory
     {
-        return inertia('Admin/ShippingRates/Edit', compact('shippingRate'));
+        $shippingAreas = ShippingArea::select("id", "name")->get();
+
+        $shippingMethods = ShippingMethod::select("id", "name")->get();
+
+        return inertia('Admin/ShippingRates/Edit', compact('shippingRate', "shippingAreas", "shippingMethods"));
     }
 
     public function update(UpdateShippingRateRequest $request, ShippingRate $shippingRate): RedirectResponse
@@ -83,6 +97,9 @@ class ShippingRateController extends Controller
     public function trashed(): Response|ResponseFactory
     {
         $trashedShippingRates = ShippingRate::search(request('search'))
+            ->query(function (Builder $builder) {
+                $builder->with(['shippingArea:id,name', 'shippingMethod:id,name']);
+            })
             ->onlyTrashed()
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
@@ -124,7 +141,9 @@ class ShippingRateController extends Controller
     {
         $selectedItems = explode(',', $selectedItems);
 
-        $trashedShippingRates = ShippingRate::onlyTrashed()->whereIn('id', $selectedItems)->get();
+        $trashedShippingRates = ShippingRate::onlyTrashed()
+            ->whereIn('id', $selectedItems)
+            ->get();
 
         (new PermanentlyDeleteTrashedShippingRatesAction())->handle($trashedShippingRates);
 

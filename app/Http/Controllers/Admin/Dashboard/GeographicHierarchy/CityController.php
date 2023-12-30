@@ -8,6 +8,8 @@ use App\Http\Requests\Dashboard\Admin\GeographicHierarchy\Cities\StoreCityReques
 use App\Http\Requests\Dashboard\Admin\GeographicHierarchy\Cities\UpdateCityRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\City;
+use App\Models\Region;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -30,34 +32,41 @@ class CityController extends Controller
 
     public function index(): Response|ResponseFactory
     {
-        $townships = City::search(request('search'))
+        $cities = City::search(request('search'))
+            ->query(function (Builder $builder) {
+                $builder->with('region:id,name');
+            })
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
 
-        return inertia('Admin/GeographicHierarchy/Cities/Index', compact('townships'));
+        return inertia('Admin/GeographicHierarchy/Cities/Index', compact('cities'));
     }
 
     public function create(): Response|ResponseFactory
     {
-        return inertia('Admin/GeographicHierarchy/Cities/Create');
+        $regions = Region::select("id", "name")->get();
+
+        return inertia('Admin/GeographicHierarchy/Cities/Create', compact("regions"));
     }
 
     public function store(StoreCityRequest $request): RedirectResponse
     {
-        City::create(["region_id" => $request->region_id,"name" => $request->name]);
+        City::create(['region_id' => $request->region_id, 'name' => $request->name]);
 
         return to_route('admin.cities.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }
 
     public function edit(City $city): Response|ResponseFactory
     {
-        return inertia('Admin/GeographicHierarchy/Cities/Edit', compact('city'));
+        $regions = Region::select("id", "name")->get();
+
+        return inertia('Admin/GeographicHierarchy/Cities/Edit', compact('city', 'regions'));
     }
 
     public function update(UpdateCityRequest $request, City $city): RedirectResponse
     {
-        $city->update(["region_id" => $request->region_id,"name" => $request->name]);
+        $city->update(['region_id' => $request->region_id, 'name' => $request->name]);
 
         return to_route('admin.cities.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }
@@ -122,7 +131,9 @@ class CityController extends Controller
     {
         $selectedItems = explode(',', $selectedItems);
 
-        $trashedCities = City::onlyTrashed()->whereIn('id', $selectedItems)->get();
+        $trashedCities = City::onlyTrashed()
+            ->whereIn('id', $selectedItems)
+            ->get();
 
         (new PermanentlyDeleteTrashedCitiesAction())->handle($trashedCities);
 

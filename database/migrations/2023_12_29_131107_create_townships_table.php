@@ -12,7 +12,7 @@ return new class () extends Migration {
     {
         Schema::create('townships', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("city_id")->constrained();
+            $table->foreignId("city_id")->constrained()->cascadeOnDelete();
             $table->string("name")->unique();
             $table->string("slug")->unique();
             $table->timestamps();

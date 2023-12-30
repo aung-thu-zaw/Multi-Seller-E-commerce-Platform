@@ -535,7 +535,18 @@ const toggleCollapseShow = (classes) => {
 
             <div
               id="geographic-hierarchy-accordion"
-              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+              :class="{
+                block:
+                  $page.url.startsWith('/admin/regions') ||
+                  $page.url.startsWith('/admin/cities') ||
+                  $page.url.startsWith('/admin/townships'),
+                hidden: !(
+                  $page.url.startsWith('/admin/regions') ||
+                  $page.url.startsWith('/admin/cities') ||
+                  $page.url.startsWith('/admin/townships')
+                )
+              }"
             >
               <ul class="pl-8">
                 <li v-show="can('regions.view')" class="items-center">
@@ -603,9 +614,9 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- Shipping Areas -->
-          <li v-show="can('brands.view')" class="items-center">
+          <li v-show="can('shipping-areas.view')" class="items-center">
             <Link
-              :href="route('admin.brands.index')"
+              :href="route('admin.shipping-areas.index')"
               :data="{
                 page: 1,
                 per_page: 5,
@@ -614,8 +625,10 @@ const toggleCollapseShow = (classes) => {
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/shipping-areas'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/shipping-areas')
               }"
             >
               <i class="fa-solid fa-map-location-dot mr-2"></i>
@@ -624,9 +637,9 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- Shipping Methods -->
-          <li v-show="can('brands.view')" class="items-center">
+          <li v-show="can('shipping-methods.view')" class="items-center">
             <Link
-              :href="route('admin.brands.index')"
+              :href="route('admin.shipping-methods.index')"
               :data="{
                 page: 1,
                 per_page: 5,
@@ -635,8 +648,10 @@ const toggleCollapseShow = (classes) => {
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/shipping-methods'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/shipping-methods')
               }"
             >
               <i class="fa-solid fa-truck mr-2"></i>
@@ -645,9 +660,9 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- Shipping Rates -->
-          <li v-show="can('brands.view')" class="items-center">
+          <li v-show="can('shipping-rates.view')" class="items-center">
             <Link
-              :href="route('admin.brands.index')"
+              :href="route('admin.shipping-rates.index')"
               :data="{
                 page: 1,
                 per_page: 5,
@@ -656,8 +671,10 @@ const toggleCollapseShow = (classes) => {
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/brands'),
-                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/brands')
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/shipping-rates'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/shipping-rates')
               }"
             >
               <i class="fa-solid fa-sack-dollar mr-2"></i>

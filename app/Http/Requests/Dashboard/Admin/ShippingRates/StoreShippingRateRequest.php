@@ -29,6 +29,7 @@ class StoreShippingRateRequest extends FormRequest
             "shipping_method_id" => ["required","numeric",Rule::exists("shipping_methods", "id")],
             "min_order_total" => ["nullable","numeric"],
             'max_order_total' => ['nullable', 'numeric'],
+            'rate' => ['required', 'numeric'],
             'captcha_token' => [new RecaptchaRule()],
         ];
     }

@@ -12,8 +12,8 @@ return new class () extends Migration {
     {
         Schema::create('shipping_rates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("shipping_area_id")->constrained();
-            $table->foreignId("shipping_method_id")->constrained();
+            $table->foreignId("shipping_area_id")->constrained()->cascadeOnDelete();
+            $table->foreignId("shipping_method_id")->constrained()->cascadeOnDelete();
             $table->decimal('min_order_total', 8, 2)->nullable();
             $table->decimal('max_order_total', 8, 2)->nullable();
             $table->decimal("rate", 8, 2)->default(0);

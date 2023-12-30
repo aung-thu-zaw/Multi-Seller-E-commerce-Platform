@@ -13,6 +13,6 @@ class ShippingRateSeeder extends Seeder
      */
     public function run(): void
     {
-        ShippingRate::factory(20)->create();
+        ShippingRate::factory(30)->create();
     }
 }

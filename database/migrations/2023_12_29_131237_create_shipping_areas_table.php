@@ -12,9 +12,9 @@ return new class () extends Migration {
     {
         Schema::create('shipping_areas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("region_id")->constrained();
-            $table->foreignId("city_id")->constrained();
-            $table->foreignId("township_id")->constrained();
+            $table->foreignId("region_id")->constrained()->cascadeOnDelete();
+            $table->foreignId("city_id")->constrained()->cascadeOnDelete();
+            $table->foreignId("township_id")->constrained()->cascadeOnDelete();
             $table->string("name")->unique();
             $table->string("slug")->unique();
             $table->timestamps();

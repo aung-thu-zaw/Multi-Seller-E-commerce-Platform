@@ -419,5 +419,21 @@
     "shipping rate": "shipping rate",
     "Shipping Rate": "Shipping Rate",
     "collection": "collection",
-    "collections": "collections"
+    "collections": "collections",
+    "Region Name": "Region Name",
+    "Region": "Region",
+    "region": "region",
+    "regions": "regions",
+    "City Name": "City Name",
+    "City": "City",
+    "city": "city",
+    "cities": "cities",
+    "Township Name": "Township Name",
+    "Township": "Township",
+    "township": "township",
+    "townships": "townships",
+    "Shipping Method Name": "Shipping Method Name",
+    "Shipping Area Name": "Shipping Area Name",
+    "Minimum Order Amount": "Minimum Order Amount",
+    "Maximum Order Amount": "Maximum Order Amount"
 }

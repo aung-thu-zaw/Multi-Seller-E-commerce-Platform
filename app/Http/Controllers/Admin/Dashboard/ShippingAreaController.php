@@ -9,7 +9,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Admin\ShippingAreas\StoreShippingAreaRequest;
 use App\Http\Requests\Dashboard\Admin\ShippingAreas\UpdateShippingAreaRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
+use App\Models\City;
+use App\Models\Region;
 use App\Models\ShippingArea;
+use App\Models\Township;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -33,6 +37,9 @@ class ShippingAreaController extends Controller
     public function index(): Response|ResponseFactory
     {
         $shippingAreas = ShippingArea::search(request('search'))
+            ->query(function (Builder $builder) {
+                $builder->with('city:id,name', 'region:id,name', 'township:id,name');
+            })
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
@@ -42,7 +49,13 @@ class ShippingAreaController extends Controller
 
     public function create(): Response|ResponseFactory
     {
-        return inertia('Admin/ShippingAreas/Create');
+        $regions = Region::select("id", "name")->get();
+
+        $cities = City::select("id", "region_id", "name")->get();
+
+        $townships = Township::select("id", "city_id", "name")->get();
+
+        return inertia('Admin/ShippingAreas/Create', compact("regions", "cities", "townships"));
     }
 
     public function store(StoreShippingAreaRequest $request): RedirectResponse
@@ -54,7 +67,13 @@ class ShippingAreaController extends Controller
 
     public function edit(ShippingArea $shippingArea): Response|ResponseFactory
     {
-        return inertia('Admin/ShippingAreas/Edit', compact('shippingArea'));
+        $regions = Region::select("id", "name")->get();
+
+        $cities = City::select("id", "region_id", "name")->get();
+
+        $townships = Township::select("id", "city_id", "name")->get();
+
+        return inertia('Admin/ShippingAreas/Edit', compact("regions", "cities", "townships", "shippingArea"));
     }
 
     public function update(UpdateShippingAreaRequest $request, ShippingArea $shippingArea): RedirectResponse
@@ -83,6 +102,9 @@ class ShippingAreaController extends Controller
     public function trashed(): Response|ResponseFactory
     {
         $trashedShippingAreas = ShippingArea::search(request('search'))
+            ->query(function (Builder $builder) {
+                $builder->with('city:id,name', 'region:id,name', 'township:id,name');
+            })
             ->onlyTrashed()
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
@@ -124,7 +146,9 @@ class ShippingAreaController extends Controller
     {
         $selectedItems = explode(',', $selectedItems);
 
-        $trashedShippingAreas = ShippingArea::onlyTrashed()->whereIn('id', $selectedItems)->get();
+        $trashedShippingAreas = ShippingArea::onlyTrashed()
+            ->whereIn('id', $selectedItems)
+            ->get();
 
         (new PermanentlyDeleteTrashedShippingAreasAction())->handle($trashedShippingAreas);
 

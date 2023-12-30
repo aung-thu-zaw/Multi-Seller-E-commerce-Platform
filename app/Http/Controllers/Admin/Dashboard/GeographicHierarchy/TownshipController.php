@@ -7,7 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Admin\GeographicHierarchy\Townships\StoreTownshipRequest;
 use App\Http\Requests\Dashboard\Admin\GeographicHierarchy\Townships\UpdateTownshipRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
+use App\Models\City;
+use App\Models\Region;
 use App\Models\Township;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -31,6 +34,9 @@ class TownshipController extends Controller
     public function index(): Response|ResponseFactory
     {
         $townships = Township::search(request('search'))
+            ->query(function (Builder $builder) {
+                $builder->with('city.region:id,name');
+            })
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
@@ -40,24 +46,28 @@ class TownshipController extends Controller
 
     public function create(): Response|ResponseFactory
     {
-        return inertia('Admin/GeographicHierarchy/Townships/Create');
+        $cities = City::select("id", "region_id", "name")->get();
+
+        return inertia('Admin/GeographicHierarchy/Townships/Create', compact('cities'));
     }
 
     public function store(StoreTownshipRequest $request): RedirectResponse
     {
-        Township::create(["city_id" => $request->city_id,"name" => $request->name]);
+        Township::create(['city_id' => $request->city_id, 'name' => $request->name]);
 
         return to_route('admin.townships.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }
 
     public function edit(Township $township): Response|ResponseFactory
     {
-        return inertia('Admin/GeographicHierarchy/Townships/Edit', compact('township'));
+        $cities = City::select("id", "region_id", "name")->get();
+
+        return inertia('Admin/GeographicHierarchy/Townships/Edit', compact('cities', 'township'));
     }
 
     public function update(UpdateTownshipRequest $request, Township $township): RedirectResponse
     {
-        $township->update(["city_id" => $request->city_id,"name" => $request->name]);
+        $township->update(['city_id' => $request->city_id, 'name' => $request->name]);
 
         return to_route('admin.townships.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }
@@ -81,6 +91,9 @@ class TownshipController extends Controller
     public function trashed(): Response|ResponseFactory
     {
         $trashedTownships = Township::search(request('search'))
+            ->query(function (Builder $builder) {
+                $builder->with('city.region:id,name');
+            })
             ->onlyTrashed()
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
@@ -122,7 +135,9 @@ class TownshipController extends Controller
     {
         $selectedItems = explode(',', $selectedItems);
 
-        $trashedTownships = Township::onlyTrashed()->whereIn('id', $selectedItems)->get();
+        $trashedTownships = Township::onlyTrashed()
+            ->whereIn('id', $selectedItems)
+            ->get();
 
         (new PermanentlyDeleteTrashedTownshipsAction())->handle($trashedTownships);
 
