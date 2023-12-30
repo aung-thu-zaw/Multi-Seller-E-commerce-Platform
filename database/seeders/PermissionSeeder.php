@@ -108,6 +108,30 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'townships.restore', 'group' => 'Geographic Hierarchy']);
         Permission::create(['name' => 'townships.force.delete', 'group' => 'Geographic Hierarchy']);
 
+        Permission::create(['name' => 'shipping-areas.view', 'group' => 'Shipping Area']);
+        Permission::create(['name' => 'shipping-areas.create', 'group' => 'Shipping Area']);
+        Permission::create(['name' => 'shipping-areas.edit', 'group' => 'Shipping Area']);
+        Permission::create(['name' => 'shipping-areas.delete', 'group' => 'Shipping Area']);
+        Permission::create(['name' => 'shipping-areas.view.trash', 'group' => 'Shipping Area']);
+        Permission::create(['name' => 'shipping-areas.restore', 'group' => 'Shipping Area']);
+        Permission::create(['name' => 'shipping-areas.force.delete', 'group' => 'Shipping Area']);
+
+        Permission::create(['name' => 'shipping-methods.view', 'group' => 'Shipping Method']);
+        Permission::create(['name' => 'shipping-methods.create', 'group' => 'Shipping Method']);
+        Permission::create(['name' => 'shipping-methods.edit', 'group' => 'Shipping Method']);
+        Permission::create(['name' => 'shipping-methods.delete', 'group' => 'Shipping Method']);
+        Permission::create(['name' => 'shipping-methods.view.trash', 'group' => 'Shipping Method']);
+        Permission::create(['name' => 'shipping-methods.restore', 'group' => 'Shipping Method']);
+        Permission::create(['name' => 'shipping-methods.force.delete', 'group' => 'Shipping Method']);
+
+        Permission::create(['name' => 'shipping-rates.view', 'group' => 'Shipping Rate']);
+        Permission::create(['name' => 'shipping-rates.create', 'group' => 'Shipping Rate']);
+        Permission::create(['name' => 'shipping-rates.edit', 'group' => 'Shipping Rate']);
+        Permission::create(['name' => 'shipping-rates.delete', 'group' => 'Shipping Rate']);
+        Permission::create(['name' => 'shipping-rates.view.trash', 'group' => 'Shipping Rate']);
+        Permission::create(['name' => 'shipping-rates.restore', 'group' => 'Shipping Rate']);
+        Permission::create(['name' => 'shipping-rates.force.delete', 'group' => 'Shipping Rate']);
+
         Permission::create(['name' => 'blog-categories.view', 'group' => 'Blog Management']);
         Permission::create(['name' => 'blog-categories.create', 'group' => 'Blog Management']);
         Permission::create(['name' => 'blog-categories.edit', 'group' => 'Blog Management']);

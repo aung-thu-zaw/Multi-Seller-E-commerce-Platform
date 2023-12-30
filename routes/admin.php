@@ -32,6 +32,9 @@ use App\Http\Controllers\Admin\Dashboard\SellerManagement\ClaimsAsASellerControl
 use App\Http\Controllers\Admin\Dashboard\SellerManagement\StoreManageController;
 use App\Http\Controllers\Admin\Dashboard\Settings\GeneralSettingController;
 use App\Http\Controllers\Admin\Dashboard\Settings\SeoSettingController;
+use App\Http\Controllers\Admin\Dashboard\ShippingAreaController;
+use App\Http\Controllers\Admin\Dashboard\ShippingMethodController;
+use App\Http\Controllers\Admin\Dashboard\ShippingRateController;
 use App\Http\Controllers\Admin\Dashboard\SubscribersAndNewsletters\SubscriberController;
 use Illuminate\Support\Facades\Route;
 
@@ -241,6 +244,56 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
         Route::controller(TownshipController::class)
             ->prefix('/townships/trash')
             ->name('townships.')
+            ->group(function () {
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+        // ***** Shipping Area Operations *****
+        Route::resource('shipping-areas', ShippingAreaController::class)->except(['show']);
+
+        Route::delete('/shipping-areas/destroy/selected/{selected_items}', [ShippingAreaController::class, 'destroySelected'])->name('shipping-areas.destroy.selected');
+
+        Route::controller(ShippingAreaController::class)
+            ->prefix('/shipping-areas/trash')
+            ->name('shipping-areas.')
+            ->group(function () {
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+
+        // ***** Shipping Method Operations *****
+        Route::resource('shipping-methods', ShippingMethodController::class)->except(['show']);
+
+        Route::delete('/shipping-methods/destroy/selected/{selected_items}', [ShippingMethodController::class, 'destroySelected'])->name('shipping-methods.destroy.selected');
+
+        Route::controller(ShippingMethodController::class)
+            ->prefix('/shipping-methods/trash')
+            ->name('shipping-methods.')
+            ->group(function () {
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+
+        // ***** Shipping Rate Operations *****
+        Route::resource('shipping-rates', ShippingRateController::class)->except(['show']);
+
+        Route::delete('/shipping-rates/destroy/selected/{selected_items}', [ShippingRateController::class, 'destroySelected'])->name('shipping-rates.destroy.selected');
+
+        Route::controller(ShippingRateController::class)
+            ->prefix('/shipping-rates/trash')
+            ->name('shipping-rates.')
             ->group(function () {
                 Route::get('/', 'trashed')->name('trashed');
                 Route::post('/{id}/restore', 'restore')->name('restore');

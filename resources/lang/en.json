@@ -407,6 +407,17 @@
     "Add Products": "Add Products",
     "Remove": "Remove",
     "Add Products To Collection": "Add Products To Collection",
-    "Product successfully added to this collection.":"Product successfully added to this collection.",
-    "Product successfully removed to this collection.":"Product successfully removed to this collection."
+    "Product successfully added to this collection.": "Product successfully added to this collection.",
+    "Product successfully removed to this collection.": "Product successfully removed to this collection.",
+    "shipping areas": "shipping areas",
+    "shipping area": "shipping area",
+    "Shipping Area": "Shipping Area",
+    "shipping methods": "shipping methods",
+    "shipping method": "shipping method",
+    "Shipping Method": "Shipping Method",
+    "shipping rates": "shipping rates",
+    "shipping rate": "shipping rate",
+    "Shipping Rate": "Shipping Rate",
+    "collection": "collection",
+    "collections": "collections"
 }

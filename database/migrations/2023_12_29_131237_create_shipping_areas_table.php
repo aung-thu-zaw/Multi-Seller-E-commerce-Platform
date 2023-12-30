@@ -15,7 +15,8 @@ return new class () extends Migration {
             $table->foreignId("region_id")->constrained();
             $table->foreignId("city_id")->constrained();
             $table->foreignId("township_id")->constrained();
-            $table->string("name");
+            $table->string("name")->unique();
+            $table->string("slug")->unique();
             $table->timestamps();
             $table->softDeletes();
         });

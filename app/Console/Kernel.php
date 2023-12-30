@@ -24,6 +24,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('regions:delete')->daily();
         $schedule->command('cities:delete')->daily();
         $schedule->command('townships:delete')->daily();
+        $schedule->command('shipping-areas:delete')->daily();
+        $schedule->command('shipping-methods:delete')->daily();
+        $schedule->command('shipping-rates:delete')->daily();
 
 
         $schedule->command('blog-categories:delete')->daily();
