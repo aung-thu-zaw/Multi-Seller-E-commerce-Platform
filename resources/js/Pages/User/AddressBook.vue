@@ -15,8 +15,6 @@ const confirmOpenModal = () => {
 
 const closeModal = () => {
   confirmingAddressCreation.value = false
-
-  //   form.reset()
 }
 </script>
 
@@ -48,9 +46,23 @@ const closeModal = () => {
     </div>
 
     <div class="p-10 border border-gray-200 bg-white rounded-md">
-      <div class="grid grid-cols-2 gap-5 overflow-auto max-h-[770px] py-1">
+      <div v-if="addresses.length" class="grid grid-cols-2 gap-5 overflow-auto max-h-[770px] py-1">
         <!-- Card -->
-        <AddressCard v-for="address in addresses" :key="address.id" :address="address" />
+        <AddressCard
+          v-for="address in addresses"
+          :key="address.id"
+          :address="address"
+          :regions="regions"
+          :cities="cities"
+          :townships="townships"
+        />
+      </div>
+      <div v-else class="py-20">
+        <h2 class="font-semibold text-md text-center text-gray-600">
+          <i class="fas fa-address-card"></i>
+
+          You don't have any address.
+        </h2>
       </div>
     </div>
   </UserDashboardLayout>

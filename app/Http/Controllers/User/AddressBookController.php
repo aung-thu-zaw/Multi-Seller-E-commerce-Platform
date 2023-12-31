@@ -19,7 +19,7 @@ class AddressBookController extends Controller
 {
     public function index(): Response|ResponseFactory
     {
-        $addresses = auth()->user()->addresses;
+        $addresses = auth()->user()->addresses()->with(["region:id,name","city:id,name","township:id,name"])->get();
 
         $regions = Region::select("id", "name")->get();
 
@@ -32,14 +32,15 @@ class AddressBookController extends Controller
 
     public function store(AddressRequest $request): RedirectResponse
     {
-
         (new CreateAddressAction())->handle($request->validated());
 
         return back()->with('success', ':label has been successfully created.');
     }
 
-    public function update(AddressRequest $request, Address $address): RedirectResponse
+    public function update(AddressRequest $request, int $addressId): RedirectResponse
     {
+        $address = Address::find($addressId);
+
         (new UpdateAddressAction())->handle($request->validated(), $address);
 
         return back()->with('success', ':label has been successfully updated.');

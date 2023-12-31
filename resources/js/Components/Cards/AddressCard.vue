@@ -4,9 +4,19 @@ import { router, usePage } from '@inertiajs/vue3'
 import { toast } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
 import { __ } from '@/Services/translations-inside-setup.js'
-import { inject } from 'vue'
+import { inject, ref } from 'vue'
 
-const props = defineProps({ address: Object })
+const props = defineProps({ address: Object, regions: Object, cities: Object, townships: Object })
+
+const confirmingAddressEdit = ref(false)
+
+const confirmOpenModal = () => {
+  confirmingAddressEdit.value = true
+}
+
+const closeModal = () => {
+  confirmingAddressEdit.value = false
+}
 
 const swal = inject('$swal')
 
@@ -56,8 +66,25 @@ const handleDeleteAddress = async () => {
         <span class="font-medium w-full flex items-center justify-between">
           {{ address.name }}
 
-          <div class="space-x-3">
-            <EditAddressModal />
+          <div class="space-x-3 flex items-center">
+            <div>
+              <button
+                type="button"
+                @click="confirmOpenModal"
+                class="font-bold text-xs text-blue-600 hover:text-blue-500 duration-200"
+              >
+                <i class="fa-solid fa-edit"></i>
+              </button>
+
+              <EditAddressModal
+                :show="confirmingAddressEdit"
+                @close="closeModal"
+                :address="address"
+                :regions="regions"
+                :cities="cities"
+                :townships="townships"
+              />
+            </div>
 
             <button
               type="button"
@@ -79,15 +106,15 @@ const handleDeleteAddress = async () => {
       </li>
       <li class="flex items-start space-x-5">
         <span class="block font-bold w-1/4"> Region : </span>
-        <span class="block font-medium w-full"> {{ address.region }} </span>
+        <span class="block font-medium w-full"> {{ address.region?.name }} </span>
       </li>
       <li class="flex items-start space-x-5">
         <span class="block font-bold w-1/4"> City : </span>
-        <span class="block font-medium w-full"> {{ address.city }} </span>
+        <span class="block font-medium w-full"> {{ address.city?.name }} </span>
       </li>
       <li class="flex items-start space-x-5">
         <span class="block font-bold w-1/4"> Township : </span>
-        <span class="block font-medium w-full"> {{ address.township }} </span>
+        <span class="block font-medium w-full"> {{ address.township?.name }} </span>
       </li>
       <li class="flex items-start space-x-5">
         <span class="block font-bold w-1/4"> Postal Code : </span>

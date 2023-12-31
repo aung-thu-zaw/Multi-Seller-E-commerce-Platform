@@ -5,7 +5,7 @@ import InputField from '@/Components/Forms/Fields/InputField.vue'
 import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
 import Checkbox from '@/Components/Forms/Fields/Checkbox.vue'
 import FormButton from '@/Components/Buttons/FormButton.vue'
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, watch } from 'vue'
 import { useForm, usePage } from '@inertiajs/vue3'
 import { useReCaptcha } from 'vue-recaptcha-v3'
 import { toast } from 'vue3-toastify'
@@ -58,37 +58,18 @@ onUnmounted(() => {
   document.body.style.overflow = null
 })
 
-const regionId = ref(null)
-const cityId = ref(null)
-const townshipId = ref(null)
-
-// const { form, processing, errors, createAction } = useResourceActions({
-//   name: null,
-//   phone: null,
-//   email: null,
-//   region: null,
-//   city: null,
-//   township: null,
-//   postal_code: null,
-//   address: null,
-//   landmark: null,
-//   is_default_billing: null,
-//   is_default_delivery: null,
-//   address_type: 'home'
-// })
-
 const form = useForm({
   name: null,
   phone: null,
   email: null,
-  region: null,
-  city: null,
-  township: null,
+  region_id: null,
+  city_id: null,
+  township_id: null,
   postal_code: null,
   address: null,
   landmark: null,
-  is_default_billing: null,
-  is_default_delivery: null,
+  is_default_billing: false,
+  is_default_delivery: false,
   address_type: 'home',
   captcha_token: null
 })
@@ -116,42 +97,19 @@ const handleCreateAddress = async () => {
 }
 
 const filteredCities = computed(() => {
-  if (!regionId.value) {
+  if (!form.region_id) {
     return []
   }
 
-  return props.cities.filter((city) => Number(city.region_id) === Number(regionId.value))
+  return props.cities.filter((city) => Number(city.region_id) === Number(form.region_id))
 })
 
 const filteredTownships = computed(() => {
-  if (!cityId.value) {
+  if (!form.city_id) {
     return []
   }
 
-  return props.townships.filter((township) => Number(township.city_id) === Number(cityId.value))
-})
-
-watch(regionId, (newRegionId) => {
-  const region = props.regions.find((region) => region.id === Number(newRegionId))
-  if (region) {
-    form.region = region.name
-  }
-})
-
-watch(cityId, (newCityId) => {
-  const city = props.cities.find((city) => city.id === Number(newCityId))
-
-  if (city) {
-    form.city = city.name
-  }
-})
-
-watch(townshipId, (newTownshipId) => {
-  const township = props.townships.find((township) => township.id === Number(newTownshipId))
-
-  if (township) {
-    form.township = township.name
-  }
+  return props.townships.filter((township) => Number(township.city_id) === Number(form.city_id))
 })
 </script>
 
@@ -262,13 +220,13 @@ watch(townshipId, (newTownshipId) => {
                         <SelectBox
                           name="region"
                           :options="regions"
-                          v-model="regionId"
+                          v-model="form.region_id"
                           :placeholder="__('Select an option')"
                           icon="fa-map-location-dot"
                           required
                         />
 
-                        <InputError :message="form.errors?.region" />
+                        <InputError :message="form.errors?.region_id" />
                       </div>
 
                       <div>
@@ -277,14 +235,14 @@ watch(townshipId, (newTownshipId) => {
                         <SelectBox
                           name="city"
                           :options="filteredCities"
-                          v-model="cityId"
+                          v-model="form.city_id"
                           :placeholder="__('Select an option')"
                           icon="fa-city"
                           required
-                          :disabled="!regionId"
+                          :disabled="!form.region_id"
                         />
 
-                        <InputError :message="form.errors?.city" />
+                        <InputError :message="form.errors?.city_id" />
                       </div>
 
                       <div>
@@ -293,14 +251,16 @@ watch(townshipId, (newTownshipId) => {
                         <SelectBox
                           name="township"
                           :options="filteredTownships"
-                          v-model="townshipId"
+                          v-model="form.township_id"
                           icon="fa-building"
                           :placeholder="__('Select an option')"
                           required
-                          :disabled="(!cityId && !regionId) || (regionId && !cityId)"
+                          :disabled="
+                            (!form.city_id && !form.region_id) || (form.region_id && !form.city_id)
+                          "
                         />
 
-                        <InputError :message="form.errors?.township" />
+                        <InputError :message="form.errors?.township_id" />
                       </div>
                     </div>
 
