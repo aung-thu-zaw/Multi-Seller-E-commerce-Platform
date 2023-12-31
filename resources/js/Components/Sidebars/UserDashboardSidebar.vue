@@ -45,7 +45,7 @@ import { Link } from '@inertiajs/vue3'
 
       <!-- Address Book -->
       <Link
-        href="#"
+        :href="route('user.address-book.index')"
         as="button"
         class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
         :class="{

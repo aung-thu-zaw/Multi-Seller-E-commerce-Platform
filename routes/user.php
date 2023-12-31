@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Seller\Dashboard\DashboardController;
+use App\Http\Controllers\User\AddressBookController;
 use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\User\DeleteAccountController;
 use App\Http\Controllers\User\FollowedStoreController;
@@ -25,5 +26,7 @@ Route::middleware(['auth'])
         Route::resource("/my-wishlists", MyWishlistController::class)->only(['index','destroy'])->parameters(['my_wishlist' => 'wishlist']);
 
         Route::get('/followed-stores', FollowedStoreController::class)->name('followed-stores');
+
+        Route::resource("/address-book", AddressBookController::class)->except(["show","create","edit"])->parameters(['address_book' => 'address']);
 
     });
