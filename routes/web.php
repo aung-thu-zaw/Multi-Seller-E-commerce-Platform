@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ecommerce\CouponController;
 use App\Http\Controllers\Ecommerce\BecomeASellerController;
 use App\Http\Controllers\Ecommerce\Conversations\ConversationController;
 use App\Http\Controllers\Ecommerce\Conversations\ConversationMessageController;
@@ -162,6 +163,8 @@ Route::controller(CartItemController::class)
     });
 
 Route::get("/my-carts", [MyCartController::class,"index"])->middleware("auth")->name("my-cart.index");
+Route::post("/apply-coupon", [CouponController::class,"applyCoupon"])->middleware("auth")->name("coupon.apply");
+Route::post("/{coupon_code}/remove-coupon", [CouponController::class,"removeCoupon"])->middleware("auth")->name("coupon.remove");
 Route::get("/checkout", [CheckoutController::class,"index"])->middleware("auth")->name("checkout.index");
 Route::get("/payments", [PaymentController::class,"index"])->middleware("auth")->name("payments.index");
 

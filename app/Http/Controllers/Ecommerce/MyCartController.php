@@ -15,6 +15,8 @@ class MyCartController extends Controller
 {
     public function index(): Response|ResponseFactory
     {
-        return inertia("E-commerce/CartAndCheckout/MyCart");
+        $coupon = session("coupon") ?? null;
+
+        return inertia("E-commerce/CartAndCheckout/MyCart", compact('coupon'));
     }
 }

@@ -5,6 +5,8 @@ import OrderSummaryCard from '@/Components/Cards/Cart/OrderSummaryCard.vue'
 import { Head, usePage } from '@inertiajs/vue3'
 import { computed } from 'vue'
 
+defineProps({ coupon: Object })
+
 const cartItems = computed(() => usePage().props.auth.cart?.cart_items)
 
 // const totalItems = computed(() => {
@@ -80,7 +82,7 @@ const groupByStore = computed(() => {
             </div>
           </div>
           <div class="w-3/12">
-            <OrderSummaryCard :cartItems="cartItems" />
+            <OrderSummaryCard :cartItems="cartItems" :coupon="coupon" />
           </div>
         </div>
       </div>

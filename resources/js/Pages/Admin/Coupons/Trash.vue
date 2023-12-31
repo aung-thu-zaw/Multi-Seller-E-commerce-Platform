@@ -13,7 +13,6 @@ import SortableTableHeaderCell from '@/Components/Tables/TableCells/SortableTabl
 import TableHeaderCell from '@/Components/Tables/TableCells/TableHeaderCell.vue'
 import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
 import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
-import BlueBadge from '@/Components/Badges/BlueBadge.vue'
 import OrangeBadge from '@/Components/Badges/OrangeBadge.vue'
 import GreenBadge from '@/Components/Badges/GreenBadge.vue'
 import NoTableData from '@/Components/Tables/NoTableData.vue'
@@ -184,7 +183,6 @@ const {
 
               <TableDataCell>
                 <div class="min-w-[150px]">
-                  <BlueBadge v-show="item?.type === 'free_shipping'"> free shipping </BlueBadge>
                   <GreenBadge v-show="item?.type === 'percentage'"> percentage </GreenBadge>
                   <OrangeBadge v-show="item?.type === 'fixed'"> fixed </OrangeBadge>
                 </div>
