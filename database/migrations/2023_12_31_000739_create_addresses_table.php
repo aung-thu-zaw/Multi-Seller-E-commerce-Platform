@@ -18,7 +18,7 @@ return new class () extends Migration {
             $table->string("email");
             $table->string("region");
             $table->string("city");
-            $table->string("township")->nullable();
+            $table->string("township");
             $table->string("postal_code")->nullable();
             $table->string("address");
             $table->string("landmark")->nullable();

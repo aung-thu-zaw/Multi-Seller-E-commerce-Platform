@@ -10,6 +10,11 @@ class Address extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'is_default_billing' => 'boolean',
+        'is_default_delivery' => 'boolean',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,Address>
      */

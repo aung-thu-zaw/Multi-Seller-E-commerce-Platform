@@ -3,8 +3,21 @@ import UserDashboardLayout from '@/Layouts/UserDashboardLayout.vue'
 import AddressCard from '@/Components/Cards/AddressCard.vue'
 import CreateAddressModal from '@/Components/Modals/Address/CreateAddressModal.vue'
 import { Head } from '@inertiajs/vue3'
+import { ref } from 'vue'
 
-defineProps({ addresses: Object })
+defineProps({ addresses: Object, regions: Object, cities: Object, townships: Object })
+
+const confirmingAddressCreation = ref(false)
+
+const confirmOpenModal = () => {
+  confirmingAddressCreation.value = true
+}
+
+const closeModal = () => {
+  confirmingAddressCreation.value = false
+
+  //   form.reset()
+}
 </script>
 
 <template>
@@ -17,7 +30,21 @@ defineProps({ addresses: Object })
         {{ __('Address Book') }}
       </h1>
 
-      <CreateAddressModal />
+      <button
+        @click="confirmOpenModal"
+        class="font-bold text-xs text-orange-500 px-3 py-2 rounded-sm border border-orange-600 hover:bg-orange-600 hover:text-white duration-200"
+      >
+        <i class="fa-solid fa-plus"></i>
+        Add New Address
+      </button>
+
+      <CreateAddressModal
+        :show="confirmingAddressCreation"
+        @close="closeModal"
+        :regions="regions"
+        :cities="cities"
+        :townships="townships"
+      />
     </div>
 
     <div class="p-10 border border-gray-200 bg-white rounded-md">

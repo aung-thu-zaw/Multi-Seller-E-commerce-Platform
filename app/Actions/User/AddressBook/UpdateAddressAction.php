@@ -24,7 +24,7 @@ class UpdateAddressAction
             'address' => $data["address"],
             'landmark' => $data["landmark"],
             'is_default_billing' => $data["is_default_billing"],
-            'is_default_shipping' => $data["is_default_shipping"],
+            'is_default_delivery' => $data["is_default_delivery"],
             'address_type' => $data["address_type"],
         ]);
     }

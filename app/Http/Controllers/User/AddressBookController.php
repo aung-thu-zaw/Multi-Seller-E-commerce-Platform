@@ -23,15 +23,16 @@ class AddressBookController extends Controller
 
         $regions = Region::select("id", "name")->get();
 
-        $cities = City::select("id", "name")->get();
+        $cities = City::select("id", "region_id", "name")->get();
 
-        $townships = Township::select("id", "name")->get();
+        $townships = Township::select("id", "city_id", "name")->get();
 
         return inertia('User/AddressBook', compact('addresses', "regions", "cities", "townships"));
     }
 
     public function store(AddressRequest $request): RedirectResponse
     {
+
         (new CreateAddressAction())->handle($request->validated());
 
         return back()->with('success', ':label has been successfully created.');

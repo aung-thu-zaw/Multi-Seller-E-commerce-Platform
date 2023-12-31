@@ -204,7 +204,7 @@ const { form, processing, errors, editAction } = useResourceActions({
 
                 <div>
                   <p class="text-xs text-main-gray mb-3">Select a label for effective delivery:</p>
-                  <div class="flex items-center space-x-5">
+                  <!-- <div class="flex items-center space-x-5">
                     <div>
                       <input
                         type="radio"
@@ -242,7 +242,52 @@ const { form, processing, errors, editAction } = useResourceActions({
                         </div>
                       </label>
                     </div>
-                  </div>
+                  </div> -->
+
+                  <ul class="flex flex-col sm:flex-row">
+                    <li
+                      class="inline-flex items-center gap-x-2.5 py-3 px-4 text-sm font-medium bg-white border text-gray-800"
+                    >
+                      <div class="relative flex items-start w-full">
+                        <div class="flex items-center h-5">
+                          <input
+                            id="hs-horizontal-list-group-item-radio-1"
+                            name="hs-horizontal-list-group-item-radio"
+                            type="radio"
+                            class="border-gray-200 rounded-full"
+                            checked
+                          />
+                        </div>
+                        <label
+                          for="hs-horizontal-list-group-item-radio-1"
+                          class="ms-3 block w-full text-sm text-gray-600 dark:text-gray-500"
+                        >
+                          Chris Lynch
+                        </label>
+                      </div>
+                    </li>
+
+                    <li
+                      class="inline-flex items-center gap-x-2.5 py-3 px-4 text-sm font-medium bg-white border text-gray-800"
+                    >
+                      <div class="relative flex items-start w-full">
+                        <div class="flex items-center h-5">
+                          <input
+                            id="hs-horizontal-list-group-item-radio-3"
+                            name="hs-horizontal-list-group-item-radio"
+                            type="radio"
+                            class="border-gray-200 rounded-full"
+                          />
+                        </div>
+                        <label
+                          for="hs-horizontal-list-group-item-radio-3"
+                          class="ms-3 block w-full text-sm text-gray-600 dark:text-gray-500"
+                        >
+                          Bob Arum
+                        </label>
+                      </div>
+                    </li>
+                  </ul>
                   <InputError :message="errors?.address_type" />
                 </div>
 

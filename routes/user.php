@@ -27,6 +27,6 @@ Route::middleware(['auth'])
 
         Route::get('/followed-stores', FollowedStoreController::class)->name('followed-stores');
 
-        Route::resource("/address-book", AddressBookController::class)->except(["show","create","edit"])->parameters(['address_book' => 'address']);
+        Route::resource("/address-book", AddressBookController::class)->except(["show"])->parameters(['address_book' => 'address']);
 
     });
