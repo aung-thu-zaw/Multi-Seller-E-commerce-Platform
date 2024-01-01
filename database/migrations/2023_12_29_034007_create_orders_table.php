@@ -13,12 +13,14 @@ return new class () extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('currency')->default('usd');
+            $table->string('invoice_no');
             $table->integer('product_qty');
             $table->string('payment_method');
             $table->enum('payment_status',['pending','completed']);
             $table->decimal('total_amount', 8, 2);
             $table->string('address');
+            $table->string('shipping_method');
+            $table->string('coupon')->nullable();
             $table->enum('status', ['pending', 'processing', 'shipped', 'completed', 'cancelled'])->default('pending');
             $table->boolean('is_returned')->default(false);
             $table->boolean('is_refunded')->default(false);

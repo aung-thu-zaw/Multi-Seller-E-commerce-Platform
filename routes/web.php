@@ -21,6 +21,7 @@ use App\Http\Controllers\Ecommerce\OurBlogs\BlogController;
 use App\Http\Controllers\Ecommerce\Pages\AboutUsController;
 use App\Http\Controllers\Ecommerce\Payments\PaymentController;
 use App\Http\Controllers\Ecommerce\Payments\PaypalController;
+use App\Http\Controllers\Ecommerce\Payments\StripeController;
 use App\Http\Controllers\Ecommerce\ProductCollectionController;
 use App\Http\Controllers\Ecommerce\Products\ProductDetailController;
 use App\Http\Controllers\Ecommerce\Products\ProductSearchByCategoryController;
@@ -165,12 +166,17 @@ Route::controller(CartItemController::class)
 Route::get("/my-carts", [MyCartController::class,"index"])->middleware("auth")->name("my-cart.index");
 Route::post("/apply-coupon", [CouponController::class,"applyCoupon"])->middleware("auth")->name("coupon.apply");
 Route::post("/{coupon_code}/remove-coupon", [CouponController::class,"removeCoupon"])->middleware("auth")->name("coupon.remove");
-Route::get("/checkout", [CheckoutController::class,"index"])->middleware("auth")->name("checkout.index");
-Route::get("/payments", [PaymentController::class,"index"])->middleware("auth")->name("payments.index");
+Route::get("/checkout", [CheckoutController::class,"index"])->middleware(["auth",'check.cart.items'])->name("checkout.index");
+Route::post("/checkout/{shipping_method_id}", [CheckoutController::class,"handleShippingMethod"])->middleware(["auth"])->name("checkout.shipping-method");
+// Route::post("/checkout/shipping-fee", [CheckoutController::class,"getShippingFee"])->middleware("auth")->name("checkout.shipping-fee");
+Route::get("/payments", PaymentController::class)->middleware(["auth",'check.cart.items'])->name("payments");
 
-Route::get("/payments/paypal/pay", [PaypalController::class,"payWithPaypal"])->middleware("auth")->name("payments.paypal.pay");
-Route::get("/payments/paypal/success", [PaypalController::class,"paypalSuccess"])->middleware("auth")->name("payments.paypal.success");
-Route::get("/payments/paypal/cancel", [PaypalController::class,"paypalCancel"])->middleware("auth")->name("payments.paypal.cancel");
+Route::get("/payments/paypal/pay", [PaypalController::class,"payWithPaypal"])->middleware("auth", 'check.cart.items')->name("payments.paypal.pay");
+Route::get("/payments/paypal/success", [PaypalController::class,"paypalSuccess"])->middleware("auth", 'check.cart.items')->name("payments.paypal.success");
+Route::get("/payments/paypal/cancel", [PaypalController::class,"paypalCancel"])->middleware("auth", 'check.cart.items')->name("payments.paypal.cancel");
+
+Route::get("/payments/stripe", [StripeController::class,"index"])->middleware("auth", 'check.cart.items')->name("payments.stripe");
+Route::post("/payments/stripe/pay", [StripeController::class,"payWithStripe"])->middleware("auth")->name("payments.stripe.pay");
 
 
 Route::get('/languages/change', ChangeLanguageController::class)->name("languages.change");

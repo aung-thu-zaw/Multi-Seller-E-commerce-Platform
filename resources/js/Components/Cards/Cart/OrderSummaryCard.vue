@@ -74,6 +74,23 @@ const removeCoupon = () => {
     }
   )
 }
+
+const GoToCheckout = () => {
+  router.get(
+    route('checkout.index'),
+    {},
+    {
+      onFinish: () => {
+        const errorMessage = usePage().props.flash.error
+        if (errorMessage) {
+          toast.error(__(errorMessage), {
+            autoClose: 2000
+          })
+        }
+      }
+    }
+  )
+}
 </script>
 
 <template>
@@ -91,11 +108,6 @@ const removeCoupon = () => {
         <span> {{ __('Total Items Price') }}:</span>
         <span>$ {{ calculateTotalItemAmount() }}</span>
       </li>
-
-      <!-- <li class="flex justify-between text-gray-700">
-        <span> {{ __('Delivery') }}:</span>
-        <span>$ 300</span>
-      </li> -->
 
       <li v-show="coupon" class="flex justify-between text-gray-700">
         <span> {{ __('Coupon Code') }}:</span>
@@ -124,18 +136,18 @@ const removeCoupon = () => {
     </ul>
 
     <div class="space-y-3">
-      <Link
-        as="button"
-        :href="route('checkout.index')"
+      <button
+        @click="GoToCheckout"
+        type="button"
         class="px-4 py-3 inline-block text-sm w-full text-center font-semibold text-white bg-orange-600 shadow-sm border border-gray-200 rounded-md hover:bg-orange-700 duration-200"
       >
         <i class="fa-solid fa-right-from-bracket"></i>
         {{ __('Proceed To Checkout') }}
-      </Link>
+      </button>
 
       <Link
         as="button"
-        href="#"
+        :href="route('home')"
         class="px-4 py-3 inline-block text-sm w-full text-center font-semibold text-orange-600 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100 duration-200"
       >
         <i class="fa-solid fa-basket-shopping"></i>

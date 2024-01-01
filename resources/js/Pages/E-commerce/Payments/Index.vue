@@ -1,8 +1,19 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue'
+import Paypal from './Partials/Paypal.vue'
+import Stripe from './Partials/Stripe.vue'
+import CashOnDelivery from './Partials/CashOnDelivery.vue'
 import ShippingAndBillingCard from '@/Components/Cards/Checkout/ShippingAndBillingCard.vue'
 import { Head, usePage, Link } from '@inertiajs/vue3'
 import { computed } from 'vue'
+
+defineProps({
+  coupon: Object,
+  address: Object,
+  shippingMethods: Object,
+  shippingRate: Object,
+  stripeKey: String
+})
 
 const cartItems = computed(() => usePage().props.auth.cart?.cart_items)
 </script>
@@ -15,43 +26,73 @@ const cartItems = computed(() => usePage().props.auth.cart?.cart_items)
       <div class="w-[1280px] mx-auto">
         <div class="flex items-start gap-5">
           <div class="w-8/12 space-y-5">
-            <div class="py-5 border border-gray-200 bg-white rounded-md p-5">
-              <h2 class="mb-5 font-bold text-xl text-gray-800">
+            <div class="py-3">
+              <h2 class="font-bold text-xl text-gray-800">
                 {{ __('Select Payment Method') }}
               </h2>
-
-              <div class="flex items-center space-x-3">
+            </div>
+            <div class="py-5 border border-gray-200 bg-white rounded-md p-5">
+              <nav class="flex space-x-2" aria-label="Tabs" role="tablist">
                 <Link
                   as="button"
-                  :href="route('payments.paypal.pay')"
-                  class="px-5 py-3.5 text-white rounded-md bg-[#ecc238] hover:bg-[#eeca51] duration-200 font-semibold text-sm"
+                  :href="route('payments')"
+                  :data="{
+                    tab: 'paypal'
+                  }"
+                  class="py-3 px-4 text-center flex-auto inline-flex justify-center items-center gap-x-2 bg-transparent text-sm text-gray-700 font-semibold hover:text-orange-600 rounded-lg active"
+                  :class="{ 'text-orange-600': $page.props.ziggy.query?.tab === 'paypal' }"
                 >
-                  <i class="fa-brands fa-paypal"></i>
                   Paypal
                 </Link>
-
                 <Link
                   as="button"
-                  href="#"
-                  class="px-5 py-3.5 text-white rounded-md bg-slate-600 hover:bg-slate-700 duration-200 font-semibold text-sm"
+                  :href="route('payments')"
+                  :data="{
+                    tab: 'credit-or-debit-card'
+                  }"
+                  class="py-3 px-4 text-center flex-auto inline-flex justify-center items-center gap-x-2 bg-transparent text-sm text-gray-700 font-semibold hover:text-orange-600 rounded-lg"
+                  :class="{
+                    'text-orange-600': $page.props.ziggy.query?.tab === 'credit-or-debit-card'
+                  }"
                 >
-                  <i class="fa-solid fa-credit-card"></i>
                   Credit / Debit Card
                 </Link>
-
                 <Link
                   as="button"
-                  href="#"
-                  class="px-5 py-3.5 text-white rounded-md bg-emerald-600 hover:bg-emerald-700 duration-200 font-semibold text-sm"
+                  :href="route('payments')"
+                  :data="{
+                    tab: 'cash-on-delivery'
+                  }"
+                  class="py-3 px-4 text-center flex-auto inline-flex justify-center items-center gap-x-2 bg-transparent text-sm text-gray-700 font-semibold hover:text-orange-600 rounded-lg"
+                  :class="{
+                    'text-orange-600': $page.props.ziggy.query?.tab === 'cash-on-delivery'
+                  }"
                 >
-                  <i class="fa-solid fa-boxes-packing"></i>
                   Cash on Delivery
                 </Link>
+              </nav>
+
+              <div class="mt-3">
+                <div v-if="$page.props.ziggy.query?.tab === 'paypal'">
+                  <Paypal />
+                </div>
+                <div v-if="$page.props.ziggy.query?.tab === 'credit-or-debit-card'">
+                  <Stripe :stripeKey="stripeKey" />
+                </div>
+                <div v-if="$page.props.ziggy.query?.tab === 'cash-on-delivery'">
+                  <CashOnDelivery />
+                </div>
               </div>
             </div>
           </div>
           <div class="w-4/12">
-            <ShippingAndBillingCard :cartItems="cartItems" />
+            <ShippingAndBillingCard
+              :cartItems="cartItems"
+              :coupon="coupon"
+              :address="address"
+              :shippingRate="shippingRate"
+              :shippingMethods="shippingMethods"
+            />
           </div>
         </div>
       </div>

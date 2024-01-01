@@ -13,6 +13,7 @@ class ShippingMethodSeeder extends Seeder
      */
     public function run(): void
     {
-        ShippingMethod::factory(3)->create();
+        ShippingMethod::factory()->create(['name' => 'Standard Delivery']);
+        ShippingMethod::factory()->create(['name' => 'Express Delivery']);
     }
 }

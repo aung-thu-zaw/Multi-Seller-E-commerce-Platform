@@ -71,5 +71,6 @@ class Kernel extends HttpKernel
         'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         'user.role' => \App\Http\Middleware\Role::class,
         'strict.inactive_store' => \App\Http\Middleware\StrictAreaForInactiveStore::class,
+        'check.cart.items' => \App\Http\Middleware\CheckCartItems::class,
     ];
 }

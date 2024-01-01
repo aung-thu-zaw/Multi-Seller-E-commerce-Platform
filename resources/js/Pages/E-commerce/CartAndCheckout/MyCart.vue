@@ -9,13 +9,6 @@ defineProps({ coupon: Object })
 
 const cartItems = computed(() => usePage().props.auth.cart?.cart_items)
 
-// const totalItems = computed(() => {
-//   if (usePage().props.auth.cart.cart_items) {
-//     return usePage().props.auth.cart?.cart_items.reduce((acc, item) => acc + item.qty, 0)
-//   }
-//   return ''
-// })
-
 const groupByStore = computed(() => {
   const grouped = {}
   for (const cartItem of cartItems.value) {
@@ -43,22 +36,6 @@ const groupByStore = computed(() => {
 
         <div class="flex items-start gap-5">
           <div class="w-9/12 space-y-5">
-            <!-- <div
-              class="py-5 px-5 border border-gray-200 bg-white rounded-md flex items-center justify-between"
-            >
-              <div class="space-x-2">
-                <span class="font-semibold text-sm text-gray-700">
-                  Select All ({{ totalItems }} Item(s))
-                </span>
-              </div>
-
-              <div>
-                <button class="font-semibold text-sm text-red-600">
-                  <i class="fa-solid fa-trash-can"></i>
-                  Remove From My Cart
-                </button>
-              </div>
-            </div> -->
 
             <div class="py-5 border border-gray-200 bg-white rounded-md">
               <div v-if="cartItems && groupByStore">

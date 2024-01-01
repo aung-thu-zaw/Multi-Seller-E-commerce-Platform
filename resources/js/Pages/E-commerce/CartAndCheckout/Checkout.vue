@@ -5,6 +5,8 @@ import ShippingAndBillingCard from '@/Components/Cards/Checkout/ShippingAndBilli
 import { Head, usePage } from '@inertiajs/vue3'
 import { computed } from 'vue'
 
+defineProps({ coupon: Object, address: Object, shippingMethods: Object, shippingRate: Object })
+
 const cartItems = computed(() => usePage().props.auth.cart?.cart_items)
 
 const groupByStore = computed(() => {
@@ -52,7 +54,13 @@ const groupByStore = computed(() => {
             </div>
           </div>
           <div class="w-4/12">
-            <ShippingAndBillingCard />
+            <ShippingAndBillingCard
+              :cartItems="cartItems"
+              :coupon="coupon"
+              :address="address"
+              :shippingRate="shippingRate"
+              :shippingMethods="shippingMethods"
+            />
           </div>
         </div>
       </div>

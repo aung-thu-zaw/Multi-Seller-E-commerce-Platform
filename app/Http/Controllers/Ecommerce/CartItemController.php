@@ -26,6 +26,7 @@ class CartItemController extends Controller
         } else {
 
             CartItem::create([
+                'shipping_method_id' => 1,
                 'cart_id' => $cart->id,
                 'product_id' => $request->product_id,
                 'qty' => $request->qty,
@@ -46,6 +47,7 @@ class CartItemController extends Controller
 
         return back();
     }
+
     public function destroy(CartItem $cartItem): RedirectResponse
     {
         $cartItem->delete();

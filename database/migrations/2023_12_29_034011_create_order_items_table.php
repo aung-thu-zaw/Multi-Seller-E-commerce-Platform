@@ -16,6 +16,7 @@ return new class () extends Migration {
             $table->foreignId('product_id')->constrained();
             $table->foreignId('store_id')->constrained();
             $table->integer("qty");
+            $table->json("attributes")->nullable();
             $table->decimal('unit_amount', 8, 2);
             $table->decimal('total_amount', 8, 2);
             $table->timestamps();
