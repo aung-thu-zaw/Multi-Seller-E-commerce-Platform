@@ -15,3 +15,4 @@ class RegionSeeder extends Seeder
         Region::factory()->create();
     }
 }
+

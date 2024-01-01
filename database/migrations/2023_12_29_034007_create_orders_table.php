@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,12 +14,14 @@ return new class() extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('invoice_no');
+            $table->string('tracking_no');
             $table->integer('product_qty');
             $table->string('payment_method');
-            $table->enum('payment_status', ['pending', 'paid']);
+            $table->enum('payment_status', ['pending', 'paid'])->default("pending");
             $table->decimal('total_amount', 8, 2);
             $table->string('address');
             $table->string('shipping_method');
+            $table->double('shipping_fee', 8, 2);
             $table->string('coupon')->nullable();
             $table->enum('status', ['pending', 'processing', 'shipped', 'delivered', 'cancelled'])->default('pending');
             $table->boolean('is_returned')->default(false);

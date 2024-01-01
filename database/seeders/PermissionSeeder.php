@@ -78,6 +78,13 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'coupons.restore', 'group' => 'Coupon']);
         Permission::create(['name' => 'coupons.force.delete', 'group' => 'Coupon']);
 
+        Permission::create(['name' => 'orders.view', 'group' => 'Order Management']);
+        Permission::create(['name' => 'orders.edit', 'group' => 'Order Management']);
+        Permission::create(['name' => 'orders.delete', 'group' => 'Order Management']);
+        Permission::create(['name' => 'orders.view.trash', 'group' => 'Order Management']);
+        Permission::create(['name' => 'orders.restore', 'group' => 'Order Management']);
+        Permission::create(['name' => 'orders.force.delete', 'group' => 'Order Management']);
+
         Permission::create(['name' => 'regions.view', 'group' => 'Geographic Hierarchy']);
         Permission::create(['name' => 'regions.create', 'group' => 'Geographic Hierarchy']);
         Permission::create(['name' => 'regions.edit', 'group' => 'Geographic Hierarchy']);

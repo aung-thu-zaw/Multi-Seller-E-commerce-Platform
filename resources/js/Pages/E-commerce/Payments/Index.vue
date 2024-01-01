@@ -77,13 +77,17 @@ const emitTotalAmount = (newTotalAmount) => {
                   Cash on Delivery
                 </Link>
               </nav>
-     
+
               <div class="mt-3">
                 <div v-if="$page.props.ziggy.query?.tab === 'paypal'">
                   <Paypal />
                 </div>
                 <div v-if="$page.props.ziggy.query?.tab === 'credit-or-debit-card'">
-                  <Stripe :stripeKey="stripeKey" :totalAmount="totalAmount" />
+                  <Stripe
+                    :stripeKey="stripeKey"
+                    :totalAmount="totalAmount"
+                    :shippingRate="shippingRate"
+                  />
                 </div>
                 <div v-if="$page.props.ziggy.query?.tab === 'cash-on-delivery'">
                   <CashOnDelivery />

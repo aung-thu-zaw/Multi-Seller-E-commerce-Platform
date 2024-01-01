@@ -20,9 +20,12 @@
 
 <script>
 import { loadStripe } from '@stripe/stripe-js'
-import { router } from '@inertiajs/vue3'
+import { router, usePage } from '@inertiajs/vue3'
 import FormButton from '@/Components/Buttons/FormButton.vue'
 import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
+import { __ } from '@/Services/translations-inside-setup'
 
 export default {
   components: {
@@ -57,7 +60,8 @@ export default {
   },
   props: {
     stripeKey: String,
-    totalAmount: Number
+    totalAmount: Number,
+    shippingRate: Number
   },
   methods: {
     async handleSubmit() {
@@ -79,7 +83,8 @@ export default {
         router.post(
           route('payments.stripe.pay', {
             payment_method_id: this.paymentMethodId,
-            total_amount: this.totalAmount
+            total_amount: this.totalAmount,
+            shipping_fee: this.shippingRate['rate']
           }),
           {},
           {
@@ -87,6 +92,10 @@ export default {
             onSuccess: () => {
               this.paymentSuccess = 'Payment successful'
               this.processing = false
+              const successMessage = usePage().props.flash.success
+              toast.success(__(successMessage), {
+                autoClose: 2000
+              })
             }
           }
         )
