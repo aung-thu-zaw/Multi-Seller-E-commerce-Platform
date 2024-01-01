@@ -53,13 +53,12 @@ class StripeController extends Controller
                 $balanceTransaction = Charge::retrieve($response->latest_charge)->balance_transaction;
 
                 if ($response->status === 'succeeded') {
-
                     $order = Order::create([
                         'user_id' => auth()->id(),
                         'invoice_no' => 'E-COMMERCE' . mt_rand(100000000, 999999999),
-                        'tracking_no' => "#".uniqid(),
+                        'tracking_no' => '#' . uniqid(),
                         'product_qty' => $cartItems->sum('qty'),
-                        'payment_method' => "card",
+                        'payment_method' => 'card',
                         'payment_status' => 'paid',
                         'total_amount' => $request->total_amount,
                         'address' => $address->address,
@@ -71,14 +70,14 @@ class StripeController extends Controller
 
                     $cartItems->each(function ($item) use ($order, &$productsByStore) {
                         $orderItem = OrderItem::create([
-                             'order_id' => $order->id,
-                             'product_id' => $item->product_id,
-                             'store_id' => $item->store_id,
-                             'qty' => $item->qty,
-                             'attributes' => $item->attributes,
-                             'unit_price' => $item->unit_price,
-                             'total_price' => $item->total_price,
-                         ]);
+                            'order_id' => $order->id,
+                            'product_id' => $item->product_id,
+                            'store_id' => $item->store_id,
+                            'qty' => $item->qty,
+                            'attributes' => $item->attributes,
+                            'unit_price' => $item->unit_price,
+                            'total_price' => $item->total_price,
+                        ]);
 
                         $productsByStore[$item->store_id][] = $orderItem;
                     });
@@ -86,7 +85,7 @@ class StripeController extends Controller
                     Transaction::create([
                         'order_id' => $order->id,
                         'transaction_id' => $balanceTransaction,
-                        'payment_method' => "card",
+                        'payment_method' => 'card',
                         'amount' => $response->amount,
                     ]);
 
@@ -98,30 +97,33 @@ class StripeController extends Controller
                         $item->destroy($item->id);
                     });
 
-                    $placedOrder = Order::with(["user:id,name","orderItems.product:id,image,name"])->find($order->id);
+                    $placedOrder = Order::with(['user:id,name', 'orderItems.product:id,image,name'])->find($order->id);
 
                     Mail::to($address->email)->queue(new OrderPlacedSuccessfullyEmail($address, $placedOrder));
 
-                    $admins = User::where('role', 'admin')->permission(['orders.edit'])->get();
+                    $admins = User::where('role', 'admin')
+                        ->permission(['orders.edit'])
+                        ->get();
 
                     $admins->each(function ($admin) use ($address, $placedOrder) {
                         Mail::to($admin->email)->queue(new NewOrderPlacedEmail($admin, $address, $placedOrder));
                     });
 
                     foreach ($productsByStore as $storeId => $orderItems) {
-                        $store = Store::with("seller:id,name")->find($storeId);
+                        $store = Store::with('seller:id,name')->find($storeId);
 
                         Mail::to($store->contact_email)->queue(new SellerNewOrderPlacedEmail($store, $address, $orderItems));
                     }
-
                 } else {
                     return back()->with('Something went wrong!');
                 }
             });
+
+            return to_route('home')->with('success', 'Your order placed is successfully.');
         } catch (\Exception $e) {
             Log::error('Stripe Error: ' . $e->getMessage());
         }
 
-        return to_route('home')->with('success', 'Your order placed is successfully.');
+        return back();
     }
 }

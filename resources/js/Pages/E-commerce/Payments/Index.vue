@@ -90,7 +90,7 @@ const emitTotalAmount = (newTotalAmount) => {
                   />
                 </div>
                 <div v-if="$page.props.ziggy.query?.tab === 'cash-on-delivery'">
-                  <CashOnDelivery />
+                  <CashOnDelivery :shippingRate="shippingRate" :totalAmount="totalAmount" />
                 </div>
               </div>
             </div>

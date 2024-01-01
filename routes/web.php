@@ -19,6 +19,7 @@ use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentReplyController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogController;
 use App\Http\Controllers\Ecommerce\Pages\AboutUsController;
+use App\Http\Controllers\Ecommerce\Payments\CashOnDeliveryController;
 use App\Http\Controllers\Ecommerce\Payments\PaymentController;
 use App\Http\Controllers\Ecommerce\Payments\PaypalController;
 use App\Http\Controllers\Ecommerce\Payments\StripeController;
@@ -175,8 +176,9 @@ Route::get('/payments/paypal/pay', [PaypalController::class, 'payWithPaypal'])->
 Route::get('/payments/paypal/success', [PaypalController::class, 'paypalSuccess'])->middleware('auth', 'check.cart.items')->name('payments.paypal.success');
 Route::get('/payments/paypal/cancel', [PaypalController::class, 'paypalCancel'])->middleware('auth', 'check.cart.items')->name('payments.paypal.cancel');
 
-Route::get('/payments/stripe', [StripeController::class, 'index'])->middleware('auth', 'check.cart.items')->name('payments.stripe');
 Route::post('/payments/stripe/pay', [StripeController::class, 'payWithStripe'])->middleware('auth')->name('payments.stripe.pay');
+
+Route::post('/payment/cash/pay', [CashOnDeliveryController::class,"payWithCash"])->name("payments.cash.pay");
 
 Route::get('/languages/change', ChangeLanguageController::class)->name('languages.change');
 
