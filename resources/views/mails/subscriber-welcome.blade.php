@@ -131,26 +131,3 @@
 </body>
 
 </html>
-
-
-
-
-color orange,gray,red,white
-
-size sm, lg, 2xl
-
-orange sm
-orange lg
-orange 2xl
-
-gray sm
-gray lg
-gray 2xl
-
-red sm
-red lg
-red 2xl
-
-white sm
-white lg
-white 2xl

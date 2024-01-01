@@ -56,7 +56,8 @@ export default {
     })
   },
   props: {
-    stripeKey: String
+    stripeKey: String,
+    totalAmount: Number
   },
   methods: {
     async handleSubmit() {
@@ -77,7 +78,8 @@ export default {
 
         router.post(
           route('payments.stripe.pay', {
-            payment_method_id: this.paymentMethodId
+            payment_method_id: this.paymentMethodId,
+            total_amount: this.totalAmount
           }),
           {},
           {

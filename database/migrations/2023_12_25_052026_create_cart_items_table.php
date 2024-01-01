@@ -14,7 +14,9 @@ return new class () extends Migration {
             $table->id();
             $table->foreignId('cart_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('store_id')->constrained()->cascadeOnDelete();
             $table->integer('qty');
+            $table->decimal("unit_price", 8, 2);
             $table->decimal("total_price", 8, 2);
             $table->json('attributes')->nullable();
             $table->timestamps();

@@ -16,12 +16,12 @@ return new class () extends Migration {
             $table->string('invoice_no');
             $table->integer('product_qty');
             $table->string('payment_method');
-            $table->enum('payment_status',['pending','completed']);
+            $table->enum('payment_status', ['pending','paid']);
             $table->decimal('total_amount', 8, 2);
             $table->string('address');
             $table->string('shipping_method');
             $table->string('coupon')->nullable();
-            $table->enum('status', ['pending', 'processing', 'shipped', 'completed', 'cancelled'])->default('pending');
+            $table->enum('status', ['pending', 'processing', 'shipped', 'delivered', 'cancelled'])->default('pending');
             $table->boolean('is_returned')->default(false);
             $table->boolean('is_refunded')->default(false);
             $table->boolean('is_canceled')->default(false);

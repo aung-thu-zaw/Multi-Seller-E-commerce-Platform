@@ -72,6 +72,6 @@ class HomeController extends Controller
     }
     // public function __invoke(): View
     // {
-    //     return view('mails.seller.store-activation');
+    //     return view('mails.user.order-placed');
     // }
 }

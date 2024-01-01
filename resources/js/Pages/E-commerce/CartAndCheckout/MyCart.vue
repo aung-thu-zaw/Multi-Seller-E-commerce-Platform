@@ -36,9 +36,8 @@ const groupByStore = computed(() => {
 
         <div class="flex items-start gap-5">
           <div class="w-9/12 space-y-5">
-
             <div class="py-5 border border-gray-200 bg-white rounded-md">
-              <div v-if="cartItems && groupByStore">
+              <div v-if="cartItems.length && groupByStore.length">
                 <div
                   v-for="(cartItemGroup, index) in groupByStore"
                   :key="index"

@@ -29,7 +29,9 @@ class CartItemController extends Controller
                 'shipping_method_id' => 1,
                 'cart_id' => $cart->id,
                 'product_id' => $request->product_id,
+                'store_id' => $request->store_id,
                 'qty' => $request->qty,
+                'unit_price' => $request->unit_price,
                 'total_price' => $request->total_price,
                 'attributes' => $request->validated()['attributes'] ? $attributes : null,
             ]);

@@ -5,7 +5,7 @@ import Stripe from './Partials/Stripe.vue'
 import CashOnDelivery from './Partials/CashOnDelivery.vue'
 import ShippingAndBillingCard from '@/Components/Cards/Checkout/ShippingAndBillingCard.vue'
 import { Head, usePage, Link } from '@inertiajs/vue3'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 defineProps({
   coupon: Object,
@@ -16,6 +16,12 @@ defineProps({
 })
 
 const cartItems = computed(() => usePage().props.auth.cart?.cart_items)
+
+const totalAmount = ref(0)
+
+const emitTotalAmount = (newTotalAmount) => {
+  totalAmount.value = newTotalAmount
+}
 </script>
 
 <template>
@@ -71,13 +77,13 @@ const cartItems = computed(() => usePage().props.auth.cart?.cart_items)
                   Cash on Delivery
                 </Link>
               </nav>
-
+     
               <div class="mt-3">
                 <div v-if="$page.props.ziggy.query?.tab === 'paypal'">
                   <Paypal />
                 </div>
                 <div v-if="$page.props.ziggy.query?.tab === 'credit-or-debit-card'">
-                  <Stripe :stripeKey="stripeKey" />
+                  <Stripe :stripeKey="stripeKey" :totalAmount="totalAmount" />
                 </div>
                 <div v-if="$page.props.ziggy.query?.tab === 'cash-on-delivery'">
                   <CashOnDelivery />
@@ -92,6 +98,7 @@ const cartItems = computed(() => usePage().props.auth.cart?.cart_items)
               :address="address"
               :shippingRate="shippingRate"
               :shippingMethods="shippingMethods"
+              @updateTotalAmount="emitTotalAmount"
             />
           </div>
         </div>

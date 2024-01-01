@@ -1,7 +1,7 @@
 <script setup>
 import { useFormatFunctions } from '@/Composables/useFormatFunctions'
-import { Link, router, usePage } from '@inertiajs/vue3'
-import { computed, ref, watch } from 'vue'
+import { Link, router } from '@inertiajs/vue3'
+import { computed, ref, watch, watchEffect } from 'vue'
 
 const props = defineProps({
   coupon: Object,
@@ -74,10 +74,20 @@ watch(selectedShippingMethod, (newShippingMethod) => {
 
 const filteredShippingMethod = computed(() => {
   const shipping = props.shippingMethods.find(
-    (shippingMethod) => shippingMethod.id === props.cartItems[0].id
+    (shippingMethod) => shippingMethod.id == props.cartItems[0].shipping_method_id
   )
 
   return shipping.name
+})
+
+const emit = defineEmits('updateTotalAmount')
+
+const emitTotalAmount = () => {
+  emit('updateTotalAmount', calculateTotalAmount())
+}
+
+watchEffect(() => {
+  emitTotalAmount()
 })
 </script>
 
@@ -149,7 +159,7 @@ const filteredShippingMethod = computed(() => {
               :for="'shipping-' + shippingMethod.id"
               class="ml-2 text-sm font-semibold text-gray-700"
             >
-              {{ shippingMethod.name }}
+              {{ shippingMethod?.name }}
             </label>
           </div>
         </li>

@@ -36,7 +36,9 @@ const decrement = () => (quantity.value <= 1 ? 1 : quantity.value--)
 
 const formData = reactive({
   product_id: props.product.id,
+  store_id: props.product.store_id,
   qty: quantity.value,
+  unit_price: 0,
   total_price: 0,
   attributes: {}
 })
@@ -56,6 +58,7 @@ const calculateTotalPrice = () => {
       }
 
       if (isMatch) {
+        formData.unit_price = sku.offer_price ? sku.offer_price : sku.price
         totalPrice = sku.offer_price ? formData.qty * sku.offer_price : formData.qty * sku.price
         break
       }
@@ -63,6 +66,10 @@ const calculateTotalPrice = () => {
 
     return totalPrice
   } else {
+    formData.unit_price = props.product.offer_price
+      ? props.product.offer_price
+      : props.product.price
+
     totalPrice = props.product.offer_price
       ? formData.qty * props.product.offer_price
       : formData.qty * props.product.price
