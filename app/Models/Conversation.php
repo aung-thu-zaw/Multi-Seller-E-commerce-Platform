@@ -12,24 +12,24 @@ class Conversation extends Model
     use HasFactory;
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,Conversation>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,Conversation>
+     */
     public function customer(): BelongsTo
     {
-        return $this->belongsTo(User::class, "customer_id");
+        return $this->belongsTo(User::class, 'customer_id');
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Store,Conversation>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Store,Conversation>
+     */
     public function store(): BelongsTo
     {
         return $this->belongsTo(Store::class);
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\HasMany<ConversationMessage>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<ConversationMessage>
+     */
     public function conversationMessages(): HasMany
     {
         return $this->hasMany(ConversationMessage::class);

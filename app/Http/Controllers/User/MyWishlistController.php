@@ -12,7 +12,7 @@ class MyWishlistController extends Controller
 {
     public function index(): Response|ResponseFactory
     {
-        $myWishlists = Wishlist::with(['product:id,store_id,name,slug,image,qty,price,offer_price','store:id,store_name,slug','product.skus.attributeOptions.attribute'])->where('user_id', auth()->id())->get();
+        $myWishlists = Wishlist::with(['product:id,store_id,name,slug,image,qty,price,offer_price', 'store:id,store_name,slug', 'product.skus.attributeOptions.attribute'])->where('user_id', auth()->id())->get();
 
         return inertia('User/MyWishlists', compact('myWishlists'));
     }

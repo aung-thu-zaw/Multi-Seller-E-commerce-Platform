@@ -31,10 +31,10 @@ class UserSeeder extends Seeder
 
         // Admin
         User::factory()->create([
-           'name' => 'Admin',
-           'role' => 'admin',
-           'email' => 'admin@gmail.com',
-           'password' => 'Password!',
+            'name' => 'Admin',
+            'role' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => 'Password!',
         ]);
 
         // Seller
@@ -58,6 +58,6 @@ class UserSeeder extends Seeder
 
         User::factory(10)->create(['role' => 'admin']);
 
-        User::factory(100)->create(["role" => "user"]);
+        User::factory(100)->create(['role' => 'user']);
     }
 }

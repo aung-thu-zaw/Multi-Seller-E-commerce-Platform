@@ -44,7 +44,7 @@ class SliderBanner extends Model
 
     public static function deleteImage(string $sliderBannerImage): void
     {
-        if (!empty($sliderBannerImage) && file_exists(storage_path('app/public/slider-banners/'.pathinfo($sliderBannerImage, PATHINFO_BASENAME)))) {
+        if (! empty($sliderBannerImage) && file_exists(storage_path('app/public/slider-banners/'.pathinfo($sliderBannerImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/slider-banners/'.pathinfo($sliderBannerImage, PATHINFO_BASENAME)));
         }
     }

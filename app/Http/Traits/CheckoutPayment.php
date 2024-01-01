@@ -4,16 +4,15 @@ namespace App\Http\Traits;
 
 use App\Models\ShippingArea;
 use App\Models\ShippingRate;
-use Illuminate\Http\Request;
 
 trait CheckoutPayment
 {
     private function getShippingArea($address): ShippingArea
     {
         return ShippingArea::where([
-            "region_id" => $address->region_id,
-            "city_id" => $address->city_id,
-            "township_id" => $address->township_id,
+            'region_id' => $address->region_id,
+            'city_id' => $address->city_id,
+            'township_id' => $address->township_id,
         ])->first();
     }
 
@@ -41,10 +40,10 @@ trait CheckoutPayment
 
     private function getShippingRate(ShippingArea $shippingArea, object $cartItems, int $totalCartItemAmount): ShippingRate
     {
-        return ShippingRate::select("rate")
-            ->where("shipping_area_id", $shippingArea->id)
-            ->where("shipping_method_id", $cartItems[0]->shipping_method_id)
-            ->where("min_order_total", '<=', $totalCartItemAmount)
+        return ShippingRate::select('rate')
+            ->where('shipping_area_id', $shippingArea->id)
+            ->where('shipping_method_id', $cartItems[0]->shipping_method_id)
+            ->where('min_order_total', '<=', $totalCartItemAmount)
             ->first();
     }
 }

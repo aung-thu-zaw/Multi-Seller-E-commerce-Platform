@@ -17,7 +17,8 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $brands = Brand::where("status", "active")->pluck("id")->toArray();
+        $brands = Brand::where('status', 'active')->pluck('id')->toArray();
+
         return [
             'category_id' => fake()->numberBetween(1, 67),
             'brand_id' => fake()->randomElement($brands),

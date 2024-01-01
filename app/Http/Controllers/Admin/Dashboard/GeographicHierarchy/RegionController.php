@@ -45,7 +45,7 @@ class RegionController extends Controller
 
     public function store(StoreRegionRequest $request): RedirectResponse
     {
-        Region::create(["name" => $request->name]);
+        Region::create(['name' => $request->name]);
 
         return to_route('admin.regions.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }
@@ -57,7 +57,7 @@ class RegionController extends Controller
 
     public function update(UpdateRegionRequest $request, Region $region): RedirectResponse
     {
-        $region->update(["name" => $request->name]);
+        $region->update(['name' => $request->name]);
 
         return to_route('admin.regions.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }

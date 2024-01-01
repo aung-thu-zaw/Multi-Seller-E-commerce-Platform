@@ -26,7 +26,7 @@ class ShippingRateFactory extends Factory
             'shipping_method_id' => fake()->randomElement($shippingMethods),
             'min_order_total' => fake()->numberBetween(1, 5),
             'max_order_total' => fake()->numberBetween(10, 20),
-            'rate' => fake()->numberBetween(100,800),
+            'rate' => fake()->numberBetween(100, 800),
         ];
     }
 }

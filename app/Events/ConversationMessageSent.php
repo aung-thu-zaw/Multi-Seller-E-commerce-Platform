@@ -4,9 +4,7 @@ namespace App\Events;
 
 use App\Models\Conversation;
 use App\Models\ConversationMessage;
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -19,10 +17,10 @@ class ConversationMessageSent implements ShouldBroadcast
     use SerializesModels;
 
     /**
-      * Create a new event instance.
-      *
-      * @return void
-      */
+     * Create a new event instance.
+     *
+     * @return void
+     */
     public function __construct(public Conversation $conversation, public ConversationMessage $conversationMessage)
     {
         //
@@ -30,13 +28,13 @@ class ConversationMessageSent implements ShouldBroadcast
 
     public function broadcastOn(): PrivateChannel
     {
-        return new PrivateChannel('conversation.' . $this->conversation->id);
+        return new PrivateChannel('conversation.'.$this->conversation->id);
     }
 
     public function broadcastWith(): array
     {
         return [
-            "message" => $this->conversationMessage
+            'message' => $this->conversationMessage,
         ];
     }
 }

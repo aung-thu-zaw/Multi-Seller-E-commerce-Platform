@@ -48,7 +48,7 @@ class Category extends Model
     protected function image(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/categories/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/categories/$value"),
         );
     }
 
@@ -69,8 +69,8 @@ class Category extends Model
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\HasMany<Brand>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Brand>
+     */
     public function brands(): HasMany
     {
         return $this->hasMany(Brand::class);
@@ -85,7 +85,7 @@ class Category extends Model
 
     public static function deleteImage(?string $categoryImage): void
     {
-        if (!empty($categoryImage) && file_exists(storage_path('app/public/categories/'.pathinfo($categoryImage, PATHINFO_BASENAME)))) {
+        if (! empty($categoryImage) && file_exists(storage_path('app/public/categories/'.pathinfo($categoryImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/categories/'.pathinfo($categoryImage, PATHINFO_BASENAME)));
         }
     }

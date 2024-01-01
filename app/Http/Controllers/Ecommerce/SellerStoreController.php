@@ -50,7 +50,7 @@ class SellerStoreController extends Controller
             ->with(['productImages', 'store:id,store_type'])
             ->withApprovedReviewCount()
             ->withApprovedReviewAvg()
-            ->filterBy(request(["search", "category", "brand", "rating", "price"]))
+            ->filterBy(request(['search', 'category', 'brand', 'rating', 'price']))
             ->where('store_id', $store->id)
             ->where('status', 'approved')
             ->sortBy(request('sort'))
@@ -63,30 +63,30 @@ class SellerStoreController extends Controller
         $categories = [];
         $brands = [];
 
-        if (!empty($categoryIds)) {
-            $categories = Category::select("id", "name", "slug")->whereIn('id', $categoryIds)->where("status", "show")->get();
+        if (! empty($categoryIds)) {
+            $categories = Category::select('id', 'name', 'slug')->whereIn('id', $categoryIds)->where('status', 'show')->get();
         }
 
-        if (!empty($brandIds)) {
-            $brands = Brand::select("id", "name", "slug")->whereIn('id', $brandIds)->where("status", "active")->get();
+        if (! empty($brandIds)) {
+            $brands = Brand::select('id', 'name', 'slug')->whereIn('id', $brandIds)->where('status', 'active')->get();
         }
 
-        if(request("category")) {
+        if (request('category')) {
 
-            $selectedCategory = Category::where("slug", request("category"))->first();
+            $selectedCategory = Category::where('slug', request('category'))->first();
 
-            $brands = Brand::select("id", "name", "slug")->where("category_id", $selectedCategory->id)->where("status", "active")->get();
+            $brands = Brand::select('id', 'name', 'slug')->where('category_id', $selectedCategory->id)->where('status', 'active')->get();
         }
 
-        if (request("brand")) {
-            $brandSlugs = explode('--', request("brand"));
+        if (request('brand')) {
+            $brandSlugs = explode('--', request('brand'));
 
-            $selectedBrands = Brand::whereIn("slug", $brandSlugs)->where("status", "active")->get();
+            $selectedBrands = Brand::whereIn('slug', $brandSlugs)->where('status', 'active')->get();
 
             if ($selectedBrands->isNotEmpty()) {
                 $categoryIds = $selectedBrands->pluck('category_id')->unique()->toArray();
 
-                $categories = Category::select("id", "name", "slug")->whereIn('id', $categoryIds)->where("status", "show")->get();
+                $categories = Category::select('id', 'name', 'slug')->whereIn('id', $categoryIds)->where('status', 'show')->get();
             }
         }
 

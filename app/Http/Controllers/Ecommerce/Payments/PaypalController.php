@@ -51,7 +51,7 @@ class PaypalController extends Controller
                 'purchase_units' => [
                     [
                         'amount' => [
-                            'currency_code' => $config["currency"],
+                            'currency_code' => $config['currency'],
                             'value' => 250.89,
                             // "value" => $request->price
                         ],
@@ -59,7 +59,7 @@ class PaypalController extends Controller
                 ],
             ]);
 
-            if (isset($response["id"]) && $response["id"] != null) {
+            if (isset($response['id']) && $response['id'] != null) {
                 foreach ($response['links'] as $link) {
                     if ($link['rel'] === 'approve') {
                         // dd($link['href']);
@@ -70,7 +70,7 @@ class PaypalController extends Controller
                 return redirect()->route('payments.paypal.cancel');
             }
         } catch (Exception $e) {
-            Log::error('PayPal API Error: ' . $e->getMessage());
+            Log::error('PayPal API Error: '.$e->getMessage());
 
             return response()->json(['error' => 'Internal Server Error'], 500);
         }
@@ -86,15 +86,15 @@ class PaypalController extends Controller
 
         $response = $provider->capturePaymentOrder($request->token);
 
-        if (isset($response["status"]) && $response["status"] === "COMPLETED") {
-            dd("Paid Successfully");
+        if (isset($response['status']) && $response['status'] === 'COMPLETED') {
+            dd('Paid Successfully');
         }
 
-        return to_route("payments.paypal.cancel");
+        return to_route('payments.paypal.cancel');
     }
 
     public function paypalCancel(Request $request)
     {
-        return to_route('payments.index')->with("error", "Something went wrong!");
+        return to_route('payments.index')->with('error', 'Something went wrong!');
     }
 }

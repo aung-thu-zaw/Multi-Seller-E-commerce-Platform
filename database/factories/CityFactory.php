@@ -17,11 +17,11 @@ class CityFactory extends Factory
      */
     public function definition(): array
     {
-        $regions = Region::pluck("id")->toArray();
+        $regions = Region::pluck('id')->toArray();
 
         return [
-            "region_id" => fake()->randomElement($regions),
-            "name" => fake()->unique()->city(),
+            'region_id' => fake()->randomElement($regions),
+            'name' => fake()->unique()->city(),
             'created_at' => fake()->dateTimeBetween('-3 months', now()),
         ];
     }

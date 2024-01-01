@@ -2,8 +2,6 @@
 
 namespace App\Actions\Admin\ShippingAreas;
 
-use App\Http\Traits\ImageUpload;
-use App\Models\Brand;
 use App\Models\ShippingArea;
 
 class UpdateShippingAreaAction

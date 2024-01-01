@@ -13,50 +13,50 @@ class ConversationMessage extends Model
     use HasFactory;
 
     /**
-    * @return \Illuminate\Database\Eloquent\Casts\Attribute<ConversationMessage, never>
-    */
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<ConversationMessage, never>
+     */
     protected function createdAt(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => date("j/m/Y", strtotime($value)),
+            get: fn ($value) => date('j/m/Y', strtotime($value)),
         );
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,ConversationMessage>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,ConversationMessage>
+     */
     public function customer(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Store,ConversationMessage>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Store,ConversationMessage>
+     */
     public function store(): BelongsTo
     {
         return $this->belongsTo(Store::class);
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\HasMany<MessageFileAttachment>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<MessageFileAttachment>
+     */
     public function messageFileAttachments(): HasMany
     {
         return $this->hasMany(MessageFileAttachment::class);
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<ConversationMessage,ConversationMessage>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<ConversationMessage,ConversationMessage>
+     */
     public function replyToMessage(): BelongsTo
     {
         return $this->belongsTo(ConversationMessage::class, 'reply_to_message_id');
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\HasMany<ConversationMessage>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<ConversationMessage>
+     */
     public function replies(): HasMany
     {
         return $this->hasMany(ConversationMessage::class, 'reply_to_message_id');

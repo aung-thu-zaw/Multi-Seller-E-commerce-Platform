@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Township;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class TownshipSeeder extends Seeder

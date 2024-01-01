@@ -11,7 +11,7 @@ class ConversationController extends Controller
 {
     public function store(Request $request): RedirectResponse
     {
-        Conversation::firstOrCreate(["customer_id" => auth()->id(),"store_id" => $request->store_id]);
+        Conversation::firstOrCreate(['customer_id' => auth()->id(), 'store_id' => $request->store_id]);
 
         return back();
     }

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('search_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id")->nullable();
-            $table->text("keyword");
+            $table->foreignId('user_id')->nullable();
+            $table->text('keyword');
             $table->timestamps();
         });
     }

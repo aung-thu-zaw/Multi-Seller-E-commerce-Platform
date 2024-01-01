@@ -57,8 +57,8 @@ class City extends Model
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\HasMany<Township>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Township>
+     */
     public function townships(): HasMany
     {
         return $this->hasMany(Township::class);

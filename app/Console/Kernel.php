@@ -28,7 +28,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('shipping-methods:delete')->daily();
         $schedule->command('shipping-rates:delete')->daily();
 
-
         $schedule->command('blog-categories:delete')->daily();
         $schedule->command('blog-contents:delete')->daily();
         $schedule->command('faq-categories:delete')->daily();
@@ -39,8 +38,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('automated-filter-words:delete')->daily();
         $schedule->command('subscribers:delete')->daily();
         $schedule->command('stores:delete')->daily();
-
-
 
         // Seller
         $schedule->command('store-product-categories:delete')->daily();

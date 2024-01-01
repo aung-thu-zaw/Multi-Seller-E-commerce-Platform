@@ -16,7 +16,7 @@ class FlashSaleSeeder extends Seeder
         $flashSale = FlashSale::factory()->create();
 
         $numberOfProducts = rand(30, 100);
-        $products = Product::where("status", "approved")->inRandomOrder()->take($numberOfProducts)->get();
+        $products = Product::where('status', 'approved')->inRandomOrder()->take($numberOfProducts)->get();
         $flashSale->products()->attach($products->pluck('id'));
     }
 }

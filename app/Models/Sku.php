@@ -11,7 +11,6 @@ class Sku extends Model
 {
     use HasFactory;
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Product,Sku>
      */
@@ -19,7 +18,6 @@ class Sku extends Model
     {
         return $this->belongsTo(Product::class);
     }
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<AttributeOption>

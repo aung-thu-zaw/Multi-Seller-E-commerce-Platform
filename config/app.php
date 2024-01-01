@@ -86,8 +86,8 @@ return [
     'locale' => 'en',
 
     'languages' => [
-        "en" => "English",
-        "my" => "Myanmar"
+        'en' => 'English',
+        'my' => 'Myanmar',
     ],
 
     /*

@@ -24,15 +24,15 @@ class ConversationMessageRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            "customer_id" => ["nullable","numeric",Rule::exists("users", "id")],
-            "store_id" => ["nullable","numeric",Rule::exists("stores", "id")],
-            "message" => ["nullable","string"],
-            "reply_to_message_id" => ["nullable","numeric"],
-            "captcha_token" => [new RecaptchaRule()],
+            'customer_id' => ['nullable', 'numeric', Rule::exists('users', 'id')],
+            'store_id' => ['nullable', 'numeric', Rule::exists('stores', 'id')],
+            'message' => ['nullable', 'string'],
+            'reply_to_message_id' => ['nullable', 'numeric'],
+            'captcha_token' => [new RecaptchaRule()],
         ];
 
-        if ($this->hasFile("files")) {
-            $rules['files.*'] = ['required','file','mimetypes:image/jpeg,image/png,image/gif,image/webp,image/jpg,image/svg,video/avi,video/mpeg,video/mp4,video/webm'];
+        if ($this->hasFile('files')) {
+            $rules['files.*'] = ['required', 'file', 'mimetypes:image/jpeg,image/png,image/gif,image/webp,image/jpg,image/svg,video/avi,video/mpeg,video/mp4,video/webm'];
         }
 
         return $rules;

@@ -18,7 +18,6 @@ class CartItem extends Model
         return $this->belongsTo(Cart::class);
     }
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Product,CartItem>
      */

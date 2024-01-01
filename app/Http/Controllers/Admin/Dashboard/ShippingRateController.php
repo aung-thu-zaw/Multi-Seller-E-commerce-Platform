@@ -48,11 +48,11 @@ class ShippingRateController extends Controller
 
     public function create(): Response|ResponseFactory
     {
-        $shippingAreas = ShippingArea::select("id", "name")->get();
+        $shippingAreas = ShippingArea::select('id', 'name')->get();
 
-        $shippingMethods = ShippingMethod::select("id", "name")->get();
+        $shippingMethods = ShippingMethod::select('id', 'name')->get();
 
-        return inertia('Admin/ShippingRates/Create', compact("shippingAreas", "shippingMethods"));
+        return inertia('Admin/ShippingRates/Create', compact('shippingAreas', 'shippingMethods'));
     }
 
     public function store(StoreShippingRateRequest $request): RedirectResponse
@@ -64,11 +64,11 @@ class ShippingRateController extends Controller
 
     public function edit(ShippingRate $shippingRate): Response|ResponseFactory
     {
-        $shippingAreas = ShippingArea::select("id", "name")->get();
+        $shippingAreas = ShippingArea::select('id', 'name')->get();
 
-        $shippingMethods = ShippingMethod::select("id", "name")->get();
+        $shippingMethods = ShippingMethod::select('id', 'name')->get();
 
-        return inertia('Admin/ShippingRates/Edit', compact('shippingRate', "shippingAreas", "shippingMethods"));
+        return inertia('Admin/ShippingRates/Edit', compact('shippingRate', 'shippingAreas', 'shippingMethods'));
     }
 
     public function update(UpdateShippingRateRequest $request, ShippingRate $shippingRate): RedirectResponse

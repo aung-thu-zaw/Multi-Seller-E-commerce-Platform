@@ -11,7 +11,6 @@ use App\Models\City;
 use App\Models\Region;
 use App\Models\Township;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
@@ -19,15 +18,15 @@ class AddressBookController extends Controller
 {
     public function index(): Response|ResponseFactory
     {
-        $addresses = auth()->user()->addresses()->with(["region:id,name","city:id,name","township:id,name"])->get();
+        $addresses = auth()->user()->addresses()->with(['region:id,name', 'city:id,name', 'township:id,name'])->get();
 
-        $regions = Region::select("id", "name")->get();
+        $regions = Region::select('id', 'name')->get();
 
-        $cities = City::select("id", "region_id", "name")->get();
+        $cities = City::select('id', 'region_id', 'name')->get();
 
-        $townships = Township::select("id", "city_id", "name")->get();
+        $townships = Township::select('id', 'city_id', 'name')->get();
 
-        return inertia('User/AddressBook', compact('addresses', "regions", "cities", "townships"));
+        return inertia('User/AddressBook', compact('addresses', 'regions', 'cities', 'townships'));
     }
 
     public function store(AddressRequest $request): RedirectResponse

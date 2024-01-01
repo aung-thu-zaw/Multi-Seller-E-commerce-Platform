@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\Ecommerce\CouponController;
 use App\Http\Controllers\Ecommerce\BecomeASellerController;
+use App\Http\Controllers\Ecommerce\CartItemController;
+use App\Http\Controllers\Ecommerce\ChangeLanguageController;
+use App\Http\Controllers\Ecommerce\CheckoutController;
 use App\Http\Controllers\Ecommerce\Conversations\ConversationController;
 use App\Http\Controllers\Ecommerce\Conversations\ConversationMessageController;
+use App\Http\Controllers\Ecommerce\CouponController;
 use App\Http\Controllers\Ecommerce\FlashSaleProductController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\ContactUsController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\FaqController;
@@ -11,9 +14,6 @@ use App\Http\Controllers\Ecommerce\HelpAndSupport\FaqFeedbackController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\HelpCenterController;
 use App\Http\Controllers\Ecommerce\HelpAndSupport\QuestionSearchController;
 use App\Http\Controllers\Ecommerce\HomeController;
-use App\Http\Controllers\Ecommerce\CartItemController;
-use App\Http\Controllers\Ecommerce\CheckoutController;
-use App\Http\Controllers\Ecommerce\ChangeLanguageController;
 use App\Http\Controllers\Ecommerce\MyCartController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentController;
 use App\Http\Controllers\Ecommerce\OurBlogs\BlogCommentReplyController;
@@ -154,7 +154,7 @@ Route::delete('/wishlists/{wishlist}', [WishlistController::class, 'destroy'])
     ->name('wishlists.destroy');
 
 Route::controller(CartItemController::class)
-->middleware('auth')
+    ->middleware('auth')
     ->prefix('/cart/cart-items')
     ->name('cart-items.')
     ->group(function () {
@@ -163,25 +163,24 @@ Route::controller(CartItemController::class)
         Route::delete('/{cart_item}', 'destroy')->name('destroy');
     });
 
-Route::get("/my-carts", [MyCartController::class,"index"])->middleware("auth")->name("my-cart.index");
-Route::post("/apply-coupon", [CouponController::class,"applyCoupon"])->middleware("auth")->name("coupon.apply");
-Route::post("/{coupon_code}/remove-coupon", [CouponController::class,"removeCoupon"])->middleware("auth")->name("coupon.remove");
-Route::get("/checkout", [CheckoutController::class,"index"])->middleware(["auth",'check.cart.items'])->name("checkout.index");
-Route::post("/checkout/{shipping_method_id}", [CheckoutController::class,"handleShippingMethod"])->middleware(["auth"])->name("checkout.shipping-method");
+Route::get('/my-carts', [MyCartController::class, 'index'])->middleware('auth')->name('my-cart.index');
+Route::post('/apply-coupon', [CouponController::class, 'applyCoupon'])->middleware('auth')->name('coupon.apply');
+Route::post('/{coupon_code}/remove-coupon', [CouponController::class, 'removeCoupon'])->middleware('auth')->name('coupon.remove');
+Route::get('/checkout', [CheckoutController::class, 'index'])->middleware(['auth', 'check.cart.items'])->name('checkout.index');
+Route::post('/checkout/{shipping_method_id}', [CheckoutController::class, 'handleShippingMethod'])->middleware(['auth'])->name('checkout.shipping-method');
 // Route::post("/checkout/shipping-fee", [CheckoutController::class,"getShippingFee"])->middleware("auth")->name("checkout.shipping-fee");
-Route::get("/payments", PaymentController::class)->middleware(["auth",'check.cart.items'])->name("payments");
+Route::get('/payments', PaymentController::class)->middleware(['auth', 'check.cart.items'])->name('payments');
 
-Route::get("/payments/paypal/pay", [PaypalController::class,"payWithPaypal"])->middleware("auth", 'check.cart.items')->name("payments.paypal.pay");
-Route::get("/payments/paypal/success", [PaypalController::class,"paypalSuccess"])->middleware("auth", 'check.cart.items')->name("payments.paypal.success");
-Route::get("/payments/paypal/cancel", [PaypalController::class,"paypalCancel"])->middleware("auth", 'check.cart.items')->name("payments.paypal.cancel");
+Route::get('/payments/paypal/pay', [PaypalController::class, 'payWithPaypal'])->middleware('auth', 'check.cart.items')->name('payments.paypal.pay');
+Route::get('/payments/paypal/success', [PaypalController::class, 'paypalSuccess'])->middleware('auth', 'check.cart.items')->name('payments.paypal.success');
+Route::get('/payments/paypal/cancel', [PaypalController::class, 'paypalCancel'])->middleware('auth', 'check.cart.items')->name('payments.paypal.cancel');
 
-Route::get("/payments/stripe", [StripeController::class,"index"])->middleware("auth", 'check.cart.items')->name("payments.stripe");
-Route::post("/payments/stripe/pay", [StripeController::class,"payWithStripe"])->middleware("auth")->name("payments.stripe.pay");
+Route::get('/payments/stripe', [StripeController::class, 'index'])->middleware('auth', 'check.cart.items')->name('payments.stripe');
+Route::post('/payments/stripe/pay', [StripeController::class, 'payWithStripe'])->middleware('auth')->name('payments.stripe.pay');
 
+Route::get('/languages/change', ChangeLanguageController::class)->name('languages.change');
 
-Route::get('/languages/change', ChangeLanguageController::class)->name("languages.change");
-
-require __DIR__ . '/auth.php';
-require __DIR__ . '/admin.php';
-require __DIR__ . '/seller.php';
-require __DIR__ . '/user.php';
+require __DIR__.'/auth.php';
+require __DIR__.'/admin.php';
+require __DIR__.'/seller.php';
+require __DIR__.'/user.php';

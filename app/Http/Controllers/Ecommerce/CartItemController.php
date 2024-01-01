@@ -13,15 +13,15 @@ class CartItemController extends Controller
 {
     public function store(CartItemRequest $request): RedirectResponse
     {
-        $cart = Cart::firstOrCreate(["user_id" => auth()->id()]);
+        $cart = Cart::firstOrCreate(['user_id' => auth()->id()]);
 
         $cartItem = CartItem::where('product_id', $request->product_id)->whereJsonContains('attributes', $request->validated()['attributes'])->first();
 
         $attributes = is_array($request->validated()['attributes']) ? json_encode($request->validated()['attributes']) : $request->validated()['attributes'];
 
-        if($cartItem) {
+        if ($cartItem) {
 
-            $cartItem->update(["qty" => $cartItem->qty + $request->qty,'total_price' => $cartItem->total_price + $request->total_price]);
+            $cartItem->update(['qty' => $cartItem->qty + $request->qty, 'total_price' => $cartItem->total_price + $request->total_price]);
 
         } else {
 
@@ -37,14 +37,14 @@ class CartItemController extends Controller
             ]);
         }
 
-        return back()->with("success", "$request->qty item(s) have been added to your cart");
+        return back()->with('success', "$request->qty item(s) have been added to your cart");
     }
 
     public function update(Request $request, CartItem $cartItem): RedirectResponse
     {
         $cartItem->update([
-            "qty" => $request->qty,
-            "total_price" => $request->total_price
+            'qty' => $request->qty,
+            'total_price' => $request->total_price,
         ]);
 
         return back();
@@ -54,6 +54,6 @@ class CartItemController extends Controller
     {
         $cartItem->delete();
 
-        return back()->with("success", "$cartItem->qty item(s) have been removed from your cart");
+        return back()->with('success', "$cartItem->qty item(s) have been removed from your cart");
     }
 }

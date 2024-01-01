@@ -44,7 +44,7 @@ class CampaignBanner extends Model
 
     public static function deleteImage(string $campaignBannerImage): void
     {
-        if (!empty($campaignBannerImage) && file_exists(storage_path('app/public/campaign-banners/'.pathinfo($campaignBannerImage, PATHINFO_BASENAME)))) {
+        if (! empty($campaignBannerImage) && file_exists(storage_path('app/public/campaign-banners/'.pathinfo($campaignBannerImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/campaign-banners/'.pathinfo($campaignBannerImage, PATHINFO_BASENAME)));
         }
     }

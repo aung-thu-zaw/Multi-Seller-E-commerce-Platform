@@ -45,9 +45,9 @@ class CityController extends Controller
 
     public function create(): Response|ResponseFactory
     {
-        $regions = Region::select("id", "name")->get();
+        $regions = Region::select('id', 'name')->get();
 
-        return inertia('Admin/GeographicHierarchy/Cities/Create', compact("regions"));
+        return inertia('Admin/GeographicHierarchy/Cities/Create', compact('regions'));
     }
 
     public function store(StoreCityRequest $request): RedirectResponse
@@ -59,7 +59,7 @@ class CityController extends Controller
 
     public function edit(City $city): Response|ResponseFactory
     {
-        $regions = Region::select("id", "name")->get();
+        $regions = Region::select('id', 'name')->get();
 
         return inertia('Admin/GeographicHierarchy/Cities/Edit', compact('city', 'regions'));
     }

@@ -17,7 +17,7 @@ class ShippingMethodFactory extends Factory
     public function definition(): array
     {
         return [
-            "name" => fake()->unique()->sentence()
+            'name' => fake()->unique()->sentence(),
         ];
     }
 }

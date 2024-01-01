@@ -49,13 +49,13 @@ class ShippingAreaController extends Controller
 
     public function create(): Response|ResponseFactory
     {
-        $regions = Region::select("id", "name")->get();
+        $regions = Region::select('id', 'name')->get();
 
-        $cities = City::select("id", "region_id", "name")->get();
+        $cities = City::select('id', 'region_id', 'name')->get();
 
-        $townships = Township::select("id", "city_id", "name")->get();
+        $townships = Township::select('id', 'city_id', 'name')->get();
 
-        return inertia('Admin/ShippingAreas/Create', compact("regions", "cities", "townships"));
+        return inertia('Admin/ShippingAreas/Create', compact('regions', 'cities', 'townships'));
     }
 
     public function store(StoreShippingAreaRequest $request): RedirectResponse
@@ -67,13 +67,13 @@ class ShippingAreaController extends Controller
 
     public function edit(ShippingArea $shippingArea): Response|ResponseFactory
     {
-        $regions = Region::select("id", "name")->get();
+        $regions = Region::select('id', 'name')->get();
 
-        $cities = City::select("id", "region_id", "name")->get();
+        $cities = City::select('id', 'region_id', 'name')->get();
 
-        $townships = Township::select("id", "city_id", "name")->get();
+        $townships = Township::select('id', 'city_id', 'name')->get();
 
-        return inertia('Admin/ShippingAreas/Edit', compact("regions", "cities", "townships", "shippingArea"));
+        return inertia('Admin/ShippingAreas/Edit', compact('regions', 'cities', 'townships', 'shippingArea'));
     }
 
     public function update(UpdateShippingAreaRequest $request, ShippingArea $shippingArea): RedirectResponse

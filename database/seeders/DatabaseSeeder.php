@@ -57,8 +57,6 @@ class DatabaseSeeder extends Seeder
             // EmailConfigurationSeeder::class,
             // PaymentConfigurationSeeder::class,
 
-
-
             // StoreProductCategorySeeder::class,
             ProductReviewSeeder::class,
             // StoreReviewSeeder::class,

@@ -16,7 +16,7 @@ class ProductDetailController extends Controller
 {
     public function show(Request $request, Product $product): Response|ResponseFactory
     {
-        $product->load(['productImages', 'brand:id,name', 'store:id,store_type,seller_id','skus']);
+        $product->load(['productImages', 'brand:id,name', 'store:id,store_type,seller_id', 'skus']);
 
         $attributes = Attribute::pluck('name', 'id');
 
@@ -58,7 +58,6 @@ class ProductDetailController extends Controller
             ->limit(5)
             ->get();
 
-
         return inertia('E-commerce/Products/Show', compact('product', 'attributes', 'options', 'price', 'productQuestions', 'productsFromTheSameStore', 'productReviewsForAverageProgressBar', 'productReviews'));
     }
 
@@ -69,7 +68,7 @@ class ProductDetailController extends Controller
             $price = [
                 'found' => false,
                 'price' => null,
-                'sku' => null
+                'sku' => null,
             ];
 
             $skuQuery = $product->skus()->where(function ($q) use ($request) {
@@ -93,7 +92,7 @@ class ProductDetailController extends Controller
     private function getSelectableOptionsFromProduct(Product $product): array
     {
         $product->load([
-            'skus.attributeOptions.attribute'
+            'skus.attributeOptions.attribute',
         ]);
 
         $allOptions = [];

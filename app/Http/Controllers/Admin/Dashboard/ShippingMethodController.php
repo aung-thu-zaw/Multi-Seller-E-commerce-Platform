@@ -45,7 +45,7 @@ class ShippingMethodController extends Controller
 
     public function store(StoreShippingMethodRequest $request): RedirectResponse
     {
-        ShippingMethod::create(["name" => $request->name]);
+        ShippingMethod::create(['name' => $request->name]);
 
         return to_route('admin.shipping-methods.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }
@@ -57,7 +57,7 @@ class ShippingMethodController extends Controller
 
     public function update(UpdateShippingMethodRequest $request, ShippingMethod $shippingMethod): RedirectResponse
     {
-        $shippingMethod->update(["name" => $request->name]);
+        $shippingMethod->update(['name' => $request->name]);
 
         return to_route('admin.shipping-methods.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }

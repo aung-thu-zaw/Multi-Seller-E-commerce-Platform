@@ -17,7 +17,7 @@ class WishlistController extends Controller
             ->whereJsonContains('attributes', $request->validated()['attributes'] ?? null)
             ->first();
 
-        if (!$wishlist) {
+        if (! $wishlist) {
             $wishlist = Wishlist::create([
                 'user_id' => auth()->id(),
                 'product_id' => $request->product_id,
@@ -38,6 +38,6 @@ class WishlistController extends Controller
     {
         $wishlist->delete();
 
-        return back()->with("success", "Item has been removed from your wishlist");
+        return back()->with('success', 'Item has been removed from your wishlist');
     }
 }

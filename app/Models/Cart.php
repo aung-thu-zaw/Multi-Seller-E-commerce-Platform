@@ -11,7 +11,6 @@ class Cart extends Model
 {
     use HasFactory;
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,Cart>
      */

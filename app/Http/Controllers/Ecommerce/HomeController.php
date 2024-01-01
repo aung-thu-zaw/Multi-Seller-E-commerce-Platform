@@ -49,16 +49,16 @@ class HomeController extends Controller
             },
         ])->first();
 
-        $collections = Collection::select("id", "name", "slug")
-        ->with(['products' => function ($query) {
-            $query->where('status', 'approved');
-        }])
-        ->withCount(['products' => function ($query) {
-            $query->where('status', 'approved');
-        }])
-        ->where("status", "show")
-        ->limit(12)
-        ->get();
+        $collections = Collection::select('id', 'name', 'slug')
+            ->with(['products' => function ($query) {
+                $query->where('status', 'approved');
+            }])
+            ->withCount(['products' => function ($query) {
+                $query->where('status', 'approved');
+            }])
+            ->where('status', 'show')
+            ->limit(12)
+            ->get();
 
         $products = Product::select('id', 'store_id', 'image', 'name', 'slug', 'price', 'offer_price')
             ->with(['productImages', 'store:id,store_type'])

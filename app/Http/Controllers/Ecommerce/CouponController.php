@@ -16,7 +16,7 @@ class CouponController extends Controller
             ->where('status', 'active')
             ->first();
 
-        if (!$coupon) {
+        if (! $coupon) {
             return back()->with('error', 'Coupon code is invalid.');
         }
 

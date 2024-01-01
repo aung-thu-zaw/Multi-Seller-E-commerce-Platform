@@ -25,9 +25,9 @@ class StoreShippingAreaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "region_id" => ["required","numeric",Rule::exists("regions", "id")],
-            "city_id" => ["required","numeric",Rule::exists("cities", "id")],
-            "township_id" => ["required","numeric",Rule::exists("townships", "id")],
+            'region_id' => ['required', 'numeric', Rule::exists('regions', 'id')],
+            'city_id' => ['required', 'numeric', Rule::exists('cities', 'id')],
+            'township_id' => ['required', 'numeric', Rule::exists('townships', 'id')],
             'name' => ['required', 'string', 'max:255', Rule::unique('shipping_areas', 'name')],
             'captcha_token' => [new RecaptchaRule()],
         ];

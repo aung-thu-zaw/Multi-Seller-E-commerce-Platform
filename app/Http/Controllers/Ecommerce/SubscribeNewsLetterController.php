@@ -16,20 +16,20 @@ class SubscribeNewsLetterController extends Controller
     public function subscribe(Request $request): RedirectResponse
     {
         $request->validate([
-            "email" => ["required","email",Rule::unique("subscribers", "email")],
+            'email' => ['required', 'email', Rule::unique('subscribers', 'email')],
             'captcha_token' => [new RecaptchaRule()],
         ]);
 
-        $subscriber = Subscriber::create(["email" => $request->email,"status" => "subscribed"]);
+        $subscriber = Subscriber::create(['email' => $request->email, 'status' => 'subscribed']);
 
         Mail::to($subscriber->email)->queue(new WelcomeToNewsletter());
 
-        return back()->with("success", "Thank you for subscribing our news letters.");
+        return back()->with('success', 'Thank you for subscribing our news letters.');
     }
 
     public function unsubscribe(Subscriber $subscriber): RedirectResponse
     {
-        $subscriber->update(["status" => "unsubscribed"]);
+        $subscriber->update(['status' => 'unsubscribed']);
 
         return back();
     }

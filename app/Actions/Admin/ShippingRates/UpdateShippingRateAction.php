@@ -2,8 +2,6 @@
 
 namespace App\Actions\Admin\ShippingRates;
 
-use App\Http\Traits\ImageUpload;
-use App\Models\Brand;
 use App\Models\ShippingRate;
 
 class UpdateShippingRateAction

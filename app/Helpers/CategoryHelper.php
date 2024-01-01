@@ -12,6 +12,7 @@ class CategoryHelper
         foreach ($childIds as $childId) {
             $childIds = array_merge($childIds, self::getChildCategoryIds($childId));
         }
+
         return $childIds;
     }
 }

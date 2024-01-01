@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -15,13 +16,13 @@ return new class () extends Migration {
             $table->foreignId('conversation_id')->constrained('conversations')->cascadeOnDelete();
             $table->foreignId('customer_id')->nullable()->constrained('users');
             $table->foreignId('store_id')->nullable()->constrained('stores');
-            $table->enum('type', ['text', 'image', 'video'])->default("text");
+            $table->enum('type', ['text', 'image', 'video'])->default('text');
             $table->text('message')->nullable();
-            $table->boolean("is_read_by_customer")->default(false);
-            $table->boolean("is_read_by_store")->default(false);
-            $table->boolean("is_deleted_by_customer")->default(false);
-            $table->boolean("is_deleted_by_store")->default(false);
-            $table->foreignId("reply_to_message_id")->nullable()->references("id")->on("conversation_messages")->cascadeOnDelete();
+            $table->boolean('is_read_by_customer')->default(false);
+            $table->boolean('is_read_by_store')->default(false);
+            $table->boolean('is_deleted_by_customer')->default(false);
+            $table->boolean('is_deleted_by_store')->default(false);
+            $table->foreignId('reply_to_message_id')->nullable()->references('id')->on('conversation_messages')->cascadeOnDelete();
             $table->timestamps();
         });
     }

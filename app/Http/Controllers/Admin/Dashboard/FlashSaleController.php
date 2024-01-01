@@ -20,24 +20,24 @@ class FlashSaleController extends Controller
 
         $flashSaleProducts = $flashSale->products()->select('id', 'image', 'name')->paginate(10);
 
-        $products = Product::select("id", "name")
-        ->where("status", "approved")
-        ->whereDoesntHave('flashSales', function ($query) use ($flashSale) {
-            $query->where('flash_sale_id', $flashSale->id);
-        })
-        ->get();
+        $products = Product::select('id', 'name')
+            ->where('status', 'approved')
+            ->whereDoesntHave('flashSales', function ($query) use ($flashSale) {
+                $query->where('flash_sale_id', $flashSale->id);
+            })
+            ->get();
 
-        return inertia("Admin/FlashSales/Edit", compact("flashSale", "products", "flashSaleProducts"));
+        return inertia('Admin/FlashSales/Edit', compact('flashSale', 'products', 'flashSaleProducts'));
     }
 
     public function update(Request $request, FlashSale $flashSale): RedirectResponse
     {
         $request->validate([
-            "end_date" => ["nullable","date"],
-            "captcha_token"  => [new RecaptchaRule()],
+            'end_date' => ['nullable', 'date'],
+            'captcha_token' => [new RecaptchaRule()],
         ]);
 
-        $flashSale->update(["end_date" => $request->end_date]);
+        $flashSale->update(['end_date' => $request->end_date]);
 
         return back()->with('success', ':label has been successfully updated.');
     }
@@ -45,22 +45,22 @@ class FlashSaleController extends Controller
     public function addProduct(Request $request, FlashSale $flashSale): RedirectResponse
     {
         $request->validate([
-            "product_id" => ["required","numeric",Rule::exists("products", "id")]
+            'product_id' => ['required', 'numeric', Rule::exists('products', 'id')],
         ]);
 
         $flashSale->products()->attach($request->product_id);
 
-        return back()->with("success", "Product successfully added to this flash sale.");
+        return back()->with('success', 'Product successfully added to this flash sale.');
     }
 
     public function removeProduct(Request $request, FlashSale $flashSale): RedirectResponse
     {
         $request->validate([
-            "product_id" => ["required","numeric",Rule::exists("products", "id")]
+            'product_id' => ['required', 'numeric', Rule::exists('products', 'id')],
         ]);
 
         $flashSale->products()->detach($request->product_id);
 
-        return back()->with("success", "Product successfully removed to this flash sale.");
+        return back()->with('success', 'Product successfully removed to this flash sale.');
     }
 }

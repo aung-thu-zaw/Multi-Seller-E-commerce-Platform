@@ -99,28 +99,28 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             });
 
         Route::controller(ProductImageController::class)
-        ->prefix('/products')
-        ->name('product.')
-        ->group(function () {
-            Route::get('/{product}/images', 'productImages')->name('images');
-            Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
-            Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
-        });
+            ->prefix('/products')
+            ->name('product.')
+            ->group(function () {
+                Route::get('/{product}/images', 'productImages')->name('images');
+                Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
+                Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
+            });
 
         Route::resource('products/{product}/product-variants', ProductVariantController::class);
 
         // ***** Collection Operations *****
-        Route::resource('collections', CollectionController::class)->except(["show"]);
+        Route::resource('collections', CollectionController::class)->except(['show']);
 
         Route::controller(CollectionController::class)
-        ->prefix('/collections')
-        ->name('collections.')
-        ->group(function () {
-            Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
-            Route::get("/{collection}/add-product", "show")->name("show");
-            Route::post("/{collection}/add-product", "addProduct")->name("add-product");
-            Route::post("/{collection}/remove-product", "removeProduct")->name("remove-product");
-        });
+            ->prefix('/collections')
+            ->name('collections.')
+            ->group(function () {
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+                Route::get('/{collection}/add-product', 'show')->name('show');
+                Route::post('/{collection}/add-product', 'addProduct')->name('add-product');
+                Route::post('/{collection}/remove-product', 'removeProduct')->name('remove-product');
+            });
 
         Route::controller(CollectionController::class)
             ->prefix('/collections/trash')
@@ -136,16 +136,15 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
 
         // ***** Flash Sale Operations *****
         Route::controller(FlashSaleController::class)
-        ->prefix("/flash-sales")
-        ->name("flash-sales.")
-        ->middleware('permission:flash-sales.edit')
-        ->group(function () {
-            Route::get("/", "edit")->name("edit");
-            Route::patch("/{flash_sale}", "update")->name("update");
-            Route::post("/{flash_sale}/add-product", "addProduct")->name("add-product");
-            Route::post("/{flash_sale}/remove-product", "removeProduct")->name("remove-product");
-        });
-
+            ->prefix('/flash-sales')
+            ->name('flash-sales.')
+            ->middleware('permission:flash-sales.edit')
+            ->group(function () {
+                Route::get('/', 'edit')->name('edit');
+                Route::patch('/{flash_sale}', 'update')->name('update');
+                Route::post('/{flash_sale}/add-product', 'addProduct')->name('add-product');
+                Route::post('/{flash_sale}/remove-product', 'removeProduct')->name('remove-product');
+            });
 
         // ***** Slider Banner Operations *****
         Route::resource('slider-banners', SliderBannerController::class)->except(['show']);
@@ -362,18 +361,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/{blog_comment}', 'destroy')->name('destroy');
                 Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
             });
-
-
-
-
-
-
-
-
-
-
-
-
 
         Route::resource('faq-categories', FaqCategoryController::class)->except(['show']);
         Route::controller(FaqCategoryController::class)

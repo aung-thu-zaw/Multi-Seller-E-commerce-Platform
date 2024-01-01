@@ -20,15 +20,15 @@ class ShippingAreaFactory extends Factory
     public function definition(): array
     {
 
-        $regions = Region::pluck("id")->toArray();
-        $cities = City::pluck("id")->toArray();
-        $townships = Township::pluck("id")->toArray();
+        $regions = Region::pluck('id')->toArray();
+        $cities = City::pluck('id')->toArray();
+        $townships = Township::pluck('id')->toArray();
 
         return [
-            "region_id" => fake()->randomElement($regions),
-            "city_id" => fake()->randomElement($cities),
-            "township_id" => fake()->randomElement($townships),
-            "name" => fake()->unique()->sentence()
+            'region_id' => fake()->randomElement($regions),
+            'city_id' => fake()->randomElement($cities),
+            'township_id' => fake()->randomElement($townships),
+            'name' => fake()->unique()->sentence(),
         ];
     }
 }

@@ -18,8 +18,8 @@ class SearchHistoryFactory extends Factory
     public function definition(): array
     {
         return [
-            "user_id" => User::factory(),
-            "keyword" => fake()->text()
+            'user_id' => User::factory(),
+            'keyword' => fake()->text(),
         ];
     }
 }

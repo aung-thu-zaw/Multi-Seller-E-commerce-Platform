@@ -48,7 +48,6 @@ class ShippingArea extends Model
         static::addGlobalScope(new FilterByScope());
     }
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Region,ShippingArea>
      */
@@ -80,5 +79,4 @@ class ShippingArea extends Model
     {
         return $this->hasMany(ShippingRate::class);
     }
-
 }

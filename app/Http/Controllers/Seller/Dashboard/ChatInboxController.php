@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Seller\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Conversation;
 use App\Models\Store;
-use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 

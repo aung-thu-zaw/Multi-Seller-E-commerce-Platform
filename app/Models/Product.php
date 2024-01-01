@@ -50,7 +50,7 @@ class Product extends Model
     protected function image(): CastAttribute
     {
         return CastAttribute::make(
-            set: fn ($value) => str_starts_with($value, 'http') || !$value ? $value : asset("storage/products/$value"),
+            set: fn ($value) => str_starts_with($value, 'http') || ! $value ? $value : asset("storage/products/$value"),
         );
     }
 
@@ -127,7 +127,7 @@ class Product extends Model
 
     public static function deleteImage(string $productImage): void
     {
-        if (!empty($productImage) && file_exists(storage_path('app/public/products/'.pathinfo($productImage, PATHINFO_BASENAME)))) {
+        if (! empty($productImage) && file_exists(storage_path('app/public/products/'.pathinfo($productImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/products/'.pathinfo($productImage, PATHINFO_BASENAME)));
         }
     }
@@ -155,64 +155,63 @@ class Product extends Model
     }
 
     /**
-    * @param array<string> $filterBy
-    * @param Builder<Product> $query
-    */
-
+     * @param  array<string>  $filterBy
+     * @param  Builder<Product>  $query
+     */
     public function scopeFilterBy(Builder $query, array $filterBy): void
     {
         $query->when(
-            $filterBy["search"] ?? null,
+            $filterBy['search'] ?? null,
             function ($query, $search) {
                 $query->where(
                     function ($query) use ($search) {
-                        $query->where("name", "LIKE", "%".$search."%");
+                        $query->where('name', 'LIKE', '%'.$search.'%');
                     }
                 );
             }
         );
 
-        $query->when($filterBy["price"] ?? null, function ($query, $price) {
+        $query->when($filterBy['price'] ?? null, function ($query, $price) {
             if ($price !== null) {
-                $priceRange = explode("-", $price);
+                $priceRange = explode('-', $price);
 
                 if (count($priceRange) === 2) {
                     $minPrice = $priceRange[0];
                     $maxPrice = $priceRange[1];
 
                     $query->where(function ($query) use ($minPrice, $maxPrice) {
-                        $query->whereBetween("price", [$minPrice, $maxPrice])
-                            ->orWhereBetween("offer_price", [$minPrice, $maxPrice]);
+                        $query->whereBetween('price', [$minPrice, $maxPrice])
+                            ->orWhereBetween('offer_price', [$minPrice, $maxPrice]);
                     });
                 }
             }
         });
 
-        $query->when($filterBy["category"] ?? null, function ($query, $categorySlug) {
-            $query->whereHas("category", function ($query) use ($categorySlug) {
-                $query->where("slug", $categorySlug);
+        $query->when($filterBy['category'] ?? null, function ($query, $categorySlug) {
+            $query->whereHas('category', function ($query) use ($categorySlug) {
+                $query->where('slug', $categorySlug);
             });
         });
 
-        $query->when($filterBy["brand"] ?? null, function ($query, $brandSlug) {
+        $query->when($filterBy['brand'] ?? null, function ($query, $brandSlug) {
             $brandSlugs = explode('--', $brandSlug);
 
-            $query->whereHas("brand", function ($query) use ($brandSlugs) {
-                $query->whereIn("slug", $brandSlugs);
+            $query->whereHas('brand', function ($query) use ($brandSlugs) {
+                $query->whereIn('slug', $brandSlugs);
             });
         });
 
-        $query->when($filterBy["rating"] ?? null, function ($query, $minRating) {
-            $query->whereHas("productReviews", function ($query) use ($minRating) {
-                $query->havingRaw("AVG(product_reviews.rating) >= ?", [$minRating]);
+        $query->when($filterBy['rating'] ?? null, function ($query, $minRating) {
+            $query->whereHas('productReviews', function ($query) use ($minRating) {
+                $query->havingRaw('AVG(product_reviews.rating) >= ?', [$minRating]);
             });
         });
     }
 
     /**
-    * @param  Builder<Product>  $query
-    * @return Builder<Product>
-    */
+     * @param  Builder<Product>  $query
+     * @return Builder<Product>
+     */
     public function scopeSortBy(Builder $query, ?string $sortType)
     {
         switch ($sortType) {

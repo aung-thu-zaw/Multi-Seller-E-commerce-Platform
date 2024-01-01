@@ -17,10 +17,10 @@ class StoreFactory extends Factory
      */
     public function definition(): array
     {
-        $seller = User::where("role", "seller")->where("status", "active")->pluck("id")->toArray();
+        $seller = User::where('role', 'seller')->where('status', 'active')->pluck('id')->toArray();
 
         return [
-            "seller_id" => fake()->randomElement($seller),
+            'seller_id' => fake()->randomElement($seller),
             'avatar' => fake()->imageUrl(),
             'cover' => fake()->imageUrl(),
             'store_name' => fake()->unique()->sentence(),

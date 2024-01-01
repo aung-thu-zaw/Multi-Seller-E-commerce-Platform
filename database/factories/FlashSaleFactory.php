@@ -17,7 +17,7 @@ class FlashSaleFactory extends Factory
     public function definition(): array
     {
         return [
-            "end_date" => fake()->dateTimeBetween(now(), '+2 weeks')->format('Y-m-d'),
+            'end_date' => fake()->dateTimeBetween(now(), '+2 weeks')->format('Y-m-d'),
         ];
     }
 }

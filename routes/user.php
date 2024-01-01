@@ -23,10 +23,10 @@ Route::middleware(['auth'])
 
         Route::get('/delete-account', DeleteAccountController::class)->name('delete-account');
 
-        Route::resource("/my-wishlists", MyWishlistController::class)->only(['index','destroy'])->parameters(['my_wishlist' => 'wishlist']);
+        Route::resource('/my-wishlists', MyWishlistController::class)->only(['index', 'destroy'])->parameters(['my_wishlist' => 'wishlist']);
 
         Route::get('/followed-stores', FollowedStoreController::class)->name('followed-stores');
 
-        Route::resource("/address-book", AddressBookController::class)->except(["show"])->parameters(['address_book' => 'address']);
+        Route::resource('/address-book', AddressBookController::class)->except(['show'])->parameters(['address_book' => 'address']);
 
     });

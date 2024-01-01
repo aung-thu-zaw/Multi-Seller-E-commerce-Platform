@@ -29,7 +29,7 @@ class AttributeSeeder extends Seeder
         ];
 
         foreach ($attributes as $attribute) {
-            DB::transaction(function() use ($attribute) {
+            DB::transaction(function () use ($attribute) {
                 $createdAttribute = Attribute::create(['name' => $attribute['name']]);
                 foreach ($attribute['values'] as $value) {
                     $createdAttribute->attributeOptions()->create(['value' => $value]);

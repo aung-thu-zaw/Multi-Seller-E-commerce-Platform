@@ -8,7 +8,6 @@ use App\Http\Requests\Dashboard\Admin\GeographicHierarchy\Townships\StoreTownshi
 use App\Http\Requests\Dashboard\Admin\GeographicHierarchy\Townships\UpdateTownshipRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\City;
-use App\Models\Region;
 use App\Models\Township;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
@@ -46,7 +45,7 @@ class TownshipController extends Controller
 
     public function create(): Response|ResponseFactory
     {
-        $cities = City::select("id", "region_id", "name")->get();
+        $cities = City::select('id', 'region_id', 'name')->get();
 
         return inertia('Admin/GeographicHierarchy/Townships/Create', compact('cities'));
     }
@@ -60,7 +59,7 @@ class TownshipController extends Controller
 
     public function edit(Township $township): Response|ResponseFactory
     {
-        $cities = City::select("id", "region_id", "name")->get();
+        $cities = City::select('id', 'region_id', 'name')->get();
 
         return inertia('Admin/GeographicHierarchy/Townships/Edit', compact('cities', 'township'));
     }

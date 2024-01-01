@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Admin\Dashboard;
 
-use App\Actions\Admin\Brands\UpdateCollectionAction;
-use App\Actions\Admin\Collections\CreateCollectionAction;
 use App\Actions\Admin\Collections\PermanentlyDeleteTrashedCollectionsAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Admin\Collections\StoreCollectionRequest;
@@ -24,8 +22,8 @@ class CollectionController extends Controller
     public function __construct()
     {
         $this->middleware('permission:collections.view', ['only' => ['index']]);
-        $this->middleware('permission:collections.create', ['only' => ['create', 'store','addProduct','show',"removeProduct"]]);
-        $this->middleware('permission:collections.edit', ['only' => ['edit', 'update','addProduct','show',"removeProduct"]]);
+        $this->middleware('permission:collections.create', ['only' => ['create', 'store', 'addProduct', 'show', 'removeProduct']]);
+        $this->middleware('permission:collections.edit', ['only' => ['edit', 'update', 'addProduct', 'show', 'removeProduct']]);
         $this->middleware('permission:collections.delete', ['only' => ['destroy', 'destroySelected']]);
         $this->middleware('permission:collections.view.trash', ['only' => ['trashed']]);
         $this->middleware('permission:collections.restore', ['only' => ['restore', 'restoreSelected']]);
@@ -46,36 +44,36 @@ class CollectionController extends Controller
     {
         $collectionProducts = $collection->products()->select('id', 'image', 'name')->paginate(10);
 
-        $products = Product::select("id", "name")
-        ->where("status", "approved")
-        ->whereDoesntHave('collections', function ($query) use ($collection) {
-            $query->where('collection_id', $collection->id);
-        })
-        ->get();
+        $products = Product::select('id', 'name')
+            ->where('status', 'approved')
+            ->whereDoesntHave('collections', function ($query) use ($collection) {
+                $query->where('collection_id', $collection->id);
+            })
+            ->get();
 
-        return inertia("Admin/Collections/Show", compact("collection", "collectionProducts", "products"));
+        return inertia('Admin/Collections/Show', compact('collection', 'collectionProducts', 'products'));
     }
 
     public function addProduct(Request $request, Collection $collection): RedirectResponse
     {
         $request->validate([
-            "product_id" => ["required","numeric",Rule::exists("products", "id")]
+            'product_id' => ['required', 'numeric', Rule::exists('products', 'id')],
         ]);
 
         $collection->products()->attach($request->product_id);
 
-        return back()->with("success", "Product successfully added to this collection.");
+        return back()->with('success', 'Product successfully added to this collection.');
     }
 
     public function removeProduct(Request $request, Collection $collection): RedirectResponse
     {
         $request->validate([
-            "product_id" => ["required","numeric",Rule::exists("products", "id")]
+            'product_id' => ['required', 'numeric', Rule::exists('products', 'id')],
         ]);
 
         $collection->products()->detach($request->product_id);
 
-        return back()->with("success", "Product successfully removed to this collection.");
+        return back()->with('success', 'Product successfully removed to this collection.');
     }
 
     public function create(): Response|ResponseFactory
@@ -85,7 +83,7 @@ class CollectionController extends Controller
 
     public function store(StoreCollectionRequest $request): RedirectResponse
     {
-        Collection::create(["name" => $request->name,"description" => $request->description,"status" => $request->status]);
+        Collection::create(['name' => $request->name, 'description' => $request->description, 'status' => $request->status]);
 
         return to_route('admin.collections.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }
@@ -97,7 +95,7 @@ class CollectionController extends Controller
 
     public function update(UpdateCollectionRequest $request, Collection $collection): RedirectResponse
     {
-        $collection->update(["name" => $request->name,"description" => $request->description,"status" => $request->status]);
+        $collection->update(['name' => $request->name, 'description' => $request->description, 'status' => $request->status]);
 
         return to_route('admin.collections.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }

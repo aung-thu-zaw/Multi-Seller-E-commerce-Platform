@@ -20,24 +20,24 @@ class AddressFactory extends Factory
     public function definition(): array
     {
 
-        $regions = Region::pluck("id")->toArray();
-        $cities = City::pluck("id")->toArray();
-        $townships = Township::pluck("id")->toArray();
+        $regions = Region::pluck('id')->toArray();
+        $cities = City::pluck('id')->toArray();
+        $townships = Township::pluck('id')->toArray();
 
         return [
-            "region_id" => fake()->randomElement($regions),
-            "city_id" => fake()->randomElement($cities),
-            "township_id" => fake()->randomElement($townships),
-            "user_id" => 1,
-            "name" => fake()->name(),
-            "phone" => fake()->unique()->phoneNumber(),
-            "email" => fake()->unique()->email(),
-            "postal_code" => fake()->postcode(),
-            "address" => fake()->address(),
-            "landmark" => fake()->sentence(),
-            "is_default_billing" => fake()->randomElement(["true","false"]),
-            "is_default_delivery" => fake()->randomElement(["true","false"]),
-            "address_type" => fake()->randomElement(["home","office"]),
+            'region_id' => fake()->randomElement($regions),
+            'city_id' => fake()->randomElement($cities),
+            'township_id' => fake()->randomElement($townships),
+            'user_id' => 1,
+            'name' => fake()->name(),
+            'phone' => fake()->unique()->phoneNumber(),
+            'email' => fake()->unique()->email(),
+            'postal_code' => fake()->postcode(),
+            'address' => fake()->address(),
+            'landmark' => fake()->sentence(),
+            'is_default_billing' => fake()->randomElement(['true', 'false']),
+            'is_default_delivery' => fake()->randomElement(['true', 'false']),
+            'address_type' => fake()->randomElement(['home', 'office']),
         ];
     }
 }

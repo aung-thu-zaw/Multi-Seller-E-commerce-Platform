@@ -44,7 +44,7 @@ class ProductBanner extends Model
 
     public static function deleteImage(string $productBannerImage): void
     {
-        if (!empty($productBannerImage) && file_exists(storage_path('app/public/product-banners/'.pathinfo($productBannerImage, PATHINFO_BASENAME)))) {
+        if (! empty($productBannerImage) && file_exists(storage_path('app/public/product-banners/'.pathinfo($productBannerImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/product-banners/'.pathinfo($productBannerImage, PATHINFO_BASENAME)));
         }
     }
