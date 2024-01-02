@@ -1,5 +1,4 @@
 <script setup>
-import { Link } from '@inertiajs/vue3'
 import CheckoutCartItem from './CheckoutCartItem.vue'
 
 defineProps({ cartItemGroup: Object, index: Number })

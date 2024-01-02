@@ -14,6 +14,7 @@ return new class () extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('invoice_no');
+            $table->string('uuid');
             $table->string('tracking_no');
             $table->integer('product_qty');
             $table->enum('payment_method', ['card','paypal','cash on delivery']);

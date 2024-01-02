@@ -16,6 +16,7 @@ use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 trait Payment
 {
@@ -44,6 +45,7 @@ trait Payment
 
             $cartItems->each(function ($item) use ($order, &$productsByStore) {
                 $orderItem = OrderItem::create([
+                    'uuid' => Str::uuid(),
                     'order_id' => $order->id,
                     'product_id' => $item->product_id,
                     'store_id' => $item->store_id,
@@ -51,6 +53,7 @@ trait Payment
                     'attributes' => $item->attributes,
                     'unit_price' => $item->unit_price,
                     'total_price' => $item->total_price,
+                    'status' => 'pending'
                 ]);
 
                 $productsByStore[$item->store_id][] = $orderItem;

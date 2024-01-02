@@ -32,7 +32,6 @@ use App\Http\Controllers\Ecommerce\SubscribeNewsLetterController;
 use App\Http\Controllers\Ecommerce\UpdateSearchHistoryController;
 use App\Http\Controllers\Ecommerce\WishlistController;
 use App\Http\Controllers\NotificationController;
-use App\Models\Wishlist;
 use Illuminate\Support\Facades\Route;
 
 // Pages

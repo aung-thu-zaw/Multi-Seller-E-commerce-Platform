@@ -76,13 +76,17 @@ import { Link } from '@inertiajs/vue3'
 
       <!-- My Orders -->
       <Link
-        href="#"
+        :href="route('user.my-orders.index')"
+        :data="{
+          tab: 'all'
+        }"
         as="button"
         class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
         :class="{
           'text-orange-600 hover:text-orange-500 border-s-[3px] border-orange-600':
-            $page.url === '/user/my-orders',
-          'text-slate-600 hover:text-slate-500 border-transparent': $page.url !== '/user/my-orders'
+            $page.url.startsWith('/user/my-orders'),
+          'text-slate-600 hover:text-slate-500 border-transparent':
+            !$page.url.startsWith('/user/my-orders')
         }"
       >
         <i class="fa-solid fa-boxes-packing"></i>

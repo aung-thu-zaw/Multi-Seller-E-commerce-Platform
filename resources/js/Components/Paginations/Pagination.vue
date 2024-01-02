@@ -17,16 +17,15 @@ defineProps({
           />
 
           <div v-else class="flex items-center">
-            <Link
+            <!-- <Link
               v-if="$page.props.ziggy.query.tab"
               class="mr-1 px-4 py-3 text-sm leading-4 border border-gray-300 rounded-full hover:bg-white hover:text-orange-500 hover:border-orange-500 focus:border-orange-500 focus:text-orange-500"
               :class="{ 'bg-orange-600 text-white': link.active }"
               :href="link.url"
             >
               <span v-html="link.label"></span>
-            </Link>
+            </Link> -->
             <Link
-              v-else
               class="mr-1 mb-1 px-4 py-3 text-sm leading-4 border border-gray-300 rounded-full hover:bg-white hover:text-orange-500 hover:border-orange-500 focus:border-orange-500 focus:text-orange-500"
               :class="{ 'bg-orange-600 text-white': link.active }"
               :href="link.url"

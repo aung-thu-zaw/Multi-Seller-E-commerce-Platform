@@ -27,6 +27,11 @@ class Order extends Model
         ];
     }
 
+    // public function getRouteKeyName()
+    // {
+    //     return 'uuid';
+    // }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,Order>
      */
@@ -57,7 +62,7 @@ class Order extends Model
     protected function createdAt(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => date("j-F-Y", strtotime($value)),
+            get: fn ($value) => date("j-F-Y ( g:i:s ) A", strtotime($value)),
         );
     }
 
