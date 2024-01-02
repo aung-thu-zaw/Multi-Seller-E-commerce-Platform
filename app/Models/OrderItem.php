@@ -11,24 +11,24 @@ class OrderItem extends Model
     use HasFactory;
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Product,OrderItem>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Product,OrderItem>
+     */
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Store,OrderItem>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Store,OrderItem>
+     */
     public function store(): BelongsTo
     {
         return $this->belongsTo(Store::class);
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Order,OrderItem>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Order,OrderItem>
+     */
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);

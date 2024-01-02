@@ -12,16 +12,16 @@ class Order extends Model
     use HasFactory;
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,Order>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,Order>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Relations\HasMany<OrderItem>
-    */
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<OrderItem>
+     */
     public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);

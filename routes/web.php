@@ -178,7 +178,7 @@ Route::get('/payments/paypal/cancel', [PaypalController::class, 'paypalCancel'])
 
 Route::post('/payments/stripe/pay', [StripeController::class, 'payWithStripe'])->middleware('auth')->name('payments.stripe.pay');
 
-Route::post('/payment/cash/pay', [CashOnDeliveryController::class,"payWithCash"])->name("payments.cash.pay");
+Route::post('/payment/cash/pay', [CashOnDeliveryController::class, 'payWithCash'])->name('payments.cash.pay');
 
 Route::get('/languages/change', ChangeLanguageController::class)->name('languages.change');
 

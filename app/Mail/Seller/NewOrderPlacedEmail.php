@@ -3,11 +3,8 @@
 namespace App\Mail\Seller;
 
 use App\Models\Address;
-use App\Models\Order;
-use App\Models\OrderItem;
 use App\Models\Store;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -18,11 +15,7 @@ class NewOrderPlacedEmail extends Mailable
     use Queueable;
     use SerializesModels;
 
-
-    /**
-    * @param array<OrderItem> $orderItems
-    */
-    public function __construct(protected Store $store, protected Address $address, protected array $orderItems)
+    public function __construct(protected Store $store, protected Address $address, protected Store $orderItems)
     {
         //
     }

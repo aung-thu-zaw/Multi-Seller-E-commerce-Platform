@@ -10,6 +10,10 @@ import ProductForYouSection from '@/Components/Sections/ProductForYouSection.vue
 import NewsletterSection from '@/Components/Sections/NewsletterSection.vue'
 import WhyChooseUsSection from '@/Components/Sections/WhyChooseUsSection.vue'
 import { Head } from '@inertiajs/vue3'
+// import { onMounted } from 'vue'
+// import { toast } from 'vue3-toastify'
+// import 'vue3-toastify/dist/index.css'
+// import { __ } from '@/Services/translations-inside-setup'
 
 defineProps({
   brands: Object,
@@ -20,6 +24,22 @@ defineProps({
   collections: Object,
   products: Object
 })
+
+// onMounted(() => {
+//   const successMessage = usePage().props.flash.success
+//   if (successMessage) {
+//     toast.success(__(successMessage), {
+//       autoClose: 2000
+//     })
+//   }
+
+//   const errorMessage = usePage().props.flash.error
+//   if (errorMessage) {
+//     toast.error(__(errorMessage), {
+//       autoClose: 2000
+//     })
+//   }
+// })
 </script>
 
 <template>
