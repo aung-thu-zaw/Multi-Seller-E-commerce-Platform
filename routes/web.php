@@ -41,6 +41,9 @@ Route::get('/terms-and-conditions', AboutUsController::class)->name('terms-and-c
 Route::get('/privacy-and-policy', AboutUsController::class)->name('privacy-and-policy');
 Route::get('/returns-and-refunds', AboutUsController::class)->name('returns-and-refunds');
 
+// Language Dropdown
+Route::get('/languages/change', ChangeLanguageController::class)->name('languages.change');
+
 // Newsletter Subscribe
 Route::controller(SubscribeNewsLetterController::class)
     ->prefix('/newsletters')
@@ -48,25 +51,6 @@ Route::controller(SubscribeNewsLetterController::class)
     ->group(function () {
         Route::post('/subscribe', 'subscribe')->name('subscribe');
         Route::put('/unsubscribe', 'unsubscribe')->name('unsubscribe');
-    });
-
-// For claims as a seller
-Route::controller(BecomeASellerController::class)
-    ->prefix('/become-a-seller')
-    ->name('become-a-seller.')
-    ->group(function () {
-        Route::get('/register', 'create')->name('register');
-        Route::post('/', 'store')->name('store');
-    });
-
-// For broadcast notifications
-Route::controller(NotificationController::class)
-    ->middleware('auth')
-    ->prefix('/notifications')
-    ->name('notifications.')
-    ->group(function () {
-        Route::post('/mark-as-read/{id}', 'markAsRead')->name('mark-as-read');
-        Route::post('/mark-all-as-read', 'markAllAsRead')->name('mark-all-as-read');
     });
 
 // Home page and product detail
@@ -120,8 +104,6 @@ Route::controller(BlogController::class)
         Route::get('/', 'index')->name('index');
         Route::get('/{blog_content}', 'show')->name('show');
     });
-Route::post('/blogs/{blog_content}/comments', BlogCommentController::class)->name('blog.comments.store');
-Route::post('/blogs/{blog_content}/comments/{blog_comment}/replies', BlogCommentReplyController::class)->name('comment.replies.store');
 
 // Our Seller Stores
 Route::controller(SellerStoreController::class)
@@ -130,32 +112,43 @@ Route::controller(SellerStoreController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/{store}', 'show')->name('show');
-        Route::post('/{store}/follow', 'followStore')
-            ->middleware('auth')
-            ->name('follow');
-        Route::post('/{store}/unfollow', 'unFollowStore')
-            ->middleware('auth')
-            ->name('unfollow');
+        Route::post('/{store}/follow', 'followStore')->middleware('auth')->name('follow');
+        Route::post('/{store}/unfollow', 'unFollowStore')->middleware('auth')->name('unfollow');
     });
 
-// Seller and Customer Communication
-Route::post('/conversations', [ConversationController::class, 'store'])
-    ->name('conversations.store')
-    ->middleware('auth');
-Route::post('/conversations/{conversation}/messages', [ConversationMessageController::class, 'store'])
-    ->name('conversation.messages.store')
-    ->middleware('auth');
 
-// Wishlist And Add To Cart
-Route::post('/wishlists', [WishlistController::class, 'store'])
-    ->middleware('auth')
-    ->name('wishlists.store');
-Route::delete('/wishlists/{wishlist}', [WishlistController::class, 'destroy'])
-    ->middleware('auth')
-    ->name('wishlists.destroy');
 
-Route::controller(CartItemController::class)
+// *********** Authenticated Routes ***********
+Route::middleware("auth")->group(function () {
+
+    // For broadcast notifications
+    Route::controller(NotificationController::class)
     ->middleware('auth')
+    ->prefix('/notifications')
+    ->name('notifications.')
+    ->group(function () {
+        Route::post('/mark-as-read/{id}', 'markAsRead')->name('mark-as-read');
+        Route::post('/mark-all-as-read', 'markAllAsRead')->name('mark-all-as-read');
+    });
+
+    // For claims as a seller
+    Route::controller(BecomeASellerController::class)
+    ->prefix('/become-a-seller')
+    ->name('become-a-seller.')
+    ->group(function () {
+        Route::get('/register', 'create')->name('register');
+        Route::post('/', 'store')->name('store');
+    });
+
+    // Seller and Customer Communication
+    Route::post('/conversations', [ConversationController::class, 'store'])->name('conversations.store');
+    Route::post('/conversations/{conversation}/messages', [ConversationMessageController::class, 'store'])->name('conversation.messages.store');
+
+
+    // Wishlist And Add To Cart
+    Route::resource("/wishlists", WishlistController::class)->only(['store','destroy']);
+
+    Route::controller(CartItemController::class)
     ->prefix('/cart/cart-items')
     ->name('cart-items.')
     ->group(function () {
@@ -164,23 +157,48 @@ Route::controller(CartItemController::class)
         Route::delete('/{cart_item}', 'destroy')->name('destroy');
     });
 
-Route::get('/my-carts', [MyCartController::class, 'index'])->middleware('auth')->name('my-cart.index');
-Route::post('/apply-coupon', [CouponController::class, 'applyCoupon'])->middleware('auth')->name('coupon.apply');
-Route::post('/{coupon_code}/remove-coupon', [CouponController::class, 'removeCoupon'])->middleware('auth')->name('coupon.remove');
-Route::get('/checkout', [CheckoutController::class, 'index'])->middleware(['auth', 'check.cart.items'])->name('checkout.index');
-Route::post('/checkout/{shipping_method_id}', [CheckoutController::class, 'handleShippingMethod'])->middleware(['auth'])->name('checkout.shipping-method');
-// Route::post("/checkout/shipping-fee", [CheckoutController::class,"getShippingFee"])->middleware("auth")->name("checkout.shipping-fee");
-Route::get('/payments', PaymentController::class)->middleware(['auth', 'check.cart.items'])->name('payments');
+    // User Shopping Cart
+    Route::get('/my-carts', [MyCartController::class, 'index'])->name('my-cart.index');
 
-Route::get('/payments/paypal/pay', [PaypalController::class, 'payWithPaypal'])->middleware('auth', 'check.cart.items')->name('payments.paypal.pay');
-Route::get('/payments/paypal/success', [PaypalController::class, 'paypalSuccess'])->middleware('auth', 'check.cart.items')->name('payments.paypal.success');
-Route::get('/payments/paypal/cancel', [PaypalController::class, 'paypalCancel'])->middleware('auth', 'check.cart.items')->name('payments.paypal.cancel');
+    // Shopping Cart Coupon Operation
+    Route::controller(CouponController::class)
+    ->name('coupon.')
+    ->group(function () {
+        Route::post('/apply-coupon', 'applyCoupon')->name('apply');
+        Route::post('/{coupon_code}/remove-coupon', 'removeCoupon')->name('remove');
+    });
 
-Route::post('/payments/stripe/pay', [StripeController::class, 'payWithStripe'])->middleware('auth')->name('payments.stripe.pay');
+    // Checkout And Shipping Method
+    Route::controller(CheckoutController::class)
+    ->prefix("/checkout")
+    ->name('checkout.')
+    ->group(function () {
+        Route::get('/', 'index')->middleware('check.cart.items')->name('index');
+        Route::post('/{shipping_method_id}', 'handleShippingMethod')->name('shipping-method');
+    });
 
-Route::post('/payment/cash/pay', [CashOnDeliveryController::class, 'payWithCash'])->name('payments.cash.pay');
+    // Payments
+    Route::get('/payments', PaymentController::class)->middleware('check.cart.items')->name('payments');
 
-Route::get('/languages/change', ChangeLanguageController::class)->name('languages.change');
+    Route::controller(PaypalController::class)
+    ->middleware("check.cart.items")
+    ->prefix("/payments/paypal")
+    ->name('payments.paypal.')
+    ->group(function () {
+        Route::get('/pay', 'payWithPaypal')->name('pay');
+        Route::get('/success', 'paypalSuccess')->name('success');
+        Route::get('/cancel', 'paypalCancel')->name('cancel');
+    });
+
+    Route::post('/payments/stripe/pay', [StripeController::class, 'payWithStripe'])->name('payments.stripe.pay');
+
+    Route::post('/payment/cash/pay', [CashOnDeliveryController::class, 'payWithCash'])->name('payments.cash.pay');
+
+    // Blog Comments And Product Questions
+    Route::post('/blogs/{blog_content}/comments', BlogCommentController::class)->name('blog.comments.store');
+    Route::post('/blogs/{blog_content}/comments/{blog_comment}/replies', BlogCommentReplyController::class)->name('comment.replies.store');
+
+});
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';

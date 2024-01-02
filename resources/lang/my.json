@@ -442,5 +442,7 @@
     "Product successfully removed to this flash sale.": "ထုတ်ကုန်ကို အမြန်လျှော့ဈေးမှ အောင်မြင်စွာ ဖယ်ရှားခဲ့သည်။",
     "Orders": "အော်ဒါများ",
     "Order": "အော်ဒါ",
-    "Invoice": "ပြေစာ"
+    "Invoice": "ပြေစာ",
+    "Payment status": "ငွေပေးချေမှု",
+    "Order status": "အော်ဒါ အခြေအနေ"
 }

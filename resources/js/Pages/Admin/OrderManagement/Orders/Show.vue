@@ -8,15 +8,20 @@ import TableHeaderCell from '@/Components/Tables/TableCells/TableHeaderCell.vue'
 import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
 import ImageCell from '@/Components/Tables/TableCells/TableImageCell.vue'
 import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
-import InputError from '@/Components/Forms/Fields/InputError.vue'
 import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
 import NormalButton from '@/Components/Buttons/NormalButton.vue'
 import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
-import { Head } from '@inertiajs/vue3'
+import { Head, router, usePage } from '@inertiajs/vue3'
 import { __ } from '@/Services/translations-inside-setup.js'
 import { useFormatFunctions } from '@/Composables/useFormatFunctions'
+import { computed, ref, watch } from 'vue'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
-defineProps({ order: Object })
+const props = defineProps({ order: Object })
+
+const orderStatus = ref(props.order?.status)
+const paymentStatus = ref(props.order?.payment_status)
 
 const { formatAmount } = useFormatFunctions()
 
@@ -30,9 +35,56 @@ const formattedAttributes = (attributes) => {
     .join(', ')
 }
 
+const subTotal = computed(() => {
+  return props.order.order_items.reduce((accumulator, currentItem) => {
+    const numericTotalPrice = parseFloat(currentItem.total_price)
+    return accumulator + numericTotalPrice
+  }, 0)
+})
+
 const printInvoice = () => {
   window.print()
 }
+
+watch(orderStatus, (newOrderStatus) => {
+  router.patch(
+    route('admin.orders.status.update', { order: props.order?.id }),
+    {
+      order_status: newOrderStatus
+    },
+    {
+      preserveScroll: true,
+      onSuccess: () => {
+        const successMessage = usePage().props.flash.success
+        if (successMessage) {
+          toast.success(__(successMessage, { label: __('Order status') }), {
+            autoClose: 2000
+          })
+        }
+      }
+    }
+  )
+})
+
+watch(paymentStatus, (newPaymentStatus) => {
+  router.patch(
+    route('admin.orders.payment.update', { order: props.order?.id }),
+    {
+      payment_status: newPaymentStatus
+    },
+    {
+      preserveScroll: true,
+      onSuccess: () => {
+        const successMessage = usePage().props.flash.success
+        if (successMessage) {
+          toast.success(__(successMessage, { label: __('Payment status') }), {
+            autoClose: 2000
+          })
+        }
+      }
+    }
+  )
+})
 </script>
 
 <template>
@@ -60,19 +112,58 @@ const printInvoice = () => {
             </h2>
 
             <div class="space-y-5 flex items-start justify-between">
-              <div class="space-y-1 font-bold text-gray-900">
-                <h3 class="text-md mb-1.5 text-gray-800">Payment Information</h3>
-                <p class="text-xs capitalize">
-                  Method : <span class="text-gray-600">{{ order.payment_method }}</span>
-                </p>
-                <p class="text-xs">
-                  Transaction Id :
-                  <span class="text-gray-600">{{ order.transaction?.transaction_id ?? '-' }}</span>
-                </p>
-                <p class="text-xs capitalize">
-                  Status :
-                  <span class="text-gray-600">{{ order?.payment_status }}</span>
-                </p>
+              <div class="flex flex-col space-y-6">
+                <div class="space-y-1 font-bold text-gray-900">
+                  <h3 class="text-md mb-1.5 text-gray-800">Delivery Information</h3>
+                  <p class="text-xs capitalize">
+                    Name : <span class="text-gray-600">{{ order.address?.name }}</span>
+                  </p>
+                  <p class="text-xs">
+                    Email :
+                    <span class="text-gray-600">
+                      {{ order.address?.email }}
+                    </span>
+                  </p>
+
+                  <p class="text-xs capitalize">
+                    Phone :
+                    <span class="text-gray-600">{{ order.address?.phone }}</span>
+                  </p>
+
+                  <p class="text-xs capitalize">
+                    Address :
+                    <span class="text-gray-600">{{ order.address?.address }}</span>
+                  </p>
+
+                  <p class="text-xs capitalize">
+                    Postal Code :
+                    <span class="text-gray-600">{{ order.address?.postal_code }}</span>
+                  </p>
+                </div>
+
+                <div class="space-y-1 font-bold text-gray-900">
+                  <h3 class="text-md mb-1.5 text-gray-800">Payment Information</h3>
+                  <p class="text-xs capitalize">
+                    Method : <span class="text-gray-600">{{ order.payment_method }}</span>
+                  </p>
+                  <p class="text-xs">
+                    Transaction Id :
+                    <span class="text-gray-600">{{
+                      order.transaction?.transaction_id ?? '-'
+                    }}</span>
+                  </p>
+                  <p class="text-xs capitalize">
+                    Status :
+                    <span
+                      :class="{
+                        'text-green-600': order.payment_status === 'completed',
+                        'text-blue-600': order.payment_status === 'pending'
+                      }"
+                    >
+                      {{ order?.payment_status }}
+                    </span>
+                  </p>
+                </div>
               </div>
               <div class="space-y-1 font-bold text-gray-700 text-right">
                 <h3 class="text-md mb-1.5">Order Date</h3>
@@ -131,7 +222,7 @@ const printInvoice = () => {
 
           <div class="flex items-start justify-between">
             <div class="w-1/2">
-              <form v-show="can('orders.edit')" class="space-y-4 md:space-y-6 w-[300px]">
+              <form v-show="can('orders.edit')" class="space-y-4 md:space-y-6 w-[200px]">
                 <div>
                   <InputLabel :label="__('Payment Status')" required />
 
@@ -148,11 +239,10 @@ const printInvoice = () => {
                       }
                     ]"
                     :placeholder="__('Select an option')"
-                    :selected="order.payment_status"
+                    :selected="paymentStatus"
+                    v-model="paymentStatus"
                     required
                   />
-
-                  <InputError :message="errors?.status" />
                 </div>
                 <div>
                   <InputLabel :label="__('Order Status')" required />
@@ -178,20 +268,18 @@ const printInvoice = () => {
                       }
                     ]"
                     :placeholder="__('Select an option')"
-                    :selected="order.status"
+                    :selected="orderStatus"
+                    v-model="orderStatus"
                     required
                   />
-
-                  <InputError :message="errors?.status" />
                 </div>
               </form>
             </div>
             <div class="w-1/2 text-right font-semibold text-gray-500 text-xs space-y-5">
               <div class="space-y-1">
                 <p>Subtotal</p>
-                <p class="text-sm font-bold text-gray-700">
-                  ${{ formatAmount(order.total_amount - order.shipping_fee) }}
-                </p>
+
+                <p class="text-sm font-bold text-gray-700">${{ subTotal }}</p>
               </div>
               <div class="space-y-1">
                 <p>Shipping Fee (+)</p>
@@ -201,8 +289,9 @@ const printInvoice = () => {
               </div>
               <div class="space-y-1">
                 <p>Coupon (-)</p>
+
                 <p
-                  v-if="order.coupon_code && order.coupon_type"
+                  v-if="order.coupon_amount && order.coupon_type"
                   class="text-sm font-bold text-gray-700"
                 >
                   <span v-if="order.coupon_type === 'fixed'">

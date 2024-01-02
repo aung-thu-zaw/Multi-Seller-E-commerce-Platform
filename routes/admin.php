@@ -220,11 +220,17 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
         // ***** Order Operations *****
         Route::resource('orders', OrderController::class)->except(['show','create','edit','store']);
 
-        Route::get('orders/{order}/detail', [OrderController::class, 'show'])->name('orders.show');
+        Route::controller(OrderController::class)
+        ->prefix('/orders')
+        ->name('orders.')
+        ->group(function () {
+            Route::get('/{order}/detail', 'show')->name('show');
+            Route::patch('/{order}/status', 'updateOrderStatus')->name('status.update');
+            Route::patch('/{order}/payment', 'updatePaymentStatus')->name('payment.update');
+            Route::delete('//destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+        });
 
         Route::get('orders/{order}/download', DownloadOrderInvoiceController::class)->name('order-invoice.download');
-
-        Route::delete('/orders/destroy/selected/{selected_items}', [OrderController::class, 'destroySelected'])->name('orders.destroy.selected');
 
         Route::controller(OrderController::class)
             ->prefix('/orders/trash')

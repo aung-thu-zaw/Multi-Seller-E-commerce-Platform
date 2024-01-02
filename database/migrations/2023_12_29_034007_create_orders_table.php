@@ -19,15 +19,11 @@ return new class () extends Migration {
             $table->enum('payment_method', ['card','paypal','cash on delivery']);
             $table->enum('payment_status', ['pending', 'completed'])->default('pending');
             $table->decimal('total_amount', 8, 2);
-            $table->string('address');
             $table->string('shipping_method');
             $table->double('shipping_fee', 8, 2);
             $table->enum('coupon_type', ['fixed','percentage'])->nullable();
             $table->string('coupon_amount')->nullable();
             $table->enum('status', ['pending', 'processing', 'shipped', 'delivered'])->default('pending');
-            $table->boolean('is_returned')->default(false);
-            $table->boolean('is_refunded')->default(false);
-            $table->boolean('is_canceled')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

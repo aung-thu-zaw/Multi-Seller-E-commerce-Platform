@@ -42,16 +42,23 @@ class OrderController extends Controller
 
     public function show(Order $order): Response|ResponseFactory
     {
-        $order->load(["orderItems.product:id,name,image",'orderItems.store:id,store_name']);
+        $order->load(["orderItems.product:id,name,image",'orderItems.store:id,store_name','transaction','address']);
 
         return inertia('Admin/OrderManagement/Orders/Show', compact('order'));
     }
 
-    public function update(OrderRequest $request, Order $order): RedirectResponse
+    public function updateOrderStatus(Request $request, Order $order): RedirectResponse
     {
-        // (new UpdateBrandAction())->handle($request->validated(), $brand);
+        $order->update(["status" => $request->order_status]);
 
-        return to_route('admin.orders.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
+        return back()->with('success', ':label has been successfully updated.');
+    }
+
+    public function updatePaymentStatus(Request $request, Order $order): RedirectResponse
+    {
+        $order->update(["payment_status" => $request->payment_status]);
+
+        return back()->with('success', ':label has been successfully updated.');
     }
 
     public function destroy(Request $request, Order $order): RedirectResponse

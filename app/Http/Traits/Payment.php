@@ -34,7 +34,7 @@ trait Payment
                 'payment_method' => $paymentMethod,
                 'payment_status' => $paymentStatus,
                 'total_amount' => $totalAmount,
-                'address' => $address->address,
+                'address_id' => $address->id,
                 'shipping_method' => $shippingMethod->name,
                 'shipping_fee' => $shippingRate,
                 'coupon_type' => session('coupon') ? session('coupon')['type'] : null,
@@ -58,7 +58,7 @@ trait Payment
 
             Transaction::create([
                 'order_id' => $order->id,
-                'transaction_id' => $transaction_id ?? null,
+                'transaction_id' => $transaction_id,
                 'payment_method' => $paymentMethod,
                 'amount' => $totalAmount,
             ]);
