@@ -85,6 +85,20 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'orders.restore', 'group' => 'Order Management']);
         Permission::create(['name' => 'orders.force.delete', 'group' => 'Order Management']);
 
+        Permission::create(['name' => 'return-orders.view', 'group' => 'Order Management']);
+        Permission::create(['name' => 'return-orders.edit', 'group' => 'Order Management']);
+        Permission::create(['name' => 'return-orders.delete', 'group' => 'Order Management']);
+        Permission::create(['name' => 'return-orders.view.trash', 'group' => 'Order Management']);
+        Permission::create(['name' => 'return-orders.restore', 'group' => 'Order Management']);
+        Permission::create(['name' => 'return-orders.force.delete', 'group' => 'Order Management']);
+
+        Permission::create(['name' => 'cancel-orders.view', 'group' => 'Order Management']);
+        Permission::create(['name' => 'cancel-orders.edit', 'group' => 'Order Management']);
+        Permission::create(['name' => 'cancel-orders.delete', 'group' => 'Order Management']);
+        Permission::create(['name' => 'cancel-orders.view.trash', 'group' => 'Order Management']);
+        Permission::create(['name' => 'cancel-orders.restore', 'group' => 'Order Management']);
+        Permission::create(['name' => 'cancel-orders.force.delete', 'group' => 'Order Management']);
+
         Permission::create(['name' => 'regions.view', 'group' => 'Geographic Hierarchy']);
         Permission::create(['name' => 'regions.create', 'group' => 'Geographic Hierarchy']);
         Permission::create(['name' => 'regions.edit', 'group' => 'Geographic Hierarchy']);

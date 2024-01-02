@@ -37,7 +37,8 @@ trait Payment
                 'address' => $address->address,
                 'shipping_method' => $shippingMethod->name,
                 'shipping_fee' => $shippingRate,
-                'coupon' => session('coupon') ? session('coupon')['code'] : null,
+                'coupon_type' => session('coupon') ? session('coupon')['type'] : null,
+                'coupon_amount' => session('coupon') ? session('coupon')['value'] : null,
                 'status' => 'pending',
             ]);
 

@@ -415,12 +415,23 @@ const toggleCollapseShow = (classes) => {
 
             <div
               id="order-management-accordion"
-              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+              :class="{
+                block:
+                  $page.url.startsWith('/admin/orders') ||
+                  $page.url.startsWith('/admin/return-orders') ||
+                  $page.url.startsWith('/admin/cancel-orders'),
+                hidden: !(
+                  $page.url.startsWith('/admin/orders') ||
+                  $page.url.startsWith('/admin/return-orders') ||
+                  $page.url.startsWith('/admin/cancel-orders')
+                )
+              }"
             >
               <ul class="pl-8">
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('orders.view')" class="items-center">
                   <Link
-                    :href="route('admin.categories.index')"
+                    :href="route('admin.orders.index')"
                     :data="{
                       page: 1,
                       per_page: 5,
@@ -430,9 +441,8 @@ const toggleCollapseShow = (classes) => {
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
-                      'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
+                        $page.url.startsWith('/admin/orders'),
+                      'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/orders')
                     }"
                   >
                     {{ __('All Orders') }}

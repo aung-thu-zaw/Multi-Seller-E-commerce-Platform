@@ -20,6 +20,7 @@ return new class () extends Migration {
             $table->decimal('unit_price', 8, 2);
             $table->decimal('total_price', 8, 2);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

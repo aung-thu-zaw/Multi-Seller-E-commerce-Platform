@@ -436,6 +436,7 @@
     "Shipping Area Name": "Shipping Area Name",
     "Minimum Order Amount": "Minimum Order Amount",
     "Maximum Order Amount": "Maximum Order Amount",
-    "Product successfully added to this flash sale.":"Product successfully added to this flash sale.",
-    "Product successfully removed to this flash sale.":"Product successfully removed to this flash sale."
+    "Product successfully added to this flash sale.": "Product successfully added to this flash sale.",
+    "Product successfully removed to this flash sale.": "Product successfully removed to this flash sale.",
+    "Orders": "orders"
 }

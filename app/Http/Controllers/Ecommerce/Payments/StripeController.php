@@ -54,7 +54,7 @@ class StripeController extends Controller
                     $request->total_amount,
                     $request->shipping_fee,
                     $productsByStore,
-                    'paid'
+                    'completed'
                 );
 
                 $this->sendOrderConfirmationEmails($address, $order, $productsByStore);

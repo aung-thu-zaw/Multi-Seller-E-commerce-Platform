@@ -98,7 +98,7 @@ class PaypalController extends Controller
                     $totalCartItemAmount + $shippingRate->rate,
                     $shippingRate->rate,
                     $productsByStore,
-                    'paid'
+                    'completed'
                 );
 
                 $this->sendOrderConfirmationEmails($address, $order, $productsByStore);

@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\Dashboard\GeographicHierarchy\CityController;
 use App\Http\Controllers\Admin\Dashboard\GeographicHierarchy\RegionController;
 use App\Http\Controllers\Admin\Dashboard\GeographicHierarchy\TownshipController;
 use App\Http\Controllers\Admin\Dashboard\HelpPageController;
+use App\Http\Controllers\Admin\Dashboard\OrderManagement\OrderController;
 use App\Http\Controllers\Admin\Dashboard\ProductManage\ProductController;
 use App\Http\Controllers\Admin\Dashboard\ProductManage\ProductImageController;
 use App\Http\Controllers\Admin\Dashboard\ProductManage\ProductVariantController;
@@ -215,6 +216,26 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
+        // ***** Order Operations *****
+        Route::resource('orders', OrderController::class)->except(['show','create','edit','store']);
+
+        Route::get('orders/{order}/detail', [OrderController::class, 'show'])->name('orders.show');
+
+        Route::delete('/orders/destroy/selected/{selected_items}', [OrderController::class, 'destroySelected'])->name('orders.destroy.selected');
+
+        Route::controller(OrderController::class)
+            ->prefix('/orders/trash')
+            ->name('orders.')
+            ->group(function () {
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+
+
         // ***** Region Operations *****
         Route::resource('regions', RegionController::class)->except(['show']);
 
@@ -265,6 +286,7 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
+
         // ***** Shipping Area Operations *****
         Route::resource('shipping-areas', ShippingAreaController::class)->except(['show']);
 
