@@ -25,6 +25,7 @@ import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 import { __ } from '@/Services/translations-inside-setup.js'
 import { useFormatFunctions } from '@/Composables/useFormatFunctions'
+import axios from 'axios'
 
 defineProps({ orders: Object })
 
@@ -33,6 +34,49 @@ const orderList = 'admin.orders.index'
 const { formatAmount } = useFormatFunctions()
 
 const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
+
+// const handleDownloadInvoice = async (orderId) => {
+//   try {
+//     const response = await axios.get(`/admin/orders/${orderId}/download`, {
+//       responseType: 'blob'
+//     })
+//     const url = window.URL.createObjectURL(new Blob([response.data]))
+//     const link = document.createElement('a')
+//     link.href = url
+//     link.setAttribute('download', 'invoice.pdf')
+//     document.body.appendChild(link)
+//     link.click()
+
+//     console.log((link.href = url))
+//   } catch (error) {
+//     console.log(error)
+//     this.showSnackbar({
+//       message: 'Error downloading invoice.',
+//       type: 'error'
+//     })
+//   }
+// }
+
+const handleDownloadInvoice = async (orderId) => {
+  try {
+    const response = await axios.get(route('admin.order-invoice.download', { order: orderId }), {
+      responseType: 'blob'
+    })
+    const url = window.URL.createObjectURL(new Blob([response.data]))
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', 'invoice.pdf')
+    document.body.appendChild(link)
+    link.click()
+
+    console.log('hit')
+  } catch (error) {
+    this.showSnackbar({
+      message: 'Error downloading invoice.',
+      type: 'error'
+    })
+  }
+}
 </script>
 
 <template>
@@ -231,6 +275,15 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
               </TableDataCell>
 
               <TableActionCell>
+                <NormalButton
+                  v-show="can('orders.edit')"
+                  @click="handleDownloadInvoice(item?.id)"
+                  class="bg-yellow-600 text-white ring-2 ring-yellow-300"
+                >
+                  <i class="fa-solid fa-download"></i>
+                  {{ __('Invoice') }}
+                </NormalButton>
+
                 <InertiaLinkButton
                   v-show="can('orders.view') || can('orders.edit')"
                   to="admin.orders.show"

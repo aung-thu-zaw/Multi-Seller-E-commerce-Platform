@@ -440,5 +440,6 @@
     "Maximum Order Amount": "အများဆုံးမှာယူမှုပမာဏ",
     "Product successfully added to this flash sale.": "ထုတ်ကုန်ကို အမြန်လျှော့ဈေးသို့ အောင်မြင်စွာ ထည့်သွင်းခဲ့သည်။",
     "Product successfully removed to this flash sale.": "ထုတ်ကုန်ကို အမြန်လျှော့ဈေးမှ အောင်မြင်စွာ ဖယ်ရှားခဲ့သည်။",
-    "Orders": "အော်ဒါများ"
+    "Orders": "အော်ဒါများ",
+    "Invoice": "ပြေစာ"
 }

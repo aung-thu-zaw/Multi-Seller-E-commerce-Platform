@@ -38,6 +38,7 @@ use App\Http\Controllers\Admin\Dashboard\ShippingAreaController;
 use App\Http\Controllers\Admin\Dashboard\ShippingMethodController;
 use App\Http\Controllers\Admin\Dashboard\ShippingRateController;
 use App\Http\Controllers\Admin\Dashboard\SubscribersAndNewsletters\SubscriberController;
+use App\Http\Controllers\DownloadOrderInvoiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/login', LoginController::class)->middleware('guest')->name('admin.login');
@@ -220,6 +221,8 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
         Route::resource('orders', OrderController::class)->except(['show','create','edit','store']);
 
         Route::get('orders/{order}/detail', [OrderController::class, 'show'])->name('orders.show');
+
+        Route::get('orders/{order}/download', DownloadOrderInvoiceController::class)->name('order-invoice.download');
 
         Route::delete('/orders/destroy/selected/{selected_items}', [OrderController::class, 'destroySelected'])->name('orders.destroy.selected');
 

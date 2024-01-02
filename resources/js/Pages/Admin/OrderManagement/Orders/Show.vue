@@ -201,11 +201,14 @@ const printInvoice = () => {
               </div>
               <div class="space-y-1">
                 <p>Coupon (-)</p>
-                <p v-if="coupon_code && coupon_type" class="text-sm font-bold text-gray-700">
-                  <span v-if="coupon_type === 'fixed'">
+                <p
+                  v-if="order.coupon_code && order.coupon_type"
+                  class="text-sm font-bold text-gray-700"
+                >
+                  <span v-if="order.coupon_type === 'fixed'">
                     ${{ formatAmount(order.coupon_amount) }}
                   </span>
-                  <span v-if="coupon_type === 'percentage'">
+                  <span v-if="order.coupon_type === 'percentage'">
                     %{{ formatAmount(order.coupon_amount) }}
                   </span>
                 </p>
