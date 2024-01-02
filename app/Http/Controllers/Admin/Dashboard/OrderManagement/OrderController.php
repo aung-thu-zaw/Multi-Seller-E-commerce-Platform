@@ -73,6 +73,9 @@ class OrderController extends Controller
     public function trashed(): Response|ResponseFactory
     {
         $trashedOrders = Order::search(request('search'))
+        ->query(function (Builder $builder) {
+            $builder->with(["user:id,name"]);
+        })
             ->onlyTrashed()
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))

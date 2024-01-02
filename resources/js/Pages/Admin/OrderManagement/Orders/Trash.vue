@@ -18,16 +18,21 @@ import BulkActionButton from '@/Components/Buttons/BulkActionButton.vue'
 import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
 import NormalButton from '@/Components/Buttons/NormalButton.vue'
 import EmptyTrashButton from '@/Components/Buttons/EmptyTrashButton.vue'
+import GreenBadge from '@/Components/Badges/GreenBadge.vue'
+import BlueBadge from '@/Components/Badges/BlueBadge.vue'
 import Pagination from '@/Components/Paginations/DashboardPagination.vue'
 import { Head } from '@inertiajs/vue3'
 import { __ } from '@/Services/translations-inside-setup.js'
 import { useResourceActions } from '@/Composables/useResourceActions'
+import { useFormatFunctions } from '@/Composables/useFormatFunctions'
 
 defineProps({ trashedOrders: Object })
 
 const orderList = 'admin.orders.index'
 
 const trashedOrderList = 'admin.orders.trashed'
+
+const { formatAmount } = useFormatFunctions()
 
 const {
   restoreAction,

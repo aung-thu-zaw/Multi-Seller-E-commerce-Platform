@@ -439,5 +439,6 @@
     "Product successfully added to this flash sale.": "Product successfully added to this flash sale.",
     "Product successfully removed to this flash sale.": "Product successfully removed to this flash sale.",
     "Orders": "orders",
+    "Order": "order",
     "Invoice": "Invoice"
 }
