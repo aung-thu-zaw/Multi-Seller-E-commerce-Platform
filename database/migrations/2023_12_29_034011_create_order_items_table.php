@@ -20,10 +20,8 @@ return new class () extends Migration {
             $table->decimal('unit_price', 8, 2);
             $table->decimal('total_price', 8, 2);
             $table->enum('status', ['pending', 'processing', 'ready to ship' ,'shipped', 'delivered'])->default('pending');
-            $table->timestamp("processing_date")->nullable();
-            $table->timestamp("ready_to_ship_date")->nullable();
-            $table->timestamp("shipped_date")->nullable();
-            $table->timestamp("delivered_date")->nullable();
+            $table->timestamp("shipped_at")->nullable();
+            $table->timestamp("delivered_at")->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
