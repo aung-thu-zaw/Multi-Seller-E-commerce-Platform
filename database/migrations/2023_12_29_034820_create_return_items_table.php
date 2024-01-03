@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,13 +12,18 @@ return new class() extends Migration
     {
         Schema::create('return_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
             $table->foreignId('order_item_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->text('reason');
-            $table->enum('status', ['requested', 'approved', 'rejected', 'processed', 'completed']);
-            $table->decimal('refund_amount', 8, 2);
-            $table->timestamp('refund_at')->nullable();
+            $table->enum('status', ['pending', 'approved', 'rejected', 'received', 'refunded']);
+            $table->timestamp('returned_at')->nullable();
+            $table->foreignId('approved_by')->nullable()->constrained('users');
+            $table->timestamp('received_at')->nullable();
+            $table->timestamp('refunded_at')->nullable();
+            $table->decimal('refund_amount', 8, 2)->nullable();
+            $table->text('comments')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

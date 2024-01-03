@@ -10,16 +10,16 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('cancelled_items', function (Blueprint $table) {
+        Schema::create('refunds', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_item_id')->constrained();
+            $table->foreignId('return_item_id')->constrained();
+            $table->foreignId('cancelled_item_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->text('reason');
-            $table->enum('status', ['pending', 'approved', 'rejected']);
-            $table->timestamp('cancelled_at')->nullable();
-            $table->foreignId('approved_by')->nullable()->constrained('users');
+            $table->decimal('amount', 8, 2);
+            $table->enum('status', ['pending', 'completed', 'failed']);
+            $table->timestamp('processed_at')->nullable();
+            $table->foreignId('processed_by')->nullable()->constrained('users');
             $table->text('comments')->nullable();
-            $table->decimal('refund_amount', 8, 2)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +30,6 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('cancelled_items');
+        Schema::dropIfExists('refunds');
     }
 };
