@@ -65,9 +65,9 @@ class MyReviewController extends Controller
                 $query->with(['order' => function ($orderQuery) {
                     $orderQuery->where('user_id', auth()->id())
                                ->where('status', 'delivered')
-                               ->select('id', 'purchased_at');
+                               ->select('id', 'tracking_no', 'purchased_at');
                 }])
-                ->select('id', 'product_id', 'store_id', 'qty', 'attributes', 'unit_price', 'total_price', 'status', 'processing_date', 'ready_to_ship_date', 'shipped_date', 'delivered_date');
+                ->select('id', 'order_id', 'product_id', 'store_id', 'attributes', 'delivered_at');
             }])
             ->paginate(10)
             ->withQueryString();

@@ -2,18 +2,18 @@
 import { Link } from '@inertiajs/vue3'
 import { computed } from 'vue'
 
-defineProps({ product: Object })
+const props = defineProps({ product: Object })
 
-// const attributes = computed(() => {
-//   return JSON.parse(props.orderItem?.attributes)
-// })
-// const formattedAttributes = computed(() => {
-//   if (!attributes.value) return ''
+const attributes = computed(() => {
+  return JSON.parse(props.product?.order_items[0]?.attributes)
+})
+const formattedAttributes = computed(() => {
+  if (!attributes.value) return ''
 
-//   return Object.entries(attributes.value)
-//     .map(([key, value]) => `${key}: ${value}`)
-//     .join(' | ')
-// })
+  return Object.entries(attributes.value)
+    .map(([key, value]) => `${key}: ${value}`)
+    .join(' | ')
+})
 </script>
 
 <template>
@@ -25,15 +25,20 @@ defineProps({ product: Object })
         <img :src="product?.image" alt="product image" class="w-20 h-20 object-cover" />
       </div>
       <div class="space-y-1 w-full">
+        <p class="text-[.7rem] text-orange-500 font-medium">
+          Order {{ product?.order_items[0]?.order?.tracking_no }}
+        </p>
         <h3 class="font-semibold text-sm text-gray-700 line-clamp-2">
           {{ product?.name }}
         </h3>
 
-        <div class="space-x-1 flex items-center text-xs font-medium mb-5 text-gray-500">
-          <!-- {{ formattedAttributes }} -->
-
-          {{ product }}
+        <div class="space-x-1 flex items-center text-xs font-medium mb-5 text-gray-600">
+          {{ formattedAttributes }}
         </div>
+
+        <p class="text-[.7rem] text-orange-500 font-medium">
+          Purchased at - {{ product?.order_items[0]?.order?.purchased_at }}
+        </p>
 
         <div class="flex items-center justify-end pt-5 w-full">
           <Link href="#" class="text-orange-600 text-xs font-bold hover:text-orange-500">
