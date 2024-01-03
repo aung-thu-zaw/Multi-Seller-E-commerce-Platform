@@ -162,6 +162,8 @@ const handleDownloadInvoice = async (orderId) => {
 
               <TableHeaderCell label="Payment Status" />
 
+              <TableHeaderCell label="Purchased Date" />
+
               <TableHeaderCell label="Order Status" />
 
               <TableHeaderCell label="Order Date" />
@@ -219,6 +221,12 @@ const handleDownloadInvoice = async (orderId) => {
                     <i class="fa-solid fa-circle-check animate-pulse"></i>
                     {{ item?.payment_status }}
                   </GreenBadge>
+                </div>
+              </TableDataCell>
+
+              <TableDataCell>
+                <div class="min-w-[250px]">
+                  {{ item?.purchased_at ?? '-' }}
                 </div>
               </TableDataCell>
 

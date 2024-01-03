@@ -32,7 +32,7 @@ defineProps({ orders: Object })
             v-show="orders.data.length"
             class="bg-orange-200 rounded-full w-5 h-5 flex items-center justify-center"
           >
-            <span class="text-xs text-orange-600">{{ orders.data.length }}</span>
+            <span class="text-xs text-orange-600">{{ orders.total }}</span>
           </div>
         </Link>
         <Link

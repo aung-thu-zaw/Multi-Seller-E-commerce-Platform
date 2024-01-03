@@ -57,13 +57,21 @@ class OrderController extends Controller
     {
         $storeId = Store::getStoreId();
 
-        $orderItems = OrderItem::where("order_id", $order->id)->where("store_id", $storeId)->get();
+        if ($order->status !== 'shipped' && $order->status !== 'delivered') {
+            $orderItems = OrderItem::where("order_id", $order->id)->where("store_id", $storeId)->get();
 
-        $orderItems->each(function ($item) use ($request) {
+            $orderItems->each(function ($item) use ($request) {
+                if ($request->order_status === 'shipped' || $request->order_status === 'delivered') {
+                    return back()->with('error', 'Cannot update order item status. Order status is already "shipped" or "delivered".');
+                }
 
-            $item->update(['status' => $request->order_status]);
-        });
+                $item->update(['status' => $request->order_status]);
+            });
 
-        return back()->with('success', ':label has been successfully updated.');
+            return back()->with('success', ':label has been successfully updated.');
+        } else {
+            return back()->with('error', 'Cannot update order item status. Order status is already "shipped" or "delivered".');
+        }
     }
+
 }

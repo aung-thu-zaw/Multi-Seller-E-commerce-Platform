@@ -34,6 +34,7 @@ trait Payment
                 'tracking_no' => '#'.uniqid(),
                 'product_qty' => $cartItems->sum('qty'),
                 'payment_method' => $paymentMethod,
+                'purchased_at' => $paymentStatus === 'completed' && $paymentMethod !== 'cash on delivery' ? now() : null,
                 'payment_status' => $paymentStatus,
                 'total_amount' => $totalAmount,
                 'address_id' => $address->id,

@@ -93,7 +93,10 @@ const user = computed(() => usePage().props.auth?.user)
         >
           <Link
             as="button"
-            href="#"
+            :href="route('user.my-reviews.index')"
+            :data="{
+              tab: 'to-review'
+            }"
             class="text-left text-sm font-semibold block w-full whitespace-nowrap bg-transparent text-slate-700"
           >
             <i class="fa-solid fa-star mr-1.5"></i>

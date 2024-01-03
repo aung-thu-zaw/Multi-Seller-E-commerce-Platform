@@ -9,8 +9,8 @@ import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
 import ImageCell from '@/Components/Tables/TableCells/TableImageCell.vue'
 import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
 import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
+import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
 import NormalButton from '@/Components/Buttons/NormalButton.vue'
-import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
 import GreenBadge from '@/Components/Badges/GreenBadge.vue'
 import BlueBadge from '@/Components/Badges/BlueBadge.vue'
 import OrangeBadge from '@/Components/Badges/OrangeBadge.vue'
@@ -66,6 +66,12 @@ watch(orderStatus, (newOrderStatus) => {
             autoClose: 2000
           })
         }
+        const errorMessage = usePage().props.flash.error
+        if (errorMessage) {
+          toast.error(__(errorMessage), {
+            autoClose: 2000
+          })
+        }
       }
     }
   )
@@ -105,7 +111,18 @@ watch(paymentStatus, (newPaymentStatus) => {
           <BreadcrumbItem :label="order?.invoice_no" />
         </Breadcrumb>
 
-        <GoBackButton />
+        <InertiaLinkButton
+          to="admin.orders.index"
+          :data="{
+            page: 1,
+            per_page: 5,
+            sort: 'id',
+            direction: 'desc'
+          }"
+        >
+          <i class="fa-solid fa-left-long"></i>
+          {{ __('Go To List') }}
+        </InertiaLinkButton>
       </div>
 
       <div class="border bg-white rounded-md shadow p-10">
@@ -167,6 +184,11 @@ watch(paymentStatus, (newPaymentStatus) => {
                     >
                       {{ order?.payment_status }}
                     </span>
+                  </p>
+
+                  <p class="text-xs">
+                    Purchased At :
+                    <span class="text-gray-600">{{ order?.purchased_at ?? '-' }}</span>
                   </p>
                 </div>
               </div>

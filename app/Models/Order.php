@@ -67,6 +67,16 @@ class Order extends Model
     }
 
     /**
+    * @return \Illuminate\Database\Eloquent\Casts\Attribute<Order, never>
+    */
+    protected function purchasedAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value ? date("j-F-Y ( g:i:s ) A", strtotime($value)) : null,
+        );
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<OrderItem>
      */
     public function orderItems(): HasMany

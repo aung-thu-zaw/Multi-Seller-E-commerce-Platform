@@ -7,6 +7,7 @@ use App\Http\Controllers\User\DeleteAccountController;
 use App\Http\Controllers\User\FollowedStoreController;
 use App\Http\Controllers\User\MyAccountController;
 use App\Http\Controllers\User\MyOrderController;
+use App\Http\Controllers\User\MyReviewController;
 use App\Http\Controllers\User\MyWishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +33,9 @@ Route::middleware(['auth'])
 
         Route::get('/my-orders', [MyOrderController::class,"index"])->name("my-orders.index");
         Route::get('/my-orders/{order}', [MyOrderController::class,"show"])->name("my-orders.show");
+
+        Route::get('/my-reviews', [MyReviewController::class,"index"])->name("my-reviews.index");
+        Route::get('/my-reviews/{product_review}', [MyReviewController::class,"show"])->name("my-reviews.show");
+
+
     });

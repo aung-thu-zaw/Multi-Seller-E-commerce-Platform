@@ -127,13 +127,17 @@ import { Link } from '@inertiajs/vue3'
 
       <!-- My Reviews -->
       <Link
-        href="#"
         as="button"
+        :href="route('user.my-reviews.index')"
+        :data="{
+          tab: 'to-review'
+        }"
         class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
         :class="{
           'text-orange-600 hover:text-orange-500 border-s-[3px] border-orange-600':
-            $page.url === '/user/my-reviews',
-          'text-slate-600 hover:text-slate-500 border-transparent': $page.url !== '/user/my-reviews'
+            $page.url.startsWith('/user/my-reviews'),
+          'text-slate-600 hover:text-slate-500 border-transparent':
+            !$page.url.startsWith('/user/my-reviews')
         }"
       >
         <i class="fa-solid fa-star"></i>

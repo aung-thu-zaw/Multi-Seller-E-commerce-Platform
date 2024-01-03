@@ -47,22 +47,81 @@ class OrderController extends Controller
         return inertia('Admin/OrderManagement/Orders/Show', compact('order'));
     }
 
+    // public function updateOrderStatus(Request $request, Order $order): RedirectResponse
+    // {
+    //     $order->update(["status" => $request->order_status]);
+
+    //     if($request->order_status === 'shipped' || $request->order_status === 'delivered') {
+    //         $order->orderItems->each(function ($item) use ($request) {
+    //             $item->update(["status" => $request->order_status]);
+    //         });
+    //     }
+
+    //     return back()->with('success', ':label has been successfully updated.');
+    // }
+
     public function updateOrderStatus(Request $request, Order $order): RedirectResponse
     {
-        $order->update(["status" => $request->order_status]);
-
-        if($request->order_status === 'shipped' || $request->order_status === 'delivered') {
-            $order->orderItems->each(function ($item) use ($request) {
-                $item->update(["status" => $request->order_status]);
+        if ($request->order_status === 'shipped' || $request->order_status === 'delivered') {
+            $isReadyToShip = $order->orderItems->every(function ($item) {
+                return $item->status === 'ready to ship' || $item->status === 'shipped';
             });
-        }
 
-        return back()->with('success', ':label has been successfully updated.');
+            if ($isReadyToShip) {
+                $order->update(['status' => $request->order_status]);
+
+                $order->orderItems->each(function ($item) use ($request) {
+                    $item->update(['status' => $request->order_status]);
+                });
+
+                return back()->with('success', ':label has been successfully updated.');
+            } else {
+                return back()->with('error', 'Cannot update order status. All order items must be "ready to ship".');
+            }
+        } else {
+            $order->update(['status' => $request->order_status]);
+
+            return back()->with('success', ':label has been successfully updated.');
+        }
     }
+
+
+
+    // public function updateOrderStatus(Request $request, Order $order): RedirectResponse
+    // {
+    //     $storeId = Store::getStoreId();
+
+    //     $orderItems = OrderItem::where("order_id", $order->id)->where("store_id", $storeId)->get();
+
+    //     if ($request->order_status === 'shipped' || $request->order_status === 'delivered') {
+    //         $isReadyToShip = $orderItems->every(function ($item) {
+    //             return $item->status === 'ready to ship';
+    //         });
+
+    //         if ($isReadyToShip) {
+    //             $order->update(['status' => $request->order_status]);
+
+    //             $orderItems->each(function ($item) use ($request) {
+    //                 $item->update(['status' => $request->order_status]);
+    //             });
+
+    //             return back()->with('success', ':label has been successfully updated.');
+    //         } else {
+    //             return back()->with('error', 'Cannot update order status. All order items must be "ready to ship".');
+    //         }
+    //     } else {
+    //         $order->update(['status' => $request->order_status]);
+
+    //         return back()->with('success', ':label has been successfully updated.');
+    //     }
+    // }
 
     public function updatePaymentStatus(Request $request, Order $order): RedirectResponse
     {
-        $order->update(["payment_status" => $request->payment_status]);
+        if($order->payment_method === 'cash on delivery' && $request->payment_status === 'completed') {
+
+            $order->update(["payment_status" => $request->payment_status,"purchased_at" => now()]);
+        }
 
         return back()->with('success', ':label has been successfully updated.');
     }

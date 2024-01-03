@@ -19,6 +19,7 @@ return new class () extends Migration {
             $table->integer('product_qty');
             $table->enum('payment_method', ['card','paypal','cash on delivery']);
             $table->enum('payment_status', ['pending', 'completed'])->default('pending');
+            $table->timestamp('purchased_at')->nullable();
             $table->decimal('total_amount', 8, 2);
             $table->string('shipping_method');
             $table->double('shipping_fee', 8, 2);
