@@ -54,7 +54,7 @@ const formattedAttributes = computed(() => {
         </Link>
         <span class="font-bold text-gray-800 mx-3">|</span>
         <Link
-          href="#"
+          href=""
           class="text-orange-600 font-semibold text-xs hover:text-orange-500 hover:underline duration-150"
         >
           <i class="fa-solid fa-pencil mr-1"></i> Write Review

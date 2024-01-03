@@ -14,7 +14,7 @@ import Myanmar from '@/assets/images/myanmar.png'
       }"
     >
       <i class="fa-solid fa-globe mr-1"></i>
-      <span v-show="!$page.url.startsWith('/admin') || !$page.url.startsWith('/seller')">
+      <span v-if="!$page.url.startsWith('/admin') && !$page.url.startsWith('/seller')">
         {{ __('Language') }}
       </span>
     </button>

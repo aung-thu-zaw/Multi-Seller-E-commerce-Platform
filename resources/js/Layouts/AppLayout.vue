@@ -5,7 +5,7 @@ import EcommerceChatWidget from '@/Components/Chats/EcommerceChatWidget.vue'
 </script>
 
 <template>
-  <div class="min-w-max mx-auto min-h-screen font-roboto bg-gray-50">
+  <div class="min-w-min mx-auto min-h-screen font-roboto bg-gray-50">
     <EcommerceChatWidget />
 
     <EcommerceNavbar />

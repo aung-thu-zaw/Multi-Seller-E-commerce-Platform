@@ -28,7 +28,6 @@ use App\Http\Controllers\Admin\Dashboard\HelpPageController;
 use App\Http\Controllers\Admin\Dashboard\OrderManagement\OrderController;
 use App\Http\Controllers\Admin\Dashboard\ProductManage\ProductController;
 use App\Http\Controllers\Admin\Dashboard\ProductManage\ProductImageController;
-use App\Http\Controllers\Admin\Dashboard\ProductManage\ProductVariantController;
 use App\Http\Controllers\Admin\Dashboard\RatingManagement\AutomatedFilterWordController;
 use App\Http\Controllers\Admin\Dashboard\SellerManagement\ClaimsAsASellerController;
 use App\Http\Controllers\Admin\Dashboard\SellerManagement\StoreManageController;
@@ -87,11 +86,12 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
         // ***** Product Operations *****
         Route::resource('products', ProductController::class)->except(['show']);
 
+        Route::delete('/products/destroy/selected/{selected_items}', [ProductController::class, 'destroySelected'])->name('products.destroy.selected');
+
         Route::controller(ProductController::class)
             ->prefix('/products/trash')
             ->name('products.')
             ->group(function () {
-                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
                 Route::get('/', 'trashed')->name('trashed');
                 Route::post('/{id}/restore', 'restore')->name('restore');
                 Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
@@ -100,16 +100,15 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-        Route::controller(ProductImageController::class)
-            ->prefix('/products')
-            ->name('product.')
-            ->group(function () {
-                Route::get('/{product}/images', 'productImages')->name('images');
-                Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
-                Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
-            });
+        // Route::controller(ProductImageController::class)
+        //     ->prefix('/products')
+        //     ->name('product.')
+        //     ->group(function () {
+        //         Route::get('/{product}/images', 'productImages')->name('images');
+        //         Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
+        //         Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
+        //     });
 
-        Route::resource('products/{product}/product-variants', ProductVariantController::class);
 
         // ***** Collection Operations *****
         Route::resource('collections', CollectionController::class)->except(['show']);

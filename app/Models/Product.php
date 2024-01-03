@@ -126,12 +126,12 @@ class Product extends Model
         return $this->hasMany(Sku::class);
     }
 
-    // protected static function booted(): void
-    // {
-    //     parent::boot();
+    protected static function booted(): void
+    {
+        parent::boot();
 
-    //     static::addGlobalScope(new FilterByScope());
-    // }
+        static::addGlobalScope(new FilterByScope());
+    }
 
     public static function deleteImage(string $productImage): void
     {

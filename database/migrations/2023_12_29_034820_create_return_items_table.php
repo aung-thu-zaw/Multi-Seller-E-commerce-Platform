@@ -18,7 +18,7 @@ return new class() extends Migration
             $table->text('reason');
             $table->enum('status', ['requested', 'approved', 'rejected', 'processed', 'completed']);
             $table->decimal('refund_amount', 8, 2);
-            $table->timestamp('refund_date')->nullable();
+            $table->timestamp('refund_at')->nullable();
             $table->timestamps();
         });
     }

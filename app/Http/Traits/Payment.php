@@ -6,10 +6,14 @@ use App\Mail\Admin\NewOrderPlacedEmail;
 use App\Mail\Seller\NewOrderPlacedEmail as SellerNewOrderPlacedEmail;
 use App\Mail\User\OrderPlacedSuccessfullyEmail;
 use App\Models\Address;
+use App\Models\Attribute;
+use App\Models\AttributeOption;
 use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use App\Models\ShippingMethod;
+use App\Models\Sku;
 use App\Models\Store;
 use App\Models\Transaction;
 use App\Models\User;
@@ -58,6 +62,23 @@ trait Payment
                 ]);
 
                 $productsByStore[$item->store_id][] = $orderItem;
+
+                if ($item->attributes) {
+                    $attributes = json_decode($item->attributes, true);
+
+                    $sku = $this->getSkuByAttributes($item->product_id, $attributes);
+
+                    if ($sku) {
+                        $sku->update(['qty' => $sku->qty - $item->qty]);
+                    }
+                } else {
+                    $product = Product::find($item->product_id);
+
+                    if ($product) {
+                        $product->update(['qty' => $product->qty - $item->qty]);
+                    }
+                }
+
             });
 
             Transaction::create([
@@ -103,4 +124,38 @@ trait Payment
 
         }
     }
+
+    /**
+     * @param array<mixed> $attributes
+     */
+    protected function getSkuByAttributes(int $productId, array $attributes): ?Sku
+    {
+        $attributeOptionIds = [];
+
+        foreach ($attributes as $attributeName => $attributeValue) {
+            $attributeId = Attribute::where('name', $attributeName)->value('id');
+
+            $attributeOptionId = AttributeOption::where('attribute_id', $attributeId)
+                ->where('value', $attributeValue)
+                ->value('id');
+
+            if ($attributeOptionId) {
+                $attributeOptionIds[] = $attributeOptionId;
+            }
+        }
+
+        if (!empty($attributeOptionIds)) {
+            $sku = Sku::where('product_id', $productId)
+                ->whereHas('attributeOptions', function ($query) use ($attributeOptionIds) {
+                    $query->whereIn('attribute_option_id', $attributeOptionIds);
+                })
+                ->first();
+
+            return $sku;
+        }
+
+        return null;
+    }
+
+
 }
