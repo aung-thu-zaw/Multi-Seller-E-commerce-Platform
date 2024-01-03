@@ -41,7 +41,11 @@ const formattedAttributes = computed(() => {
         </p>
 
         <div class="flex items-center justify-end pt-5 w-full">
-          <Link href="#" class="text-orange-600 text-xs font-bold hover:text-orange-500">
+          <Link
+            :href="route('user.my-reviews.add', { product: product?.slug })"
+            as="button"
+            class="text-orange-600 text-xs font-bold hover:text-orange-500"
+          >
             <i class="fa-solid fa-pen"></i>
             Write Review
           </Link>

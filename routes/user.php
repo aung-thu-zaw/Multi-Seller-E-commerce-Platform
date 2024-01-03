@@ -35,7 +35,7 @@ Route::middleware(['auth'])
         Route::get('/my-orders/{order}', [MyOrderController::class,"show"])->name("my-orders.show");
 
         Route::get('/my-reviews', [MyReviewController::class,"index"])->name("my-reviews.index");
-        Route::get('/my-reviews/{product_review}', [MyReviewController::class,"show"])->name("my-reviews.show");
-
+        Route::post('/my-reviews/{product}', [MyReviewController::class,"store"])->name("my-reviews.store");
+        Route::get('/my-reviews/{product}/add-review', [MyReviewController::class,"addReview"])->name("my-reviews.add");
 
     });

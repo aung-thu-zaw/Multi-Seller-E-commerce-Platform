@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import ProductToReviewCard from './ProductToReviewCard.vue'
+import ProductToReviewCard from '@/Components/Cards/Reviews/NeedToWriteReviewCard.vue'
 
 const props = defineProps({ productsToReview: Object })
 
