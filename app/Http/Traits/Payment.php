@@ -28,6 +28,7 @@ trait Payment
     {
         return DB::transaction(function () use ($paymentMethod, $transaction_id, $cartItems, $shippingMethod, $address, $totalAmount, $shippingRate, &$productsByStore, $paymentStatus) {
             $order = Order::create([
+                'uuid' => Str::uuid(),
                 'user_id' => auth()->id(),
                 'invoice_no' => 'E-COMMERCE'.mt_rand(100000000, 999999999),
                 'tracking_no' => '#'.uniqid(),
@@ -45,7 +46,6 @@ trait Payment
 
             $cartItems->each(function ($item) use ($order, &$productsByStore) {
                 $orderItem = OrderItem::create([
-                    'uuid' => Str::uuid(),
                     'order_id' => $order->id,
                     'product_id' => $item->product_id,
                     'store_id' => $item->store_id,

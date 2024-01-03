@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\DownloadOrderInvoiceController;
 use App\Http\Controllers\Seller\Auth\LoginController;
 use App\Http\Controllers\Seller\Dashboard\ChatInboxController;
 use App\Http\Controllers\Seller\Dashboard\DashboardController;
+use App\Http\Controllers\Seller\Dashboard\OrderController;
 use App\Http\Controllers\Seller\Dashboard\StoreProductCategoryController;
 use App\Http\Controllers\Seller\Dashboard\StoreSettingController;
 use Illuminate\Support\Facades\Route;
@@ -35,5 +37,18 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
         Route::get('/store-settings', [StoreSettingController::class, 'index'])->name('store-settings.index');
 
         Route::get('/chat-inbox', ChatInboxController::class)->name('chat-inbox');
+
+        // ***** Order Operations *****
+        Route::controller(OrderController::class)
+        ->prefix('/orders')
+        ->name('orders.')
+        ->middleware('strict.inactive_store')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/{order}/detail', 'show')->name('show');
+            Route::patch('/{order}/status', 'updateOrderStatus')->name('status.update');
+        });
+
+        Route::get('orders/{order}/download', DownloadOrderInvoiceController::class)->name('order-invoice.download')->middleware('strict.inactive_store');
 
     });

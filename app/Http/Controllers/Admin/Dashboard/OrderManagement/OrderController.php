@@ -51,6 +51,12 @@ class OrderController extends Controller
     {
         $order->update(["status" => $request->order_status]);
 
+        if($request->order_status === 'shipped' || $request->order_status === 'delivered') {
+            $order->orderItems->each(function ($item) use ($request) {
+                $item->update(["status" => $request->order_status]);
+            });
+        }
+
         return back()->with('success', ':label has been successfully updated.');
     }
 

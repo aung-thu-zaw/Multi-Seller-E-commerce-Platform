@@ -1,5 +1,5 @@
 <script setup>
-import AdminDashboardLayout from '@/Layouts/AdminDashboardLayout.vue'
+import SellerDashboardLayout from '@/Layouts/SellerDashboardLayout.vue'
 import Breadcrumb from '@/Components/Breadcrumbs/Breadcrumb.vue'
 import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
 import TableContainer from '@/Components/Tables/TableContainer.vue'
@@ -25,8 +25,7 @@ import 'vue3-toastify/dist/index.css'
 
 const props = defineProps({ order: Object })
 
-const orderStatus = ref(props.order?.status)
-const paymentStatus = ref(props.order?.payment_status)
+const orderStatus = ref(props.order?.order_items[0]?.status)
 
 const { formatAmount } = useFormatFunctions()
 
@@ -40,7 +39,7 @@ const formattedAttributes = (attributes) => {
     .join(', ')
 }
 
-const subTotal = computed(() => {
+const totalAmount = computed(() => {
   return props.order.order_items.reduce((accumulator, currentItem) => {
     const numericTotalPrice = parseFloat(currentItem.total_price)
     return accumulator + numericTotalPrice
@@ -53,7 +52,7 @@ const printInvoice = () => {
 
 watch(orderStatus, (newOrderStatus) => {
   router.patch(
-    route('admin.orders.status.update', { order: props.order?.uuid }),
+    route('seller.orders.status.update', { order: props.order?.uuid }),
     {
       order_status: newOrderStatus
     },
@@ -70,38 +69,18 @@ watch(orderStatus, (newOrderStatus) => {
     }
   )
 })
-
-watch(paymentStatus, (newPaymentStatus) => {
-  router.patch(
-    route('admin.orders.payment.update', { order: props.order?.uuid }),
-    {
-      payment_status: newPaymentStatus
-    },
-    {
-      preserveScroll: true,
-      onSuccess: () => {
-        const successMessage = usePage().props.flash.success
-        if (successMessage) {
-          toast.success(__(successMessage, { label: __('Payment status') }), {
-            autoClose: 2000
-          })
-        }
-      }
-    }
-  )
-})
 </script>
 
 <template>
   <Head :title="__('Order Details')" />
 
-  <AdminDashboardLayout>
+  <SellerDashboardLayout>
     <!-- Breadcrumb And Trash Button  -->
     <div class="min-h-screen py-10 font-poppins">
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb to="admin.orders.index" icon="fa-boxes-packing" label="Orders">
+        <Breadcrumb to="seller.orders.index" icon="fa-boxes-packing" label="Orders">
           <BreadcrumbItem :label="order?.invoice_no" />
         </Breadcrumb>
 
@@ -113,7 +92,7 @@ watch(paymentStatus, (newPaymentStatus) => {
           <div>
             <h2 class="font-bold text-md text-gray-700 mb-6">
               Order Invoice -
-              <span class="text-orange-600 text-xs font-bold">{{ order.invoice_no }}</span>
+              <span class="text-blue-600 text-xs font-bold">{{ order.invoice_no }}</span>
             </h2>
 
             <div class="space-y-5 flex items-start justify-between">
@@ -202,7 +181,7 @@ watch(paymentStatus, (newPaymentStatus) => {
                 <ImageCell :src="item?.product?.image" />
 
                 <TableDataCell>
-                  <div class="min-w-[150px] flex flex-col items-start">
+                  <div class="min-w-[200px] flex flex-col items-start">
                     <div>
                       {{ item?.product?.name }}
                     </div>
@@ -251,28 +230,13 @@ watch(paymentStatus, (newPaymentStatus) => {
 
           <div class="flex items-start justify-between">
             <div class="w-1/2">
-              <form v-show="can('orders.edit')" class="space-y-4 md:space-y-6 w-[200px]">
-                <div>
-                  <InputLabel :label="__('Payment Status')" required />
-
-                  <SelectBox
-                    name="status"
-                    :options="[
-                      {
-                        label: 'Pending',
-                        value: 'pending'
-                      },
-                      {
-                        label: 'Completed',
-                        value: 'completed'
-                      }
-                    ]"
-                    :placeholder="__('Select an option')"
-                    :selected="paymentStatus"
-                    v-model="paymentStatus"
-                    required
-                  />
-                </div>
+              <form
+                v-show="
+                  order.order_items[0].status !== 'shipped' ||
+                  order.order_items[0].status !== 'delivered'
+                "
+                class="space-y-4 md:space-y-6 w-[200px]"
+              >
                 <div>
                   <InputLabel :label="__('Order Status')" required />
 
@@ -288,12 +252,8 @@ watch(paymentStatus, (newPaymentStatus) => {
                         value: 'processing'
                       },
                       {
-                        label: 'Shipped',
-                        value: 'shipped'
-                      },
-                      {
-                        label: 'Delivered',
-                        value: 'delivered'
+                        label: 'Ready To Ship',
+                        value: 'ready to ship'
                       }
                     ]"
                     :placeholder="__('Select an option')"
@@ -306,37 +266,8 @@ watch(paymentStatus, (newPaymentStatus) => {
             </div>
             <div class="w-1/2 text-right font-semibold text-gray-500 text-xs space-y-5">
               <div class="space-y-1">
-                <p>Subtotal</p>
-
-                <p class="text-sm font-bold text-gray-700">${{ subTotal }}</p>
-              </div>
-              <div class="space-y-1">
-                <p>Shipping Fee (+)</p>
-                <p class="text-sm font-bold text-gray-700">
-                  ${{ formatAmount(order.shipping_fee) }}
-                </p>
-              </div>
-              <div class="space-y-1">
-                <p>Coupon (-)</p>
-
-                <p
-                  v-if="order.coupon_amount && order.coupon_type"
-                  class="text-sm font-bold text-gray-700"
-                >
-                  <span v-if="order.coupon_type === 'fixed'">
-                    ${{ formatAmount(order.coupon_amount) }}
-                  </span>
-                  <span v-if="order.coupon_type === 'percentage'">
-                    %{{ formatAmount(order.coupon_amount) }}
-                  </span>
-                </p>
-                <p v-else class="text-sm font-bold text-gray-700">$ 0</p>
-              </div>
-              <div class="space-y-1">
                 <p>Total</p>
-                <p class="text-sm font-bold text-gray-700">
-                  ${{ formatAmount(order.total_amount) }}
-                </p>
+                <p class="text-sm font-bold text-gray-700">${{ formatAmount(totalAmount) }}</p>
               </div>
             </div>
           </div>
@@ -349,7 +280,7 @@ watch(paymentStatus, (newPaymentStatus) => {
         </div>
       </div>
     </div>
-  </AdminDashboardLayout>
+  </SellerDashboardLayout>
 </template>
 
 <style scoped>

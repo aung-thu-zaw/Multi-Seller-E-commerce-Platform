@@ -44,7 +44,7 @@ const formattedAttributes = computed(() => {
 
       <p class="text-sm font-semibold text-gray-700">Qty :{{ orderItem?.qty }}</p>
 
-      <div>
+      <div v-if="orderItem.status === 'delivered'">
         <Link
           href="#"
           class="text-red-600 font-semibold text-xs hover:text-red-500 hover:underline duration-150"
@@ -58,6 +58,15 @@ const formattedAttributes = computed(() => {
           class="text-orange-600 font-semibold text-xs hover:text-orange-500 hover:underline duration-150"
         >
           <i class="fa-solid fa-pencil mr-1"></i> Write Review
+        </Link>
+      </div>
+
+      <div v-if="orderItem.status === 'pending' || orderItem.status === 'processing'">
+        <Link
+          href="#"
+          class="text-orange-600 font-semibold text-xs hover:text-orange-500 hover:underline duration-150"
+        >
+          <i class="fa-solid fa-pencil mr-1"></i> Cancel Item
         </Link>
       </div>
     </div>

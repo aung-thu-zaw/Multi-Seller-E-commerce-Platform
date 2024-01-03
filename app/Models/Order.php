@@ -27,10 +27,10 @@ class Order extends Model
         ];
     }
 
-    // public function getRouteKeyName()
-    // {
-    //     return 'uuid';
-    // }
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,Order>

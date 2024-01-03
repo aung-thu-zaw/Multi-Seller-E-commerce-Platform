@@ -1,5 +1,5 @@
 <script setup>
-import AdminDashboardLayout from '@/Layouts/AdminDashboardLayout.vue'
+import SellerDashboardLayout from '@/Layouts/SellerDashboardLayout.vue'
 import Breadcrumb from '@/Components/Breadcrumbs/Breadcrumb.vue'
 import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
 import TableContainer from '@/Components/Tables/TableContainer.vue'
@@ -17,27 +17,20 @@ import GreenBadge from '@/Components/Badges/GreenBadge.vue'
 import BlueBadge from '@/Components/Badges/BlueBadge.vue'
 import OrangeBadge from '@/Components/Badges/OrangeBadge.vue'
 import RedBadge from '@/Components/Badges/RedBadge.vue'
-import BulkActionButton from '@/Components/Buttons/BulkActionButton.vue'
 import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
 import NormalButton from '@/Components/Buttons/NormalButton.vue'
 import Pagination from '@/Components/Paginations/DashboardPagination.vue'
-import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
 import { __ } from '@/Services/translations-inside-setup.js'
-import { useFormatFunctions } from '@/Composables/useFormatFunctions'
 import axios from 'axios'
 
 defineProps({ orders: Object })
 
-const orderList = 'admin.orders.index'
-
-const { formatAmount } = useFormatFunctions()
-
-const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
+const orderList = 'seller.orders.index'
 
 const handleDownloadInvoice = async (orderId) => {
   try {
-    const response = await axios.get(route('admin.order-invoice.download', { order: orderId }), {
+    const response = await axios.get(route('seller.order-invoice.download', { order: orderId }), {
       responseType: 'blob'
     })
     const url = window.URL.createObjectURL(new Blob([response.data]))
@@ -53,12 +46,25 @@ const handleDownloadInvoice = async (orderId) => {
     })
   }
 }
+
+const totalProductQty = (orderItems) => {
+  return orderItems.reduce((totalQty, orderItem) => {
+    return totalQty + orderItem.qty
+  }, 0)
+}
+
+const subTotal = (orderItems) => {
+  return orderItems.reduce((accumulator, currentItem) => {
+    const numericTotalPrice = parseFloat(currentItem.total_price)
+    return accumulator + numericTotalPrice
+  }, 0)
+}
 </script>
 
 <template>
   <Head :title="__('Orders')" />
 
-  <AdminDashboardLayout>
+  <SellerDashboardLayout>
     <!-- Breadcrumb And Trash Button  -->
     <div class="min-h-screen py-10 font-poppins">
       <div
@@ -67,24 +73,6 @@ const handleDownloadInvoice = async (orderId) => {
         <Breadcrumb :to="orderList" icon="fa-boxes-packing" label="Orders">
           <BreadcrumbItem label="List" />
         </Breadcrumb>
-      </div>
-
-      <div class="flex items-center justify-end mb-3">
-        <!-- Trash Button -->
-        <InertiaLinkButton
-          v-show="can('orders.view.trash')"
-          to="admin.orders.trashed"
-          :data="{
-            page: 1,
-            per_page: 5,
-            sort: 'id',
-            direction: 'desc'
-          }"
-          class="bg-red-600 text-white ring-2 ring-red-300"
-        >
-          <i class="fa-solid fa-trash-can mr-1"></i>
-          {{ __('Trash') }}
-        </InertiaLinkButton>
       </div>
 
       <!-- Table Start -->
@@ -130,24 +118,8 @@ const handleDownloadInvoice = async (orderId) => {
 
         <TableContainer>
           <ActionTable :items="orders.data">
-            <!-- Table Actions -->
-            <template #bulk-actions="{ selectedItems }">
-              <BulkActionButton
-                v-show="can('orders.delete')"
-                @click="
-                  softDeleteSelectedAction('Orders', 'admin.orders.destroy.selected', selectedItems)
-                "
-                class="text-red-600"
-              >
-                <i class="fa-solid fa-trash-can"></i>
-                {{ __('Delete Selected') }} ({{ selectedItems.length }})
-              </BulkActionButton>
-            </template>
-
             <!-- Table Header -->
             <template #table-header>
-              <SortableTableHeaderCell label="Id" :to="orderList" sort="id" />
-
               <TableHeaderCell label="Customer" />
 
               <SortableTableHeaderCell label="Invoice" :to="orderList" sort="invoice_no" />
@@ -172,10 +144,6 @@ const handleDownloadInvoice = async (orderId) => {
             <!-- Table Body -->
             <template #table-data="{ item }">
               <TableDataCell>
-                {{ item?.id }}
-              </TableDataCell>
-
-              <TableDataCell>
                 <div class="min-w-[150px]">
                   {{ item?.user?.name }}
                 </div>
@@ -189,12 +157,12 @@ const handleDownloadInvoice = async (orderId) => {
 
               <TableDataCell>
                 <div class="min-w-[150px]">
-                  {{ item?.product_qty }}
+                  {{ totalProductQty(item.order_items) }}
                 </div>
               </TableDataCell>
 
               <TableDataCell>
-                <div class="min-w-[150px]">$ {{ formatAmount(item?.total_amount) }}</div>
+                <div class="min-w-[150px]">$ {{ subTotal(item.order_items) }}</div>
               </TableDataCell>
 
               <TableDataCell>
@@ -252,7 +220,6 @@ const handleDownloadInvoice = async (orderId) => {
 
               <TableActionCell>
                 <NormalButton
-                  v-show="can('orders.edit')"
                   @click="handleDownloadInvoice(item?.uuid)"
                   class="bg-yellow-600 text-white ring-2 ring-yellow-300"
                 >
@@ -261,23 +228,13 @@ const handleDownloadInvoice = async (orderId) => {
                 </NormalButton>
 
                 <InertiaLinkButton
-                  v-show="can('orders.view') || can('orders.edit')"
-                  to="admin.orders.show"
+                  to="seller.orders.show"
                   :targetIdentifier="{ order: item?.uuid }"
                   class="bg-sky-600 text-white ring-2 ring-sky-300"
                 >
                   <i class="fa-solid fa-eye"></i>
                   {{ __('Details') }}
                 </InertiaLinkButton>
-
-                <NormalButton
-                  v-show="can('orders.delete')"
-                  @click="softDeleteAction('Order', 'admin.orders.destroy', { order: item?.uuid })"
-                  class="bg-red-600 text-white ring-2 ring-red-300"
-                >
-                  <i class="fa-solid fa-trash-can"></i>
-                  {{ __('Delete') }}
-                </NormalButton>
               </TableActionCell>
             </template>
           </ActionTable>
@@ -289,5 +246,5 @@ const handleDownloadInvoice = async (orderId) => {
       </div>
       <!-- Table End -->
     </div>
-  </AdminDashboardLayout>
+  </SellerDashboardLayout>
 </template>

@@ -19,7 +19,7 @@ defineProps({ order: Object })
           <div>
             <Link
               as="button"
-              :href="route('user.my-orders.show', { order: order.id })"
+              :href="route('user.my-orders.show', { order: order.uuid })"
               class="text-sm font-bold text-orange-600 hover:text-orange-700"
             >
               Manage Order Details

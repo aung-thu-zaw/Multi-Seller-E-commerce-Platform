@@ -224,7 +224,7 @@ const {
               </TableDataCell>
 
               <TableDataCell>
-                <div class="min-w-[200px]">
+                <div class="min-w-[250px]">
                   {{ item?.created_at }}
                 </div>
               </TableDataCell>
