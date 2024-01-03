@@ -1,10 +1,8 @@
 <script setup>
 import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
-import NormalButton from '@/Components/Buttons/NormalButton.vue'
 import EcommerceCategoryDropdown from '@/Components/Dropdowns/EcommerceCategoryDropdown.vue'
 import EcommerceMainSearchBox from '@/Components/Forms/SearchBoxs/EcommerceMainSearchBox.vue'
-import InputField from '@/Components/Forms/Fields/InputField.vue'
-import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
+import TrackMyOrderForm from "@/Components/Forms/TrackMyOrderForm.vue"
 import UserDropdown from '@/Components/Dropdowns/UserDropdown.vue'
 import LanguageDropdown from '@/Components/Dropdowns/LanguageDropdown.vue'
 import NotificationDropdownForUser from '@/Components/Dropdowns/Notifications/NotificationDropdownForUser.vue'
@@ -52,42 +50,7 @@ const totalItems = computed(() => {
         </li>
 
         <li>
-          <div class="hs-dropdown relative inline-flex [--auto-close:inside]">
-            <button
-              id="hs-dropdown-hover-event"
-              type="button"
-              class="hs-dropdown-toggle flex items-center whitespace-nowrap text-sm font-bold leading-normal text-white"
-            >
-              <i class="fa-solid fa-location-crosshairs mr-1"></i>
-              {{ __('Track My Order') }}
-            </button>
-
-            <div
-              class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden bg-white shadow-md rounded-lg p-5 mt-2 z-30 w-[350px]"
-              aria-labelledby="hs-dropdown-custom-icon-trigger"
-            >
-              <form action="#">
-                <div class="mb-3">
-                  <InputLabel :label="__('Enter your order number')" required />
-
-                  <InputField
-                    type="text"
-                    name="order-no"
-                    placeholder="# E-commerce454232"
-                    autofocus
-                    required
-                  />
-                </div>
-
-                <div class="flex items-center justify-end">
-                  <NormalButton class="bg-orange-600">
-                    <i class="fa-solid fa-location-crosshairs mr-1"></i>
-                    {{ __('Track') }}
-                  </NormalButton>
-                </div>
-              </form>
-            </div>
-          </div>
+          <TrackMyOrderForm />
         </li>
 
         <li>

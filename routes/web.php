@@ -29,6 +29,7 @@ use App\Http\Controllers\Ecommerce\Products\ProductSearchByCategoryController;
 use App\Http\Controllers\Ecommerce\Products\ProductSearchController;
 use App\Http\Controllers\Ecommerce\SellerStoreController;
 use App\Http\Controllers\Ecommerce\SubscribeNewsLetterController;
+use App\Http\Controllers\Ecommerce\TrackMyOrderController;
 use App\Http\Controllers\Ecommerce\UpdateSearchHistoryController;
 use App\Http\Controllers\Ecommerce\WishlistController;
 use App\Http\Controllers\NotificationController;
@@ -157,6 +158,9 @@ Route::middleware("auth")->group(function () {
 
     // User Shopping Cart
     Route::get('/my-carts', [MyCartController::class, 'index'])->name('my-cart.index');
+
+    // Track Orders
+    Route::post('orders/{tracking_no}/track', TrackMyOrderController::class)->name('orders.track');
 
     // Shopping Cart Coupon Operation
     Route::controller(CouponController::class)

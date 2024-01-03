@@ -46,7 +46,7 @@ const getStatusColor = (step) => {
           <i :class="step.icon"></i>
         </span>
         <div
-          class="mt-2 w-px h-full md:mt-0 md:ms-2 md:w-full md:h-px md:flex-1 bg-gray-200 group-last:hidden"
+          class="mt-2 w-px h-full md:mt-0 md:ms-2 md:w-full md:h-px md:flex-1 bg-gray-300 group-last:hidden"
         ></div>
       </div>
       <div class="grow md:grow-0 mt-2">
