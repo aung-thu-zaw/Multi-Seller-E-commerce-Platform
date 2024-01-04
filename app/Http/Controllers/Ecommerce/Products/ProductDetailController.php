@@ -11,12 +11,23 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
+use Jorenvh\Share\Share;
 
 class ProductDetailController extends Controller
 {
     public function show(Request $request, Product $product): Response|ResponseFactory
     {
         $product->load(['productImages', 'brand:id,name', 'store:id,store_type,seller_id', 'skus']);
+
+        $shares = (new Share())
+        ->currentPage("$product->name")
+        ->facebook()
+        ->twitter()
+        ->reddit()
+        ->telegram()
+        ->whatsApp()
+        ->getRawLinks();
+
 
         $attributes = Attribute::pluck('name', 'id');
 
@@ -70,7 +81,7 @@ class ProductDetailController extends Controller
 
         // $recommendedProducts = $user->viewedProducts()->inRandomOrder()->limit(5)->get();
 
-        return inertia('E-commerce/Products/Show', compact('product', 'attributes', 'options', 'price', 'productQuestions', 'productsFromTheSameStore', 'alsoViewedProducts', 'productReviewsForAverageProgressBar', 'productReviews'));
+        return inertia('E-commerce/Products/Show', compact('product', 'shares', 'attributes', 'options', 'price', 'productQuestions', 'productsFromTheSameStore', 'alsoViewedProducts', 'productReviewsForAverageProgressBar', 'productReviews'));
     }
 
     private function calculatePrice(Product $product, Request $request): ?array

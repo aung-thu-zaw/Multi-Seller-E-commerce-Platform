@@ -10,6 +10,7 @@ import { Head, Link } from '@inertiajs/vue3'
 
 defineProps({
   product: Object,
+  shares: Object,
   attributes: Object,
   options: Object,
   price: Object,
@@ -27,6 +28,7 @@ defineProps({
     <div class="w-[1280px] mx-auto my-5 space-y-5">
       <ProductMainDetailSection
         :product="product"
+        :shares="shares"
         :attributes="attributes"
         :options="options"
         :price="price"
