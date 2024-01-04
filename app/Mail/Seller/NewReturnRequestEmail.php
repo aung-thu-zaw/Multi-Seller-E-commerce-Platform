@@ -3,6 +3,7 @@
 namespace App\Mail\Seller;
 
 use App\Models\OrderItem;
+use App\Models\ReturnItem;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -10,7 +11,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NewReturnRequest extends Mailable
+class NewReturnRequestEmail extends Mailable
 {
     use Queueable;
     use SerializesModels;
@@ -18,7 +19,7 @@ class NewReturnRequest extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(protected ?string $sellerName, protected ?string $userName, protected ?string $orderTrackingNo, protected ?string $cancellationReason, protected OrderItem $orderItem)
+    public function __construct(protected ?string $sellerName, protected ?string $userName, protected ?string $orderTrackingNo, protected ?string $cancellationReason, protected OrderItem $orderItem, protected ReturnItem $returnItem)
     {
         //
     }
@@ -45,7 +46,8 @@ class NewReturnRequest extends Mailable
                 'userName' => $this->userName,
                 'orderNo' => $this->orderTrackingNo,
                 'reason' => $this->cancellationReason,
-                'item' => $this->orderItem
+                'item' => $this->orderItem,
+                'returnItem' => $this->returnItem,
             ],
         );
     }

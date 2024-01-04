@@ -103,9 +103,9 @@
                                 </p>
                                 @endif
                                 @endif
-                                <p class="text-xs">Quantity: {{ $item->qty }}</p>
-                                <p class="text-xs">Unit Price: $ {{ $item->unit_price }}</p>
-                                <p class="text-xs">Total: $ {{ $item->total_price }}</p>
+                                <p class="text-xs">Quantity: {{ $cancellationItem->qty }}</p>
+                                <p class="text-xs">Unit Price: $ {{ $cancellationItem->unit_price }}</p>
+                                <p class="text-xs">Total: $ {{ $cancellationItem->total_price }}</p>
                             </div>
                         </div>
                     </div>

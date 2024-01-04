@@ -2,6 +2,7 @@
 
 namespace App\Mail\Seller;
 
+use App\Models\CancellationItem;
 use App\Models\OrderItem;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,7 +11,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NewCancellationRequest extends Mailable
+class NewCancellationRequestEmail extends Mailable
 {
     use Queueable;
     use SerializesModels;
@@ -18,7 +19,7 @@ class NewCancellationRequest extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(protected ?string $sellerName, protected ?string $userName, protected ?string $orderTrackingNo, protected ?string $cancellationReason, protected OrderItem $orderItem)
+    public function __construct(protected ?string $sellerName, protected ?string $userName, protected ?string $orderTrackingNo, protected ?string $cancellationReason, protected OrderItem $orderItem, protected CancellationItem $cancellationItem)
     {
         //
     }
@@ -45,7 +46,8 @@ class NewCancellationRequest extends Mailable
                 'userName' => $this->userName,
                 'orderNo' => $this->orderTrackingNo,
                 'reason' => $this->cancellationReason,
-                'item' => $this->orderItem
+                'item' => $this->orderItem,
+                'cancellationItem' => $this->cancellationItem,
             ],
         );
     }

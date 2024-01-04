@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Seller\Dashboard;
+namespace App\Http\Controllers\Seller\Dashboard\OrderManagement;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\HandlesQueryStringParameters;

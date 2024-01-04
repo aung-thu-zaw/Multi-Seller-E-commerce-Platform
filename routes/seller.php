@@ -4,7 +4,9 @@ use App\Http\Controllers\DownloadOrderInvoiceController;
 use App\Http\Controllers\Seller\Auth\LoginController;
 use App\Http\Controllers\Seller\Dashboard\ChatInboxController;
 use App\Http\Controllers\Seller\Dashboard\DashboardController;
-use App\Http\Controllers\Seller\Dashboard\OrderController;
+use App\Http\Controllers\Seller\Dashboard\OrderManagement\CancelItemController;
+use App\Http\Controllers\Seller\Dashboard\OrderManagement\OrderController;
+use App\Http\Controllers\Seller\Dashboard\OrderManagement\ReturnItemController;
 use App\Http\Controllers\Seller\Dashboard\StoreProductCategoryController;
 use App\Http\Controllers\Seller\Dashboard\StoreSettingController;
 use Illuminate\Support\Facades\Route;
@@ -50,5 +52,27 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
         });
 
         Route::get('orders/{order}/download', DownloadOrderInvoiceController::class)->name('order-invoice.download')->middleware('strict.inactive_store');
+
+        // ***** Return Item Operations *****
+        Route::controller(ReturnItemController::class)
+        ->prefix('/return-items')
+        ->name('return-items.')
+        ->middleware('strict.inactive_store')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/{return_item}/detail', 'show')->name('show');
+            Route::patch('/{return_item}/status', 'updateOrderStatus')->name('status.update');
+        });
+
+        // ***** Cancellation Item Operations *****
+        Route::controller(CancelItemController::class)
+        ->prefix('/cancellation-items')
+        ->name('cancellation-items.')
+        ->middleware('strict.inactive_store')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/{cancellation_item}/detail', 'show')->name('show');
+            Route::patch('/{cancellation_item}/status', 'updateOrderStatus')->name('status.update');
+        });
 
     });

@@ -388,7 +388,7 @@ const store = computed(() => usePage().props.auth?.store)
 
                   <li class="items-center">
                     <Link
-                      :href="route('admin.categories.index')"
+                      :href="route('seller.return-items.index')"
                       :data="{
                         page: 1,
                         per_page: 5,
@@ -398,18 +398,18 @@ const store = computed(() => usePage().props.auth?.store)
                       class="text-xs py-3 font-bold block"
                       :class="{
                         'text-blue-600 hover:text-blue-500':
-                          $page.url.startsWith('/admin/categories'),
+                          $page.url.startsWith('/admin/return-items'),
                         'text-slate-600 hover:text-slate-500':
-                          !$page.url.startsWith('/admin/categories')
+                          !$page.url.startsWith('/admin/return-items')
                       }"
                     >
-                      {{ __('Return Orders') }}
+                      {{ __('Return Items') }}
                     </Link>
                   </li>
 
                   <li class="items-center">
                     <Link
-                      :href="route('admin.categories.index')"
+                      :href="route('seller.cancellation-items.index')"
                       :data="{
                         page: 1,
                         per_page: 5,
@@ -418,13 +418,15 @@ const store = computed(() => usePage().props.auth?.store)
                       }"
                       class="text-xs py-3 font-bold block"
                       :class="{
-                        'text-blue-600 hover:text-blue-500':
-                          $page.url.startsWith('/admin/categories'),
-                        'text-slate-600 hover:text-slate-500':
-                          !$page.url.startsWith('/admin/categories')
+                        'text-blue-600 hover:text-blue-500': $page.url.startsWith(
+                          '/admin/cancellation-items'
+                        ),
+                        'text-slate-600 hover:text-slate-500': !$page.url.startsWith(
+                          '/admin/cancellation-items'
+                        )
                       }"
                     >
-                      {{ __('Cancel Orders') }}
+                      {{ __('Cancellation Items') }}
                     </Link>
                   </li>
                 </ul>
