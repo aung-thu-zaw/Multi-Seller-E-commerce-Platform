@@ -17,7 +17,7 @@ defineProps({
     <tbody>
       <tr
         v-for="(item, index) in items"
-        :key="item.id"
+        :key="index"
         :class="{
           'border-b': index !== items.length - 1
         }"

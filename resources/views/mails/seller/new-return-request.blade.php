@@ -37,13 +37,15 @@
 
                 <div class="px-10 space-y-5">
                     <p class="font-bold">
-                        Dear Seller Name,
+                        Dear {{ $sellerName }},
                     </p>
 
                     <p>
 
-                        A new cancellation request has been initiated by a customer for the order with ID #[Order
-                        ID]. Please review the details below:
+                        A new cancellation request has been initiated by a customer for the order with <span
+                            class="text-orange-600">
+                            {{ $orderNo }}
+                        </span>. Please review the details below:
 
                     </p>
 
@@ -61,19 +63,19 @@
                             <span class="text-orange-600">
                                 Order ID :
                             </span>
-                            #[Order ID]
+                            {{ $orderNo }}
                         </div>
                         <div>
                             <span class="text-orange-600">
                                 User :
                             </span>
-                            [User Name]
+                            {{ $userName }}
                         </div>
                         <div>
                             <span class="text-orange-600">
                                 Reason :
                             </span>
-                            [User's reason for cancellation/return]
+                            {{ $reason }}
                         </div>
                     </div>
 
@@ -89,19 +91,18 @@
 
 
                                 @if ($item->attributes !== null)
-                                @php
-                                $attributes = is_array($item->attributes)
-                                ? $item->attributes
-                                : json_decode($item->attributes, true);
-                                @endphp
+                                    @php
+                                        $attributes = is_array($item->attributes) ? $item->attributes : json_decode($item->attributes, true);
+                                    @endphp
 
-                                @if (count($attributes))
-                                <p class="text-xs text-orange-500">
-                                    @foreach ($attributes as $attribute => $value)
-                                    {{ ucfirst($attribute) }}: {{ ucfirst($value) }}{{ !$loop->last ? ' | ' : '' }}
-                                    @endforeach
-                                </p>
-                                @endif
+                                    @if (count($attributes))
+                                        <p class="text-xs text-orange-500">
+                                            @foreach ($attributes as $attribute => $value)
+                                                {{ ucfirst($attribute) }}:
+                                                {{ ucfirst($value) }}{{ !$loop->last ? ' | ' : '' }}
+                                            @endforeach
+                                        </p>
+                                    @endif
                                 @endif
                                 <p class="text-xs">Quantity: {{ $returnItem->qty }}</p>
                                 <p class="text-xs">Unit Price: $ {{ $returnItem->unit_price }}</p>

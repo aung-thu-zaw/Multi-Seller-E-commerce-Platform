@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class RequestReturnItemController extends Controller
 {
@@ -24,6 +25,7 @@ class RequestReturnItemController extends Controller
         }
 
         $returnItem = ReturnItem::create([
+            'uuid' => Str::uuid(),
             "order_item_id" => $orderItem->id,
             "user_id" => auth()->id(),
             "reason" => $request->reason,

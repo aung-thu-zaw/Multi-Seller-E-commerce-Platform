@@ -7,13 +7,14 @@ use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\CancellationItem;
 use App\Models\OrderItem;
 use App\Models\Store;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
-class CancelItemController extends Controller
+class CancellationItemController extends Controller
 {
     use HandlesQueryStringParameters;
 
@@ -34,27 +35,23 @@ class CancelItemController extends Controller
 
     public function show(CancellationItem $cancellationItem): Response|ResponseFactory
     {
+        $cancellationItem->load(['orderItem.product:id,name,image','orderItem.order.user:id,name','orderItem.order.address']);
+
         return inertia('Seller/OrderManagement/CancellationItems/Show', compact('cancellationItem'));
     }
 
-    // public function updateOrderStatus(Request $request, Order $order): RedirectResponse
-    // {
-    //     $storeId = Store::getStoreId();
+    public function updateCancellationItemStatus(Request $request, CancellationItem $cancellationItem): RedirectResponse
+    {
+        if($request->cancellation_item_status === 'approved') {
 
-    //     if ($order->status !== 'shipped' && $order->status !== 'delivered') {
-    //         $orderItems = OrderItem::where("order_id", $order->id)->where("store_id", $storeId)->get();
+            $cancellationItem->update(['status' => $request->cancellation_item_status,'approved_by' => auth()->id(),'cancel_approved_at' => now()]);
+            OrderItem::find($cancellationItem->order_item_id)->update(["status" => "cancelled"]);
 
-    //         $orderItems->each(function ($item) use ($request) {
-    //             if ($request->order_status === 'shipped' || $request->order_status === 'delivered') {
-    //                 return back()->with('error', 'Cannot update order item status. Order status is already "shipped" or "delivered".');
-    //             }
+        } else {
 
-    //             $item->update(['status' => $request->order_status]);
-    //         });
+            $cancellationItem->update(['status' => $request->cancellation_item_status]);
+        }
 
-    //         return back()->with('success', ':label has been successfully updated.');
-    //     } else {
-    //         return back()->with('error', 'Cannot update order item status. Order status is already "shipped" or "delivered".');
-    //     }
-    // }
+        return back()->with('success', ':label has been successfully updated.');
+    }
 }

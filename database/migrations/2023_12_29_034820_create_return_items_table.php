@@ -20,12 +20,11 @@ return new class () extends Migration {
             $table->decimal('unit_price', 8, 2);
             $table->decimal('total_price', 8, 2);
             $table->enum('status', ['pending', 'approved', 'rejected', 'received', 'refunded'])->default("pending");
-            $table->timestamp('returned_at')->nullable();
             $table->foreignId('approved_by')->nullable()->constrained('users');
             $table->timestamp('received_at')->nullable();
+            $table->timestamp('approved_at')->nullable();
             $table->timestamp('refunded_at')->nullable();
             $table->decimal('refund_amount', 8, 2)->nullable();
-            $table->text('comments')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

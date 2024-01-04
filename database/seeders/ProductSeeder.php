@@ -107,6 +107,7 @@ class ProductSeeder extends Seeder
                 $DBProduct = Product::factory()->create([
                     'name' => $product['name'],
                     'slug' => str($product['name'])->slug(),
+                    'status' => 'approved'
                 ]);
 
                 foreach ($product['SKUs'] as $sku) {
@@ -114,13 +115,13 @@ class ProductSeeder extends Seeder
                     $skuOptions = [];
                     foreach ($sku['attributes'] as $name => $value) {
                         $skuCode .= ' '.$value.' '.$name;
-                        if (! array_key_exists($name, $attributesByName)) {
+                        if (!array_key_exists($name, $attributesByName)) {
                             $this->command->error('Attribute '.$name.' not found');
 
                             return;
                         }
                         $attributeOption = AttributeOption::where('attribute_id', $attributesByName[$name])->where('value', $value)->value('id');
-                        if (! $attributeOption) {
+                        if (!$attributeOption) {
                             $this->command->error('Attribute Value '.$name.' => '.$value.' not found');
 
                             return;
@@ -204,3 +205,5 @@ class ProductSeeder extends Seeder
         // Product::factory(50)->create(['store_id' => 2, 'status' => 'approved']);
     }
 }
+
+

@@ -13,6 +13,11 @@ class CancellationItem extends Model
     use SoftDeletes;
     use Searchable;
 
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
+
     /**
       * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<OrderItem,CancellationItem>
       */

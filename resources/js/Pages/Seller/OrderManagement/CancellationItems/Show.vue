@@ -23,9 +23,9 @@ import { computed, ref, watch } from 'vue'
 import { toast } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
 
-const props = defineProps({ order: Object })
+const props = defineProps({ cancellationItem: Object })
 
-const orderStatus = ref(props.order?.order_items[0]?.status)
+const cancellationItemStatus = ref(props.cancellationItem?.status)
 
 const { formatAmount } = useFormatFunctions()
 
@@ -39,29 +39,24 @@ const formattedAttributes = (attributes) => {
     .join(', ')
 }
 
-const totalAmount = computed(() => {
-  return props.order.order_items.reduce((accumulator, currentItem) => {
-    const numericTotalPrice = parseFloat(currentItem.total_price)
-    return accumulator + numericTotalPrice
-  }, 0)
-})
-
 const printInvoice = () => {
   window.print()
 }
 
-watch(orderStatus, (newOrderStatus) => {
+watch(cancellationItemStatus, (newCancellationItemStatus) => {
   router.patch(
-    route('seller.orders.status.update', { order: props.order?.uuid }),
+    route('seller.cancellation-items.status.update', {
+      cancellation_item: props.cancellationItem?.uuid
+    }),
     {
-      order_status: newOrderStatus
+      cancellation_item_status: newCancellationItemStatus
     },
     {
       preserveScroll: true,
       onSuccess: () => {
         const successMessage = usePage().props.flash.success
         if (successMessage) {
-          toast.success(__(successMessage, { label: __('Order status') }), {
+          toast.success(__(successMessage, { label: __('Cancellation item status') }), {
             autoClose: 2000
           })
         }
@@ -78,7 +73,7 @@ watch(orderStatus, (newOrderStatus) => {
 </script>
 
 <template>
-  <Head :title="__('Order Details')" />
+  <Head :title="__('Cancellation Item Details')" />
 
   <SellerDashboardLayout>
     <!-- Breadcrumb And Trash Button  -->
@@ -86,12 +81,16 @@ watch(orderStatus, (newOrderStatus) => {
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb to="seller.orders.index" icon="fa-fa-square-xmark" label="Orders">
-          <BreadcrumbItem :label="order?.invoice_no" />
+        <Breadcrumb
+          to="seller.cancellation-items.index"
+          icon="fa-fa-square-xmark"
+          label="Cancellation Items"
+        >
+          <BreadcrumbItem :label="cancellationItem?.order_item?.order?.tracking_no" />
         </Breadcrumb>
 
         <InertiaLinkButton
-          to="seller.orders.index"
+          to="seller.cancellation-items.index"
           :data="{
             page: 1,
             per_page: 5,
@@ -109,7 +108,9 @@ watch(orderStatus, (newOrderStatus) => {
           <div>
             <h2 class="font-bold text-md text-gray-700 mb-6">
               Order Invoice -
-              <span class="text-blue-600 text-xs font-bold">{{ order.invoice_no }}</span>
+              <span class="text-blue-600 text-xs font-bold">{{
+                cancellationItem.order_item?.order?.invoice_no
+              }}</span>
             </h2>
 
             <div class="space-y-5 flex items-start justify-between">
@@ -117,63 +118,81 @@ watch(orderStatus, (newOrderStatus) => {
                 <div class="space-y-1 font-bold text-gray-900">
                   <h3 class="text-md mb-1.5 text-gray-800">Delivery Information</h3>
                   <p class="text-xs capitalize">
-                    Name : <span class="text-gray-600">{{ order.address?.name }}</span>
+                    Name :
+                    <span class="text-gray-600">{{
+                      cancellationItem.order_item?.order?.address?.name
+                    }}</span>
                   </p>
                   <p class="text-xs">
                     Email :
                     <span class="text-gray-600">
-                      {{ order.address?.email }}
+                      {{ cancellationItem.order_item?.order?.address?.email }}
                     </span>
                   </p>
 
                   <p class="text-xs capitalize">
                     Phone :
-                    <span class="text-gray-600">{{ order.address?.phone }}</span>
+                    <span class="text-gray-600">{{
+                      cancellationItem.order_item?.order?.address?.phone
+                    }}</span>
                   </p>
 
                   <p class="text-xs capitalize">
                     Address :
-                    <span class="text-gray-600">{{ order.address?.address }}</span>
+                    <span class="text-gray-600">{{
+                      cancellationItem.order_item?.order?.address?.address
+                    }}</span>
                   </p>
 
                   <p class="text-xs capitalize">
                     Postal Code :
-                    <span class="text-gray-600">{{ order.address?.postal_code }}</span>
+                    <span class="text-gray-600">{{
+                      cancellationItem.order_item?.order?.address?.postal_code
+                    }}</span>
                   </p>
                 </div>
 
                 <div class="space-y-1 font-bold text-gray-900">
                   <h3 class="text-md mb-1.5 text-gray-800">Payment Information</h3>
                   <p class="text-xs capitalize">
-                    Method : <span class="text-gray-600">{{ order.payment_method }}</span>
+                    Method :
+                    <span class="text-gray-600">{{
+                      cancellationItem.order_item?.order?.payment_method
+                    }}</span>
                   </p>
                   <p class="text-xs">
                     Transaction Id :
                     <span class="text-gray-600">{{
-                      order.transaction?.transaction_id ?? '-'
+                      cancellationItem.order_item?.order?.transaction?.transaction_id ?? '-'
                     }}</span>
                   </p>
                   <p class="text-xs capitalize">
                     Status :
                     <span
                       :class="{
-                        'text-green-600': order.payment_status === 'completed',
-                        'text-blue-600': order.payment_status === 'pending'
+                        'text-green-600':
+                          cancellationItem.order_item?.order?.payment_status === 'completed',
+                        'text-blue-600':
+                          cancellationItem.order_item?.order?.payment_status === 'pending'
                       }"
                     >
-                      {{ order?.payment_status }}
+                      {{ cancellationItem.order_item?.order?.payment_status }}
                     </span>
                   </p>
 
                   <p class="text-xs">
                     Purchased At :
-                    <span class="text-gray-600">{{ order?.purchased_at ?? '-' }}</span>
+                    <span class="text-gray-600">{{
+                      cancellationItem.order_item?.order?.purchased_at ?? '-'
+                    }}</span>
                   </p>
                 </div>
               </div>
               <div class="space-y-1 font-bold text-gray-700 text-right">
                 <h3 class="text-md mb-1.5">Order Date</h3>
-                <p class="text-xs capitalize">{{ order.created_at }}</p>
+                <p class="text-xs capitalize">
+                  {{ cancellationItem.order_item?.order?.created_at }}
+                </p>
               </div>
             </div>
           </div>
@@ -182,17 +201,22 @@ watch(orderStatus, (newOrderStatus) => {
           <div>
             <h2 class="font-bold text-md text-gray-700 mb-3">
               <i class="fa-solid fa-clipboard-list"></i>
-              Order Summary
+              Cancellation Item :
             </h2>
-            <p class="text-xs font-medium text-gray-600">All items here can't be deleted.</p>
+
+            <p class="text-xs font-medium text-gray-600">
+              <span class="font-bold text-gray-800">Cancellation Reason:</span>
+              {{ cancellationItem?.reason }}
+            </p>
           </div>
+
           <TableContainer>
-            <Table :items="order.order_items">
+            <Table :items="[cancellationItem]">
               <!-- Table Header -->
               <template #table-header>
                 <TableHeaderCell label="Image" />
                 <TableHeaderCell label="Item" />
-                <TableHeaderCell label="Status" />
+                <TableHeaderCell label="Cancellation Status" />
                 <TableHeaderCell label="Price" />
                 <TableHeaderCell label="Qty" />
                 <TableHeaderCell label="Total" />
@@ -200,16 +224,19 @@ watch(orderStatus, (newOrderStatus) => {
 
               <!-- Table Body -->
               <template #table-data="{ item }">
-                <ImageCell :src="item?.product?.image" />
+                <ImageCell :src="item.order_item?.product?.image" />
 
                 <TableDataCell>
                   <div class="min-w-[200px] flex flex-col items-start">
                     <div>
-                      {{ item?.product?.name }}
+                      {{ item.order_item?.product?.name }}
                     </div>
 
-                    <div v-if="item.attributes" class="capitalize text-xs text-gray-500">
-                      {{ formattedAttributes(item?.attributes) }}
+                    <div
+                      v-if="item?.order_item?.attributes"
+                      class="capitalize text-xs text-gray-500"
+                    >
+                      {{ formattedAttributes(item?.order_item?.attributes) }}
                     </div>
                   </div>
                 </TableDataCell>
@@ -220,20 +247,12 @@ watch(orderStatus, (newOrderStatus) => {
                       <i class="fa-solid fa-spinner animate-spin"></i>
                       {{ item?.status }}
                     </BlueBadge>
-                    <OrangeBadge v-show="item?.status === 'processing'">
-                      <i class="fa-solid fa-rotate animate-spin"></i>
-                      {{ item?.status }}
-                    </OrangeBadge>
-                    <SlateBadge v-show="item?.status === 'ready to ship'">
-                      <i class="fa-solid fa-people-carry-box animate-pulse"></i>
-                      {{ item?.status }}
-                    </SlateBadge>
-                    <RedBadge v-show="item?.status === 'shipped'">
-                      <i class="fa-solid fa-truck-fast animate-pulse"></i>
+                    <RedBadge v-show="item?.status === 'rejected'">
+                      <i class="fa-solid fa-circle-xmark animate-pulse"></i>
                       {{ item?.status }}
                     </RedBadge>
-                    <GreenBadge v-show="item?.status === 'delivered'">
-                      <i class="fa-solid fa-truck-ramp-box animate-pulse"></i>
+                    <GreenBadge v-show="item?.status === 'approved'">
+                      <i class="fa-solid fa-circle-check animate-pulse"></i>
                       {{ item?.status }}
                     </GreenBadge>
                   </div>
@@ -252,16 +271,9 @@ watch(orderStatus, (newOrderStatus) => {
 
           <div class="flex items-start justify-between">
             <div class="w-1/2">
-              <form
-                v-show="
-                  orderStatus === 'pending' ||
-                  orderStatus === 'processing' ||
-                  orderStatus === 'ready to ship'
-                "
-                class="space-y-4 md:space-y-6 w-[200px]"
-              >
+              <form class="space-y-4 md:space-y-6 w-[200px]">
                 <div>
-                  <InputLabel :label="__('Order Status')" required />
+                  <InputLabel :label="__('Cancellation Item Status')" required />
 
                   <SelectBox
                     name="status"
@@ -271,28 +283,28 @@ watch(orderStatus, (newOrderStatus) => {
                         value: 'pending'
                       },
                       {
-                        label: 'Processing',
-                        value: 'processing'
+                        label: 'Approved',
+                        value: 'approved'
                       },
                       {
-                        label: 'Ready To Ship',
-                        value: 'ready to ship'
+                        label: 'Rejected',
+                        value: 'rejected'
                       }
                     ]"
                     :placeholder="__('Select an option')"
-                    :selected="orderStatus"
-                    v-model="orderStatus"
+                    :selected="cancellationItemStatus"
+                    v-model="cancellationItemStatus"
                     required
                   />
                 </div>
               </form>
             </div>
-            <div class="w-1/2 text-right font-semibold text-gray-500 text-xs space-y-5">
+            <!-- <div class="w-1/2 text-right font-semibold text-gray-500 text-xs space-y-5">
               <div class="space-y-1">
                 <p>Total</p>
                 <p class="text-sm font-bold text-gray-700">${{ formatAmount(totalAmount) }}</p>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
 

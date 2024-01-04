@@ -24,7 +24,8 @@ class ReturnAndCancellationItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "reason"=>["required","string"],
+            "qty" => ["required","numeric"],
+            "reason" => ["required","string"],
             'captcha_token' => [new RecaptchaRule()],
         ];
     }

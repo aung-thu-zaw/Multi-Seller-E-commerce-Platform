@@ -13,6 +13,11 @@ class ReturnItem extends Model
     use SoftDeletes;
     use Searchable;
 
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
+
     /**
       * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<OrderItem,ReturnItem>
       */

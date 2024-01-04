@@ -4,7 +4,7 @@ use App\Http\Controllers\DownloadOrderInvoiceController;
 use App\Http\Controllers\Seller\Auth\LoginController;
 use App\Http\Controllers\Seller\Dashboard\ChatInboxController;
 use App\Http\Controllers\Seller\Dashboard\DashboardController;
-use App\Http\Controllers\Seller\Dashboard\OrderManagement\CancelItemController;
+use App\Http\Controllers\Seller\Dashboard\OrderManagement\CancellationItemController;
 use App\Http\Controllers\Seller\Dashboard\OrderManagement\OrderController;
 use App\Http\Controllers\Seller\Dashboard\OrderManagement\ReturnItemController;
 use App\Http\Controllers\Seller\Dashboard\StoreProductCategoryController;
@@ -65,14 +65,14 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
         });
 
         // ***** Cancellation Item Operations *****
-        Route::controller(CancelItemController::class)
+        Route::controller(CancellationItemController::class)
         ->prefix('/cancellation-items')
         ->name('cancellation-items.')
         ->middleware('strict.inactive_store')
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/{cancellation_item}/detail', 'show')->name('show');
-            Route::patch('/{cancellation_item}/status', 'updateOrderStatus')->name('status.update');
+            Route::patch('/{cancellation_item}/status', 'updateCancellationItemStatus')->name('status.update');
         });
 
     });

@@ -19,7 +19,6 @@ return new class () extends Migration {
             $table->enum('status', ['pending', 'completed', 'failed']);
             $table->timestamp('processed_at')->nullable();
             $table->foreignId('processed_by')->nullable()->constrained('users');
-            $table->text('comments')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

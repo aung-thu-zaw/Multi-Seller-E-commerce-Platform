@@ -8,7 +8,6 @@ import DashboardTableDataSearchBox from '@/Components/Forms/SearchBoxs/Dashboard
 import DashboardTableDataPerPageSelectBox from '@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue'
 import DashboardTableFilter from '@/Components/Forms/SelectBoxs/DashboardTableFilter.vue'
 import FilteredBy from '@/Components/Tables/FilteredBy.vue'
-import SortableTableHeaderCell from '@/Components/Tables/TableCells/SortableTableHeaderCell.vue'
 import TableHeaderCell from '@/Components/Tables/TableCells/TableHeaderCell.vue'
 import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
 import ImageCell from '@/Components/Tables/TableCells/TableImageCell.vue'
@@ -16,7 +15,6 @@ import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
 import NoTableData from '@/Components/Tables/NoTableData.vue'
 import GreenBadge from '@/Components/Badges/GreenBadge.vue'
 import BlueBadge from '@/Components/Badges/BlueBadge.vue'
-import OrangeBadge from '@/Components/Badges/OrangeBadge.vue'
 import RedBadge from '@/Components/Badges/RedBadge.vue'
 import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
 import NormalButton from '@/Components/Buttons/NormalButton.vue'
@@ -152,16 +150,16 @@ const { formatAmount } = useFormatFunctions()
 
               <TableDataCell>
                 <div class="min-w-[100px]">
-                  {{ item.order_item?.qty }}
+                  {{ item.qty }}
                 </div>
               </TableDataCell>
 
               <TableDataCell>
-                <div class="min-w-[150px]">$ {{ formatAmount(item.order_item?.unit_price) }}</div>
+                <div class="min-w-[150px]">$ {{ formatAmount(item.unit_price) }}</div>
               </TableDataCell>
 
               <TableDataCell>
-                <div class="min-w-[150px]">$ {{ formatAmount(item.order_item?.total_price) }}</div>
+                <div class="min-w-[150px]">$ {{ formatAmount(item.total_price) }}</div>
               </TableDataCell>
 
               <TableDataCell>
@@ -207,7 +205,7 @@ const { formatAmount } = useFormatFunctions()
 
                 <InertiaLinkButton
                   to="seller.cancellation-items.show"
-                  :targetIdentifier="{ cancellation_item: item?.id }"
+                  :targetIdentifier="{ cancellation_item: item?.uuid }"
                   class="bg-sky-600 text-white ring-2 ring-sky-300"
                 >
                   <i class="fa-solid fa-eye"></i>

@@ -19,7 +19,7 @@ return new class () extends Migration {
             $table->decimal('unit_price', 8, 2);
             $table->decimal('total_price', 8, 2);
             $table->json('attributes')->nullable();
-            $table->enum('status', ['pending', 'processing', 'ready to ship' ,'shipped', 'delivered'])->default('pending');
+            $table->enum('status', ['pending', 'processing', 'ready to ship' ,'shipped', 'delivered','cancelled'])->default('pending');
             $table->timestamp("shipped_at")->nullable();
             $table->timestamp("delivered_at")->nullable();
             $table->timestamps();
