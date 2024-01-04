@@ -72,6 +72,6 @@ class HomeController extends Controller
     }
     // public function __invoke(): View
     // {
-    //     return view('mails.seller.new-order-placed');
+    //     return view('mails.seller.new-cancellation-request');
     // }
 }

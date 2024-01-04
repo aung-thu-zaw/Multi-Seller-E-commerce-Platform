@@ -13,7 +13,7 @@ return new class () extends Migration {
         Schema::create('refunds', function (Blueprint $table) {
             $table->id();
             $table->foreignId('return_item_id')->constrained();
-            $table->foreignId('cancelled_item_id')->constrained();
+            $table->foreignId('cancellation_item_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->decimal('amount', 8, 2);
             $table->enum('status', ['pending', 'completed', 'failed']);

@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ReturnItem extends Model
+class CancellationItem extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     /**
-      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<OrderItem,ReturnItem>
+      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<OrderItem,CancellationItem>
       */
     public function orderItem()
     {
@@ -26,4 +26,5 @@ class ReturnItem extends Model
     {
         return $this->hasOne(Refund::class);
     }
+
 }

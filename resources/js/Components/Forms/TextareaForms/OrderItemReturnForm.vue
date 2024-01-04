@@ -3,8 +3,13 @@ import TextAreaField from '@/Components/Forms/Fields/TextAreaField.vue'
 import InputError from '@/Components/Forms/Fields/InputError.vue'
 import FormButton from '@/Components/Buttons/FormButton.vue'
 import FileInput from '@/Components/Forms/Fields/FileInput.vue'
-import { useForm } from '@inertiajs/vue3'
+import { useForm, usePage } from '@inertiajs/vue3'
 import { useReCaptcha } from 'vue-recaptcha-v3'
+import { __ } from '@/Services/translations-inside-setup.js'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
+
+const props = defineProps({ orderItem: Object })
 
 const emit = defineEmits('updateReturnBox')
 
@@ -19,12 +24,26 @@ const { executeRecaptcha, recaptchaLoaded } = useReCaptcha()
 const submitCancelItem = async () => {
   await recaptchaLoaded()
   form.captcha_token = await executeRecaptcha('request_order_item_return')
-  form.post(route('comment.replies.store'), {
+  form.post(route('order-items.request-return', { order_item: props.orderItem?.id }), {
     replace: true,
     preserveState: true,
     preserveScroll: true,
-    onSuccess: () => (form.reason = ''),
-    onFinish: () => emit('updateReturnBox', false)
+    onSuccess: () => {
+      form.reason = ''
+      emit('updateReturnBox', false)
+      const successMessage = usePage().props.flash.success
+      if (successMessage) {
+        toast.success(__(successMessage, { label: __('Order status') }), {
+          autoClose: 2000
+        })
+      }
+      const errorMessage = usePage().props.flash.error
+      if (errorMessage) {
+        toast.error(__(errorMessage), {
+          autoClose: 2000
+        })
+      }
+    }
   })
 }
 </script>

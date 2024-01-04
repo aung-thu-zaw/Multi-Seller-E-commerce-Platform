@@ -27,6 +27,8 @@ use App\Http\Controllers\Ecommerce\ProductCollectionController;
 use App\Http\Controllers\Ecommerce\Products\ProductDetailController;
 use App\Http\Controllers\Ecommerce\Products\ProductSearchByCategoryController;
 use App\Http\Controllers\Ecommerce\Products\ProductSearchController;
+use App\Http\Controllers\Ecommerce\RequestCancellationItemController;
+use App\Http\Controllers\Ecommerce\RequestReturnItemController;
 use App\Http\Controllers\Ecommerce\SellerStoreController;
 use App\Http\Controllers\Ecommerce\SubscribeNewsLetterController;
 use App\Http\Controllers\Ecommerce\TrackMyOrderController;
@@ -159,9 +161,6 @@ Route::middleware("auth")->group(function () {
     // User Shopping Cart
     Route::get('/my-carts', [MyCartController::class, 'index'])->name('my-cart.index');
 
-    // Track Orders
-    Route::post('orders/{tracking_no}/track', TrackMyOrderController::class)->name('orders.track');
-
     // Shopping Cart Coupon Operation
     Route::controller(CouponController::class)
     ->name('coupon.')
@@ -195,6 +194,13 @@ Route::middleware("auth")->group(function () {
     Route::post('/payments/stripe/pay', [StripeController::class, 'payWithStripe'])->name('payments.stripe.pay');
 
     Route::post('/payment/cash/pay', [CashOnDeliveryController::class, 'payWithCash'])->name('payments.cash.pay');
+
+    // Track Orders
+    Route::post('orders/{tracking_no}/track', TrackMyOrderController::class)->name('orders.track');
+
+    // Order Return And Cancellation
+    Route::post('/order-items/{order_item}/cancel', RequestCancellationItemController::class)->name('order-items.request-cancel');
+    Route::post('/order-items/{order_item}/return', RequestReturnItemController::class)->name('order-items.request-return');
 
     // Blog Comments And Product Questions
     Route::post('/blogs/{blog_content}/comments', BlogCommentController::class)->name('blog.comments.store');

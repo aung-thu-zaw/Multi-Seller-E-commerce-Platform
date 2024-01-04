@@ -20,7 +20,7 @@ class MyOrderController extends Controller
 
     public function show(Order $order): Response|ResponseFactory
     {
-        $order->load(["orderItems.store:id,store_name","orderItems.product:id,store_id,image,name,slug"]);
+        $order->load(["orderItems.store:id,store_name","orderItems.product:id,store_id,image,name,slug",'orderItems.cancellationItem:id,order_item_id,status','orderItems.returnItem:id,order_item_id,status']);
 
         return inertia('User/MyOrders/Show', compact('order'));
     }

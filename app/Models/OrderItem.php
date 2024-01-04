@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
@@ -67,5 +68,21 @@ class OrderItem extends Model
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne<ReturnItem>
+     */
+    public function returnItem(): HasOne
+    {
+        return $this->hasOne(ReturnItem::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne<CancellationItem>
+     */
+    public function cancellationItem(): HasOne
+    {
+        return $this->hasOne(CancellationItem::class);
     }
 }

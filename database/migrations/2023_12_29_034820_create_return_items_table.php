@@ -15,7 +15,7 @@ return new class () extends Migration {
             $table->foreignId('order_item_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->text('reason');
-            $table->enum('status', ['pending', 'approved', 'rejected', 'received', 'refunded']);
+            $table->enum('status', ['pending', 'approved', 'rejected', 'received', 'refunded'])->default("pending");
             $table->timestamp('returned_at')->nullable();
             $table->foreignId('approved_by')->nullable()->constrained('users');
             $table->timestamp('received_at')->nullable();
