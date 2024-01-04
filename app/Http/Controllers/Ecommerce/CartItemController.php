@@ -15,9 +15,14 @@ class CartItemController extends Controller
     {
         $cart = Cart::firstOrCreate(['user_id' => auth()->id()]);
 
-        $cartItem = CartItem::where('product_id', $request->product_id)->whereJsonContains('attributes', $request->validated()['attributes'])->first();
+        $attributes = $request->validated()['attributes'];
 
-        $attributes = is_array($request->validated()['attributes']) ? json_encode($request->validated()['attributes']) : $request->validated()['attributes'];
+        $cartItem = CartItem::where('product_id', $request->product_id)
+            ->where(function ($query) use ($attributes) {
+                $query->whereJsonContains('attributes', $attributes)
+                    ->orWhere('attributes', null);
+            })
+            ->first();
 
         if ($cartItem) {
 
@@ -33,7 +38,7 @@ class CartItemController extends Controller
                 'qty' => $request->qty,
                 'unit_price' => $request->unit_price,
                 'total_price' => $request->total_price,
-                'attributes' => $request->validated()['attributes'] ? $attributes : null,
+                'attributes' => is_array($attributes) ? json_encode($attributes) : $attributes,
             ]);
         }
 

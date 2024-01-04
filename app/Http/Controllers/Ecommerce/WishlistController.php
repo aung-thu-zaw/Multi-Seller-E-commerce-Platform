@@ -11,28 +11,36 @@ class WishlistController extends Controller
 {
     public function store(WishlistRequest $request): RedirectResponse
     {
+        $attributes = isset($request->validated()['attributes'])
+            ? (is_array($request->validated()['attributes'])
+                ? json_encode($request->validated()['attributes'])
+                : $request->validated()['attributes'])
+            : null;
+
         $wishlist = Wishlist::where('user_id', auth()->id())
             ->where('product_id', $request->product_id)
             ->where('store_id', $request->store_id)
-            ->whereJsonContains('attributes', $request->validated()['attributes'] ?? null)
+            ->where(function ($query) use ($attributes) {
+                $query->whereJsonContains('attributes', json_decode($attributes, true) ?? null)
+                    ->orWhere('attributes', null);
+            })
             ->first();
 
-        if (! $wishlist) {
+        if (!$wishlist) {
             $wishlist = Wishlist::create([
                 'user_id' => auth()->id(),
                 'product_id' => $request->product_id,
                 'store_id' => $request->store_id,
-                'attributes' => $request->validated()['attributes'] ?? null,
+                'attributes' => $attributes,
             ]);
 
-            return back()->with('success', 'Item is moved to wishlist, you can re-add it to cart from wishlist.');
+            return back()->with('success', 'Item is moved to the wishlist; you can re-add it to the cart from the wishlist.');
         } else {
-
             $wishlist->delete();
-
-            return back()->with('success', 'Item has been removed from your wishlist');
+            return back()->with('success', 'Item has been removed from your wishlist.');
         }
     }
+
 
     public function destroy(Wishlist $wishlist): RedirectResponse
     {

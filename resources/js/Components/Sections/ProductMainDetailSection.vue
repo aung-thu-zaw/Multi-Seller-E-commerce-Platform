@@ -182,6 +182,53 @@ const handleAddToCart = () => {
     })
   }
 }
+
+// const saveToWishlist = () => {
+//   router.post(
+//     route('wishlists.store', {
+//       product_id: props.cartItem?.product.id,
+//       store_id: props.cartItem?.product.store_id,
+//       attributes: props.cartItem?.attributes
+//     }),
+//     {},
+//     {
+//       preserveScroll: true,
+//       onSuccess: () => {
+//         router.delete(route('cart-items.destroy', props.cartItem?.id))
+//         const successMessage = usePage().props.flash.success
+//         toast.success(__(successMessage), {
+//           autoClose: 2000
+//         })
+//       }
+//     }
+//   )
+// }
+
+const handleAddToWishlist = () => {
+  router.post(
+    route('wishlists.store', {
+      product_id: props.product.id,
+      store_id: props.product.store_id,
+      attributes: formData.attributes
+    }),
+    {},
+    {
+      preserveScroll: true,
+      onSuccess: () => {
+        const successMessage = usePage().props.flash.success
+        toast.success(__(successMessage), {
+          autoClose: 2000
+        })
+      }
+    }
+  )
+}
+
+const saved = computed(() => {
+  return usePage().props.auth?.wishlists.some(
+    (wishlists) => wishlists.product_id === props.product?.id
+  )
+})
 </script>
 
 <template>
@@ -201,7 +248,9 @@ const handleAddToCart = () => {
 
             <div class="flex items-center space-x-2 pr-8">
               <button
+                @click="handleAddToWishlist"
                 class="rounded-full w-8 h-8 bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-800 flex items-center text-xs justify-center border"
+                    :class="{ 'text-orange-600': saved }"
               >
                 <i class="fa-solid fa-heart"></i>
               </button>
