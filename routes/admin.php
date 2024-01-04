@@ -190,7 +190,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             ->prefix('/product-banners/trash')
             ->name('product-banners.')
             ->group(function () {
-                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
                 Route::get('/', 'trashed')->name('trashed');
                 Route::post('/{id}/restore', 'restore')->name('restore');
                 Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');

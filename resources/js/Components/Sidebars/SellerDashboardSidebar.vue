@@ -188,7 +188,7 @@ const store = computed(() => usePage().props.auth?.store)
             <!-- Products -->
             <li class="items-center">
               <Link
-                href="#"
+                :href="route('seller.products.index')"
                 :data="{
                   page: 1,
                   per_page: 5,
@@ -206,32 +206,10 @@ const store = computed(() => usePage().props.auth?.store)
               </Link>
             </li>
 
-            <!-- Flash Sales -->
-            <li class="items-center">
-              <Link
-                :href="route('admin.brands.index')"
-                :data="{
-                  page: 1,
-                  per_page: 5,
-                  sort: 'id',
-                  direction: 'desc'
-                }"
-                class="text-xs py-3 font-bold block"
-                :class="{
-                  'text-blue-600 hover:text-blue-500': $page.url.startsWith('/seller/flash-sales'),
-                  'text-slate-600 hover:text-slate-500':
-                    !$page.url.startsWith('/seller/flash-sales')
-                }"
-              >
-                <i class="fa-solid fa-bolt-lightning mr-2"></i>
-                {{ __('Flash Sales') }}
-              </Link>
-            </li>
-
             <!-- Banners -->
             <li class="items-center">
               <Link
-                :href="route('admin.brands.index')"
+                href="#"
                 :data="{
                   page: 1,
                   per_page: 5,
@@ -284,7 +262,7 @@ const store = computed(() => usePage().props.auth?.store)
             <!-- Stock Management -->
             <li class="items-center">
               <Link
-                :href="route('admin.brands.index')"
+                href="#"
                 :data="{
                   page: 1,
                   per_page: 5,
@@ -484,7 +462,7 @@ const store = computed(() => usePage().props.auth?.store)
                 <ul class="pl-8">
                   <li class="items-center">
                     <Link
-                      :href="route('admin.categories.index')"
+                      href="#"
                       :data="{
                         page: 1,
                         per_page: 5,
@@ -504,7 +482,7 @@ const store = computed(() => usePage().props.auth?.store)
                   </li>
                   <li class="items-center">
                     <Link
-                      :href="route('admin.categories.index')"
+                      href="#"
                       :data="{
                         page: 1,
                         per_page: 5,
@@ -543,7 +521,7 @@ const store = computed(() => usePage().props.auth?.store)
             <!-- My Withdraw -->
             <li class="items-center">
               <Link
-                :href="route('admin.brands.index')"
+                href="#"
                 :data="{
                   page: 1,
                   per_page: 5,
@@ -593,7 +571,7 @@ const store = computed(() => usePage().props.auth?.store)
           <!-- Seller Guides -->
           <li class="items-center">
             <Link
-              :href="route('admin.brands.index')"
+              href="#"
               :data="{
                 page: 1,
                 per_page: 5,
@@ -614,7 +592,7 @@ const store = computed(() => usePage().props.auth?.store)
           <!-- Seller Faqs -->
           <li class="items-center">
             <Link
-              :href="route('admin.brands.index')"
+              href="#"
               :data="{
                 page: 1,
                 per_page: 5,
@@ -635,7 +613,7 @@ const store = computed(() => usePage().props.auth?.store)
           <!-- Help Center -->
           <li class="items-center">
             <Link
-              :href="route('admin.brands.index')"
+              href="#"
               :data="{
                 page: 1,
                 per_page: 5,

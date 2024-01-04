@@ -205,8 +205,8 @@ Route::middleware("auth")->group(function () {
     // Blog Comments And Product Questions
     Route::post('/blogs/{blog_content}/comments', BlogCommentController::class)->name('blog.comments.store');
     Route::post('/blogs/{blog_content}/comments/{blog_comment}/replies', BlogCommentReplyController::class)->name('comment.replies.store');
-    Route::post('/products/{product}/questions', BlogCommentController::class)->name('blog.comments.store');
-    Route::post('/products/{product}/questions/{product_question}/answers', BlogCommentReplyController::class)->name('comment.replies.store');
+    Route::post('/products/{product}/questions', BlogCommentController::class)->name('product.questions.store');
+    Route::post('/products/{product}/questions/{product_question}/answers', BlogCommentReplyController::class)->name('question.answers.store');
 
 });
 

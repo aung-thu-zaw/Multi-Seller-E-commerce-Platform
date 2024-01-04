@@ -18,7 +18,7 @@ return new class() extends Migration
             $table->string('name');
             $table->string('slug');
             $table->text('description');
-            $table->string('sku')->nullable();
+            $table->string('code')->nullable();
             $table->decimal('price', 8, 2);
             $table->decimal('offer_price', 8, 2)->nullable();
             $table->date('offer_price_start_date')->nullable();
@@ -30,7 +30,7 @@ return new class() extends Migration
             $table->text('warranty_policy')->nullable();
             $table->string('return_day')->nullable();
             $table->text('return_policy')->nullable();
-            $table->enum('status', ['draft', 'pending', 'approved', 'rejected', 'removed'])->default('draft');
+            $table->enum('status', ['draft', 'pending', 'approved', 'rejected'])->default('draft');
             $table->softDeletes();
             $table->timestamps();
         });
