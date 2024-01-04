@@ -1,7 +1,7 @@
 <script setup>
 import StarRating from '@/Components/Ratings/StarRating.vue'
 import { useFormatFunctions } from '@/Composables/useFormatFunctions'
-import { router, usePage, Link } from '@inertiajs/vue3'
+import { router, usePage } from '@inertiajs/vue3'
 import { computed } from 'vue'
 import { __ } from '@/Services/translations-inside-setup.js'
 import { toast } from 'vue3-toastify'
@@ -54,6 +54,26 @@ const saved = computed(() => {
     (wishlists) => wishlists.product_id === props.product?.id
   )
 })
+
+const handleTrackInteraction = () => {
+  router.get(route('product.view', { product: props.product?.slug }))
+}
+
+const handleGoToProductDetailPage = (slug) => {
+  router.get(
+    route('products.show', slug),
+    {
+      tab: 'description'
+    },
+    {
+      onSuccess: () => {
+        if (usePage().props.auth.user) {
+          handleTrackInteraction()
+        }
+      }
+    }
+  )
+}
 </script>
 
 <template>
@@ -100,13 +120,11 @@ const saved = computed(() => {
           Official
         </span>
 
-        <h3 class="text-md text-gray-700 font-semibold line-clamp-2 cursor-pointer mt-1">
-          <Link
-            :href="route('products.show', { product: product?.slug })"
-            :data="{ tab: 'description' }"
-          >
-            {{ product?.name }}
-          </Link>
+        <h3
+          @click="handleGoToProductDetailPage(product.slug)"
+          class="text-md text-gray-700 font-semibold line-clamp-2 cursor-pointer mt-1"
+        >
+          {{ product?.name }}
         </h3>
 
         <div class="flex items-center justify-between w-full">

@@ -27,6 +27,7 @@ use App\Http\Controllers\Ecommerce\ProductCollectionController;
 use App\Http\Controllers\Ecommerce\Products\ProductDetailController;
 use App\Http\Controllers\Ecommerce\Products\ProductSearchByCategoryController;
 use App\Http\Controllers\Ecommerce\Products\ProductSearchController;
+use App\Http\Controllers\Ecommerce\ProductViewRecordController;
 use App\Http\Controllers\Ecommerce\RequestCancellationItemController;
 use App\Http\Controllers\Ecommerce\RequestReturnItemController;
 use App\Http\Controllers\Ecommerce\SellerStoreController;
@@ -58,6 +59,7 @@ Route::controller(SubscribeNewsLetterController::class)
 // Home page and product detail
 Route::get('/', HomeController::class)->name('home');
 Route::get('/products/{product}', [ProductDetailController::class, 'show'])->name('products.show');
+Route::get('/product/{product}/view', ProductViewRecordController::class)->name('product.view');
 
 // Search Products and Search by Category Products
 Route::get('products', ProductSearchController::class)->name('products.search');

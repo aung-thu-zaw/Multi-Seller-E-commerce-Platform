@@ -28,7 +28,7 @@ class ProductFactory extends Factory
             'description' => fake()->text(),
             'qty' => fake()->numberBetween(5, 100),
             'price' => fake()->numberBetween(10, 500),
-            'sku' => uniqid(),
+            'code' => uniqid(),
             'status' => fake()->randomElement(['draft', 'pending', 'approved', 'rejected']),
             'created_at' => fake()->dateTimeBetween('-4 months', now()),
         ];

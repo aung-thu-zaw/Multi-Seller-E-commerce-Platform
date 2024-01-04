@@ -111,6 +111,14 @@ class Product extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<User>
+     */
+    public function viewers()
+    {
+        return $this->belongsToMany(User::class, 'user_product_views')->withTimestamps();
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<FlashSale>
      */
     public function flashSales(): BelongsToMany

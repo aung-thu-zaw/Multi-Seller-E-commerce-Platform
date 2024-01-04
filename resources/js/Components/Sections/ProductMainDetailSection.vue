@@ -187,16 +187,50 @@ const handleAddToCart = () => {
 <template>
   <div class="rounded-md bg-white border border-gray-200 overflow-hidden">
     <div class="flex items-start justify-between space-x-6">
-      <aside class="w-4/12 p-5">
+      <aside class="w-5/12 p-5">
         <ProductImageGallery :product="product" />
       </aside>
 
-      <div class="w-8/12 min-h-[510px] flex items-start justify-between">
-        <main class="space-y-5 py-5">
+      <div class="w-7/12 min-h-[510px] flex items-start justify-between">
+        <main class="space-y-5 py-5 w-full">
           <!-- Product  -->
-          <div class="w-full flex items-center justify-between">
+          <div class="flex items-center justify-between w-full">
             <div class="">
               <h2 class="font-semibold text-2xl">{{ product?.name }}</h2>
+            </div>
+
+            <div class="flex items-center space-x-2 pr-8">
+              <button
+                class="rounded-full w-8 h-8 bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-800 flex items-center text-xs justify-center border"
+              >
+                <i class="fa-solid fa-heart"></i>
+              </button>
+              <!-- Popover -->
+              <div class="hs-tooltip inline-block [--trigger:click] [--placement:bottom]">
+                <button
+                  type="button"
+                  class="hs-tooltip-toggle flex justify-center items-center h-10 w-10 text-sm font-semibold"
+                >
+                  <span
+                    class="rounded-full w-8 h-8 bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-800 flex items-center justify-center border"
+                  >
+                    <i class="fa-solid fa-share-nodes"></i>
+                  </span>
+                  <div
+                    class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-3 px-4 bg-white border text-sm text-gray-600 rounded-lg shadow-md"
+                    role="tooltip"
+                  >
+                    <ul class="space-y-3">
+                      <li>Facebook</li>
+                      <li>Twitter</li>
+                      <li>LinkedIn</li>
+                      <li>Instagram</li>
+                      <li>Youtube</li>
+                    </ul>
+                  </div>
+                </button>
+              </div>
+              <!-- End Popover -->
             </div>
           </div>
 
