@@ -58,7 +58,19 @@ class ProductDetailController extends Controller
             ->limit(5)
             ->get();
 
-        return inertia('E-commerce/Products/Show', compact('product', 'attributes', 'options', 'price', 'productQuestions', 'productsFromTheSameStore', 'productReviewsForAverageProgressBar', 'productReviews'));
+        $alsoViewedProducts = Product::select('id', 'store_id', 'image', 'name', 'slug', 'price', 'offer_price')
+        ->whereHas('viewers', function ($query) use ($product) {
+            $query->whereIn('users.id', $product->viewers->pluck('id'));
+        })
+        ->where('id', '!=', $product->id)
+        ->where('category_id', $product->category_id)
+        ->inRandomOrder()
+        ->limit(10)
+        ->get();
+
+        // $recommendedProducts = $user->viewedProducts()->inRandomOrder()->limit(5)->get();
+
+        return inertia('E-commerce/Products/Show', compact('product', 'attributes', 'options', 'price', 'productQuestions', 'productsFromTheSameStore', 'alsoViewedProducts', 'productReviewsForAverageProgressBar', 'productReviews'));
     }
 
     private function calculatePrice(Product $product, Request $request): ?array

@@ -16,7 +16,8 @@ defineProps({
   productQuestions: Object,
   productReviewsForAverageProgressBar: Object,
   productReviews: Object,
-  productsFromTheSameStore: Object
+  productsFromTheSameStore: Object,
+  alsoViewedProducts: Object
 })
 </script>
 
@@ -248,7 +249,7 @@ defineProps({
             </div>
           </div>
 
-          <PeopleWhoViewedProductSection />
+          <PeopleWhoViewedProductSection :alsoViewedProducts="alsoViewedProducts" />
         </div>
 
         <div class="w-[400px]">

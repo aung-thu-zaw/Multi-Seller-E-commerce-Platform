@@ -1,7 +1,7 @@
 <script setup>
 import ProductGridCard from '@/Components/Cards/Products/ProductGridCard.vue'
 
-defineProps({ alsoViewedProducts: Object })
+defineProps({ recommendedProducts: Object })
 </script>
 
 <template>
@@ -10,13 +10,13 @@ defineProps({ alsoViewedProducts: Object })
       <!-- Title -->
       <div class="text-gray-700 flex items-center justify-between mb-5">
         <h2 class="text-xl font-bold">
-          {{ __('People Who Viewed This Item Also Viewed') }}
+          {{ __('Recommended Products') }}
         </h2>
       </div>
 
       <div class="grid grid-cols-4 gap-3 py-3">
         <ProductGridCard
-          v-for="product in alsoViewedProducts"
+          v-for="product in recommendedProducts"
           :key="product.id"
           :product="product"
         />
