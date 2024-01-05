@@ -6,6 +6,7 @@ use App\Models\Address;
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address as MailablesAddress;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -29,6 +30,7 @@ class OrderPlacedSuccessfullyEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: new MailablesAddress('noreply@support.ecommerce.com', 'E-commerce Platform'),
             subject: 'Order Placed Successfully',
         );
     }

@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address as MailablesAddress;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -30,6 +31,7 @@ class NewOrderPlacedEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: new MailablesAddress('noreply@support.ecommerce.com', 'E-commerce Platform'),
             subject: 'New Order Placed',
         );
     }

@@ -70,8 +70,9 @@ class HomeController extends Controller
 
         return inertia('E-commerce/Home', compact('brands', 'sliderBanners', 'campaignBanner', 'productBanners', 'flashSale', 'collections', 'products'));
     }
+
     // public function __invoke(): View
     // {
-    //     return view('mails.seller.new-cancellation-request');
+    //     return view('mails.user.welcome-mail');
     // }
 }

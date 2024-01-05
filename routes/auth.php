@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Auth\FacebookAuthController;
+use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
@@ -33,6 +35,20 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
+
+    // Socialite Authentication
+    Route::prefix("/auth/redirect")
+    ->name("redirect.")
+    ->group(function () {
+        Route::get('/facebook', [FacebookAuthController::class,"redirectToProvider"])->name("facebook");
+        Route::get('/google', [GoogleAuthController::class,"redirectToProvider"])->name("google");
+    });
+
+    Route::prefix("/auth/callback")
+    ->group(function () {
+        Route::get('/facebook', [FacebookAuthController::class,"handelProviderCallback"]);
+        Route::get('/google', [GoogleAuthController::class,"handelProviderCallback"]);
+    });
 });
 
 Route::middleware('auth')->group(function () {

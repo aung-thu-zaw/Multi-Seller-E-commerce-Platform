@@ -21,21 +21,23 @@ Route::middleware(['auth'])
         Route::get('/my-account', [MyAccountController::class, 'edit'])->name('my-account.edit');
         Route::patch('/my-account/{user}', [MyAccountController::class, 'update'])->name('my-account.update');
 
-        Route::get('/change-password', ChangePasswordController::class)->name('change-password');
+        Route::middleware("verified")->group(function () {
+            Route::get('/change-password', ChangePasswordController::class)->name('change-password');
 
-        Route::get('/delete-account', DeleteAccountController::class)->name('delete-account');
+            Route::get('/delete-account', DeleteAccountController::class)->name('delete-account');
 
-        Route::resource('/my-wishlists', MyWishlistController::class)->parameters(['my_wishlist' => 'wishlist'])->only(['index', 'destroy']);
+            Route::resource('/my-wishlists', MyWishlistController::class)->parameters(['my_wishlist' => 'wishlist'])->only(['index', 'destroy']);
 
-        Route::get('/followed-stores', FollowedStoreController::class)->name('followed-stores');
+            Route::get('/followed-stores', FollowedStoreController::class)->name('followed-stores');
 
-        Route::resource('/address-book', AddressBookController::class)->parameters(['address_book' => 'address'])->except(['show']);
+            Route::resource('/address-book', AddressBookController::class)->parameters(['address_book' => 'address'])->except(['show']);
 
-        Route::get('/my-orders', [MyOrderController::class,"index"])->name("my-orders.index");
-        Route::get('/my-orders/{order}', [MyOrderController::class,"show"])->name("my-orders.show");
+            Route::get('/my-orders', [MyOrderController::class,"index"])->name("my-orders.index");
+            Route::get('/my-orders/{order}', [MyOrderController::class,"show"])->name("my-orders.show");
 
-        Route::get('/my-reviews', [MyReviewController::class,"index"])->name("my-reviews.index");
-        Route::post('/my-reviews/{product}', [MyReviewController::class,"store"])->name("my-reviews.store");
-        Route::get('/my-reviews/{product}/add-review', [MyReviewController::class,"addReview"])->name("my-reviews.add");
+            Route::get('/my-reviews', [MyReviewController::class,"index"])->name("my-reviews.index");
+            Route::post('/my-reviews/{product}', [MyReviewController::class,"store"])->name("my-reviews.store");
+            Route::get('/my-reviews/{product}/add-review', [MyReviewController::class,"addReview"])->name("my-reviews.add");
+        });
 
     });

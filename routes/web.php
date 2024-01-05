@@ -122,7 +122,7 @@ Route::controller(SellerStoreController::class)
 
 
 // *********** Authenticated Routes ***********
-Route::middleware("auth")->group(function () {
+Route::middleware(["auth",'verified'])->group(function () {
 
     // For broadcast notifications
     Route::controller(NotificationController::class)
