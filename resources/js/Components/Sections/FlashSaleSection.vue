@@ -23,7 +23,7 @@ const isFlashSaleActive = computed(() => {
       <div class="text-slate-600 flex items-center justify-between border-b px-6 py-3">
         <h2 class="text-2xl font-bold">
           <i class="fa-solid fa-bolt text-orange-600 animate-pulse"></i>
-          {{ __('Flash Sales') }}
+          {{ __('Flash Sale') }}
         </h2>
 
         <FlashSaleCountdownTimer :flashSale="flashSale" />

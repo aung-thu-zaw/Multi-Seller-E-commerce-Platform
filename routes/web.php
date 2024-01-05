@@ -76,7 +76,7 @@ Route::controller(ProductCollectionController::class)
     });
 
 //  FlashSale Products
-Route::get('/flash-sale/products', FlashSaleProductController::class)->name('flash-sale.products.show');
+Route::get('/flash-sale', FlashSaleProductController::class)->name('flash-sale.products.show');
 
 // Support And Helps
 Route::get('/help-center', HelpCenterController::class)->name('help-center');

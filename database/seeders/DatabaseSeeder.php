@@ -68,7 +68,9 @@ class DatabaseSeeder extends Seeder
 
             SearchHistorySeeder::class,
             AddressSeeder::class,
-            UserProductViewSeeder::class
+            UserProductViewSeeder::class,
+            StoreProductBannerSeeder::class,
+            StoreProductCategorySeeder::class,
         ]);
     }
 }

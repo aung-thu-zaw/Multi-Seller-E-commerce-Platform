@@ -39,23 +39,16 @@ class StoreProductCategory extends Model
         ];
     }
 
-    // protected static function booted(): void
-    // {
-    //     parent::boot();
-
-    //     static::addGlobalScope(new FilterByScope());
-    // }
-
-    public static function getStoreId(): int
+    protected static function booted(): void
     {
-        return Store::where('seller_id', auth()->id())->value('id');
+        parent::boot();
+
+        static::addGlobalScope(new FilterByScope());
     }
 
-    public function checkStoreAccess(): void
+    public function checkStoreAccess(int $storeId): void
     {
-        $store = self::getStoreId();
-
-        if ($this->store_id !== $store) {
+        if ($this->store_id !== $storeId) {
             abort(403, 'Unauthorized access to store.');
         }
     }

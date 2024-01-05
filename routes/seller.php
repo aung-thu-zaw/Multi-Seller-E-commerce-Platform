@@ -9,6 +9,7 @@ use App\Http\Controllers\Seller\Dashboard\OrderManagement\OrderController;
 use App\Http\Controllers\Seller\Dashboard\OrderManagement\ReturnItemController;
 use App\Http\Controllers\Seller\Dashboard\ProductManage\ProductController;
 use App\Http\Controllers\Seller\Dashboard\ProductManage\ProductImageController;
+use App\Http\Controllers\Seller\Dashboard\StoreProductBannerController;
 use App\Http\Controllers\Seller\Dashboard\StoreProductCategoryController;
 use App\Http\Controllers\Seller\Dashboard\StoreSettingController;
 use Illuminate\Support\Facades\Route;
@@ -22,19 +23,56 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
         // Dashboard
         Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
-        // ***** Product Operations *****
-        Route::resource('products', ProductController::class)->except(['show']);
+        // ***** Store Product Category Operations *****
+        Route::resource('store-product-categories', StoreProductCategoryController::class)->except(['show']);
 
-        Route::delete('/products/destroy/selected/{selected_items}', [ProductController::class, 'destroySelected'])->name('products.destroy.selected');
+        Route::delete('/store-product-categories/destroy/selected/{selected_items}', [StoreProductCategoryController::class, 'destroySelected'])->name('store-product-categories.destroy.selected');
 
-        Route::controller(ProductImageController::class)
-            ->prefix('/products')
-            ->name('product.')
+        Route::controller(StoreProductCategoryController::class)
+            ->prefix('/store-product-categories/trash')
+            ->name('store-product-categories.')
             ->group(function () {
-                Route::get('/{product}/images', 'productImages')->name('images');
-                Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
-                Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
+
+        // ***** Store Product Banner Operations *****
+        Route::resource('store-product-banners', StoreProductBannerController::class)->except(['show']);
+
+        Route::delete('/store-product-banners/destroy/selected/{selected_items}', [StoreProductBannerController::class, 'destroySelected'])->name('store-product-banners.destroy.selected');
+
+        Route::controller(StoreProductBannerController::class)
+            ->prefix('/store-product-banners/trash')
+            ->name('store-product-banners.')
+            ->group(function () {
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+
+
+
+
+        // // ***** Product Operations *****
+        // Route::resource('products', ProductController::class)->except(['show']);
+
+        // Route::delete('/products/destroy/selected/{selected_items}', [ProductController::class, 'destroySelected'])->name('products.destroy.selected');
+
+        // Route::controller(ProductImageController::class)
+        //     ->prefix('/products')
+        //     ->name('product.')
+        //     ->group(function () {
+        //         Route::get('/{product}/images', 'productImages')->name('images');
+        //         Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
+        //         Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
+        //     });
 
 
         // Store Category Operations

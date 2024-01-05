@@ -161,7 +161,7 @@ const store = computed(() => usePage().props.auth?.store)
             </li>
 
             <!-- Categories -->
-            <!-- <li class="items-center">
+            <li class="items-center">
               <Link
                 :href="route('seller.store-product-categories.index')"
                 :data="{
@@ -181,14 +181,39 @@ const store = computed(() => usePage().props.auth?.store)
                 }"
               >
                 <i class="fa-solid fa-list mr-2"></i>
-                {{ __('Store Product Categories') }}
+                {{ __('Product Categories') }}
               </Link>
-            </li> -->
+            </li>
+
+            <!-- Banners -->
+            <li class="items-center">
+              <Link
+                :href="route('seller.store-product-banners.index')"
+                :data="{
+                  page: 1,
+                  per_page: 5,
+                  sort: 'id',
+                  direction: 'desc'
+                }"
+                class="text-xs py-3 font-bold block"
+                :class="{
+                  'text-blue-600 hover:text-blue-500': $page.url.startsWith(
+                    '/seller/store-product-banners'
+                  ),
+                  'text-slate-600 hover:text-slate-500': !$page.url.startsWith(
+                    '/seller/store-product-banners'
+                  )
+                }"
+              >
+                <i class="fa-solid fa-ad mr-2"></i>
+                {{ __('Product Banners') }}
+              </Link>
+            </li>
 
             <!-- Products -->
             <li class="items-center">
               <Link
-                :href="route('seller.products.index')"
+                href="#"
                 :data="{
                   page: 1,
                   per_page: 5,
@@ -203,29 +228,6 @@ const store = computed(() => usePage().props.auth?.store)
               >
                 <i class="fa-solid fa-basket-shopping mr-2"></i>
                 {{ __('Products') }}
-              </Link>
-            </li>
-
-            <!-- Banners -->
-            <li class="items-center">
-              <Link
-                href="#"
-                :data="{
-                  page: 1,
-                  per_page: 5,
-                  sort: 'id',
-                  direction: 'desc'
-                }"
-                class="text-xs py-3 font-bold block"
-                :class="{
-                  'text-blue-600 hover:text-blue-500':
-                    $page.url.startsWith('/seller/product-banners'),
-                  'text-slate-600 hover:text-slate-500':
-                    !$page.url.startsWith('/seller/product-banners')
-                }"
-              >
-                <i class="fa-solid fa-ad mr-2"></i>
-                {{ __('Product Banners') }}
               </Link>
             </li>
 
