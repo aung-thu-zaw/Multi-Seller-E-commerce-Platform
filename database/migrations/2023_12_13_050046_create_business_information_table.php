@@ -14,10 +14,6 @@ return new class extends Migration
         Schema::create('business_information', function (Blueprint $table) {
             $table->id();
             $table->foreignId('seller_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->string('country')->nullable();
-            $table->string('region')->nullable();
-            $table->string('city')->nullable();
-            $table->string('township')->nullable();
             $table->string('contact_email')->nullable();
             $table->string('contact_phone')->nullable();
             $table->string('business_name')->nullable();

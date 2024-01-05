@@ -29,7 +29,19 @@ const { form, processing, errors, editAction } = useResourceActions({
 <template>
   <!-- Form Start -->
   <div class="border p-10 bg-white rounded-md">
-    <form @submit.prevent="editAction" class="space-y-4 md:space-y-6">
+    <form
+      @submit.prevent="
+        editAction(
+          'Store',
+          'seller.store-settings.update-store-information',
+          {
+            store_id: store.id
+          },
+          'patch'
+        )
+      "
+      class="space-y-4 md:space-y-6"
+    >
       <PreviewImage :src="previewImage" />
 
       <div>
@@ -79,7 +91,7 @@ const { form, processing, errors, editAction } = useResourceActions({
       </div>
 
       <div>
-        <InputLabel :label="__('Address')" />
+        <InputLabel :label="__('Address')" required />
 
         <InputField
           type="text"
@@ -87,6 +99,7 @@ const { form, processing, errors, editAction } = useResourceActions({
           icon="fa-location-dot"
           v-model="form.address"
           :placeholder="__('Enter :label', { label: __('Store Address') })"
+          required
         />
 
         <InputError :message="errors?.address" />
@@ -106,14 +119,13 @@ const { form, processing, errors, editAction } = useResourceActions({
 
       <div class="grid grid-cols-2 gap-5">
         <div>
-          <InputLabel :label="__('Store Profile')" required />
+          <InputLabel :label="__('Store Profile')" />
 
           <FileInput
             name="store-profile"
             text="PNG, JPG or JPEG ( Max File Size : 1.5 MB )"
             v-model="form.avatar"
             @update:modelValue="setImagePreview"
-            required
           />
 
           <InputError :message="errors?.avatar" />

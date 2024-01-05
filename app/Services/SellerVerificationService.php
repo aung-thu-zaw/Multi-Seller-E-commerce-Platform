@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\BankAccount;
 use App\Models\BusinessInformation;
 use App\Models\SellerRequest;
 use App\Models\User;
@@ -15,6 +16,10 @@ class SellerVerificationService
         (new StoreService())->createStore($user, $sellerRequest);
 
         BusinessInformation::create([
+            'seller_id' => $user->id,
+        ]);
+
+        BankAccount::create([
             'seller_id' => $user->id,
         ]);
 

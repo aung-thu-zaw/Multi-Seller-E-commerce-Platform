@@ -116,7 +116,7 @@ const store = computed(() => usePage().props.auth?.store)
             <!-- Store Setting -->
             <li class="items-center">
               <Link
-                :href="route('seller.store-settings.index')"
+                :href="route('seller.store-settings.edit')"
                 class="text-xs py-3 font-bold block"
                 :class="{
                   'text-blue-600 hover:text-blue-500':
@@ -545,7 +545,8 @@ const store = computed(() => usePage().props.auth?.store)
             <!-- Store Setting -->
             <li class="items-center">
               <Link
-                :href="route('seller.store-settings.index')"
+                :href="route('seller.store-settings.edit')"
+                :data="{ tab: 'store-information' }"
                 class="text-xs py-3 font-bold block"
                 :class="{
                   'text-blue-600 hover:text-blue-500':

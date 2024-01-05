@@ -6,29 +6,39 @@ import TextAreaField from '@/Components/Forms/Fields/TextAreaField.vue'
 import FormButton from '@/Components/Buttons/FormButton.vue'
 import { useResourceActions } from '@/Composables/useResourceActions'
 
+const props = defineProps({ store: Object, businessInformation: Object })
+
 const { form, processing, errors, editAction } = useResourceActions({
-  country: null,
-  region: null,
-  city: null,
-  township: null,
-  contact_email: null,
-  contact_phone: null,
-  business_name: null,
-  business_registration_number: null,
-  tax_number: null,
-  industry: null,
-  website: null,
-  address: null,
-  business_description: null,
-  products_or_services: null,
-  additional_information: null
+  contact_email: props.businessInformation?.contact_email,
+  contact_phone: props.businessInformation?.contact_phone,
+  business_name: props.businessInformation?.business_name,
+  business_registration_number: props.businessInformation?.business_registration_number,
+  tax_number: props.businessInformation?.tax_number,
+  industry: props.businessInformation?.industry,
+  website: props.businessInformation?.website,
+  address: props.businessInformation?.address,
+  business_description: props.businessInformation?.business_description,
+  products_or_services: props.businessInformation?.products_or_services,
+  additional_information: props.businessInformation?.additional_information
 })
 </script>
 
 <template>
   <!-- Form Start -->
   <div class="border p-10 bg-white rounded-md">
-    <form @submit.prevent="editAction" class="space-y-4 md:space-y-6">
+    <form
+      @submit.prevent="
+        editAction(
+          'Business Information',
+          'seller.store-settings.update-business-information',
+          {
+            business_information_id: businessInformation.id
+          },
+          'patch'
+        )
+      "
+      class="space-y-4 md:space-y-6"
+    >
       <div>
         <InputLabel :label="__('Business Name')" required />
 
@@ -168,7 +178,7 @@ const { form, processing, errors, editAction } = useResourceActions({
       </div>
 
       <div>
-        <InputLabel :label="__('Address')" />
+        <InputLabel :label="__('Address')" required />
 
         <InputField
           type="text"
@@ -176,6 +186,7 @@ const { form, processing, errors, editAction } = useResourceActions({
           icon="fa-location-dot"
           v-model="form.address"
           :placeholder="__('Enter :label', { label: __('Business Address') })"
+          required
         />
 
         <InputError :message="errors?.address" />

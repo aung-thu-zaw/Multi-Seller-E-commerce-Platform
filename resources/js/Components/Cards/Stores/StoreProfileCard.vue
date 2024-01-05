@@ -23,7 +23,7 @@ const avgRating = computed(() => {
     <div
       class="flex flex-col items-center justify-center w-[300px] h-full border-r border-r-slate-300 p-2"
     >
-      <img :src="store.avatar" alt="store-avatar" class="rounded-md w-12 h-12 object-cover" />
+      <img :src="store.avatar" alt="store-avatar" class="rounded-md w-16 h-16 object-cover" />
 
       <div class="mt-3 flex flex-col items-center justify-between">
         <h1 class="font-bold text-sm text-slate-600 text-center line-clamp-2">

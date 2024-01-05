@@ -91,7 +91,17 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
         //         Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
         //     });
 
-        Route::get('/store-settings', [StoreSettingController::class, 'index'])->name('store-settings.index');
+        // ***** Store Setting Operations *****
+        Route::controller(StoreSettingController::class)
+        ->prefix('/store-settings')
+        ->name('store-settings.')
+        ->group(function () {
+            Route::get('/', 'edit')->name('edit');
+            Route::patch('{store_id}/store-information', 'updateStoreInformation')->name('update-store-information');
+            Route::patch('{business_information_id}/business-information', 'updateBusinessInformation')->name('update-business-information');
+            Route::patch('{bank_account_id}/bank-account', 'updateBankAccount')->name('update-bank-account');
+        });
+
 
         Route::get('/chat-inbox', ChatInboxController::class)->name('chat-inbox');
 

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
@@ -21,8 +20,8 @@ return new class() extends Migration
             $table->string('slug')->unique();
             $table->enum('status', ['active', 'inactive'])->default('inactive');
             $table->text('description')->nullable();
-            $table->string('contact_email')->nullable();
-            $table->string('contact_phone')->nullable();
+            $table->string('contact_email')->unique();
+            $table->string('contact_phone')->unique();
             $table->string('address')->nullable();
             $table->softDeletes();
             $table->timestamps();

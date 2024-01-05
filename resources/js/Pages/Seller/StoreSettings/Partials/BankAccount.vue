@@ -6,18 +6,32 @@ import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
 import FormButton from '@/Components/Buttons/FormButton.vue'
 import { useResourceActions } from '@/Composables/useResourceActions'
 
+const props = defineProps({ bankAccount: Object })
+
 const { form, processing, errors, editAction } = useResourceActions({
-  account_title: null,
-  account_number: null,
-  bank_name: null,
-  branch_code: null
+  account_title: props.bankAccount?.account_title,
+  account_number: props.bankAccount?.account_number,
+  bank_name: props.bankAccount?.bank_name,
+  branch_code: props.bankAccount?.branch_code
 })
 </script>
 
 <template>
   <!-- Form Start -->
   <div class="border p-10 bg-white rounded-md">
-    <form @submit.prevent="editAction" class="space-y-4 md:space-y-6">
+    <form
+      @submit.prevent="
+        editAction(
+          'Bank Account',
+          'seller.store-settings.update-bank-account',
+          {
+            bank_account_id: bankAccount.id
+          },
+          'patch'
+        )
+      "
+      class="space-y-4 md:space-y-6"
+    >
       <div>
         <InputLabel :label="__('Account Title')" required />
 

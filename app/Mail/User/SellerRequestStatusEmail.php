@@ -40,7 +40,7 @@ class SellerRequestStatusEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.users.seller-request-status',
+            view: 'mails.user.seller-request-status',
             with: [
                 'name' => $this->userName,
                 'store_name' => $this->sellerRequest->store_name,
