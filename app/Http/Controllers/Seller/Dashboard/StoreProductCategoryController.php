@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
+use Illuminate\Support\Str;
 
 class StoreProductCategoryController extends Controller
 {
@@ -35,8 +36,7 @@ class StoreProductCategoryController extends Controller
 
     public function store(StoreProductCategoryRequest $request): RedirectResponse
     {
-
-        StoreProductCategory::create(['store_id' => Store::getStoreId(), 'name' => $request->name, 'status' => $request->status]);
+        StoreProductCategory::create(['uuid' => Str::uuid(),'store_id' => Store::getStoreId(), 'name' => $request->name, 'status' => $request->status]);
 
         return to_route('seller.store-product-categories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }

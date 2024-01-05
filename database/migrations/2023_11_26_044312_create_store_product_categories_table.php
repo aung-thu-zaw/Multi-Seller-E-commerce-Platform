@@ -14,8 +14,8 @@ return new class() extends Migration
         Schema::create('store_product_categories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('store_id')->constrained()->cascadeOnDelete();
+            $table->string('uuid');
             $table->string('name');
-            $table->string('slug');
             $table->enum('status', ['show', 'hide'])->default('hide');
             $table->softDeletes();
             $table->timestamps();

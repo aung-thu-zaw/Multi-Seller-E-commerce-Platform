@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Store;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,10 +17,12 @@ class StoreProductCategoryFactory extends Factory
      */
     public function definition(): array
     {
+        $stores = Store::where("status", "active")->pluck("id")->toArray();
+
         return [
-            'store_id' => 2,
+            'uuid' => fake()->uuid(),
+            'store_id' => fake()->randomElement($stores) ,
             'name' => fake()->sentence(),
-            'slug' => fake()->slug(),
             'status' => fake()->randomElement(['show', 'hide']),
         ];
     }

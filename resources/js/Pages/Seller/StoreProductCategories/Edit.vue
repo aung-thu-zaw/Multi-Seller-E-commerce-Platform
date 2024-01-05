@@ -20,7 +20,7 @@ const { form, processing, errors, editAction } = useResourceActions({
 </script>
 
 <template>
-  <Head :title="__('Edit :label', { label: __('Store Product Category') })" />
+  <Head :title="__('Edit :label', { label: __('Product Category') })" />
 
   <SellerDashboardLayout>
     <div class="min-h-screen py-10 font-poppins">
@@ -30,7 +30,7 @@ const { form, processing, errors, editAction } = useResourceActions({
         <Breadcrumb
           to="seller.store-product-categories.index"
           icon="fa-list"
-          label="Store Product Categories"
+          label="Product Categories"
         >
           <BreadcrumbItem :label="storeProductCategory.name" />
           <BreadcrumbItem label="Edit" />
@@ -45,8 +45,8 @@ const { form, processing, errors, editAction } = useResourceActions({
       <div class="border p-10 bg-white rounded-md">
         <form
           @submit.prevent="
-            editAction('Store Product Category', 'seller.store-product-categories.update', {
-              store_product_category: storeProductCategory?.slug
+            editAction('Product Category', 'seller.store-product-categories.update', {
+              store_product_category: storeProductCategory?.uuid
             })
           "
           class="space-y-4 md:space-y-6"

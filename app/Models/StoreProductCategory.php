@@ -7,26 +7,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
 
 class StoreProductCategory extends Model
 {
     use HasFactory;
-    use HasSlug;
     use Searchable;
     use SoftDeletes;
 
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('name')
-            ->saveSlugsTo('slug');
-    }
+
 
     public function getRouteKeyName()
     {
-        return 'slug';
+        return 'uuid';
     }
 
     /**

@@ -31,7 +31,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 </script>
 
 <template>
-  <Head :title="__('Store Product Categories')" />
+  <Head :title="__('Product Categories')" />
 
   <SellerDashboardLayout>
     <!-- Breadcrumb And Trash Button  -->
@@ -39,7 +39,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="storeProductCategoryList" icon="fa-list" label="Store Product Categories">
+        <Breadcrumb :to="storeProductCategoryList" icon="fa-list" label="Product Categories">
           <BreadcrumbItem label="List" />
         </Breadcrumb>
       </div>
@@ -48,7 +48,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
         <!-- Create New Button -->
         <InertiaLinkButton to="seller.store-product-categories.create">
           <i class="fa-solid fa-file-circle-plus mr-1"></i>
-          {{ __('Create A New :label', { label: __('Store Product Category') }) }}
+          {{ __('Create A New :label', { label: __('Product Category') }) }}
         </InertiaLinkButton>
 
         <!-- Trash Button -->
@@ -73,7 +73,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
           class="my-3 flex flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between overflow-auto p-2"
         >
           <DashboardTableDataSearchBox
-            :placeholder="__('Search by :label', { label: __('Store Product Category Name') })"
+            :placeholder="__('Search by :label', { label: __('Product Category Name') })"
             :to="storeProductCategoryList"
           />
 
@@ -107,7 +107,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
               <BulkActionButton
                 @click="
                   softDeleteSelectedAction(
-                    'Store Product Categories',
+                    'Product Categories',
                     'seller.store-product-categories.destroy.selected',
                     selectedItems
                   )
@@ -121,8 +121,6 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
             <!-- Table Header -->
             <template #table-header>
-              <SortableTableHeaderCell label="# No" :to="storeProductCategoryList" sort="id" />
-
               <SortableTableHeaderCell label="Name" :to="storeProductCategoryList" sort="name" />
 
               <TableHeaderCell label="Status" />
@@ -132,10 +130,6 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
             <!-- Table Body -->
             <template #table-data="{ item }">
-              <TableDataCell>
-                {{ item?.id }}
-              </TableDataCell>
-
               <TableDataCell>
                 {{ item?.name }}
               </TableDataCell>
@@ -154,7 +148,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
               <TableActionCell>
                 <InertiaLinkButton
                   to="seller.store-product-categories.edit"
-                  :targetIdentifier="{ store_product_category: item?.slug }"
+                  :targetIdentifier="{ store_product_category: item?.uuid }"
                 >
                   <i class="fa-solid fa-edit"></i>
                   {{ __('Edit') }}
@@ -163,9 +157,9 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
                 <NormalButton
                   @click="
                     softDeleteAction(
-                      'Store Product Category',
+                      'Product Category',
                       'seller.store-product-categories.destroy',
-                      { store_product_category: item?.slug }
+                      { store_product_category: item?.uuid }
                     )
                   "
                   class="bg-red-600 text-white ring-2 ring-red-300"

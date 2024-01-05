@@ -39,7 +39,7 @@ const {
 </script>
 
 <template>
-  <Head :title="__('Deleted :label', { label: __('Store Product Categories') })" />
+  <Head :title="__('Deleted :label', { label: __('Product Categories') })" />
 
   <SellerDashboardLayout>
     <!-- Breadcrumb And Go back Button  -->
@@ -47,7 +47,7 @@ const {
       <div
         class="flex flex-col items-start md:flex-row md:items-center md:justify-between mb-4 md:mb-8"
       >
-        <Breadcrumb :to="storeProductCategoryList" icon="fa-list" label="Store Product Categories">
+        <Breadcrumb :to="storeProductCategoryList" icon="fa-list" label="Product Categories">
           <BreadcrumbLinkItem label="Trash" :to="trashedStoreProductCategoryList" />
           <BreadcrumbItem label="List" />
         </Breadcrumb>
@@ -75,14 +75,14 @@ const {
       >
         {{
           __(':label in the trash will be automatically deleted after 60 days', {
-            label: __('Store Product Categories')
+            label: __('Product Categories')
           })
         }}
 
         <EmptyTrashButton
           @click="
             permanentDeleteAllAction(
-              'Store Product Category',
+              'Product Category',
               'seller.store-product-categories.force-delete.all'
             )
           "
@@ -95,7 +95,7 @@ const {
           class="my-3 flex flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between overflow-auto p-2"
         >
           <DashboardTableDataSearchBox
-            :placeholder="__('Search by :label', { label: __('Store Product Category Name') })"
+            :placeholder="__('Search by :label', { label: __('Product Category Name') })"
             :to="trashedStoreProductCategoryList"
           />
 
@@ -116,7 +116,7 @@ const {
               <BulkActionButton
                 @click="
                   restoreSelectedAction(
-                    'Store Product Categories',
+                    'Product Categories',
                     'seller.store-product-categories.restore.selected',
                     selectedItems
                   )
@@ -129,7 +129,7 @@ const {
               <BulkActionButton
                 @click="
                   permanentDeleteSelectedAction(
-                    'Store Product Categories',
+                    'Product Categories',
                     'seller.store-product-categories.force-delete.selected',
                     selectedItems
                   )
@@ -144,12 +144,6 @@ const {
             <!-- Table Header -->
             <template #table-header>
               <SortableTableHeaderCell
-                label="# No"
-                :to="trashedStoreProductCategoryList"
-                sort="id"
-              />
-
-              <SortableTableHeaderCell
                 label="Name"
                 :to="trashedStoreProductCategoryList"
                 sort="name"
@@ -161,21 +155,15 @@ const {
             <!-- Table Body -->
             <template #table-data="{ item }">
               <TableDataCell>
-                {{ item?.id }}
-              </TableDataCell>
-
-              <TableDataCell>
                 {{ item?.name }}
               </TableDataCell>
 
               <TableActionCell>
                 <NormalButton
                   @click="
-                    restoreAction(
-                      'Store Product Category',
-                      'seller.store-product-categories.restore',
-                      { id: item?.id }
-                    )
+                    restoreAction('Product Category', 'seller.store-product-categories.restore', {
+                      id: item?.id
+                    })
                   "
                 >
                   <i class="fa-solid fa-recycle"></i>
@@ -185,7 +173,7 @@ const {
                 <NormalButton
                   @click="
                     permanentDeleteAction(
-                      'Store Product Category',
+                      'Product Category',
                       'seller.store-product-categories.force-delete',
                       { id: item?.id }
                     )

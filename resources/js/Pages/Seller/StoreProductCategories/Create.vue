@@ -18,7 +18,7 @@ const { form, processing, errors, createAction } = useResourceActions({
 </script>
 
 <template>
-  <Head :title="__('Create :label', { label: __('Store Product Category') })" />
+  <Head :title="__('Create :label', { label: __('Product Category') })" />
 
   <SellerDashboardLayout>
     <div class="min-h-screen py-10 font-poppins">
@@ -28,7 +28,7 @@ const { form, processing, errors, createAction } = useResourceActions({
         <Breadcrumb
           to="seller.store-product-categories.index"
           icon="fa-list"
-          label="Store Product Categories"
+          label="Product Categories"
         >
           <BreadcrumbItem label="Create" />
         </Breadcrumb>
@@ -42,7 +42,7 @@ const { form, processing, errors, createAction } = useResourceActions({
       <div class="border p-10 bg-white rounded-md">
         <form
           @submit.prevent="
-            createAction('Store Product Category', 'seller.store-product-categories.store')
+            createAction('Product Category', 'seller.store-product-categories.store')
           "
           class="space-y-4 md:space-y-6"
         >
