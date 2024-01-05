@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\InvalidStateException;
@@ -35,10 +36,10 @@ class FacebookAuthController extends Controller
                 "email" => $facebookUser->getEmail(),
                 "avatar" => $facebookUser->getAvatar(),
                 "role" => "user",
-                // "email_verified_at" => now(),
+                "email_verified_at" => now(),
             ]);
 
-            // event(new RegisteredWithSocialite($newUser));
+            event(new Registered($newUser));
 
             Auth::login($newUser);
         } else {

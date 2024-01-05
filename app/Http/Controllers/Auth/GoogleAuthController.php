@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
@@ -27,6 +28,7 @@ class GoogleAuthController extends Controller
 
         $existingUser = User::where("google_id", $googleUser->getId())->first();
 
+
         if (!$existingUser) {
             $newUser = User::create([
                 "google_id" => $googleUser->getId(),
@@ -34,16 +36,18 @@ class GoogleAuthController extends Controller
                 "email" => $googleUser->getEmail(),
                 "avatar" => $googleUser->getAvatar(),
                 "role" => "user",
-                // "email_verified_at"=>now(),
+                "email_verified_at" => now(),
             ]);
 
-            // event(new RegisteredWithSocialite($newUser));
+            event(new Registered($newUser));
 
             Auth::login($newUser);
+
         } else {
+
             Auth::login($existingUser);
         }
 
-        return to_route('home');
+        return back();
     }
 }

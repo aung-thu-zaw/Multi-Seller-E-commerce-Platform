@@ -5,6 +5,8 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Scopes\FilterByScope;
+use App\Notifications\Auth\ResetPasswordQueued;
+use App\Notifications\Auth\VerifyEmailQueued;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -201,5 +203,15 @@ class User extends Authenticatable implements MustVerifyEmail
         if (!empty($avatar) && file_exists(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/avatars/users/'.pathinfo($avatar, PATHINFO_BASENAME)));
         }
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmailQueued());
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordQueued($token));
     }
 }
