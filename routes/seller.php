@@ -7,6 +7,7 @@ use App\Http\Controllers\Seller\Dashboard\DashboardController;
 use App\Http\Controllers\Seller\Dashboard\OrderManagement\CancellationItemController;
 use App\Http\Controllers\Seller\Dashboard\OrderManagement\OrderController;
 use App\Http\Controllers\Seller\Dashboard\OrderManagement\ReturnItemController;
+use App\Http\Controllers\Seller\Dashboard\PayoutRequestController;
 use App\Http\Controllers\Seller\Dashboard\ProductManage\ProductController;
 use App\Http\Controllers\Seller\Dashboard\ProductManage\ProductImageController;
 use App\Http\Controllers\Seller\Dashboard\ProductQuestionController;
@@ -60,6 +61,9 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
 
         // ***** Product Question Operations *****
         Route::resource('product-questions', ProductQuestionController::class)->except(['show','destroy']);
+
+        // ***** Payout Requests Operations *****
+        Route::resource('payout-requests', PayoutRequestController::class)->except(['show','destroy']);
 
 
 

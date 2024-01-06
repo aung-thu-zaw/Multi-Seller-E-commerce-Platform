@@ -548,7 +548,7 @@ const store = computed(() => usePage().props.auth?.store)
             <!-- My Withdraw -->
             <li class="items-center">
               <Link
-                href="#"
+                :href="route('seller.payout-requests.index')"
                 :data="{
                   page: 1,
                   per_page: 5,
@@ -557,13 +557,14 @@ const store = computed(() => usePage().props.auth?.store)
                 }"
                 class="text-xs py-3 font-bold block"
                 :class="{
-                  'text-blue-600 hover:text-blue-500': $page.url.startsWith('/seller/my-withdraw'),
+                  'text-blue-600 hover:text-blue-500':
+                    $page.url.startsWith('/seller/payout-requests'),
                   'text-slate-600 hover:text-slate-500':
-                    !$page.url.startsWith('/seller/my-withdraw')
+                    !$page.url.startsWith('/seller/payout-requests')
                 }"
               >
                 <i class="fa-solid fa-money-bill-transfer mr-2"></i>
-                {{ __('My Withdraw') }}
+                {{ __('Payout Requests') }}
               </Link>
             </li>
 

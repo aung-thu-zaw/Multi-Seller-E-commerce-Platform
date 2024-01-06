@@ -10,13 +10,11 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('payout_requests', function (Blueprint $table) {
+        Schema::create('seller_balances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('seller_id')->constrained("users")->cascadeOnDelete();
-            $table->decimal('amount', 10, 2);
-            $table->enum('status', ['pending', 'paid', 'declined'])->default('pending');
+            $table->decimal('balance', 8, 2)->default(0);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -25,6 +23,6 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('payout_requests');
+        Schema::dropIfExists('seller_balances');
     }
 };

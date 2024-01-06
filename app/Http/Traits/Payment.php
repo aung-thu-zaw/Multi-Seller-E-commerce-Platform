@@ -12,6 +12,7 @@ use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\SellerBalance;
 use App\Models\ShippingMethod;
 use App\Models\Sku;
 use App\Models\Store;
@@ -63,6 +64,7 @@ trait Payment
 
                 $productsByStore[$item->store_id][] = $orderItem;
 
+                // Update Product Qty
                 if ($item->attributes) {
                     $attributes = json_decode($item->attributes, true);
 
@@ -78,6 +80,13 @@ trait Payment
                         $product->update(['qty' => $product->qty - $item->qty]);
                     }
                 }
+
+                // Add Balance To Seller
+                $store = Store::find($item->store_id);
+                SellerBalance::updateOrCreate(
+                    ['seller_id' => $store->seller_id],
+                    ['balance' => DB::raw("balance + $item->total_price")]
+                );
 
             });
 

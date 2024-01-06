@@ -49,6 +49,15 @@ export function useResourceActions(formFields = {}) {
               })
             })
           }
+          const errorMessage = usePage().props.flash.error
+          if (errorMessage) {
+            swal({
+              icon: 'error',
+              title: __(errorMessage, {
+                label: __(entityType)
+              })
+            })
+          }
         },
         onFinish: () => (processing.value = false),
         onError: (backendErrors) => {
