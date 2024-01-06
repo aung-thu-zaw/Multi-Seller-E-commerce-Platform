@@ -35,7 +35,9 @@ const isAnswerBoxOpened = ref(false)
     </div>
 
     <div
-      v-show="product.store_id === $page.props.auth.store?.id"
+      v-show="
+        product.store_id === $page.props.auth.store?.id && !productQuestion.product_question_answer
+      "
       class="flex items-center justify-end mt-3"
     >
       <button
@@ -58,7 +60,7 @@ const isAnswerBoxOpened = ref(false)
     </div>
 
     <!-- Reply Form -->
-    <div v-show="isAnswerBoxOpened">
+    <div v-show="isAnswerBoxOpened && !productQuestion.product_question_answer">
       <QuestionAnswerForm
         :product="product"
         :productQuestion="productQuestion"

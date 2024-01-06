@@ -25,6 +25,8 @@ use App\Http\Controllers\Ecommerce\Payments\PaypalController;
 use App\Http\Controllers\Ecommerce\Payments\StripeController;
 use App\Http\Controllers\Ecommerce\ProductCollectionController;
 use App\Http\Controllers\Ecommerce\Products\ProductDetailController;
+use App\Http\Controllers\Ecommerce\Products\ProductQuestionAnswerController;
+use App\Http\Controllers\Ecommerce\Products\ProductQuestionController;
 use App\Http\Controllers\Ecommerce\Products\ProductSearchByCategoryController;
 use App\Http\Controllers\Ecommerce\Products\ProductSearchController;
 use App\Http\Controllers\Ecommerce\ProductViewRecordController;
@@ -207,8 +209,8 @@ Route::middleware(["auth",'verified'])->group(function () {
     // Blog Comments And Product Questions
     Route::post('/blogs/{blog_content}/comments', BlogCommentController::class)->name('blog.comments.store');
     Route::post('/blogs/{blog_content}/comments/{blog_comment}/replies', BlogCommentReplyController::class)->name('comment.replies.store');
-    Route::post('/products/{product}/questions', BlogCommentController::class)->name('product.questions.store');
-    Route::post('/products/{product}/questions/{product_question}/answers', BlogCommentReplyController::class)->name('question.answers.store');
+    Route::post('/products/{product}/questions', ProductQuestionController::class)->name('product.questions.store');
+    Route::post('/products/{product}/questions/{product_question}/answers', ProductQuestionAnswerController::class)->name('question.answers.store');
 
 });
 

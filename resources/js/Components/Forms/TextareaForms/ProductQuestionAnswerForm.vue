@@ -21,9 +21,9 @@ const submitProductQuestionAnswer = async () => {
   await recaptchaLoaded()
   form.captcha_token = await executeRecaptcha('create_question_answer')
   form.post(
-    route('', {
-      //   blog_content: props.blogContent?.slug,
-      //   blog_comment: props.blogComment?.id
+    route('question.answers.store', {
+      product: props.product?.slug,
+      product_question: props.productQuestion?.id
     }),
     {
       replace: true,
@@ -51,7 +51,8 @@ const submitProductQuestionAnswer = async () => {
       </div>
 
       <div class="border w-[100px] ml-auto">
-        <FormButton type="submit">
+        <FormButton>
+          <i class="fa-solid fa-paper-plane"></i>
           {{ __('Submit') }}
         </FormButton>
       </div>

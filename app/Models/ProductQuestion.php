@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\FilterByScope;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Laravel\Scout\Searchable;
 
 class ProductQuestion extends Model
 {
     use HasFactory;
+    use Searchable;
 
     /**
      * @return \Illuminate\Database\Eloquent\Casts\Attribute<ProductQuestion, never>
@@ -44,5 +47,12 @@ class ProductQuestion extends Model
     public function productQuestionAnswer(): HasOne
     {
         return $this->hasOne(ProductQuestionAnswer::class);
+    }
+
+    protected static function booted(): void
+    {
+        parent::boot();
+
+        static::addGlobalScope(new FilterByScope());
     }
 }

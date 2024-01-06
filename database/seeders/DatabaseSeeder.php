@@ -63,8 +63,8 @@ class DatabaseSeeder extends Seeder
             // ProductReviewResponseSeeder::class,
             // StoreReviewResponseSeeder::class,
             // ProductReviewImageSeeder::class,
-            // ProductQuestionSeeder::class,
-            // ProductQuestionAnswerSeeder::class,
+            ProductQuestionSeeder::class,
+            ProductQuestionAnswerSeeder::class,
 
             SearchHistorySeeder::class,
             AddressSeeder::class,

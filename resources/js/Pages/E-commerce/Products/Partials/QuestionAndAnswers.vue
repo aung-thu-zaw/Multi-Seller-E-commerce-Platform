@@ -3,6 +3,7 @@ import ProductQuestionCard from '@/Components/Cards/Products/ProductQuestionCard
 import ProductAnswerCard from '@/Components/Cards/Products/ProductAnswerCard.vue'
 import ProductQuestionForm from '@/Components/Forms/TextareaForms/ProductQuestionForm.vue'
 import Pagination from '@/Components/Paginations/Pagination.vue'
+import { Link } from '@inertiajs/vue3'
 
 defineProps({ product: Object, productQuestions: Object })
 </script>
@@ -55,9 +56,7 @@ defineProps({ product: Object, productQuestions: Object })
     </div>
 
     <!-- Question Form -->
-    <div
-      v-show="$page.props.auth?.user && $page.props.auth?.store?.id !== product?.store?.seller_id"
-    >
+    <div v-show="$page.props.auth?.user && $page.props.auth?.store?.id !== product?.store_id">
       <ProductQuestionForm :product="product" />
     </div>
     <div v-show="!$page.props.auth.user" class="py-5">

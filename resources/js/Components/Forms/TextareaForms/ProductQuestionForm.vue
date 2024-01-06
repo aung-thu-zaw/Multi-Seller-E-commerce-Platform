@@ -18,7 +18,7 @@ const { executeRecaptcha, recaptchaLoaded } = useReCaptcha()
 const submitProductQuestion = async () => {
   await recaptchaLoaded()
   form.captcha_token = await executeRecaptcha('create_product_question')
-  form.post('', {
+  form.post(route('product.questions.store', { product: props.product?.slug }), {
     replace: true,
     preserveState: true,
     preserveScroll: true,

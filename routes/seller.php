@@ -9,6 +9,7 @@ use App\Http\Controllers\Seller\Dashboard\OrderManagement\OrderController;
 use App\Http\Controllers\Seller\Dashboard\OrderManagement\ReturnItemController;
 use App\Http\Controllers\Seller\Dashboard\ProductManage\ProductController;
 use App\Http\Controllers\Seller\Dashboard\ProductManage\ProductImageController;
+use App\Http\Controllers\Seller\Dashboard\ProductQuestionController;
 use App\Http\Controllers\Seller\Dashboard\StoreProductBannerController;
 use App\Http\Controllers\Seller\Dashboard\StoreProductCategoryController;
 use App\Http\Controllers\Seller\Dashboard\StoreSettingController;
@@ -56,6 +57,9 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
                 Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
+
+        // ***** Product Question Operations *****
+        Route::resource('product-questions', ProductQuestionController::class)->except(['show','destroy']);
 
 
 

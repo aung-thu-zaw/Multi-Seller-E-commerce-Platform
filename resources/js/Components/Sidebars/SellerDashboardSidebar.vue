@@ -231,6 +231,31 @@ const store = computed(() => usePage().props.auth?.store)
               </Link>
             </li>
 
+            <!-- Product Questions -->
+            <li class="items-center">
+              <Link
+                :href="route('seller.product-questions.index')"
+                :data="{
+                  page: 1,
+                  per_page: 5,
+                  sort: 'id',
+                  direction: 'desc'
+                }"
+                class="text-xs py-3 font-bold block"
+                :class="{
+                  'text-blue-600 hover:text-blue-500': $page.url.startsWith(
+                    '/seller/product-questions'
+                  ),
+                  'text-slate-600 hover:text-slate-500': !$page.url.startsWith(
+                    '/seller/product-questions'
+                  )
+                }"
+              >
+                <i class="fa-solid fa-clipboard-question mr-2"></i>
+                {{ __('Products Questions') }}
+              </Link>
+            </li>
+
             <!-- Chat -->
             <!-- Store Profile -->
             <li class="items-center">
@@ -595,18 +620,8 @@ const store = computed(() => usePage().props.auth?.store)
           <!-- Seller Faqs -->
           <li class="items-center">
             <Link
-              href="#"
-              :data="{
-                page: 1,
-                per_page: 5,
-                sort: 'id',
-                direction: 'desc'
-              }"
-              class="text-xs py-3 font-bold block"
-              :class="{
-                'text-blue-600 hover:text-blue-500': $page.url.startsWith('/seller/guides'),
-                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/seller/guides')
-              }"
+              :href="route('faqs.index')"
+              class="text-xs py-3 font-bold block text-slate-600 hover:text-slate-500"
             >
               <i class="fa-solid fa-circle-question mr-2"></i>
               {{ __('FAQs') }}
@@ -616,18 +631,8 @@ const store = computed(() => usePage().props.auth?.store)
           <!-- Help Center -->
           <li class="items-center">
             <Link
-              href="#"
-              :data="{
-                page: 1,
-                per_page: 5,
-                sort: 'id',
-                direction: 'desc'
-              }"
-              class="text-xs py-3 font-bold block"
-              :class="{
-                'text-blue-600 hover:text-blue-500': $page.url.startsWith('/seller/guides'),
-                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/seller/guides')
-              }"
+              :href="route('help-center')"
+              class="text-xs py-3 font-bold block text-slate-600 hover:text-slate-500"
             >
               <i class="fa-solid fa-circle-info mr-2"></i>
               {{ __('Help Center') }}
