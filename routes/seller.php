@@ -11,6 +11,8 @@ use App\Http\Controllers\Seller\Dashboard\PayoutRequestController;
 use App\Http\Controllers\Seller\Dashboard\ProductManage\ProductController;
 use App\Http\Controllers\Seller\Dashboard\ProductManage\ProductImageController;
 use App\Http\Controllers\Seller\Dashboard\ProductQuestionController;
+use App\Http\Controllers\Seller\Dashboard\ReviewManagement\ProductReviewController;
+use App\Http\Controllers\Seller\Dashboard\ReviewManagement\StoreReviewController;
 use App\Http\Controllers\Seller\Dashboard\StoreProductBannerController;
 use App\Http\Controllers\Seller\Dashboard\StoreProductCategoryController;
 use App\Http\Controllers\Seller\Dashboard\StoreSettingController;
@@ -61,6 +63,12 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
 
         // ***** Product Question Operations *****
         Route::resource('product-questions', ProductQuestionController::class)->except(['show','destroy']);
+
+        // ***** Product Review Operations *****
+        Route::resource('product-reviews', ProductReviewController::class)->except(['show','destroy']);
+
+        // ***** Store Review Operations *****
+        Route::resource('store-reviews', StoreReviewController::class)->except(['show','destroy']);
 
         // ***** Payout Requests Operations *****
         Route::resource('payout-requests', PayoutRequestController::class)->except(['show','destroy']);

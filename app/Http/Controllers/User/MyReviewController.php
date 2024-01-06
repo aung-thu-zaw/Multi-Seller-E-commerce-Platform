@@ -58,6 +58,8 @@ class MyReviewController extends Controller
     {
         $productReview = (new CreateProductReviewAction())->handle($request->validated(), $product);
 
+        
+
         return to_route("user.my-reviews.index", ["tab" => "to-review"])->with('success', 'Your rating has been successfully submitted.');
     }
 }

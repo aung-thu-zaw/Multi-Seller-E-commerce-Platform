@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Laravel\Scout\Searchable;
 
 class StoreReview extends Model
 {
     use HasFactory;
+    use Searchable;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,StoreReview>

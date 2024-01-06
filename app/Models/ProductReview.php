@@ -10,11 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 class ProductReview extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use Searchable;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Product,ProductReview>

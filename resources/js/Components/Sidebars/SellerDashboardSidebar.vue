@@ -484,12 +484,21 @@ const store = computed(() => usePage().props.auth?.store)
 
               <div
                 id="review-management-accordion"
-                class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+                class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+                :class="{
+                  block:
+                    $page.url.startsWith('/seller/product-reviews') ||
+                    $page.url.startsWith('/seller/store-reviews'),
+                  hidden: !(
+                    $page.url.startsWith('/seller/product-reviews') ||
+                    $page.url.startsWith('/seller/store-reviews')
+                  )
+                }"
               >
                 <ul class="pl-8">
                   <li class="items-center">
                     <Link
-                      href="#"
+                      :href="route('seller.product-reviews.index')"
                       :data="{
                         page: 1,
                         per_page: 5,
@@ -499,9 +508,9 @@ const store = computed(() => usePage().props.auth?.store)
                       class="text-xs py-3 font-bold block"
                       :class="{
                         'text-blue-600 hover:text-blue-500':
-                          $page.url.startsWith('/admin/product-reviews'),
+                          $page.url.startsWith('/seller/product-reviews'),
                         'text-slate-600 hover:text-slate-500':
-                          !$page.url.startsWith('/admin/product-reviews')
+                          !$page.url.startsWith('/seller/product-reviews')
                       }"
                     >
                       {{ __('Product Reviews') }}
@@ -509,7 +518,7 @@ const store = computed(() => usePage().props.auth?.store)
                   </li>
                   <li class="items-center">
                     <Link
-                      href="#"
+                      :href="route('seller.store-reviews.index')"
                       :data="{
                         page: 1,
                         per_page: 5,
@@ -519,9 +528,9 @@ const store = computed(() => usePage().props.auth?.store)
                       class="text-xs py-3 font-bold block"
                       :class="{
                         'text-blue-600 hover:text-blue-500':
-                          $page.url.startsWith('/admin/store-reviews'),
+                          $page.url.startsWith('/seller/store-reviews'),
                         'text-slate-600 hover:text-slate-500':
-                          !$page.url.startsWith('/admin/store-reviews')
+                          !$page.url.startsWith('/seller/store-reviews')
                       }"
                     >
                       {{ __('Store Reviews') }}
