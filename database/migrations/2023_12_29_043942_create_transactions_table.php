@@ -12,9 +12,10 @@ return new class () extends Migration {
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('order_id')->nullable()->constrained()->onDelete('set null');
             $table->string('transaction_id')->nullable();
-            $table->string('payment_method');
+            $table->enum('related_type', ['order', 'payout', 'refund']);
+            $table->enum('payment_method', ["card","paypal","bank"]);
             $table->decimal('amount', 8, 2);
             $table->timestamps();
         });

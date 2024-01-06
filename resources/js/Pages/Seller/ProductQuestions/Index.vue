@@ -15,7 +15,7 @@ import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
 import ImageCell from '@/Components/Tables/TableCells/TableImageCell.vue'
 import NoTableData from '@/Components/Tables/NoTableData.vue'
 import GreenBadge from '@/Components/Badges/GreenBadge.vue'
-import RedBadge from '@/Components/Badges/RedBadge.vue'
+import OrangeBadge from '@/Components/Badges/OrangeBadge.vue'
 import BulkActionButton from '@/Components/Buttons/BulkActionButton.vue'
 import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
 import Pagination from '@/Components/Paginations/DashboardPagination.vue'
@@ -128,14 +128,14 @@ const productQuestionList = 'seller.product-questions.index'
 
               <TableDataCell>
                 <div class="min-w-[150px]">
-                  <GreenBadge v-show="item?.status === 'awaiting'">
+                  <OrangeBadge v-show="item?.status === 'awaiting'">
                     <i class="fa-solid fa-spinner animate-spin"></i>
                     awaiting response
-                  </GreenBadge>
-                  <RedBadge v-show="item?.status === 'answered'">
+                  </OrangeBadge>
+                  <GreenBadge v-show="item?.status === 'answered'">
                     <i class="fa-solid fa-circle-check animate-pulse"></i>
                     {{ item?.status }}
-                  </RedBadge>
+                  </GreenBadge>
                 </div>
               </TableDataCell>
 

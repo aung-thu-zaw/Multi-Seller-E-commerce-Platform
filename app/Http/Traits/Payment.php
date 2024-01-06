@@ -84,6 +84,7 @@ trait Payment
             Transaction::create([
                 'order_id' => $order->id,
                 'transaction_id' => $transaction_id,
+                'related_type' => 'order',
                 'payment_method' => $paymentMethod,
                 'amount' => $totalAmount,
             ]);
