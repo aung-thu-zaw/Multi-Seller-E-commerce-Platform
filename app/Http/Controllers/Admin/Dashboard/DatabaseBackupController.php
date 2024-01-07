@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Response as FacadesResponse;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Response;
 use Inertia\ResponseFactory;
@@ -50,5 +52,22 @@ class DatabaseBackupController extends Controller
         return to_route('admin.database-backups.index')->with('success', 'Backup completed successfully');
     }
 
+    public function download(string $file)
+    {
+        $filePath = "Multi Seller E-commerce Platform/{$file}";
+
+        try {
+            if (Storage::disk('local')->exists($filePath)) {
+                return response()->download(storage_path("app/{$filePath}"), $file, [
+                    'Content-Type' => 'application/zip',
+                    'Content-Disposition' => 'attachment; filename=' . $file,
+                ]);
+            } else {
+                return redirect()->route('admin.database-backups.index')->with('error', 'Backup file not found');
+            }
+        } catch (\Exception $e) {
+            return redirect()->route('admin.database-backups.index')->with('error', 'Download failed: ' . $e->getMessage());
+        }
+    }
 
 }

@@ -20,6 +20,7 @@ import { Head, router, usePage } from '@inertiajs/vue3'
 import { __ } from '@/Services/translations-inside-setup.js'
 import { toast } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
+import axios from 'axios'
 
 defineProps({ backups: Object })
 
@@ -27,28 +28,28 @@ const backupList = 'admin.database-backups.index'
 
 const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
-const handleDownloadFile = (filename) => {
-  router.get(
-    route('admin.database-backups.download', { file: filename }),
-    {},
-    {
-      onSuccess: () => {
-        const successMessage = usePage().props.flash.success
-        if (successMessage) {
-          toast.success(__(successMessage), {
-            autoClose: 2000
-          })
-        }
-        const errorMessage = usePage().props.flash.error
-        if (errorMessage) {
-          toast.error(__(errorMessage), {
-            autoClose: 2000
-          })
-        }
-      }
-    }
-  )
-}
+// const handleDownloadFile = (filename) => {
+//   router.get(
+//     route('admin.database-backups.download', { file: filename }),
+//     {},
+//     {
+//       onSuccess: () => {
+//         const successMessage = usePage().props.flash.success
+//         if (successMessage) {
+//           toast.success(__(successMessage), {
+//             autoClose: 2000
+//           })
+//         }
+//         const errorMessage = usePage().props.flash.error
+//         if (errorMessage) {
+//           toast.error(__(errorMessage), {
+//             autoClose: 2000
+//           })
+//         }
+//       }
+//     }
+//   )
+// }
 
 const handleCreateANewBackup = () => {
   router.post(
@@ -71,6 +72,28 @@ const handleCreateANewBackup = () => {
       }
     }
   )
+}
+
+const handleDownloadBackup = async (filename) => {
+  try {
+    const response = await axios.get(route('admin.database-backups.download', { file: filename }), {
+      responseType: 'blob'
+    })
+
+    const url = window.URL.createObjectURL(new Blob([response.data]))
+    const link = document.createElement('a')
+
+    link.href = url
+    link.setAttribute('download', filename)
+    document.body.appendChild(link)
+    link.click()
+  } catch (error) {
+    if (error) {
+      toast.error(__(error), {
+        autoClose: 2000
+      })
+    }
+  }
 }
 </script>
 
@@ -189,7 +212,7 @@ const handleCreateANewBackup = () => {
               <TableActionCell>
                 <NormalButton
                   v-show="can('database-backups.download')"
-                  @click="handleDownloadFile(item.filename)"
+                  @click="handleDownloadBackup(item.filename)"
                   class="bg-yellow-600 text-white ring-2 ring-yellow-300"
                 >
                   <i class="fa-solid fa-download"></i>

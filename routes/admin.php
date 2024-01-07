@@ -226,7 +226,7 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             Route::get('/{order}/detail', 'show')->name('show');
             Route::patch('/{order}/status', 'updateOrderStatus')->name('status.update');
             Route::patch('/{order}/payment', 'updatePaymentStatus')->name('payment.update');
-            Route::delete('//destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+            Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
         });
 
         Route::get('orders/{order}/download', DownloadOrderInvoiceController::class)->name('order-invoice.download');
@@ -603,6 +603,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             Route::get('/', 'index')->name('index');
             Route::post('/', 'backup')->name('backup');
             Route::delete('/{file}', 'destroy')->name('destroy');
-            Route::get('/download/{file}', 'download')->name('download');
+            Route::get('/{file}/download', 'download')->name('download');
         });
     });
