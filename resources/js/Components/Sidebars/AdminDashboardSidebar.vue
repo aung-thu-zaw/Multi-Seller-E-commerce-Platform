@@ -2008,9 +2008,7 @@ const toggleCollapseShow = (classes) => {
               :href="route('admin.database-backups.index')"
               :data="{
                 page: 1,
-                per_page: 5,
-                sort: 'id',
-                direction: 'desc'
+                per_page: 5
               }"
               class="text-xs py-3 font-bold block"
               :class="{

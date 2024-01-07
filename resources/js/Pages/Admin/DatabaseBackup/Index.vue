@@ -3,16 +3,14 @@ import AdminDashboardLayout from '@/Layouts/AdminDashboardLayout.vue'
 import Breadcrumb from '@/Components/Breadcrumbs/Breadcrumb.vue'
 import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
 import TableContainer from '@/Components/Tables/TableContainer.vue'
-import ActionTable from '@/Components/Tables/ActionTable.vue'
-import DashboardTableDataSearchBox from '@/Components/Forms/SearchBoxs/DashboardTableDataSearchBox.vue'
+import Table from '@/Components/Tables/Table.vue'
 import DashboardTableDataPerPageSelectBox from '@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue'
-import DashboardTableFilter from '@/Components/Forms/SelectBoxs/DashboardTableFilter.vue'
-import FilteredBy from '@/Components/Tables/FilteredBy.vue'
+import GreenBadge from '@/Components/Badges/GreenBadge.vue'
+import RedBadge from '@/Components/Badges/RedBadge.vue'
 import TableHeaderCell from '@/Components/Tables/TableCells/TableHeaderCell.vue'
 import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
 import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
 import NoTableData from '@/Components/Tables/NoTableData.vue'
-import BulkActionButton from '@/Components/Buttons/BulkActionButton.vue'
 import NormalButton from '@/Components/Buttons/NormalButton.vue'
 import Pagination from '@/Components/Paginations/DashboardPagination.vue'
 import { useResourceActions } from '@/Composables/useResourceActions'
@@ -22,34 +20,11 @@ import { toast } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
 import axios from 'axios'
 
-defineProps({ backups: Object })
+defineProps({ backupsPaginated: Object, overAllInformation: Object })
 
 const backupList = 'admin.database-backups.index'
 
-const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
-
-// const handleDownloadFile = (filename) => {
-//   router.get(
-//     route('admin.database-backups.download', { file: filename }),
-//     {},
-//     {
-//       onSuccess: () => {
-//         const successMessage = usePage().props.flash.success
-//         if (successMessage) {
-//           toast.success(__(successMessage), {
-//             autoClose: 2000
-//           })
-//         }
-//         const errorMessage = usePage().props.flash.error
-//         if (errorMessage) {
-//           toast.error(__(errorMessage), {
-//             autoClose: 2000
-//           })
-//         }
-//       }
-//     }
-//   )
-// }
+const { softDeleteAction } = useResourceActions()
 
 const handleCreateANewBackup = () => {
   router.post(
@@ -111,67 +86,72 @@ const handleDownloadBackup = async (filename) => {
         </Breadcrumb>
       </div>
 
-      <div class="flex items-center justify-between mb-3">
-        <!-- Create New Button -->
-        <NormalButton v-show="can('database-backups.create')" @click="handleCreateANewBackup">
-          <i class="fa-solid fa-file-circle-plus mr-1"></i>
-          {{ __('Create A New :label', { label: __('Backup') }) }}
-        </NormalButton>
+      <div class="border bg-white rounded-md shadow px-5 pt-6 mb-5">
+        <TableContainer>
+          <Table :items="[overAllInformation]">
+            <!-- Table Header -->
+            <template #table-header>
+              <TableHeaderCell label="Disk" />
+
+              <TableHeaderCell label="Disk Health" />
+
+              <TableHeaderCell label="Total Backups" />
+
+              <TableHeaderCell label="Last Time Backup" />
+
+              <TableHeaderCell label="Used Storage" />
+            </template>
+
+            <!-- Table Body -->
+            <template #table-data="{ item }">
+              <TableDataCell>
+                {{ item?.disk }}
+              </TableDataCell>
+              <TableDataCell>
+                <GreenBadge v-show="item.health === 'Healthy'">
+                  <i class="fa-solid fa-circle-check"></i>
+                  {{ item.health }}
+                </GreenBadge>
+                <RedBadge v-show="item.health === 'Not Healthy'">
+                  <i class="fa-solid fa-circle-xmar"></i>
+                  {{ item.health }}
+                </RedBadge>
+              </TableDataCell>
+
+              <TableDataCell>
+                {{ item?.amountOfBackups }}
+              </TableDataCell>
+
+              <TableDataCell>
+                {{ item?.lastTimeBackup }}
+              </TableDataCell>
+
+              <TableDataCell>
+                {{ item?.usedBackupStorage }}
+              </TableDataCell>
+            </template>
+          </Table>
+        </TableContainer>
       </div>
 
       <!-- Table Start -->
       <div class="border bg-white rounded-md shadow px-5 py-3">
-        <div
-          class="my-3 flex flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between overflow-auto p-2"
-        >
-          <DashboardTableDataSearchBox
-            :placeholder="__('Search by :label', { label: __('Url') })"
-            :to="backupList"
-          />
+        <div class="my-3 flex items-center justify-between overflow-auto w-full p-2">
+          <!-- Create New Button -->
+          <div class="w-full">
+            <NormalButton v-show="can('database-backups.create')" @click="handleCreateANewBackup">
+              <i class="fa-solid fa-file-circle-plus mr-1"></i>
+              {{ __('Create A New :label', { label: __('Backup') }) }}
+            </NormalButton>
+          </div>
 
           <div class="flex items-center justify-end w-full md:space-x-5">
             <DashboardTableDataPerPageSelectBox :to="backupList" />
-
-            <DashboardTableFilter
-              :to="backupList"
-              :filterBy="['created', 'status']"
-              :options="[
-                {
-                  label: 'Show',
-                  value: 'show'
-                },
-                {
-                  label: 'Hide',
-                  value: 'hide'
-                }
-              ]"
-            />
           </div>
         </div>
 
-        <!-- Filtered By -->
-        <FilteredBy :to="backupList" />
-
         <TableContainer>
-          <ActionTable :items="backups">
-            <!-- Table Actions -->
-            <!-- <template #bulk-actions="{ selectedItems }">
-              <BulkActionButton
-                v-show="can('database-backups.delete')"
-                @click="
-                  softDeleteSelectedAction(
-                    'Database Backups',
-                    'admin.database-backups.destroy.selected',
-                    selectedItems
-                  )
-                "
-                class="text-red-600"
-              >
-                <i class="fa-solid fa-trash-can"></i>
-                {{ __('Delete Selected') }} ({{ selectedItems.length }})
-              </BulkActionButton>
-            </template> -->
-
+          <Table :items="backupsPaginated.data">
             <!-- Table Header -->
             <template #table-header>
               <TableHeaderCell label="Location" />
@@ -180,7 +160,7 @@ const handleDownloadBackup = async (filename) => {
 
               <TableHeaderCell label="Size" />
 
-              <TableHeaderCell label="Date" />
+              <TableHeaderCell label="Created At" />
 
               <TableHeaderCell label="Actions" />
             </template>
@@ -233,12 +213,12 @@ const handleDownloadBackup = async (filename) => {
                 </NormalButton>
               </TableActionCell>
             </template>
-          </ActionTable>
+          </Table>
         </TableContainer>
 
-        <!-- <Pagination :data="backups" /> -->
+        <Pagination :data="backupsPaginated" />
 
-        <NoTableData v-show="!backups.length" />
+        <NoTableData v-show="!backupsPaginated.data" />
       </div>
       <!-- Table End -->
     </div>
