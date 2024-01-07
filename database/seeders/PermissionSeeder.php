@@ -253,5 +253,10 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'general-settings.edit', 'group' => 'Settings']);
 
         Permission::create(['name' => 'seo-settings.edit', 'group' => 'Settings']);
+
+        Permission::create(['name' => 'database-backups.view', 'group' => 'Database Backup']);
+        Permission::create(['name' => 'database-backups.download', 'group' => 'Database Backup']);
+        Permission::create(['name' => 'database-backups.create', 'group' => 'Database Backup']);
+        Permission::create(['name' => 'database-backups.delete', 'group' => 'Database Backup']);
     }
 }

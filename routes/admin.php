@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\Dashboard\CategoryController;
 use App\Http\Controllers\Admin\Dashboard\CollectionController;
 use App\Http\Controllers\Admin\Dashboard\CouponController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
+use App\Http\Controllers\Admin\Dashboard\DatabaseBackupController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqCategoryController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqContentController;
 use App\Http\Controllers\Admin\Dashboard\Faqs\FaqSubcategoryController;
@@ -592,4 +593,16 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
+
+
+        // ***** Database Backup Operations *****
+        Route::controller(DatabaseBackupController::class)
+        ->prefix('/database-backups')
+        ->name('database-backups.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/', 'backup')->name('backup');
+            Route::delete('/{file}', 'destroy')->name('destroy');
+            Route::get('/download/{file}', 'download')->name('download');
+        });
     });

@@ -2003,6 +2003,28 @@ const toggleCollapseShow = (classes) => {
 
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
           <!-- Clear Database -->
+          <li v-show="can('database-backups.view')" class="items-center">
+            <Link
+              :href="route('admin.database-backups.index')"
+              :data="{
+                page: 1,
+                per_page: 5,
+                sort: 'id',
+                direction: 'desc'
+              }"
+              class="text-xs py-3 font-bold block"
+              :class="{
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/database-backups'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/database-backups')
+              }"
+            >
+              <i class="fa-solid fa-database mr-2"></i>
+              {{ __('Database Backups') }}
+            </Link>
+          </li>
+          <!-- Clear Database -->
           <li v-show="can('brands.view')" class="items-center">
             <Link
               :href="route('admin.brands.index')"
@@ -2018,7 +2040,7 @@ const toggleCollapseShow = (classes) => {
                 'text-red-600 hover:text-red-500': !$page.url.startsWith('/admin/brands')
               }"
             >
-              <i class="fa-solid fa-database mr-2"></i>
+              <i class="fa-solid fa-ban mr-2"></i>
               {{ __('Clear Database') }}
             </Link>
           </li>
