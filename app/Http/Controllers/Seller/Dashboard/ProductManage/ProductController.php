@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Seller\Dashboard\ProductManage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Seller\ProductManage\ProductRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
+use App\Models\AttributeOption;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use Attribute;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
@@ -42,7 +45,95 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request): RedirectResponse
     {
-        (new CreateProductAction())->handle($request->validated());
+
+        $product = [
+            [
+                'name' => 'Samsung Galaxy S21',
+                'status' => 'approved',
+                'SKUs' => [
+                    [
+                        'price' => 349,
+                        'qty' => 20,
+                        'attributes' => [
+                            'color' => 'Red', 'ram' => '2GB', 'storage' => '32GB',
+                        ],
+                    ],
+                    [
+                        'price' => 349,
+                        'qty' => 10,
+                        'attributes' => [
+                            'color' => 'Green', 'ram' => '4GB', 'storage' => '32GB',
+                        ],
+                    ],
+                    [
+                        'price' => 349,
+                        'qty' => 2,
+                        'attributes' => [
+                            'color' => 'Yellow', 'ram' => '8GB', 'storage' => '32GB',
+                        ],
+                    ],
+                    [
+                        'price' => 1099,
+                        'qty' => 4,
+                        'attributes' => [
+                            'color' => 'Blue', 'ram' => '8GB', 'storage' => '512GB',
+                        ],
+                    ],
+                    [
+                        'price' => 1499,
+                        'qty' => 5,
+                        'attributes' => [
+                            'color' => 'Black', 'ram' => '16GB', 'storage' => '1TB',
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+
+
+
+        $product = "";
+        $attributesByName = Attribute::pluck('id', 'name')->toArray();
+
+        DB::transaction(function () use ($product, $attributesByName) {
+
+            // Main Product Creation
+            $DBProduct = Product::factory()->create([
+                'name' => $product['name'],
+                'slug' => str($product['name'])->slug(),
+                'status' => 'approved'
+            ]);
+
+            // Product Variant Creation
+            foreach ($product['SKUs'] as $sku) {
+                $skuCode = str($product['name']);
+                $skuOptions = [];
+                foreach ($sku['attributes'] as $name => $value) {
+                    $skuCode .= ' '.$value.' '.$name;
+                    if (!array_key_exists($name, $attributesByName)) {
+
+                        $this->command->error('Attribute '.$name.' not found');
+
+                        return;
+                    }
+                    $attributeOption = AttributeOption::where('attribute_id', $attributesByName[$name])->where('value', $value)->value('id');
+                    if (!$attributeOption) {
+                        $this->command->error('Attribute Value '.$name.' => '.$value.' not found');
+
+                        return;
+                    }
+                    $skuOptions[] = $attributeOption;
+                }
+                $sku = $DBProduct->skus()->create([
+                    'code' => str()->slug($skuCode),
+                    'price' => $sku['price'],
+                    'qty' => $sku['qty'],
+                ]);
+
+                $sku->attributeOptions()->attach($skuOptions);
+            }
+        });
 
         return to_route('seller.products.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }
@@ -62,7 +153,7 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, Product $product): RedirectResponse
     {
-        (new UpdateProductAction())->handle($request->validated(), $product);
+        // (new UpdateProductAction())->handle($request->validated(), $product);
 
         return to_route('seller.products.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
     }

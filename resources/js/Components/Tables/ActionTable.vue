@@ -113,7 +113,7 @@ const deselectAll = () => {
         <td class="pl-4">
           <Checkbox v-model:checked="selectedItems" :value="item.id" />
         </td>
-        <slot name="table-data" :item="item" />
+        <slot name="table-data" :item="item" :index="index" />
       </tr>
     </tbody>
   </table>

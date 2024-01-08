@@ -9,7 +9,7 @@ defineProps({
 
 <template>
   <th scope="col" class="px-6 py-3">
-    <span class="line-clamp-1 capitalize">
+    <span class="line-clamp-1 capitalize p-1">
       {{ label }}
     </span>
   </th>

@@ -23,23 +23,32 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'brand_id' => ['nullable', 'numeric', Rule::exists('brands', 'id')],
             'category_id' => ['required', 'numeric', Rule::exists('categories', 'id')],
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'qty' => ['required', 'numeric'],
-            'price' => ['required', 'numeric'],
-            'offer_price' => ['nullable', 'numeric'],
-            'offer_price_start_date' => ['nullable', 'date'],
-            'offer_price_end_date' => ['nullable', 'date'],
             'image' => ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'],
             'warranty_type' => ['nullable', 'string'],
             'warranty_period' => ['nullable', 'string'],
             'warranty_policy' => ['nullable', 'string'],
             'return_day' => ['nullable', 'string'],
             'return_policy' => ['nullable', 'string'],
+            'status' => ['required', Rule::in(["pending","draft"])],
+            'variants' => ["nullable","array"],
             'captcha_token' => [new RecaptchaRule()],
         ];
+
+        if($this->input("variants")) {
+            $rules['qty'] = ['nullable', 'numeric'];
+            $rules['price'] = ['nullable', 'numeric'];
+
+        } else {
+
+            $rules['qty'] = ['required', 'numeric'];
+            $rules['price'] = ['required', 'numeric'];
+        }
+
+        return $rules;
     }
 }

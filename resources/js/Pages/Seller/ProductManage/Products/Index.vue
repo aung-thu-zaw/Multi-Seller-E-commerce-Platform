@@ -1,5 +1,5 @@
 <script setup>
-import AdminDashboardLayout from '@/Layouts/AdminDashboardLayout.vue'
+import SellerDashboardLayout from '@/Layouts/SellerDashboardLayout.vue'
 import Breadcrumb from '@/Components/Breadcrumbs/Breadcrumb.vue'
 import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
 import TableContainer from '@/Components/Tables/TableContainer.vue'
@@ -37,7 +37,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 <template>
   <Head :title="__('Products')" />
 
-  <AdminDashboardLayout>
+  <SellerDashboardLayout>
     <!-- Breadcrumb And Trash Button  -->
     <div class="min-h-screen py-10 font-poppins">
       <div
@@ -50,13 +50,13 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
       <div class="flex items-center justify-between mb-3">
         <!-- Create New Button -->
-        <InertiaLinkButton v-show="can('products.create')" to="seller.products.create">
+        <InertiaLinkButton to="seller.products.create">
           <i class="fa-solid fa-file-circle-plus mr-1"></i>
           {{ __('Create A New :label', { label: __('Product') }) }}
         </InertiaLinkButton>
 
         <!-- Trash Button -->
-        <InertiaLinkButton
+        <!-- <InertiaLinkButton
           to="seller.products.trashed"
           :data="{
             page: 1,
@@ -68,7 +68,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
         >
           <i class="fa-solid fa-trash-can mr-1"></i>
           {{ __('Trash') }}
-        </InertiaLinkButton>
+        </InertiaLinkButton> -->
       </div>
 
       <!-- Table Start -->
@@ -117,7 +117,6 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
             <!-- Table Actions -->
             <template #bulk-actions="{ selectedItems }">
               <BulkActionButton
-                v-show="can('products.delete')"
                 @click="
                   softDeleteSelectedAction(
                     'Products',
@@ -214,7 +213,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
                     <Link
                       as="button"
                       class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 w-full"
-                      :href="route('seller.product-variants.index', item?.slug)"
+                      href="#"
                     >
                       <i class="fa-solid fa-boxes-stacked"></i>
                       {{ __('Product Variants') }}
@@ -252,5 +251,5 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
       </div>
       <!-- Table End -->
     </div>
-  </AdminDashboardLayout>
+  </SellerDashboardLayout>
 </template>

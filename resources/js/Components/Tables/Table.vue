@@ -22,7 +22,7 @@ defineProps({
           'border-b': index !== items.length - 1
         }"
       >
-        <slot name="table-data" :item="item" />
+        <slot name="table-data" :item="item" :index="index" />
       </tr>
     </tbody>
   </table>

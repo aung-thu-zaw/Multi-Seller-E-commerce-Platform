@@ -77,18 +77,26 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
 
 
         // // ***** Product Operations *****
-        // Route::resource('products', ProductController::class)->except(['show']);
+        Route::resource('product-manage', ProductController::class)->except(['show'])->parameters([
+            'product-manage' => 'product',
+        ])->names([
+            'index' => 'products.index',
+            'create' => 'products.create',
+            'edit' => 'products.edit',
+            'update' => 'products.update',
+            'destroy' => 'products.destroy',
+        ]);
 
-        // Route::delete('/products/destroy/selected/{selected_items}', [ProductController::class, 'destroySelected'])->name('products.destroy.selected');
+        Route::delete('/products/destroy/selected/{selected_items}', [ProductController::class, 'destroySelected'])->name('products.destroy.selected');
 
-        // Route::controller(ProductImageController::class)
-        //     ->prefix('/products')
-        //     ->name('product.')
-        //     ->group(function () {
-        //         Route::get('/{product}/images', 'productImages')->name('images');
-        //         Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
-        //         Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
-        //     });
+        Route::controller(ProductImageController::class)
+            ->prefix('/products')
+            ->name('product.')
+            ->group(function () {
+                Route::get('/{product}/images', 'productImages')->name('images');
+                Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
+                Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
+            });
 
 
         // Store Category Operations

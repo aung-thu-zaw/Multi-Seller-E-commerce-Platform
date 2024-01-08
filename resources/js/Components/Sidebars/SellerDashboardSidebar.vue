@@ -213,7 +213,7 @@ const store = computed(() => usePage().props.auth?.store)
             <!-- Products -->
             <li class="items-center">
               <Link
-                href="#"
+                :href="route('seller.products.index')"
                 :data="{
                   page: 1,
                   per_page: 5,
@@ -222,8 +222,10 @@ const store = computed(() => usePage().props.auth?.store)
                 }"
                 class="text-xs py-3 font-bold block"
                 :class="{
-                  'text-blue-600 hover:text-blue-500': $page.url.startsWith('/seller/products'),
-                  'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/seller/products')
+                  'text-blue-600 hover:text-blue-500':
+                    $page.url.startsWith('/seller/product-manage'),
+                  'text-slate-600 hover:text-slate-500':
+                    !$page.url.startsWith('/seller/product-manage')
                 }"
               >
                 <i class="fa-solid fa-basket-shopping mr-2"></i>
