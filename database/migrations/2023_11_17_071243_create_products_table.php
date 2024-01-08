@@ -19,11 +19,11 @@ return new class() extends Migration
             $table->string('slug');
             $table->text('description');
             $table->string('code')->nullable();
-            $table->decimal('price', 8, 2);
+            $table->decimal('price', 8, 2)->nullable();
             $table->decimal('offer_price', 8, 2)->nullable();
             $table->date('offer_price_start_date')->nullable();
             $table->date('offer_price_end_date')->nullable();
-            $table->integer('qty');
+            $table->integer('qty')->nullable();
             $table->string('image');
             $table->string('warranty_type')->nullable();
             $table->string('warranty_period')->nullable();

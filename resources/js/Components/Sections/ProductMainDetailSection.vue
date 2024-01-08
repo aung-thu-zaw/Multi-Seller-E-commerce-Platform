@@ -138,10 +138,12 @@ const remainingQuantityInStock = computed(() => {
 const getDefaultAttributes = () => {
   if (props.attributes && props.options && props.product?.skus.length) {
     const defaultAttributes = {}
-
+    console.log(props.options)
     for (const attributeId in props.attributes) {
       const attributeName = props.attributes[attributeId]
       const options = props.options[attributeId]
+
+      console.log(attributeName, options)
 
       defaultAttributes[attributeName] = options[0].value
     }

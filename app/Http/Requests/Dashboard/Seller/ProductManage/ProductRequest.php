@@ -34,19 +34,19 @@ class ProductRequest extends FormRequest
             'warranty_policy' => ['nullable', 'string'],
             'return_day' => ['nullable', 'string'],
             'return_policy' => ['nullable', 'string'],
-            'status' => ['required', Rule::in(["pending","draft"])],
-            'variants' => ["nullable","array"],
             'captcha_token' => [new RecaptchaRule()],
         ];
 
-        if($this->input("variants")) {
+        if($this->variants || $this->attribute_options) {
             $rules['qty'] = ['nullable', 'numeric'];
             $rules['price'] = ['nullable', 'numeric'];
+            $rules['variants'] = ['required', 'array'];
+            $rules['attribute_options'] = ['required', 'array'];
 
         } else {
-
             $rules['qty'] = ['required', 'numeric'];
             $rules['price'] = ['required', 'numeric'];
+            $rules['variants'] = ['nullable', 'array'];
         }
 
         return $rules;

@@ -16,6 +16,7 @@ import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
 import NormalButton from '@/Components/Buttons/NormalButton.vue'
 import FormButton from '@/Components/Buttons/FormButton.vue'
 import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
+import MultipleFileInput from '@/Components/Forms/Fields/MultipleFileInput.vue'
 import Datepicker from 'vue3-datepicker'
 import { useResourceActions } from '@/Composables/useResourceActions'
 import { Head } from '@inertiajs/vue3'
@@ -35,12 +36,27 @@ const productHasVariants = ref(null)
 
 const productList = 'seller.products.index'
 
-const { previewImage, setImagePreview } = useImagePreview()
+const {
+  previewImage,
+  setImagePreview,
+  previewImages,
+  setMultipleImagePreviews,
+  removePreviewImage
+} = useImagePreview()
+
+const removeImage = (index) => {
+  removePreviewImage(index)
+  const optionalImagesArray = Array.from(form.images)
+
+  if (index >= 0 && index < optionalImagesArray.length) {
+    optionalImagesArray.splice(index, 1)
+    form.images = optionalImagesArray
+  }
+}
 
 const { form, processing, errors, createAction } = useResourceActions({
   brand_id: null,
   category_id: null,
-  store_id: null,
   name: null,
   qty: null,
   price: null,
@@ -49,11 +65,13 @@ const { form, processing, errors, createAction } = useResourceActions({
   offer_price_end_date: null,
   description: null,
   image: null,
+  images: null,
   warranty_type: null,
   warranty_policy: null,
   warranty_period: null,
   return_day: null,
   return_policy: null,
+  attribute_options: [],
   variants: []
 })
 
@@ -76,19 +94,33 @@ const addNewVariantAttributeAndOptions = () => {
 const saveVariantAttributeAndOptions = (index) => {
   const currentVariant = variantAttributesAndOptions.value[index]
 
-  const attributeInput = currentVariant.attribute
+  const attributeInput = currentVariant.attribute.toLowerCase()
 
   const optionInput =
     typeof currentVariant.options !== 'string'
       ? currentVariant.options.join(',')
       : currentVariant.options
 
-  console.log(optionInput)
-
   const filteredOptions = optionInput
     .split(',')
-    .map((option) => option.trim())
+    .map((option) => option.trim().toLowerCase())
     .filter((option) => option !== '')
+
+  // Check if the attribute already exists in form.attribute_options
+  const existingAttributeIndex = form.attribute_options.findIndex(
+    (attr) => attr.attribute.toLowerCase() === attributeInput.toLowerCase()
+  )
+
+  if (existingAttributeIndex !== -1) {
+    // Update options for the existing attribute
+    form.attribute_options[existingAttributeIndex].options = [...new Set(filteredOptions)]
+  } else {
+    // Add attributes and options directly to form.attribute_options
+    form.attribute_options.push({
+      attribute: attributeInput.toLowerCase(),
+      options: filteredOptions
+    })
+  }
 
   currentVariant.attribute = attributeInput
   currentVariant.options = filteredOptions
@@ -107,6 +139,17 @@ const editVariantAttributeAndOptions = (index) => {
 }
 
 const deleteVariantAttributeAndOptions = (index) => {
+  const deletedVariant = variantAttributesAndOptions.value[index]
+
+  // Remove the attribute and options from form.attribute_options
+  const deletedAttributeIndex = form.attribute_options.findIndex(
+    (attr) => attr.attribute.toLowerCase() === deletedVariant.attribute.toLowerCase()
+  )
+
+  if (deletedAttributeIndex !== -1) {
+    form.attribute_options.splice(deletedAttributeIndex, 1)
+  }
+
   variantAttributesAndOptions.value.splice(index, 1)
 }
 
@@ -138,7 +181,8 @@ const deleteProductVariant = (index) => {
 }
 
 const handleAttributeOptionChange = (index, attribute, selectedOption) => {
-  form.variants[index].attributes[attribute] = selectedOption
+  const currentVariant = form.variants[index]
+  currentVariant.attributes[attribute] = selectedOption.toLowerCase()
 }
 </script>
 
@@ -162,10 +206,62 @@ const handleAttributeOptionChange = (index, attribute, selectedOption) => {
       <!-- Form Start -->
       <div class="border p-10 bg-white rounded-md">
         <form
-          @submit.prevent="createAction('Product', 'seller.products.store')"
+          @submit.prevent="createAction('Product', 'seller.product-manage.store')"
           class="space-y-4 md:space-y-6"
         >
-          <PreviewImage :src="previewImage" />
+          <div class="flex items-center flex-wrap">
+            <PreviewImage :src="previewImage" class="ml-2" />
+
+            <div
+              v-for="(previewImage, index) in previewImages"
+              :key="index"
+              class="relative inline-block m-2"
+            >
+              <img
+                :src="previewImage"
+                :alt="'optional-images' + index"
+                class="w-32 h-32 object-cover rounded-md ring-2 ring-gray-200"
+              />
+              <span
+                @click="removeImage(index)"
+                class="absolute top-2 right-2 bg-black bg-opacity-40 text-white text-xs p-2 rounded-md hover:bg-opacity-60 cursor-pointer"
+              >
+                <i class="fa-solid fa-trash-can"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <InputLabel :label="__('Product Image') + ' ( Main Image )'" required />
+
+              <FileInput
+                name="product-image"
+                v-model="form.image"
+                text="PNG, JPG or JPEG ( Max File Size : 1.5 MB )"
+                @update:modelValue="setImagePreview"
+                required
+              />
+
+              <InputError :message="errors?.image" />
+            </div>
+
+            <div>
+              <InputLabel :label="__('Product Image') + ' ( Supported Multiple Image )'" required />
+
+              <MultipleFileInput
+                name="product-images"
+                text="PNG, JPG or JPEG ( Max File Size : 1.5 MB )"
+                v-model="form.images"
+                @update:modelValue="setMultipleImagePreviews"
+                required
+              />
+
+              <InputError :message="form.errors?.images" />
+            </div>
+          </div>
+
+          <hr />
 
           <div>
             <InputLabel :label="__('Product Name')" required />
@@ -223,7 +319,7 @@ const handleAttributeOptionChange = (index, attribute, selectedOption) => {
             <InputError :message="errors?.description" />
           </div>
 
-          <div class="grid grid-cols-2 gap-5">
+          <div class="grid grid-cols-3 gap-5">
             <div>
               <InputLabel :label="__('Warranty Type')" />
 
@@ -331,6 +427,27 @@ const handleAttributeOptionChange = (index, attribute, selectedOption) => {
 
               <InputError :message="errors?.warranty_period" />
             </div>
+            <div>
+              <InputLabel :label="__('Return Day')" />
+
+              <SelectBox
+                name="warranty-period"
+                :options="[
+                  {
+                    label: '7 Days',
+                    value: '7 days'
+                  },
+                  {
+                    label: '14 Days',
+                    value: '14 days'
+                  }
+                ]"
+                v-model="form.return_day"
+                :placeholder="__('Select an option')"
+              />
+
+              <InputError :message="errors?.return_day" />
+            </div>
           </div>
 
           <div>
@@ -348,28 +465,6 @@ const handleAttributeOptionChange = (index, attribute, selectedOption) => {
           </div>
 
           <div>
-            <InputLabel :label="__('Return Day')" />
-
-            <SelectBox
-              name="warranty-period"
-              :options="[
-                {
-                  label: '7 Days',
-                  value: '7 days'
-                },
-                {
-                  label: '14 Days',
-                  value: '14 days'
-                }
-              ]"
-              v-model="form.return_day"
-              :placeholder="__('Select an option')"
-            />
-
-            <InputError :message="errors?.return_day" />
-          </div>
-
-          <div>
             <InputLabel :label="__('Return Policy')" />
 
             <InputField
@@ -381,20 +476,6 @@ const handleAttributeOptionChange = (index, attribute, selectedOption) => {
             />
 
             <InputError :message="errors?.return_policy" />
-          </div>
-
-          <div>
-            <InputLabel :label="__('Product Image') + ' ( Main Image )'" required />
-
-            <FileInput
-              name="product-image"
-              v-model="form.image"
-              text="PNG, JPG or JPEG ( Max File Size : 1.5 MB )"
-              @update:modelValue="setImagePreview"
-              required
-            />
-
-            <InputError :message="errors?.image" />
           </div>
 
           <div v-show="productHasVariants === null" class="w-full">
@@ -430,7 +511,7 @@ const handleAttributeOptionChange = (index, attribute, selectedOption) => {
                   name="product-price"
                   v-model="form.price"
                   :placeholder="__('Enter :label', { label: __('Product Price') })"
-                  required
+                  :required="!productHasVariants"
                 />
 
                 <InputError :message="errors?.price" />
@@ -444,7 +525,7 @@ const handleAttributeOptionChange = (index, attribute, selectedOption) => {
                   name="product-quantity"
                   v-model="form.qty"
                   :placeholder="__('Enter :label', { label: __('Product Quantity') })"
-                  required
+                  :required="!productHasVariants"
                 />
 
                 <InputError :message="errors?.qty" />
@@ -519,7 +600,11 @@ const handleAttributeOptionChange = (index, attribute, selectedOption) => {
                   To create product variants, add at least one variant attribute and option.
                 </p>
               </div>
+              {{ variantAttributesAndOptions }}
 
+              <br />
+
+              {{ form }}
               <div
                 v-for="(attributeAndOptions, index) in variantAttributesAndOptions"
                 :key="index"

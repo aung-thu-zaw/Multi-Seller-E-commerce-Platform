@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Seller\Dashboard\ProductManage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Seller\ProductManage\ProductRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
+use App\Http\Traits\ImageUpload;
+use App\Models\Attribute;
 use App\Models\AttributeOption;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
-use Attribute;
+use App\Models\ProductImage;
+use App\Models\Store;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +21,8 @@ use Inertia\ResponseFactory;
 
 class ProductController extends Controller
 {
+    use ImageUpload;
+
     use HandlesQueryStringParameters;
 
     public function index(): Response|ResponseFactory
@@ -46,92 +51,91 @@ class ProductController extends Controller
     public function store(ProductRequest $request): RedirectResponse
     {
 
-        $product = [
-            [
-                'name' => 'Samsung Galaxy S21',
-                'status' => 'approved',
-                'SKUs' => [
-                    [
-                        'price' => 349,
-                        'qty' => 20,
-                        'attributes' => [
-                            'color' => 'Red', 'ram' => '2GB', 'storage' => '32GB',
-                        ],
-                    ],
-                    [
-                        'price' => 349,
-                        'qty' => 10,
-                        'attributes' => [
-                            'color' => 'Green', 'ram' => '4GB', 'storage' => '32GB',
-                        ],
-                    ],
-                    [
-                        'price' => 349,
-                        'qty' => 2,
-                        'attributes' => [
-                            'color' => 'Yellow', 'ram' => '8GB', 'storage' => '32GB',
-                        ],
-                    ],
-                    [
-                        'price' => 1099,
-                        'qty' => 4,
-                        'attributes' => [
-                            'color' => 'Blue', 'ram' => '8GB', 'storage' => '512GB',
-                        ],
-                    ],
-                    [
-                        'price' => 1499,
-                        'qty' => 5,
-                        'attributes' => [
-                            'color' => 'Black', 'ram' => '16GB', 'storage' => '1TB',
-                        ],
-                    ],
-                ],
-            ],
-        ];
+        if($request->attribute_options) {
 
+            foreach ($request->attribute_options as $attributeOption) {
+                $attributeName = $attributeOption['attribute'];
+                $options = $attributeOption['options'];
 
+                $attribute = Attribute::firstOrCreate(['name' => $attributeName]);
 
+                foreach ($options as $option) {
+                    AttributeOption::firstOrCreate([
+                        'attribute_id' => $attribute->id,
+                        'value' => $option,
+                    ]);
+                }
+            }
+        }
 
-        $product = "";
         $attributesByName = Attribute::pluck('id', 'name')->toArray();
 
-        DB::transaction(function () use ($product, $attributesByName) {
+        DB::transaction(function () use ($request, $attributesByName) {
 
-            // Main Product Creation
-            $DBProduct = Product::factory()->create([
-                'name' => $product['name'],
-                'slug' => str($product['name'])->slug(),
-                'status' => 'approved'
+            $image = isset($request->image) ? $this->createImage($request->image, 'products') : null;
+
+            $product = Product::create([
+                'brand_id' => $request->brand_id,
+                'category_id' => $request->category_id,
+                'store_id' => Store::getStoreId(),
+                'name' => $request->name,
+                'description' => $request->description,
+                // 'code' => $request->code,
+                'price' => $request->price,
+                'offer_price' => $request->offer_price,
+                'offer_price_start_date' => $request->offer_price_start_date,
+                'offer_price_end_date' => $request->offer_price_end_date,
+                'qty' => $request->qty,
+                'image' => $image,
+                'warranty_type' => $request->warranty_type,
+                'warranty_period' => $request->warranty_period,
+                'warranty_policy' => $request->warranty_policy,
+                'return_day' => $request->return_day,
+                'return_policy' => $request->return_policy,
+                'status' => 'pending',
             ]);
 
-            // Product Variant Creation
-            foreach ($product['SKUs'] as $sku) {
-                $skuCode = str($product['name']);
-                $skuOptions = [];
-                foreach ($sku['attributes'] as $name => $value) {
-                    $skuCode .= ' '.$value.' '.$name;
-                    if (!array_key_exists($name, $attributesByName)) {
+            foreach ($request->images as $image) {
+                $originalName = $image->getClientOriginalName();
 
-                        $this->command->error('Attribute '.$name.' not found');
+                $fileName = time().'-'.$originalName;
 
-                        return;
+                $image->storeAs('products', $fileName);
+
+                ProductImage::create(['product_id' => $product->id, 'image' => $fileName]);
+            }
+
+            if($request->variants) {
+
+                foreach ($request->variants as $sku) {
+                    $skuCode = str($product->name);
+                    $skuOptions = [];
+
+
+                    foreach ($sku['attributes'] as $name => $value) {
+                        $skuCode .= ' '.$value.' '.$name;
+                        if (!array_key_exists($name, $attributesByName)) {
+                            // $this->command->error('Attribute '.$name.' not found');
+
+                            return;
+                        }
+                        $attributeOption = AttributeOption::where('attribute_id', $attributesByName[$name])->where('value', $value)->value('id');
+                        if (!$attributeOption) {
+                            // $this->command->error('Attribute Value '.$name.' => '.$value.' not found');
+
+                            return;
+                        }
+                        $skuOptions[] = $attributeOption;
                     }
-                    $attributeOption = AttributeOption::where('attribute_id', $attributesByName[$name])->where('value', $value)->value('id');
-                    if (!$attributeOption) {
-                        $this->command->error('Attribute Value '.$name.' => '.$value.' not found');
+                    $sku = $product->skus()->create([
+                        'code' => str()->slug($skuCode),
+                        'price' => $sku['price'],
+                        'offer_price' => $sku['offer_price'],
+                        'qty' => $sku['qty'],
+                    ]);
 
-                        return;
-                    }
-                    $skuOptions[] = $attributeOption;
+                    $sku->attributeOptions()->attach($skuOptions);
                 }
-                $sku = $DBProduct->skus()->create([
-                    'code' => str()->slug($skuCode),
-                    'price' => $sku['price'],
-                    'qty' => $sku['qty'],
-                ]);
-
-                $sku->attributeOptions()->attach($skuOptions);
             }
         });
 
