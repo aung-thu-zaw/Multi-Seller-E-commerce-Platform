@@ -13,10 +13,31 @@ import 'vue3-toastify/dist/index.css'
 
 const props = defineProps({
   product: Object,
-  shares: Object,
-  attributes: Object,
-  options: Object,
-  price: Object
+  shares: Object
+})
+
+const attributes = []
+const options = {}
+
+props.product.skus.forEach((sku) => {
+  sku.attribute_options.forEach((attributeOption) => {
+    // const attributeId = attributeOption.attribute_id
+    const attributeName = attributeOption.attribute.name
+    const optionValue = attributeOption.value
+
+    // Add attribute to the list if not already present
+    if (!attributes.includes(attributeName)) {
+      attributes.push(attributeName)
+    }
+
+    // Add option to the corresponding attribute
+    if (!options[attributeName]) {
+      options[attributeName] = []
+    }
+    if (!options[attributeName].includes(optionValue)) {
+      options[attributeName].push(optionValue)
+    }
+  })
 })
 
 const { formatAmount } = useFormatFunctions()
@@ -53,7 +74,7 @@ const formData = reactive({
 const calculateTotalPrice = () => {
   let totalPrice = 0
 
-  if (props.attributes && props.options && props.product?.skus.length) {
+  if (props.product?.skus.length) {
     for (const sku of props.product.skus) {
       let isMatch = true
 
@@ -113,7 +134,7 @@ const discountPercentage = computed(() => {
 })
 
 const remainingQuantityInStock = computed(() => {
-  if (props.attributes && props.options && props.product?.skus.length) {
+  if (props.product?.skus.length) {
     for (const sku of props.product.skus) {
       let isMatch = true
 
@@ -136,16 +157,12 @@ const remainingQuantityInStock = computed(() => {
 })
 
 const getDefaultAttributes = () => {
-  if (props.attributes && props.options && props.product?.skus.length) {
+  if (props.product?.skus.length) {
     const defaultAttributes = {}
-    console.log(props.options)
-    for (const attributeId in props.attributes) {
-      const attributeName = props.attributes[attributeId]
-      const options = props.options[attributeId]
+    for (const attribute of attributes) {
+      const skuOptions = options[attribute]
 
-      console.log(attributeName, options)
-
-      defaultAttributes[attributeName] = options[0].value
+      defaultAttributes[attribute] = skuOptions[0]
     }
 
     return defaultAttributes
@@ -159,9 +176,11 @@ onMounted(() => {
   formData.total_price = calculateTotalPrice()
 })
 
-const handleSelectedAttributes = (option) => {
-  formData.attributes[option.attribute.name] = option.value
+const handleSelectedAttributes = (attribute, option) => {
+  formData.attributes[attribute] = option
   formData.total_price = calculateTotalPrice()
+
+  //   console.log(attribute + '=' + option)
 }
 
 watch(quantity, (newValue) => {
@@ -293,7 +312,6 @@ const saved = computed(() => {
               <RedBadge> Out of stock </RedBadge>
             </div>
           </div>
-
           <!-- Product Price -->
           <div class="my-2">
             <div v-if="productOfferPrice">
@@ -326,22 +344,22 @@ const saved = computed(() => {
             <div
               v-for="(attribute, index) in attributes"
               :key="index"
-              v-show="options[index]"
+              v-show="options[attribute]"
               class="flex items-center"
             >
               <p class="font-semibold text-sm text-gray-700 mr-5">{{ attribute }} :</p>
               <div class="flex items-center space-x-3">
                 <button
-                  v-for="option in options[index]"
+                  v-for="option in options[attribute]"
                   :key="option"
                   class="px-3.5 py-1 flex items-center justify-center text-sm font-semibold rounded-sm border border-gray-300 hover:border-orange-400 duration-100"
                   :class="{
                     'border-orange-500 ring-2 ring-orange-300':
-                      formData.attributes[attribute] === option.value
+                      formData.attributes[attribute] === option
                   }"
-                  @click="handleSelectedAttributes(option)"
+                  @click="handleSelectedAttributes(attribute, option)"
                 >
-                  <span> {{ option.value }} </span>
+                  <span> {{ option }} </span>
                 </button>
               </div>
             </div>
