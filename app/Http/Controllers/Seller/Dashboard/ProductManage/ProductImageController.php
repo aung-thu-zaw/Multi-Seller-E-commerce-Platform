@@ -7,7 +7,6 @@ use App\Http\Requests\Dashboard\ProductImageRequest;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 

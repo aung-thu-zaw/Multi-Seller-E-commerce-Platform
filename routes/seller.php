@@ -62,19 +62,16 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
             });
 
         // ***** Product Question Operations *****
-        Route::resource('product-questions', ProductQuestionController::class)->except(['show','destroy']);
+        Route::resource('product-questions', ProductQuestionController::class)->except(['show', 'destroy']);
 
         // ***** Product Review Operations *****
-        Route::resource('product-reviews', ProductReviewController::class)->except(['show','destroy']);
+        Route::resource('product-reviews', ProductReviewController::class)->except(['show', 'destroy']);
 
         // ***** Store Review Operations *****
-        Route::resource('store-reviews', StoreReviewController::class)->except(['show','destroy']);
+        Route::resource('store-reviews', StoreReviewController::class)->except(['show', 'destroy']);
 
         // ***** Payout Requests Operations *****
-        Route::resource('payout-requests', PayoutRequestController::class)->except(['show','destroy']);
-
-
-
+        Route::resource('payout-requests', PayoutRequestController::class)->except(['show', 'destroy']);
 
         // // ***** Product Operations *****
         Route::resource('product-manage', ProductController::class)->except(['show'])->parameters([
@@ -98,7 +95,6 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
                 Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
             });
 
-
         // Store Category Operations
         // Route::resource('store-product-categories', StoreProductCategoryController::class)->except(['show'])->middleware('strict.inactive_store');
         // Route::controller(StoreProductCategoryController::class)
@@ -117,51 +113,50 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
 
         // ***** Store Setting Operations *****
         Route::controller(StoreSettingController::class)
-        ->prefix('/store-settings')
-        ->name('store-settings.')
-        ->group(function () {
-            Route::get('/', 'edit')->name('edit');
-            Route::patch('{store_id}/store-information', 'updateStoreInformation')->name('update-store-information');
-            Route::patch('{business_information_id}/business-information', 'updateBusinessInformation')->name('update-business-information');
-            Route::patch('{bank_account_id}/bank-account', 'updateBankAccount')->name('update-bank-account');
-        });
-
+            ->prefix('/store-settings')
+            ->name('store-settings.')
+            ->group(function () {
+                Route::get('/', 'edit')->name('edit');
+                Route::patch('{store_id}/store-information', 'updateStoreInformation')->name('update-store-information');
+                Route::patch('{business_information_id}/business-information', 'updateBusinessInformation')->name('update-business-information');
+                Route::patch('{bank_account_id}/bank-account', 'updateBankAccount')->name('update-bank-account');
+            });
 
         Route::get('/chat-inbox', ChatInboxController::class)->name('chat-inbox');
 
         // ***** Order Operations *****
         Route::controller(OrderController::class)
-        ->prefix('/orders')
-        ->name('orders.')
-        ->middleware('strict.inactive_store')
-        ->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/{order}/detail', 'show')->name('show');
-            Route::patch('/{order}/status', 'updateOrderStatus')->name('status.update');
-        });
+            ->prefix('/orders')
+            ->name('orders.')
+            ->middleware('strict.inactive_store')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/{order}/detail', 'show')->name('show');
+                Route::patch('/{order}/status', 'updateOrderStatus')->name('status.update');
+            });
 
         Route::get('orders/{order}/download', DownloadOrderInvoiceController::class)->name('order-invoice.download')->middleware('strict.inactive_store');
 
         // ***** Return Item Operations *****
         Route::controller(ReturnItemController::class)
-        ->prefix('/return-items')
-        ->name('return-items.')
-        ->middleware('strict.inactive_store')
-        ->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/{return_item}/detail', 'show')->name('show');
-            Route::patch('/{return_item}/status', 'updateOrderStatus')->name('status.update');
-        });
+            ->prefix('/return-items')
+            ->name('return-items.')
+            ->middleware('strict.inactive_store')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/{return_item}/detail', 'show')->name('show');
+                Route::patch('/{return_item}/status', 'updateOrderStatus')->name('status.update');
+            });
 
         // ***** Cancellation Item Operations *****
         Route::controller(CancellationItemController::class)
-        ->prefix('/cancellation-items')
-        ->name('cancellation-items.')
-        ->middleware('strict.inactive_store')
-        ->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/{cancellation_item}/detail', 'show')->name('show');
-            Route::patch('/{cancellation_item}/status', 'updateCancellationItemStatus')->name('status.update');
-        });
+            ->prefix('/cancellation-items')
+            ->name('cancellation-items.')
+            ->middleware('strict.inactive_store')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/{cancellation_item}/detail', 'show')->name('show');
+                Route::patch('/{cancellation_item}/status', 'updateCancellationItemStatus')->name('status.update');
+            });
 
     });

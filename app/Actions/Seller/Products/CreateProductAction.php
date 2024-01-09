@@ -4,7 +4,6 @@ namespace App\Actions\Seller\Products;
 
 use App\Http\Traits\ImageUpload;
 use App\Models\Product;
-use App\Services\SkuGeneratorService;
 
 class CreateProductAction
 {

@@ -37,6 +37,7 @@ class OrderController extends Controller
 
         return inertia('Seller/OrderManagement/Orders/Index', compact('orders'));
     }
+
     public function show(Order $order): Response|ResponseFactory
     {
         $storeId = Store::getStoreId();
@@ -47,7 +48,7 @@ class OrderController extends Controller
                     ->with(['product:id,name,image', 'store:id,store_name']);
             },
             'transaction',
-            'address'
+            'address',
         ]);
 
         return inertia('Seller/OrderManagement/Orders/Show', compact('order'));
@@ -58,7 +59,7 @@ class OrderController extends Controller
         $storeId = Store::getStoreId();
 
         if ($order->status !== 'shipped' && $order->status !== 'delivered') {
-            $orderItems = OrderItem::where("order_id", $order->id)->where("store_id", $storeId)->get();
+            $orderItems = OrderItem::where('order_id', $order->id)->where('store_id', $storeId)->get();
 
             $orderItems->each(function ($item) use ($request) {
                 if ($request->order_status === 'shipped' || $request->order_status === 'delivered') {
@@ -73,5 +74,4 @@ class OrderController extends Controller
             return back()->with('error', 'Cannot update order item status. Order status is already "shipped" or "delivered".');
         }
     }
-
 }

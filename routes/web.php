@@ -122,78 +122,76 @@ Route::controller(SellerStoreController::class)
         Route::post('/{store}/unfollow', 'unFollowStore')->middleware('auth')->name('unfollow');
     });
 
-
 // *********** Authenticated Routes ***********
-Route::middleware(["auth",'verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     // For broadcast notifications
     Route::controller(NotificationController::class)
-    ->middleware('auth')
-    ->prefix('/notifications')
-    ->name('notifications.')
-    ->group(function () {
-        Route::post('/mark-as-read/{id}', 'markAsRead')->name('mark-as-read');
-        Route::post('/mark-all-as-read', 'markAllAsRead')->name('mark-all-as-read');
-    });
+        ->middleware('auth')
+        ->prefix('/notifications')
+        ->name('notifications.')
+        ->group(function () {
+            Route::post('/mark-as-read/{id}', 'markAsRead')->name('mark-as-read');
+            Route::post('/mark-all-as-read', 'markAllAsRead')->name('mark-all-as-read');
+        });
 
     // For claims as a seller
     Route::controller(BecomeASellerController::class)
-    ->prefix('/become-a-seller')
-    ->name('become-a-seller.')
-    ->group(function () {
-        Route::get('/register', 'create')->name('register');
-        Route::post('/', 'store')->name('store');
-    });
+        ->prefix('/become-a-seller')
+        ->name('become-a-seller.')
+        ->group(function () {
+            Route::get('/register', 'create')->name('register');
+            Route::post('/', 'store')->name('store');
+        });
 
     // Seller and Customer Communication
     Route::post('/conversations', [ConversationController::class, 'store'])->name('conversations.store');
     Route::post('/conversations/{conversation}/messages', [ConversationMessageController::class, 'store'])->name('conversation.messages.store');
 
-
     // Wishlist And Add To Cart
-    Route::resource("/wishlists", WishlistController::class)->only(['store','destroy']);
+    Route::resource('/wishlists', WishlistController::class)->only(['store', 'destroy']);
 
     Route::controller(CartItemController::class)
-    ->prefix('/cart/cart-items')
-    ->name('cart-items.')
-    ->group(function () {
-        Route::post('/', 'store')->name('store');
-        Route::patch('/{cart_item}', 'update')->name('update');
-        Route::delete('/{cart_item}', 'destroy')->name('destroy');
-    });
+        ->prefix('/cart/cart-items')
+        ->name('cart-items.')
+        ->group(function () {
+            Route::post('/', 'store')->name('store');
+            Route::patch('/{cart_item}', 'update')->name('update');
+            Route::delete('/{cart_item}', 'destroy')->name('destroy');
+        });
 
     // User Shopping Cart
     Route::get('/my-carts', [MyCartController::class, 'index'])->name('my-cart.index');
 
     // Shopping Cart Coupon Operation
     Route::controller(CouponController::class)
-    ->name('coupon.')
-    ->group(function () {
-        Route::post('/apply-coupon', 'applyCoupon')->name('apply');
-        Route::post('/{coupon_code}/remove-coupon', 'removeCoupon')->name('remove');
-    });
+        ->name('coupon.')
+        ->group(function () {
+            Route::post('/apply-coupon', 'applyCoupon')->name('apply');
+            Route::post('/{coupon_code}/remove-coupon', 'removeCoupon')->name('remove');
+        });
 
     // Checkout And Shipping Method
     Route::controller(CheckoutController::class)
-    ->prefix("/checkout")
-    ->name('checkout.')
-    ->group(function () {
-        Route::get('/', 'index')->middleware('check.cart.items')->name('index');
-        Route::post('/{shipping_method_id}', 'handleShippingMethod')->name('shipping-method');
-    });
+        ->prefix('/checkout')
+        ->name('checkout.')
+        ->group(function () {
+            Route::get('/', 'index')->middleware('check.cart.items')->name('index');
+            Route::post('/{shipping_method_id}', 'handleShippingMethod')->name('shipping-method');
+        });
 
     // Payments
     Route::get('/payments', PaymentController::class)->middleware('check.cart.items')->name('payments');
 
     Route::controller(PaypalController::class)
-    ->middleware("check.cart.items")
-    ->prefix("/payments/paypal")
-    ->name('payments.paypal.')
-    ->group(function () {
-        Route::get('/pay', 'payWithPaypal')->name('pay');
-        Route::get('/success', 'paypalSuccess')->name('success');
-        Route::get('/cancel', 'paypalCancel')->name('cancel');
-    });
+        ->middleware('check.cart.items')
+        ->prefix('/payments/paypal')
+        ->name('payments.paypal.')
+        ->group(function () {
+            Route::get('/pay', 'payWithPaypal')->name('pay');
+            Route::get('/success', 'paypalSuccess')->name('success');
+            Route::get('/cancel', 'paypalCancel')->name('cancel');
+        });
 
     Route::post('/payments/stripe/pay', [StripeController::class, 'payWithStripe'])->name('payments.stripe.pay');
 

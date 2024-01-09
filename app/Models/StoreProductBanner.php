@@ -49,7 +49,7 @@ class StoreProductBanner extends Model
 
     public static function deleteImage(string $storeProductBannerImage): void
     {
-        if (!empty($storeProductBannerImage) && file_exists(storage_path('app/public/store-product-banners/'.pathinfo($storeProductBannerImage, PATHINFO_BASENAME)))) {
+        if (! empty($storeProductBannerImage) && file_exists(storage_path('app/public/store-product-banners/'.pathinfo($storeProductBannerImage, PATHINFO_BASENAME)))) {
             unlink(storage_path('app/public/store-product-banners/'.pathinfo($storeProductBannerImage, PATHINFO_BASENAME)));
         }
     }

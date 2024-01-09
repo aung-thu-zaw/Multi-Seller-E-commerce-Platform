@@ -3,9 +3,6 @@
 namespace App\Listeners\Registered;
 
 use App\Mail\User\RegisteredUserWelcomeEmail;
-use App\Notifications\Admin\EmailNotifications\RegisteredUserEmailNotification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
 class SendWelcomeEmailToRegisteredUser

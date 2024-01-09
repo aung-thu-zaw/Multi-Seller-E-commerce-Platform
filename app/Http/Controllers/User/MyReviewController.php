@@ -5,11 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Actions\User\MyReviews\CreateProductReviewAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\User\ProductReviewRequest;
-use App\Models\Order;
 use App\Models\Product;
-use App\Models\ProductReview;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
@@ -49,7 +46,7 @@ class MyReviewController extends Controller
 
     public function addReview(Product $product): Response|ResponseFactory
     {
-        $product->load(["orderItems:id,product_id,attributes"]);
+        $product->load(['orderItems:id,product_id,attributes']);
 
         return inertia('User/MyReviews/AddReview', compact('product'));
     }
@@ -58,8 +55,6 @@ class MyReviewController extends Controller
     {
         $productReview = (new CreateProductReviewAction())->handle($request->validated(), $product);
 
-        
-
-        return to_route("user.my-reviews.index", ["tab" => "to-review"])->with('success', 'Your rating has been successfully submitted.');
+        return to_route('user.my-reviews.index', ['tab' => 'to-review'])->with('success', 'Your rating has been successfully submitted.');
     }
 }

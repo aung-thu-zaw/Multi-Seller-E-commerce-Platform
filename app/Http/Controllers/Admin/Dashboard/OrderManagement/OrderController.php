@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Dashboard\OrderManagement;
 
 use App\Actions\Admin\OrderManagement\PermanentlyDeleteTrashedOrdersAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Admin\OrderManagement\OrderRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Builder;
@@ -30,9 +29,9 @@ class OrderController extends Controller
     public function index(): Response|ResponseFactory
     {
         $orders = Order::search(request('search'))
-        ->query(function (Builder $builder) {
-            $builder->with(["user:id,name"]);
-        })
+            ->query(function (Builder $builder) {
+                $builder->with(['user:id,name']);
+            })
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
@@ -42,7 +41,7 @@ class OrderController extends Controller
 
     public function show(Order $order): Response|ResponseFactory
     {
-        $order->load(["orderItems.product:id,name,image",'orderItems.store:id,store_name','transaction','address']);
+        $order->load(['orderItems.product:id,name,image', 'orderItems.store:id,store_name', 'transaction', 'address']);
 
         return inertia('Admin/OrderManagement/Orders/Show', compact('order'));
     }
@@ -59,12 +58,12 @@ class OrderController extends Controller
 
                 $order->orderItems->each(function ($item) use ($request) {
 
-                    if($request->order_status === 'shipped') {
-                        $item->update(['status' => $request->order_status,"shipped_at" => now()]);
+                    if ($request->order_status === 'shipped') {
+                        $item->update(['status' => $request->order_status, 'shipped_at' => now()]);
                     }
 
-                    if($request->order_status === 'delivered') {
-                        $item->update(['status' => $request->order_status,"delivered_at" => now()]);
+                    if ($request->order_status === 'delivered') {
+                        $item->update(['status' => $request->order_status, 'delivered_at' => now()]);
                     }
 
                 });
@@ -82,9 +81,9 @@ class OrderController extends Controller
 
     public function updatePaymentStatus(Request $request, Order $order): RedirectResponse
     {
-        if($order->payment_method === 'cash on delivery' && $request->payment_status === 'completed') {
+        if ($order->payment_method === 'cash on delivery' && $request->payment_status === 'completed') {
 
-            $order->update(["payment_status" => $request->payment_status,"purchased_at" => now()]);
+            $order->update(['payment_status' => $request->payment_status, 'purchased_at' => now()]);
         }
 
         return back()->with('success', ':label has been successfully updated.');
@@ -109,9 +108,9 @@ class OrderController extends Controller
     public function trashed(): Response|ResponseFactory
     {
         $trashedOrders = Order::search(request('search'))
-        ->query(function (Builder $builder) {
-            $builder->with(["user:id,name"]);
-        })
+            ->query(function (Builder $builder) {
+                $builder->with(['user:id,name']);
+            })
             ->onlyTrashed()
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))

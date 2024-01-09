@@ -27,27 +27,26 @@ class PayoutRequestController extends Controller
 
     public function create(): Response|ResponseFactory
     {
-        $sellerBalance = SellerBalance::where("seller_id", auth()->id())->first();
+        $sellerBalance = SellerBalance::where('seller_id', auth()->id())->first();
 
-        return inertia("Seller/PayoutRequests/Create", compact('sellerBalance'));
+        return inertia('Seller/PayoutRequests/Create', compact('sellerBalance'));
     }
 
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            "amount" => ["required","numeric"]
+            'amount' => ['required', 'numeric'],
         ]);
 
-        $sellerBalance = SellerBalance::where("seller_id", auth()->id())->first();
-
+        $sellerBalance = SellerBalance::where('seller_id', auth()->id())->first();
 
         if ($sellerBalance->balance < $request->amount) {
-            return back()->with("error", "Insufficient funds. You do not have enough balance for this payout request.");
+            return back()->with('error', 'Insufficient funds. You do not have enough balance for this payout request.');
         }
 
-        PayoutRequest::create(["seller_id" => auth()->id(),"amount" => $request->amount,"status" => "pending"]);
+        PayoutRequest::create(['seller_id' => auth()->id(), 'amount' => $request->amount, 'status' => 'pending']);
 
-        return to_route("seller.payout-requests.index", $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
+        return to_route('seller.payout-requests.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
 
     }
 }

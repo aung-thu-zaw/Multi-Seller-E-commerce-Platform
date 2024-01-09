@@ -14,8 +14,8 @@ class UpdateStoreInformationAction
      */
     public function handle(array $data, Store $store): void
     {
-        $avatar = isset($data['avatar']) && !is_string($data['avatar']) ? $this->updateImage($data['avatar'], $store->avatar, 'stores/avatars') : $store->avatar;
-        $cover = isset($data['cover']) && !is_string($data['cover']) ? $this->updateImage($data['cover'], $store->cover, 'stores/covers') : $store->cover;
+        $avatar = isset($data['avatar']) && ! is_string($data['avatar']) ? $this->updateImage($data['avatar'], $store->avatar, 'stores/avatars') : $store->avatar;
+        $cover = isset($data['cover']) && ! is_string($data['cover']) ? $this->updateImage($data['cover'], $store->cover, 'stores/covers') : $store->cover;
 
         $store->update([
             'store_name' => $data['store_name'],

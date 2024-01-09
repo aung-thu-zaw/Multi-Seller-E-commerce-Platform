@@ -10,8 +10,8 @@ use Laravel\Scout\Searchable;
 class CancellationItem extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     use Searchable;
+    use SoftDeletes;
 
     public function getRouteKeyName()
     {
@@ -19,8 +19,8 @@ class CancellationItem extends Model
     }
 
     /**
-      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<OrderItem,CancellationItem>
-      */
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<OrderItem,CancellationItem>
+     */
     public function orderItem()
     {
         return $this->belongsTo(OrderItem::class);
@@ -33,5 +33,4 @@ class CancellationItem extends Model
     {
         return $this->hasOne(Refund::class);
     }
-
 }

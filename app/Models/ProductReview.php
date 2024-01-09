@@ -16,8 +16,8 @@ use Laravel\Scout\Searchable;
 class ProductReview extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     use Searchable;
+    use SoftDeletes;
 
     /**
      *     @return array<string>

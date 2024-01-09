@@ -12,6 +12,6 @@ class FormatHelper
             $size /= 1024;
         }
 
-        return round($size, 2) . ' ' . $units[$i];
+        return round($size, 2).' '.$units[$i];
     }
 }

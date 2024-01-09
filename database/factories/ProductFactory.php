@@ -20,8 +20,8 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         $brands = Brand::where('status', 'active')->pluck('id')->toArray();
-        $categories = Category::where("status", "show")->pluck("id")->toArray();
-        $stores = Store::where("status", 'active')->pluck("id")->toArray();
+        $categories = Category::where('status', 'show')->pluck('id')->toArray();
+        $stores = Store::where('status', 'active')->pluck('id')->toArray();
 
         return [
             'category_id' => fake()->randomElement($categories),

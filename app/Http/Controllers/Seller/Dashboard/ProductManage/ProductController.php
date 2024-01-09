@@ -21,13 +21,13 @@ use Inertia\ResponseFactory;
 
 class ProductController extends Controller
 {
-    use ImageUpload;
-
     use HandlesQueryStringParameters;
+    use ImageUpload;
 
     public function index(): Response|ResponseFactory
     {
         $products = Product::search(request('search'))
+            ->where('store_id', Store::getStoreId())
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
@@ -50,9 +50,7 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request): RedirectResponse
     {
-
-        if($request->attribute_options) {
-
+        if ($request->attribute_options) {
             foreach ($request->attribute_options as $attributeOption) {
                 $attributeName = $attributeOption['attribute'];
                 $options = $attributeOption['options'];
@@ -71,7 +69,6 @@ class ProductController extends Controller
         $attributesByName = Attribute::pluck('id', 'name')->toArray();
 
         DB::transaction(function () use ($request, $attributesByName) {
-
             $image = isset($request->image) ? $this->createImage($request->image, 'products') : null;
 
             $product = Product::create([
@@ -105,22 +102,22 @@ class ProductController extends Controller
                 ProductImage::create(['product_id' => $product->id, 'image' => $fileName]);
             }
 
-            if($request->variants) {
-
+            if ($request->variants) {
                 foreach ($request->variants as $sku) {
                     $skuCode = str($product->name);
                     $skuOptions = [];
 
-
                     foreach ($sku['attributes'] as $name => $value) {
                         $skuCode .= ' '.$value.' '.$name;
-                        if (!array_key_exists($name, $attributesByName)) {
+                        if (! array_key_exists($name, $attributesByName)) {
                             // $this->command->error('Attribute '.$name.' not found');
 
                             return;
                         }
-                        $attributeOption = AttributeOption::where('attribute_id', $attributesByName[$name])->where('value', $value)->value('id');
-                        if (!$attributeOption) {
+                        $attributeOption = AttributeOption::where('attribute_id', $attributesByName[$name])
+                            ->where('value', $value)
+                            ->value('id');
+                        if (! $attributeOption) {
                             // $this->command->error('Attribute Value '.$name.' => '.$value.' not found');
 
                             return;
@@ -144,7 +141,7 @@ class ProductController extends Controller
 
     public function edit(Product $product): Response|ResponseFactory
     {
-        $product->load(["productImages:id,product_id,image",'skus.attributeOptions.attribute']);
+        $product->load(['productImages:id,product_id,image', 'skus.attributeOptions.attribute']);
 
         $categories = Category::select('id', 'name')
             ->where('status', 'show')
@@ -153,7 +150,6 @@ class ProductController extends Controller
         $brands = Brand::select('id', 'name')
             ->where('status', 'active')
             ->get();
-
 
         return inertia('Seller/ProductManage/Products/Edit', compact('product', 'categories', 'brands'));
     }

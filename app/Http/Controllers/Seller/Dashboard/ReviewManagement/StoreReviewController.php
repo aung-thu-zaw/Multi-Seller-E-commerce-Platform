@@ -7,7 +7,6 @@ use App\Models\Scopes\FilterByScope;
 use App\Models\Store;
 use App\Models\StoreReview;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
@@ -22,7 +21,7 @@ class StoreReviewController extends Controller
                         ->withoutGlobalScope(FilterByScope::class);
                 }]);
             })
-            ->where("store_id", Store::getStoreId())
+            ->where('store_id', Store::getStoreId())
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());

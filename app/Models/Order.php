@@ -14,8 +14,8 @@ use Laravel\Scout\Searchable;
 class Order extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     use Searchable;
+    use SoftDeletes;
 
     /**
      *     @return array<string>
@@ -57,22 +57,22 @@ class Order extends Model
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Casts\Attribute<Order, never>
-    */
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<Order, never>
+     */
     protected function createdAt(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => date("j-F-Y ( g:i:s ) A", strtotime($value)),
+            get: fn ($value) => date('j-F-Y ( g:i:s ) A', strtotime($value)),
         );
     }
 
     /**
-    * @return \Illuminate\Database\Eloquent\Casts\Attribute<Order, never>
-    */
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<Order, never>
+     */
     protected function purchasedAt(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value ? date("j-F-Y ( g:i:s ) A", strtotime($value)) : null,
+            get: fn ($value) => $value ? date('j-F-Y ( g:i:s ) A', strtotime($value)) : null,
         );
     }
 

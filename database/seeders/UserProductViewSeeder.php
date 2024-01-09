@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\UserProductView;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class UserProductViewSeeder extends Seeder

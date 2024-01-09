@@ -59,7 +59,7 @@ trait Payment
                     'attributes' => $item->attributes,
                     'unit_price' => $item->unit_price,
                     'total_price' => $item->total_price,
-                    'status' => 'pending'
+                    'status' => 'pending',
                 ]);
 
                 $productsByStore[$item->store_id][] = $orderItem;
@@ -136,7 +136,7 @@ trait Payment
     }
 
     /**
-     * @param array<mixed> $attributes
+     * @param  array<mixed>  $attributes
      */
     protected function getSkuByAttributes(int $productId, array $attributes): ?Sku
     {
@@ -154,7 +154,7 @@ trait Payment
             }
         }
 
-        if (!empty($attributeOptionIds)) {
+        if (! empty($attributeOptionIds)) {
             $sku = Sku::where('product_id', $productId)
                 ->whereHas('attributeOptions', function ($query) use ($attributeOptionIds) {
                     $query->whereIn('attribute_option_id', $attributeOptionIds);
@@ -166,6 +166,4 @@ trait Payment
 
         return null;
     }
-
-
 }

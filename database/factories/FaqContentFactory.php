@@ -17,7 +17,7 @@ class FaqContentFactory extends Factory
      */
     public function definition(): array
     {
-        $faqSubcategory = FaqSubcategory::pluck("id")->toArray();
+        $faqSubcategory = FaqSubcategory::pluck('id')->toArray();
 
         return [
             'faq_subcategory_id' => fake()->randomElement($faqSubcategory),

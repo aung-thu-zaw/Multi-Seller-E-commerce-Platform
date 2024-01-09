@@ -45,6 +45,7 @@ class ProductQuestionController extends Controller
     private function getSeller(Product $product): User
     {
         $store = Store::findOrFail($product->store_id);
+
         return User::findOrFail($store->seller_id);
     }
 

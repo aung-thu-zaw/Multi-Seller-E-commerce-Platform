@@ -14,29 +14,29 @@ class FacebookAuthController extends Controller
 {
     public function redirectToProvider(): RedirectResponse
     {
-        return Socialite::driver("facebook")->redirect();
+        return Socialite::driver('facebook')->redirect();
     }
 
     public function handelProviderCallback(): RedirectResponse
     {
         try {
-            $facebookUser = Socialite::driver("facebook")->user();
+            $facebookUser = Socialite::driver('facebook')->user();
 
-        } catch(InvalidStateException $e) {
+        } catch (InvalidStateException $e) {
 
-            return redirect()->back()->with("status", "Something Went Wrong!");
+            return redirect()->back()->with('status', 'Something Went Wrong!');
         }
 
-        $existingUser = User::where("facebook_id", $facebookUser->getId())->first();
+        $existingUser = User::where('facebook_id', $facebookUser->getId())->first();
 
-        if (!$existingUser) {
+        if (! $existingUser) {
             $newUser = User::create([
-                "facebook_id" => $facebookUser->getId(),
-                "name" => $facebookUser->getName(),
-                "email" => $facebookUser->getEmail(),
-                "avatar" => $facebookUser->getAvatar(),
-                "role" => "user",
-                "email_verified_at" => now(),
+                'facebook_id' => $facebookUser->getId(),
+                'name' => $facebookUser->getName(),
+                'email' => $facebookUser->getEmail(),
+                'avatar' => $facebookUser->getAvatar(),
+                'role' => 'user',
+                'email_verified_at' => now(),
             ]);
 
             event(new Registered($newUser));

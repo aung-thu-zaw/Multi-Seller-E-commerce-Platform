@@ -23,13 +23,13 @@ class ProductReviewRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            "comment" => ["required","string"],
-            "rating" => ["required",'numeric'],
-            "captcha_token"  => [new RecaptchaRule()],
+            'comment' => ['required', 'string'],
+            'rating' => ['required', 'numeric'],
+            'captcha_token' => [new RecaptchaRule()],
         ];
 
-        if ($this->hasFile("images")) {
-            $rules["images.*"] = ['required', 'image', 'mimes:png,jpg,jpeg', 'max:1500'];
+        if ($this->hasFile('images')) {
+            $rules['images.*'] = ['required', 'image', 'mimes:png,jpg,jpeg', 'max:1500'];
         }
 
         return $rules;

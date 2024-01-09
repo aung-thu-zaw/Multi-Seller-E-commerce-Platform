@@ -17,7 +17,7 @@ class BrandFactory extends Factory
      */
     public function definition(): array
     {
-        $categories = Category::where("status", "show")->pluck("id")->toArray();
+        $categories = Category::where('status', 'show')->pluck('id')->toArray();
 
         return [
             'category_id' => fake()->randomElement($categories),

@@ -2,11 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Attribute;
-use App\Models\AttributeOption;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class ProductSeeder extends Seeder
 {
@@ -76,6 +73,6 @@ class ProductSeeder extends Seeder
         Product::factory()->create(['image' => 'product-54.jpg', 'status' => 'approved']);
         Product::factory()->create(['image' => 'product-55.jpg', 'status' => 'approved']);
 
-        Product::factory(1000)->create(["status"=>"approved"]);
+        Product::factory(1000)->create(['status' => 'approved']);
     }
 }

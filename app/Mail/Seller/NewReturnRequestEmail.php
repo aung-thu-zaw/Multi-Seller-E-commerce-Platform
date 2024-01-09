@@ -5,7 +5,6 @@ namespace App\Mail\Seller;
 use App\Models\OrderItem;
 use App\Models\ReturnItem;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;

@@ -7,7 +7,6 @@ use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\CancellationItem;
 use App\Models\OrderItem;
 use App\Models\Store;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -24,7 +23,7 @@ class CancellationItemController extends Controller
 
         $cancellationItems = CancellationItem::search(request('search'))
             ->query(function (Builder $builder) {
-                $builder->with(['orderItem.product:id,name,image','orderItem.order.user:id,name']);
+                $builder->with(['orderItem.product:id,name,image', 'orderItem.order.user:id,name']);
             })
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
@@ -35,17 +34,17 @@ class CancellationItemController extends Controller
 
     public function show(CancellationItem $cancellationItem): Response|ResponseFactory
     {
-        $cancellationItem->load(['orderItem.product:id,name,image','orderItem.order.user:id,name','orderItem.order.address']);
+        $cancellationItem->load(['orderItem.product:id,name,image', 'orderItem.order.user:id,name', 'orderItem.order.address']);
 
         return inertia('Seller/OrderManagement/CancellationItems/Show', compact('cancellationItem'));
     }
 
     public function updateCancellationItemStatus(Request $request, CancellationItem $cancellationItem): RedirectResponse
     {
-        if($request->cancellation_item_status === 'approved') {
+        if ($request->cancellation_item_status === 'approved') {
 
-            $cancellationItem->update(['status' => $request->cancellation_item_status,'approved_by' => auth()->id(),'cancel_approved_at' => now()]);
-            OrderItem::find($cancellationItem->order_item_id)->update(["status" => "cancelled"]);
+            $cancellationItem->update(['status' => $request->cancellation_item_status, 'approved_by' => auth()->id(), 'cancel_approved_at' => now()]);
+            OrderItem::find($cancellationItem->order_item_id)->update(['status' => 'cancelled']);
 
         } else {
 

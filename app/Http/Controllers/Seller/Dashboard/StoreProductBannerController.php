@@ -11,19 +11,19 @@ use App\Models\Store;
 use App\Models\StoreProductBanner;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Inertia\Response;
 use Inertia\ResponseFactory;
-use Illuminate\Support\Str;
 
 class StoreProductBannerController extends Controller
 {
-    use ImageUpload;
     use HandlesQueryStringParameters;
+    use ImageUpload;
 
     public function index(): Response|ResponseFactory
     {
         $storeProductBanners = StoreProductBanner::search(request('search'))
-        ->where('store_id', Store::getStoreId())
+            ->where('store_id', Store::getStoreId())
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
@@ -62,7 +62,7 @@ class StoreProductBannerController extends Controller
     {
         $storeProductBanner->checkStoreAccess(Store::getStoreId());
 
-        $image = isset($request->image) && !is_string($request->image) ? $this->updateImage($request->image, $storeProductBanner->image, 'store-product-banners') : $storeProductBanner->image;
+        $image = isset($request->image) && ! is_string($request->image) ? $this->updateImage($request->image, $storeProductBanner->image, 'store-product-banners') : $storeProductBanner->image;
 
         $storeProductBanner->update([
             'url' => $request->url,
@@ -119,7 +119,7 @@ class StoreProductBannerController extends Controller
         $selectedItems = explode(',', $selectedItems);
 
         StoreProductBanner::onlyTrashed()
-        ->where('store_id', Store::getStoreId())
+            ->where('store_id', Store::getStoreId())
             ->whereIn('id', $selectedItems)
             ->restore();
 

@@ -5,7 +5,6 @@ namespace App\Notifications\Admin\EmailNotifications;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -37,11 +36,11 @@ class RegisteredUserEmailNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage())
-        ->subject("New User Registered")
-        ->greeting("Dear ".$notifiable->name.",")
-        ->line("A new user has registered on our platform. Please review the details below:")
-        ->line("Name: ".$this->user->name)
-        ->line("Email: ".$this->user->email)
-        ->line("Registration Date: ".Carbon::parse($this->user->created_at)->format("Y-m-d"));
+            ->subject('New User Registered')
+            ->greeting('Dear '.$notifiable->name.',')
+            ->line('A new user has registered on our platform. Please review the details below:')
+            ->line('Name: '.$this->user->name)
+            ->line('Email: '.$this->user->email)
+            ->line('Registration Date: '.Carbon::parse($this->user->created_at)->format('Y-m-d'));
     }
 }

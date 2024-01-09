@@ -37,18 +37,18 @@ Route::middleware('guest')->group(function () {
         ->name('password.store');
 
     // Socialite Authentication
-    Route::prefix("/auth/redirect")
-    ->name("redirect.")
-    ->group(function () {
-        Route::get('/facebook', [FacebookAuthController::class,"redirectToProvider"])->name("facebook");
-        Route::get('/google', [GoogleAuthController::class,"redirectToProvider"])->name("google");
-    });
+    Route::prefix('/auth/redirect')
+        ->name('redirect.')
+        ->group(function () {
+            Route::get('/facebook', [FacebookAuthController::class, 'redirectToProvider'])->name('facebook');
+            Route::get('/google', [GoogleAuthController::class, 'redirectToProvider'])->name('google');
+        });
 
-    Route::prefix("/auth/callback")
-    ->group(function () {
-        Route::get('/facebook', [FacebookAuthController::class,"handelProviderCallback"]);
-        Route::get('/google', [GoogleAuthController::class,"handelProviderCallback"]);
-    });
+    Route::prefix('/auth/callback')
+        ->group(function () {
+            Route::get('/facebook', [FacebookAuthController::class, 'handelProviderCallback']);
+            Route::get('/google', [GoogleAuthController::class, 'handelProviderCallback']);
+        });
 });
 
 Route::middleware('auth')->group(function () {

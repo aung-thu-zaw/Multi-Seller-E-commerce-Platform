@@ -4,7 +4,6 @@ namespace App\Http\Requests\Ecommerce;
 
 use App\Rules\RecaptchaRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class ReturnAndCancellationItemRequest extends FormRequest
 {
@@ -24,8 +23,8 @@ class ReturnAndCancellationItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "qty" => ["required","numeric"],
-            "reason" => ["required","string"],
+            'qty' => ['required', 'numeric'],
+            'reason' => ['required', 'string'],
             'captcha_token' => [new RecaptchaRule()],
         ];
     }

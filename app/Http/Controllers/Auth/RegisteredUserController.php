@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use App\Rules\RecaptchaRule;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -49,6 +48,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return back()->with("success", "Account is created successfully.");
+        return back()->with('success', 'Account is created successfully.');
     }
 }

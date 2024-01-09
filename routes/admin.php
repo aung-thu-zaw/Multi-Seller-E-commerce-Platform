@@ -110,7 +110,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
         //         Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
         //     });
 
-
         // ***** Collection Operations *****
         Route::resource('collections', CollectionController::class)->except(['show']);
 
@@ -217,17 +216,17 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             });
 
         // ***** Order Operations *****
-        Route::resource('orders', OrderController::class)->except(['show','create','edit','store']);
+        Route::resource('orders', OrderController::class)->except(['show', 'create', 'edit', 'store']);
 
         Route::controller(OrderController::class)
-        ->prefix('/orders')
-        ->name('orders.')
-        ->group(function () {
-            Route::get('/{order}/detail', 'show')->name('show');
-            Route::patch('/{order}/status', 'updateOrderStatus')->name('status.update');
-            Route::patch('/{order}/payment', 'updatePaymentStatus')->name('payment.update');
-            Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
-        });
+            ->prefix('/orders')
+            ->name('orders.')
+            ->group(function () {
+                Route::get('/{order}/detail', 'show')->name('show');
+                Route::patch('/{order}/status', 'updateOrderStatus')->name('status.update');
+                Route::patch('/{order}/payment', 'updatePaymentStatus')->name('payment.update');
+                Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
+            });
 
         Route::get('orders/{order}/download', DownloadOrderInvoiceController::class)->name('order-invoice.download');
 
@@ -242,7 +241,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
-
 
         // ***** Region Operations *****
         Route::resource('regions', RegionController::class)->except(['show']);
@@ -593,16 +591,14 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-
-
         // ***** Database Backup Operations *****
         Route::controller(DatabaseBackupController::class)
-        ->prefix('/database-backups')
-        ->name('database-backups.')
-        ->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::post('/', 'backup')->name('backup');
-            Route::delete('/{file}', 'destroy')->name('destroy');
-            Route::get('/{file}/download', 'download')->name('download');
-        });
+            ->prefix('/database-backups')
+            ->name('database-backups.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('/', 'backup')->name('backup');
+                Route::delete('/{file}', 'destroy')->name('destroy');
+                Route::get('/{file}/download', 'download')->name('download');
+            });
     });

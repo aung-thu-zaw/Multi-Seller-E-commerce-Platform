@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Dashboard;
 use App\Helpers\FormatHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\HandlesQueryStringParameters;
-use App\Models\Brand;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -58,7 +57,7 @@ class DatabaseBackupController extends Controller
             'health' => $diskHealth,
             'amountOfBackups' => count($backups),
             'usedBackupStorage' => FormatHelper::humanReadableFilesize($totalBackupStorage),
-            'lastTimeBackup' => Carbon::createFromTimestamp(Storage::disk('local')->lastModified(end($backupFiles)))->diffForHumans()
+            'lastTimeBackup' => Carbon::createFromTimestamp(Storage::disk('local')->lastModified(end($backupFiles)))->diffForHumans(),
         ];
 
         // Paginator
@@ -73,8 +72,8 @@ class DatabaseBackupController extends Controller
             $perPage,
             $currentPage,
             [
-                'path' => route('admin.database-backups.index', ["per_page" => $perPage]),
-                "pageName" => "page"
+                'path' => route('admin.database-backups.index', ['per_page' => $perPage]),
+                'pageName' => 'page',
             ]
         );
 
@@ -100,7 +99,7 @@ class DatabaseBackupController extends Controller
 
     public function destroy(Request $request, string $file): RedirectResponse
     {
-        Storage::disk("local")->delete("Multi Seller E-commerce Platform/{$file}");
+        Storage::disk('local')->delete("Multi Seller E-commerce Platform/{$file}");
 
         return to_route('admin.database-backups.index', $this->getQueryStringParams($request))->with('success', 'Backup file deleted successfully');
     }
@@ -111,7 +110,7 @@ class DatabaseBackupController extends Controller
             Artisan::call('backup:run');
 
         } catch (Exception $e) {
-            return to_route('admin.database-backup.index')->with('error', 'Backup failed: ' . $e->getMessage());
+            return to_route('admin.database-backup.index')->with('error', 'Backup failed: '.$e->getMessage());
         }
 
         return to_route('admin.database-backups.index', $this->getQueryStringParams($request))->with('success', 'Backup completed successfully');
@@ -125,15 +124,14 @@ class DatabaseBackupController extends Controller
             if (Storage::disk('local')->exists($filePath)) {
                 return response()->download(storage_path("app/{$filePath}"), $file, [
                     'Content-Type' => 'application/zip',
-                    'Content-Disposition' => 'attachment; filename=' . $file,
+                    'Content-Disposition' => 'attachment; filename='.$file,
                 ]);
             } else {
                 to_route('admin.database-backups.index', $this->getQueryStringParams($request))->with('error', 'Backup file not found');
             }
         } catch (\Exception $e) {
-            to_route('admin.database-backups.index', $this->getQueryStringParams($request))->with('error', 'Download failed: ' . $e->getMessage());
+            to_route('admin.database-backups.index', $this->getQueryStringParams($request))->with('error', 'Download failed: '.$e->getMessage());
         }
 
     }
-
 }

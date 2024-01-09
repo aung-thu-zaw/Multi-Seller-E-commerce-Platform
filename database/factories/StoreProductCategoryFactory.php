@@ -17,11 +17,11 @@ class StoreProductCategoryFactory extends Factory
      */
     public function definition(): array
     {
-        $stores = Store::where("status", "active")->pluck("id")->toArray();
+        $stores = Store::where('status', 'active')->pluck('id')->toArray();
 
         return [
             'uuid' => fake()->uuid(),
-            'store_id' => fake()->randomElement($stores) ,
+            'store_id' => fake()->randomElement($stores),
             'name' => fake()->sentence(),
             'status' => fake()->randomElement(['show', 'hide']),
         ];

@@ -26,7 +26,7 @@ class WishlistController extends Controller
             })
             ->first();
 
-        if (!$wishlist) {
+        if (! $wishlist) {
             $wishlist = Wishlist::create([
                 'user_id' => auth()->id(),
                 'product_id' => $request->product_id,
@@ -37,10 +37,10 @@ class WishlistController extends Controller
             return back()->with('success', 'Item is moved to the wishlist; you can re-add it to the cart from the wishlist.');
         } else {
             $wishlist->delete();
+
             return back()->with('success', 'Item has been removed from your wishlist.');
         }
     }
-
 
     public function destroy(Wishlist $wishlist): RedirectResponse
     {

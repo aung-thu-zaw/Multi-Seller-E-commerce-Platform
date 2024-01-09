@@ -5,7 +5,6 @@ namespace App\Listeners\Registered;
 use App\Models\User;
 use App\Notifications\Admin\EmailNotifications\RegisteredUserEmailNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Notification;
 
 class SendNewUserRegisteredEmailNotificationToAdmin implements ShouldQueue
@@ -25,7 +24,7 @@ class SendNewUserRegisteredEmailNotificationToAdmin implements ShouldQueue
     {
         $user = $event->user ?? null;
 
-        $admins = User::where("role", "admin")->get();
+        $admins = User::where('role', 'admin')->get();
 
         Notification::send($admins, new RegisteredUserEmailNotification($user));
     }

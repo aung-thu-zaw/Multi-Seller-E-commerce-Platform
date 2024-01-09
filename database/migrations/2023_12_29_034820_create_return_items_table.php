@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -12,14 +13,14 @@ return new class () extends Migration {
     {
         Schema::create('return_items', function (Blueprint $table) {
             $table->id();
-            $table->string("uuid");
+            $table->string('uuid');
             $table->foreignId('order_item_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->text('reason');
             $table->integer('qty');
             $table->decimal('unit_price', 8, 2);
             $table->decimal('total_price', 8, 2);
-            $table->enum('status', ['pending', 'approved', 'rejected', 'received', 'refunded'])->default("pending");
+            $table->enum('status', ['pending', 'approved', 'rejected', 'received', 'refunded'])->default('pending');
             $table->foreignId('approved_by')->nullable()->constrained('users');
             $table->timestamp('received_at')->nullable();
             $table->timestamp('approved_at')->nullable();

@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -17,13 +18,13 @@ return new class () extends Migration {
             $table->string('uuid');
             $table->string('tracking_no');
             $table->integer('product_qty');
-            $table->enum('payment_method', ['card','paypal','cash on delivery']);
+            $table->enum('payment_method', ['card', 'paypal', 'cash on delivery']);
             $table->enum('payment_status', ['pending', 'completed'])->default('pending');
             $table->timestamp('purchased_at')->nullable();
             $table->decimal('total_amount', 8, 2);
             $table->string('shipping_method');
             $table->double('shipping_fee', 8, 2);
-            $table->enum('coupon_type', ['fixed','percentage'])->nullable();
+            $table->enum('coupon_type', ['fixed', 'percentage'])->nullable();
             $table->string('coupon_amount')->nullable();
             $table->enum('status', ['pending', 'processing', 'shipped', 'delivered'])->default('pending');
             $table->timestamps();

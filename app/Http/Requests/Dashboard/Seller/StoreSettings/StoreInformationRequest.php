@@ -26,11 +26,11 @@ class StoreInformationRequest extends FormRequest
         $store = $this->route()->parameter('store_id');
 
         $rules = [
-            "store_name" => ["required","string",Rule::unique("stores", "store_name")->ignore($store)],
-            "description" => ["nullable","string"],
-            "contact_email" => ["required","email",Rule::unique("stores", "contact_email")->ignore($store)],
-            "contact_phone" => ["required","string",Rule::unique("stores", "contact_phone")->ignore($store)],
-            "address" => ["required","string","max:100"],
+            'store_name' => ['required', 'string', Rule::unique('stores', 'store_name')->ignore($store)],
+            'description' => ['nullable', 'string'],
+            'contact_email' => ['required', 'email', Rule::unique('stores', 'contact_email')->ignore($store)],
+            'contact_phone' => ['required', 'string', Rule::unique('stores', 'contact_phone')->ignore($store)],
+            'address' => ['required', 'string', 'max:100'],
             'captcha_token' => [new RecaptchaRule()],
         ];
 

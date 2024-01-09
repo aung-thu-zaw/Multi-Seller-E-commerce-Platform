@@ -17,7 +17,7 @@ class StoreReviewResponseFactory extends Factory
      */
     public function definition(): array
     {
-        $storeReviews = StoreReview::where("status", "approved")->pluck("id")->toArray();
+        $storeReviews = StoreReview::where('status', 'approved')->pluck('id')->toArray();
 
         return [
             'store_review_id' => fake()->randomElement($storeReviews),

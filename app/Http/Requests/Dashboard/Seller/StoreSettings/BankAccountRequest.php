@@ -24,10 +24,10 @@ class BankAccountRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "account_title" => ["required","string"],
-            "account_number" => ["required","string"],
-            "bank_name" => ["required","string",Rule::in(['kbz','aya','cb','agd'])],
-            "branch_code" => ["nullable"],
+            'account_title' => ['required', 'string'],
+            'account_number' => ['required', 'string'],
+            'bank_name' => ['required', 'string', Rule::in(['kbz', 'aya', 'cb', 'agd'])],
+            'branch_code' => ['nullable'],
             'captcha_token' => [new RecaptchaRule()],
         ];
     }

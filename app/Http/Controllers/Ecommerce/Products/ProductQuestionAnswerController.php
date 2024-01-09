@@ -37,7 +37,7 @@ class ProductQuestionAnswerController extends Controller
 
     private function getCurrentUserStore(): Store
     {
-        return Store::where("seller_id", auth()->id())->first();
+        return Store::where('seller_id', auth()->id())->first();
     }
 
     private function createProductQuestionAnswer(ProductQuestion $productQuestion, Store $store, string $answer): ProductQuestionAnswer
@@ -51,7 +51,7 @@ class ProductQuestionAnswerController extends Controller
 
     private function updateProductQuestionStatus(ProductQuestion $productQuestion): void
     {
-        $productQuestion->update(["status" => "answered"]);
+        $productQuestion->update(['status' => 'answered']);
     }
 
     private function getInquirer(ProductQuestion $productQuestion): User

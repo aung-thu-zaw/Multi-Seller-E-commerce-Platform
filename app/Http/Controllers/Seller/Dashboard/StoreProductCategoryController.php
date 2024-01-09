@@ -10,9 +10,9 @@ use App\Models\Store;
 use App\Models\StoreProductCategory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Inertia\Response;
 use Inertia\ResponseFactory;
-use Illuminate\Support\Str;
 
 class StoreProductCategoryController extends Controller
 {

@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Ecommerce\Products;
 
 use App\Http\Controllers\Controller;
-use App\Models\Attribute;
 use App\Models\Product;
 use App\Models\ProductQuestion;
 use App\Models\ProductReview;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\ResponseFactory;
@@ -20,13 +18,13 @@ class ProductDetailController extends Controller
         $product->load(['productImages', 'brand:id,name', 'store:id,store_type,seller_id', 'skus.attributeOptions.attribute']);
 
         $shares = (new Share())
-        ->currentPage("$product->name")
-        ->facebook()
-        ->twitter()
-        ->reddit()
-        ->telegram()
-        ->whatsApp()
-        ->getRawLinks();
+            ->currentPage("$product->name")
+            ->facebook()
+            ->twitter()
+            ->reddit()
+            ->telegram()
+            ->whatsApp()
+            ->getRawLinks();
 
         $product->loadAvg(['productReviews' => function ($query) {
             $query->where('status', 'approved');
@@ -63,14 +61,14 @@ class ProductDetailController extends Controller
             ->get();
 
         $alsoViewedProducts = Product::select('id', 'store_id', 'image', 'name', 'slug', 'price', 'offer_price')
-        ->whereHas('viewers', function ($query) use ($product) {
-            $query->whereIn('users.id', $product->viewers->pluck('id'));
-        })
-        ->where('id', '!=', $product->id)
-        ->where('category_id', $product->category_id)
-        ->inRandomOrder()
-        ->limit(10)
-        ->get();
+            ->whereHas('viewers', function ($query) use ($product) {
+                $query->whereIn('users.id', $product->viewers->pluck('id'));
+            })
+            ->where('id', '!=', $product->id)
+            ->where('category_id', $product->category_id)
+            ->inRandomOrder()
+            ->limit(10)
+            ->get();
 
         // $recommendedProducts = $user->viewedProducts()->inRandomOrder()->limit(5)->get();
 

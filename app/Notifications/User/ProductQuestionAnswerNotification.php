@@ -5,10 +5,7 @@ namespace App\Notifications\User;
 use App\Models\Product;
 use App\Models\ProductQuestionAnswer;
 use App\Models\Store;
-use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class ProductQuestionAnswerNotification extends Notification

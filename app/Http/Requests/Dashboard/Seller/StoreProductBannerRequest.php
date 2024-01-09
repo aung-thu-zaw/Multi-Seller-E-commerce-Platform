@@ -42,7 +42,6 @@ class StoreProductBannerRequest extends FormRequest
             }
         }
 
-
         return $rules;
     }
 }

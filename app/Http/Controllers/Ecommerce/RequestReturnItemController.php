@@ -10,7 +10,6 @@ use App\Models\ReturnItem;
 use App\Models\Store;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -21,20 +20,19 @@ class RequestReturnItemController extends Controller
         $existingReturn = ReturnItem::where('order_item_id', $orderItem->id)->where('user_id', auth()->id())->first();
 
         if ($existingReturn) {
-            return back()->with("error", "You have already submitted a return request for this item.");
+            return back()->with('error', 'You have already submitted a return request for this item.');
         }
 
         $returnItem = ReturnItem::create([
             'uuid' => Str::uuid(),
-            "order_item_id" => $orderItem->id,
-            "user_id" => auth()->id(),
-            "reason" => $request->reason,
-            "qty" => $request->qty,
-            "unit_price" => $orderItem->unit_price,
-            "total_price" => $request->qty * $orderItem->unit_price,
-            "status" => "pending"
-           ]);
-
+            'order_item_id' => $orderItem->id,
+            'user_id' => auth()->id(),
+            'reason' => $request->reason,
+            'qty' => $request->qty,
+            'unit_price' => $orderItem->unit_price,
+            'total_price' => $request->qty * $orderItem->unit_price,
+            'status' => 'pending',
+        ]);
 
         $order = $orderItem->order;
         $store = Store::find($orderItem->store_id);
@@ -43,6 +41,6 @@ class RequestReturnItemController extends Controller
 
         Mail::to($store->contact_email)->queue(new NewReturnRequestEmail($seller->name, $user->name, $order->tracking_no, $request->reason, $orderItem, $returnItem));
 
-        return back()->with("success", "Your request is successfully submitted.");
+        return back()->with('success', 'Your request is successfully submitted.');
     }
 }

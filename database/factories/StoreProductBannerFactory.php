@@ -17,7 +17,7 @@ class StoreProductBannerFactory extends Factory
      */
     public function definition(): array
     {
-        $stores = Store::where("status", "active")->pluck("id")->toArray();
+        $stores = Store::where('status', 'active')->pluck('id')->toArray();
 
         return [
             'uuid' => fake()->uuid(),
