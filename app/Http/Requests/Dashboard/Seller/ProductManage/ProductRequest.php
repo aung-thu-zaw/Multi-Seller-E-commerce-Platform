@@ -37,13 +37,19 @@ class ProductRequest extends FormRequest
             'captcha_token' => [new RecaptchaRule()],
         ];
 
-        if($this->variants || $this->attribute_options) {
+        if($this->variants) {
             $rules['qty'] = ['nullable', 'numeric'];
             $rules['price'] = ['nullable', 'numeric'];
             $rules['variants'] = ['required', 'array'];
-            $rules['attribute_options'] = ['required', 'array'];
 
+        } elseif($this->attribute_options) {
+
+            $rules['attribute_options'] = ['required', 'array'];
+            $rules['qty'] = ['nullable', 'numeric'];
+            $rules['price'] = ['nullable', 'numeric'];
+            $rules['variants'] = ['required', 'array'];
         } else {
+
             $rules['qty'] = ['required', 'numeric'];
             $rules['price'] = ['required', 'numeric'];
             $rules['variants'] = ['nullable', 'array'];

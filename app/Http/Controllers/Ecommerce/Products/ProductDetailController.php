@@ -28,11 +28,6 @@ class ProductDetailController extends Controller
         ->whatsApp()
         ->getRawLinks();
 
-
-        // $attributes = Attribute::pluck('name', 'id');
-
-        // $options = $this->getSelectableOptionsFromProduct($product);
-
         $product->loadAvg(['productReviews' => function ($query) {
             $query->where('status', 'approved');
         }], 'rating');
@@ -81,29 +76,4 @@ class ProductDetailController extends Controller
 
         return inertia('E-commerce/Products/Show', compact('product', 'shares', 'productQuestions', 'productsFromTheSameStore', 'alsoViewedProducts', 'productReviewsForAverageProgressBar', 'productReviews'));
     }
-
-
-    // private function getSelectableOptionsFromProduct(Product $product): array
-    // {
-    //     $product->load([
-    //         'skus.attributeOptions.attribute',
-    //     ]);
-
-    //     $allOptions = [];
-
-    //     foreach ($product->skus as $sku) {
-    //         foreach ($sku->attributeOptions->groupBy('attribute_id') as $attributeID => $options) {
-    //             $allOptions[$attributeID][] = $options->toArray();
-    //         }
-    //     }
-    //     foreach ($allOptions as $attribute => $options) {
-
-    //         $allOptions[$attribute] = collect($options)
-    //             ->flatten(1)
-    //             ->unique('id')
-    //             ->toArray();
-    //     }
-
-    //     return $allOptions;
-    // }
 }

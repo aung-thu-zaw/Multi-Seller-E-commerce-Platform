@@ -144,6 +144,8 @@ class ProductController extends Controller
 
     public function edit(Product $product): Response|ResponseFactory
     {
+        $product->load(["productImages:id,product_id,image",'skus.attributeOptions.attribute']);
+
         $categories = Category::select('id', 'name')
             ->where('status', 'show')
             ->get();
@@ -152,11 +154,13 @@ class ProductController extends Controller
             ->where('status', 'active')
             ->get();
 
+
         return inertia('Seller/ProductManage/Products/Edit', compact('product', 'categories', 'brands'));
     }
 
     public function update(ProductRequest $request, Product $product): RedirectResponse
     {
+        dd($request->all());
         // (new UpdateProductAction())->handle($request->validated(), $product);
 
         return to_route('seller.products.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');

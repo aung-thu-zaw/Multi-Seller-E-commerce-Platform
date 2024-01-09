@@ -33,6 +33,8 @@ const { formatDate } = useFormatFunctions()
 const editor = ClassicEditor
 
 const productHasVariants = ref(null)
+const offerStartDate = ref(null)
+const offerEndDate = ref(null)
 
 const productList = 'seller.products.index'
 
@@ -75,9 +77,12 @@ const { form, processing, errors, createAction } = useResourceActions({
   variants: []
 })
 
-watch([form.offer_price_start_date, form.offer_price_end_date], () => {
-  form.offer_price_start_date = formatDate(form.offer_price_start_date)
-  form.offer_price_end_date = formatDate(form.offer_price_end_date)
+watch(offerStartDate, (newStartDate) => {
+  form.offer_price_start_date = newStartDate ? formatDate(newStartDate) : null
+})
+
+watch(offerEndDate, (newEndDate) => {
+  form.offer_price_end_date = newEndDate ? formatDate(newEndDate) : null
 })
 
 const variantAttributesAndOptions = ref([])
@@ -600,11 +605,7 @@ const handleAttributeOptionChange = (index, attribute, selectedOption) => {
                   To create product variants, add at least one variant attribute and option.
                 </p>
               </div>
-              {{ variantAttributesAndOptions }}
 
-              <br />
-
-              {{ form }}
               <div
                 v-for="(attributeAndOptions, index) in variantAttributesAndOptions"
                 :key="index"
@@ -709,6 +710,7 @@ const handleAttributeOptionChange = (index, attribute, selectedOption) => {
                             handleAttributeOptionChange(index, attribute, $event.target.value)
                           "
                         >
+                          <option>{{ __('Select an option') }}</option>
                           <option
                             v-for="option in getAttributeOptions(attribute)"
                             :key="option"
