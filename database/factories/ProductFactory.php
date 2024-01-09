@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Store;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,12 +21,12 @@ class ProductFactory extends Factory
     {
         $brands = Brand::where('status', 'active')->pluck('id')->toArray();
         $categories = Category::where("status", "show")->pluck("id")->toArray();
-
+        $stores = Store::where("status", 'active')->pluck("id")->toArray();
 
         return [
             'category_id' => fake()->randomElement($categories),
             'brand_id' => fake()->randomElement($brands),
-            'store_id' => fake()->numberBetween(1, 2),
+            'store_id' => fake()->randomElement($stores),
             'image' => fake()->imageUrl(),
             'name' => fake()->sentence(),
             'description' => fake()->text(),

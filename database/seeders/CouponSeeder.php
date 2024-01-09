@@ -17,7 +17,5 @@ class CouponSeeder extends Seeder
         Coupon::factory()->create(['code' => 'CHRISTMAS SHOPPING']);
         Coupon::factory()->create(['code' => 'NEW YEAR SHOPPING']);
         Coupon::factory()->create(['code' => 'WEEKEND SHOPPING']);
-
-        Coupon::factory(50)->create();
     }
 }

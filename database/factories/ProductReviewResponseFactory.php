@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\ProductReview;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,10 @@ class ProductReviewResponseFactory extends Factory
      */
     public function definition(): array
     {
+        $productReviews = ProductReview::where("status", "approved")->pluck("id")->toArray();
+
         return [
-            'product_review_id' => fake()->numberBetween(1, 10),
+            'product_review_id' => fake()->randomElement($productReviews),
             'store_id' => fake()->numberBetween(1, 2),
             'response' => fake()->paragraph(),
         ];

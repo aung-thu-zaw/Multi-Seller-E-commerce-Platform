@@ -18,6 +18,6 @@ class StoreSeeder extends Seeder
             'status' => 'active',
         ]);
 
-        Store::factory(10)->create();
+        Store::factory(20)->create(["status"=>"active"]);
     }
 }

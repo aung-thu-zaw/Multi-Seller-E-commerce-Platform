@@ -23,9 +23,7 @@ class UserSeeder extends Seeder
 
         $superAdmin->assignRole(1);
 
-        $role = Role::with('permissions')
-            ->where('id', 1)
-            ->first();
+        $role = Role::with('permissions')->find(1);
 
         $superAdmin->syncPermissions($role->permissions);
 
@@ -53,11 +51,8 @@ class UserSeeder extends Seeder
             'password' => 'Password!',
         ]);
 
-        // 5 To 55
         User::factory(50)->create(['role' => 'seller', 'status' => 'active']);
-
-        User::factory(10)->create(['role' => 'admin']);
-
         User::factory(100)->create(['role' => 'user']);
+        User::factory(10)->create(['role' => 'admin']);
     }
 }

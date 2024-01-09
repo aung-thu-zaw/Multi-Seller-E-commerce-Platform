@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,9 +18,12 @@ class ProductQuestionFactory extends Factory
      */
     public function definition(): array
     {
+        $users = User::where('status', 'active')->pluck('id')->toArray();
+        $products = Product::where('status', 'approved')->pluck('id')->toArray();
+
         return [
-            'user_id' => fake()->numberBetween(5, 20),
-            'product_id' => fake()->numberBetween(5, 20),
+            'user_id' => fake()->randomElement($users),
+            'product_id' => fake()->randomElement($products),
             'question' => fake()->paragraph(),
         ];
     }

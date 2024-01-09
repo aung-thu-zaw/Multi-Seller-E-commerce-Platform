@@ -13,6 +13,6 @@ class UserProductViewSeeder extends Seeder
      */
     public function run(): void
     {
-        UserProductView::factory(1000)->create();
+        UserProductView::factory(500)->create();
     }
 }

@@ -19,7 +19,6 @@ class AddressFactory extends Factory
      */
     public function definition(): array
     {
-
         $regions = Region::pluck('id')->toArray();
         $cities = City::pluck('id')->toArray();
         $townships = Township::pluck('id')->toArray();

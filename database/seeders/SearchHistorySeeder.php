@@ -88,7 +88,7 @@ class SearchHistorySeeder extends Seeder
         SearchHistory::factory()->create(['keyword' => 'Designer watches for men']);
         SearchHistory::factory()->create(['keyword' => 'Bluetooth speakers with built-in microphone']);
         SearchHistory::factory()->create(['keyword' => 'Espresso coffee beans']);
-        SearchHistory::factory()->create(['keyword' => 'Maternity activewear']);
+        SearchHistory::factory()->create(['keyword' => 'Maternity active wear']);
         SearchHistory::factory()->create(['keyword' => 'Outdoor grills and BBQ accessories']);
         SearchHistory::factory()->create(['keyword' => 'Travel luggage organizers']);
         SearchHistory::factory()->create(['keyword' => 'Smartphone camera lenses']);

@@ -20,7 +20,5 @@ class BlogCategorySeeder extends Seeder
         BlogCategory::factory()->create(['image' => 'travel.jpeg', 'name' => 'Travel', 'status' => 'show']);
         BlogCategory::factory()->create(['image' => 'beauty.jpeg', 'name' => 'Beauty & Health', 'status' => 'show']);
         BlogCategory::factory()->create(['image' => 'home-improvement.jpeg', 'name' => 'Home Improvement', 'status' => 'show']);
-
-        BlogCategory::factory(20)->create(['status' => 'hide']);
     }
 }

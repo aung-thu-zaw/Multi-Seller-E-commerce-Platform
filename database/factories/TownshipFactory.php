@@ -17,12 +17,11 @@ class TownshipFactory extends Factory
      */
     public function definition(): array
     {
-
         $cities = City::pluck('id')->toArray();
 
         return [
             'city_id' => fake()->randomElement($cities),
-            'name' => fake()->unique()->sentence(),
+            'name' => fake()->unique()->city(),
             'created_at' => fake()->dateTimeBetween('-3 months', now()),
         ];
     }

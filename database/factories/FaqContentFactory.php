@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\FaqSubcategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,10 @@ class FaqContentFactory extends Factory
      */
     public function definition(): array
     {
+        $faqSubcategory = FaqSubcategory::pluck("id")->toArray();
+
         return [
-            'faq_subcategory_id' => fake()->numberBetween(1, 18),
+            'faq_subcategory_id' => fake()->randomElement($faqSubcategory),
             'question' => fake()->sentence(),
             'slug' => fake()->unique()->slug(),
             'answer' => fake()->paragraph(10),

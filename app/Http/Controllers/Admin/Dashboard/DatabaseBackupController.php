@@ -21,6 +21,14 @@ class DatabaseBackupController extends Controller
 {
     use HandlesQueryStringParameters;
 
+    public function __construct()
+    {
+        $this->middleware('permission:database-backups.view', ['only' => ['index']]);
+        $this->middleware('permission:database-backups.download', ['only' => ['download']]);
+        $this->middleware('permission:database-backups.create', ['only' => ['backup']]);
+        $this->middleware('permission:database-backups.delete', ['only' => ['destroy']]);
+    }
+
     public function index(): Response|ResponseFactory
     {
         // Get backup files

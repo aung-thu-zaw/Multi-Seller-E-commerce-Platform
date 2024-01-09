@@ -19,9 +19,9 @@ class ProductReviewFactory extends Factory
      */
     public function definition(): array
     {
-        $users = User::where('status', 'active')->pluck('id');
-        $stores = Store::where('status', 'approved')->pluck('id');
-        $products = Product::where('status', 'approved')->pluck('id');
+        $users = User::where('status', 'active')->pluck('id')->toArray();
+        $stores = Store::where('status', 'active')->pluck('id')->toArray();
+        $products = Product::where('status', 'approved')->pluck('id')->toArray();
 
         return [
             'user_id' => fake()->randomElement($users),

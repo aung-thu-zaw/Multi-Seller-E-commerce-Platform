@@ -17,7 +17,7 @@ class RegionFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->unique()->sentence(),
+            'name' => fake()->unique()->state(),
             'created_at' => fake()->dateTimeBetween('-3 months', now()),
         ];
     }

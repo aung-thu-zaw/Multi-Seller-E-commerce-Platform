@@ -65,7 +65,5 @@ class BlogContentSeeder extends Seeder
         BlogContent::factory()->create(['thumbnail' => 'blog-47.jpg', 'status' => 'published', 'published_at' => now()]);
         BlogContent::factory()->create(['thumbnail' => 'blog-48.jpg', 'status' => 'published', 'published_at' => now()]);
         BlogContent::factory()->create(['thumbnail' => 'blog-49.jpg', 'status' => 'published', 'published_at' => now()]);
-
-        BlogContent::factory(50)->create(['status' => 'draft']);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\ProductQuestion;
+use App\Models\Store;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,9 +18,12 @@ class ProductQuestionAnswerFactory extends Factory
      */
     public function definition(): array
     {
+        $productQuestions = ProductQuestion::pluck('id')->toArray();
+        $stores = Store::where('status', 'active')->pluck('id')->toArray();
+
         return [
-            'product_question_id' => fake()->numberBetween(1, 20),
-            'store_id' => fake()->numberBetween(1, 2),
+            'product_question_id' => fake()->randomElement($productQuestions),
+            'store_id' => fake()->randomElement($stores),
             'answer' => fake()->paragraph(),
         ];
     }

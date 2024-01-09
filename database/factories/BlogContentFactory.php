@@ -19,7 +19,6 @@ class BlogContentFactory extends Factory
     public function definition(): array
     {
         $blogCategories = BlogCategory::where('status', 'show')->pluck('id')->toArray();
-
         $authors = User::where('role', 'admin')->pluck('id')->toArray();
 
         return [
