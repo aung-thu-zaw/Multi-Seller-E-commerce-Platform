@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Scopes\FilterByScope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,17 @@ class ProductQuestion extends Model
 {
     use HasFactory;
     use Searchable;
+
+
+    /**
+     *     @return array<string>
+     */
+    public function toSearchableArray(): array
+    {
+        return [
+            'question' => $this->question,
+        ];
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Casts\Attribute<ProductQuestion, never>

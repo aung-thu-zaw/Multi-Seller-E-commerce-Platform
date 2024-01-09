@@ -26,7 +26,7 @@ const handleNotificationReadAt = () => {
 <template>
   <div
     @click="handleNotificationReadAt"
-    class="flex px-4 py-3 w-full overflow-hidden border-b border-gray-200"
+    class="flex px-4 py-3 w-full overflow-hidden border-b border-gray-200 cursor-pointer"
     :class="{
       'bg-gray-100 ': notification.read_at,
       'hover:bg-gray-50 ': !notification.read_at

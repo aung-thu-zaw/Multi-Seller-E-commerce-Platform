@@ -21,7 +21,7 @@ class StoreProductCategoryController extends Controller
     public function index(): Response|ResponseFactory
     {
         $storeProductCategories = StoreProductCategory::search(request('search'))
-        ->where('store_id', Store::getStoreId())
+            ->where('store_id', Store::getStoreId())
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
@@ -36,7 +36,7 @@ class StoreProductCategoryController extends Controller
 
     public function store(StoreProductCategoryRequest $request): RedirectResponse
     {
-        StoreProductCategory::create(['uuid' => Str::uuid(),'store_id' => Store::getStoreId(), 'name' => $request->name, 'status' => $request->status]);
+        StoreProductCategory::create(['uuid' => Str::uuid(), 'store_id' => Store::getStoreId(), 'name' => $request->name, 'status' => $request->status]);
 
         return to_route('seller.store-product-categories.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
     }
@@ -70,7 +70,9 @@ class StoreProductCategoryController extends Controller
     {
         $selectedItems = explode(',', $selectedItems);
 
-        StoreProductCategory::where('store_id', Store::getStoreId())->whereIn('id', $selectedItems)->delete();
+        StoreProductCategory::where('store_id', Store::getStoreId())
+            ->whereIn('id', $selectedItems)
+            ->delete();
 
         return to_route('seller.store-product-categories.index', $this->getQueryStringParams($request))->with('success', 'Selected :label have been successfully deleted.');
     }
@@ -102,7 +104,10 @@ class StoreProductCategoryController extends Controller
     {
         $selectedItems = explode(',', $selectedItems);
 
-        StoreProductCategory::onlyTrashed()->where('store_id', Store::getStoreId())->whereIn('id', $selectedItems)->restore();
+        StoreProductCategory::onlyTrashed()
+            ->where('store_id', Store::getStoreId())
+            ->whereIn('id', $selectedItems)
+            ->restore();
 
         return to_route('seller.store-product-categories.trashed', $this->getQueryStringParams($request))->with('success', 'Selected :label have been successfully restored.');
     }
@@ -122,7 +127,10 @@ class StoreProductCategoryController extends Controller
     {
         $selectedItems = explode(',', $selectedItems);
 
-        $trashedStoreProductCategories = StoreProductCategory::onlyTrashed()->where('store_id', Store::getStoreId())->whereIn('id', $selectedItems)->get();
+        $trashedStoreProductCategories = StoreProductCategory::onlyTrashed()
+            ->where('store_id', Store::getStoreId())
+            ->whereIn('id', $selectedItems)
+            ->get();
 
         (new PermanentlyDeleteTrashedStoreProductCategoriesAction())->handle($trashedStoreProductCategories);
 
@@ -131,7 +139,9 @@ class StoreProductCategoryController extends Controller
 
     public function forceDeleteAll(Request $request): RedirectResponse
     {
-        $trashedStoreProductCategories = StoreProductCategory::onlyTrashed()->where('store_id', Store::getStoreId())->get();
+        $trashedStoreProductCategories = StoreProductCategory::onlyTrashed()
+            ->where('store_id', Store::getStoreId())
+            ->get();
 
         (new PermanentlyDeleteTrashedStoreProductCategoriesAction())->handle($trashedStoreProductCategories);
 

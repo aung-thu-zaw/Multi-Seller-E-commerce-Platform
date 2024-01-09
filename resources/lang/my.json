@@ -444,5 +444,16 @@
     "Order": "အော်ဒါ",
     "Invoice": "ပြေစာ",
     "Payment status": "ငွေပေးချေမှု",
-    "Order status": "အော်ဒါ အခြေအနေ"
+    "Order status": "အော်ဒါ အခြေအနေ",
+    "Product Categories": "ကုန်ပစ္စည်းအမျိုးအစားများ",
+    "Product Category": "ကုန်ပစ္စည်းအမျိုးအစား",
+    "Product Category Name": "ကုန်ပစ္စည်းအမျိုးအစားအမည်",
+    "Product Questions": "ထုတ်ကုန်မေးခွန်းများ",
+    "Product Question": "ထုတ်ကုန်မေးခွန်း",
+    "Go To Question": "မေးခွန်းသို့သွားပါ။",
+    "New product question from :label": ":label ဆီမှ ထုတ်ကုန်မေးခွန်းအသစ်",
+    "Your product question has been replied to by :label": "သင့်ထုတ်ကုန်မေးခွန်းကို :label မှ စာပြန်ထားသည်။",
+    "Review Management": "သုံးသပ်ချက် စီမံခန့်ခွဲမှု",
+    "Go To Review":"သုံးသပ်ချက်သို့သွားပါ။"
 }
+

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\FilterByScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,6 +18,16 @@ class ProductReview extends Model
     use HasFactory;
     use SoftDeletes;
     use Searchable;
+
+    /**
+     *     @return array<string>
+     */
+    public function toSearchableArray(): array
+    {
+        return [
+            'comment' => $this->comment,
+        ];
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Product,ProductReview>
@@ -105,5 +116,12 @@ class ProductReview extends Model
             default:
                 return $query->orderBy('id', 'desc');
         }
+    }
+
+    protected static function booted(): void
+    {
+        parent::boot();
+
+        static::addGlobalScope(new FilterByScope());
     }
 }

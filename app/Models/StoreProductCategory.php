@@ -14,8 +14,6 @@ class StoreProductCategory extends Model
     use Searchable;
     use SoftDeletes;
 
-
-
     public function getRouteKeyName()
     {
         return 'uuid';

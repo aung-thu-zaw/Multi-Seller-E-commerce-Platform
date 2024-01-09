@@ -48,7 +48,7 @@ const productReviewList = 'seller.store-reviews.index'
           class="my-3 flex flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between overflow-auto p-2"
         >
           <DashboardTableDataSearchBox
-            :placeholder="__('Search by :label', { label: __('Question') })"
+            :placeholder="__('Search by :label', { label: __('Comment') })"
             :to="productReviewList"
           />
 

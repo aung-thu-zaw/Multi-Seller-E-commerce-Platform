@@ -442,5 +442,15 @@
     "Order": "order",
     "Invoice": "Invoice",
     "Payment status": "Payment status",
-    "Order status": "Order status"
+    "Order status": "Order status",
+    "Product Categories": "Product Categories",
+    "Product Category": "Product Category",
+    "Product Category Name": "Product Category Name",
+    "Product Questions": "Product Questions",
+    "Product Question": "Product Question",
+    "Go To Question": "Go To Question",
+    "New product question from :label": "New product question from :label",
+    "Your product question has been replied to by :label": "Your product question has been replied to by :label",
+    "Review Management": "Review Management",
+    "Go To Review":"Go To Review"
 }

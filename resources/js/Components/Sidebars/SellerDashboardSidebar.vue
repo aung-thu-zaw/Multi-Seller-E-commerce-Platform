@@ -254,7 +254,7 @@ const store = computed(() => usePage().props.auth?.store)
                 }"
               >
                 <i class="fa-solid fa-clipboard-question mr-2"></i>
-                {{ __('Products Questions') }}
+                {{ __('Product Questions') }}
               </Link>
             </li>
 

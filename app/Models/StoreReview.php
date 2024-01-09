@@ -2,18 +2,31 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\FilterByScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
 class StoreReview extends Model
 {
     use HasFactory;
     use Searchable;
+    use SoftDeletes;
+
+    /**
+     *     @return array<string>
+     */
+    public function toSearchableArray(): array
+    {
+        return [
+            'comment' => $this->comment,
+        ];
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User,StoreReview>
@@ -60,6 +73,13 @@ class StoreReview extends Model
         }
 
         return $query;
+    }
+
+    protected static function booted(): void
+    {
+        parent::boot();
+
+        static::addGlobalScope(new FilterByScope());
     }
 
     /**
