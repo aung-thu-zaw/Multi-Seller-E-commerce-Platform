@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Seller\Dashboard\ProductManage;
+namespace App\Http\Controllers\Seller\Dashboard;
 
 use App\Actions\Products\CreateProductAction;
 use App\Actions\Products\UpdateProductAction;

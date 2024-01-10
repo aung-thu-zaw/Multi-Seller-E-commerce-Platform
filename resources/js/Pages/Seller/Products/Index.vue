@@ -186,13 +186,13 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
               <TableActionCell>
                 <div class="min-w-[400px] space-x-3">
-                  <!-- <NormalButton
-                    v-show="item?.status === 'draft' && can('products.create')"
+                  <NormalButton
+                    v-show="item?.status === 'draft'"
                     class="bg-amber-600 text-white ring-2 ring-amber-300"
                   >
                     <i class="fa-solid fa-paper-plane"></i>
-                    {{ __('Request') }}
-                  </NormalButton> -->
+                    {{ __('Request Publish') }}
+                  </NormalButton>
 
                   <InertiaLinkButton
                     to="seller.products.edit"

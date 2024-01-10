@@ -76,47 +76,42 @@ class UpdateProductAction
             }
 
             if (isset($data["variants"]) && !empty($data["variants"])) {
-
-                $productAllSkus = Sku::where("product_id", $product->id)->get();
-
-                foreach ($productAllSkus as $sku) {
-                    $sku->delete();
-                    $sku->attributeOptions()->detach();
-                }
-
-                foreach ($data["variants"] as $sku) {
-                    $skuCode = str($product->name);
+                foreach ($data["variants"] as $variantData) {
                     $skuOptions = [];
 
-                    foreach ($sku['attributes'] as $name => $value) {
-                        $skuCode .= ' '.$value.' '.$name;
-                        if (! array_key_exists($name, $attributesByName)) {
-                            // $this->command->error('Attribute '.$name.' not found');
-
+                    foreach ($variantData['attributes'] as $name => $value) {
+                        if (!array_key_exists($name, $attributesByName)) {
                             return;
                         }
+
                         $attributeOption = AttributeOption::where('attribute_id', $attributesByName[$name])
                             ->where('value', $value)
                             ->value('id');
-                        if (! $attributeOption) {
-                            // $this->command->error('Attribute Value '.$name.' => '.$value.' not found');
 
+                        if (!$attributeOption) {
                             return;
                         }
+
                         $skuOptions[] = $attributeOption;
                     }
-                    $sku = $product->skus()->create([
-                        'code' => str()->slug($skuCode),
-                        'price' => $sku['price'],
-                        'offer_price' => $sku['offer_price'],
-                        'qty' => $sku['qty'],
-                    ]);
 
-                    $sku->attributeOptions()->attach($skuOptions);
+                    $existingSku = $product->skus()
+                        ->whereHas('attributeOptions', function ($query) use ($skuOptions) {
+                            $query->whereIn('attribute_option_id', $skuOptions);
+                        })
+                        ->first();
+
+                    if ($existingSku) {
+                        $existingSku->update([
+                            'price' => $variantData['price'],
+                            'offer_price' => $variantData['offer_price'],
+                            'qty' => $variantData['qty'],
+                        ]);
+                    } else {
+                        return back()->with("error", "product variants not found");
+                    }
                 }
-
             }
-
         });
 
     }

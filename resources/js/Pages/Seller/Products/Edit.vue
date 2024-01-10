@@ -6,14 +6,12 @@ import TableContainer from '@/Components/Tables/TableContainer.vue'
 import Table from '@/Components/Tables/Table.vue'
 import TableHeaderCell from '@/Components/Tables/TableCells/TableHeaderCell.vue'
 import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
-import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
 import PreviewImage from '@/Components/Forms/PreviewImage.vue'
 import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
 import InputError from '@/Components/Forms/Fields/InputError.vue'
 import InputField from '@/Components/Forms/Fields/InputField.vue'
 import FileInput from '@/Components/Forms/Fields/FileInput.vue'
 import SelectBox from '@/Components/Forms/Fields/SelectBox.vue'
-import NormalButton from '@/Components/Buttons/NormalButton.vue'
 import FormButton from '@/Components/Buttons/FormButton.vue'
 import GoBackButton from '@/Components/Buttons/GoBackButton.vue'
 import MultipleFileInput from '@/Components/Forms/Fields/MultipleFileInput.vue'
@@ -115,17 +113,6 @@ watch(offerEndDate, (newEndDate) => {
   form.offer_price_end_date = newEndDate ? formatDate(newEndDate) : null
 })
 
-const addNewProductVariant = () => {
-  const emptyProductVariant = {
-    price: null,
-    offer_price: null,
-    qty: null,
-    attributes: {}
-  }
-
-  form.variants.unshift({ ...emptyProductVariant })
-}
-
 const getUniqueAttributes = computed(() => {
   const attributes = []
 
@@ -168,10 +155,6 @@ const getAttributeOptions = (attribute) => {
   // Convert the set to an array before returning
   const attributeOptions = Array.from(attributeOptionsSet)
   return attributeOptions
-}
-
-const deleteProductVariant = (index) => {
-  form.variants.splice(index, 1)
 }
 </script>
 
@@ -568,23 +551,12 @@ const deleteProductVariant = (index) => {
           <hr />
 
           <div v-show="product.skus.length" class="mb-5">
-            <h1 class="font-bold text-md text-gray-700">
+            <h1 class="font-bold text-md text-gray-700 mb-5">
               <i class="fa-solid fa-boxes-stacked"></i>
               Product Variants
             </h1>
 
             <div>
-              <div class="flex items-center justify-end mb-5">
-                <button
-                  @click="addNewProductVariant"
-                  type="button"
-                  class="font-bold text-blue-600 text-xs"
-                >
-                  <i class="fa-solid fa-plus"></i>
-                  Add New Product Variant
-                </button>
-              </div>
-{{ form.variants }}
               <!-- Table  -->
               <TableContainer>
                 <Table :items="form.variants">
@@ -598,7 +570,6 @@ const deleteProductVariant = (index) => {
                     <TableHeaderCell label="Qty" />
                     <TableHeaderCell label="Price" />
                     <TableHeaderCell label="Discount Price" />
-                    <TableHeaderCell label="Actions" />
                   </template>
                   <!-- Table Body -->
                   <template #table-data="{ index }">
@@ -650,16 +621,6 @@ const deleteProductVariant = (index) => {
                         />
                       </div>
                     </TableDataCell>
-
-                    <TableActionCell>
-                      <NormalButton
-                        @click="deleteProductVariant(index)"
-                        class="bg-red-600 text-white ring-2 ring-red-300"
-                      >
-                        <i class="fa-solid fa-trash-can"></i>
-                        {{ __('Delete') }}
-                      </NormalButton>
-                    </TableActionCell>
                   </template>
                 </Table>
               </TableContainer>

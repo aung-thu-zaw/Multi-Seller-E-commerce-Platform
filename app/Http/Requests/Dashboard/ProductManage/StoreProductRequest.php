@@ -24,6 +24,7 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
+            'store_id' => ['nullable', 'numeric', Rule::exists('stores', 'id')],
             'brand_id' => ['nullable', 'numeric', Rule::exists('brands', 'id')],
             'category_id' => ['required', 'numeric', Rule::exists('categories', 'id')],
             'name' => ['required', 'string', 'max:255'],

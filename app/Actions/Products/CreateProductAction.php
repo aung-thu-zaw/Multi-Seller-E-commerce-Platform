@@ -59,7 +59,7 @@ class CreateProductAction
                 'warranty_policy' => $data["warranty_policy"] ?? null,
                 'return_day' => $data["return_day"] ?? null,
                 'return_policy' => $data["return_policy"] ?? null,
-                'status' => 'pending',
+                'status' => 'draft',
             ]);
 
             foreach ($data["images"] as $image) {

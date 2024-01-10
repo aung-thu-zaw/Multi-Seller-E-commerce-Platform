@@ -24,6 +24,7 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
+            'store_id' => ['nullable', 'numeric', Rule::exists('stores', 'id')],
             'brand_id' => ['nullable', 'numeric', Rule::exists('brands', 'id')],
             'category_id' => ['required', 'numeric', Rule::exists('categories', 'id')],
             'name' => ['required', 'string', 'max:255'],
@@ -39,7 +40,7 @@ class UpdateProductRequest extends FormRequest
             'captcha_token' => [new RecaptchaRule()],
         ];
 
-        if ($this->variants !== []) {
+        if ($this->variants) {
             $rules['qty'] = ['nullable', 'numeric'];
             $rules['price'] = ['nullable', 'numeric'];
             $rules['variants'] = ['required', 'array'];
@@ -61,7 +62,7 @@ class UpdateProductRequest extends FormRequest
             $rules['image'] = ['nullable', 'string'];
         }
 
-        if ($this->hasFile('images')) {
+        if ($this->images) {
 
             $rules['images.*'] = ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1500'];
 

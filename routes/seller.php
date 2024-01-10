@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DeleteProductImageController;
 use App\Http\Controllers\DownloadOrderInvoiceController;
 use App\Http\Controllers\Seller\Auth\LoginController;
 use App\Http\Controllers\Seller\Dashboard\ChatInboxController;
@@ -8,8 +9,7 @@ use App\Http\Controllers\Seller\Dashboard\OrderManagement\CancellationItemContro
 use App\Http\Controllers\Seller\Dashboard\OrderManagement\OrderController;
 use App\Http\Controllers\Seller\Dashboard\OrderManagement\ReturnItemController;
 use App\Http\Controllers\Seller\Dashboard\PayoutRequestController;
-use App\Http\Controllers\Seller\Dashboard\ProductManage\ProductController;
-use App\Http\Controllers\Seller\Dashboard\ProductManage\ProductImageController;
+use App\Http\Controllers\Seller\Dashboard\ProductController;
 use App\Http\Controllers\Seller\Dashboard\ProductQuestionController;
 use App\Http\Controllers\Seller\Dashboard\ReviewManagement\ProductReviewController;
 use App\Http\Controllers\Seller\Dashboard\ReviewManagement\StoreReviewController;
@@ -85,15 +85,8 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
         ]);
 
         Route::delete('/products/destroy/selected/{selected_items}', [ProductController::class, 'destroySelected'])->name('products.destroy.selected');
+        Route::delete('/products/images/{product_image}', DeleteProductImageController::class)->name('product.images.destroy');
 
-        Route::controller(ProductImageController::class)
-            ->prefix('/products')
-            ->name('product.')
-            ->group(function () {
-                Route::get('/{product}/images', 'productImages')->name('images');
-                Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
-                Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
-            });
 
         // Store Category Operations
         // Route::resource('store-product-categories', StoreProductCategoryController::class)->except(['show'])->middleware('strict.inactive_store');
