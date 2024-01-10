@@ -467,5 +467,6 @@
     "Database Backups": "ဒေတာဘေ့စ် Backups",
     "Database Backup": "ဒေတာဘေ့စ် Backup",
     "Sorry, we currently do not support shipping to your area. Please contact support for assistance.":"ဝမ်းနည်းပါသည်၊ ကျွန်ုပ်တို့သည် သင့်ဒေသသို့ ပို့ဆောင်ခြင်းကို လောလောဆယ် မပံ့ပိုးပါ။ အကူအညီအတွက် ကျေးဇူးပြု၍ အကူအညီရယူပါ။",
-    "Please create a default delivery address before proceeding.":"ဆက်လက်မလုပ်ဆောင်မီ ပုံသေပေးပို့လိပ်စာတစ်ခု ဖန်တီးပါ။"
+    "Please create a default delivery address before proceeding.":"ဆက်လက်မလုပ်ဆောင်မီ ပုံသေပေးပို့လိပ်စာတစ်ခု ဖန်တီးပါ။",
+    "You must have items in your cart to proceed to checkout.":"ငွေရှင်းရန် ဆက်လက်လုပ်ဆောင်ရန် သင့်စျေးဝယ်လှည်းထဲတွင် ပစ္စည်းများရှိရပါမည်။"
 }

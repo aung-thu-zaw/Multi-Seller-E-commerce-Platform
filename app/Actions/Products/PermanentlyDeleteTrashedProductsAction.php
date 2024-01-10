@@ -15,11 +15,13 @@ class PermanentlyDeleteTrashedProductsAction
     {
         $products->each(function ($product) {
 
-            $productImages=ProductImage::where("product_id", $product->id)->get();
+            $productImages = ProductImage::where("product_id", $product->id)->get();
 
             $productImages->each(function ($image) {
 
                 ProductImage::deleteImage($image);
+
+                $image->delete();
 
             });
 

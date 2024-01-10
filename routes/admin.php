@@ -27,8 +27,7 @@ use App\Http\Controllers\Admin\Dashboard\GeographicHierarchy\RegionController;
 use App\Http\Controllers\Admin\Dashboard\GeographicHierarchy\TownshipController;
 use App\Http\Controllers\Admin\Dashboard\HelpPageController;
 use App\Http\Controllers\Admin\Dashboard\OrderManagement\OrderController;
-use App\Http\Controllers\Admin\Dashboard\ProductManage\ProductController;
-use App\Http\Controllers\Admin\Dashboard\ProductManage\ProductImageController;
+use App\Http\Controllers\Admin\Dashboard\ProductController;
 use App\Http\Controllers\Admin\Dashboard\RatingManagement\AutomatedFilterWordController;
 use App\Http\Controllers\Admin\Dashboard\SellerManagement\ClaimsAsASellerController;
 use App\Http\Controllers\Admin\Dashboard\SellerManagement\StoreManageController;
@@ -38,6 +37,7 @@ use App\Http\Controllers\Admin\Dashboard\ShippingAreaController;
 use App\Http\Controllers\Admin\Dashboard\ShippingMethodController;
 use App\Http\Controllers\Admin\Dashboard\ShippingRateController;
 use App\Http\Controllers\Admin\Dashboard\SubscribersAndNewsletters\SubscriberController;
+use App\Http\Controllers\DeleteProductImageController;
 use App\Http\Controllers\DownloadOrderInvoiceController;
 use Illuminate\Support\Facades\Route;
 
@@ -85,12 +85,22 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             });
 
         // ***** Product Operations *****
-        Route::resource('products', ProductController::class)->except(['show']);
+        Route::resource('product-manage', ProductController::class)->except(['show'])->parameters([
+            'product-manage' => 'product',
+        ])->names([
+            'index' => 'products.index',
+            'create' => 'products.create',
+            'edit' => 'products.edit',
+            'update' => 'products.update',
+            'destroy' => 'products.destroy',
+        ]);
 
         Route::delete('/products/destroy/selected/{selected_items}', [ProductController::class, 'destroySelected'])->name('products.destroy.selected');
 
+        Route::delete('/products/images/{product_image}', DeleteProductImageController::class)->name('product.images.destroy');
+
         Route::controller(ProductController::class)
-            ->prefix('/products/trash')
+            ->prefix('/product-manage/trash')
             ->name('products.')
             ->group(function () {
                 Route::get('/', 'trashed')->name('trashed');
@@ -101,14 +111,6 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
-        // Route::controller(ProductImageController::class)
-        //     ->prefix('/products')
-        //     ->name('product.')
-        //     ->group(function () {
-        //         Route::get('/{product}/images', 'productImages')->name('images');
-        //         Route::post('/{product}/images', 'handleProductImages')->name('images.upload');
-        //         Route::delete('/images/{product_image}', 'destroyProductImage')->name('images.destroy');
-        //     });
 
         // ***** Collection Operations *****
         Route::resource('collections', CollectionController::class)->except(['show']);

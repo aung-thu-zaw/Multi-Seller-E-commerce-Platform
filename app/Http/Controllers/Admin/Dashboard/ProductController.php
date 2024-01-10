@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Dashboard\ProductManage;
+namespace App\Http\Controllers\Admin\Dashboard;
 
-use App\Actions\Admin\Products\CreateProductAction;
-use App\Actions\Admin\Products\PermanentlyDeleteTrashedProductsAction;
-use App\Actions\Admin\Products\UpdateProductAction;
+use App\Actions\Products\CreateProductAction;
+use App\Actions\Products\PermanentlyDeleteTrashedProductsAction;
+use App\Actions\Products\UpdateProductAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Admin\ProductManage\Products\StoreProductRequest;
-use App\Http\Requests\Dashboard\Admin\ProductManage\Products\UpdateProductRequest;
+use App\Http\Requests\Dashboard\ProductManage\StoreProductRequest;
+use App\Http\Requests\Dashboard\ProductManage\UpdateProductRequest;
 use App\Http\Traits\HandlesQueryStringParameters;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Store;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -22,17 +23,6 @@ class ProductController extends Controller
 {
     use HandlesQueryStringParameters;
 
-    public function __construct()
-    {
-        $this->middleware('permission:products.view', ['only' => ['index']]);
-        $this->middleware('permission:products.create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:products.edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:products.delete', ['only' => ['destroy', 'destroySelected']]);
-        $this->middleware('permission:products.view.trash', ['only' => ['trashed']]);
-        $this->middleware('permission:products.restore', ['only' => ['restore', 'restoreSelected']]);
-        $this->middleware('permission:products.force.delete', ['only' => ['forceDelete', 'forceDeleteSelected', 'forceDeleteAll']]);
-    }
-
     public function index(): Response|ResponseFactory
     {
         $products = Product::search(request('search'))
@@ -40,7 +30,7 @@ class ProductController extends Controller
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
 
-        return inertia('Admin/ProductManage/Products/Index', compact('products'));
+        return inertia('Admin/Products/Index', compact('products'));
     }
 
     public function create(): Response|ResponseFactory
@@ -53,20 +43,29 @@ class ProductController extends Controller
             ->where('status', 'active')
             ->get();
 
-        $stores = Store::select('id', 'store_name')->where('status', 'active')->get();
+        $activeStores = Store::select("id", "store_name")->where("status", "active")->get();
 
-        return inertia('Admin/ProductManage/Products/Create', compact('categories', 'brands', 'stores'));
+        $stores = $activeStores->map(function ($activeStores) {
+            return [
+                'id'   => $activeStores->id,
+                'name' => $activeStores->store_name,
+            ];
+        });
+
+        return inertia('Admin/Products/Create', compact('categories', 'brands', 'stores'));
     }
 
-    // public function store(StoreProductRequest $request): RedirectResponse
-    // {
-    //     (new CreateProductAction())->handle($request->validated());
+    public function store(StoreProductRequest $request): RedirectResponse
+    {
+        (new CreateProductAction())->handle($request->validated());
 
-    //     return to_route('admin.products.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
-    // }
+        return to_route('admin.products.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
+    }
 
     public function edit(Product $product): Response|ResponseFactory
     {
+        $product->load(['productImages:id,product_id,image', 'skus.attributeOptions.attribute']);
+
         $categories = Category::select('id', 'name')
             ->where('status', 'show')
             ->get();
@@ -75,17 +74,24 @@ class ProductController extends Controller
             ->where('status', 'active')
             ->get();
 
-        $stores = Store::select('id', 'store_name')->where('status', 'active')->get();
+        $activeStores = Store::select("id", "store_name")->where("status", "active")->get();
 
-        return inertia('Admin/ProductManage/Products/Edit', compact('product', 'categories', 'brands', 'stores'));
+        $stores = $activeStores->map(function ($activeStores) {
+            return [
+                'id'   => $activeStores->id,
+                'name' => $activeStores->store_name,
+            ];
+        });
+
+        return inertia('Admin/Products/Edit', compact('product', 'categories', 'brands', 'stores'));
     }
 
-    // public function update(UpdateProductRequest $request, Product $product): RedirectResponse
-    // {
-    //     (new UpdateProductAction())->handle($request->validated(), $product);
+    public function update(UpdateProductRequest $request, Product $product): RedirectResponse
+    {
+        (new UpdateProductAction())->handle($request->validated(), $product);
 
-    //     return to_route('admin.products.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
-    // }
+        return to_route('admin.products.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
+    }
 
     public function destroy(Request $request, Product $product): RedirectResponse
     {
@@ -111,7 +117,7 @@ class ProductController extends Controller
             ->paginate(request('per_page', 5))
             ->appends(request()->all());
 
-        return inertia('Admin/ProductManage/Products/Trash', compact('trashedProducts'));
+        return inertia('Admin/Products/Trash', compact('trashedProducts'));
     }
 
     public function restore(Request $request, int $trashedProductId): RedirectResponse
@@ -137,6 +143,16 @@ class ProductController extends Controller
     public function forceDelete(Request $request, int $trashedProductId): RedirectResponse
     {
         $trashedProduct = Product::onlyTrashed()->findOrFail($trashedProductId);
+
+        $productImages = ProductImage::where("product_id", $trashedProduct)->get();
+
+        $productImages->each(function ($image) {
+
+            ProductImage::deleteImage($image);
+
+            $image->delete();
+
+        });
 
         Product::deleteImage($trashedProduct->image);
 

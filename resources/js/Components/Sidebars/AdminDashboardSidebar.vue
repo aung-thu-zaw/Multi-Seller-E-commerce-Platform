@@ -168,8 +168,8 @@ const toggleCollapseShow = (classes) => {
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/products'),
-                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/products')
+                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/product-manage'),
+                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/product-manage')
               }"
             >
               <i class="fa-solid fa-basket-shopping mr-2"></i>

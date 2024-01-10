@@ -8,7 +8,6 @@ import DashboardTableDataSearchBox from '@/Components/Forms/SearchBoxs/Dashboard
 import DashboardTableDataPerPageSelectBox from '@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue'
 import DashboardTableFilter from '@/Components/Forms/SelectBoxs/DashboardTableFilter.vue'
 import FilteredBy from '@/Components/Tables/FilteredBy.vue'
-import OptionDropdown from '@/Components/Dropdowns/OptionDropdown.vue'
 import SortableTableHeaderCell from '@/Components/Tables/TableCells/SortableTableHeaderCell.vue'
 import TableHeaderCell from '@/Components/Tables/TableCells/TableHeaderCell.vue'
 import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
@@ -24,7 +23,7 @@ import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
 import NormalButton from '@/Components/Buttons/NormalButton.vue'
 import Pagination from '@/Components/Paginations/DashboardPagination.vue'
 import { useResourceActions } from '@/Composables/useResourceActions'
-import { Head, Link } from '@inertiajs/vue3'
+import { Head } from '@inertiajs/vue3'
 import { __ } from '@/Services/translations-inside-setup.js'
 
 defineProps({ products: Object })
@@ -165,12 +164,12 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
               </TableDataCell>
 
               <TableDataCell>
-                {{ item?.qty }}
+                {{ item?.qty ?? '-' }}
               </TableDataCell>
 
               <TableDataCell>
                 <div class="min-w-[100px]">
-                  {{ item?.price }}
+                  {{ item?.price ?? '-' }}
                 </div>
               </TableDataCell>
 
@@ -195,33 +194,6 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
               <TableActionCell>
                 <div class="min-w-[400px] space-x-3">
-                  <NormalButton
-                    v-show="item?.status === 'draft' && can('products.create')"
-                    class="bg-amber-600 text-white ring-2 ring-amber-300"
-                  >
-                    <i class="fa-solid fa-paper-plane"></i>
-                    {{ __('Request') }}
-                  </NormalButton>
-
-                  <OptionDropdown v-show="can('products.create') || can('products.edit')">
-                    <Link
-                      as="button"
-                      class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 w-full"
-                      :href="route('admin.product.images', item?.slug)"
-                    >
-                      <i class="fa-solid fa-images"></i>
-                      {{ __('Product Images') }}
-                    </Link>
-                    <Link
-                      as="button"
-                      class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 w-full"
-                      :href="route('admin.product-variants.index', item?.slug)"
-                    >
-                      <i class="fa-solid fa-boxes-stacked"></i>
-                      {{ __('Product Variants') }}
-                    </Link>
-                  </OptionDropdown>
-
                   <InertiaLinkButton
                     v-show="can('products.edit')"
                     to="admin.products.edit"
@@ -234,7 +206,9 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
                   <NormalButton
                     v-show="can('products.delete')"
                     @click="
-                      softDeleteAction('Product', 'admin.products.destroy', { product: item?.slug })
+                      softDeleteAction('Product', 'admin.products.destroy', {
+                        product: item?.slug
+                      })
                     "
                     class="bg-red-600 text-white ring-2 ring-red-300"
                   >

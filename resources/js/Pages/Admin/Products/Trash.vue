@@ -169,12 +169,12 @@ const {
               </TableDataCell>
 
               <TableDataCell>
-                {{ item?.qty }}
+                {{ item?.qty ?? '-' }}
               </TableDataCell>
 
               <TableDataCell>
                 <div class="min-w-[100px]">
-                  {{ item?.price }}
+                  {{ item?.price ?? '-' }}
                 </div>
               </TableDataCell>
 
