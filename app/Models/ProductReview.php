@@ -118,10 +118,26 @@ class ProductReview extends Model
         }
     }
 
-    protected static function booted(): void
+    /**
+     * @param  Builder<StoreReview>  $builder
+     *
+     */
+    public function scopeFilterByScope(Builder $builder): void
     {
-        parent::boot();
-
-        static::addGlobalScope(new FilterByScope());
+        $builder->when(request('created_from'), function ($query, $createdFrom) {
+            $query->whereDate('created_at', '>=', $createdFrom);
+        })
+            ->when(request('created_until'), function ($query, $createdUntil) {
+                $query->whereDate('created_at', '<=', $createdUntil);
+            })
+            ->when(request('deleted_from'), function ($query, $deletedFrom) {
+                $query->whereDate('deleted_at', '>=', $deletedFrom);
+            })
+            ->when(request('deleted_until'), function ($query, $deletedUntil) {
+                $query->whereDate('deleted_at', '<=', $deletedUntil);
+            })
+            ->when(request('filter_by_status'), function ($query, $filterByStatus) {
+                $query->where('response_status', $filterByStatus);
+            });
     }
 }

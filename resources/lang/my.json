@@ -454,6 +454,15 @@
     "New product question from :label": ":label ဆီမှ ထုတ်ကုန်မေးခွန်းအသစ်",
     "Your product question has been replied to by :label": "သင့်ထုတ်ကုန်မေးခွန်းကို :label မှ စာပြန်ထားသည်။",
     "Review Management": "သုံးသပ်ချက် စီမံခန့်ခွဲမှု",
-    "Go To Review":"သုံးသပ်ချက်သို့သွားပါ။"
-}
+    "Go To Review": "သုံးသပ်ချက်သို့သွားပါ။",
+    "Payout Requests": "ငွေပေးချေမှုတောင်းဆိုမှုများ",
+    "Payout Request": "ငွေပေးချေမှုတောင်းဆိုမှု",
+    "Make A New Request": "တောင်းဆိုမှုအသစ်တစ်ခုလုပ်ပါ",
+    "Insufficient funds. You do not have enough balance for this payout request.": "ငွေကြေးမလုံလောက်။ ဤပေးချေမှုတောင်းဆိုမှုအတွက် သင့်တွင် လက်ကျန်ငွေအလုံအလောက်မရှိပါ။",
+    "Amount": "ပမာဏ",
+    "Your current balance is :label": "သင်၏လက်ရှိလက်ကျန်ငွေမှာ :label ဖြစ်သည်။",
 
+    "Your store information is updated successfully.":"သင်၏စတိုးဆိုင်အချက်အလက်ကို အောင်မြင်စွာ မွမ်းမံပြီးပါပြီ။",
+    "Your business information is updated successfully.":"သင့်လုပ်ငန်းအချက်အလက်ကို အောင်မြင်စွာ မွမ်းမံပြီးပါပြီ။",
+    "Your bank account information is updated successfully.":"သင့်ဘဏ်အကောင့်အချက်အလက်ကို အောင်မြင်စွာ မွမ်းမံပြီးပါပြီ။"
+}

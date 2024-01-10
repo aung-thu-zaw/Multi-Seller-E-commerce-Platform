@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\BankAccount;
+use App\Models\BusinessInformation;
 use App\Models\Store;
 use Illuminate\Database\Seeder;
 
@@ -12,11 +14,14 @@ class StoreSeeder extends Seeder
      */
     public function run(): void
     {
-        Store::factory()->create([
+        $store=Store::factory()->create([
             'seller_id' => 3,
             'store_type' => 'business',
             'status' => 'active',
         ]);
+
+        BusinessInformation::create(["seller_id"=>$store->seller_id]);
+        BankAccount::create(["seller_id"=>$store->seller_id]);
 
         Store::factory(20)->create(['status' => 'active']);
     }

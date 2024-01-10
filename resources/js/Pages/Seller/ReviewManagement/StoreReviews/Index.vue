@@ -64,8 +64,8 @@ const productReviewList = 'seller.store-reviews.index'
                   value: 'awaiting'
                 },
                 {
-                  label: 'Replied',
-                  value: 'replied'
+                  label: 'Responded',
+                  value: 'responded'
                 }
               ]"
             />
@@ -158,8 +158,8 @@ const productReviewList = 'seller.store-reviews.index'
               <TableActionCell>
                 <InertiaLinkButton
                   to="stores.show"
-                  :targetIdentifier="{ store: item?.id }"
-                  :data="{ tab: 'ratings-and-reviews', rating: 'all', review_sort: 'recent' }"
+                  :targetIdentifier="{ store: item.store?.slug }"
+                  :data="{ tab: 'store-rating-and-reviews', rating: 'all', review_sort: 'recent' }"
                 >
                   <i class="fa-solid fa-arrow-right"></i>
                   {{ __('Go To Review') }}

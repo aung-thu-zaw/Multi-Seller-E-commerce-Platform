@@ -32,7 +32,7 @@ const { form, processing, errors, editAction } = useResourceActions({
           'Business Information',
           'seller.store-settings.update-business-information',
           {
-            business_information_id: businessInformation.id
+            business_information_id: businessInformation?.id
           },
           'patch'
         )

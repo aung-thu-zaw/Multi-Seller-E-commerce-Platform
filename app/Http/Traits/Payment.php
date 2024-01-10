@@ -83,6 +83,7 @@ trait Payment
 
                 // Add Balance To Seller
                 $store = Store::find($item->store_id);
+                
                 SellerBalance::updateOrCreate(
                     ['seller_id' => $store->seller_id],
                     ['balance' => DB::raw("balance + $item->total_price")]

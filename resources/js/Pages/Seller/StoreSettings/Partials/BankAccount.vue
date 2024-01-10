@@ -25,7 +25,7 @@ const { form, processing, errors, editAction } = useResourceActions({
           'Bank Account',
           'seller.store-settings.update-bank-account',
           {
-            bank_account_id: bankAccount.id
+            bank_account_id: bankAccount?.id
           },
           'patch'
         )

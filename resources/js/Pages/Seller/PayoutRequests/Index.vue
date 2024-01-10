@@ -4,7 +4,6 @@ import Breadcrumb from '@/Components/Breadcrumbs/Breadcrumb.vue'
 import BreadcrumbItem from '@/Components/Breadcrumbs/BreadcrumbItem.vue'
 import TableContainer from '@/Components/Tables/TableContainer.vue'
 import ActionTable from '@/Components/Tables/ActionTable.vue'
-import DashboardTableDataSearchBox from '@/Components/Forms/SearchBoxs/DashboardTableDataSearchBox.vue'
 import DashboardTableDataPerPageSelectBox from '@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue'
 import DashboardTableFilter from '@/Components/Forms/SelectBoxs/DashboardTableFilter.vue'
 import FilteredBy from '@/Components/Tables/FilteredBy.vue'
@@ -14,7 +13,7 @@ import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
 import NoTableData from '@/Components/Tables/NoTableData.vue'
 import GreenBadge from '@/Components/Badges/GreenBadge.vue'
 import BlueBadge from '@/Components/Badges/BlueBadge.vue'
-import RedBadge from '@/Components/Badges/BlueBadge.vue'
+import RedBadge from '@/Components/Badges/RedBadge.vue'
 import InertiaLinkButton from '@/Components/Buttons/InertiaLinkButton.vue'
 import Pagination from '@/Components/Paginations/DashboardPagination.vue'
 import { Head } from '@inertiajs/vue3'
@@ -55,11 +54,6 @@ const { formatAmount } = useFormatFunctions()
         <div
           class="my-3 flex flex-col sm:flex-row space-y-5 sm:space-y-0 items-center justify-between overflow-auto p-2"
         >
-          <DashboardTableDataSearchBox
-            :placeholder="__('Search by :label', { label: __('Question') })"
-            :to="payoutRequestList"
-          />
-
           <div class="flex items-center justify-end w-full md:space-x-5">
             <DashboardTableDataPerPageSelectBox :to="payoutRequestList" />
 
@@ -72,12 +66,12 @@ const { formatAmount } = useFormatFunctions()
                   value: 'pending'
                 },
                 {
-                  label: 'Completed',
-                  value: 'completed'
+                  label: 'Paid',
+                  value: 'paid'
                 },
                 {
-                  label: 'Failed',
-                  value: 'failed'
+                  label: 'Declined',
+                  value: 'declined'
                 }
               ]"
             />

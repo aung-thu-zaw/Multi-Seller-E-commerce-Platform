@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,13 @@ class SellerBalanceFactory extends Factory
      */
     public function definition(): array
     {
+        $sellers = User::where('role', 'seller')->where("status","active")
+            ->pluck('id')
+            ->toArray();
+
         return [
-            //
+            'seller_id' => fake()->randomElement($sellers),
+            'balance' => fake()->numberBetween(100, 1000),
         ];
     }
 }

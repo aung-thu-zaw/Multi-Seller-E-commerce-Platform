@@ -16,10 +16,10 @@ class StoreReviewController extends Controller
     {
         $storeReviews = StoreReview::search(request('search'))
             ->query(function (Builder $builder) {
-                $builder->with(['reviewer' => function ($query) {
+                $builder->with(['store','reviewer' => function ($query) {
                     $query->select('id', 'name')
                         ->withoutGlobalScope(FilterByScope::class);
-                }]);
+                }])->filterByScope();
             })
             ->where('store_id', Store::getStoreId())
             ->orderBy(request('sort', 'id'), request('direction', 'desc'))

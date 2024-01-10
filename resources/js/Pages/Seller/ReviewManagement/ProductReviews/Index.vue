@@ -65,8 +65,8 @@ const productReviewList = 'seller.product-reviews.index'
                   value: 'awaiting'
                 },
                 {
-                  label: 'Replied',
-                  value: 'replied'
+                  label: 'Responded',
+                  value: 'responded'
                 }
               ]"
             />

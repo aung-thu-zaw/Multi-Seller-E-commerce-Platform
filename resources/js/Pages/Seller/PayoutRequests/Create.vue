@@ -54,7 +54,7 @@ const { form, processing, errors, createAction } = useResourceActions({
               type="text"
               name="payout-amount"
               v-model="form.amount"
-              :placeholder="__('Enter :label', { label: __('Payout Amount') })"
+              :placeholder="__('Enter :label', { label: __('Amount') })"
               autofocus
               required
               :disabled="sellerBalance?.balance <= 0"
@@ -62,7 +62,11 @@ const { form, processing, errors, createAction } = useResourceActions({
 
             <InputError :message="errors?.amount" />
             <span class="text-xs text-gray-700 font-bold">
-              Your current balance is ${{ formatAmount(sellerBalance?.balance) ?? 0 }}
+              {{
+                __('Your current balance is :label', {
+                  label: sellerBalance?.balance ? formatAmount(sellerBalance?.balance) : 0
+                })
+              }}
             </span>
           </div>
 

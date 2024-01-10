@@ -289,7 +289,7 @@ const store = computed(() => usePage().props.auth?.store)
 
           <ul class="md:flex-col md:min-w-full flex flex-col list-none">
             <!-- Stock Management -->
-            <li class="items-center">
+            <!-- <li class="items-center">
               <Link
                 href="#"
                 :data="{
@@ -311,7 +311,7 @@ const store = computed(() => usePage().props.auth?.store)
                 <i class="fa-solid fa-boxes-stacked mr-2"></i>
                 {{ __('Stock Management') }}
               </Link>
-            </li>
+            </li> -->
 
             <!-- Order Managements -->
             <li class="hs-accordion items-center" id="order-management-accordion">

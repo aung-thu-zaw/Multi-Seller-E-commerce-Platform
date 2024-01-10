@@ -75,13 +75,6 @@ class StoreReview extends Model
         return $query;
     }
 
-    protected static function booted(): void
-    {
-        parent::boot();
-
-        static::addGlobalScope(new FilterByScope());
-    }
-
     /**
      * @param  Builder<StoreReview>  $query
      * @return Builder<StoreReview>
@@ -98,5 +91,28 @@ class StoreReview extends Model
             default:
                 return $query->orderBy('id', 'desc');
         }
+    }
+
+    /**
+     * @param  Builder<StoreReview>  $builder
+     *
+     */
+    public function scopeFilterByScope(Builder $builder): void
+    {
+        $builder->when(request('created_from'), function ($query, $createdFrom) {
+            $query->whereDate('created_at', '>=', $createdFrom);
+        })
+            ->when(request('created_until'), function ($query, $createdUntil) {
+                $query->whereDate('created_at', '<=', $createdUntil);
+            })
+            ->when(request('deleted_from'), function ($query, $deletedFrom) {
+                $query->whereDate('deleted_at', '>=', $deletedFrom);
+            })
+            ->when(request('deleted_until'), function ($query, $deletedUntil) {
+                $query->whereDate('deleted_at', '<=', $deletedUntil);
+            })
+            ->when(request('filter_by_status'), function ($query, $filterByStatus) {
+                $query->where('response_status', $filterByStatus);
+            });
     }
 }
