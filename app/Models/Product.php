@@ -241,4 +241,11 @@ class Product extends Model
                 return $query->orderBy('id', 'desc');
         }
     }
+
+    public function checkStoreAccess(int $storeId): void
+    {
+        if ($this->store_id !== $storeId) {
+            abort(403, 'Unauthorized access to store.');
+        }
+    }
 }

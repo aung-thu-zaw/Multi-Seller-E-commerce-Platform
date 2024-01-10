@@ -30,7 +30,7 @@ const activeImage = computed(() => images[activeImageIndex.value])
         :class="{ 'border-orange-500 ring-2 ring-orange-300': activeImageIndex === index }"
         @click="activeImageIndex = index"
       >
-        <img class="w-14 h-14 rounded-sm" :src="image" :alt="product.name" />
+        <img class="w-14 h-14 rounded-sm object-cover" :src="image" :alt="product.name" />
       </div>
     </div>
   </div>

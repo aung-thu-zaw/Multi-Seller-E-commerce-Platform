@@ -11,10 +11,9 @@ import FilteredBy from '@/Components/Tables/FilteredBy.vue'
 import SortableTableHeaderCell from '@/Components/Tables/TableCells/SortableTableHeaderCell.vue'
 import TableHeaderCell from '@/Components/Tables/TableCells/TableHeaderCell.vue'
 import TableDataCell from '@/Components/Tables/TableCells/TableDataCell.vue'
-import ImageCell from '@/Components/Tables/TableCells/TableImageCell.vue'
 import TableActionCell from '@/Components/Tables/TableCells/TableActionCell.vue'
+import ImageCell from '@/Components/Tables/TableCells/TableImageCell.vue'
 import NoTableData from '@/Components/Tables/NoTableData.vue'
-import OptionDropdown from '@/Components/Dropdowns/OptionDropdown.vue'
 import OrangeBadge from '@/Components/Badges/OrangeBadge.vue'
 import BlueBadge from '@/Components/Badges/BlueBadge.vue'
 import GreenBadge from '@/Components/Badges/GreenBadge.vue'
@@ -56,7 +55,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
         </InertiaLinkButton>
 
         <!-- Trash Button -->
-        <InertiaLinkButton
+        <!-- <InertiaLinkButton
           to="seller.products.trashed"
           :data="{
             page: 1,
@@ -68,7 +67,7 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
         >
           <i class="fa-solid fa-trash-can mr-1"></i>
           {{ __('Trash') }}
-        </InertiaLinkButton>
+        </InertiaLinkButton> -->
       </div>
 
       <!-- Table Start -->
@@ -133,11 +132,13 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
             <!-- Table Header -->
             <template #table-header>
-              <SortableTableHeaderCell label="# No" :to="productList" sort="id" />
-
               <TableHeaderCell label="Image" />
 
               <SortableTableHeaderCell label="Name" :to="productList" sort="name" />
+
+              <SortableTableHeaderCell label="Qty" :to="productList" sort="qty" />
+
+              <SortableTableHeaderCell label="Price" :to="productList" sort="price" />
 
               <TableHeaderCell label="Status" />
 
@@ -146,15 +147,21 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
             <!-- Table Body -->
             <template #table-data="{ item }">
-              <TableDataCell>
-                {{ item?.id }}
-              </TableDataCell>
-
               <ImageCell :src="item?.image" />
 
               <TableDataCell>
-                <div class="min-w-[300px]">
+                <div class="min-w-[250px]">
                   {{ item?.name }}
+                </div>
+              </TableDataCell>
+
+              <TableDataCell>
+                {{ item?.qty ?? '-' }}
+              </TableDataCell>
+
+              <TableDataCell>
+                <div class="min-w-[100px]">
+                  {{ item?.price ?? '-' }}
                 </div>
               </TableDataCell>
 
@@ -177,32 +184,36 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
                 </RedBadge>
               </TableDataCell>
 
-              <TableActionCell class="min-w-[500px]">
-                <NormalButton
-                  v-show="item?.status === 'draft'"
-                  class="bg-amber-600 text-white ring-2 ring-amber-300"
-                >
-                  <i class="fa-solid fa-paper-plane"></i>
-                  {{ __('Request') }}
-                </NormalButton>
+              <TableActionCell>
+                <div class="min-w-[400px] space-x-3">
+                  <!-- <NormalButton
+                    v-show="item?.status === 'draft' && can('products.create')"
+                    class="bg-amber-600 text-white ring-2 ring-amber-300"
+                  >
+                    <i class="fa-solid fa-paper-plane"></i>
+                    {{ __('Request') }}
+                  </NormalButton> -->
 
-                <OptionDropdown :product="item" />
+                  <InertiaLinkButton
+                    to="seller.products.edit"
+                    :targetIdentifier="{ product: item?.slug }"
+                  >
+                    <i class="fa-solid fa-edit"></i>
+                    {{ __('Edit') }}
+                  </InertiaLinkButton>
 
-                <InertiaLinkButton
-                  to="seller.products.edit"
-                  :targetIdentifier="{ product: item?.slug }"
-                >
-                  <i class="fa-solid fa-edit"></i>
-                  {{ __('Edit') }}
-                </InertiaLinkButton>
-
-                <NormalButton
-                  @click="softDeleteAction('Product', 'seller.products.destroy', item?.slug)"
-                  class="bg-red-600 text-white ring-2 ring-red-300"
-                >
-                  <i class="fa-solid fa-trash-can"></i>
-                  {{ __('Delete') }}
-                </NormalButton>
+                  <NormalButton
+                    @click="
+                      softDeleteAction('Product', 'seller.products.destroy', {
+                        product: item?.slug
+                      })
+                    "
+                    class="bg-red-600 text-white ring-2 ring-red-300"
+                  >
+                    <i class="fa-solid fa-trash-can"></i>
+                    {{ __('Delete') }}
+                  </NormalButton>
+                </div>
               </TableActionCell>
             </template>
           </ActionTable>

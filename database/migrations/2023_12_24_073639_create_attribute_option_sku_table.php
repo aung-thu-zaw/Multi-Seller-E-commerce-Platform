@@ -12,7 +12,7 @@ return new class() extends Migration
     public function up(): void
     {
         Schema::create('attribute_option_sku', function (Blueprint $table) {
-            $table->foreignId('sku_id')->constrained();
+            $table->foreignId('sku_id')->constrained()->cascadeOnDelete();
             $table->foreignId('attribute_option_id')->constrained();
         });
     }

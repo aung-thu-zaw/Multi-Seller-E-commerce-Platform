@@ -58,12 +58,12 @@ class ProductController extends Controller
         return inertia('Admin/ProductManage/Products/Create', compact('categories', 'brands', 'stores'));
     }
 
-    public function store(StoreProductRequest $request): RedirectResponse
-    {
-        (new CreateProductAction())->handle($request->validated());
+    // public function store(StoreProductRequest $request): RedirectResponse
+    // {
+    //     (new CreateProductAction())->handle($request->validated());
 
-        return to_route('admin.products.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
-    }
+    //     return to_route('admin.products.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully created.');
+    // }
 
     public function edit(Product $product): Response|ResponseFactory
     {
@@ -80,12 +80,12 @@ class ProductController extends Controller
         return inertia('Admin/ProductManage/Products/Edit', compact('product', 'categories', 'brands', 'stores'));
     }
 
-    public function update(UpdateProductRequest $request, Product $product): RedirectResponse
-    {
-        (new UpdateProductAction())->handle($request->validated(), $product);
+    // public function update(UpdateProductRequest $request, Product $product): RedirectResponse
+    // {
+    //     (new UpdateProductAction())->handle($request->validated(), $product);
 
-        return to_route('admin.products.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
-    }
+    //     return to_route('admin.products.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
+    // }
 
     public function destroy(Request $request, Product $product): RedirectResponse
     {
