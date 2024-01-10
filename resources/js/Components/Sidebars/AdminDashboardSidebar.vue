@@ -691,147 +691,6 @@ const toggleCollapseShow = (classes) => {
         <hr class="my-4 md:min-w-full" />
         <!-- Heading -->
         <h6 class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline">
-          {{ __('Analytics and Reporting') }}
-        </h6>
-        <!-- Navigation -->
-
-        <ul class="md:flex-col md:min-w-full flex flex-col list-none">
-          <!-- Blog Managements -->
-          <li
-            v-show="
-              can('blog-categories.view') || can('blog-contents.view') || can('blog-comments.view')
-            "
-            class="hs-accordion items-center"
-            id="blog-management-accordion"
-          >
-            <button
-              type="button"
-              class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
-            >
-              <span>
-                <i class="fa-solid fa-file-pen mr-1.5"></i>
-                {{ __('Blog Management') }}
-              </span>
-              <span>
-                <svg
-                  class="hs-accordion-active:block ms-auto hidden w-4 h-4 text-gray-600 group-hover:text-gray-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="m18 15-6-6-6 6" />
-                </svg>
-
-                <svg
-                  class="hs-accordion-active:hidden ms-auto block w-4 h-4 text-gray-600 group-hover:text-gray-500"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  ></path>
-                </svg>
-              </span>
-            </button>
-
-            <div
-              id="blog-management-accordion"
-              class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
-              :class="{
-                block:
-                  $page.url.startsWith('/admin/blog-categories') ||
-                  $page.url.startsWith('/admin/blog-contents') ||
-                  $page.url.startsWith('/admin/blog-comments'),
-                hidden: !(
-                  $page.url.startsWith('/admin/blog-categories') ||
-                  $page.url.startsWith('/admin/blog-contents') ||
-                  $page.url.startsWith('/admin/blog-comments')
-                )
-              }"
-            >
-              <ul class="pl-8">
-                <li v-show="can('blog-categories.view')" class="items-center">
-                  <Link
-                    :href="route('admin.blog-categories.index')"
-                    :data="{
-                      page: 1,
-                      per_page: 5,
-                      sort: 'id',
-                      direction: 'desc'
-                    }"
-                    class="text-xs py-3 font-bold block"
-                    :class="{
-                      'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/blog-categories'),
-                      'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/blog-categories')
-                    }"
-                  >
-                    {{ __('Blog Categories') }}
-                  </Link>
-                </li>
-                <li v-show="can('blog-contents.view')" class="items-center">
-                  <Link
-                    :href="route('admin.blog-contents.index')"
-                    :data="{
-                      page: 1,
-                      per_page: 5,
-                      sort: 'id',
-                      direction: 'desc'
-                    }"
-                    class="text-xs py-3 font-bold block"
-                    :class="{
-                      'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/blog-contents'),
-                      'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/blog-contents')
-                    }"
-                  >
-                    {{ __('Blog Contents') }}
-                  </Link>
-                </li>
-
-                <li v-show="can('blog-comments.view')" class="items-center">
-                  <Link
-                    :href="route('admin.blog-comments.index')"
-                    :data="{
-                      page: 1,
-                      per_page: 5,
-                      sort: 'id',
-                      direction: 'desc'
-                    }"
-                    class="text-xs py-3 font-bold block"
-                    :class="{
-                      'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/blog-comments'),
-                      'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/blog-comments')
-                    }"
-                  >
-                    {{ __('Blog Comments') }}
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-
-        <!-- Divider -->
-        <hr class="my-4 md:min-w-full" />
-        <!-- Heading -->
-        <h6 class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline">
           {{ __('Management & Oversight') }}
         </h6>
         <!-- Navigation -->
@@ -1897,7 +1756,7 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- Configurations -->
-          <li class="hs-accordion items-center" id="configuration-accordion">
+          <!-- <li class="hs-accordion items-center" id="configuration-accordion">
             <button
               type="button"
               class="hs-accordion-toggle text-slate-600 hover:text-slate-500 text-xs py-3 font-bold flex items-center justify-between w-full"
@@ -1990,7 +1849,7 @@ const toggleCollapseShow = (classes) => {
                 </li>
               </ul>
             </div>
-          </li>
+          </li> -->
         </ul>
 
         <!-- Divider -->
@@ -2023,7 +1882,7 @@ const toggleCollapseShow = (classes) => {
             </Link>
           </li>
           <!-- Clear Database -->
-          <li v-show="can('brands.view')" class="items-center">
+          <!-- <li v-show="can('brands.view')" class="items-center">
             <Link
               :href="route('admin.brands.index')"
               :data="{
@@ -2041,7 +1900,7 @@ const toggleCollapseShow = (classes) => {
               <i class="fa-solid fa-ban mr-2"></i>
               {{ __('Clear Database') }}
             </Link>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>

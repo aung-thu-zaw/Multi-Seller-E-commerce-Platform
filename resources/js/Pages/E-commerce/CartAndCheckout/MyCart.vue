@@ -3,7 +3,10 @@ import AppLayout from '@/Layouts/AppLayout.vue'
 import CartItemByStoreCard from '@/Components/Cards/Cart/CartItemByStoreCard.vue'
 import OrderSummaryCard from '@/Components/Cards/Cart/OrderSummaryCard.vue'
 import { Head, usePage } from '@inertiajs/vue3'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
+import { __ } from '@/Services/translations-inside-setup.js'
 
 defineProps({ coupon: Object })
 

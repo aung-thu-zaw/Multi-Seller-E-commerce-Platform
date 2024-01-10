@@ -6,7 +6,7 @@ import 'vue3-toastify/dist/index.css'
 import { __ } from '@/Services/translations-inside-setup.js'
 import { inject, ref } from 'vue'
 
-const props = defineProps({ address: Object, regions: Object, cities: Object, townships: Object })
+const props = defineProps({ address: Object, shippingAreas: Object })
 
 const confirmingAddressEdit = ref(false)
 
@@ -80,9 +80,7 @@ const handleDeleteAddress = async () => {
                 :show="confirmingAddressEdit"
                 @close="closeModal"
                 :address="address"
-                :regions="regions"
-                :cities="cities"
-                :townships="townships"
+                :shippingAreas="shippingAreas"
               />
             </div>
 

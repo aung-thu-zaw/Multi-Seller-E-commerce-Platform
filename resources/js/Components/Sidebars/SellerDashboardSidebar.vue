@@ -609,7 +609,7 @@ const store = computed(() => usePage().props.auth?.store)
 
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
           <!-- Seller Guides -->
-          <li class="items-center">
+          <!-- <li class="items-center">
             <Link
               href="#"
               :data="{
@@ -627,7 +627,7 @@ const store = computed(() => usePage().props.auth?.store)
               <i class="fa-solid fa-book mr-2"></i>
               {{ __('Guides') }}
             </Link>
-          </li>
+          </li> -->
 
           <!-- Seller Faqs -->
           <li class="items-center">

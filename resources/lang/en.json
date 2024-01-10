@@ -456,10 +456,14 @@
     "Payout Requests": "Payout Requests",
     "Payout Request": "Payout Request",
     "Make A New Request": "Make A New Request",
-    "Insufficient funds. You do not have enough balance for this payout request.":"Insufficient funds. You do not have enough balance for this payout request.",
-    "Amount":"Amount",
-    "Your current balance is :label":"Your current balance is :label",
-    "Your store information is updated successfully.":"Your store information is updated successfully.",
-    "Your business information is updated successfully.":"Your business information is updated successfully.",
-    "Your bank account information is updated successfully.":"Your bank account information is updated successfully."
+    "Insufficient funds. You do not have enough balance for this payout request.": "Insufficient funds. You do not have enough balance for this payout request.",
+    "Amount": "Amount",
+    "Your current balance is :label": "Your current balance is :label",
+    "Your store information is updated successfully.": "Your store information is updated successfully.",
+    "Your business information is updated successfully.": "Your business information is updated successfully.",
+    "Your bank account information is updated successfully.": "Your bank account information is updated successfully.",
+    "Database Backups": "Database Backups",
+    "Database Backup": "Database Backup",
+    "Sorry, we currently do not support shipping to your area. Please contact support for assistance.":"Sorry, we currently do not support shipping to your area. Please contact support for assistance.",
+    "Please create a default delivery address before proceeding.":"Please create a default delivery address before proceeding."
 }

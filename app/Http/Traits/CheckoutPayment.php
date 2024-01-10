@@ -2,18 +2,20 @@
 
 namespace App\Http\Traits;
 
+use App\Models\Address;
 use App\Models\ShippingArea;
 use App\Models\ShippingRate;
+use Illuminate\Http\RedirectResponse;
 
 trait CheckoutPayment
 {
-    private function getShippingArea($address): ShippingArea
+    private function getShippingArea(Address $address): ?ShippingArea
     {
         return ShippingArea::where([
-            'region_id' => $address->region_id,
-            'city_id' => $address->city_id,
-            'township_id' => $address->township_id,
-        ])->first();
+             'region_id' => $address->region_id,
+             'city_id' => $address->city_id,
+             'township_id' => $address->township_id,
+         ])->first();
     }
 
     private function calculateTotalCartItemAmount($cartItems, $coupon)
@@ -38,7 +40,7 @@ trait CheckoutPayment
         return $total;
     }
 
-    private function getShippingRate(ShippingArea $shippingArea, object $cartItems, int $totalCartItemAmount): ShippingRate
+    private function getShippingRate(?ShippingArea $shippingArea, object $cartItems, int $totalCartItemAmount): ?ShippingRate
     {
         return ShippingRate::select('rate')
             ->where('shipping_area_id', $shippingArea->id)

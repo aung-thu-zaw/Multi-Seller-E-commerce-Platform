@@ -12,6 +12,6 @@ class ShippingAreaSeeder extends Seeder
      */
     public function run(): void
     {
-        ShippingArea::factory(20)->create();
+        ShippingArea::factory(300)->create();
     }
 }

@@ -4,7 +4,9 @@ namespace Database\Factories;
 
 use App\Models\City;
 use App\Models\Region;
+use App\Models\ShippingArea;
 use App\Models\Township;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,15 +21,14 @@ class AddressFactory extends Factory
      */
     public function definition(): array
     {
-        $regions = Region::pluck('id')->toArray();
-        $cities = City::pluck('id')->toArray();
-        $townships = Township::pluck('id')->toArray();
+        $shippingAreas = ShippingArea::all();
+        $users = User::pluck("id")->toArray();
 
         return [
-            'region_id' => fake()->randomElement($regions),
-            'city_id' => fake()->randomElement($cities),
-            'township_id' => fake()->randomElement($townships),
-            'user_id' => 1,
+            'region_id' => fake()->randomElement($shippingAreas->pluck('region_id')->toArray()),
+            'city_id' => fake()->randomElement($shippingAreas->pluck('city_id')->toArray()),
+            'township_id' => fake()->randomElement($shippingAreas->pluck('township_id')->toArray()),
+            'user_id' => fake()->randomElement($users),
             'name' => fake()->name(),
             'phone' => fake()->unique()->phoneNumber(),
             'email' => fake()->unique()->email(),

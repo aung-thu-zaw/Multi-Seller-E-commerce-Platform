@@ -12,7 +12,6 @@ class AddressSeeder extends Seeder
      */
     public function run(): void
     {
-        Address::factory(1)->create(['is_default_delivery' => true, 'is_default_billing' => true]);
-        Address::factory(4)->create();
+        Address::factory(50)->create(['is_default_delivery' => true, 'is_default_billing' => true]);
     }
 }

@@ -5,7 +5,10 @@ import CreateAddressModal from '@/Components/Modals/Address/CreateAddressModal.v
 import { Head } from '@inertiajs/vue3'
 import { ref } from 'vue'
 
-defineProps({ addresses: Object, regions: Object, cities: Object, townships: Object })
+defineProps({
+  addresses: Object,
+  shippingAreas: Object
+})
 
 const confirmingAddressCreation = ref(false)
 
@@ -39,9 +42,7 @@ const closeModal = () => {
       <CreateAddressModal
         :show="confirmingAddressCreation"
         @close="closeModal"
-        :regions="regions"
-        :cities="cities"
-        :townships="townships"
+        :shippingAreas="shippingAreas"
       />
     </div>
 
@@ -52,9 +53,7 @@ const closeModal = () => {
           v-for="address in addresses"
           :key="address.id"
           :address="address"
-          :regions="regions"
-          :cities="cities"
-          :townships="townships"
+          :shippingAreas="shippingAreas"
         />
       </div>
       <div v-else class="py-20">

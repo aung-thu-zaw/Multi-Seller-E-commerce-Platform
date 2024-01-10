@@ -9,6 +9,7 @@ use App\Http\Requests\Dashboard\User\AddressRequest;
 use App\Models\Address;
 use App\Models\City;
 use App\Models\Region;
+use App\Models\ShippingArea;
 use App\Models\Township;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
@@ -20,13 +21,9 @@ class AddressBookController extends Controller
     {
         $addresses = auth()->user()->addresses()->with(['region:id,name', 'city:id,name', 'township:id,name'])->get();
 
-        $regions = Region::select('id', 'name')->get();
+        $shippingAreas = ShippingArea::with(['region','city','township'])->get();
 
-        $cities = City::select('id', 'region_id', 'name')->get();
-
-        $townships = Township::select('id', 'city_id', 'name')->get();
-
-        return inertia('User/AddressBook', compact('addresses', 'regions', 'cities', 'townships'));
+        return inertia('User/AddressBook', compact('addresses', 'shippingAreas'));
     }
 
     public function store(AddressRequest $request): RedirectResponse

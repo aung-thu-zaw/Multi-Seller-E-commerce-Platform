@@ -22,9 +22,7 @@ const props = defineProps({
     default: true
   },
   address: Object,
-  regions: Object,
-  cities: Object,
-  townships: Object
+  shippingAreas: Object
 })
 
 const emit = defineEmits(['close'])
@@ -97,20 +95,37 @@ const handleCreateAddress = async () => {
   })
 }
 
+const regions = props.shippingAreas.map((area) => ({
+  id: area.region_id,
+  name: area.region.name
+}))
+
+const cities = props.shippingAreas.map((area) => ({
+  id: area.city_id,
+  region_id: area.region_id,
+  name: area.city.name
+}))
+
+const townships = props.shippingAreas.map((area) => ({
+  id: area.township_id,
+  city_id: area.city_id,
+  name: area.township.name
+}))
+
 const filteredCities = computed(() => {
   if (!form.region_id) {
-    return props.regions
+    return regions
   }
 
-  return props.cities.filter((city) => Number(city.region_id) === Number(form.region_id))
+  return cities.filter((city) => Number(city.region_id) === Number(form.region_id))
 })
 
 const filteredTownships = computed(() => {
   if (!form.city_id) {
-    return props.cities
+    return cities
   }
 
-  return props.townships.filter((township) => Number(township.city_id) === Number(form.city_id))
+  return townships.filter((township) => Number(township.city_id) === Number(form.city_id))
 })
 </script>
 

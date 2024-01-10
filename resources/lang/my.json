@@ -461,8 +461,11 @@
     "Insufficient funds. You do not have enough balance for this payout request.": "ငွေကြေးမလုံလောက်။ ဤပေးချေမှုတောင်းဆိုမှုအတွက် သင့်တွင် လက်ကျန်ငွေအလုံအလောက်မရှိပါ။",
     "Amount": "ပမာဏ",
     "Your current balance is :label": "သင်၏လက်ရှိလက်ကျန်ငွေမှာ :label ဖြစ်သည်။",
-
-    "Your store information is updated successfully.":"သင်၏စတိုးဆိုင်အချက်အလက်ကို အောင်မြင်စွာ မွမ်းမံပြီးပါပြီ။",
-    "Your business information is updated successfully.":"သင့်လုပ်ငန်းအချက်အလက်ကို အောင်မြင်စွာ မွမ်းမံပြီးပါပြီ။",
-    "Your bank account information is updated successfully.":"သင့်ဘဏ်အကောင့်အချက်အလက်ကို အောင်မြင်စွာ မွမ်းမံပြီးပါပြီ။"
+    "Your store information is updated successfully.": "သင်၏စတိုးဆိုင်အချက်အလက်ကို အောင်မြင်စွာ မွမ်းမံပြီးပါပြီ။",
+    "Your business information is updated successfully.": "သင့်လုပ်ငန်းအချက်အလက်ကို အောင်မြင်စွာ မွမ်းမံပြီးပါပြီ။",
+    "Your bank account information is updated successfully.": "သင့်ဘဏ်အကောင့်အချက်အလက်ကို အောင်မြင်စွာ မွမ်းမံပြီးပါပြီ။",
+    "Database Backups": "ဒေတာဘေ့စ် Backups",
+    "Database Backup": "ဒေတာဘေ့စ် Backup",
+    "Sorry, we currently do not support shipping to your area. Please contact support for assistance.":"ဝမ်းနည်းပါသည်၊ ကျွန်ုပ်တို့သည် သင့်ဒေသသို့ ပို့ဆောင်ခြင်းကို လောလောဆယ် မပံ့ပိုးပါ။ အကူအညီအတွက် ကျေးဇူးပြု၍ အကူအညီရယူပါ။",
+    "Please create a default delivery address before proceeding.":"ဆက်လက်မလုပ်ဆောင်မီ ပုံသေပေးပို့လိပ်စာတစ်ခု ဖန်တီးပါ။"
 }
