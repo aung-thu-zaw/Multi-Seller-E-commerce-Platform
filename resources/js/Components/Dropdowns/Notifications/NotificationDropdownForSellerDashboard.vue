@@ -1,5 +1,7 @@
 <script setup>
 import ProductQuestionNotificationCard from '@/Components/Cards/Notifications/ProductQuestionNotificationCard.vue'
+import ProductApprovedNotificationCard from '@/Components/Cards/Notifications/ProductApprovedNotificationCard.vue'
+import ProductRejectedNotificationCard from '@/Components/Cards/Notifications/ProductRejectedNotificationCard.vue'
 import { router, usePage } from '@inertiajs/vue3'
 import { computed, onMounted, ref } from 'vue'
 
@@ -21,6 +23,26 @@ onMounted(() => {
           product: notification.product,
           question: notification.question,
           user: notification.user
+        }
+      })
+    }
+
+    if (notification.type === 'App\\Notifications\\Seller\\ProductApprovedNotification') {
+      notifications.value.unshift({
+        id: notification.id,
+        type: notification.type,
+        data: {
+          product: notification.product
+        }
+      })
+    }
+
+    if (notification.type === 'App\\Notifications\\Seller\\ProductRejectedNotification') {
+      notifications.value.unshift({
+        id: notification.id,
+        type: notification.type,
+        data: {
+          product: notification.product
         }
       })
     }
@@ -108,6 +130,14 @@ const handleMarkAllAsRead = () => {
             v-show="
               notification.type === 'App\\Notifications\\Seller\\NewProductQuestionNotification'
             "
+            :notification="notification"
+          />
+          <ProductApprovedNotificationCard
+            v-show="notification.type === 'App\\Notifications\\Seller\\ProductApprovedNotification'"
+            :notification="notification"
+          />
+          <ProductRejectedNotificationCard
+            v-show="notification.type === 'App\\Notifications\\Seller\\ProductRejectedNotification'"
             :notification="notification"
           />
         </div>

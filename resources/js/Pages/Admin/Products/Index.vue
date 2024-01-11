@@ -6,6 +6,7 @@ import TableContainer from '@/Components/Tables/TableContainer.vue'
 import ActionTable from '@/Components/Tables/ActionTable.vue'
 import DashboardTableDataSearchBox from '@/Components/Forms/SearchBoxs/DashboardTableDataSearchBox.vue'
 import DashboardTableDataPerPageSelectBox from '@/Components/Forms/SelectBoxs/DashboardTableDataPerPageSelectBox.vue'
+import ProductStatusSelectBox from '@/Components/Forms/SelectBoxs/ProductStatusSelectBox.vue'
 import DashboardTableFilter from '@/Components/Forms/SelectBoxs/DashboardTableFilter.vue'
 import FilteredBy from '@/Components/Tables/FilteredBy.vue'
 import SortableTableHeaderCell from '@/Components/Tables/TableCells/SortableTableHeaderCell.vue'
@@ -146,6 +147,8 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
 
               <TableHeaderCell label="Status" />
 
+              <TableHeaderCell label="Change Status" />
+
               <TableHeaderCell label="Actions" />
             </template>
 
@@ -190,6 +193,10 @@ const { softDeleteAction, softDeleteSelectedAction } = useResourceActions()
                   <i class="fa-solid fa-circle-xmark animate-pulse"></i>
                   {{ item?.status }}
                 </RedBadge>
+              </TableDataCell>
+
+              <TableDataCell>
+                <ProductStatusSelectBox :product="item" />
               </TableDataCell>
 
               <TableActionCell>

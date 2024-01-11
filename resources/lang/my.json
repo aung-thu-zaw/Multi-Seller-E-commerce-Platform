@@ -471,5 +471,7 @@
     "Please create a default delivery address before proceeding.": "ဆက်လက်မလုပ်ဆောင်မီ ပုံသေပေးပို့လိပ်စာတစ်ခု ဖန်တီးပါ။",
     "You must have items in your cart to proceed to checkout.": "ငွေရှင်းရန် ဆက်လက်လုပ်ဆောင်ရန် သင့်စျေးဝယ်လှည်းထဲတွင် ပစ္စည်းများရှိရပါမည်။",
     "Product Review":"ထုတ်ကုန်သုံးသပ်ချက်",
-    "Store Review":"စတိုးဆိုင်သုံးသပ်ချက်"
+    "Store Review":"စတိုးဆိုင်သုံးသပ်ချက်",
+    "Your product has been approved by admin.":"သင့်ထုတ်ကုန်ကို စီမံခန့်ခွဲသူမှ အတည်ပြုထားသည်။",
+    "Your product has been rejected by admin.":"သင့်ထုတ်ကုန်ကို စီမံခန့်ခွဲသူမှ ငြင်းပယ်ထားသည်။"
 }

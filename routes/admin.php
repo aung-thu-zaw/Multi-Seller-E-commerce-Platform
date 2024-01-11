@@ -97,6 +97,8 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
             'destroy' => 'products.destroy',
         ]);
 
+        Route::patch('/products/{product}/change-status', [ProductController::class, 'changeStatus'])->name('products.status.update');
+
         Route::delete('/products/destroy/selected/{selected_items}', [ProductController::class, 'destroySelected'])->name('products.destroy.selected');
 
         Route::delete('/products/images/{product_image}', DeleteProductImageController::class)->name('product.images.destroy');

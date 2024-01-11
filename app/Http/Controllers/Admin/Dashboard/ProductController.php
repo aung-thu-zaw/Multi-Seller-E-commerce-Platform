@@ -14,6 +14,9 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\Store;
+use App\Models\User;
+use App\Notifications\Seller\ProductApprovedNotification;
+use App\Notifications\Seller\ProductRejectedNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -91,6 +94,27 @@ class ProductController extends Controller
         (new UpdateProductAction())->handle($request->validated(), $product);
 
         return to_route('admin.products.index', $this->getQueryStringParams($request))->with('success', ':label has been successfully updated.');
+    }
+
+    public function changeStatus(Request $request, Product $product): RedirectResponse
+    {
+        $product->update(["status" => $request->product_status]);
+
+        $store = Store::find($product->store_id);
+
+        $seller = User::find($store->seller_id);
+
+        if($request->product_status === 'approved') {
+
+            $seller->notify(new ProductApprovedNotification($product));
+
+        } elseif($request->product_status === 'rejected') {
+
+            $seller->notify(new ProductRejectedNotification($product));
+
+        }
+
+        return back()->with('success', ':label has been successfully updated.');
     }
 
     public function destroy(Request $request, Product $product): RedirectResponse
