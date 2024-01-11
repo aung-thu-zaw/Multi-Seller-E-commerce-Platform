@@ -168,8 +168,10 @@ const toggleCollapseShow = (classes) => {
               }"
               class="text-xs py-3 font-bold block"
               :class="{
-                'text-orange-600 hover:text-orange-500': $page.url.startsWith('/admin/product-manage'),
-                'text-slate-600 hover:text-slate-500': !$page.url.startsWith('/admin/product-manage')
+                'text-orange-600 hover:text-orange-500':
+                  $page.url.startsWith('/admin/product-manage'),
+                'text-slate-600 hover:text-slate-500':
+                  !$page.url.startsWith('/admin/product-manage')
               }"
             >
               <i class="fa-solid fa-basket-shopping mr-2"></i>
@@ -877,12 +879,14 @@ const toggleCollapseShow = (classes) => {
               :class="{
                 block:
                   $page.url.startsWith('/admin/automated-filter-words') ||
-                  $page.url.startsWith('/admin/product-review-and-ratings') ||
+                  $page.url.startsWith('/admin/product-reviews') ||
+                  $page.url.startsWith('/admin/store-reviews') ||
                   $page.url.startsWith('/admin/seller-service-rating') ||
                   $page.url.startsWith('/admin/delivery-service-rating'),
                 hidden: !(
                   $page.url.startsWith('/admin/automated-filter-words') ||
-                  $page.url.startsWith('/admin/product-review-and-ratings') ||
+                  $page.url.startsWith('/admin/product-reviews') ||
+                  $page.url.startsWith('/admin/store-reviews') ||
                   $page.url.startsWith('/admin/seller-service-rating') ||
                   $page.url.startsWith('/admin/delivery-service-rating')
                 )
@@ -911,9 +915,9 @@ const toggleCollapseShow = (classes) => {
                     {{ __('Automated Filter Words') }}
                   </Link>
                 </li>
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('product-reviews.view')" class="items-center">
                   <Link
-                    :href="route('admin.categories.index')"
+                    :href="route('admin.product-reviews.index')"
                     :data="{
                       page: 1,
                       per_page: 5,
@@ -923,15 +927,35 @@ const toggleCollapseShow = (classes) => {
                     class="text-xs py-3 font-bold block"
                     :class="{
                       'text-orange-600 hover:text-orange-500':
-                        $page.url.startsWith('/admin/categories'),
+                        $page.url.startsWith('/admin/product-reviews'),
                       'text-slate-600 hover:text-slate-500':
-                        !$page.url.startsWith('/admin/categories')
+                        !$page.url.startsWith('/admin/product-reviews')
                     }"
                   >
                     {{ __('Product Review & Ratings') }}
                   </Link>
                 </li>
-                <li v-show="can('categories.view')" class="items-center">
+                <li v-show="can('store-reviews.view')" class="items-center">
+                  <Link
+                    :href="route('admin.store-reviews.index')"
+                    :data="{
+                      page: 1,
+                      per_page: 5,
+                      sort: 'id',
+                      direction: 'desc'
+                    }"
+                    class="text-xs py-3 font-bold block"
+                    :class="{
+                      'text-orange-600 hover:text-orange-500':
+                        $page.url.startsWith('/admin/store-reviews'),
+                      'text-slate-600 hover:text-slate-500':
+                        !$page.url.startsWith('/admin/store-reviews')
+                    }"
+                  >
+                    {{ __('Store Review & Ratings') }}
+                  </Link>
+                </li>
+                <!-- <li v-show="can('categories.view')" class="items-center">
                   <Link
                     :href="route('admin.categories.index')"
                     :data="{
@@ -970,7 +994,7 @@ const toggleCollapseShow = (classes) => {
                   >
                     {{ __('Delivery Service Ratings') }}
                   </Link>
-                </li>
+                </li> -->
               </ul>
             </div>
           </li>

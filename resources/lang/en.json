@@ -224,6 +224,7 @@
     "Retype Password": "Retype Password",
     "Admins": "Admins",
     "Product Review & Ratings": "Product Review & Ratings",
+    "Store Review & Ratings": "Store Review & Ratings",
     "Seller Service Ratings": "Seller Service Ratings",
     "Delivery Service Ratings": "Delivery Service Ratings",
     "Automated Filter Words": "Automated Filter Words",
@@ -464,6 +465,8 @@
     "Your bank account information is updated successfully.": "Your bank account information is updated successfully.",
     "Database Backups": "Database Backups",
     "Database Backup": "Database Backup",
-    "Sorry, we currently do not support shipping to your area. Please contact support for assistance.":"Sorry, we currently do not support shipping to your area. Please contact support for assistance.",
-    "Please create a default delivery address before proceeding.":"Please create a default delivery address before proceeding."
+    "Sorry, we currently do not support shipping to your area. Please contact support for assistance.": "Sorry, we currently do not support shipping to your area. Please contact support for assistance.",
+    "Please create a default delivery address before proceeding.": "Please create a default delivery address before proceeding.",
+    "Product Review":"Product Review",
+    "Store Review":"Store Review"
 }

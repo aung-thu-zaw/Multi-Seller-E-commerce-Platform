@@ -29,6 +29,8 @@ use App\Http\Controllers\Admin\Dashboard\HelpPageController;
 use App\Http\Controllers\Admin\Dashboard\OrderManagement\OrderController;
 use App\Http\Controllers\Admin\Dashboard\ProductController;
 use App\Http\Controllers\Admin\Dashboard\RatingManagement\AutomatedFilterWordController;
+use App\Http\Controllers\Admin\Dashboard\RatingManagement\ProductReviewController;
+use App\Http\Controllers\Admin\Dashboard\RatingManagement\StoreReviewController;
 use App\Http\Controllers\Admin\Dashboard\SellerManagement\ClaimsAsASellerController;
 use App\Http\Controllers\Admin\Dashboard\SellerManagement\StoreManageController;
 use App\Http\Controllers\Admin\Dashboard\Settings\GeneralSettingController;
@@ -111,6 +113,39 @@ Route::middleware(['auth', 'verified', 'user.role:admin'])
                 Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
             });
 
+        // ***** Product Review Operations *****
+        Route::resource('product-reviews', ProductReviewController::class)->except(['show','create','store']);
+
+        Route::delete('/product-reviews/destroy/selected/{selected_items}', [ProductReviewController::class, 'destroySelected'])->name('product-reviews.destroy.selected');
+
+        Route::controller(ProductReviewController::class)
+            ->prefix('/product-reviews/trash')
+            ->name('product-reviews.')
+            ->group(function () {
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
+
+        // ***** Store Review Operations *****
+        Route::resource('store-reviews', StoreReviewController::class)->except(['show','create','store']);
+
+        Route::delete('/store-reviews/destroy/selected/{selected_items}', [StoreReviewController::class, 'destroySelected'])->name('store-reviews.destroy.selected');
+
+        Route::controller(StoreReviewController::class)
+            ->prefix('/store-reviews/trash')
+            ->name('store-reviews.')
+            ->group(function () {
+                Route::get('/', 'trashed')->name('trashed');
+                Route::post('/{id}/restore', 'restore')->name('restore');
+                Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
+                Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
+                Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
+                Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
+            });
 
         // ***** Collection Operations *****
         Route::resource('collections', CollectionController::class)->except(['show']);

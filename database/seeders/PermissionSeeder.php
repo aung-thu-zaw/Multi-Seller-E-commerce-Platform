@@ -174,6 +174,20 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'automated-filter-words.restore', 'group' => 'Rating Management']);
         Permission::create(['name' => 'automated-filter-words.force.delete', 'group' => 'Rating Management']);
 
+        Permission::create(['name' => 'product-reviews.view', 'group' => 'Rating Management']);
+        Permission::create(['name' => 'product-reviews.edit', 'group' => 'Rating Management']);
+        Permission::create(['name' => 'product-reviews.delete', 'group' => 'Rating Management']);
+        Permission::create(['name' => 'product-reviews.view.trash', 'group' => 'Rating Management']);
+        Permission::create(['name' => 'product-reviews.restore', 'group' => 'Rating Management']);
+        Permission::create(['name' => 'product-reviews.force.delete', 'group' => 'Rating Management']);
+
+        Permission::create(['name' => 'store-reviews.view', 'group' => 'Rating Management']);
+        Permission::create(['name' => 'store-reviews.edit', 'group' => 'Rating Management']);
+        Permission::create(['name' => 'store-reviews.delete', 'group' => 'Rating Management']);
+        Permission::create(['name' => 'store-reviews.view.trash', 'group' => 'Rating Management']);
+        Permission::create(['name' => 'store-reviews.restore', 'group' => 'Rating Management']);
+        Permission::create(['name' => 'store-reviews.force.delete', 'group' => 'Rating Management']);
+
         Permission::create(['name' => 'claims-as-a-seller.view', 'group' => 'Seller Management']);
         Permission::create(['name' => 'claims-as-a-seller.edit', 'group' => 'Seller Management']);
         Permission::create(['name' => 'claims-as-a-seller.delete', 'group' => 'Seller Management']);
