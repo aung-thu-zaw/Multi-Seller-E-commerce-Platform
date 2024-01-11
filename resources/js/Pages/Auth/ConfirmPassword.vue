@@ -1,9 +1,9 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue'
-import InputError from '@/Components/InputError.vue'
-import InputLabel from '@/Components/InputLabel.vue'
-import PrimaryButton from '@/Components/PrimaryButton.vue'
-import TextInput from '@/Components/TextInput.vue'
+import InputField from '@/Components/Forms/Fields/InputField.vue'
+import InputError from '@/Components/Forms/Fields/InputError.vue'
+import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
+import FormButton from '@/Components/Buttons/FormButton.vue'
 import { Head, useForm } from '@inertiajs/vue3'
 
 const form = useForm({
@@ -28,7 +28,7 @@ const submit = () => {
     <form @submit.prevent="submit">
       <div>
         <InputLabel for="password" value="Password" />
-        <TextInput
+        <InputField
           id="password"
           type="password"
           class="mt-1 block w-full"
@@ -41,13 +41,13 @@ const submit = () => {
       </div>
 
       <div class="flex justify-end mt-4">
-        <PrimaryButton
+        <FormButton
           class="ms-4"
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         >
           Confirm
-        </PrimaryButton>
+        </FormButton>
       </div>
     </form>
   </GuestLayout>

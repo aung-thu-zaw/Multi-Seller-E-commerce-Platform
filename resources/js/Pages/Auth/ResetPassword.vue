@@ -1,9 +1,9 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue'
-import InputError from '@/Components/InputError.vue'
-import InputLabel from '@/Components/InputLabel.vue'
-import PrimaryButton from '@/Components/PrimaryButton.vue'
-import TextInput from '@/Components/TextInput.vue'
+import InputField from '@/Components/Forms/Fields/InputField.vue'
+import InputError from '@/Components/Forms/Fields/InputError.vue'
+import InputLabel from '@/Components/Forms/Fields/InputLabel.vue'
+import FormButton from '@/Components/Buttons/FormButton.vue'
 import { Head, useForm } from '@inertiajs/vue3'
 
 const props = defineProps({
@@ -39,7 +39,7 @@ const submit = () => {
       <div>
         <InputLabel for="email" value="Email" />
 
-        <TextInput
+        <InputField
           id="email"
           type="email"
           class="mt-1 block w-full"
@@ -55,7 +55,7 @@ const submit = () => {
       <div class="mt-4">
         <InputLabel for="password" value="Password" />
 
-        <TextInput
+        <InputField
           id="password"
           type="password"
           class="mt-1 block w-full"
@@ -70,7 +70,7 @@ const submit = () => {
       <div class="mt-4">
         <InputLabel for="password_confirmation" value="Confirm Password" />
 
-        <TextInput
+        <InputField
           id="password_confirmation"
           type="password"
           class="mt-1 block w-full"
@@ -83,9 +83,9 @@ const submit = () => {
       </div>
 
       <div class="flex items-center justify-end mt-4">
-        <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+        <FormButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
           Reset Password
-        </PrimaryButton>
+        </FormButton>
       </div>
     </form>
   </GuestLayout>
