@@ -44,7 +44,7 @@ const loadMoreProduct = () => {
         </h2>
 
         <div class="flex items-center space-x-2">
-          <span
+          <!-- <span
             class="font-bold text-sm bg-orange-500 text-white px-3 py-1.5 rounded-sm transition-all cursor-pointer"
             >New Arrivals</span
           >
@@ -55,7 +55,7 @@ const loadMoreProduct = () => {
           <span
             class="font-bold text-sm text-gray-600 hover:bg-orange-50 px-3 py-1.5 rounded-sm transition-all cursor-pointer"
             >Top Product</span
-          >
+          > -->
         </div>
       </div>
 

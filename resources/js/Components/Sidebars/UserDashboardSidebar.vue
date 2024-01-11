@@ -60,7 +60,7 @@ import { Link } from '@inertiajs/vue3'
       </Link>
 
       <!-- Vouchers -->
-      <Link
+      <!-- <Link
         href="#"
         as="button"
         class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
@@ -72,7 +72,7 @@ import { Link } from '@inertiajs/vue3'
       >
         <i class="fa-solid fa-ticket"></i>
         {{ __('My Vouchers') }}
-      </Link>
+      </Link> -->
 
       <!-- My Orders -->
       <Link
@@ -94,7 +94,7 @@ import { Link } from '@inertiajs/vue3'
       </Link>
 
       <!-- My Returns & Cancellations -->
-      <Link
+      <!-- <Link
         href="#"
         as="button"
         class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
@@ -107,7 +107,7 @@ import { Link } from '@inertiajs/vue3'
       >
         <i class="fa-solid fa-rotate-left"></i>
         {{ __('My Returns & Cancellations') }}
-      </Link>
+      </Link> -->
 
       <!-- My Wishlists -->
       <Link
@@ -161,7 +161,7 @@ import { Link } from '@inertiajs/vue3'
       </Link>
 
       <!-- Notification Settings -->
-      <Link
+      <!-- <Link
         href="#"
         as="button"
         class="py-1 pe-4 inline-flex items-center gap-x-2 px-5 text-sm whitespace-nowrap font-semibold"
@@ -174,7 +174,7 @@ import { Link } from '@inertiajs/vue3'
       >
         <i class="fa-solid fa-gear"></i>
         {{ __('Notification Settings') }}
-      </Link>
+      </Link> -->
 
       <!-- Change Password -->
       <Link

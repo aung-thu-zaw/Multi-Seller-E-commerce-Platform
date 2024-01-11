@@ -470,8 +470,16 @@
     "Sorry, we currently do not support shipping to your area. Please contact support for assistance.": "ဝမ်းနည်းပါသည်၊ ကျွန်ုပ်တို့သည် သင့်ဒေသသို့ ပို့ဆောင်ခြင်းကို လောလောဆယ် မပံ့ပိုးပါ။ အကူအညီအတွက် ကျေးဇူးပြု၍ အကူအညီရယူပါ။",
     "Please create a default delivery address before proceeding.": "ဆက်လက်မလုပ်ဆောင်မီ ပုံသေပေးပို့လိပ်စာတစ်ခု ဖန်တီးပါ။",
     "You must have items in your cart to proceed to checkout.": "ငွေရှင်းရန် ဆက်လက်လုပ်ဆောင်ရန် သင့်စျေးဝယ်လှည်းထဲတွင် ပစ္စည်းများရှိရပါမည်။",
-    "Product Review":"ထုတ်ကုန်သုံးသပ်ချက်",
-    "Store Review":"စတိုးဆိုင်သုံးသပ်ချက်",
-    "Your product has been approved by admin.":"သင့်ထုတ်ကုန်ကို စီမံခန့်ခွဲသူမှ အတည်ပြုထားသည်။",
-    "Your product has been rejected by admin.":"သင့်ထုတ်ကုန်ကို စီမံခန့်ခွဲသူမှ ငြင်းပယ်ထားသည်။"
+    "Product Review": "ထုတ်ကုန်သုံးသပ်ချက်",
+    "Store Review": "စတိုးဆိုင်သုံးသပ်ချက်",
+    "Your product has been approved by admin.": "သင့်ထုတ်ကုန်ကို စီမံခန့်ခွဲသူမှ အတည်ပြုထားသည်။",
+    "Your product has been rejected by admin.": "သင့်ထုတ်ကုန်ကို စီမံခန့်ခွဲသူမှ ငြင်းပယ်ထားသည်။",
+    "Return Items": "ပြန်လည်ပေးပို့သော ပစ္စည်းများ",
+    "Cancellation Items": "ပယ်ဖျက်သော ပစ္စည်းများ",
+    "Total Orders": "စုစုပေါင်း အော်ဒါများ",
+    "Total Users": "စုစုပေါင်းအသုံးပြုသူများ",
+    "Overview": "ခြုံငုံသုံးသပ်ချက်",
+    "PERFORMANCE": "စွမ်းဆောင်ရည်",
+    "Total Sales Value": "စုစုပေါင်း အရောင်းတန်ဖိုး",
+    "My Cart": "ကျွန်ုပ်၏လှည်း"
 }

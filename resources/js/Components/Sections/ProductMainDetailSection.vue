@@ -402,12 +402,12 @@ const saved = computed(() => {
               <i class="fa-solid fa-cart-plus"></i>
               Add to cart
             </button>
-            <button
+            <!-- <button
               class="text-sm px-6 shadow-md py-3 font-bold rounded-[4px] active:animate-press bg-yellow-500 text-white hover:bg-yellow-600 duration-200"
             >
               <i class="fa-solid fa-basket-shopping"></i>
               Buy now
-            </button>
+            </button> -->
           </div>
         </main>
       </div>

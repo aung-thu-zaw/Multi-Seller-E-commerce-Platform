@@ -134,11 +134,11 @@ const messages = computed(() => {
       <div v-if="!isWidgetOpened" class="relative">
         <i class="fa-solid fa-message"></i>
 
-        <span
+        <!-- <span
           class="w-4 h-4 absolute -top-1 -right-2 font-bold text-[.7rem] bg-white rounded-full text-orange-500 flex items-center justify-center border border-orange-300 z-10"
         >
           3
-        </span>
+        </span> -->
       </div>
 
       <span v-else>

@@ -96,21 +96,21 @@ defineProps({ topQuestions: Object, faqSubcategories: Object })
 
       <!-- Self Service Tools -->
       <div class="px-32">
-        <p class="text-sm font-bold text-gray-600 text-center">
+        <!-- <p class="text-sm font-bold text-gray-600 text-center">
           {{
             __(
               "Still looking for answers? Chat with us by clicking 'Chat Now' or clicking 'Contact Us'. You can contact us at :label from 8:00 AM to 09:30 PM (Monday to Sunday).",
               { label: $page.props.generalSetting?.support_phone }
             )
           }}
-        </p>
+        </p> -->
         <div class="flex items-center my-5 justify-center space-x-20">
-          <button
+          <!-- <button
             class="border font-bold text-md text-white p-5 w-72 bg-orange-600 shadow-md rounded-md hover:scale-110 transition-all"
           >
             <i class="fa-solid fa-comments mr-2"></i>
             {{ __('Live Chat Now') }}
-          </button>
+          </button> -->
           <Link
             as="button"
             :href="route('contact-us.index')"

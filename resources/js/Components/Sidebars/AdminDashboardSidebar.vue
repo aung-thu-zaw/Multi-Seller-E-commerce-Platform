@@ -893,7 +893,7 @@ const toggleCollapseShow = (classes) => {
               }"
             >
               <ul class="pl-8">
-                <li v-show="can('automated-filter-words.view')" class="items-center">
+                <!-- <li v-show="can('automated-filter-words.view')" class="items-center">
                   <Link
                     :href="route('admin.automated-filter-words.index')"
                     :data="{
@@ -914,7 +914,7 @@ const toggleCollapseShow = (classes) => {
                   >
                     {{ __('Automated Filter Words') }}
                   </Link>
-                </li>
+                </li> -->
                 <li v-show="can('product-reviews.view')" class="items-center">
                   <Link
                     :href="route('admin.product-reviews.index')"
@@ -1383,7 +1383,7 @@ const toggleCollapseShow = (classes) => {
           </li>
 
           <!-- Newsletters -->
-          <li v-show="can('brands.view')" class="items-center">
+          <!-- <li v-show="can('brands.view')" class="items-center">
             <Link
               :href="route('admin.brands.index')"
               :data="{
@@ -1401,7 +1401,7 @@ const toggleCollapseShow = (classes) => {
               <i class="fa-solid fa-envelope-open-text mr-2"></i>
               {{ __('Newsletters') }}
             </Link>
-          </li>
+          </li> -->
         </ul>
 
         <!-- Divider -->
@@ -1413,8 +1413,8 @@ const toggleCollapseShow = (classes) => {
         <!-- Navigation -->
 
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
-          <!-- Subscribers -->
-          <li v-show="can('brands.view')" class="items-center">
+          <!-- Chat box -->
+          <!-- <li v-show="can('brands.view')" class="items-center">
             <Link
               :href="route('admin.brands.index')"
               :data="{
@@ -1432,7 +1432,7 @@ const toggleCollapseShow = (classes) => {
               <i class="fa-solid fa-message mr-2"></i>
               {{ __('Chat Inbox') }}
             </Link>
-          </li>
+          </li> -->
 
           <!-- FAQs -->
           <li

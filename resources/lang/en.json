@@ -467,8 +467,16 @@
     "Database Backup": "Database Backup",
     "Sorry, we currently do not support shipping to your area. Please contact support for assistance.": "Sorry, we currently do not support shipping to your area. Please contact support for assistance.",
     "Please create a default delivery address before proceeding.": "Please create a default delivery address before proceeding.",
-    "Product Review":"Product Review",
-    "Store Review":"Store Review",
-    "Your product has been approved by admin.":"Your product has been approved by admin.",
-    "Your product has been rejected by admin.":"Your product has been rejected by admin."
+    "Product Review": "Product Review",
+    "Store Review": "Store Review",
+    "Your product has been approved by admin.": "Your product has been approved by admin.",
+    "Your product has been rejected by admin.": "Your product has been rejected by admin.",
+    "Return Items": "Return Items",
+    "Cancellation Items": "Cancellation Items",
+    "Total Orders": "Total Orders",
+    "Total Users": "Total Users",
+    "Overview": "Overview",
+    "PERFORMANCE": "PERFORMANCE",
+    "Total Sales Value": "Total Sales Value",
+    "My Cart": "My Cart"
 }
