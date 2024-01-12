@@ -28,13 +28,14 @@
 
 
     <!-- CK Editor -->
-    {{-- <script src="../node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
-    <script src="../node_modules/@ckeditor/ckeditor5-vue/dist/ckeditor.js"></script> --}}
+    <script src="../node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
+    <script src="../node_modules/@ckeditor/ckeditor5-vue/dist/ckeditor.js"></script>
 
 
     <!-- Scripts -->
     @routes
-    @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
+    {{-- @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"]) --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js',"resources/js/Pages/{$page['component']}.vue"])
     @inertiaHead
 </head>
 

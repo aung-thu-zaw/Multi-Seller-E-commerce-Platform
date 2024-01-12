@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Actions\Admin\Brands;
+namespace App\Actions\User\MyReviews;
 
 use App\Models\Brand;
 use Illuminate\Support\Collection;
 
-class PermanentlyDeleteTrashedBrandsAction
+class PermanentlyDeleteTrashedProductReviewsAction
 {
     /**
      * @param  Collection<int,Brand>  $brands
