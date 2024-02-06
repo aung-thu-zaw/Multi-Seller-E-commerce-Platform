@@ -67,11 +67,9 @@ const closeModal = () => {
         }}
       </p>
 
-      <NormalButton
-        @click="confirmUserDeletion"
-        class="bg-red-600 text-white ring-2 ring-red-300"
-        >{{ __('Delete Account') }}</NormalButton
-      >
+      <NormalButton @click="confirmUserDeletion" class="bg-red-600 text-white ring-2 ring-red-300">
+        {{ __('Delete Account') }}
+      </NormalButton>
 
       <Modal :show="confirmingUserDeletion" @close="closeModal">
         <div class="p-6">

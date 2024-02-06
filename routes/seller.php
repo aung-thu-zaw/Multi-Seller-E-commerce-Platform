@@ -87,23 +87,6 @@ Route::middleware(['auth', 'verified', 'user.role:seller'])
         Route::delete('/products/destroy/selected/{selected_items}', [ProductController::class, 'destroySelected'])->name('products.destroy.selected');
         Route::delete('/products/images/{product_image}', DeleteProductImageController::class)->name('product.images.destroy');
 
-
-        // Store Category Operations
-        // Route::resource('store-product-categories', StoreProductCategoryController::class)->except(['show'])->middleware('strict.inactive_store');
-        // Route::controller(StoreProductCategoryController::class)
-        //     ->middleware('strict.inactive_store')
-        //     ->prefix('/store-product-categories/trash')
-        //     ->name('store-product-categories.')
-        //     ->group(function () {
-        //         Route::delete('/destroy/selected/{selected_items}', 'destroySelected')->name('destroy.selected');
-        //         Route::get('/', 'trashed')->name('trashed');
-        //         Route::post('/{id}/restore', 'restore')->name('restore');
-        //         Route::post('/restore/selected/{selected_items}', 'restoreSelected')->name('restore.selected');
-        //         Route::delete('/{id}/force-delete', 'forceDelete')->name('force-delete');
-        //         Route::delete('/force-delete/selected/{selected_items}', 'forceDeleteSelected')->name('force-delete.selected');
-        //         Route::delete('/force-delete/all', 'forceDeleteAll')->name('force-delete.all');
-        //     });
-
         // ***** Store Setting Operations *****
         Route::controller(StoreSettingController::class)
             ->prefix('/store-settings')

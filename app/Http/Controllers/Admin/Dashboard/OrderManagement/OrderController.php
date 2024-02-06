@@ -18,12 +18,12 @@ class OrderController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:brands.view', ['only' => ['index']]);
-        $this->middleware('permission:brands.edit', ['only' => ['update']]);
-        $this->middleware('permission:brands.delete', ['only' => ['destroy', 'destroySelected']]);
-        $this->middleware('permission:brands.view.trash', ['only' => ['trashed']]);
-        $this->middleware('permission:brands.restore', ['only' => ['restore', 'restoreSelected']]);
-        $this->middleware('permission:brands.force.delete', ['only' => ['forceDelete', 'forceDeleteSelected', 'forceDeleteAll']]);
+        $this->middleware('permission:orders.view', ['only' => ['index']]);
+        $this->middleware('permission:orders.edit', ['only' => ['update']]);
+        $this->middleware('permission:orders.delete', ['only' => ['destroy', 'destroySelected']]);
+        $this->middleware('permission:orders.view.trash', ['only' => ['trashed']]);
+        $this->middleware('permission:orders.restore', ['only' => ['restore', 'restoreSelected']]);
+        $this->middleware('permission:orders.force.delete', ['only' => ['forceDelete', 'forceDeleteSelected', 'forceDeleteAll']]);
     }
 
     public function index(): Response|ResponseFactory
