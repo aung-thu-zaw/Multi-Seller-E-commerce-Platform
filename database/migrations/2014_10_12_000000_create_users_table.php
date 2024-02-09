@@ -26,8 +26,8 @@ return new class() extends Migration
             $table->date('birthday')->nullable();
             $table->enum('status', ['active', 'suspended'])->default('active');
             $table->rememberToken();
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
